@@ -12,7 +12,7 @@ Voer onderstaande stappen strikt in volgorde uit. Wijk niet af van de voorgeschr
 
 ---
 
-## Stap 0 — Lees bij aanvang
+## Stap 1 — Lees bij aanvang
 
 Lees deze twee bestanden volledig vóór enige andere actie:
 - `$CLAUDE_SKILL_DIR/kaders.md` — JAS v1.0.10 taxonomie en annotatieprincipes
@@ -20,7 +20,7 @@ Lees deze twee bestanden volledig vóór enige andere actie:
 
 ---
 
-## Stap 1 — Bestaande annotatie controleren
+## Stap 2 — Bestaande annotatie controleren
 
 Controleer vóór alle overige stappen of er al een annotatie bestaat voor dit artikel:
 
@@ -30,11 +30,11 @@ Controleer vóór alle overige stappen of er al een annotatie bestaat voor dit a
    - Lees het rapport via de Read tool.
    - Meld aan de gebruiker: "Bestaande annotatie gevonden: [bestandsnaam]. Wetstekst geldig per [peildatum uit frontmatter]. Gebruik je deze als basis of wil je een nieuwe annotatie opstellen?"
    - **Wacht op bevestiging.** Ga alleen verder met de workflow als de gebruiker een nieuwe annotatie vraagt of als de bestaande annotatie verouderd is (andere peildatum).
-4. Als geen bestaand rapport gevonden wordt: ga door met Stap 2.
+4. Als geen bestaand rapport gevonden wordt: ga door met Stap 3.
 
 ---
 
-## Stap 2 — Argument parsen
+## Stap 3 — Argument parsen
 
 Parseer `$ARGUMENTS` en stel vast:
 
@@ -55,7 +55,7 @@ Noteer: `[A]`, `[W]`, `[B]`, `[L]`, en het begripsbepalings-artikel `[BD]`.
 
 ---
 
-## Stap 3 — Wetstekst ophalen en artikelen extraheren
+## Stap 4 — Wetstekst ophalen en artikelen extraheren
 
 **Parallel aanroepen via MCP:**
 
@@ -80,23 +80,23 @@ Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in 
 
 ---
 
-## Stap 4 — Art. 1 IW 1990 + Leidraad ophalen (conditioneel)
+## Stap 5 — Art. 1 IW 1990 + Leidraad ophalen (conditioneel)
 
 **Alleen als `[W]` = Invorderingswet 1990 of Uitvoeringsbesluit IW 1990:**
 
 Roep parallel aan:
-- `wettenbank_artikel(bwbId="BWBR0004770", artikel="1")` — tenzij `[A]` = 1 (dan al beschikbaar uit Stap 3). Gebruik de `leden`-array (JSON) en noteer de letterlijke tekst van art. 1 lid 2 IW 1990 (de Awb-uitsluitingsclausule) uit het lid-object met `lid: "2"`.
+- `wettenbank_artikel(bwbId="BWBR0004770", artikel="1")` — tenzij `[A]` = 1 (dan al beschikbaar uit Stap 4). Gebruik de `leden`-array (JSON) en noteer de letterlijke tekst van art. 1 lid 2 IW 1990 (de Awb-uitsluitingsclausule) uit het lid-object met `lid: "2"`.
 - `wettenbank_artikel(bwbId="BWBR0024096", artikel=[A])` — het Leidraad-artikel met hetzelfde nummer als het te annoteren artikel. Gebruik de `leden`-array (JSON). De Leidraad is een beleidsregel (type: beleidsregel), geen wet, maar verplichte bron voor §8 van het rapport. Als het `fout`-veld aanwezig is (artikel niet gevonden): roep aansluitend `wettenbank_zoekterm(bwbId="BWBR0024096", zoekterm="artikel [A]")` aan en gebruik het eerste trefferresultaat als Leidraad-bron voor §8. Als ook dat geen resultaat oplevert: noteer dit en sla §8 over.
 
 **Nooit:** `BWBR0004800` (Leidraad invordering 1990, verlopen per 2005-07-12).
 
-**Als `[W]` ≠ IW 1990 en ≠ UB IW:** sla Stap 4 over.
+**Als `[W]` ≠ IW 1990 en ≠ UB IW:** sla Stap 5 over.
 
 ---
 
-## Stap 5 — Kruisreferenties extraheren
+## Stap 6 — Kruisreferenties extraheren
 
-Scan de in Stap 3 verkregen artikeltekst op expliciete verwijzingen. Neem uitsluitend verwijzingen op die **letterlijk in de tekst staan** als "artikel X", "artikel X, lid Y", "artikel X, onderdeel Y". Geen verwijzingen toevoegen op basis van eigen kennis.
+Scan de in Stap 4 verkregen artikeltekst op expliciete verwijzingen. Neem uitsluitend verwijzingen op die **letterlijk in de tekst staan** als "artikel X", "artikel X, lid Y", "artikel X, onderdeel Y". Geen verwijzingen toevoegen op basis van eigen kennis.
 
 Maak twee lijsten:
 - **Intern**: verwijzingen naar artikelen binnen dezelfde wet `[W]`
@@ -118,9 +118,9 @@ Vervallen artikelen worden door de MCP gefilterd — gaten in nummering zijn nor
 
 ---
 
-## Stap 6 — JAS-annotatie uitvoeren
+## Stap 7 — JAS-annotatie uitvoeren
 
-Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR/kaders.md`. Voer de annotatie uit op de wetstekst van artikel `[A]` uit Stap 3, aangevuld met de brondefinities uit Stap 3.
+Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR/kaders.md`. Voer de annotatie uit op de wetstekst van artikel `[A]` uit Stap 4, aangevuld met de brondefinities uit Stap 4.
 
 **Interne annotatiestap (niet opnemen in rapportoutput):** loop de 13 JAS-elementen af en bepaal per element of het aanwezig is in het artikel: rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, variabele/variabelewaarde, parameter/parameterwaarde, operator, tijdsaanduiding, plaatsaanduiding, delegatiebevoegdheid/delegatie-invulling, brondefinitie. Noteer per aanwezig element de vindplaats in het artikel.
 
@@ -140,9 +140,9 @@ Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR
 
 ---
 
-## Stap 7 — Afleidingsregels en rekenstructuur uitwerken
+## Stap 8 — Afleidingsregels en rekenstructuur uitwerken
 
-Op basis van de in Stap 6 geclassificeerde afleidingsregels:
+Op basis van de in Stap 7 geclassificeerde afleidingsregels:
 
 **Beslisregels:** stel per beslisregel de voorwaardenstructuur op (EN/OF/NIET), de uitvoervariabele (ja/nee) en de vindplaats.
 
@@ -152,21 +152,21 @@ Op basis van de in Stap 6 geclassificeerde afleidingsregels:
 
 ---
 
-## Stap 8 — Awb-toepasselijkheidscheck (conditioneel)
+## Stap 9 — Awb-toepasselijkheidscheck (conditioneel)
 
-**Alleen als `[W]` = IW 1990:** stel per gevonden Awb-artikel (Stap 5, extern) vast of de betreffende Awb-titel van toepassing is op grond van art. 1 lid 2 IW 1990 (Stap 4). Citeer art. 1 lid 2 letterlijk. Vermeld per Awb-titel: van toepassing / uitgesloten / geen expliciete uitzondering met reden.
+**Alleen als `[W]` = IW 1990:** stel per gevonden Awb-artikel (Stap 6, extern) vast of de betreffende Awb-titel van toepassing is op grond van art. 1 lid 2 IW 1990 (Stap 5). Citeer art. 1 lid 2 letterlijk. Vermeld per Awb-titel: van toepassing / uitgesloten / geen expliciete uitzondering met reden.
 
-**Als `[W]` ≠ IW 1990:** sla Stap 8 over.
+**Als `[W]` ≠ IW 1990:** sla Stap 9 over.
 
 ---
 
-## Stap 9 — Kwaliteitscheck
+## Stap 10 — Kwaliteitscheck
 
 Doorloop de pre-save checklist in `$CLAUDE_SKILL_DIR/rapportformat.md` volledig vóór opslaan. Alle punten moeten afgevinkt zijn of voorzien van een expliciete toelichting waarom een punt niet van toepassing is.
 
 ---
 
-## Stap 10 — Timestamp ophalen en rapport opslaan
+## Stap 11 — Timestamp ophalen en rapport opslaan
 
 Haal de timestamp op via `date +%Y-%m-%d_%H-%M-%S`. Sla het rapport op als:
 
@@ -184,7 +184,7 @@ Genereer het rapport conform de structuur in `$CLAUDE_SKILL_DIR/rapportformat.md
 
 ---
 
-## Stap 11 — INDEX.md bijwerken
+## Stap 12 — INDEX.md bijwerken
 
 Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 - Gebruik het format: `- [Art. [A] (versie X)](./jas-annotatie-...) (YYYY-MM-DD)`
@@ -193,7 +193,7 @@ Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 
 ---
 
-## Stap 12 — Commit en push
+## Stap 13 — Commit en push
 
 Voer in de projectroot uit:
 
@@ -203,10 +203,10 @@ git commit -m "jas: annotatie art. [A] [W] ([PD])"
 git push
 ```
 
-Gebruik exact het opgeslagen bestandspad uit Stap 10 voor de `git add`.
+Gebruik exact het opgeslagen bestandspad uit Stap 11 voor de `git add`.
 
 ---
 
-## Stap 13 — Retourneer bestandspad
+## Stap 14 — Retourneer bestandspad
 
 Retourneer uitsluitend het opgeslagen bestandspad.

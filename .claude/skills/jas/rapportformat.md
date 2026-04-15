@@ -43,7 +43,7 @@ Vermeld eerst de structuurpositie van het artikel, **letterlijk overgenomen uit 
 
 > **Structuurpositie:** Hoofdstuk X > Afdeling Y > Artikel Z
 
-Als het `pad`-veld afwezig is in de MCP-response: gebruik de uitkomst van de `wettenbank_structuur`-fallback (zie Stap 3 SKILL.md) als structuurpositie. Geeft ook dat geen resultaat: schrijf "Structuurpositie niet beschikbaar in MCP-response." Neem nooit een hoofdstuktitel aan op basis van de artikelinhoud.
+Als het `pad`-veld afwezig is in de MCP-response: gebruik de uitkomst van de `wettenbank_structuur`-fallback (zie Stap 4 SKILL.md) als structuurpositie. Geeft ook dat geen resultaat: schrijf "Structuurpositie niet beschikbaar in MCP-response." Neem nooit een hoofdstuktitel aan op basis van de artikelinhoud.
 
 Breng daarna de interne relaties tussen de leden in kaart: welk lid is de hoofdregel, welke leden zijn afwijkingen, uitzonderingen of nadere invullingen. Gebruik een boomstructuur met ├── en └── vertakkingen.
 
