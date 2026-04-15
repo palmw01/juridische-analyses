@@ -1,0 +1,9 @@
+# Negeer git geschiedenis
+.git/
+
+# Negeer alle presentaties (tenzij expliciet gevraagd)
+presentaties/
+
+# Negeer de JAS-skill kaders zelf tijdens zoeken (ze zijn instructie, geen data)
+.claude/skills/jas/kaders.md
+.claude/skills/jas/rapportformat.md
