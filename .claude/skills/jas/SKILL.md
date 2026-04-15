@@ -72,7 +72,7 @@ De tool-resultaten zijn **JSON**. Extraheer per response de volgende velden:
 - `formaat` — `"plain"` of `"markdown"`; geeft aan of de tekst Markdown-opmaak bevat
 - `bronreferentie` — JCI-uri (bijv. `"jci1.3:c:BWBR0004770&artikel=25"`); gebruik letterlijk in Bijlage B
 
-**Structuurcontext:** gebruik het `pad`-veld (string) voor §1 (structuurpositie in de header) en §2 (Structuurdiagram). **Neem nooit een hoofdstuk- of afdelingstitel aan op basis van de artikelinhoud.** Als `pad` afwezig is: noteer "Structuurpositie niet beschikbaar" in §2.
+**Structuurcontext:** gebruik het `pad`-veld (string) voor §1 (structuurpositie in de header) en §2 (Structuurdiagram). **Neem nooit een hoofdstuk- of afdelingstitel aan op basis van de artikelinhoud.** Als `pad` afwezig is: roep `wettenbank_structuur(bwbId=[B])` aan en zoek in de `structuur`-array het knooppunt op dat overeenkomt met artikel `[A]`; gebruik de ancestor-knooppunten als structuurpositie. Geeft ook dat geen resultaat: noteer "Structuurpositie niet beschikbaar" in §2.
 
 Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in artikel `[A]`.
 
@@ -86,7 +86,7 @@ Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in 
 
 Roep parallel aan:
 - `wettenbank_artikel(bwbId="BWBR0004770", artikel="1")` — tenzij `[A]` = 1 (dan al beschikbaar uit Stap 3). Gebruik de `leden`-array (JSON) en noteer de letterlijke tekst van art. 1 lid 2 IW 1990 (de Awb-uitsluitingsclausule) uit het lid-object met `lid: "2"`.
-- `wettenbank_artikel(bwbId="BWBR0024096", artikel=[A])` — het Leidraad-artikel met hetzelfde nummer als het te annoteren artikel. Gebruik de `leden`-array (JSON). De Leidraad is een beleidsregel (type: beleidsregel), geen wet, maar verplichte bron voor §8 van het rapport. Als het `fout`-veld aanwezig is (artikel niet gevonden): noteer dit en sla §8 over.
+- `wettenbank_artikel(bwbId="BWBR0024096", artikel=[A])` — het Leidraad-artikel met hetzelfde nummer als het te annoteren artikel. Gebruik de `leden`-array (JSON). De Leidraad is een beleidsregel (type: beleidsregel), geen wet, maar verplichte bron voor §8 van het rapport. Als het `fout`-veld aanwezig is (artikel niet gevonden): roep aansluitend `wettenbank_zoekterm(bwbId="BWBR0024096", zoekterm="artikel [A]")` aan en gebruik het eerste trefferresultaat als Leidraad-bron voor §8. Als ook dat geen resultaat oplevert: noteer dit en sla §8 over.
 
 **Nooit:** `BWBR0004800` (Leidraad invordering 1990, verlopen per 2005-07-12).
 
@@ -102,7 +102,15 @@ Maak twee lijsten:
 - **Intern**: verwijzingen naar artikelen binnen dezelfde wet `[W]`
 - **Extern**: verwijzingen naar artikelen in andere wetten
 
-Voor **externe** verwijzingen: gebruik `wettenbank_artikel(bwbId=<id>, artikel=<nr>)` per gerefereerd artikel. Roep alle externe artikelen parallel aan. Gebruik het `tekst`-veld (JSON) van elke response.
+**Parallel aanroepen:**
+
+1. Roep `wettenbank_artikel(bwbId=[B], artikel=<nr>)` aan voor elk **intern** gerefereerd artikel.
+2. Roep `wettenbank_artikel(bwbId=<id>, artikel=<nr>)` aan voor elk **extern** gerefereerd artikel.
+3. Roep `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` aan om **omgekeerde kruisreferenties** te vinden: artikelen binnen dezelfde wet die verwijzen naar art. `[A]`. Verwerk de `artikelen`-array uit de response: noteer per treffer het artikelnummer en het aantal treffers. Dit levert de lijst van articles die afhankelijk zijn van of verwijzen naar art. `[A]`.
+
+Alle drie de groepen aanroepen parallel uitvoeren.
+
+Gebruik de `leden`-array (JSON) van elke response voor inhoudelijke annotatie; gebruik `bronreferentie` voor Bijlage B.
 
 BWB-ids: IW 1990 = BWBR0004770 | UB IW = BWBR0004772 | AWR = BWBR0002320 | Awb = BWBR0005537 | Leidraad 2008 = BWBR0024096
 
@@ -185,6 +193,20 @@ Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 
 ---
 
-## Stap 12 — Retourneer bestandspad
+## Stap 12 — Commit en push
+
+Voer in de projectroot uit:
+
+```
+git add analyses/jas-annotatie-art[A]-[afkorting wet]-[TIMESTAMP].md analyses/INDEX.md
+git commit -m "jas: annotatie art. [A] [W] ([PD])"
+git push
+```
+
+Gebruik exact het opgeslagen bestandspad uit Stap 10 voor de `git add`.
+
+---
+
+## Stap 13 — Retourneer bestandspad
 
 Retourneer uitsluitend het opgeslagen bestandspad.

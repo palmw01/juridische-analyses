@@ -43,7 +43,7 @@ Vermeld eerst de structuurpositie van het artikel, **letterlijk overgenomen uit 
 
 > **Structuurpositie:** Hoofdstuk X > Afdeling Y > Artikel Z
 
-Als het `pad`-veld afwezig is in de MCP-response: schrijf "Structuurpositie niet beschikbaar in MCP-response." Neem nooit een hoofdstuktitel aan op basis van de artikelinhoud.
+Als het `pad`-veld afwezig is in de MCP-response: gebruik de uitkomst van de `wettenbank_structuur`-fallback (zie Stap 3 SKILL.md) als structuurpositie. Geeft ook dat geen resultaat: schrijf "Structuurpositie niet beschikbaar in MCP-response." Neem nooit een hoofdstuktitel aan op basis van de artikelinhoud.
 
 Breng daarna de interne relaties tussen de leden in kaart: welk lid is de hoofdregel, welke leden zijn afwijkingen, uitzonderingen of nadere invullingen. Gebruik een boomstructuur met ├── en └── vertakkingen.
 
@@ -144,9 +144,9 @@ Bij geen termijnen: schrijf exact "Geen termijnen in artikel [A]."
 
 **§7.1 Interne verwijzingen (binnen [wetnaam])**
 
-| Artikel (bron) | Verwijst naar | Letterlijke verwijzingstekst | Relevantie voor annotatie |
-|----------------|---------------|------------------------------|--------------------------|
-| Art. [A] lid Y [wet] | Art. Z lid W [wet] | "[exacte formulering uit tekst]" | [één zin] |
+| Artikel (bron) | Verwijst naar | Letterlijke verwijzingstekst | Geciteerde doeltekst | Relevantie voor annotatie |
+|----------------|---------------|------------------------------|----------------------|--------------------------|
+| Art. [A] lid Y [wet] | Art. Z lid W [wet] | "[exacte formulering uit tekst]" | "[letterlijke tekst gerefereerd lid]" | [één zin] |
 
 Bij geen interne verwijzingen: schrijf exact "Geen interne verwijzingen in de tekst van artikel [A]."
 
@@ -167,6 +167,16 @@ Citeer art. 1 lid 2 IW 1990 letterlijk als blokcitaat. Vul daarna de tabel in:
 | [Awb-titel X.Y] | Art. X:Y Awb | Ja / Nee / Geen expliciete uitzondering | [reden op basis van art. 1 lid 2] |
 
 Bij geen Awb-verwijzingen in artikel [A]: schrijf exact "Artikel [A] bevat geen verwijzingen naar de Awb; Awb-toepasselijkheidscheck niet van toepassing."
+
+**§7.4 Omgekeerde kruisreferenties (artikelen die verwijzen naar artikel [A])**
+
+Gebaseerd op `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` — alleen artikelen binnen dezelfde wet `[W]`.
+
+| Verwijzend artikel | Aantal treffers | Relevantie voor annotatie |
+|--------------------|-----------------|--------------------------|
+| Art. Z [wet] | [n] | [één zin] |
+
+Bij geen omgekeerde verwijzingen: schrijf exact "Geen artikelen in [wetnaam] verwijzen naar artikel [A]."
 
 ---
 
@@ -281,6 +291,7 @@ Citeer hier de volledige, onbewerkte wetstekst van artikelen die als kruisrefere
 - [ ] §5: beslisregels, rekenregels én parameters aanwezig (of standaardmelding)
 - [ ] §6: alle termijnen met rechtsgevolg bij overschrijding (of standaardmelding)
 - [ ] §7.3: Awb-toepasselijkheid via art. 1 lid 2 IW 1990 (bij IW 1990)
+- [ ] §7.4: omgekeerde kruisreferenties opgenomen (of standaardmelding)
 - [ ] §8: Leidraad letterlijk geciteerd, beleidsruimte benoemd (bij IW 1990/UB IW)
 - [ ] §9: drie interpretatiemethoden doorlopen, spanningsvelden benoemd
 - [ ] §11: onzekerheden expliciet, geen schijnzekerheid
