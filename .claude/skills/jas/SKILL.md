@@ -20,21 +20,7 @@ Lees deze twee bestanden volledig vóór enige andere actie:
 
 ---
 
-## Stap 2 — Bestaande annotatie controleren
-
-Controleer vóór alle overige stappen of er al een annotatie bestaat voor dit artikel:
-
-1. Lees `analyses/INDEX.md` om snel te zien of het artikel al behandeld is.
-2. Als niet gevonden in de index: Zoek met `Glob` naar `analyses/*-art[A]-*` (vervang `[A]` met het artikelnummer uit `$ARGUMENTS`).
-3. Als een bestaand rapport gevonden wordt:
-   - Lees het rapport via de Read tool.
-   - Meld aan de gebruiker: "Bestaande annotatie gevonden: [bestandsnaam]. Wetstekst geldig per [peildatum uit frontmatter]. Gebruik je deze als basis of wil je een nieuwe annotatie opstellen?"
-   - **Wacht op bevestiging.** Ga alleen verder met de workflow als de gebruiker een nieuwe annotatie vraagt of als de bestaande annotatie verouderd is (andere peildatum).
-4. Als geen bestaand rapport gevonden wordt: ga door met Stap 3.
-
----
-
-## Stap 3 — Argument parsen
+## Stap 2 — Argument parsen
 
 Parseer `$ARGUMENTS` en stel vast:
 
@@ -52,6 +38,20 @@ Parseer `$ARGUMENTS` en stel vast:
 Geen herkenbare wet: gebruik IW 1990 (`BWBR0004770`) als standaard en vermeld dit in het rapport.
 
 Noteer: `[A]`, `[W]`, `[B]`, `[L]`, en het begripsbepalings-artikel `[BD]`.
+
+---
+
+## Stap 3 — Bestaande annotatie controleren
+
+Controleer nu `[A]` bekend is of er al een annotatie bestaat voor dit artikel:
+
+1. Lees `analyses/INDEX.md` om snel te zien of het artikel al behandeld is.
+2. Als niet gevonden in de index: Zoek met `Glob` naar `analyses/*-art[A]-*` (vervang `[A]` met het artikelnummer uit Stap 2).
+3. Als een bestaand rapport gevonden wordt:
+   - Lees het rapport via de Read tool.
+   - Meld aan de gebruiker: "Bestaande annotatie gevonden: [bestandsnaam]. Wetstekst geldig per [peildatum uit frontmatter]. Gebruik je deze als basis of wil je een nieuwe annotatie opstellen?"
+   - **Wacht op bevestiging.** Ga alleen verder met de workflow als de gebruiker een nieuwe annotatie vraagt of als de bestaande annotatie verouderd is (andere peildatum).
+4. Als geen bestaand rapport gevonden wordt: ga door met Stap 4.
 
 ---
 
