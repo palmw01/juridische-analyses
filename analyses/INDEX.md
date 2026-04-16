@@ -13,6 +13,7 @@ Deze index bevat alle uitgevoerde annotaties, gesorteerd op wet.
 
 ## Leidraad Invordering 2008 (LI 2008)
 - [Art. 9.1 en 9.5](./jas-annotatie-art9.1en9.5-LI2008-2026-04-03_22-39-50.md) (2026-04-03)
+- [Art. 24.4 (versie 1)](./jas-annotatie-art24.4-LI2008-2026-04-16_20-24-39.md) (2026-04-16)
 
 ---
-*Laatste update: 2026-04-15*
+*Laatste update: 2026-04-16*
