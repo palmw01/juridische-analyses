@@ -12,7 +12,7 @@ Deze index bevat alle uitgevoerde annotaties, gesorteerd op wet.
 - [Art. 9 (versie 3)](./jas-annotatie-art9-IW1990-2026-04-12_15-51-31.md) (2026-04-12)
 - [Art. 9 lid 1 (versie 1)](./jas-annotatie-art9-IW1990-2026-04-21_14-38-29.md) (2026-04-21)
 - [Art. 25 (versie 1)](./jas-annotatie-art25-IW1990-2026-04-22_20-59-00.md) (2026-04-22)
-- [Art. 28 (versie 1)](./jas-annotatie-art28-IW1990-2026-04-22_21-12-04.md) (2026-04-22)
+- [Art. 25 (versie 2)](./jas-annotatie-art25-IW1990-2026-04-22_22-07-58.md) (2026-04-22)
 
 ## Leidraad Invordering 2008 (LI 2008)
 - [Art. 9.1 en 9.5](./jas-annotatie-art9.1en9.5-LI2008-2026-04-03_22-39-50.md) (2026-04-03)
