@@ -7,6 +7,13 @@ timestamp: 2026-04-16_20-24-39
 peildatum: 2026-01-01
 analist: Belastingdienst — Domein Inning
 jas-versie: 1.0.10
+tags:
+  - jas-annotatie
+  - li2008
+  - art24-4
+aliases:
+  - "Art. 24.4 LI 2008 (2026-04-16)"
+kruisreferenties: []
 ---
 
 # JAS-annotatie: Art. 24.4 Leidraad Invordering 2008

@@ -7,6 +7,14 @@ timestamp: 2026-04-03_22-39-50
 peildatum: 2026-01-01
 analist: Belastingdienst — Domein Inning
 jas-versie: 1.0.7
+tags:
+  - jas-annotatie
+  - li2008
+  - art9-1
+  - art9-5
+aliases:
+  - "Art. 9.1 en 9.5 LI 2008 (2026-04-03)"
+kruisreferenties: []
 ---
 
 # JAS-annotatie: Art. 9.1 en 9.5 Leidraad Invordering 2008

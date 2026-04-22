@@ -8,3 +8,12 @@
 # Gegenereerde HTML-renders
 analyses/*.html
 presentaties/*.html
+
+# Obsidian — per-apparaat state (niet tracken)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+# Obsidian — plugin-cache en hot-reload
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/styles.css

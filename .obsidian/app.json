@@ -1,0 +1,12 @@
+{
+  "attachmentFolderPath": "media",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "analyses",
+  "templateFolderPath": ".obsidian/templates",
+  "userIgnoreFilters": [".git/", ".claude/"],
+  "alwaysUpdateLinks": true,
+  "promptDelete": false,
+  "trashOption": "local",
+  "defaultViewMode": "source",
+  "livePreview": true
+}

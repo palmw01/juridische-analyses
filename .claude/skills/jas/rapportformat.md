@@ -12,8 +12,22 @@ timestamp: [YYYY-MM-DD_HH-MM-SS]
 peildatum: [peildatum uit MCP]
 analist: Belastingdienst — Domein Inning
 jas-versie: 1.0.10
+tags:
+  - jas-annotatie
+  - [wet-afkorting-lowercase]
+  - art[nummer]
+aliases:
+  - "Art. [A] [wet-afkorting] ([datum])"
+kruisreferenties: []
 ---
 ```
+
+**Invulregels frontmatter-uitbreidingen:**
+
+- **tags[1] — wet-afkorting-lowercase:** IW 1990 → `iw1990`; AWR → `awr`; Awb → `awb`; LI 2008 → `li2008`; UB IW 1990 → `ubiw1990`.
+- **tags[2] — art[nummer]:** artikelnummer zonder spaties; `.` en `:` worden `-`: art. 9 → `art9`; art. 4:86 → `art4-86`; art. 24.4 → `art24-4`; art. 9 lid 1 → `art9` (lid niet in tag); gecombineerd "9.1 en 9.5" → twee tags: `art9-1` en `art9-5`.
+- **aliases[0]:** gebruik de volledige artikelreferentie + datum in ronde haken: `"Art. 9 lid 1 IW 1990 (2026-04-21)"`.
+- **kruisreferenties:** lege array vóór Stap 7; wordt na Stap 7 gevuld met strings als `"Art. 2 IW 1990"`, `"Art. 1 IW 1990"`, `"Art. 4:86 Awb"` — zie Stap 7 (SKILL.md).
 
 ---
 
@@ -146,7 +160,9 @@ Bij geen termijnen: schrijf exact "Geen termijnen in artikel [A]."
 
 | Artikel (bron) | Verwijst naar | Letterlijke verwijzingstekst | Geciteerde doeltekst | Relevantie voor annotatie |
 |----------------|---------------|------------------------------|----------------------|--------------------------|
-| Art. [A] lid Y [wet] | Art. Z lid W [wet] | "[exacte formulering uit tekst]" | "[letterlijke tekst gerefereerd lid]" | [één zin] |
+| Art. [A] lid Y [wet] | [[Art. Z IW 1990]] | "[exacte formulering uit tekst]" | "[letterlijke tekst gerefereerd lid]" | [één zin] |
+
+*Notatie "Verwijst naar"-kolom:* gebruik altijd de wiki-link-vorm `[[Art. Z [wet-afkorting]]]` (bijv. `[[Art. 2 IW 1990]]`). Dit maakt de Obsidian-graafweergave actief.
 
 Bij geen interne verwijzingen: schrijf exact "Geen interne verwijzingen in de tekst van artikel [A]."
 
@@ -154,7 +170,9 @@ Bij geen interne verwijzingen: schrijf exact "Geen interne verwijzingen in de te
 
 | Artikel (bron) | Verwijst naar | Wet | Letterlijke verwijzingstekst | Geciteerde doeltekst |
 |----------------|---------------|-----|------------------------------|----------------------|
-| Art. [A] lid Y [wet] | Art. Z lid W | [wetnaam] | "[exacte formulering]" | "[letterlijke tekst gerefereerd lid]" |
+| Art. [A] lid Y [wet] | [[Art. Z Awb]] | [wetnaam] | "[exacte formulering]" | "[letterlijke tekst gerefereerd lid]" |
+
+*Notatie "Verwijst naar"-kolom:* gebruik altijd de wiki-link-vorm `[[Art. Z [wet-afkorting]]]` (bijv. `[[Art. 4:86 Awb]]`).
 
 Bij geen externe verwijzingen: schrijf exact "Geen externe verwijzingen in de tekst van artikel [A]."
 
@@ -174,7 +192,9 @@ Gebaseerd op `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` — alleen
 
 | Verwijzend artikel | Aantal treffers | Relevantie voor annotatie |
 |--------------------|-----------------|--------------------------|
-| Art. Z [wet] | [n] | [één zin] |
+| [[Art. Z IW 1990]] | [n] | [één zin] |
+
+*Notatie "Verwijzend artikel"-kolom:* gebruik altijd de wiki-link-vorm `[[Art. Z [wet-afkorting]]]`.
 
 Bij geen omgekeerde verwijzingen: schrijf exact "Geen artikelen in [wetnaam] verwijzen naar artikel [A]."
 

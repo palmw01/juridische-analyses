@@ -7,6 +7,13 @@ timestamp: 2026-04-03_22-32-04
 peildatum: 2026-01-01
 analist: Belastingdienst — Domein Inning
 jas-versie: 1.0.7
+tags:
+  - jas-annotatie
+  - awb
+  - art4-86
+aliases:
+  - "Art. 4:86 Awb (2026-04-03)"
+kruisreferenties: []
 ---
 
 # JAS-annotatie: Art. 4:86 Awb

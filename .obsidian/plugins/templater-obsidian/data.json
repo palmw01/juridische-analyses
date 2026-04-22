@@ -1,0 +1,12 @@
+{
+  "command_timeout": 5,
+  "templates_folder": ".obsidian/templates",
+  "auto_jump_to_cursor": true,
+  "use_system_commands": false,
+  "trigger_on_file_creation": false,
+  "enable_system_commands": false,
+  "syntax_highlighting_enabled": true,
+  "syntax_highlighting_mobile_enabled": false,
+  "enabled_templates_hotkeys": [],
+  "startup_templates": []
+}

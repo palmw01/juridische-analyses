@@ -116,6 +116,10 @@ BWB-ids: IW 1990 = BWBR0004770 | UB IW = BWBR0004772 | AWR = BWBR0002320 | Awb =
 
 Vervallen artikelen worden door de MCP gefilterd — gaten in nummering zijn normaal.
 
+**Wiki-links voor Obsidian:** schrijf in de kolom "Verwijst naar" van §7.1, §7.2 en in de kolom "Verwijzend artikel" van §7.4 elk artikel als wiki-link: `[[Art. Z IW 1990]]`, `[[Art. Z Awb]]`, etc. Gebruik de korte wet-afkorting (IW 1990, Awb, AWR, LI 2008), niet de volledige wetnaam.
+
+**Kruisreferenties voor frontmatter:** sla na het invullen van §7.1, §7.2 en §7.4 alle referentie-strings op als `[kruisrefs]` — een lijst van strings zónder `[[]]`, bijv. `["Art. 2 IW 1990", "Art. 1 IW 1990", "Art. 4:86 Awb"]`. Gebruik `[kruisrefs]` in Stap 11 voor het frontmatter-veld `kruisreferenties`. Bij geen kruisreferenties: lege array `[]`.
+
 ---
 
 ## Stap 7 — JAS-annotatie uitvoeren
@@ -166,7 +170,20 @@ Doorloop de pre-save checklist in `$CLAUDE_SKILL_DIR/rapportformat.md` volledig 
 
 ---
 
-## Stap 11 — Timestamp ophalen en rapport opslaan
+## Stap 11 — Frontmatter bepalen, timestamp ophalen en rapport opslaan
+
+**Frontmatter-uitbreidingen bepalen (vóór opslaan):**
+
+1. **tags** (zie rapportformat.md voor invulregels):
+   - Altijd: `jas-annotatie`
+   - Wet-tag: `[W]` → lowercase afkorting: IW 1990 → `iw1990`; AWR → `awr`; Awb → `awb`; LI 2008 → `li2008`; UB IW 1990 → `ubiw1990`
+   - Artikel-tag: `art` + artikelnummer, `.` en `:` → `-`: art. 9 → `art9`; art. 4:86 → `art4-86`; art. 24.4 → `art24-4`; gecombineerd "9.1 en 9.5" → `art9-1` + `art9-5`
+2. **aliases**: `"Art. [A] [wet-afkorting] ([datum])"` — bijv. `"Art. 9 lid 1 IW 1990 (2026-04-21)"`
+3. **kruisreferenties**: gebruik de `[kruisrefs]`-lijst uit Stap 7 (lege array `[]` bij geen kruisreferenties)
+
+Sla `[hub-pad]` op voor Stap 12b: `wetsartikelen/[wet-afkorting]/art-[nummer].md` waarbij `[nummer]` = artikelnummer met `.` en `:` vervangen door `-` (art. 9 → `art-9`; art. 4:86 → `art-4-86`; gecombineerd "9.1 en 9.5" → `art-9-1en9-5`).
+
+---
 
 Haal de timestamp op via `date +%Y-%m-%d_%H-%M-%S`. Sla het rapport op als:
 
@@ -193,12 +210,64 @@ Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 
 ---
 
+## Stap 12b — Hub-note aanmaken
+
+Controleer of `[hub-pad]` (bepaald in Stap 11) al bestaat via de Read-tool.
+
+**Als het bestand niet bestaat:** maak het aan met onderstaande structuur. Vul `[A]`, `[wet-afkorting]`, `[volledige wetnaam (BWB-id)]`, `[wet-afkorting-lowercase]` en `[nummer]` in met de waarden uit Stap 2 en 11. Noteer het pad als `[hub-nieuw]` = true voor Stap 13.
+
+```markdown
+---
+type: wetsartikel-hub
+artikel: Art. [A] [wet-afkorting]
+wet: [volledige wetnaam (BWB-id)]
+aliases:
+  - "Art. [A] [wet-afkorting]"
+tags:
+  - wetsartikel
+  - [wet-afkorting-lowercase]
+  - art[nummer]
+---
+
+# Art. [A] — [volledige wetnaam]
+
+## Alle annotaties
+
+\`\`\`dataview
+TABLE datum AS "Analysedatum", peildatum AS "Peildatum", jas-versie AS "JAS"
+FROM "analyses"
+WHERE type = "jas-annotatie" AND contains(artikel, "Art. [A]") AND contains(wet, "[deel van wetnaam]")
+SORT datum DESC
+\`\`\`
+
+## Annotaties die naar dit artikel verwijzen
+
+\`\`\`dataview
+TABLE artikel, datum AS "Analysedatum"
+FROM "analyses"
+WHERE type = "jas-annotatie" AND contains(kruisreferenties, "Art. [A] [wet-afkorting]")
+SORT datum DESC
+\`\`\`
+```
+
+**Als het bestand al bestaat:** geen actie. Noteer `[hub-nieuw]` = false.
+
+---
+
 ## Stap 13 — Commit en push
 
 Voer in de projectroot uit:
 
 ```
 git add analyses/jas-annotatie-art[A]-[afkorting wet]-[TIMESTAMP].md analyses/INDEX.md
+git commit -m "jas: annotatie art. [A] [W] ([PD])"
+git push
+```
+
+Als `[hub-nieuw]` = true: voeg de hub-note toe aan de `git add` vóór de commit:
+
+```
+git add analyses/jas-annotatie-art[A]-[afkorting wet]-[TIMESTAMP].md analyses/INDEX.md [hub-pad]
 git commit -m "jas: annotatie art. [A] [W] ([PD])"
 git push
 ```
