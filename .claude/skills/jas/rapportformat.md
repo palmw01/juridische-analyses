@@ -299,6 +299,7 @@ Citeer hier de volledige, onbewerkte wetstekst van artikelen die als kruisrefere
 - **MvT-verwijzingen alleen geverifieerd.** Nooit Kamerstukken-verwijzingen fabriceren; altijd "Verificatie vereist" markeren.
 - **Nulresultaat Leidraad: standaardmelding.** Gebruik exact de voorgeschreven tekst.
 - **Altijd opslaan.** Rapport als MD-bestand in `analyses/` conform het bestandsnaamschema.
+- **Hub-note verplicht.** Vóór de commit: controleer via Read-tool of `wetsartikelen/[wet-afkorting]/art-[nummer].md` bestaat. Zo niet: aanmaken. Nooit overslaan.
 
 ---
 
@@ -316,3 +317,4 @@ Citeer hier de volledige, onbewerkte wetstekst van artikelen die als kruisrefere
 - [ ] §9: drie interpretatiemethoden doorlopen, spanningsvelden benoemd
 - [ ] §11: onzekerheden expliciet, geen schijnzekerheid
 - [ ] Bestandsnaam conform: `jas-annotatie-art[A]-[wet]-[TIMESTAMP].md`
+- [ ] **Hub-note:** `wetsartikelen/[wet-afkorting]/art-[nummer].md` bestaat (aangemaakt of al aanwezig) — controleer met Read-tool vóór commit

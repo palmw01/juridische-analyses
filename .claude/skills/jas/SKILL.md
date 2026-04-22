@@ -210,11 +210,11 @@ Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 
 ---
 
-## Stap 12b — Hub-note aanmaken
+## Stap 12b — Hub-note aanmaken ⚠️ VERPLICHT — nooit overslaan
 
-Controleer of `[hub-pad]` (bepaald in Stap 11) al bestaat via de Read-tool.
+Roep de Read-tool aan op `[hub-pad]` (bepaald in Stap 11). **Deze stap mag niet worden overgeslagen.** De pre-save checklist (rapportformat.md) blokkeert de commit als de hub-note ontbreekt.
 
-**Als het bestand niet bestaat:** maak het aan met onderstaande structuur. Vul `[A]`, `[wet-afkorting]`, `[volledige wetnaam (BWB-id)]`, `[wet-afkorting-lowercase]` en `[nummer]` in met de waarden uit Stap 2 en 11. Noteer het pad als `[hub-nieuw]` = true voor Stap 13.
+**Als de Read-tool een fout geeft (bestand bestaat niet):** maak het aan met onderstaande structuur. Vul `[A]`, `[wet-afkorting]`, `[volledige wetnaam (BWB-id)]`, `[wet-afkorting-lowercase]` en `[nummer]` in met de waarden uit Stap 2 en 11. Noteer het pad als `[hub-nieuw]` = true voor Stap 13.
 
 ```markdown
 ---
