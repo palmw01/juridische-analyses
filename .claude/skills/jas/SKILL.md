@@ -181,7 +181,19 @@ Doorloop de pre-save checklist in `$CLAUDE_SKILL_DIR/rapportformat.md` volledig 
 2. **aliases**: `"Art. [A] [wet-afkorting] ([datum])"` — bijv. `"Art. 9 lid 1 IW 1990 (2026-04-21)"`
 3. **kruisreferenties**: gebruik de `[kruisrefs]`-lijst uit Stap 7 (lege array `[]` bij geen kruisreferenties)
 
-Sla `[hub-pad]` op voor Stap 12b: `wetsartikelen/[wet-afkorting]/art-[nummer].md` waarbij `[nummer]` = artikelnummer met `.` en `:` vervangen door `-` (art. 9 → `art-9`; art. 4:86 → `art-4-86`; gecombineerd "9.1 en 9.5" → `art-9-1en9-5`).
+Sla `[hub-pad]` op voor Stap 12b: `wetsartikelen/[wet-mapnaam]/art-[nummer].md`
+
+**`[wet-mapnaam]` — exacte mapnamen (geen spaties, geen punten):**
+
+| Wet | Mapnaam |
+|-----|---------|
+| Invorderingswet 1990 | `IW1990` |
+| Algemene wet bestuursrecht | `Awb` |
+| Algemene wet inzake rijksbelastingen | `AWR` |
+| Leidraad Invordering 2008 | `LI2008` |
+| Uitvoeringsbesluit IW 1990 | `UBIW1990` |
+
+**`[nummer]`** = artikelnummer met `.` en `:` vervangen door `-`: art. 9 → `art-9`; art. 4:86 → `art-4-86`; gecombineerd "9.1 en 9.5" → `art-9-1en9-5`.
 
 ---
 
