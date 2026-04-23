@@ -77,6 +77,12 @@ De tool-resultaten zijn **JSON**. Extraheer per response de volgende velden:
 
 Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in artikel `[A]`.
 
+**Begrippen-check:** roep voor elke geïdentificeerde term het begrip-protocol aan (zie `$CLAUDE_SKILL_DIR/../begrip/SKILL.md`). Dit controleert of het begrip al gedocumenteerd is in `begrippen/` en maakt of actualiseert de begrip-noot. Voer dit parallel uit voor alle gevonden termen.
+
+**Lid-niveau controle:** tel `leden.length` in de MCP-response voor artikel `[A]`.
+- Als `[L]` niet is opgegeven (volledig artikel gevraagd) EN `leden.length > 3`: stop de workflow. Meld: *"Art. [A] [W] heeft [N] leden. Specificeer een lid: `/jas art. [A] lid [N] [W]`"* en lijst alle beschikbare lidnummers op.
+- Als `[L]` is opgegeven of `leden.length ≤ 3`: ga door. Bij een specifiek lid: gebruik alleen `leden[].tekst` van dat lid voor §4 en §5; gebruik de volledige artikeltekst wel als context voor §2, §3 en §9.
+
 **Gebruik altijd de `artikel`-parameter — nooit de volledige wet ophalen.**
 
 ---
@@ -121,9 +127,12 @@ Vervallen artikelen worden door de MCP gefilterd — gaten in nummering zijn nor
 
 ## Stap 7 — JAS-annotatie uitvoeren
 
-Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR/kaders.md`. Voer de annotatie uit op de wetstekst van artikel `[A]` uit Stap 4, aangevuld met de brondefinities uit Stap 4.
+Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR/kaders.md`. Voer de annotatie uit op de wetstekst van lid `[L]` uit Stap 4, aangevuld met de brondefinities uit Stap 4.
 
-**Interne annotatiestap (niet opnemen in rapportoutput):** loop de 13 JAS-elementen af en bepaal per element of het aanwezig is in het artikel: rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, variabele/variabelewaarde, parameter/parameterwaarde, operator, tijdsaanduiding, plaatsaanduiding, delegatiebevoegdheid/delegatie-invulling, brondefinitie. Noteer per aanwezig element de vindplaats in het artikel.
+**7a — Extractie (interne stap, niet in output):**
+Lees de letterlijke tekst van lid `[L]` woord voor woord. Maak een genummerde lijst van alle te classificeren zinsdelen en formuleringen — nog geen oordeel, alleen identificatie. Noteer deze lijst intern als `[extractielijst]`. Een formulering is elk afzonderlijk zinsdeel dat een juridisch element kan bevatten (werkwoord, substantief, bijwoordelijke bepaling, voegwoord met voorwaardelijke werking, etc.).
+
+**Interne annotatiestap (niet opnemen in rapportoutput):** loop de 13 JAS-elementen af en bepaal per element of het aanwezig is in het lid: rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, variabele/variabelewaarde, parameter/parameterwaarde, operator, tijdsaanduiding, plaatsaanduiding, delegatiebevoegdheid/delegatie-invulling, brondefinitie. Noteer per aanwezig element de vindplaats.
 
 **Annotatieprincipes:**
 1. Citeer het exacte zinsdeel letterlijk bij elk geclassificeerd element.
@@ -132,12 +141,15 @@ Gebruik de definities, herkenningsvragen en taalkenmerken uit `$CLAUDE_SKILL_DIR
 4. Markeer meerduidigheid of alternatieve classificaties expliciet in de toelichting.
 5. Traceer delegatieketens volledig: wet → amvb → ministeriële regeling; haal alle schakels op.
 
-**Structuur van de annotatietabel:** maak één subsectie per lid van het artikel. Nummer de annotaties doorlopend over alle leden. Gebruik als kolomnamen: Nr | Formulering (letterlijk geciteerd) | JAS-element | Toelichting.
+**Structuur van de annotatietabel:** maak één subsectie voor lid `[L]`. Nummer de annotaties doorlopend. Gebruik als kolomnamen: Nr | Formulering (letterlijk geciteerd) | JAS-element | Toelichting.
 
 **Inhoud van de Toelichting-kolom:**
 1. Interpretatiemethode (grammaticaal / systematisch / teleologisch)
 2. Reden voor keuze van deze JAS-klasse boven alternatieven
 3. Meerduidigheid of alternatieve classificatie (indien van toepassing)
+
+**7d — Verificatie (interne stap, niet in output):**
+Vergelijk de annotatietabel met `[extractielijst]` uit 7a. Is elk item uit de extractielijst terug te vinden als een annotatierij? Zo niet: voeg de ontbrekende rij alsnog toe aan de tabel vóór verdere verwerking. Noteer het aantal toegevoegde rijen als `[7d-aanvullingen]`; bij 0 aanvullingen: ga direct door.
 
 ---
 
