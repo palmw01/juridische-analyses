@@ -156,6 +156,8 @@ Bij geen termijnen: schrijf exact "Geen termijnen in artikel [A]."
 
 ## §7 Kruisreferenties
 
+*Verwijzingen worden geëxtraheerd via het protocol in `kruisverwijzingen.md`. Verwijzingen met confidence < 0.8 worden gemarkeerd met *(verificatie aanbevolen)* in de Relevantie-kolom.*
+
 **§7.1 Interne verwijzingen (binnen [wetnaam])**
 
 | Artikel (bron) | Verwijst naar | Letterlijke verwijzingstekst | Geciteerde doeltekst | Relevantie voor annotatie |

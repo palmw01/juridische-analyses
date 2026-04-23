@@ -14,9 +14,10 @@ Voer onderstaande stappen strikt in volgorde uit. Wijk niet af van de voorgeschr
 
 ## Stap 1 — Lees bij aanvang
 
-Lees deze twee bestanden volledig vóór enige andere actie:
+Lees dit bestand volledig vóór enige andere actie:
 - `$CLAUDE_SKILL_DIR/kaders.md` — JAS v1.0.10 taxonomie en annotatieprincipes
-- `$CLAUDE_SKILL_DIR/rapportformat.md` — §1–§11 structuur, kwaliteitseisen, pre-save checklist
+
+`$CLAUDE_SKILL_DIR/kruisverwijzingen.md` wordt geladen in Stap 6. `$CLAUDE_SKILL_DIR/rapportformat.md` wordt geladen in Stap 10.
 
 ---
 
@@ -96,19 +97,15 @@ Roep parallel aan:
 
 ## Stap 6 — Kruisreferenties extraheren
 
-Scan de in Stap 4 verkregen artikeltekst op expliciete verwijzingen. Neem uitsluitend verwijzingen op die **letterlijk in de tekst staan** als "artikel X", "artikel X, lid Y", "artikel X, onderdeel Y". Geen verwijzingen toevoegen op basis van eigen kennis.
+Lees `$CLAUDE_SKILL_DIR/kruisverwijzingen.md` volledig. Voer het daarin beschreven protocol uit op alle `leden[].tekst`-velden uit Stap 4. Dit levert een intern JSON-model op.
 
-Maak twee lijsten:
-- **Intern**: verwijzingen naar artikelen binnen dezelfde wet `[W]`
-- **Extern**: verwijzingen naar artikelen in andere wetten
+**Intern vs. extern:** records met `doel_bwbId` = `[B]` zijn intern; records met `doel_bwbId` ≠ `[B]` zijn extern. Records met `doel_artikel: null` (verwijzing naar hele wet) zijn altijd extern. Twijfelgeval: classificeer als extern.
 
-**Parallel aanroepen:**
+**Parallel aanroepen (op basis van het JSON-model):**
 
-1. Roep `wettenbank_artikel(bwbId=[B], artikel=<nr>)` aan voor elk **intern** gerefereerd artikel.
-2. Roep `wettenbank_artikel(bwbId=<id>, artikel=<nr>)` aan voor elk **extern** gerefereerd artikel.
-3. Roep `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` aan om **omgekeerde kruisreferenties** te vinden: artikelen binnen dezelfde wet die verwijzen naar art. `[A]`. Verwerk de `artikelen`-array uit de response: noteer per treffer het artikelnummer en het aantal treffers. Dit levert de lijst van articles die afhankelijk zijn van of verwijzen naar art. `[A]`.
-
-Alle drie de groepen aanroepen parallel uitvoeren.
+1. `wettenbank_artikel(bwbId=[B], artikel=<nr>)` voor elk uniek intern `(doel_bwbId, doel_artikel)`-paar waarbij `doel_artikel` niet null is.
+2. `wettenbank_artikel(bwbId=<doel_bwbId>, artikel=<doel_artikel>)` voor elk uniek extern paar waarbij `doel_artikel` niet null is.
+3. `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` voor omgekeerde kruisreferenties — verwerkt de `artikelen`-array per treffer voor §7.4.
 
 Gebruik de `leden`-array (JSON) van elke response voor inhoudelijke annotatie; gebruik `bronreferentie` voor Bijlage B.
 
@@ -116,9 +113,9 @@ BWB-ids: IW 1990 = BWBR0004770 | UB IW = BWBR0004772 | AWR = BWBR0002320 | Awb =
 
 Vervallen artikelen worden door de MCP gefilterd — gaten in nummering zijn normaal.
 
-**Wiki-links voor Obsidian:** schrijf in de kolom "Verwijst naar" van §7.1, §7.2 en in de kolom "Verwijzend artikel" van §7.4 elk artikel als wiki-link: `[[Art. Z IW 1990]]`, `[[Art. Z Awb]]`, etc. Gebruik de korte wet-afkorting (IW 1990, Awb, AWR, LI 2008), niet de volledige wetnaam.
+**§7 vullen vanuit het JSON-model:** volg de "Van JSON-model naar §7"-sectie in kruisverwijzingen.md. Wiki-link-notatie (`[[Art. Z wet-afkorting]]`) is verplicht in de "Verwijst naar"-kolom van §7.1, §7.2 en de "Verwijzend artikel"-kolom van §7.4.
 
-**Kruisreferenties voor frontmatter:** sla na het invullen van §7.1, §7.2 en §7.4 alle referentie-strings op als `[kruisrefs]` — een lijst van strings zónder `[[]]`, bijv. `["Art. 2 IW 1990", "Art. 1 IW 1990", "Art. 4:86 Awb"]`. Gebruik `[kruisrefs]` in Stap 11 voor het frontmatter-veld `kruisreferenties`. Bij geen kruisreferenties: lege array `[]`.
+**Kruisreferenties voor frontmatter:** sla na §7.1 en §7.2 alle unieke `"Art. <doel_artikel> <wet-afkorting>"`-strings op als `[kruisrefs]` — zonder `[[]]`, zonder lid. Gebruik `[kruisrefs]` in Stap 11. Bij geen kruisreferenties: lege array `[]`.
 
 ---
 
@@ -166,7 +163,7 @@ Op basis van de in Stap 7 geclassificeerde afleidingsregels:
 
 ## Stap 10 — Kwaliteitscheck
 
-Doorloop de pre-save checklist in `$CLAUDE_SKILL_DIR/rapportformat.md` volledig vóór opslaan. Alle punten moeten afgevinkt zijn of voorzien van een expliciete toelichting waarom een punt niet van toepassing is.
+Lees `$CLAUDE_SKILL_DIR/rapportformat.md` volledig. Doorloop daarna de pre-save checklist volledig vóór opslaan. Alle punten moeten afgevinkt zijn of voorzien van een expliciete toelichting waarom een punt niet van toepassing is.
 
 ---
 
