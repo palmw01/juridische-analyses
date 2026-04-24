@@ -17,7 +17,7 @@ Voer onderstaande stappen strikt in volgorde uit. Wijk niet af van de voorgeschr
 Lees dit bestand volledig vóór enige andere actie:
 - `$CLAUDE_SKILL_DIR/kaders.md` — JAS v1.0.10 taxonomie en annotatieprincipes
 
-`$CLAUDE_SKILL_DIR/kruisverwijzingen.md` wordt geladen in Stap 6. `$CLAUDE_SKILL_DIR/rapportformat.md` wordt geladen in Stap 10.
+`$CLAUDE_SKILL_DIR/kruisverwijzingen.md` wordt geladen in Stap 6. `$CLAUDE_SKILL_DIR/rapportformat.md` wordt geladen in Stap 11.
 
 ---
 
@@ -75,9 +75,9 @@ De tool-resultaten zijn **JSON**. Extraheer per response de volgende velden:
 
 **Structuurcontext:** gebruik het `pad`-veld (string) voor §1 (structuurpositie in de header) en §2 (Structuurdiagram). **Neem nooit een hoofdstuk- of afdelingstitel aan op basis van de artikelinhoud.** Als `pad` afwezig is: roep `wettenbank_structuur(bwbId=[B])` aan en zoek in de `structuur`-array het knooppunt op dat overeenkomt met artikel `[A]`; gebruik de ancestor-knooppunten als structuurpositie. Geeft ook dat geen resultaat: noteer "Structuurpositie niet beschikbaar" in §2.
 
-Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in artikel `[A]`.
+Noteer uit `[BD]` alle begripsomschrijvingen die betrekking hebben op termen in artikel `[A]`. Sla deze op als `[brondefinities]` voor gebruik in Stap 10 (§3).
 
-**Begrippen-check:** roep voor elke geïdentificeerde term het begrip-protocol aan (zie `$CLAUDE_SKILL_DIR/../begrip/SKILL.md`). Dit controleert of het begrip al gedocumenteerd is in `begrippen/` en maakt of actualiseert de begrip-noot. Voer dit parallel uit voor alle gevonden termen.
+**Begrippen-check:** identificeer eerst alle relevante termen in de `leden[].tekst` van artikel `[A]`. Roep daarna voor elke geïdentificeerde term het begrip-protocol aan (zie `$CLAUDE_SKILL_DIR/../begrip/SKILL.md`). Dit controleert of het begrip al gedocumenteerd is in `begrippen/` en maakt of actualiseert de begrip-noot. Verwerk de termen één voor één.
 
 **Lid-niveau controle:** tel `leden.length` in de MCP-response voor artikel `[A]`.
 - Als `[L]` niet is opgegeven (volledig artikel gevraagd) EN `leden.length > 3`: stop de workflow. Meld: *"Art. [A] [W] heeft [N] leden. Specificeer een lid: `/jas art. [A] lid [N] [W]`"* en lijst alle beschikbare lidnummers op.
@@ -111,7 +111,7 @@ Lees `$CLAUDE_SKILL_DIR/kruisverwijzingen.md` volledig. Voer het daarin beschrev
 
 1. `wettenbank_artikel(bwbId=[B], artikel=<nr>)` voor elk uniek intern `(doel_bwbId, doel_artikel)`-paar waarbij `doel_artikel` niet null is.
 2. `wettenbank_artikel(bwbId=<doel_bwbId>, artikel=<doel_artikel>)` voor elk uniek extern paar waarbij `doel_artikel` niet null is.
-3. `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` voor omgekeerde kruisreferenties — verwerkt de `artikelen`-array per treffer voor §7.4.
+3. `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` voor omgekeerde kruisreferenties. Verwerk de `artikelen`-array per treffer als kandidatenlijst. Voer daarna de §7.4-verificatieprocedure uit (zie kruisverwijzingen.md §7.4-protocol) vóór §7.4 te vullen.
 
 Gebruik de `leden`-array (JSON) van elke response voor inhoudelijke annotatie; gebruik `bronreferentie` voor Bijlage B.
 
@@ -119,9 +119,9 @@ BWB-ids: IW 1990 = BWBR0004770 | UB IW = BWBR0004772 | AWR = BWBR0002320 | Awb =
 
 Vervallen artikelen worden door de MCP gefilterd — gaten in nummering zijn normaal.
 
-**§7 vullen vanuit het JSON-model:** volg de "Van JSON-model naar §7"-sectie in kruisverwijzingen.md. Wiki-link-notatie (`[[Art. Z wet-afkorting]]`) is verplicht in de "Verwijst naar"-kolom van §7.1, §7.2 en de "Verwijzend artikel"-kolom van §7.4.
+**§7 vullen vanuit het JSON-model:** volg de "Van JSON-model naar §7"-sectie en het §7.4-protocol in kruisverwijzingen.md. Wiki-link-notatie (`[[Art. Z wet-afkorting]]`) is verplicht in de "Verwijst naar"-kolom van §7.1, §7.2 en de "Verwijzend artikel"-kolom van §7.4.
 
-**Kruisreferenties voor frontmatter:** sla na §7.1 en §7.2 alle unieke `"Art. <doel_artikel> <wet-afkorting>"`-strings op als `[kruisrefs]` — zonder `[[]]`, zonder lid. Gebruik `[kruisrefs]` in Stap 11. Bij geen kruisreferenties: lege array `[]`.
+**Kruisreferenties voor frontmatter:** sla na deduplicatie van het JSON-model alle unieke `"Art. <doel_artikel> <wet-afkorting>"`-strings op als `[kruisrefs]` — zonder `[[]]`, zonder lid. Gebruik `[kruisrefs]` in Stap 12. Bij geen kruisreferenties: lege array `[]`.
 
 ---
 
@@ -173,13 +173,41 @@ Op basis van de in Stap 7 geclassificeerde afleidingsregels:
 
 ---
 
-## Stap 10 — Kwaliteitscheck
+## Stap 10 — Rapportopbouw (§2, §3, §6, §9–§11)
+
+Gebruik uitsluitend de in Stappen 4–9 vergaarde wetstekst en annotaties als grondslag. Geen nieuwe MCP-aanroepen in deze stap.
+
+**§2 Structuurdiagram:**
+Gebruik het `pad`-veld uit Stap 4 als structuurpositie (blokcitaat, letterlijk overgenomen). Breng daarna de interne relaties tussen de leden in kaart op basis van de in Stap 7 geclassificeerde JAS-elementen: welk lid is de hoofdregel, welke leden zijn uitzonderingen of nadere invullingen. Gebruik een boomstructuur met ├── en └── vertakkingen. Bij een enkel lid: schrijf de standaardmelding uit rapportformat.md.
+
+**§3 Brondefinities:**
+Genereer de vierkolomstabel (Term | Definitie | Vindplaats | Reikwijdte) op basis van `[brondefinities]` uit Stap 4. Citeer definities letterlijk. Bij geen relevante brondefinities: gebruik de standaardmelding uit rapportformat.md.
+
+**§6 Termijnen en tijdsaanduidingen:**
+Genereer de tabel op basis van alle tijdsaanduidingen die in Stap 7 als JAS-element zijn geclassificeerd. Vermeld per termijn: naam, duur/datum, aanvang, einde en rechtsgevolg bij overschrijding. Bij geen termijnen: gebruik de standaardmelding uit rapportformat.md.
+
+**§9 Juridische analyse:**
+- §9.1 Grammaticale interpretatie — op basis van de letterlijke wetstekst uit §1; benoem de gewone betekenis van sleuteltermen.
+- §9.2 Systematische interpretatie — op basis van de kruisreferenties uit §7 (inclusief §7.3); verwijs altijd naar concrete artikelnummers.
+- §9.3 Teleologische interpretatie — op basis van wetsstructuur en wetsgeschiedenis; markeer MvT-verwijzingen altijd als "Verificatie vereist" tenzij de vindplaats (Kamerstukken II [jaar], [nr.], nr. [ondernr.], p. [X]) zeker is. Fabriceer geen MvT-verwijzingen.
+- §9.4 Spanning en meerduidigheid — gebruik uitsluitend §1–§7 als grondslag; bij geen spanningsvelden: gebruik de standaardmelding uit rapportformat.md.
+
+**§10 Lacunes en ontbrekend beleid:**
+Identificeer op basis van §9 en §5 eventuele lacunes. Bij geen lacunes: gebruik de standaardmelding uit rapportformat.md.
+
+**§11 Conclusie:**
+- §11.1 Kernbevindingen: minimaal 3, maximaal 5 genummerde bevindingen (structuur per bevinding: vetgedrukte titel, *Vindplaats:*, *Betekenis:*).
+- §11.2 Onzekerheden en voorbehouden: benoem resterende onzekerheden; altijd vermelden als teleologische interpretaties niet geverifieerd zijn.
+
+---
+
+## Stap 11 — Kwaliteitscheck
 
 Lees `$CLAUDE_SKILL_DIR/rapportformat.md` volledig. Doorloop daarna de pre-save checklist volledig vóór opslaan. Alle punten moeten afgevinkt zijn of voorzien van een expliciete toelichting waarom een punt niet van toepassing is.
 
 ---
 
-## Stap 11 — Frontmatter bepalen, timestamp ophalen en rapport opslaan
+## Stap 12 — Frontmatter bepalen, timestamp ophalen en rapport opslaan
 
 **Frontmatter-uitbreidingen bepalen (vóór opslaan):**
 
@@ -188,9 +216,9 @@ Lees `$CLAUDE_SKILL_DIR/rapportformat.md` volledig. Doorloop daarna de pre-save 
    - Wet-tag: `[W]` → lowercase afkorting: IW 1990 → `iw1990`; AWR → `awr`; Awb → `awb`; LI 2008 → `li2008`; UB IW 1990 → `ubiw1990`
    - Artikel-tag: `art` + artikelnummer, `.` en `:` → `-`: art. 9 → `art9`; art. 4:86 → `art4-86`; art. 24.4 → `art24-4`; gecombineerd "9.1 en 9.5" → `art9-1` + `art9-5`
 2. **aliases**: `"Art. [A] [wet-afkorting] ([datum])"` — bijv. `"Art. 9 lid 1 IW 1990 (2026-04-21)"`
-3. **kruisreferenties**: gebruik de `[kruisrefs]`-lijst uit Stap 7 (lege array `[]` bij geen kruisreferenties)
+3. **kruisreferenties**: gebruik de `[kruisrefs]`-lijst uit Stap 6 (lege array `[]` bij geen kruisreferenties)
 
-Sla `[hub-pad]` op voor Stap 12b: `wetsartikelen/[wet-mapnaam]/art-[nummer].md`
+Sla `[hub-pad]` op voor Stap 13b: `wetsartikelen/[wet-mapnaam]/art-[nummer].md`
 
 **`[wet-mapnaam]` — exacte mapnamen (geen spaties, geen punten):**
 
@@ -222,7 +250,7 @@ Genereer het rapport conform de structuur in `$CLAUDE_SKILL_DIR/rapportformat.md
 
 ---
 
-## Stap 12 — INDEX.md bijwerken
+## Stap 13 — INDEX.md bijwerken
 
 Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 - Gebruik het format: `- [Art. [A] (versie X)](./jas-annotatie-...) (YYYY-MM-DD)`
@@ -231,11 +259,11 @@ Voeg het nieuwe rapport toe aan `analyses/INDEX.md` onder de juiste wet:
 
 ---
 
-## Stap 12b — Hub-note aanmaken ⚠️ VERPLICHT — nooit overslaan
+## Stap 13b — Hub-note aanmaken ⚠️ VERPLICHT — nooit overslaan
 
-Roep de Read-tool aan op `[hub-pad]` (bepaald in Stap 11). **Deze stap mag niet worden overgeslagen.** De pre-save checklist (rapportformat.md) blokkeert de commit als de hub-note ontbreekt.
+Roep de Read-tool aan op `[hub-pad]` (bepaald in Stap 12). **Deze stap mag niet worden overgeslagen.** De pre-save checklist (rapportformat.md) blokkeert de commit als de hub-note ontbreekt.
 
-**Als de Read-tool een fout geeft (bestand bestaat niet):** maak het aan met onderstaande structuur. Vul `[A]`, `[wet-afkorting]`, `[volledige wetnaam (BWB-id)]`, `[wet-afkorting-lowercase]` en `[nummer]` in met de waarden uit Stap 2 en 11. Noteer het pad als `[hub-nieuw]` = true voor Stap 13.
+**Als de Read-tool een fout geeft (bestand bestaat niet):** maak het aan met onderstaande structuur. Vul `[A]`, `[wet-afkorting]`, `[volledige wetnaam (BWB-id)]`, `[wet-afkorting-lowercase]` en `[nummer]` in met de waarden uit Stap 2 en 12. Noteer het pad als `[hub-nieuw]` = true voor Stap 14.
 
 ```markdown
 ---
@@ -275,7 +303,7 @@ SORT datum DESC
 
 ---
 
-## Stap 13 — Commit en push
+## Stap 14 — Commit en push
 
 Voer in de projectroot uit:
 
@@ -293,10 +321,10 @@ git commit -m "jas: annotatie art. [A] [W] ([PD])"
 git push
 ```
 
-Gebruik exact het opgeslagen bestandspad uit Stap 11 voor de `git add`.
+Gebruik exact het opgeslagen bestandspad uit Stap 12 voor de `git add`.
 
 ---
 
-## Stap 14 — Retourneer bestandspad
+## Stap 15 — Retourneer bestandspad
 
 Retourneer uitsluitend het opgeslagen bestandspad.

@@ -3,10 +3,14 @@
   "newFileLocation": "folder",
   "newFileFolderPath": "analyses",
   "templateFolderPath": ".obsidian/templates",
-  "userIgnoreFilters": [".git/", ".claude/"],
+  "userIgnoreFilters": [
+    ".git/",
+    ".claude/"
+  ],
   "alwaysUpdateLinks": true,
   "promptDelete": false,
   "trashOption": "local",
   "defaultViewMode": "source",
-  "livePreview": true
+  "livePreview": true,
+  "readableLineLength": true
 }

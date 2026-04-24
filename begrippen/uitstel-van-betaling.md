@@ -34,4 +34,4 @@ SORT datum DESC
 
 ## Gerelateerde begrippen
 
-*(Vul handmatig aan met wiki-links naar verwante begrippen)*
+- [[belastingschuldige]] — de wederpartij die uitstel aanvraagt (art. 25 lid 1 IW 1990)

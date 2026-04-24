@@ -5,8 +5,11 @@ Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijk
 ---
 
 ## Inhoud
-- `analyses/`: De verzameling van alle voltooide JAS-annotaties.
+- `analyses/`: De verzameling van alle voltooide JAS-annotaties ([INDEX](./analyses/INDEX.md) · [Dashboard](./analyses/DASHBOARD.md)).
+- `begrippen/`: Gedefinieerde juridische begrippen, gekoppeld aan JAS-elementen ([INDEX](./begrippen/INDEX.md)).
+- `wetsartikelen/`: Hub-notes per wetsartikel met links naar alle annotaties.
 - `.claude/skills/jas/`: De volledige intelligentie en kaders van de JAS-skill.
+- `.claude/skills/begrip/`: De workflow voor het documenteren van juridische begrippen.
 
 ## Installatie & Gebruik
 Om deze omgeving te gebruiken met Claude Code of Gemini CLI, moet de `wettenbank-mcp` server lokaal beschikbaar zijn.
@@ -22,6 +25,7 @@ Om deze omgeving te gebruiken met Claude Code of Gemini CLI, moet de `wettenbank
    }
    ```
 3. Gebruik het commando `/jas [artikel]` (bijv. `/jas art. 25 IW 1990`) om een nieuwe analyse te starten.
+4. Gebruik `/begrip [term] [wet]` (bijv. `/begrip ontvanger IW 1990`) om een begrip te documenteren of bij te werken.
 
 ---
 

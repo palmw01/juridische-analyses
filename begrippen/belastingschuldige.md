@@ -34,4 +34,4 @@ SORT datum DESC
 
 ## Gerelateerde begrippen
 
-*(Vul handmatig aan met wiki-links naar verwante begrippen)*
+- [[uitstel-van-betaling|uitstel van betaling]] — de belastingschuldige is de aanvrager van uitstel (art. 25 lid 1 IW 1990)

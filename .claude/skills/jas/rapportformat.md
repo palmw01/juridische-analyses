@@ -319,4 +319,4 @@ Citeer hier de volledige, onbewerkte wetstekst van artikelen die als kruisrefere
 - [ ] §9: drie interpretatiemethoden doorlopen, spanningsvelden benoemd
 - [ ] §11: onzekerheden expliciet, geen schijnzekerheid
 - [ ] Bestandsnaam conform: `jas-annotatie-art[A]-[wet]-[TIMESTAMP].md`
-- [ ] **Hub-note:** `wetsartikelen/[wet-afkorting]/art-[nummer].md` bestaat (aangemaakt of al aanwezig) — controleer met Read-tool vóór commit
+- [ ] **Hub-note:** `wetsartikelen/[wet-mapnaam]/art-[nummer].md` bestaat (aangemaakt of al aanwezig) — controleer met Read-tool vóór commit
