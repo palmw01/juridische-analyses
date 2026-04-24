@@ -1,3 +1,6 @@
+# PDF-documenten
+*.pdf
+
 # OS / IDE
 .DS_Store
 .vscode/

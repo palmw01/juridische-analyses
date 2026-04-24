@@ -1,1 +1,25 @@
-{"mcpServers": {"wettenbank": {"command": "node", "args": ["/home/willardp/Documenten/Projecten/wetten-overheid-tools/wettenbank-mcp/dist/index.js"]}}}
+{
+  "mcpServers": {
+    "wettenbank": {
+      "command": "node",
+      "args": ["/home/willardp/Documenten/Projecten/wetten-overheid-tools/wettenbank-mcp/dist/index.js"]
+    }
+  },
+  "skills": [
+    {
+      "name": "annoteer",
+      "description": "Markeer en classificeer een wetsartikel (Activiteit 2). Gebruik: /annoteer art. [A] [W]",
+      "path": ".claude/skills/annoteer/SKILL.md"
+    },
+    {
+      "name": "begrip",
+      "description": "Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]",
+      "path": ".claude/skills/begrip/SKILL.md"
+    },
+    {
+      "name": "wettenbank",
+      "description": "Haal wetstekst op via de wettenbank MCP en extraheer kruisreferenties. Gebruik: /wettenbank art. 25 IW 1990",
+      "path": ".claude/skills/wettenbank/SKILL.md"
+    }
+  ]
+}

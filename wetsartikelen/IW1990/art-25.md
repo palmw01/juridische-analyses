@@ -6,26 +6,32 @@ aliases:
   - "Art. 25 IW 1990"
 tags:
   - wetsartikel
-  - iw1990
-  - art25
+  - wet/iw1990
+  - art/25
 ---
 
 # Art. 25 — Invorderingswet 1990
 
-## Alle annotaties
+## Begrippen
 
 ```dataview
-TABLE datum AS "Analysedatum", peildatum AS "Peildatum", jas-versie AS "JAS"
-FROM "analyses"
-WHERE type = "jas-annotatie" AND contains(artikel, "Art. 25") AND contains(wet, "Invorderingswet")
-SORT datum DESC
+TABLE jas-klasse, definitie, bron
+FROM #art/25 AND #begrip
+SORT jas-klasse ASC
 ```
 
-## Annotaties die naar dit artikel verwijzen
+## Afleidingsregels
 
 ```dataview
-TABLE artikel, datum AS "Analysedatum"
-FROM "analyses"
-WHERE type = "jas-annotatie" AND contains(kruisreferenties, "Art. 25 IW 1990")
-SORT datum DESC
+TABLE soort, invoer, uitvoer
+FROM #art/25 AND #afleidingsregel
+SORT regel-id ASC
+```
+
+## Annotaties
+
+```dataview
+TABLE peildatum, structuurpositie
+FROM #art/25 AND #annotatie
+SORT peildatum DESC
 ```

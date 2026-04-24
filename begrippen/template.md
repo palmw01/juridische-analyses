@@ -1,0 +1,46 @@
+---
+type: begrip
+begripsnaam: [slug]
+jas-klasse: [één van de 13 JAS-elementen uit kaders.md]
+tags:
+  - begrip
+  - jas/[klasse-slug]        # bijv. jas/rechtssubject, jas/rechtsbetrekking
+  - wet/[wet-afkorting]      # bijv. wet/iw1990
+  - art/[nummer]             # bijv. art/25
+markering: "[letterlijk geciteerd tekstfragment incl. lidwoord en verwijzingen]"
+bron: "Art. [A] lid [L] [W]"
+peildatum: [YYYY-MM-DD]
+interpretatiemethode: [grammaticaal | systematisch | teleologisch]
+toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
+definitie: "[begripsdefinitie — zo nauw mogelijk bij wetsformulering]"
+is-een: []
+heeft: []
+leidt-tot: []
+afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afleidingsregel)
+---
+
+## Definitie
+
+*[markering]* *(Art. [A] lid [L] [W], peildatum [PD])*
+
+[begripsdefinitie]
+
+## Voorbeelden
+
+| Stelling | Waar? |
+|----------|-------|
+| [concrete stelling] | ja / nee |
+| [grensgeval] | ja / nee |
+
+## Kenmerken
+
+- [eigenschap 1: relatie met ander begrip of kenmerk]
+- [eigenschap 2]
+
+## Relaties
+
+| Type | Begrip |
+|------|--------|
+| is een | [[begrippen/...]] |
+| heeft | [[begrippen/...]] |
+| leidt tot | [[begrippen/...]] |

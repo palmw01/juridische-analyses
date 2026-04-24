@@ -1,106 +1,145 @@
 ---
-description: Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip ontvanger IW 1990 of /begrip belastingschuldige
+description: Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]
 context: fork
 agent: general-purpose
 ---
 
-# /begrip — Begrip documenteren (Wetsanalyse Activiteit 3)
+# Skill: /begrip
 
-**Term:** `$ARGUMENTS`
+**Trigger:** `/begrip [slug]` of `/begrip-alles art. [A] [W]`
 
-Een begrip is het product van **Activiteit 3** van de Wetsanalyse-methode. De bron is uitsluitend de annotatietabel uit Activiteit 2 (de JAS-annotaties in `analyses/`). Raadpleeg **nooit** de wettenbank-tools — de definitie is de letterlijk geciteerde formulering uit de annotatie.
+Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode. Leest de door `/annoteer` aangemaakte begrip-noten (met gevulde frontmatter) en vult de A3-inhoud in: definitie, voorbeelden, kenmerken en relaties. Bij JAS-klasse Afleidingsregel maakt de skill tevens een regel-noot aan in `regels/`.
 
----
-
-## Stap 1 — Argument parsen
-
-Parseer `$ARGUMENTS`:
-- **`[TERM]`**: de juridische term (bijv. "ontvanger", "belastingschuldige")
-- **`[TERM-slug]`**: term in lowercase, spaties → `-`, speciale tekens verwijderd (bijv. "ministeriële regeling" → `ministeriële-regeling`)
-
-Bestandspad: `begrippen/[TERM-slug].md`
+**De wetstekst wordt niet opnieuw opgehaald.** De annotatiefrontmatter (`markering`, `jas-klasse`, `bron`, `peildatum`, `interpretatiemethode`) is de enige bron.
 
 ---
 
-## Stap 2 — Controleer bestaand begrip
+## Voorbereiding
 
-Lees `begrippen/[TERM-slug].md`.
+1. **Lees de begrip-noot** in `begrippen/[slug].md` — de frontmatter bevat alle benodigde informatie.
+2. **Lees de bijbehorende annotatie-noot** in `annotaties/` om de annotatietabel in context te zien (samenhang met andere markeringen uit hetzelfde artikel).
+3. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor relaties (is-een, heeft, leidt-tot).
 
-- **Bestand bestaat en is volledig ingevuld:** vergelijk met de annotaties. Als niets veranderd is: retourneer het bestandspad zonder aanpassing. Als actualisering nodig is: ga naar Stap 4.
-- **Bestand bestaat niet of is leeg:** ga naar Stap 3.
-
----
-
-## Stap 3 — Extraheer uit annotaties
-
-Zoek in alle bestanden in `analyses/` naar rijen in de annotatietabel waar de Begrip-kolom `[[begrippen/[TERM-slug]]]` bevat.
-
-**Methode:**
-```
-Grep: analyses/*.md naar "begrippen/[TERM-slug]"
-```
-
-Lees elk gevonden annotatiebestand. Extraheer per treffer:
-
-**Uit de annotatie-frontmatter:**
-- `[ANNOTATIE-BESTAND]`: bestandspad (bijv. `analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40.md`)
-- `[ARTIKEL]`: waarde van het `artikel`-veld
-- `[WET]`: waarde van het `wet`-veld
-
-**Uit de annotatietabel (rijen waar Begrip-kolom de term bevat):**
-- `[FORMULERING]`: de letterlijk geciteerde wetsformulering (tweede kolom)
-- `[JAS-KLASSE]`: de JAS-klasse (derde kolom, bijv. Rechtssubject, Rechtsobject, Voorwaarde)
-- `[TOELICHTING]`: de toelichting (vierde kolom)
-- `[VINDPLAATS]`: het artikel en lid waarop de annotatie betrekking heeft (uit `artikel`-frontmatter)
-
-**Als geen enkele annotatie de term in de Begrip-kolom heeft:**
-Meld dit aan de gebruiker: "De term '[TERM]' is nog niet als begrip geclassificeerd in een annotatietabel. Maak eerst een annotatie (Activiteit 2) voordat je dit begrip documenteert."
-Stop hier.
+Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld verwijst naar dat artikel, en verwerk ze achtereenvolgens.
 
 ---
 
-## Stap 4 — Stel de begripsdefinitie samen
+## Definitie opstellen (A3a)
 
-Bepaal op basis van de gevonden formuleringen:
-
-- **`[DEFINITIE]`**: de meest specifieke en volledige wetsformulering die de inhoud van het begrip beschrijft, letterlijk geciteerd. Bij meerdere vindplaatsen: kies de begripsbepaling (definitie-artikel) als primaire bron; noem overige vindplaatsen als contextuele verschijningen.
-- **`[JAS-KLASSE]`**: de dominante JAS-klasse over alle vindplaatsen (bij wisselende klassen: kies de meest specifieke).
-- **`[VINDPLAATSEN]`**: lijst van alle artikelen/leden waar het begrip voorkomt in de annotatietabellen.
-
----
-
-## Stap 5 — Sla het begrip op
-
-Gebruik de datum van vandaag (`date +%Y-%m-%d`). Sla op als `begrippen/[TERM-slug].md` met de template uit `.claude/skills/begrip/template.md`.
-
-Vul in:
-- `begripsnaam`: `[TERM]`
-- `jas-klasse`: `[JAS-KLASSE]`
-- `definitie`: letterlijk geciteerde `[DEFINITIE]`
-- `annotaties`: lijst van alle `[ANNOTATIE-BESTAND]`-paden als Obsidian-links
-- `vindplaatsen`: lijst van alle `[VINDPLAATSEN]`
-- `tags`: `begrip` + slugified wet-afkorting (bijv. `iw1990`)
-- `aliases`: `[TERM]` en indien relevant `[TERM] [WET-AFKORTING]`
-
-Vul de Markdown-secties in:
-- **Definitie**: de letterlijk geciteerde formulering met vindplaats
-- **Begripsvoorbeelden**: 2-3 stellingen (waar/niet waar) die de grens van het begrip testen, afgeleid uit de annotatie-toelichting
-- **Kenmerken**: eigenschappen die volgen uit de JAS-toelichting in de annotatie
-- **Relaties**: koppelingen naar andere begrippen die in dezelfde annotatierijen voorkomen
-- **Annotatiebronnen**: de Obsidian-links naar alle bronnotaties
+- Sluit zo nauw mogelijk aan bij de **letterlijke markering** in het frontmatter-veld `markering`.
+- Benoem interpretatie- en preciseringskeuzes expliciet.
+- Als de betekenis afwijkt van de letterlijke formulering: onderbouw dit en signaleer als potentieel uitvoeringsbeleid-lacune (A5-signaal).
+- Geen parafrase van de wetstekst — gebruik de markering als startpunt.
 
 ---
 
-## Stap 6 — Commit
+## Begripsnaam-vuistregels (Handleiding §3.5.2a)
 
-```
-git add begrippen/[TERM-slug].md
-git commit -m "begrip: [TERM] ([WET-AFKORTING])"
-git push
+- Begin met **zelfstandig naamwoord** (uitzondering: afleidingsregel/rechtsfeit → actieve werkwoordsvorm)
+- **Enkelvoudsvorm**, tenzij meervoud in de wet tot andere betekenis leidt
+- **Geen hoofdletters**, geen Romeinse cijfers, zo min mogelijk afkortingen (bij gebruik: uitschrijven in definitie)
+- Sluit zo nauw mogelijk aan bij de letterlijke markering
+- Voeg wettelijke context toe als dezelfde formulering in meerdere wetten anders betekent
+- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat
+
+---
+
+## Voorbeelden opstellen (Leidraad product #13)
+
+- Minimaal **2 stellingen** (waar/niet-waar) die de grenzen van het begrip toetsen.
+- Minimaal **1 grensgeval** dat de precieze afbakening demonstreert.
+- Stellingen zijn concreet en toetsbaar (geen vage parafrasen).
+
+---
+
+## Kenmerken en relaties (Leidraad product #14)
+
+- Leg relaties met andere begrippen vast via de velden `is-een`, `heeft`, `leidt-tot` in de frontmatter.
+- Gebruik wiki-links naar betrokken begrip-noten: `[[begrippen/[slug]]]`.
+- Vul ook de `## Relaties`-tabel in de body in.
+
+---
+
+## Afleidingsregel-noot (A3b — alleen bij JAS-klasse Afleidingsregel)
+
+Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[art]-[nr].md`.
+
+**Vier soorten:**
+- **Beslissingsregel**: ja/nee uitkomst (recht bestaat of niet)
+- **Rekenregel**: numerieke berekening (bedrag, duur, hoogte)
+- **Beperkingsregel**: beperkt of maximeert een waarde of recht
+- **Specialisatieregel**: specificeert of preciseert een algemene regel voor een deelgeval
+
+Frontmatter:
+```yaml
+---
+type: afleidingsregel
+regel-id: AR-[art]-[nr]
+soort: [Beslissingsregel | Rekenregel | Beperkingsregel | Specialisatieregel]
+tags:
+  - afleidingsregel
+  - wet/[wet-afkorting]
+  - art/[nummer]
+bron: "Art. [A] lid [L] [W]"
+peildatum: [YYYY-MM-DD]
+begrip: "[[begrippen/[slug]]]"
+invoer: []
+uitvoer: ""
+operators: []
+---
 ```
 
+Body:
+- `## Formele regel` — als-dan structuur met invoerbegrippen en uitvoerbegrip
+- `## Toelichting` — tracering naar specifiek lid + interpretatiemotivering
+- `## Voorbeeldreeksen` — minimaal 2 invoer/uitkomst-combinaties (Leidraad product #20)
+
+Signaleer wanneer een regel uitvoeringsbeleid vereist dat ontbreekt (A5-signaal).
+
+Na aanmaken: update het `afleidingsregels`-veld in de bijbehorende begrip-noot met een wiki-link.
+
 ---
 
-## Stap 7 — Retourneer bestandspad
+## Output per begrip
 
-Retourneer uitsluitend `begrippen/[TERM-slug].md`.
+Vul de body van `begrippen/[slug].md` volledig in:
+
+```markdown
+## Definitie
+
+*[markering]* *(Art. [A] lid [L] [W], peildatum [PD])*
+
+[begripsdefinitie]
+
+## Voorbeelden
+
+| Stelling | Waar? |
+|----------|-------|
+| [concrete stelling] | ja / nee |
+| [grensgeval] | ja / nee |
+
+## Kenmerken
+
+- [eigenschap 1]
+- [eigenschap 2]
+
+## Relaties
+
+| Type | Begrip |
+|------|--------|
+| is een | [[begrippen/...]] |
+| heeft | [[begrippen/...]] |
+| leidt tot | [[begrippen/...]] |
+```
+
+Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
+
+---
+
+## Kwaliteitseisen (niet-onderhandelbaar)
+
+- Definitie uitsluitend gebaseerd op de `markering` in de frontmatter — nooit rechtstreeks uit de wetstekst of eigen kennis.
+- Voorbeelden bevatten altijd minimaal één grensgeval.
+- Relaties zijn altijd wiki-links, nooit losse tekst.
+- Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
+- Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
