@@ -4,6 +4,11 @@
 
 # Lokale instellingen
 .claude/settings.local.json
+settings.json
+
+# Obsidian — apparaatspecifieke UI-instellingen
+.obsidian/appearance.json
+.obsidian/core-plugins.json
 
 # Gegenereerde HTML-renders
 analyses/*.html
