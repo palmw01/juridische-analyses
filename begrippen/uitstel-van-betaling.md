@@ -1,13 +1,12 @@
 ---
 type: begrip
 begripsnaam: uitstel van betaling
-jas-klasse: Rechtsobject
-definitie: "Het door de ontvanger verlenen van tijdelijk respijt voor het voldoen van een belastingaanslag, waardoor de betalingsverplichting wordt opgeschort en de dwanginvordering niet aanvangt of wordt geschorst (art. 25 lid 1 IW 1990)."
+jas-klasse: Rechtsbetrekking
+definitie: "het verlenen van uitstel van betaling"
 annotaties:
   - "[[analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40]]"
   - "[[analyses/jas-annotatie-art25lid5-IW1990-2026-04-24_19-41-43]]"
 vindplaatsen:
-  - "Art. 25 lid 1 IW 1990"
   - "Art. 25 lid 4 IW 1990"
   - "Art. 25 lid 5 IW 1990"
 datum-aangemaakt: 2026-04-24
@@ -17,47 +16,45 @@ tags:
   - iw1990
 aliases:
   - "uitstel van betaling"
+  - "uitstel van betaling IW 1990"
 ---
 
-# uitstel van betaling
+# Uitstel van betaling
 
 ## Definitie
 
-Het door de ontvanger verlenen van tijdelijk respijt voor het voldoen van een belastingaanslag, waardoor de betalingsverplichting wordt opgeschort en de dwanginvordering niet aanvangt of wordt geschorst (art. 25 lid 1 IW 1990).
+"het verlenen van uitstel van betaling"
 
-**Vindplaats:** Art. 25 lid 1 IW 1990; Art. 25 lid 4 IW 1990; Art. 25 lid 5 IW 1990
+**Vindplaats:** Art. 25 lid 4 en lid 5 IW 1990 (rechtsobject/rechtsbetrekking)
+
+De formulering keert in beide leden terug als "met betrekking tot het verlenen van uitstel van betaling" — het centrale rechtsobject van art. 25 IW 1990 als geheel. Het uitstel is de rechtsbetrekking tussen ontvanger en belastingschuldige waarbij de invorderingsbevoegdheid tijdelijk wordt opgeschort. De ontvanger verleent het uitstel bij beschikking (lid 1) of op grond van bij ministeriële regeling gestelde regels (lid 4 en 5).
 
 ## Begripsvoorbeelden
 
 | Stelling | Waar / Niet waar | Toelichting |
 |----------|-----------------|-------------|
-| Uitstel op grond van art. 25 lid 4 duurt maximaal 12 maanden (met mogelijkheid van verlenging) | Waar | Art. 25 lid 4 eerste volzin bepaalt de duur op 12 maanden; verlenging is mogelijk op grond van art. 3.64 lid 3 Wet IB 2001. |
-| Uitstel op grond van art. 25 lid 4 schort de dwanginvordering op | Waar | Art. 25 lid 1 bepaalt dat gedurende het uitstel de dwanginvordering niet aanvangt of wordt geschorst; dit geldt ook voor lid 4-uitstel. |
-| Gedurende lid 4-uitstel loopt geen invorderingsrente | Niet waar | Art. 28 lid 3 IW 1990 noemt art. 25 lid 4 niet in de opsomming van uitstelgronden waarvoor geen invorderingsrente geldt; lid 4-uitstel is daarin uitdrukkelijk niet vrijgesteld. |
-| Gedurende lid 5-uitstel loopt geen invorderingsrente | Waar | Art. 28 lid 3 IW 1990 noemt art. 25 lid 5 uitdrukkelijk in de opsomming van uitstelgronden waarvoor geen invorderingsrente geldt; bij tussentijdse beëindiging herleeft de renteplicht (art. 28 lid 4 IW 1990). |
-| Het lid 5-uitstel duurt maximaal tot het begin van het tiende jaar na het belastingjaar | Waar | Art. 25 lid 5 tweede volzin bepaalt dit als maximum. |
+| Een belastingschuldige die inkomstenbelasting is verschuldigd door toepassing van art. 3.64 lid 1 Wet IB 2001 en voldoende zekerheid stelt, kan aanspraak maken op uitstel van betaling voor 12 maanden. | Waar | Art. 25 lid 4 volzin 1 IW 1990 jo. art. 1d UR IW 1990: de ontvanger verleent uitstel mits aan alle cumulatieve voorwaarden is voldaan (schriftelijk verzoek, zekerheid, grondslag art. 3.64 lid 1). |
+| Uitstel van betaling op grond van art. 25 lid 5 IW 1990 kan voor onbepaalde tijd worden verleend. | Niet waar | Art. 25 lid 5 tweede volzin IW 1990 begrenst het uitstel tot uiterlijk het begin van het tiende jaar na afloop van het kalenderjaar waarop de belastingaanslag betrekking heeft. |
+| Het uitstel van betaling op grond van lid 4 schort ook de invorderingsrente op. | Niet waar | Art. 28 lid 3 IW 1990 noemt lid 4 niet in de opsomming van uitstelgronden waarvoor geen invorderingsrente geldt — bij lid 4-uitstel loopt de invorderingsrente onverminderd door. |
 
 ## Kenmerken
 
-- Rechtskarakter: beschikking van de ontvanger (art. 25 lid 1: "bij beschikking").
-- Duur lid 4-uitstel: 12 maanden; verlengbaar op grond van art. 3.64 lid 3 Wet IB 2001.
-- Voorwaarde lid 4: voldoende zekerheid (art. 25 lid 4 eerste volzin, verplicht).
-- Grondslag belasting lid 4: inkomstenbelasting verschuldigd door toepassing art. 3.64 lid 1 Wet IB 2001 (doorschuiving via te conserveren inkomen).
-- Beëindiging lid 4: indien herinvesteringen niet leiden tot in Nederland belastbare winst, of bij emigratie van de belastingschuldige.
-- Invorderingsrente lid 4: art. 28 lid 3 sluit lid 4-uitstel uit van de invorderingsrente-vrijstelling — rente loopt gewoon door.
-- Duur lid 5-uitstel: uiterlijk het begin van het tiende jaar na afloop van het belastingjaar (art. 25 lid 5 tweede volzin IW 1990).
-- Voorwaarde lid 5: zekerheid facultatief (gedelegeerd; art. 25 lid 5 derde volzin IW 1990 — "kunnen mede").
-- Grondslag belasting lid 5: conserverende aanslag inkomstenbelasting bij emigratie pensioen- of lijfrente-aanspraken (art. 3.83, 3.133, 3.136 of 7.2 Wet IB 2001).
-- Beëindiging lid 5: bij omstandigheid als bedoeld in art. 19b Wet LB 1964 of art. 3.133/3.135 Wet IB 2001.
-- Invorderingsrente lid 5: art. 28 lid 3 vrijstelt; bij beëindiging herleeft de verplichting (art. 28 lid 4).
+- Het uitstel is een rechtsbetrekking tussen de ontvanger (als verlenende partij) en de belastingschuldige (als rechthebbende), gecreëerd bij beschikking of van rechtswege op grond van ministeriële regeling.
+- Tijdens de uitsteltermijn is de dwanginvordering opgeschort (art. 25 lid 1 IW 1990).
+- Het uitstel is termijngebonden: lid 4-uitstel maximaal 12 maanden (verlengbaar op grond van art. 3.64 lid 3 Wet IB 2001); lid 5-uitstel maximaal tot het begin van het tiende jaar na het belastingjaar.
+- Het uitstel eindigt van rechtswege bij het intreden van een beëindigingsgrond (lid 4: geen NL-belastbare winst na herinvestering of emigratie; lid 5: omstandigheid als bedoeld in art. 19b Wet LB 1964 of art. 3.133/3.135 Wet IB 2001).
+- Zekerheid is bij lid 4 een dwingende drempelvoorwaarde; bij lid 5 een facultatieve bevoegdheid van de minister.
 
 ## Relaties
 
 | Relatie | Begrip | Toelichting |
 |---------|--------|-------------|
-| is een | [[begrippen/rechtsobject]] | Uitstel van betaling is het voorwerp van de rechtsbetrekking tussen ontvanger en belastingschuldige. |
-| verleend door | [[begrippen/ontvanger]] | De ontvanger is bevoegd (en op grond van lid 4 verplicht bij voldaan verzoek) uitstel te verlenen. |
-| voor | [[begrippen/belastingaanslag]] | Het uitstel wordt verleend voor een belastingaanslag (betreffende inkomstenbelasting). |
+| verleend aan | [[begrippen/belastingschuldige]] | De belastingschuldige is de partij aan wie het uitstel wordt verleend (art. 25 lid 4 volzin 2: "emigratie van de belastingschuldige"). |
+| verleend door | [[begrippen/ontvanger]] | De ontvanger is de bevoegde autoriteit die het uitstel verleent (art. 25 lid 1 IW 1990 als grondslag; uitgewerkt via ministeriële regeling in lid 4 en 5). |
+| heeft als voorwaarde | [[begrippen/zekerheid]] | "Mits voldoende zekerheid is gesteld" (lid 4) of facultatief op grond van delegatie (lid 5). |
+| ziet op | [[begrippen/belastingaanslag]] | Het uitstel wordt verleend voor belastingaanslagen betreffende de inkomstenbelasting (lid 4 en lid 5). |
+| wordt uitgewerkt door | [[begrippen/ministeriële-regeling]] | De voorwaarden voor verlening zijn uitgewerkt in een ministeriële regeling (art. 1d en art. 1e UR IW 1990). |
+| beëindigingsgronden | [[begrippen/emigratie]] | Emigratie van de belastingschuldige is een zelfstandige beëindigingsgrond (lid 4 volzin 2). |
 
 ## Annotatiebronnen
 
