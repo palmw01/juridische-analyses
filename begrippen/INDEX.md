@@ -24,10 +24,10 @@ Gedefinieerde begrippen per wet, gekoppeld aan JAS-elementen.
 ## Alle begrippen (Dataview)
 
 ```dataview
-TABLE wet, vindplaats AS "Vindplaats", jas-element AS "JAS-element", datum AS "Datum"
+TABLE begripsnaam AS "Begrip", jas-klasse AS "JAS-klasse", vindplaatsen AS "Vindplaats", datum-aangemaakt AS "Datum"
 FROM "begrippen"
 WHERE type = "begrip"
-SORT wet ASC, term ASC
+SORT begripsnaam ASC
 ```
 
 ---

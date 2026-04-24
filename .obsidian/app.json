@@ -5,7 +5,17 @@
   "templateFolderPath": ".obsidian/templates",
   "userIgnoreFilters": [
     ".git/",
-    ".claude/"
+    ".claude/",
+    "/",
+    "CLAUDE.md",
+    "README.md",
+    "jas-kwaliteitsverbeterplan.md",
+    "settings.json",
+    "Handleiding Wetsanalyse in de praktijk.pdf",
+    "Leidraad voor Wetsanalyse op maat .pdf",
+    "analyses/DASHBOARD.md",
+    "analyses/INDEX.md",
+    "begrippen/INDEX.md"
   ],
   "alwaysUpdateLinks": true,
   "promptDelete": false,
