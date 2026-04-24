@@ -5,8 +5,10 @@ jas-klasse: Rechtsobject
 definitie: "Een door de inspecteur vastgestelde beschikking waarbij het bedrag van een belasting wordt bepaald en de belastingplichtige wordt verplicht dit te betalen; in art. 25 lid 4 IW 1990: een aanslag betreffende inkomstenbelasting verschuldigd door toepassing van art. 3.64 lid 1 Wet IB 2001."
 annotaties:
   - "[[analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40]]"
+  - "[[analyses/jas-annotatie-art25lid5-IW1990-2026-04-24_19-41-43]]"
 vindplaatsen:
   - "Art. 25 lid 4 IW 1990 (eerste volzin)"
+  - "Art. 25 lid 5 IW 1990 (eerste volzin)"
 datum-aangemaakt: 2026-04-24
 datum-bijgewerkt: 2026-04-24
 tags:
@@ -49,3 +51,4 @@ Een door de inspecteur vastgestelde beschikking waarbij het bedrag van een belas
 Annotaties die dit begrip voeden:
 
 - [[analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40]]
+- [[analyses/jas-annotatie-art25lid5-IW1990-2026-04-24_19-41-43]]
