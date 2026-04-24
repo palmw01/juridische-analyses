@@ -4,11 +4,11 @@ context: fork
 agent: general-purpose
 ---
 
-# /begrip — Begrip documenteren
+# /begrip — Begrip documenteren (Wetsanalyse Activiteit 3)
 
 **Term:** `$ARGUMENTS`
 
-Voer onderstaande stappen uit. Het doel is een actuele, correcte begrip-noot in `begrippen/` die als Obsidian-knooppunt functioneert.
+Een begrip is het product van **Activiteit 3** van de Wetsanalyse-methode. De bron is uitsluitend de annotatietabel uit Activiteit 2 (de JAS-annotaties in `analyses/`). Raadpleeg **nooit** de wettenbank-tools — de definitie is de letterlijk geciteerde formulering uit de annotatie.
 
 ---
 
@@ -16,55 +16,91 @@ Voer onderstaande stappen uit. Het doel is een actuele, correcte begrip-noot in 
 
 Parseer `$ARGUMENTS`:
 - **`[TERM]`**: de juridische term (bijv. "ontvanger", "belastingschuldige")
-- **`[W]`** en **`[B]`**: wet en BWB-id, gebruik dezelfde mapping als de JAS-skill
+- **`[TERM-slug]`**: term in lowercase, spaties → `-`, speciale tekens verwijderd (bijv. "ministeriële regeling" → `ministeriële-regeling`)
 
-Bestandspad: `begrippen/[TERM-slug].md` waarbij `[TERM-slug]` = term in lowercase, spaties → `-`, speciale tekens verwijderd (bijv. "belastingschuldige" → `begrippen/belastingschuldige.md`).
-
----
-
-## Stap 2 — Controleer bestaande begrip-noot
-
-Roep de Read-tool aan op `begrippen/[TERM-slug].md`.
-
-**Als het bestand bestaat:**
-- Lees de huidige `definitie`, `vindplaats` en `jas-element`
-- Vergelijk met de aangeleverde of nieuw op te zoeken definitie
-- Als er niets veranderd is: retourneer het bestandspad zonder aanpassing
-- Als actualisering nodig is (nieuwe vindplaats, betere definitie, extra JAS-element): ga naar Stap 4 (actualiseren)
-
-**Als het bestand niet bestaat:** ga naar Stap 3.
+Bestandspad: `begrippen/[TERM-slug].md`
 
 ---
 
-## Stap 3 — Definitie ophalen
+## Stap 2 — Controleer bestaand begrip
 
-Roep aan: `wettenbank_artikel(bwbId=[B], artikel=<begripsbepalings-artikel>)`
+Lees `begrippen/[TERM-slug].md`.
 
-Zoek in de `leden`-array naar de omschrijving van `[TERM]`. Citeer letterlijk. Als de term niet in het begripsbepalings-artikel staat: zoek in het volledige artikel dat de term introduceert via `wettenbank_zoekterm(bwbId=[B], zoekterm="[TERM]")`.
-
-Noteer:
-- `[DEFINITIE]`: letterlijk geciteerde definitie
-- `[VINDPLAATS]`: artikelnummer + lid + wet (bijv. "Art. 3 lid 1 IW 1990")
-- `[JAS-ELEMENT]`: het primaire JAS-element van deze term (Rechtssubject / Rechtsobject / Brondefinitie / etc.)
+- **Bestand bestaat en is volledig ingevuld:** vergelijk met de annotaties. Als niets veranderd is: retourneer het bestandspad zonder aanpassing. Als actualisering nodig is: ga naar Stap 4.
+- **Bestand bestaat niet of is leeg:** ga naar Stap 3.
 
 ---
 
-## Stap 4 — Begrip-noot aanmaken of actualiseren
+## Stap 3 — Extraheer uit annotaties
 
-Sla op als `begrippen/[TERM-slug].md`. Haal de timestamp op via `date +%Y-%m-%d`. Gebruik de template uit `.claude/skills/begrip/template.md`.
+Zoek in alle bestanden in `analyses/` naar rijen in de annotatietabel waar de Begrip-kolom `[[begrippen/[TERM-slug]]]` bevat.
+
+**Methode:**
+```
+Grep: analyses/*.md naar "begrippen/[TERM-slug]"
+```
+
+Lees elk gevonden annotatiebestand. Extraheer per treffer:
+
+**Uit de annotatie-frontmatter:**
+- `[ANNOTATIE-BESTAND]`: bestandspad (bijv. `analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40.md`)
+- `[ARTIKEL]`: waarde van het `artikel`-veld
+- `[WET]`: waarde van het `wet`-veld
+
+**Uit de annotatietabel (rijen waar Begrip-kolom de term bevat):**
+- `[FORMULERING]`: de letterlijk geciteerde wetsformulering (tweede kolom)
+- `[JAS-KLASSE]`: de JAS-klasse (derde kolom, bijv. Rechtssubject, Rechtsobject, Voorwaarde)
+- `[TOELICHTING]`: de toelichting (vierde kolom)
+- `[VINDPLAATS]`: het artikel en lid waarop de annotatie betrekking heeft (uit `artikel`-frontmatter)
+
+**Als geen enkele annotatie de term in de Begrip-kolom heeft:**
+Meld dit aan de gebruiker: "De term '[TERM]' is nog niet als begrip geclassificeerd in een annotatietabel. Maak eerst een annotatie (Activiteit 2) voordat je dit begrip documenteert."
+Stop hier.
 
 ---
 
-## Stap 5 — Commit
+## Stap 4 — Stel de begripsdefinitie samen
+
+Bepaal op basis van de gevonden formuleringen:
+
+- **`[DEFINITIE]`**: de meest specifieke en volledige wetsformulering die de inhoud van het begrip beschrijft, letterlijk geciteerd. Bij meerdere vindplaatsen: kies de begripsbepaling (definitie-artikel) als primaire bron; noem overige vindplaatsen als contextuele verschijningen.
+- **`[JAS-KLASSE]`**: de dominante JAS-klasse over alle vindplaatsen (bij wisselende klassen: kies de meest specifieke).
+- **`[VINDPLAATSEN]`**: lijst van alle artikelen/leden waar het begrip voorkomt in de annotatietabellen.
+
+---
+
+## Stap 5 — Sla het begrip op
+
+Gebruik de datum van vandaag (`date +%Y-%m-%d`). Sla op als `begrippen/[TERM-slug].md` met de template uit `.claude/skills/begrip/template.md`.
+
+Vul in:
+- `begripsnaam`: `[TERM]`
+- `jas-klasse`: `[JAS-KLASSE]`
+- `definitie`: letterlijk geciteerde `[DEFINITIE]`
+- `annotaties`: lijst van alle `[ANNOTATIE-BESTAND]`-paden als Obsidian-links
+- `vindplaatsen`: lijst van alle `[VINDPLAATSEN]`
+- `tags`: `begrip` + slugified wet-afkorting (bijv. `iw1990`)
+- `aliases`: `[TERM]` en indien relevant `[TERM] [WET-AFKORTING]`
+
+Vul de Markdown-secties in:
+- **Definitie**: de letterlijk geciteerde formulering met vindplaats
+- **Begripsvoorbeelden**: 2-3 stellingen (waar/niet waar) die de grens van het begrip testen, afgeleid uit de annotatie-toelichting
+- **Kenmerken**: eigenschappen die volgen uit de JAS-toelichting in de annotatie
+- **Relaties**: koppelingen naar andere begrippen die in dezelfde annotatierijen voorkomen
+- **Annotatiebronnen**: de Obsidian-links naar alle bronnotaties
+
+---
+
+## Stap 6 — Commit
 
 ```
 git add begrippen/[TERM-slug].md
-git commit -m "begrip: [TERM] ([W])"
+git commit -m "begrip: [TERM] ([WET-AFKORTING])"
 git push
 ```
 
 ---
 
-## Stap 6 — Retourneer bestandspad
+## Stap 7 — Retourneer bestandspad
 
 Retourneer uitsluitend `begrippen/[TERM-slug].md`.
