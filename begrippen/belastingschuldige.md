@@ -5,10 +5,8 @@ jas-klasse: Rechtssubject
 definitie: "Degene te wiens naam de belastingaanslag is gesteld (art. 3 lid 1 IW 1990 jo. de invorderingspraktijk); de persoon die gehouden is tot betaling van de belastingschuld en aan wie uitstel van betaling kan worden verleend."
 annotaties:
   - "[[analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40]]"
-  - "[[analyses/jas-annotatie-art25lid5-IW1990-2026-04-24_19-41-43]]"
 vindplaatsen:
   - "Art. 25 lid 4 IW 1990 (tweede volzin)"
-  - "Art. 25 lid 5 IW 1990 (impliciet — houder van de conserverende aanslag)"
 datum-aangemaakt: 2026-04-24
 datum-bijgewerkt: 2026-04-24
 tags:
@@ -51,4 +49,3 @@ Degene te wiens naam de belastingaanslag is gesteld; de persoon die gehouden is 
 Annotaties die dit begrip voeden:
 
 - [[analyses/jas-annotatie-art25lid4-IW1990-2026-04-24_14-52-40]]
-- [[analyses/jas-annotatie-art25lid5-IW1990-2026-04-24_19-41-43]]
