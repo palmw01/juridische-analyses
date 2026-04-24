@@ -10,6 +10,7 @@ Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijk
 - `wetsartikelen/`: Hub-notes per wetsartikel met links naar alle annotaties.
 - `.claude/skills/jas/`: De volledige intelligentie en kaders van de JAS-skill.
 - `.claude/skills/begrip/`: De workflow voor het documenteren van juridische begrippen.
+- `.claude/skills/shared/`: Gedeelde resources (BWB-mapping, begrip-template) — één bron van waarheid voor beide skills.
 
 ## Installatie & Gebruik
 Om deze omgeving te gebruiken met Claude Code of Gemini CLI, moet de `wettenbank-mcp` server lokaal beschikbaar zijn.
