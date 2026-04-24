@@ -6,11 +6,12 @@ Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijk
 
 ## Inhoud
 - `analyses/`: De verzameling van alle voltooide JAS-annotaties ([INDEX](./analyses/INDEX.md) · [Dashboard](./analyses/DASHBOARD.md)).
-- `begrippen/`: Gedefinieerde juridische begrippen, gekoppeld aan JAS-elementen ([INDEX](./begrippen/INDEX.md)).
+- `begrippen/`: Juridische begrippen met definities, voorbeelden, kenmerken, relaties en annotatiebronnen ([INDEX](./begrippen/INDEX.md)).
 - `wetsartikelen/`: Hub-notes per wetsartikel met links naar alle annotaties.
-- `.claude/skills/jas/`: De volledige intelligentie en kaders van de JAS-skill.
-- `.claude/skills/begrip/`: De workflow voor het documenteren van juridische begrippen.
-- `.claude/skills/shared/`: Gedeelde resources (BWB-mapping, begrip-template) — één bron van waarheid voor beide skills.
+- `.claude/skills/jas/`: Analyse-skill (Hoofdactiviteiten 2 + 3), rapportformat en structuurdiagram.
+- `.claude/skills/wettenbank/`: Dataverwerving-skill — BWB-mapping, MCP-aanroepen, kruisreferentie-extractie.
+- `.claude/skills/begrip/`: Begrip-skill — documenteren en verrijken van juridische begrippen.
+- `.claude/skills/publicatie/`: Publicatie-skill — opslaan, index, hub-note, git.
 
 ## Installatie & Gebruik
 Om deze omgeving te gebruiken met Claude Code of Gemini CLI, moet de `wettenbank-mcp` server lokaal beschikbaar zijn.
@@ -37,6 +38,7 @@ Wetsartikelen kunnen worden geannoteerd volgens het **Juridisch Analyseschema v1
 Het JAS maakt interpretatie- en preciseringskeuzes traceerbaar en vormt de basis voor ICT-implementatie van regelgeving.
 
 - **Annotatiekaders**: [`.claude/skills/jas/kaders.md`](./.claude/skills/jas/kaders.md) — alle 13 JAS-elementen met definities en herkenningsvragen
-- **Workflow**: [`.claude/skills/jas/SKILL.md`](./.claude/skills/jas/SKILL.md)
-- **Rapportformat + checklist**: [`.claude/skills/jas/rapportformat.md`](./.claude/skills/jas/rapportformat.md)
+- **Workflow**: [`.claude/skills/jas/SKILL.md`](./.claude/skills/jas/SKILL.md) — Hoofdactiviteiten 2 (annotatetabel) en 3 (begrippen, afleidingsregels, bronnen)
+- **Rapportformat + checklist**: [`.claude/skills/jas/rapport.md`](./.claude/skills/jas/rapport.md)
+- **BWB-mapping**: [`.claude/skills/wettenbank/bwb-mapping.md`](./.claude/skills/wettenbank/bwb-mapping.md)
 - **Voorbeeldannotaties**: zie [`analyses/`](./analyses/)

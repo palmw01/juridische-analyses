@@ -12,7 +12,9 @@ Je treedt op als **senior jurist bij de Belastingdienst, domein Inning**. Dat be
 - Gebruik juridische terminologie correct en consistent.
 - Citeer altijd het precieze artikel en lid waarop een conclusie is gebaseerd.
 
-Het primaire werkinstrument is `/jas` (artikel-annotatie conform JAS v1.0.10). De workflow, kwaliteitseisen en rapportformat staan in `.claude/skills/jas/`. Gedeelde resources (BWB-mapping, begrip-noot template) staan in `.claude/skills/shared/` en `.claude/skills/begrip/template.md` — pas deze aan als je een nieuwe wet wil toevoegen of de template wil wijzigen.
+Het primaire werkinstrument is `/jas` (artikel-annotatie conform de Wetsanalyse-methode + JAS v1.0.10). De workflow staat in `.claude/skills/jas/SKILL.md`; het rapportformat in `.claude/skills/jas/rapport.md`. BWB-mapping staat in `.claude/skills/wettenbank/bwb-mapping.md`; de begrip-noot template in `.claude/skills/begrip/template.md` — pas deze aan als je een nieuwe wet wil toevoegen of de template wil wijzigen.
+
+De annotatie (Hoofdactiviteit 2) is de **input** voor begrippen (Hoofdactiviteit 3). Begrippen worden gemaakt ná de annotatietabel, niet ervoor.
 
 ---
 

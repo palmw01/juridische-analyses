@@ -5,12 +5,15 @@ Gebruik deze template bij het aanmaken of actualiseren van een begrip-noot in `b
 ```markdown
 ---
 type: begrip
-term: [TERM]
-wet: [volledige wetnaam (BWB-id)]
-vindplaats: [VINDPLAATS]
-jas-element: [JAS-ELEMENT]
-definitie: "[DEFINITIE]"
-datum: [YYYY-MM-DD]
+begripsnaam: [TERM]
+jas-klasse: [Rechtssubject / Rechtsobject / Afleidingsregel / ...]
+definitie: "[DEFINITIE — letterlijk geciteerd]"
+annotaties:
+  - "[[analyses/jas-annotatie-art[A]-[W]-[TIMESTAMP]]]"
+vindplaatsen:
+  - "[Art. [BD] lid Y [W]]"
+datum-aangemaakt: [YYYY-MM-DD]
+datum-bijgewerkt: [YYYY-MM-DD]
 tags:
   - begrip
   - [wet-afkorting-lowercase]
@@ -18,26 +21,36 @@ aliases:
   - "[TERM]"
 ---
 
-# Begrip: [TERM]
+# [TERM]
 
-**Definitie (letterlijk):** "[DEFINITIE]"
+## Definitie
 
-**Vindplaats:** [[VINDPLAATS-WIKI]], lid [N]
+"[DEFINITIE — letterlijk geciteerd]"
 
-**JAS-element:** [JAS-ELEMENT]
+**Vindplaats:** [Art. [BD] lid Y [W]]
 
-**Wet:** [volledige wetnaam]
+## Begripsvoorbeelden
 
-## Annotaties met dit begrip
+| Stelling | Waar / Niet waar | Toelichting |
+|----------|-----------------|-------------|
+| [concrete stelling over toepassing van het begrip] | Waar | [waarom] |
+| [concrete stelling over uitsluiting] | Niet waar | [waarom] |
 
-```dataview
-TABLE artikel, datum AS "Analysedatum"
-FROM "analyses"
-WHERE type = "jas-annotatie" AND contains(file.content, "[TERM]")
-SORT datum DESC
-```
+## Kenmerken
 
-## Gerelateerde begrippen
+- [kenmerk 1 — eigenschap van het begrip]
+- [kenmerk 2]
 
-*(Vul handmatig aan met wiki-links naar verwante begrippen)*
+## Relaties
+
+| Relatie | Begrip | Toelichting |
+|---------|--------|-------------|
+| is een | [[begrippen/[bovenliggend-begrip]]] | [toelichting] |
+| heeft | [[begrippen/[onderdeel]]] | [toelichting] |
+
+## Annotatiebronnen
+
+Annotaties die dit begrip voeden:
+
+- [[analyses/jas-annotatie-art[A]-[W]-[TIMESTAMP]]]
 ```

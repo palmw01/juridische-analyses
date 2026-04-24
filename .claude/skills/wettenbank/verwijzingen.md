@@ -1,6 +1,6 @@
 # Kruisreferentie-extractieprotocol — JAS v1.0.10
 
-Gebruik dit protocol in Stap 6. Voer de fasen strikt in volgorde uit. Lever het resultaat op als intern JSON-model; gebruik dit model als enige bron voor §7 en de frontmatter-array `kruisreferenties`.
+Gebruik dit protocol in de Voorbereiding (dataverwerving). Voer de fasen strikt in volgorde uit. Lever het resultaat op als intern JSON-model; gebruik dit model als enige bron voor de annotatietabel (kolom Begrip) en de frontmatter-array `kruisreferenties`.
 
 ---
 
@@ -26,7 +26,7 @@ Zoek in elke `leden[].tekst` naar het patroon `[display-tekst](jci1.3:c:...)`.
 Pas de URI-parser toe → bwbId + artikel.
 
 ### 1b. Bepaal de wetnaam
-Zoek het bwbId op in de BWB-mapping (SKILL.md Stap 2). Ontbreekt het bwbId in de mapping: gebruik de display-tekst als wetnaam.
+Zoek het bwbId op in `bwb-mapping.md`. Ontbreekt het bwbId in de mapping: gebruik de display-tekst als wetnaam.
 
 ### 1c. Extraheer lidnummer(s) uit de display-tekst
 
@@ -119,47 +119,43 @@ Gebruik `(bron_bwbId, bron_artikel, bron_lid, doel_bwbId, doel_artikel, doel_lid
 
 ---
 
-## Van JSON-model naar §7
+## Van JSON-model naar kruisreferenties-kolom en frontmatter
 
 Groepeer records op `doel_bwbId`:
-- `doel_bwbId` = `bron_bwbId` → **§7.1 Interne verwijzingen**
-- `doel_bwbId` ≠ `bron_bwbId` → **§7.2 Externe verwijzingen**
+- `doel_bwbId` = `bron_bwbId` → **interne verwijzing**
+- `doel_bwbId` ≠ `bron_bwbId` → **externe verwijzing**
 
-Schrijf in de "Verwijst naar"-kolom altijd de wiki-link-notatie: `[[Art. Z wet-afkorting]]`.
-
-Bij `confidence < 0.8`: voeg in de "Relevantie"-kolom toe: *(verificatie aanbevolen)*.
+Bij `confidence < 0.8`: markeer met *(verificatie aanbevolen)*.
 
 De `kruisreferenties`-array in de frontmatter bevat de unieke waarden van `"Art. <doel_artikel> <wet-afkorting>"` — zonder wiki-brackets, zonder lid.
 
 ---
 
-## §7.4-protocol — Omgekeerde kruisreferenties
+## Omgekeerde kruisreferenties — verificatieprotocol
 
-De `wettenbank_zoekterm`-resultaten zijn een ruwe kandidatenlijst. Voer de onderstaande stappen verplicht uit voordat §7.4 wordt geschreven.
+De `wettenbank_zoekterm`-resultaten zijn een ruwe kandidatenlijst. Voer de onderstaande stappen verplicht uit.
 
 ### Stap A — Filter valse treffers (andere wet)
 
 De zoekterm `"artikel [A]"` matcht ook passages als "artikel [A] van de [andere wet]" die binnen [B] voorkomen. Per kandidaatartikel:
 
-1. Roep `wettenbank_artikel(bwbId=[B], artikel=<nr>)` aan voor elk kandidaatartikel dat nog niet is opgehaald in Stap 6.
-2. Controleer in de retourneertekst of de passage `"artikel [A]"` gevolgd wordt door een wetnaam of wetsafkorting van een **andere wet** dan [B]. Zo ja → **valse treffer**, uitsluiten van §7.4.
-
-*Voorbeeld van valse treffer:* art. 7a IW 1990 bevat "artikel 25 van de Algemene wet inkomensafhankelijke regelingen" — de "25" verwijst naar de AWIR, niet naar IW 1990.
+1. Roep `wettenbank_artikel(bwbId=[B], artikel=<nr>)` aan voor elk kandidaatartikel dat nog niet is opgehaald.
+2. Controleer in de retourneertekst of de passage `"artikel [A]"` gevolgd wordt door een wetnaam of wetsafkorting van een **andere wet** dan [B]. Zo ja → **valse treffer**, uitsluiten.
 
 ### Stap B — Classificeer per lid
 
-Zoek in de retourneertekst naar de specifieke lidaanduiding van het geannoteerde lid `[L]`. Gebruik de rangnamentabel uit Fase 1c.
+Zoek in de retourneertekst naar de specifieke lidaanduiding van het geannoteerde lid `[L]`. Gebruik de rangnamentabel.
 
 | Wat je vindt in de tekst | Classificatie |
 |--------------------------|---------------|
-| Expliciete verwijzing naar lid [L] (bijv. "artikel [A], vierde lid" of een bereik dat lid [L] omsluit zoals "derde **tot en met** vijfde") | **Directe omgekeerde kruisreferentie** — opnemen |
-| Verwijzing naar art. [A] zonder specifiek lid (bijv. "het bepaalde in artikel [A]") | **Algemene omgekeerde kruisreferentie** — opnemen met *(verwijst naar art. [A] in het geheel)* in de Relevantie-kolom |
-| Verwijzing naar art. [A] met een ander lid dan [L] | **Niet-relevant** — uitsluiten van §7.4 |
+| Expliciete verwijzing naar lid [L] | **Directe omgekeerde kruisreferentie** — opnemen |
+| Verwijzing naar art. [A] zonder specifiek lid | **Algemene omgekeerde kruisreferentie** — opnemen met *(verwijst naar art. [A] in het geheel)* |
+| Verwijzing naar art. [A] met een ander lid dan [L] | **Niet-relevant** — uitsluiten |
 
-### Stap C — Beschrijving in de Relevantie-kolom
+### Stap C — Beschrijving
 
-De Relevantie-kolom beschrijft de **werkelijke inhoud** van het verwijzende artikel, niet de verwijzing zelf. Gebruik het `pad`-veld van de MCP-response voor de afdeling/context. Benoem expliciet wat het artikel regelt (bijv. "uitsluiting verrekening gedurende uitstel", "overeenkomstige toepassing uitstelregime op aansprakelijk gestelden").
+Beschrijf de **werkelijke inhoud** van het verwijzende artikel, niet de verwijzing zelf. Gebruik het `pad`-veld van de MCP-response voor context.
 
 ### Stap D — Substantieel belang
 
-Controleer na classificatie of het verwijzende artikel lid [L] **opneemt in een opsomming of juist uitsluit**. Dit heeft rechtstreekse gevolgen voor de uitvoering van het geannoteerde lid (bijv. of invorderingsrente loopt of een vrijstelling geldt). Noteer een dergelijk bevinding als substantieel punt voor §9 (spanning/meerduidigheid) of §10 (lacunes).
+Controleer of het verwijzende artikel lid [L] **opneemt in een opsomming of juist uitsluit**. Noteer dit als relevant punt voor de toelichting-kolom van de annotatietabel.
