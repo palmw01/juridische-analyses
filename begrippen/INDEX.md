@@ -16,7 +16,7 @@ Gedefinieerde begrippen per wet, gekoppeld aan JAS-elementen.
 
 | Begrip | JAS-element | Vindplaats | Datum |
 |--------|-------------|-----------|-------|
-| [belastingschuldige](./belastingschuldige.md) | Rechtssubject | Art. 1 lid 1 IW 1990 | 2026-04-23 |
+| [belastingschuldige](./belastingschuldige.md) | Rechtssubject | Art. 25 lid 4 IW 1990 | 2026-04-24 |
 | [uitstel van betaling](./uitstel-van-betaling.md) | Rechtsbetrekking | Art. 25 lid 1 IW 1990 | 2026-04-23 |
 
 ---
