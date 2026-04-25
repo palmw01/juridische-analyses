@@ -1,17 +1,79 @@
-name: Trigger Quartz rebuild
+name: Deploy Quartz to GitHub Pages
 
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  trigger:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger wetten-overheid-tools quartz build
+      - name: Checkout vault
+        uses: actions/checkout@v4
+        with:
+          path: vault
+
+      - name: Clone Quartz
+        run: git clone --depth=1 https://github.com/jackyzha0/quartz.git quartz
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: quartz/package-lock.json
+
+      - name: Install Quartz dependencies
+        working-directory: quartz
+        run: npm ci
+
+      - name: Copy vault content
         run: |
-          curl -s -X POST \
-            -H "Authorization: Bearer ${{ secrets.QUARTZ_DEPLOY_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/palmw01/wetten-overheid-tools/actions/workflows/deploy.yml/dispatches \
-            -d '{"ref":"main"}'
+          rm -rf quartz/content
+          cp -r vault quartz/content
+
+      - name: Patch quartz.config.ts
+        working-directory: quartz
+        run: |
+          node -e "
+            const fs = require('fs');
+            let c = fs.readFileSync('./quartz.config.ts', 'utf8');
+            c = c.replace(/pageTitle: \x22[^\x22]*\x22/, 'pageTitle: \x22Juridische wetsanalyse — Inning\x22');
+            c = c.replace(/baseUrl: \x22[^\x22]*\x22/, 'baseUrl: \x22palmw01.github.io/juridische-analyses\x22');
+            c = c.replace(/locale: \x22[^\x22]*\x22/, 'locale: \x22nl-NL\x22');
+            c = c.replace(/ignorePatterns: \[[\s\S]*?\]/,
+              'ignorePatterns: [\x22.obsidian\x22,\x22.claude\x22,\x22.git\x22,\x22.trash\x22,\x22README.md\x22,\x22CLAUDE.md\x22,\x22settings.json\x22,\x22**/template.md\x22]');
+            fs.writeFileSync('./quartz.config.ts', c);
+          "
+
+      - name: Build Quartz
+        working-directory: quartz
+        run: |
+          npx quartz build 2>&1
+          test "$(ls -A public 2>/dev/null)" || (echo "FOUT: geen output in public/" && exit 1)
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: quartz/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
