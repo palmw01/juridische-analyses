@@ -50,14 +50,20 @@ De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden no
 
 ## Reikwijdte van deze workflow
 
-Deze AI-workflow dekt Activiteit 2 (A2: markeren + classificeren) en Activiteit 3 (A3: begrippen + afleidingsregels) van de Wetsanalyse-methode. De volgende activiteiten vallen **buiten** de scope van deze workflow:
+**Ondersteund door AI: uitsluitend A2 en A3.**
 
-- **A1 — Werkgebied bepalen**: juridische scenario's, deelvragen en bronnenselectie vereisen een menselijk oordeel over scope en relevantie.
-- **A4 — Valideren**: valt buiten de scope; validatie vindt plaats in het multidisciplinaire team (Handleiding §2.3, §3.6).
-- **A5 — Signaleren**: valt buiten de scope; signalering en oplevering aan beleidsverantwoordelijken is een menselijke taak.
-- **A6 — Kennismodel**: begrip- en regel-noten zijn input voor A6, niet het kennismodel zelf.
+| Activiteit | Omschrijving | AI-ondersteuning |
+|------------|--------------|-----------------|
+| A1 — Werkgebied bepalen | Scope, juridische scenario's, bronnenselectie | ✗ niet ondersteund |
+| **A2 — Markeren en classificeren** | Annoteren, JAS-classificatie, diagrammen | **✓ ondersteund** |
+| **A3 — Betekenis vastleggen** | Begrippen, afleidingsregels, relaties | **✓ ondersteund** |
+| A4 — Valideren | Toetsing in multidisciplinair team | ✗ niet ondersteund |
+| A5 — Signaleren | Lacunes, open normen, uitvoeringsbeleid | ✗ niet ondersteund |
+| A6 — Kennismodel opstellen | Gegevensmodel, regelmodel, procesmodel | ✗ niet ondersteund |
 
-De AI-output is een **analysehulpmiddel**, geen juridisch bindend of gevalideerd eindproduct.
+**Resultaten van de AI-workflow** zijn de graafmodellen in de vault: annotatie-noten (A2), begrip-noten (A3a) en afleidingsregel-noten (A3b). Deze zijn input voor A4–A6, maar die activiteiten vallen buiten de scope van deze workflow.
+
+**De scope van A2 en A3 wordt niet uitgebreid.** Voorstellen om andere activiteiten (A1, A4, A5, A6) alsnog met AI te ondersteunen worden niet doorgevoerd zonder expliciete beslissing van de gebruiker.
 
 ---
 
