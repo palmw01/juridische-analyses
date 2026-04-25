@@ -48,6 +48,19 @@ De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden no
 
 ---
 
+## Reikwijdte van deze workflow
+
+Deze AI-workflow dekt Activiteit 2 (A2: markeren + classificeren) en Activiteit 3 (A3: begrippen + afleidingsregels) van de Wetsanalyse-methode. De volgende activiteiten vallen **buiten** wat de AI zelfstandig kan vervangen:
+
+- **A1 — Werkgebied bepalen**: juridische scenario's, deelvragen en bronnenselectie vereisen een menselijk oordeel over scope en relevantie.
+- **A4 — Valideren**: de AI die A3 uitvoert kan A4 niet onafhankelijk uitvoeren. Validatie van afleidingsregels met juridische scenario's en voorbeeldreeksen vereist toetsing door een ander dan de opsteller — bij voorkeur in het multidisciplinaire team (Handleiding §2.3, §3.6).
+- **A5 — Signaleren**: A5-signalen in noten zijn aanzetten, geen vastgesteld uitvoeringsbeleid. Vaststelling en oplevering aan beleidsverantwoordelijken is een menselijke taak.
+- **A6 — Kennismodel**: begrip- en regel-noten zijn input voor A6, niet het kennismodel zelf.
+
+De AI-output is een **analysehulpmiddel**, geen juridisch bindend of gevalideerd eindproduct.
+
+---
+
 ## Betrouwbaarheid van wetsinformatie
 
 - Lees altijd de werkelijke wetstekst voordat je claims maakt over structuur (lidnummers, artikelnummers, volgorde, inhoud).
