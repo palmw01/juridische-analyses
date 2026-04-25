@@ -15,6 +15,7 @@ Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificer
 3. **Haal brondefinities op** via `wettenbank_artikel` op het begripsbepalingen-artikel van dezelfde wet (zie `bwb-mapping.md` voor artikelnummer).
 4. **Noteer het `pad`-veld** letterlijk uit de MCP-response — dit is de structuurpositie. Neem dit nooit aan op basis van de artikelinhoud.
 5. **Noteer de peildatum** uit `versiedatum` in de MCP-response. Gebruik nooit de datum van vandaag.
+6. **Extraheer kruisreferenties** conform `.claude/skills/wettenbank/verwijzingen.md` en voeg de `kruisreferenties`-array toe aan de annotatie-frontmatter.
 
 ---
 
@@ -98,6 +99,7 @@ tags:
   - wet/[wet-afkorting]
   - art/[nummer]
 begrippen: []
+kruisreferenties: []   # gevuld conform verwijzingen.md — "Art. X [wet]"-notatie
 ---
 ```
 
@@ -108,12 +110,13 @@ Body:
 
 #### Annotatietabel-formaat
 
-| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip |
-|----|------------------------------------------------------|-----------|---------------------|--------|
-| [doorlopend] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch | [[begrippen/[slug]]] |
+| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
+|----|------------------------------------------------------|-----------|---------------------|--------|-------------|
+| [doorlopend] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch | [[begrippen/[slug]]] | — |
 
 - Nummerering doorlopend over alle leden.
 - Overlappende markeringen: elke klasse op aparte rij, zelfde citaat mag meerdere keren voorkomen.
+- **Signalering**: gebruik `—` als er geen bijzonderheden zijn. Gebruik `⚠ [toelichting]` bij meerduidigheid, spanning met andere artikelen, open normen of delegatiegaten (bijv. `⚠ meerduidig: ook uitlegbaar als voorwaarde` of `⚠ spanning met art. 4:81 Awb`).
 
 #### Delegatiestructuur-formaat
 

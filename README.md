@@ -9,10 +9,9 @@ Het primaire artefact is een **Obsidian knowledge graph**: atomaire entiteitsbes
 ## Vault-structuur
 
 ```
-annotaties/       ← lichte annotatie-noot per artikel (wetstekst + annotatietabel)
+annotaties/       ← lichte annotatie-noot per artikel (wetstekst + annotatietabel + diagram)
 begrippen/        ← atomaire begrip-noten (definitie, voorbeelden, kenmerken, relaties)
 regels/           ← atomaire afleidingsregel-noten (als-dan, voorbeeldreeksen)
-wetsartikelen/    ← hub-notes per artikel (puur Dataview)
 .claude/skills/   ← skill-documentatie voor Claude Code
 ```
 
@@ -47,9 +46,10 @@ Wetsartikelen worden geannoteerd conform het **Juridisch Analyseschema v1.0.10**
 Het JAS maakt interpretatie- en preciseringskeuzes traceerbaar en vormt de basis voor ICT-implementatie van regelgeving.
 
 - **Annotatiekaders**: [`.claude/skills/annoteer/kaders.md`](./.claude/skills/annoteer/kaders.md) — alle 13 JAS-elementen
-- **Skill /annoteer**: [`.claude/skills/annoteer/SKILL.md`](./.claude/skills/annoteer/SKILL.md) — markeringen + classificaties (A2)
+- **Skill /annoteer**: [`.claude/skills/annoteer/SKILL.md`](./.claude/skills/annoteer/SKILL.md) — markeringen + classificaties + Mermaid-diagram (A2)
 - **Skill /begrip**: [`.claude/skills/begrip/SKILL.md`](./.claude/skills/begrip/SKILL.md) — begrippen + afleidingsregels (A3)
 - **BWB-mapping**: [`.claude/skills/wettenbank/bwb-mapping.md`](./.claude/skills/wettenbank/bwb-mapping.md)
+- **Kruisreferentieprotocol**: [`.claude/skills/wettenbank/verwijzingen.md`](./.claude/skills/wettenbank/verwijzingen.md) — JCI URI-extractie, forward/backward kruisreferenties
 
 ---
 
@@ -67,4 +67,32 @@ Alle entiteiten zijn voorzien van geneste tags zodat de graph filterbaar en kleu
 | `#wet/iw1990` | Alles wat de IW 1990 betreft |
 | `#art/25` | Alles dat art. 25 betreft |
 
-Stel in Obsidian Graph View → Groups kleuren in per tag conform kaders.md §Kleurcodering.
+Kleuren zijn direct geconfigureerd in `.obsidian/graph.json` conform de JAS-kleurcodering — geen handmatige instelling nodig.
+
+### Local Graph
+
+Elke noot heeft een eigen lokale graph die alleen de directe verbindingen toont:
+
+- **Openen:** Command Palette (`Ctrl+P`) → "Open local graph"  
+- **Vastzetten:** Sleep het venster naar de rechterzijbalk voor permanent zicht naast de noot
+- **Aanbevolen depth:** `2` voor een begrip-netwerk (begrip → gerelateerde begrippen), `3` voor een artikel-overzicht (artikel → begrippen → afleidingsregels)
+- **Incoming/Outgoing:** Schakel af afzonderlijk om alleen verwijzingen vanúit of náár de noot te tonen
+
+### Filterpatronen (Global Graph)
+
+| Filter | Resultaat |
+|--------|-----------|
+| `tag:#jas/rechtsbetrekking` | Alleen rechtsbetrekkingen |
+| `tag:#jas/afleidingsregel` | Alleen afleidingsregels |
+| `tag:#tussenresultaat` | Alleen tussenresultaten in algoritmen |
+| `tag:#wet/iw1990` | Alles m.b.t. IW 1990 |
+| `path:begrippen/` | Alleen begrip-noten |
+
+### Plugin-aanbevelingen
+
+| Plugin | Functie | Installatie |
+|--------|---------|------------|
+| **Dataview** | Tabellen en lijsten op basis van frontmatter | Reeds geïnstalleerd |
+| **Templater** | Templates met dynamische velden | Reeds geïnstalleerd |
+| **Breadcrumbs** | Hiërarchische relaties zichtbaar in een eigen view; gebruik `is-een` als parent-relatie en `leidt-tot` als child-relatie | Community Plugins |
+| **Juggl** | Interactieve graph met meer filteropties | Community Plugins |

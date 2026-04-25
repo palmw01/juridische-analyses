@@ -20,6 +20,11 @@
       "name": "wettenbank",
       "description": "Haal wetstekst op via de wettenbank MCP en extraheer kruisreferenties. Gebruik: /wettenbank art. 25 IW 1990",
       "path": ".claude/skills/wettenbank/SKILL.md"
+    },
+    {
+      "name": "quartz",
+      "description": "Beheer de Quartz-publicatiesite van de vault (Docker + Portainer). Gebruik: /quartz",
+      "path": ".claude/skills/quartz/SKILL.md"
     }
   ]
 }

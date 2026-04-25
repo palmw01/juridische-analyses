@@ -224,6 +224,7 @@ De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsb
 | Rechtssubject | Rechtsbetrekking | `rechthebbende` of `plichthebbende` |
 | Rechtsbetrekking | Rechtsobject | `voorwerp` |
 | Rechtsbetrekking | Voorwaarde | `geldig indien` |
+| Rechtsbetrekking | Afleidingsregel | `nader uitgewerkt in` |
 | Rechtsfeit | Rechtsbetrekking | `triggert` |
 | Rechtsfeit | Afleidingsregel | `triggert` |
 | Afleidingsregel | Variabele | `gebruikt` |
@@ -232,7 +233,21 @@ De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsb
 | Voorwaarde | Parameter | *(ongelabeld)* |
 | Voorwaarde | Tijdsaanduiding | *(ongelabeld)* |
 | Voorwaarde | Plaatsaanduiding | *(ongelabeld)* |
-| Delegatiebevoegdheid | Rechtsbetrekking | `nader uitgewerkt in` |
+| Delegatiebevoegdheid | Rechtsbetrekking | `gemandateerd aan` |
+
+### Extra knooptypes opnemen in het diagram
+
+Voeg naast Rechtssubject/Rechtsobject ook de volgende elementen op als ze in de annotatietabel voorkomen **en** direct verbonden zijn aan de centrale rechtsbetrekking of het rechtsfeit van het diagram:
+
+| JAS-klasse | Wanneer opnemen | Verbinding |
+|-----------|----------------|-----------|
+| Voorwaarde | Altijd bij aanwezigheid | RB →\|geldig indien\| VW |
+| Rechtsfeit | Altijd bij aanwezigheid | RF →\|triggert\| RB |
+| Afleidingsregel | Bij directe uitwerking van RB | RB →\|nader uitgewerkt in\| AR |
+| Delegatiebevoegdheid | Bij aanwezigheid | DB →\|gemandateerd aan\| RB |
+| Variabele / Parameter | Alleen als onderdeel van een Voorwaarde of Afleidingsregel in hetzelfde diagram | VW --- VA / AR →\|gebruikt\| VA |
+
+Neem **géén** losse variabelen of parameters op die niet gekoppeld zijn aan een Voorwaarde of Afleidingsregel in hetzelfde diagram — dit houdt het diagram leesbaar.
 
 Rechtssubjecten die als plichthebbende optreden (kenbaar uit de rechtsbetrekking-formulering) krijgen het label `plichthebbende`; de rechthebbende krijgt `rechthebbende`. Bij twijfel: gebruik `rechtssubject`.
 

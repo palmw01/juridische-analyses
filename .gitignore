@@ -20,7 +20,7 @@ presentaties/*.html
 # Obsidian — per-apparaat state (niet tracken)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
-.obsidian/graph.json
+# graph.json wordt wél getrackt: colorGroups zijn gedeelde JAS-configuratie
 # Obsidian — plugin-cache en hot-reload
 .obsidian/plugins/*/main.js
 .obsidian/plugins/*/manifest.json

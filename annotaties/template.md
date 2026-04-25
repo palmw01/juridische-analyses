@@ -11,6 +11,7 @@ tags-formaat:
   - wet/[wet-afkorting]   # bijv. wet/iw1990
   - art/[nummer]          # bijv. art/25
 begrippen: []             # wiki-links naar begrippen/ — gevuld na /begrip-alles
+kruisreferenties: []      # "Art. X [wet]"-notatie — gevuld conform verwijzingen.md
 ---
 
 ## Wetstekst (letterlijk, peildatum [PD])
@@ -20,10 +21,10 @@ begrippen: []             # wiki-links naar begrippen/ — gevuld na /begrip-all
 
 ## Annotatietabel
 
-| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip |
-|----|------------------------------------------------------|-----------|---------------------|--------|
-| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] |
-| 2  | "[citaat]" | **[klasse]** | systematisch | begrippen/[slug] |
+| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
+|----|------------------------------------------------------|-----------|---------------------|--------|-------------|
+| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] | — |
+| 2  | "[citaat]" | **[klasse]** | systematisch | begrippen/[slug] | — |
 
 ## Diagram
 

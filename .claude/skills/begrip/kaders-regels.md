@@ -126,9 +126,11 @@ Wetgeving bevat soms **impliciete algoritmen**: één wetsformulering bevat meer
 ### Werkwijze
 
 1. Identificeer alle tussenresultaten in de formule — dit zijn variabelen die niet rechtstreeks observeerbaar zijn uit de werkelijke wereld maar berekend moeten worden
-2. Maak voor elk tussenresultaat een begrip-noot aan (`herkomst: afgeleid`)
+2. Maak voor elk tussenresultaat een begrip-noot aan (`herkomst: afgeleid`) en voeg de tag `#tussenresultaat` toe aan de `tags`-lijst
 3. Maak voor elk tussenresultaat een aparte afleidingsregel aan
 4. Verwijs in de hoofdregel naar de tussenresultaat-begrippen als `invoer`
+
+De tag `#tussenresultaat` maakt afgeleide tussenberekeningen filterbaar in Obsidian Graph View en Dataview.
 
 ### Voorbeeld (invorderingsrente art. 28 IW 1990)
 

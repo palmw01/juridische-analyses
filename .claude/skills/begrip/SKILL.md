@@ -75,7 +75,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[art]-[nr].md`.
 - Vul altijd het `naam`-veld in met een leesbare naam (actieve werkwoordsvorm).
 - Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit.
-- Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan.
+- Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan. Voeg de tag `#tussenresultaat` toe aan de tags-lijst van elke tussenresultaat-begrip-noot.
 - Kies het taalpatroon uit `## Formele regel` passend bij het `soort` en verwijder de overige blokken.
 - Controleer of het taalpatroon aansluit bij de RegelSpraaak-oriëntatie uit het regelkader.
 
@@ -160,3 +160,21 @@ Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
 - Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
 - Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
 - Stel `status: concept` in op alle nieuw aangemaakte begrip-noten.
+
+### Verplichte checklist-output na elk begrip
+
+Print na het opslaan van elke begrip-noot de volgende checklist in de chat (vink af op basis van de daadwerkelijk ingevulde frontmatter):
+
+```
+Kennismodel-checklist — [begripsnaam]
+✅/⬜ soort ingevuld
+✅/⬜ herkomst ingevuld
+✅/⬜ kardinaliteit in relaties-tabel
+✅/⬜ [id]-markering (n.v.t. indien geen identificatiebegrip)
+✅/⬜ wiki-link afleidingsregel (n.v.t. indien herkomst: direct)
+✅/⬜ aliases aanwezig (leeg is toegestaan indien geen synoniemen)
+✅/⬜ geldigheid-van ingevuld
+✅/⬜ status: concept
+```
+
+Bij `/begrip-alles`: print de checklist per begrip afzonderlijk, direct nadat dat begrip is opgeslagen.

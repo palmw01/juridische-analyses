@@ -29,7 +29,6 @@ De wetsanalyse werkt iteratief via twee micro-skills:
 annotaties/       ← lichte annotatie-noot per artikel (A2-tussenproduct)
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
-wetsartikelen/    ← hub-notes als puur Dataview-aggregators
 ```
 
 ### Entiteitstypen en tags
@@ -99,4 +98,6 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie |
 | Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
+| Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
+| `/quartz` | `.claude/skills/quartz/SKILL.md` | Vault publiceren als website via Docker + Portainer |
 | Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats |
