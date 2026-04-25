@@ -123,7 +123,20 @@ Body:
 
 Bij geen delegatie: schrijf exact "Geen delegatiebevoegdheden in artikel [A]."
 
-### 2. Begrip-noten (lege frontmatter)
+### 2. Diagram (A2c)
+
+Maak na de annotatietabel de `## Diagram`-sectie aan. Volg `kaders.md §Diagramregels` volledig.
+
+Werkwijze:
+1. Identificeer alle Rechtsbetrekkingen in de annotatietabel. Eén diagram per Rechtsbetrekking.
+2. Per diagram: bepaal de centrale knoop (Rechtsbetrekking), voeg alle elementen toe die in de annotatietabel aan dat lid zijn gerelateerd, verbind ze met de randlabels uit de relatieschematabel.
+3. Neem alleen de `classDef`-regels op voor de klassen die daadwerkelijk in het diagram voorkomen.
+4. Knooplabels: `"[JAS-klasse]\n'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
+5. Titel boven elk blok: `### Diagram [N] — lid [L]: [korte omschrijving rechtsbetrekking]`
+
+Bij geen Rechtsbetrekking en geen Rechtsfeit in het artikel: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
+
+### 3. Begrip-noten (lege frontmatter)
 
 Maak per annotatierij een begrip-noot aan in `begrippen/[slug].md`. **Vul uitsluitend de frontmatter in** — definitie, voorbeelden en kenmerken blijven leeg (dat doet `/begrip`).
 

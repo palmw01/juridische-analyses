@@ -209,6 +209,94 @@ brondefinitie
 
 ---
 
+## Diagramregels (A2c)
+
+Eén diagram per Rechtsbetrekking in het artikel. Bij meerdere Rechtsbetrekkingen: meerdere genummerde Mermaid-blokken in de `## Diagram`-sectie van de annotatie-noot, elk voorzien van een label (`subgraph` of commentaarregel met lid + omschrijving).
+
+### Centrale klasse
+
+De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsbetrekking: het Rechtsfeit als centrale knoop.
+
+### Randlabels per JAS-klasse-combinatie
+
+| Van (knoop) | Naar (knoop) | Randlabel |
+|-------------|-------------|-----------|
+| Rechtssubject | Rechtsbetrekking | `rechthebbende` of `plichthebbende` |
+| Rechtsbetrekking | Rechtsobject | `voorwerp` |
+| Rechtsbetrekking | Voorwaarde | `geldig indien` |
+| Rechtsfeit | Rechtsbetrekking | `triggert` |
+| Rechtsfeit | Afleidingsregel | `triggert` |
+| Afleidingsregel | Variabele | `gebruikt` |
+| Afleidingsregel | Parameter | `gebruikt` |
+| Voorwaarde | Variabele | *(ongelabeld)* |
+| Voorwaarde | Parameter | *(ongelabeld)* |
+| Voorwaarde | Tijdsaanduiding | *(ongelabeld)* |
+| Voorwaarde | Plaatsaanduiding | *(ongelabeld)* |
+| Delegatiebevoegdheid | Rechtsbetrekking | `nader uitgewerkt in` |
+
+Rechtssubjecten die als plichthebbende optreden (kenbaar uit de rechtsbetrekking-formulering) krijgen het label `plichthebbende`; de rechthebbende krijgt `rechthebbende`. Bij twijfel: gebruik `rechtssubject`.
+
+### Knooplabel-formaat
+
+```
+"[JAS-klasse]\n'[markering ingekort tot max. 40 tekens]'"
+```
+
+Markering inkorten: begin bij het zelfstandig naamwoord, laat hulpwerkwoorden weg, voeg `…` toe indien afgekort.
+
+### classDef per JAS-klasse (Mermaid)
+
+```
+classDef rb   fill:#FF0000,color:#fff
+classDef rs   fill:#4472C4,color:#fff
+classDef ro   fill:#70AD47,color:#fff
+classDef rf   fill:#FFC000
+classDef vw   fill:#7030A0,color:#fff
+classDef ar   fill:#00B0F0
+classDef va   fill:#92D050
+classDef pa   fill:#FFD966
+classDef ta   fill:#F4B942
+classDef pl   fill:#9DC3E6
+classDef db   fill:#C9C9C9
+classDef bd   fill:#D6B4C8
+classDef op   fill:#808080,color:#fff
+```
+
+Klasse-afkorting per element: `rb` Rechtsbetrekking · `rs` Rechtssubject · `ro` Rechtsobject · `rf` Rechtsfeit · `vw` Voorwaarde · `ar` Afleidingsregel · `va` Variabele · `pa` Parameter · `ta` Tijdsaanduiding · `pl` Plaatsaanduiding · `db` Delegatiebevoegdheid · `bd` Brondefinitie · `op` Operator.
+
+### Voorbeeld (enkelvoudige rechtsbetrekking)
+
+````markdown
+## Diagram
+
+### Diagram 1 — lid 1: aanspraak op zorgtoeslag
+
+```mermaid
+graph LR
+    RB["rechtsbetrekking\n'aanspraak op een zorgtoeslag'"]:::rb
+    RS1["rechtssubject\n'de verzekerde'"]:::rs
+    RO["rechtsobject\n'een zorgtoeslag'"]:::ro
+    VW["voorwaarde\n'indien de normpremie minder bedraagt…'"]:::vw
+    VA["variabele\n'de normpremie'"]:::va
+    PA["parameter\n'de standaardpremie'"]:::pa
+
+    RS1 -->|rechthebbende| RB
+    RB -->|voorwerp| RO
+    RB -->|geldig indien| VW
+    VW --- VA
+    VW --- PA
+
+    classDef rb fill:#FF0000,color:#fff
+    classDef rs fill:#4472C4,color:#fff
+    classDef ro fill:#70AD47,color:#fff
+    classDef vw fill:#7030A0,color:#fff
+    classDef va fill:#92D050
+    classDef pa fill:#FFD966
+```
+````
+
+---
+
 ## Kleurcodering (indicatief voor tools)
 
 > **Let op:** De onderstaande kleurcodes zijn gebaseerd op gangbare implementaties van JAS-annotatie­tools. De officiële JAS-specificatie v1.0.10 schrijft geen vaste kleurwaarden voor.

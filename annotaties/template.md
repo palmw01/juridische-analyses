@@ -25,6 +25,26 @@ begrippen: []             # wiki-links naar begrippen/ — gevuld na /begrip-all
 | 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] |
 | 2  | "[citaat]" | **[klasse]** | systematisch | begrippen/[slug] |
 
+## Diagram
+
+<!-- Één diagram per Rechtsbetrekking; bij meerdere: genummerde blokken conform kaders.md §Diagramregels -->
+
+### Diagram 1 — lid [L]: [korte omschrijving rechtsbetrekking]
+
+```mermaid
+graph LR
+    RB["rechtsbetrekking\n'[markering ingekort]'"]:::rb
+    RS1["rechtssubject\n'[markering]'"]:::rs
+    RO["rechtsobject\n'[markering]'"]:::ro
+
+    RS1 -->|rechthebbende| RB
+    RB -->|voorwerp| RO
+
+    classDef rb fill:#FF0000,color:#fff
+    classDef rs fill:#4472C4,color:#fff
+    classDef ro fill:#70AD47,color:#fff
+```
+
 ## Delegatiestructuur
 
 | Delegatiebevoegdheid | Vindplaats | Type | Invulling | Vindplaats invulling |
