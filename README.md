@@ -77,6 +77,7 @@ Elke noot heeft een eigen lokale graph die alleen de directe verbindingen toont:
 - **Vastzetten:** Sleep het venster naar de rechterzijbalk voor permanent zicht naast de noot
 - **Aanbevolen depth:** `2` voor een begrip-netwerk (begrip → gerelateerde begrippen), `3` voor een artikel-overzicht (artikel → begrippen → afleidingsregels)
 - **Incoming/Outgoing:** Schakel af afzonderlijk om alleen verwijzingen vanúit of náár de noot te tonen
+- **Relatierichting:** Wiki-links in begrip-noten zijn altijd *uitgaand* (forward-only): een begrip beschrijft uitsluitend relaties die vanuit zichzelf lopen. Backward links worden niet opgenomen — Obsidian genereert die automatisch als backlinks. Dit voorkomt dubbele of verkeerd gerichte kanten in de graph.
 
 ### Filterpatronen (Global Graph)
 
