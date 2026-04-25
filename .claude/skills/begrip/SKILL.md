@@ -161,3 +161,4 @@ Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
 - Relaties zijn altijd wiki-links, nooit losse tekst.
 - Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
 - Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
+- Stel `status: concept` in op alle nieuw aangemaakte begrip-noten — `gevalideerd` is voorbehouden aan A4-toetsing door het multidisciplinaire team.

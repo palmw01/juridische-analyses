@@ -29,6 +29,7 @@ De wetsanalyse werkt iteratief via twee micro-skills:
 annotaties/       ← lichte annotatie-noot per artikel (A2-tussenproduct)
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
+signaleringen/    ← A5-signalen: ontbrekend beleid, open normen, meerduidigheid
 wetsartikelen/    ← hub-notes als puur Dataview-aggregators
 ```
 
@@ -39,6 +40,7 @@ wetsartikelen/    ← hub-notes als puur Dataview-aggregators
 | Annotatie-noot | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
 | Begrip-noot | `begrip` | `#begrip`, `#jas/[klasse]`, `#wet/[wet]`, `#art/[nr]` |
 | Afleidingsregel-noot | `afleidingsregel` | `#afleidingsregel`, `#wet/[wet]`, `#art/[nr]` |
+| Signalering-noot | `signalering` | `#signalering`, `#wet/[wet]`, `#art/[nr]` |
 
 In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → rood, `#jas/rechtssubject` → blauw, enz.) conform kaders.md §Kleurcodering.
 
@@ -93,4 +95,4 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie |
 | Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats (begrippen: soort, herkomst, aliases; regels: naam, rechtsfeit) |
+| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `signaleringen/template.md` | Noot-formats |

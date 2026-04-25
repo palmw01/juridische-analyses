@@ -187,6 +187,8 @@ Een begrip-noot is pas **kennismodel-gereed** als aan alle volgende eisen is vol
 4. Identificatiebegrippen zijn gemarkeerd als `[id]` in het `soort`-veld
 5. Afgeleide begrippen hebben een wiki-link naar de afleidingsregel in het `afleidingsregels`-veld
 6. `aliases`-veld gevuld met bekende synoniemen (of leeg als geen synoniemen bestaan)
+7. `geldigheid-van` is ingevuld (= peildatum bij aanmaken)
+8. `status` is ingevuld (`concept` bij aanmaken; `gevalideerd` na A4-toetsing)
 
 ---
 

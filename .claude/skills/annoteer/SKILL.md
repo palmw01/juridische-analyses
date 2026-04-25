@@ -172,6 +172,9 @@ is-een: []
 heeft: []
 leidt-tot: []
 afleidingsregels: []
+geldigheid-van: [YYYY-MM-DD uit MCP versiedatum]
+geldigheid-tot: ""
+status: concept
 ---
 ```
 

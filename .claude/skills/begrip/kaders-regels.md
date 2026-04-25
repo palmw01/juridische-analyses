@@ -34,6 +34,8 @@ Regel-noten worden **alleen** aangemaakt bij begrip-noten met JAS-klasse `Afleid
 | **Beperkingsregel** | Beperking of maximering van een waarde of recht | "[uitvoerbegrip] bedraagt ten hoogste/ten minste [grens]" | Begrenzing |
 | **Specialisatieregel** | Deelgeval ten opzichte van een hoofdregel | "In afwijking van [naam hoofdregel]: … indien …" | Subtype-tak |
 
+> **Noot:** De Leidraad product #15 noemt drie typen (beslissing, berekening, beperking). De Specialisatieregel is een praktijkextensie gebaseerd op de term "specialisaties" in Handleiding §3.5.2b ("berekeningen, beslissingen, **specialisaties** en voorwaarden"). Gebruik dit type uitsluitend voor expliciete "in afwijking van"-constructies in de wettekst.
+
 Kies het type dat het **rechtsgevolg** beschrijft, niet de wetsstructuur.
 
 ---

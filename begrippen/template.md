@@ -22,6 +22,9 @@ is-een: []
 heeft: []
 leidt-tot: []
 afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afleidingsregel of herkomst = afgeleid)
+geldigheid-van: [YYYY-MM-DD]   # = peildatum bij aanmaken; wijzigt bij wetswijziging
+geldigheid-tot: ""             # invullen bij vervallen of vervangen begrip
+status: concept                # concept | ter-review | gevalideerd
 ---
 
 ## Definitie
