@@ -8,7 +8,7 @@ Welkom in de kennisomgeving voor de gestructureerde analyse van wet- en regelgev
 
 ## Methodiek: Juridisch Analyseschema (JAS)
 
-De analyses in deze vault worden uitgevoerd conform het **Juridisch Analyseschema (JAS) v1.0.10**. Deze methode maakt interpretatie- en preciseringskeuzes in wetgeving traceerbaar en vormt een brug tussen de juridische brontekst en de uiteindelijke ICT-implementatie.
+De analyses in deze vault worden uitgevoerd conform het <a href="https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10" target="_blank">Juridisch Analyseschema (JAS) v1.0.10</a>. Deze methode maakt interpretatie- en preciseringskeuzes in wetgeving traceerbaar en vormt een brug tussen de juridische brontekst en de uiteindelijke ICT-implementatie.
 
 De kern van de graaf bestaat uit drie verbonden entiteitstypen:
 
