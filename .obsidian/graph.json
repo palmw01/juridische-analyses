@@ -7,20 +7,104 @@
   "showOrphans": true,
   "collapse-color-groups": false,
   "colorGroups": [
-    { "query": "tag:#jas/rechtsbetrekking",    "color": { "a": 1, "rgb": 16711680 } },
-    { "query": "tag:#jas/rechtssubject",       "color": { "a": 1, "rgb": 4485828 } },
-    { "query": "tag:#jas/rechtsobject",        "color": { "a": 1, "rgb": 7384391 } },
-    { "query": "tag:#jas/rechtsfeit",          "color": { "a": 1, "rgb": 16760832 } },
-    { "query": "tag:#jas/voorwaarde",          "color": { "a": 1, "rgb": 7352480 } },
-    { "query": "tag:#jas/afleidingsregel",     "color": { "a": 1, "rgb": 45296 } },
-    { "query": "tag:#jas/variabele",           "color": { "a": 1, "rgb": 9621584 } },
-    { "query": "tag:#jas/parameter",           "color": { "a": 1, "rgb": 16767334 } },
-    { "query": "tag:#jas/operator",            "color": { "a": 1, "rgb": 8421504 } },
-    { "query": "tag:#jas/tijdsaanduiding",     "color": { "a": 1, "rgb": 16038210 } },
-    { "query": "tag:#jas/plaatsaanduiding",    "color": { "a": 1, "rgb": 10337382 } },
-    { "query": "tag:#jas/delegatiebevoegdheid","color": { "a": 1, "rgb": 13224393 } },
-    { "query": "tag:#jas/brondefinitie",       "color": { "a": 1, "rgb": 14070984 } },
-    { "query": "tag:#tussenresultaat",         "color": { "a": 1, "rgb": 16711935 } }
+    {
+      "query": "tag:#jas/rechtsbetrekking",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "tag:#jas/rechtssubject",
+      "color": {
+        "a": 1,
+        "rgb": 4485828
+      }
+    },
+    {
+      "query": "tag:#jas/rechtsobject",
+      "color": {
+        "a": 1,
+        "rgb": 7384391
+      }
+    },
+    {
+      "query": "tag:#jas/rechtsfeit",
+      "color": {
+        "a": 1,
+        "rgb": 16760832
+      }
+    },
+    {
+      "query": "tag:#jas/voorwaarde",
+      "color": {
+        "a": 1,
+        "rgb": 7352480
+      }
+    },
+    {
+      "query": "tag:#jas/afleidingsregel",
+      "color": {
+        "a": 1,
+        "rgb": 45296
+      }
+    },
+    {
+      "query": "tag:#jas/variabele",
+      "color": {
+        "a": 1,
+        "rgb": 9621584
+      }
+    },
+    {
+      "query": "tag:#jas/parameter",
+      "color": {
+        "a": 1,
+        "rgb": 16767334
+      }
+    },
+    {
+      "query": "tag:#jas/operator",
+      "color": {
+        "a": 1,
+        "rgb": 8421504
+      }
+    },
+    {
+      "query": "tag:#jas/tijdsaanduiding",
+      "color": {
+        "a": 1,
+        "rgb": 16038210
+      }
+    },
+    {
+      "query": "tag:#jas/plaatsaanduiding",
+      "color": {
+        "a": 1,
+        "rgb": 10337382
+      }
+    },
+    {
+      "query": "tag:#jas/delegatiebevoegdheid",
+      "color": {
+        "a": 1,
+        "rgb": 13224393
+      }
+    },
+    {
+      "query": "tag:#jas/brondefinitie",
+      "color": {
+        "a": 1,
+        "rgb": 14070984
+      }
+    },
+    {
+      "query": "tag:#tussenresultaat",
+      "color": {
+        "a": 1,
+        "rgb": 16711935
+      }
+    }
   ],
   "collapse-display": false,
   "showArrow": false,
@@ -32,6 +116,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1.2514124681860448,
+  "scale": 1.263761695626629,
   "close": false
 }
