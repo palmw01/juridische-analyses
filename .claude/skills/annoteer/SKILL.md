@@ -152,6 +152,9 @@ peildatum: [YYYY-MM-DD uit MCP]
 interpretatiemethode: [grammaticaal | systematisch | teleologisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
 definitie: ""
+soort: ""           # getal | datum | waar-niet-waar | tekst | enumeratiewaarde [| id]
+herkomst: ""        # direct | afgeleid
+aliases: []
 is-een: []
 heeft: []
 leidt-tot: []

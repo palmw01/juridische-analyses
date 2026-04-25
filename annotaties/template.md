@@ -1,10 +1,12 @@
 ---
 type: annotatie
+tags:
+  - template
 artikel: "Art. [A] [W]"
 bwb-id: [BWB-ID]
 peildatum: [YYYY-MM-DD]
 structuurpositie: "[pad-veld uit MCP, bijv. Hoofdstuk X > Afdeling Y > Artikel Z]"
-tags:
+tags-formaat:
   - annotatie
   - wet/[wet-afkorting]   # bijv. wet/iw1990
   - art/[nummer]          # bijv. art/25
@@ -20,8 +22,8 @@ begrippen: []             # wiki-links naar begrippen/ — gevuld na /begrip-all
 
 | Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip |
 |----|------------------------------------------------------|-----------|---------------------|--------|
-| 1  | "[citaat]" | **[klasse]** | grammaticaal | [[begrippen/[slug]]] |
-| 2  | "[citaat]" | **[klasse]** | systematisch | [[begrippen/[slug]]] |
+| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] |
+| 2  | "[citaat]" | **[klasse]** | systematisch | begrippen/[slug] |
 
 ## Delegatiestructuur
 

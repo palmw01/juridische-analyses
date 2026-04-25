@@ -1,8 +1,10 @@
 ---
 type: begrip
+tags:
+  - template
 begripsnaam: [slug]
 jas-klasse: [één van de 13 JAS-elementen uit kaders.md]
-tags:
+tags-formaat:
   - begrip
   - jas/[klasse-slug]        # bijv. jas/rechtssubject, jas/rechtsbetrekking
   - wet/[wet-afkorting]      # bijv. wet/iw1990
@@ -13,10 +15,13 @@ peildatum: [YYYY-MM-DD]
 interpretatiemethode: [grammaticaal | systematisch | teleologisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
 definitie: "[begripsdefinitie — zo nauw mogelijk bij wetsformulering]"
+soort: ""           # getal | datum | waar-niet-waar | tekst | enumeratiewaarde [| id]
+herkomst: ""        # direct | afgeleid
+aliases: []         # Obsidian: alternatieve namen / synoniemen (bijv. [invorderbaar])
 is-een: []
 heeft: []
 leidt-tot: []
-afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afleidingsregel)
+afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afleidingsregel of herkomst = afgeleid)
 ---
 
 ## Definitie
@@ -39,8 +44,8 @@ afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afl
 
 ## Relaties
 
-| Type | Begrip |
-|------|--------|
-| is een | [[begrippen/...]] |
-| heeft | [[begrippen/...]] |
-| leidt tot | [[begrippen/...]] |
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| is een | — | begrippen/… |
+| heeft | 1:1 / 1:n / n:m | begrippen/… |
+| leidt tot | — | begrippen/… |

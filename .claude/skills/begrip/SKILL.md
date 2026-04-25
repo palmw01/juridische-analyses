@@ -12,6 +12,12 @@ Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode. Leest de door `/annote
 
 **De wetstekst wordt niet opnieuw opgehaald.** De annotatiefrontmatter (`markering`, `jas-klasse`, `bron`, `peildatum`, `interpretatiemethode`) is de enige bron.
 
+**Lees vóór elke run eerst beide kaderdocumenten volledig in:**
+- `.claude/skills/begrip/kaders.md` — begrippenkader (A3a + A6d): naamgeving, definitie, soort, herkomst, relaties, identificatie
+- `.claude/skills/begrip/kaders-regels.md` — regelkader (A3b + A6e): typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak
+
+De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline secties hieronder zijn beknopte verwijzingslagen; de kaders bevatten de gezaghebbende volledige uitwerking.
+
 ---
 
 ## Voorbereiding
@@ -30,6 +36,10 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 - Benoem interpretatie- en preciseringskeuzes expliciet.
 - Als de betekenis afwijkt van de letterlijke formulering: onderbouw dit en signaleer als potentieel uitvoeringsbeleid-lacune (A5-signaal).
 - Geen parafrase van de wetstekst — gebruik de markering als startpunt.
+- Vul altijd `soort` (datatype) en `herkomst` (direct/afgeleid) in conform begrippenkader §Eigenschappen.
+- Markeer identificatiebegrippen met `[id]` in het `soort`-veld conform begrippenkader §Identificatiebegrippen.
+- Vul `aliases` in met bekende juridische synoniemen (of laat leeg als er geen synoniemen bestaan).
+- Leg kardinaliteit vast in de `## Relaties`-tabel (1:1 / 1:n / n:m) conform begrippenkader §Relaties en kardinaliteit.
 
 ---
 
@@ -63,6 +73,11 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 ## Afleidingsregel-noot (A3b — alleen bij JAS-klasse Afleidingsregel)
 
 Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[art]-[nr].md`.
+- Vul altijd het `naam`-veld in met een leesbare naam (actieve werkwoordsvorm).
+- Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit.
+- Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan.
+- Kies het taalpatroon uit `## Formele regel` passend bij het `soort` en verwijder de overige blokken.
+- Controleer of het taalpatroon aansluit bij de RegelSpraaak-oriëntatie uit het regelkader.
 
 **Vier soorten:**
 - **Beslissingsregel**: ja/nee uitkomst (recht bestaat of niet)
@@ -75,6 +90,7 @@ Frontmatter:
 ---
 type: afleidingsregel
 regel-id: AR-[art]-[nr]
+naam: ""            # leesbare naam, bijv. "bepalen invorderbaarheid belastingaanslag"
 soort: [Beslissingsregel | Rekenregel | Beperkingsregel | Specialisatieregel]
 tags:
   - afleidingsregel
@@ -125,11 +141,11 @@ Vul de body van `begrippen/[slug].md` volledig in:
 
 ## Relaties
 
-| Type | Begrip |
-|------|--------|
-| is een | [[begrippen/...]] |
-| heeft | [[begrippen/...]] |
-| leidt tot | [[begrippen/...]] |
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| is een | — | [[begrippen/...]] |
+| heeft | 1:1 / 1:n / n:m | [[begrippen/...]] |
+| leidt tot | — | [[begrippen/...]] |
 ```
 
 Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.

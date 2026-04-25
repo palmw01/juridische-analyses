@@ -77,5 +77,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie + voorbeelden + afleidingsregels |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties |
 | JAS kaders | `.claude/skills/annoteer/kaders.md` | Canonieke JAS v1.0.10 taxonomie (ongewijzigd) |
+| Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie |
+| Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats |
+| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats (begrippen: soort, herkomst, aliases; regels: naam, rechtsfeit) |

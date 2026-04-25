@@ -15,7 +15,8 @@
     "Leidraad voor Wetsanalyse op maat .pdf",
     "analyses/DASHBOARD.md",
     "analyses/INDEX.md",
-    "begrippen/INDEX.md"
+    "begrippen/INDEX.md",
+    "template.md"
   ],
   "alwaysUpdateLinks": true,
   "promptDelete": false,
