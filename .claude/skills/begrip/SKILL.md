@@ -67,6 +67,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 - Leg relaties met andere begrippen vast via de velden `is-een`, `heeft`, `leidt-tot` in de frontmatter.
 - Gebruik wiki-links naar betrokken begrip-noten: `[[begrippen/[slug]]]`.
 - Vul ook de `## Relaties`-tabel in de body in.
+- **Alleen uitgaande (forward) relaties opnemen** — nooit backward links die al als forward link in een ander begrip staan. Zie begrippenkader §Relaties en kardinaliteit.
 
 ---
 

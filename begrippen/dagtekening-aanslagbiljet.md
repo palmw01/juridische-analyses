@@ -54,6 +54,5 @@ de op het aanslagbiljet vermelde datum waarop de belastingaanslag door de inspec
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/belastingaanslag]] |
 | leidt tot | — | [[begrippen/zes-weken-na-dagtekening-aanslagbiljet]] |
 | leidt tot | — | [[begrippen/invorderbaarheid]] |

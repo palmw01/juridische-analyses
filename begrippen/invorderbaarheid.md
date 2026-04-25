@@ -54,4 +54,3 @@ de juridische toestand waarin de ontvanger bevoegd is tot actieve invordering va
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/belastingaanslag]] |

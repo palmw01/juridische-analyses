@@ -149,6 +149,8 @@ Reden: complexe YAML-objecten breken Obsidians graph-link detectie.
 De `## Relaties`-tabel in de body bevat altijd de kardinaliteitskolom — dit is de
 input voor het entiteitrelatiediagram (A6d).
 
+**Alleen uitgaande (forward) relaties opnemen.** De relaties-tabel en de frontmatter-velden `is-een`, `heeft` en `leidt-tot` bevatten uitsluitend relaties die *vanuit dit begrip* lopen — consistent met de voorbeelden in de Handleiding (§3.5.2), die relaties altijd beschrijven vanuit het perspectief van het begrip dat wordt uitgewerkt. Neem geen backward link op die al als forward link in een ander begrip is vastgelegd: Obsidian pikt alle wiki-links in het bestand op als uitgaande kanten in de Graph View, waardoor een onjuiste backward link een extra, verkeerd gerichte kant trekt. Voorbeeld: als `belastingaanslag` al `heeft 1:1 dagtekening-aanslagbiljet` bevat, dan neemt `dagtekening-aanslagbiljet` **geen** `heeft belastingaanslag` op.
+
 ---
 
 ## Identificatiebegrippen
