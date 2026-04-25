@@ -134,7 +134,7 @@ Werkwijze:
 1. Identificeer alle Rechtsbetrekkingen in de annotatietabel. Eén diagram per Rechtsbetrekking.
 2. Per diagram: bepaal de centrale knoop (Rechtsbetrekking), voeg alle elementen toe die in de annotatietabel aan dat lid zijn gerelateerd, verbind ze met de randlabels uit de relatieschematabel.
 3. Neem alleen de `classDef`-regels op voor de klassen die daadwerkelijk in het diagram voorkomen.
-4. Knooplabels: `"[JAS-klasse]\n'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
+4. Knooplabels: `"[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
 5. Titel boven elk blok: `### Diagram [N] — lid [L]: [korte omschrijving rechtsbetrekking]`
 
 Bij geen Rechtsbetrekking en geen Rechtsfeit in het artikel: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`

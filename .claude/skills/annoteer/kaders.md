@@ -254,7 +254,7 @@ Rechtssubjecten die als plichthebbende optreden (kenbaar uit de rechtsbetrekking
 ### Knooplabel-formaat
 
 ```
-"[JAS-klasse]\n'[markering ingekort tot max. 40 tekens]'"
+"[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"
 ```
 
 Markering inkorten: begin bij het zelfstandig naamwoord, laat hulpwerkwoorden weg, voeg `…` toe indien afgekort.
@@ -288,12 +288,12 @@ Klasse-afkorting per element: `rb` Rechtsbetrekking · `rs` Rechtssubject · `ro
 
 ```mermaid
 graph LR
-    RB["rechtsbetrekking\n'aanspraak op een zorgtoeslag'"]:::rb
-    RS1["rechtssubject\n'de verzekerde'"]:::rs
-    RO["rechtsobject\n'een zorgtoeslag'"]:::ro
-    VW["voorwaarde\n'indien de normpremie minder bedraagt…'"]:::vw
-    VA["variabele\n'de normpremie'"]:::va
-    PA["parameter\n'de standaardpremie'"]:::pa
+    RB["rechtsbetrekking<br/>'aanspraak op een zorgtoeslag'"]:::rb
+    RS1["rechtssubject<br/>'de verzekerde'"]:::rs
+    RO["rechtsobject<br/>'een zorgtoeslag'"]:::ro
+    VW["voorwaarde<br/>'indien de normpremie minder bedraagt…'"]:::vw
+    VA["variabele<br/>'de normpremie'"]:::va
+    PA["parameter<br/>'de standaardpremie'"]:::pa
 
     RS1 -->|rechthebbende| RB
     RB -->|voorwerp| RO
