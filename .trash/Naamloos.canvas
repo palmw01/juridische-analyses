@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"615148d136777301","x":-445,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/aanslagbiljet.md"},
+		{"id":"e3d6d65f766bdf14","x":0,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/belastingaanslag.md"},
+		{"id":"231d1ed10cf8c646","x":445,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/betalingstermijn-belastingaanslag.md"},
+		{"id":"77c1950e06af406d","x":890,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/dagtekening-aanslagbiljet.md"},
+		{"id":"9f53a09ffd12bdbf","x":1335,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/invorderbaar-worden-belastingaanslag.md"},
+		{"id":"21dfff30dbd8d4a0","x":1780,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/invorderbaarheid.md"},
+		{"id":"40e533e101eb5ab1","x":2225,"y":-176,"width":400,"height":400,"type":"file","file":"begrippen/template.md"},
+		{"id":"d490957225562817","x":-282,"y":-365,"width":400,"height":400,"type":"file","file":"annotaties/iw1990-art9.md"},
+		{"id":"d6ef3a807f085bf9","x":163,"y":-365,"width":400,"height":400,"type":"file","file":"annotaties/template.md"}
+	],
+	"edges":[]
+}

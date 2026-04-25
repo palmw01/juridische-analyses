@@ -49,7 +49,7 @@ indien [specificerende voorwaarde]
 
 ## Toelichting
 
-[tracering naar specifiek lid + interpretatiemotivering; A5-signaal indien uitvoeringsbeleid ontbreekt]
+[tracering naar specifiek lid + interpretatiemotivering]
 
 ## Voorbeeldreeksen
 

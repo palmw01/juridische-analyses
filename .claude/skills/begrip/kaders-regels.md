@@ -12,7 +12,7 @@ Afleidingsregels duiden en leggen vast welke **berekeningen, beslissingen, speci
 
 Beschreven in vaste taalpatronen zodat ze:
 - omgezet kunnen worden naar executeerbare softwarecode zonder nadere interpretatie
-- gevalideerd kunnen worden door het multidisciplinaire team (juristen, uitvoeringsdeskundigen, regelanalisten) met juridische scenario's (A4)
+- gevalideerd kunnen worden door het multidisciplinaire team (juristen, uitvoeringsdeskundigen, regelanalisten) met juridische scenario's
 - direct gekoppeld zijn aan de rechtsgevolgen per rechtsfeit uit het juridische scenario
 
 Het architectuurprincipe is:
@@ -68,7 +68,7 @@ Een regel-noot bevat de volgende elementen:
 | `uitvoer` | Wiki-link naar uitvoerbegrip (het afgeleide begrip) |
 | `operators` | EN / OF / NIET / plus / min / maal / gedeeld-door / kleiner-dan / groter-dan / gelijk-aan / ten-hoogste / ten-minste |
 | `## Formele regel` | Volledige als-dan structuur conform taalpatroon per type |
-| `## Toelichting` | Tracering naar artikel, lid, zinsdeel + interpretatiemotivering + A5-signaal |
+| `## Toelichting` | Tracering naar artikel, lid, zinsdeel + interpretatiemotivering |
 | `## Voorbeeldreeksen` | Minimaal 2 invoer/uitkomst-combinaties incl. ten minste 1 grensgeval |
 
 ---
@@ -165,7 +165,7 @@ Koppelingspatroon:
 
 ---
 
-## Voorbeeldreeksen (validatie A4)
+## Voorbeeldreeksen
 
 Minimaal 2 reeksen; bij meerdere voorwaarden minimaal 1 reeks per tak.
 
@@ -209,7 +209,6 @@ Een regel-noot is pas **kennismodel-gereed** als aan alle volgende eisen is vold
 4. Uitvoerbegrip is een wiki-link naar een begrip-noot
 5. Tussenresultaten zijn als eigen begrip + eigen afleidingsregel uitgewerkt
 6. Voorbeeldreeksen bevatten minimaal één grensgeval
-7. A5-signaal vermeld als uitvoeringsbeleid vereist is maar ontbreekt
 
 ---
 
@@ -235,7 +234,6 @@ Referentietabel voor de meest voorkomende afleidingsregels in de invorderingssfe
 5. Tussenresultaten zijn als eigen begrip + eigen regel uitgewerkt
 6. Voorbeeldreeksen bevatten altijd minimaal één grensgeval
 7. Taalpatroon is voor niet-juristen begrijpelijk en consistent met §Taalpatronen
-8. A5-signaal opnemen bij ontbrekend uitvoeringsbeleid
 
 ---
 

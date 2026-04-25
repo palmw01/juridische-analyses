@@ -67,7 +67,7 @@ Begrippen worden **nooit** rechtstreeks uit de wetstekst afgeleid. De `markering
 - Gebruik **niet** de begripsnaam zelf in de definitie
 - Gebruik wél al eerder gedefinieerde begrippen in de definitie
 - Benoem interpretatie- en preciseringskeuzes expliciet
-- Signaleer als de betekenis afwijkt van de letterlijke formulering (A5-signaal)
+- Benoem in `toelichting-klasse` als de betekenis afwijkt van de letterlijke formulering
 
 ---
 
@@ -118,10 +118,10 @@ afgeleide begrippen worden berekend/beslist door een afleidingsregel.
 
 ### Status
 
-Optioneel veld voor kwaliteitsbewaking:
-- `gevalideerd` — getoetst in multidisciplinair team (A4)
-- `concept` — aangemaakt maar nog niet getoetst
+Veld voor kwaliteitsbewaking:
+- `concept` — aangemaakt maar nog niet getoetst (altijd bij aanmaken)
 - `ter-review` — in bespreking
+- `gevalideerd` — getoetst door het multidisciplinaire team (buiten AI-scope)
 
 ### Uitleg klasse
 
@@ -188,7 +188,7 @@ Een begrip-noot is pas **kennismodel-gereed** als aan alle volgende eisen is vol
 5. Afgeleide begrippen hebben een wiki-link naar de afleidingsregel in het `afleidingsregels`-veld
 6. `aliases`-veld gevuld met bekende synoniemen (of leeg als geen synoniemen bestaan)
 7. `geldigheid-van` is ingevuld (= peildatum bij aanmaken)
-8. `status` is ingevuld (`concept` bij aanmaken; `gevalideerd` na A4-toetsing)
+8. `status` is ingevuld (`concept` bij aanmaken)
 
 ---
 

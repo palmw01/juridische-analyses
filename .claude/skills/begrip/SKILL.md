@@ -34,7 +34,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 
 - Sluit zo nauw mogelijk aan bij de **letterlijke markering** in het frontmatter-veld `markering`.
 - Benoem interpretatie- en preciseringskeuzes expliciet.
-- Als de betekenis afwijkt van de letterlijke formulering: onderbouw dit en signaleer als potentieel uitvoeringsbeleid-lacune (A5-signaal).
+- Als de betekenis afwijkt van de letterlijke formulering: onderbouw dit in `toelichting-klasse`.
 - Geen parafrase van de wetstekst — gebruik de markering als startpunt.
 - Vul altijd `soort` (datatype) en `herkomst` (direct/afgeleid) in conform begrippenkader §Eigenschappen.
 - Markeer identificatiebegrippen met `[id]` in het `soort`-veld conform begrippenkader §Identificatiebegrippen.
@@ -110,8 +110,6 @@ Body:
 - `## Toelichting` — tracering naar specifiek lid + interpretatiemotivering
 - `## Voorbeeldreeksen` — minimaal 2 invoer/uitkomst-combinaties (Leidraad product #20)
 
-Signaleer wanneer een regel uitvoeringsbeleid vereist dat ontbreekt (A5-signaal).
-
 Na aanmaken: update het `afleidingsregels`-veld in de bijbehorende begrip-noot met een wiki-link.
 
 ---
@@ -161,4 +159,4 @@ Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
 - Relaties zijn altijd wiki-links, nooit losse tekst.
 - Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
 - Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
-- Stel `status: concept` in op alle nieuw aangemaakte begrip-noten — `gevalideerd` is voorbehouden aan A4-toetsing door het multidisciplinaire team.
+- Stel `status: concept` in op alle nieuw aangemaakte begrip-noten.

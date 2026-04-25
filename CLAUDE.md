@@ -29,7 +29,6 @@ De wetsanalyse werkt iteratief via twee micro-skills:
 annotaties/       ← lichte annotatie-noot per artikel (A2-tussenproduct)
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
-signaleringen/    ← A5-signalen: ontbrekend beleid, open normen, meerduidigheid
 wetsartikelen/    ← hub-notes als puur Dataview-aggregators
 ```
 
@@ -40,7 +39,6 @@ wetsartikelen/    ← hub-notes als puur Dataview-aggregators
 | Annotatie-noot | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
 | Begrip-noot | `begrip` | `#begrip`, `#jas/[klasse]`, `#wet/[wet]`, `#art/[nr]` |
 | Afleidingsregel-noot | `afleidingsregel` | `#afleidingsregel`, `#wet/[wet]`, `#art/[nr]` |
-| Signalering-noot | `signalering` | `#signalering`, `#wet/[wet]`, `#art/[nr]` |
 
 In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → rood, `#jas/rechtssubject` → blauw, enz.) conform kaders.md §Kleurcodering.
 
@@ -52,11 +50,11 @@ De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden no
 
 ## Reikwijdte van deze workflow
 
-Deze AI-workflow dekt Activiteit 2 (A2: markeren + classificeren) en Activiteit 3 (A3: begrippen + afleidingsregels) van de Wetsanalyse-methode. De volgende activiteiten vallen **buiten** wat de AI zelfstandig kan vervangen:
+Deze AI-workflow dekt Activiteit 2 (A2: markeren + classificeren) en Activiteit 3 (A3: begrippen + afleidingsregels) van de Wetsanalyse-methode. De volgende activiteiten vallen **buiten** de scope van deze workflow:
 
 - **A1 — Werkgebied bepalen**: juridische scenario's, deelvragen en bronnenselectie vereisen een menselijk oordeel over scope en relevantie.
-- **A4 — Valideren**: de AI die A3 uitvoert kan A4 niet onafhankelijk uitvoeren. Validatie van afleidingsregels met juridische scenario's en voorbeeldreeksen vereist toetsing door een ander dan de opsteller — bij voorkeur in het multidisciplinaire team (Handleiding §2.3, §3.6).
-- **A5 — Signaleren**: A5-signalen in noten zijn aanzetten, geen vastgesteld uitvoeringsbeleid. Vaststelling en oplevering aan beleidsverantwoordelijken is een menselijke taak.
+- **A4 — Valideren**: valt buiten de scope; validatie vindt plaats in het multidisciplinaire team (Handleiding §2.3, §3.6).
+- **A5 — Signaleren**: valt buiten de scope; signalering en oplevering aan beleidsverantwoordelijken is een menselijke taak.
 - **A6 — Kennismodel**: begrip- en regel-noten zijn input voor A6, niet het kennismodel zelf.
 
 De AI-output is een **analysehulpmiddel**, geen juridisch bindend of gevalideerd eindproduct.
@@ -95,4 +93,4 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie |
 | Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `signaleringen/template.md` | Noot-formats |
+| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats |
