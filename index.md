@@ -8,6 +8,6 @@ Wetsanalyses van de Belastingdienst, domein Inning, op basis van de [Invordering
 
 ## Inhoud
 
-- [[annotaties/index|Annotaties]] — geannoteerde wetsartikelen (A2)
-- [[begrippen/index|Begrippen]] — atomaire begrip-noten (A3a)
-- [[regels/index|Afleidingsregels]] — afleidingsregel-noten (A3b)
+- [Annotaties](annotaties) — geannoteerde wetsartikelen (A2)
+- [Begrippen](begrippen) — atomaire begrip-noten (A3a)
+- [Afleidingsregels](regels) — afleidingsregel-noten (A3b)
