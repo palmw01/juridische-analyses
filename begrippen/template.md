@@ -32,10 +32,10 @@ afleidingsregels: []   # wiki-links naar regels/ (alleen indien JAS-klasse = Afl
 
 ## Voorbeelden
 
-| Stelling | Waar? |
-|----------|-------|
-| [concrete stelling] | ja / nee |
-| [grensgeval] | ja / nee |
+| Stelling | Waar? | Toelichting |
+|----------|-------|-------------|
+| [concrete stelling] | ja / nee | [waarom geldt het (niet)?] |
+| [grensgeval] | ja / nee | [waarom geldt het (niet)?] |
 
 ## Kenmerken
 

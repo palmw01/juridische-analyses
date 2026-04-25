@@ -42,7 +42,7 @@ Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificer
 | Rechtsfeit | Actieve werkwoordsvorm + tijdsverloop (indienen, verstrijken, betekenen) |
 | Voorwaarde | Gehele zin of zinsdeel m.i.v. voegwoord (indien, als, tenzij, mits) |
 | Afleidingsregel | Volledige als-dan constructie incl. lidwoord, werkwoorden en punt |
-| Variabele | Kenmerk + werkwoord + voorwaarden (met lidwoord) |
+| Variabele | Zelfstandig naamwoord (kenmerk) + lidwoord — géén werkwoord, géén voorwaarden |
 | Parameter | Tariefwaarde, drempel, maximum, minimum |
 | Tijdsaanduiding | Tijdstip, tijdvak, termijn (specifieker dan variabele — gebruik dit bij twijfel) |
 | Plaatsaanduiding | Geografische aanduiding, jurisdictie (specifieker dan parameter) |

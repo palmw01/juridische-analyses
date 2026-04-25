@@ -129,10 +129,10 @@ Vul de body van `begrippen/[slug].md` volledig in:
 
 ## Voorbeelden
 
-| Stelling | Waar? |
-|----------|-------|
-| [concrete stelling] | ja / nee |
-| [grensgeval] | ja / nee |
+| Stelling | Waar? | Toelichting |
+|----------|-------|-------------|
+| [concrete stelling] | ja / nee | [waarom geldt het (niet)?] |
+| [grensgeval] | ja / nee | [waarom geldt het (niet)?] |
 
 ## Kenmerken
 
@@ -155,7 +155,9 @@ Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
 ## Kwaliteitseisen (niet-onderhandelbaar)
 
 - Definitie uitsluitend gebaseerd op de `markering` in de frontmatter — nooit rechtstreeks uit de wetstekst of eigen kennis.
-- Voorbeelden bevatten altijd minimaal één grensgeval.
+- Definitie is substitueerbaar: test altijd of de definitietekst het begrip kan vervangen in een zin zonder betekenisverlies.
+- Definitie bevat geen punt aan het einde.
+- Voorbeelden bevatten altijd minimaal één grensgeval, elk met toelichting (waarom geldt het wel/niet?).
 - Relaties zijn altijd wiki-links, nooit losse tekst.
 - Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
 - Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
