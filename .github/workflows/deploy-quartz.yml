@@ -160,7 +160,7 @@ jobs:
             );
             c = c.replace(
               'PageTitle.css = \`',
-              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; }\n  .page-title { font-size: 1.1rem; }\n}'
+              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; white-space: nowrap; }\n  .page-title { font-size: 1.1rem; white-space: nowrap; }\n}'
             );
             fs.writeFileSync(f, c);
           "
