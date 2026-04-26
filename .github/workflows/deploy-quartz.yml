@@ -156,7 +156,7 @@ jobs:
             let c = fs.readFileSync(f, 'utf8');
             c = c.replace(
               '<a href={baseDir}>{title}</a>',
-              '<a href={baseDir}><span class=\"title-full\">{title}</span><span class=\"title-short\">Wetsanalyse</span></a>'
+              '<a href={baseDir}><span class=\"title-full\">{title}</span><span class=\"title-short\">Juridische wetsanalyse</span></a>'
             );
             fs.writeFileSync(f, c);
           "
