@@ -162,7 +162,7 @@ jobs:
           "
 
       - name: Kopieer custom styles
-        run: cp vault/.github/quartz-custom.scss quartz/quartz/styles/custom.scss
+        run: cat vault/.github/quartz-custom.scss >> quartz/quartz/styles/custom.scss
 
       - name: Build Quartz
         working-directory: quartz
