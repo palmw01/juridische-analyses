@@ -1,7 +1,7 @@
 # Juridische wetsanalyse — Obsidian knowledge graph
 
 [![Live Documentation](https://img.shields.io/badge/Live-Documentation-green)](https://palmw01.github.io/juridische-analyses/)
-![Deployment Status](https://github.com/palmw01/juridische-analyses/actions/workflows/deploy.yml/badge.svg)
+![Deployment Status](https://github.com/palmw01/juridische-analyses/actions/workflows/deploy-quartz.yml/badge.svg)
 ![License](https://img.shields.io/github/license/palmw01/juridische-analyses)
 
 🌐 **Bekijk de live knowledge graph en documentatie:**  
