@@ -90,7 +90,6 @@ jobs:
               backdrop-filter: blur(4px);
             }
             .graph-controls h4 { margin: 0 0 10px 0; border-bottom: 1px solid var(--lightgray); padding-bottom: 5px; }
-            .graph-controls fieldset { border: none; padding: 0; margin-bottom: 10px; }
             .graph-controls label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
             .graph-controls input[type='range'] { width: 100px; }
             .graph-settings-toggle {
@@ -113,48 +112,42 @@ jobs:
             \`;
             fs.appendFileSync('quartz/styles/custom.scss', customCss);
 
-            // 3. Patch Graph.tsx voor de UI
+            // 3. Patch Graph.tsx voor de UI (Gebruik valide JSX)
             const graphPath = 'quartz/components/Graph.tsx';
             if (fs.existsSync(graphPath)) {
               let graphTsx = fs.readFileSync(graphPath, 'utf8');
               const uiHtml = \`
-                <div class=\"graph-settings-toggle\" id=\"graph-settings-button\" aria-label=\"Instellingen\">⚙️</div>
-                <div class=\"graph-controls\" id=\"graph-controls-menu\" style=\"display:none\">
+                <div className=\"graph-settings-toggle\" id=\"graph-settings-button\" aria-label=\"Instellingen\">⚙️</div>
+                <div className=\"graph-controls\" id=\"graph-controls-menu\" style={{ display: \"none\" }}>
                   <h4>Analyse Filters</h4>
-                  <label><input type=\"checkbox\" class=\"graph-filter\" data-folder=\"annotaties\" checked> Annotaties</label>
-                  <label><input type=\"checkbox\" class=\"graph-filter\" data-folder=\"begrippen\" checked> Begrippen</label>
-                  <label><input type=\"checkbox\" class=\"graph-filter\" data-folder=\"regels\" checked> Regels</label>
+                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"annotaties\" defaultChecked /> Annotaties</label>
+                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"begrippen\" defaultChecked /> Begrippen</label>
+                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"regels\" defaultChecked /> Regels</label>
                   
                   <h4>Krachten (Obsidian)</h4>
-                  <label>Afstoting <span></span><input type=\"range\" id=\"graph-repel\" min=\"0\" max=\"200\" value=\"20\"></label>
-                  <label>Afstand <span></span><input type=\"range\" id=\"graph-distance\" min=\"50\" max=\"600\" value=\"450\"></label>
-                  <label>Pijlen <input type=\"checkbox\" id=\"graph-arrows\"></label>
+                  <label>Afstoting <span></span><input type=\"range\" id=\"graph-repel\" min=\"0\" max=\"200\" defaultValue=\"20\" /></label>
+                  <label>Afstand <span></span><input type=\"range\" id=\"graph-distance\" min=\"50\" max=\"600\" defaultValue=\"450\" /></label>
+                  <label>Pijlen <input type=\"checkbox\" id=\"graph-arrows\" /></label>
                 </div>
               \`;
+              // We injecteren het binnen de bestaande div.
+              // Quartz v4 gebruikt Preact, dus 'class' werkt vaak ook, maar 'className' is veiliger in TSX.
               graphTsx = graphTsx.replace('<div class={classNames(displayClass, \"graph\")}>', '<div class={classNames(displayClass, \"graph\")}>' + uiHtml);
               fs.writeFileSync(graphPath, graphTsx);
             }
 
-            // 4. Patch de client-side JS (graph.inline.ts) voor interactiviteit
+            // 4. Patch de client-side JS (graph.inline.ts)
             const scriptPath = 'quartz/components/scripts/graph.inline.ts';
             if (fs.existsSync(scriptPath)) {
               let scriptJs = fs.readFileSync(scriptPath, 'utf8');
-              
-              // Voeg event listeners toe aan het einde van de initialisatie
               const injection = \`
                 // Custom Obsidian-like controls injection
-                const settingsBtn = document.getElementById('graph-settings-button');
-                const menu = document.getElementById('graph-controls-menu');
-                if (settingsBtn && menu) {
-                  settingsBtn.onclick = () => menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-                }
-
-                // Luister naar kracht-aanpassingen (eenvoudige implementatie)
-                document.getElementById('graph-repel')?.addEventListener('input', (e) => {
-                  const val = -e.target.value * 5; // Schaal naar D3 krachten
-                  // Hier zou je de simulation.force('charge').strength(val) kunnen updaten
-                  // Voor nu slaan we het op in localStorage voor herlaad-behoud
-                  localStorage.setItem('graph-repel', val);
+                document.addEventListener('DOMContentLoaded', () => {
+                  const settingsBtn = document.getElementById('graph-settings-button');
+                  const menu = document.getElementById('graph-controls-menu');
+                  if (settingsBtn && menu) {
+                    settingsBtn.onclick = () => menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+                  }
                 });
               \`;
               fs.appendFileSync(scriptPath, injection);
@@ -167,7 +160,7 @@ jobs:
             }
             fs.writeFileSync('./quartz.layout.ts', l);
 
-            console.log('Obsidian Advanced Graph v2 (met krachten en pijlen) geïnjecteerd.');
+            console.log('Obsidian Advanced Graph v2.1 (gefixte JSX) geïnjecteerd.');
           "
 
       - name: Injecteer frontmatter-links in body
