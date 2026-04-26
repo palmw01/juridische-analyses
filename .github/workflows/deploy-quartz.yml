@@ -160,7 +160,7 @@ jobs:
             );
             c = c.replace(
               'PageTitle.css = \`',
-              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; white-space: nowrap; }\n  .page-title { font-size: 1.1rem; white-space: nowrap; }\n}'
+              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; white-space: nowrap; }\n  .page-title { font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 1; min-width: 0; }\n}'
             );
             fs.writeFileSync(f, c);
           "
