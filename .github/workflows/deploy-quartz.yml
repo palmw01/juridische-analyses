@@ -147,6 +147,20 @@ jobs:
             }
           "
 
+      - name: Patch PageTitle voor mobiele afkorting
+        working-directory: quartz
+        run: |
+          node -e "
+            const fs = require('fs');
+            const f = 'quartz/components/PageTitle.tsx';
+            let c = fs.readFileSync(f, 'utf8');
+            c = c.replace(
+              '<a href={baseDir}>{title}</a>',
+              '<a href={baseDir}><span class=\"title-full\">{title}</span><span class=\"title-short\">JW - Inning</span></a>'
+            );
+            fs.writeFileSync(f, c);
+          "
+
       - name: Injecteer mobiele CSS-fixes
         working-directory: quartz
         run: |
@@ -155,8 +169,11 @@ jobs:
             const css = [
               '',
               '/* Mobiele overflow-fixes */',
+              '.title-short { display: none; }',
               '@media (max-width: 800px) {',
-              '  .page-title { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+              '  .title-full  { display: none; }',
+              '  .title-short { display: inline; }',
+              '  .page-title  { font-size: 1.1rem; }',
               '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
               '  img { max-width: 100%; height: auto; }',
               '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
