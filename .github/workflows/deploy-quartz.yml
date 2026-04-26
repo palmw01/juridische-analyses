@@ -56,6 +56,62 @@ jobs:
             fs.writeFileSync('./quartz.config.ts', c);
           "
 
+      - name: Injecteer frontmatter-links in body
+        working-directory: quartz
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+
+            const START = '<!-- fm-links-start -->';
+            const END   = '<!-- fm-links-end -->';
+            const SKIP  = new Set(['index.md', 'template.md']);
+            const RE_WIKILINK = /\[\[[^\]]+\]\]/g;
+            const RE_BLOCK    = new RegExp(START + '[\\\\s\\\\S]*?' + END);
+
+            function allLinks(text) {
+              return new Set(text.match(RE_WIKILINK) || []);
+            }
+
+            function processFile(filePath) {
+              let src = fs.readFileSync(filePath, 'utf8');
+              if (!src.startsWith('---')) return;
+
+              // Splits frontmatter en body
+              const fmEnd = src.indexOf('\\n---', 3);
+              if (fmEnd === -1) return;
+              const fm   = src.slice(0, fmEnd + 4);
+              const body = src.slice(fmEnd + 4);
+
+              // Wiki-links in frontmatter
+              const fmLinks = allLinks(fm);
+              if (fmLinks.size === 0) return;
+
+              // Verwijder eventueel oud blok om dubbeltelling te voorkomen
+              const bodyClean = body.replace(RE_BLOCK, '');
+
+              // Alleen links die nog niet in de body staan
+              const bodyLinks = allLinks(bodyClean);
+              const extra = [...fmLinks].filter(l => !bodyLinks.has(l));
+              if (extra.length === 0) return;
+
+              const block = START + '\\n' + extra.join('\\n') + '\\n' + END;
+              fs.writeFileSync(filePath, fm + bodyClean.trimEnd() + '\\n\\n' + block + '\\n');
+            }
+
+            let n = 0;
+            for (const folder of ['annotaties', 'begrippen', 'regels']) {
+              const dir = path.join('content', folder);
+              if (!fs.existsSync(dir)) continue;
+              for (const f of fs.readdirSync(dir)) {
+                if (!f.endsWith('.md') || SKIP.has(f)) continue;
+                processFile(path.join(dir, f));
+                n++;
+              }
+            }
+            console.log('Frontmatter-links geinjekteerd: ' + n + ' bestanden');
+          "
+
       - name: Genereer mapindex-links
         working-directory: quartz
         run: |
