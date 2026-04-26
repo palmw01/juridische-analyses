@@ -156,6 +156,7 @@ jobs:
               '',
               '/* Mobiele overflow-fixes */',
               '@media (max-width: 800px) {',
+              '  .page-title { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
               '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
               '  img { max-width: 100%; height: auto; }',
               '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
