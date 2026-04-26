@@ -150,32 +150,20 @@ jobs:
       - name: Injecteer mobiele CSS-fixes
         working-directory: quartz
         run: |
-          cat >> styles/custom.scss << 'EOF'
-
-/* Mobiele overflow-fixes (Quartz base.scss dekt pre/code/html al) */
-@media (max-width: 800px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    max-width: 100%;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  #graph-container, .graph {
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  iframe {
-    max-width: 100%;
-  }
-}
-EOF
+          node -e "
+            const fs = require('fs');
+            const css = [
+              '',
+              '/* Mobiele overflow-fixes */',
+              '@media (max-width: 800px) {',
+              '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
+              '  img { max-width: 100%; height: auto; }',
+              '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
+              '  iframe { max-width: 100%; }',
+              '}',
+            ].join('\n');
+            fs.appendFileSync('styles/custom.scss', css);
+          "
 
       - name: Build Quartz
         working-directory: quartz
