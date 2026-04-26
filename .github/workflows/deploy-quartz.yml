@@ -150,55 +150,32 @@ jobs:
       - name: Injecteer mobiele CSS-fixes
         working-directory: quartz
         run: |
-          cat >> quartz/styles/custom.scss << 'EOF'
+          cat >> styles/custom.scss << 'EOF'
 
-          /* ── Mobiele overflow-fixes ── */
-          @media (max-width: 768px) {
-            /* Tabellen horizontaal scrollbaar */
-            table {
-              display: block;
-              overflow-x: auto;
-              -webkit-overflow-scrolling: touch;
-              max-width: 100%;
-            }
+/* Mobiele overflow-fixes (Quartz base.scss dekt pre/code/html al) */
+@media (max-width: 800px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
 
-            /* Codeblokken: wrap lange regels */
-            pre {
-              white-space: pre-wrap;
-              word-break: break-word;
-              overflow-x: auto;
-            }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-            /* Inline code: breek bij te lange tokens */
-            code {
-              word-break: break-all;
-            }
+  #graph-container, .graph {
+    max-width: 100%;
+    overflow: hidden;
+  }
 
-            /* Afbeeldingen nooit breder dan viewport */
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-
-            /* Graaf-canvas begrenzen */
-            #graph-container,
-            .graph {
-              max-width: 100%;
-              overflow: hidden;
-            }
-
-            /* Lange URLs en woorden breken */
-            p, li, blockquote, td, th {
-              overflow-wrap: break-word;
-              word-break: break-word;
-            }
-
-            /* Brede iframes (bijv. embeds) scrollbaar */
-            iframe {
-              max-width: 100%;
-            }
-          }
-          EOF
+  iframe {
+    max-width: 100%;
+  }
+}
+EOF
 
       - name: Build Quartz
         working-directory: quartz
