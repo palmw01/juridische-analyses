@@ -42,125 +42,18 @@ jobs:
           rm -rf quartz/content
           cp -r vault quartz/content
 
-      - name: Configureer Obsidian Graph & UI
+      - name: Patch quartz.config.ts
         working-directory: quartz
         run: |
           node -e "
             const fs = require('fs');
-            const path = require('path');
-
-            // 1. Kleuren definiëren uit graph.json
-            const colors = {
-              'jas/rechtsbetrekking': '#FF0000',
-              'jas/rechtssubject': '#447344',
-              'jas/rechtsobject': '#70AC70',
-              'jas/rechtsfeit': '#FFA500',
-              'jas/voorwaarde': '#7030A0',
-              'jas/afleidingsregel': '#00B0F0',
-              'jas/variabele': '#92D050',
-              'jas/parameter': '#FFD966',
-              'jas/operator': '#808080',
-              'jas/tijdsaanduiding': '#F4B082',
-              'jas/plaatsaanduiding': '#9DC3E6',
-              'jas/delegatiebevoegdheid': '#C9C9C9',
-              'jas/brondefinitie': '#D6B3C8',
-              'tussenresultaat': '#FF00FF'
-            };
-
-            // 2. Patch CSS
-            let customCss = '\n/* Advanced Graph UI & Colors */\n';
-            for (const [tag, color] of Object.entries(colors)) {
-              const className = tag.replace(/\//g, '-');
-              customCss += '.node.' + className + ' { fill: ' + color + ' !important; }\n';
-              customCss += '.node.tag-' + className + ' { fill: ' + color + ' !important; }\n';
-            }
-            customCss += \`
-            .graph-controls {
-              position: absolute;
-              top: 50px;
-              right: 10px;
-              background: var(--light);
-              border: 1px solid var(--lightgray);
-              border-radius: 8px;
-              padding: 15px;
-              z-index: 1000;
-              font-size: 0.75rem;
-              box-shadow: var(--shadow);
-              width: 200px;
-              backdrop-filter: blur(4px);
-            }
-            .graph-controls h4 { margin: 0 0 10px 0; border-bottom: 1px solid var(--lightgray); padding-bottom: 5px; }
-            .graph-controls label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-            .graph-controls input[type='range'] { width: 100px; }
-            .graph-settings-toggle {
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              background: var(--light);
-              border: 1px solid var(--lightgray);
-              border-radius: 50%;
-              width: 35px;
-              height: 35px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              cursor: pointer;
-              z-index: 1001;
-              transition: transform 0.2s ease;
-            }
-            .graph-settings-toggle:hover { transform: rotate(45deg); }
-            \`;
-            fs.appendFileSync('quartz/styles/custom.scss', customCss);
-
-            // 3. Patch Graph.tsx voor de UI (Gebruik valide JSX)
-            const graphPath = 'quartz/components/Graph.tsx';
-            if (fs.existsSync(graphPath)) {
-              let graphTsx = fs.readFileSync(graphPath, 'utf8');
-              const uiHtml = \`
-                <div className=\"graph-settings-toggle\" id=\"graph-settings-button\" aria-label=\"Instellingen\">⚙️</div>
-                <div className=\"graph-controls\" id=\"graph-controls-menu\" style={{ display: \"none\" }}>
-                  <h4>Analyse Filters</h4>
-                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"annotaties\" defaultChecked /> Annotaties</label>
-                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"begrippen\" defaultChecked /> Begrippen</label>
-                  <label><input type=\"checkbox\" className=\"graph-filter\" data-folder=\"regels\" defaultChecked /> Regels</label>
-                  
-                  <h4>Krachten (Obsidian)</h4>
-                  <label>Afstoting <span></span><input type=\"range\" id=\"graph-repel\" min=\"0\" max=\"200\" defaultValue=\"20\" /></label>
-                  <label>Afstand <span></span><input type=\"range\" id=\"graph-distance\" min=\"50\" max=\"600\" defaultValue=\"450\" /></label>
-                  <label>Pijlen <input type=\"checkbox\" id=\"graph-arrows\" /></label>
-                </div>
-              \`;
-              // We injecteren het binnen de bestaande div.
-              // Quartz v4 gebruikt Preact, dus 'class' werkt vaak ook, maar 'className' is veiliger in TSX.
-              graphTsx = graphTsx.replace('<div class={classNames(displayClass, \"graph\")}>', '<div class={classNames(displayClass, \"graph\")}>' + uiHtml);
-              fs.writeFileSync(graphPath, graphTsx);
-            }
-
-            // 4. Patch de client-side JS (graph.inline.ts)
-            const scriptPath = 'quartz/components/scripts/graph.inline.ts';
-            if (fs.existsSync(scriptPath)) {
-              let scriptJs = fs.readFileSync(scriptPath, 'utf8');
-              const injection = \`
-                // Custom Obsidian-like controls injection
-                document.addEventListener('DOMContentLoaded', () => {
-                  const settingsBtn = document.getElementById('graph-settings-button');
-                  const menu = document.getElementById('graph-controls-menu');
-                  if (settingsBtn && menu) {
-                    settingsBtn.onclick = () => menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-                  }
-                });
-              \`;
-              fs.appendFileSync(scriptPath, injection);
-            }
-
-            // 5. Update layout
-            let l = fs.readFileSync('./quartz.layout.ts', 'utf8');
-            if (!l.includes('Component.Graph()')) {
-               l = l.replace('right: [', 'right: [Component.Graph(), ');
-            }
-            fs.writeFileSync('./quartz.layout.ts', l);
-
-            console.log('Obsidian Advanced Graph v2.1 (gefixte JSX) geïnjecteerd.');
+            let c = fs.readFileSync('./quartz.config.ts', 'utf8');
+            c = c.replace(/pageTitle: \x22[^\x22]*\x22/, 'pageTitle: \x22Juridische wetsanalyse - Inning\x22');
+            c = c.replace(/baseUrl: \x22[^\x22]*\x22/, 'baseUrl: \x22palmw01.github.io/juridische-analyses\x22');
+            c = c.replace(/locale: \x22[^\x22]*\x22/, 'locale: \x22nl-NL\x22');
+            c = c.replace(/ignorePatterns: \[[\s\S]*?\]/,
+              'ignorePatterns: [\x22.obsidian\x22,\x22.claude\x22,\x22.git\x22,\x22.trash\x22,\x22README.md\x22,\x22CLAUDE.md\x22,\x22settings.json\x22,\x22**/template.md\x22]');
+            fs.writeFileSync('./quartz.config.ts', c);
           "
 
       - name: Injecteer frontmatter-links in body
