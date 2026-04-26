@@ -48,7 +48,7 @@ jobs:
           node -e "
             const fs = require('fs');
             let c = fs.readFileSync('./quartz.config.ts', 'utf8');
-            c = c.replace(/pageTitle: \x22[^\x22]*\x22/, 'pageTitle: \x22Juridische wetsanalyse — Inning\x22');
+            c = c.replace(/pageTitle: \x22[^\x22]*\x22/, 'pageTitle: \x22Juridische wetsanalyse - Inning\x22');
             c = c.replace(/baseUrl: \x22[^\x22]*\x22/, 'baseUrl: \x22palmw01.github.io/juridische-analyses\x22');
             c = c.replace(/locale: \x22[^\x22]*\x22/, 'locale: \x22nl-NL\x22');
             c = c.replace(/ignorePatterns: \[[\s\S]*?\]/,
