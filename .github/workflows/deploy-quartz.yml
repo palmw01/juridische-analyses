@@ -56,6 +56,52 @@ jobs:
             fs.writeFileSync('./quartz.config.ts', c);
           "
 
+      - name: Patch graph settings
+        working-directory: quartz
+        run: |
+          node -e "
+            const fs = require('fs');
+            let c = fs.readFileSync('./quartz.config.ts', 'utf8');
+
+            // Vervang localGraph-instellingen: meer repelForce en linkDistance
+            c = c.replace(
+              /localGraph:\s*\{[^}]*\}/s,
+              \`localGraph: {
+                drag: true,
+                zoom: true,
+                depth: 1,
+                scale: 1.1,
+                repelForce: 1.0,
+                centerForce: 0.2,
+                linkDistance: 60,
+                fontSize: 0.5,
+                opacityScale: 1,
+                showTags: true,
+                removeSelfLoops: true,
+              }\`
+            );
+
+            // Vervang globalGraph-instellingen
+            c = c.replace(
+              /globalGraph:\s*\{[^}]*\}/s,
+              \`globalGraph: {
+                drag: true,
+                zoom: true,
+                depth: -1,
+                scale: 0.9,
+                repelForce: 1.0,
+                centerForce: 0.2,
+                linkDistance: 60,
+                fontSize: 0.45,
+                opacityScale: 1,
+                showTags: true,
+                removeSelfLoops: true,
+              }\`
+            );
+
+            fs.writeFileSync('./quartz.config.ts', c);
+          "
+
       - name: Build Quartz
         working-directory: quartz
         run: |
