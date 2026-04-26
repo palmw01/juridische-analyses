@@ -8,6 +8,9 @@ Atomaire definities van juridische begrippen, afgeleid uit de annotaties. Elk be
 
 ## JAS-entiteitstypen
 
+<details>
+<summary>Toon/verberg tabel</summary>
+
 | Klasse | Omschrijving | Kleurcode (JAS) |
 |--------|--------------|-----------------|
 | Rechtsbetrekking | Juridische verhouding met rechthebbende en plichthebbende | `#FF0000` |
@@ -23,3 +26,5 @@ Atomaire definities van juridische begrippen, afgeleid uit de annotaties. Elk be
 | Delegatiebevoegdheid | Bevoegdheid tot nadere regelgeving | `#C9C9C9` |
 | Brondefinitie | Definitie elders in de regelgeving | `#D6B4C8` |
 | Operator | Logische of rekenkundige operator | `#808080` |
+
+</details>
