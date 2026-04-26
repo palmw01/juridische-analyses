@@ -162,7 +162,7 @@ jobs:
               '  iframe { max-width: 100%; }',
               '}',
             ].join('\n');
-            fs.appendFileSync('styles/custom.scss', css);
+            fs.appendFileSync('quartz/styles/custom.scss', css);
           "
 
       - name: Build Quartz
