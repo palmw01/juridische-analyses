@@ -158,35 +158,11 @@ jobs:
               '<a href={baseDir}>{title}</a>',
               '<a href={baseDir}><span class=\"title-full\">{title}</span><span class=\"title-short\">Wetsanalyse</span></a>'
             );
-            c = c.replace(
-              'PageTitle.css = \`',
-              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; white-space: nowrap; }\n  .page-title { font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 1; min-width: 0; }\n}'
-            );
             fs.writeFileSync(f, c);
           "
 
-      - name: Injecteer mobiele CSS-fixes
-        working-directory: quartz
-        run: |
-          node -e "
-            const fs = require('fs');
-            const css = [
-              '',
-              '/* Mobiele overflow-fixes */',
-              '@media (max-width: 800px) {',
-              '  html { width: 100%; }',
-              '  #quartz-body { padding-left: 1rem !important; padding-right: 1rem !important; box-sizing: border-box; }',
-              '  .search { flex-grow: 0 !important; min-width: unset !important; max-width: unset !important; }',
-              '  .search-button { width: auto !important; border: none !important; padding: 0 !important; background: transparent !important; }',
-              '  .search-button > p { display: none !important; }',
-              '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
-              '  img { max-width: 100%; height: auto; }',
-              '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
-              '  iframe { max-width: 100%; }',
-              '}',
-            ].join('\n');
-            fs.appendFileSync('quartz/styles/custom.scss', css);
-          "
+      - name: Kopieer custom styles
+        run: cp vault/.github/quartz-custom.scss quartz/quartz/styles/custom.scss
 
       - name: Build Quartz
         working-directory: quartz
