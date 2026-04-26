@@ -176,6 +176,7 @@ jobs:
               '@media (max-width: 800px) {',
               '  html { width: 100%; }',
               '  #quartz-body { padding-left: 1rem !important; padding-right: 1rem !important; box-sizing: border-box; }',
+              '  .readermode { display: none !important; }',
               '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
               '  img { max-width: 100%; height: auto; }',
               '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
