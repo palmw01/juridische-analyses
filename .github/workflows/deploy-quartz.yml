@@ -158,6 +158,10 @@ jobs:
               '<a href={baseDir}>{title}</a>',
               '<a href={baseDir}><span class=\"title-full\">{title}</span><span class=\"title-short\">JW - Inning</span></a>'
             );
+            c = c.replace(
+              'PageTitle.css = \`',
+              'PageTitle.css = \`\n.title-short { display: none; }\n@media (max-width: 800px) {\n  .title-full { display: none; }\n  .title-short { display: inline; }\n  .page-title { font-size: 1.1rem; }\n}'
+            );
             fs.writeFileSync(f, c);
           "
 
@@ -169,11 +173,7 @@ jobs:
             const css = [
               '',
               '/* Mobiele overflow-fixes */',
-              '.title-short { display: none; }',
               '@media (max-width: 800px) {',
-              '  .title-full  { display: none; }',
-              '  .title-short { display: inline; }',
-              '  .page-title  { font-size: 1.1rem; }',
               '  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }',
               '  img { max-width: 100%; height: auto; }',
               '  #graph-container, .graph { max-width: 100%; overflow: hidden; }',
