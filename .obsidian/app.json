@@ -16,6 +16,10 @@
     "analyses/DASHBOARD.md",
     "analyses/INDEX.md",
     "begrippen/INDEX.md",
+    "annotaties/index.md",
+    "begrippen/index.md",
+    "regels/index.md",
+    "index.md",
     "template.md"
   ],
   "alwaysUpdateLinks": true,
