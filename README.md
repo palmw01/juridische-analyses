@@ -1,5 +1,14 @@
 # Juridische wetsanalyse — Obsidian knowledge graph
 
+[![Live Documentation](https://img.shields.io/badge/Live-Documentation-green)](https://palmw01.github.io/juridische-analyses/)
+
+🌐 **Bekijk de live knowledge graph en documentatie:**  
+https://palmw01.github.io/juridische-analyses/
+
+> Dit project levert een machine-leesbare representatie van wetgeving op basis van het JAS, geschikt voor analyse en automatisering.
+
+---
+
 Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijksbelastingen**, aangedreven door Claude Code en een MCP-koppeling met [wetten.overheid.nl](https://wetten.overheid.nl).
 
 Het primaire artefact is een **Obsidian knowledge graph**: atomaire entiteitsbestanden per annotatie, begrip en afleidingsregel, verbonden via wiki-links en doorzoekbaar via Dataview en Obsidian Graph View.
