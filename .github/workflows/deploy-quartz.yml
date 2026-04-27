@@ -53,6 +53,7 @@ jobs:
             c = c.replace(/locale: \x22[^\x22]*\x22/, 'locale: \x22nl-NL\x22');
             c = c.replace(/ignorePatterns: \[[\s\S]*?\]/,
               'ignorePatterns: [\x22.obsidian\x22,\x22.claude\x22,\x22.git\x22,\x22.trash\x22,\x22README.md\x22,\x22CLAUDE.md\x22,\x22settings.json\x22,\x22**/template.md\x22]');
+            c = c.replace(/repoUrl: \x22[^\x22]*\x22/, 'repoUrl: \x22https://github.com/palmw01/juridische-analyses\x22');
             fs.writeFileSync('./quartz.config.ts', c);
           "
 
