@@ -53,3 +53,37 @@
 
   iframe { max-width: 100%; }
 }
+
+// Footer
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--gray);
+
+  hr { margin-bottom: 0.75rem; }
+
+  p { margin: 0 0 0.4rem; }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+
+    li { margin: 0; }
+
+    a {
+      color: var(--gray);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+
+      &:hover {
+        color: var(--secondary);
+        border-bottom-color: var(--secondary);
+      }
+    }
+  }
+}
