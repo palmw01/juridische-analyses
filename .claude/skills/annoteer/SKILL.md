@@ -106,6 +106,7 @@ kruisreferenties: []   # gevuld conform verwijzingen.md — "Art. X [wet]"-notat
 Body:
 - `## Wetstekst (letterlijk, peildatum [PD])` — elk lid op een nieuwe regel als `> **[nr]** [tekst]`
 - `## Annotatietabel` — zie tabelformaat hieronder
+- `## Diagram` — zie Diagram (A2c) hieronder
 - `## Delegatiestructuur` — zie tabelformaat hieronder
 
 #### Annotatietabel-formaat
@@ -164,6 +165,7 @@ tags:
   - art/[nummer]
 markering: "[letterlijk geciteerd incl. lidwoord en verwijzingen]"
 bron: "Art. [A] lid [L] [W]"
+bronnen: []
 peildatum: [YYYY-MM-DD uit MCP]
 interpretatiemethode: [grammaticaal | systematisch | teleologisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
@@ -181,6 +183,12 @@ status: concept
 ---
 ```
 
+> **⚠ Valkuil — JAS-klasse ≠ entiteitstype**
+> Het `type`-veld is altijd `begrip` — ook als de `jas-klasse` `afleidingsregel` is.
+> De `jas-klasse` beschrijft de juridische functie; `type` beschrijft het entiteitstype in de vault.
+> Tags bij JAS-klasse afleidingsregel: `[begrip, jas/afleidingsregel, wet/..., art/...]`
+> — **nooit** `[afleidingsregel, ...]` (dat is het patroon voor regel-noten in `regels/`).
+
 Na aanmaken: update het `begrippen`-veld in de annotatie-noot met wiki-links naar alle aangemaakte begrip-noten.
 
 ---
@@ -193,3 +201,16 @@ Na aanmaken: update het `begrippen`-veld in de annotatie-noot met wiki-links naa
 - Begrip-noten bevatten na `/annoteer` uitsluitend frontmatter; A3-inhoud is taak van `/begrip`.
 - Markering-veld bevat altijd het letterlijke citaat inclusief lidwoord.
 - Delegatieketens volledig uitwerken — alle schakels ophalen via MCP.
+
+---
+
+## Hergebruiksrapportage
+
+Print aan het einde van elke annotatie-run een overzicht van hergebruikte begrippen — begrip-noten die al bestonden vóór deze run en nu een extra markering hebben gekregen:
+
+**Hergebruikte begrippen (definitie mogelijk bijstellen):**
+- `[[begrippen/[slug]]]` — primaire bron: [bron-veld]; nieuw ook geannoteerd in Art. [A] [W]
+
+Voor elk hergebruikt begrip: voer `/begrip [slug]` uit om de definitie bij te stellen op basis van alle markeringen.
+
+Als er geen hergebruikte begrippen zijn: schrijf exact "Geen hergebruikte begrippen."

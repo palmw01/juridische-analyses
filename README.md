@@ -23,6 +23,7 @@ Het primaire artefact is een **Obsidian knowledge graph**: atomaire entiteitsbes
 annotaties/       ← lichte annotatie-noot per artikel (wetstekst + annotatietabel + diagram)
 begrippen/        ← atomaire begrip-noten (definitie, voorbeelden, kenmerken, relaties)
 regels/           ← atomaire afleidingsregel-noten (als-dan, voorbeeldreeksen)
+tools/            ← Python-scripts voor graph-export naar GraphML/GEXF (Gephi/Cytoscape)
 .claude/skills/   ← skill-documentatie voor Claude Code
 ```
 
@@ -42,6 +43,18 @@ Voorbeeld:
 /annoteer art. 25 IW 1990
 /begrip-alles art. 25 IW 1990
 ```
+
+### Graph-export (Gephi / Cytoscape)
+
+De vault is exporteerbaar als GraphML en GEXF voor analyse in Gephi of Cytoscape:
+
+```sh
+cd tools/
+.venv/bin/python export_graph.py        # → graph.graphml + graph.gexf
+.venv/bin/python generate_model.py      # → graph-model.json (na toevoeging nieuwe frontmatter-velden)
+```
+
+Het `graph-model.json` beschrijft node-types, edge-types, JAS-kleurcodering en exportinstellingen. Pas het model bij als er nieuwe frontmatter-velden worden toegevoegd aan de templates — of regenereer het automatisch met `generate_model.py`.
 
 ### Installatie
 

@@ -1,9 +1,10 @@
 ---
-type: afleidingsregel
+type: begrip
 begripsnaam: invorderbaarheid-belastingaanslag
 jas-klasse: afleidingsregel
 tags:
-  - afleidingsregel
+  - begrip
+  - jas/afleidingsregel
   - wet/iw1990
   - art/9
 markering: "Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet."

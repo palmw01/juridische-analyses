@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d29" for="edge" attr.name="label" attr.type="string"/>
+<key id="d28" for="node" attr.name="operators" attr.type="string"/>
+<key id="d27" for="node" attr.name="naam" attr.type="string"/>
+<key id="d26" for="node" attr.name="regel_id" attr.type="string"/>
+<key id="d25" for="node" attr.name="bronnen" attr.type="string"/>
+<key id="d24" for="node" attr.name="leidt_tot" attr.type="string"/>
+<key id="d23" for="node" attr.name="heeft" attr.type="string"/>
+<key id="d22" for="node" attr.name="afleidingsregels" attr.type="string"/>
+<key id="d21" for="node" attr.name="status" attr.type="string"/>
+<key id="d20" for="node" attr.name="geldigheid_tot" attr.type="string"/>
+<key id="d19" for="node" attr.name="geldigheid_van" attr.type="string"/>
+<key id="d18" for="node" attr.name="is_een" attr.type="string"/>
+<key id="d17" for="node" attr.name="herkomst" attr.type="string"/>
+<key id="d16" for="node" attr.name="soort" attr.type="string"/>
+<key id="d15" for="node" attr.name="definitie" attr.type="string"/>
+<key id="d14" for="node" attr.name="toelichting_klasse" attr.type="string"/>
+<key id="d13" for="node" attr.name="interpretatiemethode" attr.type="string"/>
+<key id="d12" for="node" attr.name="bron" attr.type="string"/>
+<key id="d11" for="node" attr.name="markering" attr.type="string"/>
+<key id="d10" for="node" attr.name="begripsnaam" attr.type="string"/>
+<key id="d9" for="node" attr.name="start" attr.type="string"/>
+<key id="d8" for="node" attr.name="kruisreferenties" attr.type="string"/>
+<key id="d7" for="node" attr.name="structuurpositie" attr.type="string"/>
+<key id="d6" for="node" attr.name="peildatum" attr.type="string"/>
+<key id="d5" for="node" attr.name="bwb_id" attr.type="string"/>
+<key id="d4" for="node" attr.name="artikel" attr.type="string"/>
+<key id="d3" for="node" attr.name="color" attr.type="string"/>
+<key id="d2" for="node" attr.name="jas_klasse" attr.type="string"/>
+<key id="d1" for="node" attr.name="node_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="directed"><node id="iw1990-art9">
+  <data key="d0">Art. 9 IW 1990</data>
+  <data key="d1">annotatie</data>
+  <data key="d2">annotatie</data>
+  <data key="d3">#CCCCCC</data>
+  <data key="d4">Art. 9 IW 1990</data>
+  <data key="d5">BWBR0004770</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d7">Hoofdstuk II Invordering in eerste aanleg &gt; Artikel 9</data>
+  <data key="d8">[]</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="belastingaanslag">
+  <data key="d0">belastingaanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">rechtsobject</data>
+  <data key="d3">#70AD47</data>
+  <data key="d10">belastingaanslag</data>
+  <data key="d11">Een belastingaanslag</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">grammaticaal</data>
+  <data key="d14">De belastingaanslag is het rechtsobject waaraan invorderbaarheid als rechtsgevolg wordt verbonden. Brondefinitie in art. 2 lid 1 onderdeel m IW 1990: omvat voorlopige aanslag, aanslag, uitnodiging tot betaling, navorderingsaanslag en naheffingsaanslag, alsmede de voorlopige conserverende aanslag, de conserverende aanslag en de conserverende navorderingsaanslag in de inkomstenbelasting en in de schenk- en erfbelasting.</data>
+  <data key="d15">een door de inspecteur vastgesteld, formeel besluit dat de belastingschuld van een belastingschuldige vaststelt en de grondslag vormt voor invordering door de ontvanger</data>
+  <data key="d16">enumeratiewaarde [id]</data>
+  <data key="d17">direct</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">[]</data>
+  <data key="d23">['[[begrippen/dagtekening-aanslagbiljet]]']</data>
+  <data key="d24">['[[begrippen/invorderbaarheid]]']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="dagtekening-aanslagbiljet">
+  <data key="d0">dagtekening-aanslagbiljet</data>
+  <data key="d1">begrip</data>
+  <data key="d2">rechtsfeit</data>
+  <data key="d3">#FFC000</data>
+  <data key="d10">dagtekening-aanslagbiljet</data>
+  <data key="d11">de dagtekening van het aanslagbiljet</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">systematisch</data>
+  <data key="d14">Primair geclassificeerd als rechtsfeit (systematische interpretatie): de dagtekening is het tijdstip waaraan de aanvang van de invorderingstermijn als rechtsgevolg is verbonden — dagtekening creëert het recht tot invordering na zes weken. Tevens uitlegbaar als tijdsaanduiding (grammaticale interpretatie): de dagtekening fungeert als peildatum voor de berekening van het invorderingstijdstip. Brondefinitie van aanslagbiljet: art. 2 lid 2 onderdeel d IW 1990.</data>
+  <data key="d15">de op het aanslagbiljet vermelde datum waarop de belastingaanslag door de inspecteur is vastgesteld en die de aanvang van de invorderingstermijn bepaalt</data>
+  <data key="d16">datum</data>
+  <data key="d17">direct</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">[]</data>
+  <data key="d23">[]</data>
+  <data key="d24">['[[begrippen/zes-weken-na-dagtekening-aanslagbiljet]]', '[[begrippen/invorderbaarheid]]']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="invorderbaarheid-belastingaanslag">
+  <data key="d0">invorderbaarheid-belastingaanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">afleidingsregel</data>
+  <data key="d3">#00B0F0</data>
+  <data key="d10">invorderbaarheid-belastingaanslag</data>
+  <data key="d11">Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet.</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">grammaticaal</data>
+  <data key="d14">De volledige zin vormt een afleidingsregel: uit de dagtekening van het aanslagbiljet plus zes weken volgt het tijdstip waarop invorderbaarheid intreedt. De regel combineert kenmerken van een beslissingsregel (invorderbaar ja/nee) en een rekenregel (berekening van het tijdstip).</data>
+  <data key="d15">de regel die bepaalt dat een belastingaanslag invorderbaar wordt op het tijdstip gelegen zes weken na de dagtekening van het aanslagbiljet</data>
+  <data key="d16">waar-niet-waar</data>
+  <data key="d17">afgeleid</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">['[[regels/AR-9-1]]']</data>
+  <data key="d23">['[[begrippen/belastingaanslag]]', '[[begrippen/dagtekening-aanslagbiljet]]', '[[begrippen/zes-weken-na-dagtekening-aanslagbiljet]]']</data>
+  <data key="d24">['[[begrippen/invorderbaarheid]]']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="invorderbaarheid">
+  <data key="d0">invorderbaarheid</data>
+  <data key="d1">begrip</data>
+  <data key="d2">rechtsbetrekking</data>
+  <data key="d3">#FF0000</data>
+  <data key="d10">invorderbaarheid</data>
+  <data key="d11">is invorderbaar</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">grammaticaal</data>
+  <data key="d14">De formulering 'is invorderbaar' drukt de rechtsbetrekking uit: het moment waarop de ontvanger bevoegd is tot invordering (rechthebbende) en de belastingschuldige verplicht is te betalen (plichthebbende). De rechtssubjecten zijn niet expliciet in lid 1 vernoemd; zij vloeien voort uit art. 2 lid 1 onderdeel k (belastingschuldige) en art. 3 lid 1 IW 1990 (ontvanger).</data>
+  <data key="d15">de juridische toestand waarin de ontvanger bevoegd is tot actieve invordering van een belastingaanslag en de belastingschuldige gehouden is tot betaling</data>
+  <data key="d16">waar-niet-waar</data>
+  <data key="d17">afgeleid</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">['[[regels/AR-9-1]]']</data>
+  <data key="d23">[]</data>
+  <data key="d25">['Art. 9 lid 1 IW 1990']</data>
+  <data key="d24">[]</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d0">zes-weken-na-dagtekening-aanslagbiljet</data>
+  <data key="d1">begrip</data>
+  <data key="d2">tijdsaanduiding</data>
+  <data key="d3">#F4B942</data>
+  <data key="d10">zes-weken-na-dagtekening-aanslagbiljet</data>
+  <data key="d11">zes weken na de dagtekening van het aanslagbiljet</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">grammaticaal</data>
+  <data key="d14">De gecombineerde uitdrukking duidt het tijdstip aan waarop invorderbaarheid van een reguliere belastingaanslag intreedt. Bestaat uit de parameter 'zes weken', de operator 'na' en de peildatum/het rechtsfeit 'de dagtekening van het aanslagbiljet'. Let op: art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit — de termijn van zes weken loopt strikt kalendertechnisch door, ook bij weekenden en feestdagen.</data>
+  <data key="d15">het tijdstip gelegen zes aaneengesloten weken na de dagtekening van het aanslagbiljet, berekend zonder toepassing van de Algemene termijnenwet, waarop een reguliere belastingaanslag invorderbaar wordt</data>
+  <data key="d16">datum</data>
+  <data key="d17">afgeleid</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">['[[regels/AR-9-1]]']</data>
+  <data key="d23">['[[begrippen/dagtekening-aanslagbiljet]]', '[[begrippen/zes-weken]]']</data>
+  <data key="d24">['[[begrippen/invorderbaarheid]]']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="zes-weken">
+  <data key="d0">zes-weken</data>
+  <data key="d1">begrip</data>
+  <data key="d2">parameter</data>
+  <data key="d3">#FFD966</data>
+  <data key="d10">zes-weken</data>
+  <data key="d11">zes weken</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d13">grammaticaal</data>
+  <data key="d14">De termijn 'zes weken' is een parameter: een constante waarde die voor alle reguliere belastingaanslagen gelijkelijk geldt, ongeacht belastingsoort, belastingplichtige of tijdvak. Afwijkende termijnen zijn vastgesteld in lid 2 (navorderingsaanslag: één maand; naheffingsaanslag: veertien dagen) en lid 4 (uitnodiging tot betaling: tien dagen). Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit.</data>
+  <data key="d15">een vaste termijn van zes aaneengesloten weken (42 kalenderdagen), neergelegd in art. 9 lid 1 IW 1990 als standaard betalingstermijn voor reguliere belastingaanslagen</data>
+  <data key="d16">getal</data>
+  <data key="d17">direct</data>
+  <data key="d18">[]</data>
+  <data key="d19">2026-01-01</data>
+  <data key="d20"></data>
+  <data key="d21">concept</data>
+  <data key="d22">[]</data>
+  <data key="d23">[]</data>
+  <data key="d24">['[[begrippen/zes-weken-na-dagtekening-aanslagbiljet]]']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<node id="AR-9-1">
+  <data key="d0">bepalen invorderbaarheid belastingaanslag</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d2">afleidingsregel</data>
+  <data key="d3">#00B0F0</data>
+  <data key="d26">AR-9-1</data>
+  <data key="d27">bepalen invorderbaarheid belastingaanslag</data>
+  <data key="d16">Beslissingsregel</data>
+  <data key="d12">Art. 9 lid 1 IW 1990</data>
+  <data key="d6">2026-01-01</data>
+  <data key="d28">['plus', 'groter-dan-of-gelijk-aan']</data>
+  <data key="d9">2026-01-01</data>
+</node>
+<edge source="iw1990-art9" target="invorderbaarheid-belastingaanslag">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="iw1990-art9" target="belastingaanslag">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="iw1990-art9" target="invorderbaarheid">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="iw1990-art9" target="dagtekening-aanslagbiljet">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="iw1990-art9" target="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="iw1990-art9" target="zes-weken">
+  <data key="d29">begrippen</data>
+</edge>
+<edge source="belastingaanslag" target="dagtekening-aanslagbiljet">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="belastingaanslag" target="invorderbaarheid">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="dagtekening-aanslagbiljet" target="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="dagtekening-aanslagbiljet" target="invorderbaarheid">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="invorderbaarheid-belastingaanslag" target="belastingaanslag">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="invorderbaarheid-belastingaanslag" target="dagtekening-aanslagbiljet">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="invorderbaarheid-belastingaanslag" target="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="invorderbaarheid-belastingaanslag" target="invorderbaarheid">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="invorderbaarheid-belastingaanslag" target="AR-9-1">
+  <data key="d29">afleidingsregels</data>
+</edge>
+<edge source="invorderbaarheid" target="AR-9-1">
+  <data key="d29">afleidingsregels</data>
+</edge>
+<edge source="zes-weken-na-dagtekening-aanslagbiljet" target="dagtekening-aanslagbiljet">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="zes-weken-na-dagtekening-aanslagbiljet" target="zes-weken">
+  <data key="d29">heeft</data>
+</edge>
+<edge source="zes-weken-na-dagtekening-aanslagbiljet" target="invorderbaarheid">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="zes-weken-na-dagtekening-aanslagbiljet" target="AR-9-1">
+  <data key="d29">afleidingsregels</data>
+</edge>
+<edge source="zes-weken" target="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d29">leidt-tot</data>
+</edge>
+<edge source="AR-9-1" target="invorderbaarheid-belastingaanslag">
+  <data key="d29">begrip</data>
+</edge>
+<edge source="AR-9-1" target="dagtekening-aanslagbiljet">
+  <data key="d29">invoer</data>
+</edge>
+<edge source="AR-9-1" target="belastingaanslag">
+  <data key="d29">invoer</data>
+</edge>
+<edge source="AR-9-1" target="zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d29">invoer</data>
+</edge>
+<edge source="AR-9-1" target="invorderbaarheid">
+  <data key="d29">uitvoer</data>
+</edge>
+</graph></graphml>

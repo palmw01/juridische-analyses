@@ -29,6 +29,7 @@ De wetsanalyse werkt iteratief via twee micro-skills:
 annotaties/       ← lichte annotatie-noot per artikel (A2-tussenproduct)
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
+tools/            ← Python-scripts voor graph-export (GraphML/GEXF); draai met .venv/bin/python
 ```
 
 ### Entiteitstypen en tags
@@ -43,7 +44,13 @@ In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → roo
 
 ### Annotatie → begrip: strikte volgorde
 
-De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering` in de begrip-frontmatter is de enige bron voor de definitie.
+De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in de begrip-frontmatter zijn de enige bron voor de definitie.
+
+Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de frontmatter zowel het primaire `bron`-veld als een `bronnen`-lijst met alle artikelreferenties. De definitie is dan een synthese van alle markeringen.
+
+### Type vs. JAS-klasse — valkuil
+
+Het `type`-veld in begrip-noten is **altijd** `begrip`, ook als de `jas-klasse` `afleidingsregel` is. De `jas-klasse` beschrijft de juridische functie; `type` beschrijft het vault-entiteitstype. Tags bij `jas-klasse: afleidingsregel`: `[begrip, jas/afleidingsregel, wet/..., art/...]` — nooit `[afleidingsregel, ...]` (dat patroon is voor noten in `regels/`).
 
 ---
 
@@ -99,5 +106,5 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| `/quartz` | `.claude/skills/quartz/SKILL.md` | Vault publiceren als website via Docker + Portainer |
 | Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats |
+| Graph-export | `tools/export_graph.py`, `tools/generate_model.py`, `tools/graph-model.json` | Vault → GraphML/GEXF voor Gephi/Cytoscape |

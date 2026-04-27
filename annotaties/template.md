@@ -10,7 +10,7 @@ tags-formaat:
   - annotatie
   - wet/[wet-afkorting]   # bijv. wet/iw1990
   - art/[nummer]          # bijv. art/25
-begrippen: []             # wiki-links naar begrippen/ — gevuld na /begrip-alles
+begrippen: []             # wiki-links naar begrippen/ — gevuld door /annoteer
 kruisreferenties: []      # "Art. X [wet]"-notatie — gevuld conform verwijzingen.md
 ---
 
@@ -34,9 +34,9 @@ kruisreferenties: []      # "Art. X [wet]"-notatie — gevuld conform verwijzing
 
 ```mermaid
 graph LR
-    RB["rechtsbetrekking\n'[markering ingekort]'"]:::rb
-    RS1["rechtssubject\n'[markering]'"]:::rs
-    RO["rechtsobject\n'[markering]'"]:::ro
+    RB["rechtsbetrekking<br/>'[markering ingekort]'"]:::rb
+    RS1["rechtssubject<br/>'[markering]'"]:::rs
+    RO["rechtsobject<br/>'[markering]'"]:::ro
 
     RS1 -->|rechthebbende| RB
     RB -->|voorwerp| RO

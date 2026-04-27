@@ -11,7 +11,7 @@ tags-formaat:
   - art/[nummer]          # bijv. art/25
 bron: "Art. [A] lid [L] [W]"
 peildatum: [YYYY-MM-DD]
-begrip: "begrippen/[slug]"   # het begrip (JAS-klasse: Afleidingsregel) waarvan deze regel deel uitmaakt
+begrip: ""   # wiki-link naar begrip-noot: [[begrippen/[slug]]]
 rechtsfeit: ""                    # wiki-link naar het rechtsfeit dat deze regel triggert
 invoer: []                        # wiki-links naar begrippen (variabelen/parameters)
 uitvoer: ""                       # wiki-link naar begrip (het afgeleide rechtsgevolg)

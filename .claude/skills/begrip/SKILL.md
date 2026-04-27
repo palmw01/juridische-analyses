@@ -23,8 +23,13 @@ De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline s
 ## Voorbereiding
 
 1. **Lees de begrip-noot** in `begrippen/[slug].md` — de frontmatter bevat alle benodigde informatie.
-2. **Lees de bijbehorende annotatie-noot** in `annotaties/` om de annotatietabel in context te zien (samenhang met andere markeringen uit hetzelfde artikel).
-3. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor relaties (is-een, heeft, leidt-tot).
+2. **Zoek alle annotaties** die naar dit begrip verwijzen:
+   ```
+   grep -rl "begrippen/[slug]" annotaties/
+   ```
+   Lees elke gevonden annotatie-noot. Verzamel per annotatie de rij uit de annotatietabel die betrekking heeft op dit begrip: `markering`, `interpretatiemethode` en de artikelreferentie. Dit zijn alle markeringen die de definitie moeten voeden.
+3. **Vul het `bronnen`-veld** in de frontmatter met alle gevonden artikelreferenties (als lijst). Het bestaande `bron`-veld blijft ongewijzigd.
+4. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor relaties (is-een, heeft, leidt-tot).
 
 Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld verwijst naar dat artikel, en verwerk ze achtereenvolgens.
 
@@ -119,12 +124,31 @@ Na aanmaken: update het `afleidingsregels`-veld in de bijbehorende begrip-noot m
 
 Vul de body van `begrippen/[slug].md` volledig in:
 
+**Definitie-blok bij één markering:**
 ```markdown
 ## Definitie
 
 *[markering]* *(Art. [A] lid [L] [W], peildatum [PD])*
 
 [begripsdefinitie]
+```
+
+**Definitie-blok bij meerdere markeringen (na multi-annotatie actualisatie):**
+```markdown
+## Definitie
+
+Markeringen:
+- *[markering 1]* *(Art. [A] lid [L] [W], peildatum [PD], [interpretatiemethode])*
+- *[markering 2]* *(Art. [B] lid [M] [W], peildatum [PD], [interpretatiemethode])*
+
+[begripsdefinitie — synthese van alle markeringen]
+```
+
+**Volledige body-structuur:**
+```markdown
+## Definitie
+
+[zie bovenstaande blokken — kies passende variant]
 
 ## Voorbeelden
 

@@ -11,6 +11,8 @@ tags-formaat:
   - art/[nummer]             # bijv. art/25
 markering: "[letterlijk geciteerd tekstfragment incl. lidwoord en verwijzingen]"
 bron: "Art. [A] lid [L] [W]"
+bronnen:
+  - "Art. [A] lid [L] [W]"   # primaire bron; aanvullen bij actualisatie met nieuwe artikelen
 peildatum: [YYYY-MM-DD]
 interpretatiemethode: [grammaticaal | systematisch | teleologisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
@@ -29,7 +31,14 @@ status: concept                # concept | ter-review | gevalideerd
 
 ## Definitie
 
+<!-- Bij één markering: -->
 *[markering]* *(Art. [A] lid [L] [W], peildatum [PD])*
+
+<!-- Bij meerdere markeringen (na actualisatie): vervang bovenstaande door:
+Markeringen:
+- *[markering 1]* *(Art. [A] lid [L] [W], peildatum [PD], [interpretatiemethode])*
+- *[markering 2]* *(Art. [B] lid [M] [W], peildatum [PD], [interpretatiemethode])*
+-->
 
 [begripsdefinitie]
 
@@ -49,6 +58,6 @@ status: concept                # concept | ter-review | gevalideerd
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| is een | — | begrippen/… |
-| heeft | 1:1 / 1:n / n:m | begrippen/… |
-| leidt tot | — | begrippen/… |
+| is een | — | [[begrippen/…]] |
+| heeft | 1:1 / 1:n / n:m | [[begrippen/…]] |
+| leidt tot | — | [[begrippen/…]] |
