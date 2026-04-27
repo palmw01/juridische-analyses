@@ -55,7 +55,7 @@ jobs:
               'ignorePatterns: [\x22.obsidian\x22,\x22.claude\x22,\x22.git\x22,\x22.trash\x22,\x22README.md\x22,\x22CLAUDE.md\x22,\x22settings.json\x22,\x22**/template.md\x22]');
             fs.writeFileSync('./quartz.config.ts', c);
             let l = fs.readFileSync('./quartz.layout.ts', 'utf8');
-            l = l.replace(/GitHub: \x22[^\x22]*\x22/, 'Broncode: \x22https://github.com/palmw01/juridische-analyses\x22');
+            l = l.replace(/GitHub: \x22[^\x22]*\x22,?\n?\s*/, '');
             l = l.replace(/\x22Discord Community\x22: \x22[^\x22]*\x22,?\n?\s*/, '');
             fs.writeFileSync('./quartz.layout.ts', l);
             const year = new Date().getFullYear();

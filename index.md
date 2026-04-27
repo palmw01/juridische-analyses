@@ -38,3 +38,7 @@ Deze vault is ontworpen voor visuele en data-gedreven analyse via **Obsidian**:
 - **Kleurcodering:** De graph hanteert de JAS-standaard voor snelle interpretatie (o.a. blauw voor rechtssubjecten, rood voor rechtsbetrekkingen).
 
 *Onderdeel van de digitale transformatie van juridische kaders binnen de Belastingdienst.*
+
+---
+
+*De bronbestanden van deze kennisomgeving zijn beschikbaar op [GitHub](https://github.com/palmw01/juridische-analyses).*
