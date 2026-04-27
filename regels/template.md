@@ -9,12 +9,12 @@ tags-formaat:
   - afleidingsregel
   - wet/[wet-afkorting]   # bijv. wet/iw1990
   - art/[nummer]          # bijv. art/25
-bron: "Art. [A] lid [L] [W]"
+afgeleid-van: ""   # wiki-link naar annotatie-noot: annotaties/[wet]-art[nr]
 peildatum: [YYYY-MM-DD]
-begrip: ""   # wiki-link naar begrip-noot: [[begrippen/[slug]]]
+bepaalt: ""   # wiki-link naar begrip-noot: begrippen/[slug]
 rechtsfeit: ""                    # wiki-link naar het rechtsfeit dat deze regel triggert
 invoer: []                        # wiki-links naar begrippen (variabelen/parameters)
-uitvoer: ""                       # wiki-link naar begrip (het afgeleide rechtsgevolg)
+uitvoer: []                       # wiki-links naar begrippen (het afgeleide rechtsgevolg)
 operators: []                     # EN | OF | NIET | plus | min | maal | gedeeld-door | ten-hoogste | ten-minste
 ---
 

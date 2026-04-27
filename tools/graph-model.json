@@ -8,6 +8,7 @@
       "frontmatter_type": "annotatie",
       "label_veld": "artikel",
       "klasse_veld": null,
+      "id_veld": null,
       "attributen": [
         "artikel",
         "bwb-id",
@@ -23,6 +24,7 @@
       "frontmatter_type": "begrip",
       "label_veld": "begripsnaam",
       "klasse_veld": "jas-klasse",
+      "id_veld": "begripsnaam",
       "attributen": [
         "begripsnaam",
         "jas-klasse",
@@ -50,11 +52,11 @@
       "frontmatter_type": "afleidingsregel",
       "label_veld": "naam",
       "klasse_veld": null,
+      "id_veld": "regel-id",
       "attributen": [
         "regel-id",
         "naam",
         "soort",
-        "bron",
         "peildatum",
         "operators"
       ],
@@ -167,10 +169,18 @@
       "kardinaliteit": "1:n"
     },
     {
-      "label": "begrip",
+      "label": "afgeleid-van",
+      "van": "afleidingsregel",
+      "naar": "annotatie",
+      "frontmatter_veld": "afgeleid-van",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "bepaalt",
       "van": "afleidingsregel",
       "naar": "begrip",
-      "frontmatter_veld": "begrip",
+      "frontmatter_veld": "bepaalt",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
@@ -206,8 +216,8 @@
     ],
     "output_map": "tools/",
     "skip_bestanden": [
-      "index.md",
-      "template.md"
+      "template.md",
+      "index.md"
     ],
     "tijdsdimensie": {
       "actief": true,

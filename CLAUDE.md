@@ -42,6 +42,10 @@ tools/            ← Python-scripts voor graph-export (GraphML/GEXF); draai met
 
 In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → rood, `#jas/rechtssubject` → blauw, enz.) conform kaders.md §Kleurcodering.
 
+### Templates — geen wikilinks
+
+Templates mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
+
 ### Annotatie → begrip: strikte volgorde
 
 De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in de begrip-frontmatter zijn de enige bron voor de definitie.

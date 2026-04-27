@@ -188,7 +188,6 @@
   <data key="d26">AR-9-1</data>
   <data key="d27">bepalen invorderbaarheid belastingaanslag</data>
   <data key="d16">Beslissingsregel</data>
-  <data key="d12">Art. 9 lid 1 IW 1990</data>
   <data key="d6">2026-01-01</data>
   <data key="d28">['plus', 'groter-dan-of-gelijk-aan']</data>
   <data key="d9">2026-01-01</data>
@@ -256,8 +255,11 @@
 <edge source="zes-weken" target="zes-weken-na-dagtekening-aanslagbiljet">
   <data key="d29">leidt-tot</data>
 </edge>
+<edge source="AR-9-1" target="iw1990-art9">
+  <data key="d29">afgeleid-van</data>
+</edge>
 <edge source="AR-9-1" target="invorderbaarheid-belastingaanslag">
-  <data key="d29">begrip</data>
+  <data key="d29">bepaalt</data>
 </edge>
 <edge source="AR-9-1" target="dagtekening-aanslagbiljet">
   <data key="d29">invoer</data>

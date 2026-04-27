@@ -11,7 +11,6 @@ Gebruik:
 import argparse
 import json
 import re
-import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -41,7 +40,6 @@ def lees_obsidian_kleuren(vault_root: Path) -> dict[str, dict]:
         rgb_int = groep.get("color", {}).get("rgb")
         if not rgb_int:
             continue
-        # query formaat: "tag:#jas/rechtsbetrekking" of "tag:#tussenresultaat"
         m = re.search(r"tag:#(?:jas/)?(\S+)", query)
         if m:
             klasse = m.group(1)
@@ -90,7 +88,6 @@ def detecteer_label_veld(frontmatters: list[dict], type_naam: str) -> str:
         if kandidaat in tellingen:
             return kandidaat
 
-    # Veld met de meeste niet-lege waarden dat geen wikilinks bevat
     velden_zonder_links = [
         (v, t) for v, t in tellingen.items()
         if not any(bevat_wikilink(fm.get(v)) for fm in frontmatters)
@@ -107,6 +104,26 @@ def detecteer_klasse_veld(frontmatters: list[dict]) -> str | None:
         for veld in fm:
             if "klasse" in veld.lower() and veld not in IGNORE_VELDEN:
                 return veld
+    return None
+
+
+def detecteer_id_veld(frontmatters: list[dict], md_bestanden: list[Path]) -> str | None:
+    """Detecteert een veld waarvan de waarde overeenkomt met de bestandsnaam-stem."""
+    if not frontmatters:
+        return None
+    stems = [md.stem for md in md_bestanden]
+    kandidaten: dict[str, int] = defaultdict(int)
+    for fm, stem in zip(frontmatters, stems):
+        for veld, waarde in fm.items():
+            if veld in IGNORE_VELDEN or bevat_wikilink(waarde):
+                continue
+            if isinstance(waarde, str) and waarde == stem:
+                kandidaten[veld] += 1
+    if not kandidaten:
+        return None
+    beste = max(kandidaten, key=lambda v: kandidaten[v])
+    if kandidaten[beste] == len(frontmatters):
+        return beste
     return None
 
 
@@ -160,19 +177,17 @@ def detecteer_edge_types(
 def genereer_model(vault_root: Path) -> dict:
     kleur_map = lees_obsidian_kleuren(vault_root)
 
-    # Ontdek alle submappen met .md-bestanden
     node_types = []
     alle_frontmatters: dict[str, list[dict]] = {}
-    map_naar_type: dict[str, str] = {}  # "begrippen" → "begrip"
+    map_naar_type: dict[str, str] = {}
 
     for submap in sorted(vault_root.iterdir()):
         if not submap.is_dir() or submap.name.startswith("."):
             continue
-        md_bestanden = [f for f in submap.glob("*.md") if f.name not in SKIP]
+        md_bestanden = [f for f in sorted(submap.glob("*.md")) if f.name not in SKIP]
         if not md_bestanden:
             continue
 
-        # Bepaal dominant type uit frontmatter
         type_telling: dict[str, int] = defaultdict(int)
         fms = []
         for md in md_bestanden:
@@ -193,9 +208,9 @@ def genereer_model(vault_root: Path) -> dict:
 
         label_veld = detecteer_label_veld(fms, dominant_type)
         klasse_veld = detecteer_klasse_veld(fms)
+        id_veld = detecteer_id_veld(fms, md_bestanden)
         attributen = detecteer_attributen(fms)
 
-        # Bepaal jas_klasse_override als er geen klasse_veld is
         jas_override = None if klasse_veld else dominant_type
 
         node_def = {
@@ -204,6 +219,7 @@ def genereer_model(vault_root: Path) -> dict:
             "frontmatter_type": dominant_type,
             "label_veld": label_veld,
             "klasse_veld": klasse_veld,
+            "id_veld": id_veld,
             "attributen": attributen,
         }
         if jas_override is not None:
@@ -211,7 +227,6 @@ def genereer_model(vault_root: Path) -> dict:
 
         node_types.append(node_def)
 
-    # Ontdek edge-types per node-type
     alle_edges = []
     voor_dubbelen: set[tuple] = set()
 
@@ -225,10 +240,9 @@ def genereer_model(vault_root: Path) -> dict:
                 voor_dubbelen.add(sleutel)
                 alle_edges.append(edge)
 
-    # Bouw JAS-klassen uit Obsidian-kleuren
     jas_klassen = list(kleur_map.values()) if kleur_map else []
 
-    model = {
+    return {
         "versie": "1.0",
         "beschrijving": f"Gegenereerd model voor vault: {vault_root.name}",
         "node_types": node_types,
@@ -254,8 +268,6 @@ def genereer_model(vault_root: Path) -> dict:
             "timeline_veld": "geldigheid-van",
         },
     }
-
-    return model
 
 
 def main():

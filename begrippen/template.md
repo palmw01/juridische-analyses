@@ -2,7 +2,7 @@
 type: begrip
 tags:
   - template
-begripsnaam: [slug]
+begripsnaam: ""
 jas-klasse: [één van de 13 JAS-elementen uit kaders.md]
 tags-formaat:
   - begrip
@@ -58,6 +58,6 @@ Markeringen:
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| is een | — | [[begrippen/…]] |
-| heeft | 1:1 / 1:n / n:m | [[begrippen/…]] |
-| leidt tot | — | [[begrippen/…]] |
+| is een | — | begrippen/… |
+| heeft | 1:1 / 1:n / n:m | begrippen/… |
+| leidt tot | — | begrippen/… |

@@ -193,7 +193,6 @@
           <attvalue for="24" value="AR-9-1" />
           <attvalue for="25" value="bepalen invorderbaarheid belastingaanslag" />
           <attvalue for="14" value="Beslissingsregel" />
-          <attvalue for="10" value="Art. 9 lid 1 IW 1990" />
           <attvalue for="5" value="2026-01-01" />
           <attvalue for="26" value="['plus', 'groter-dan-of-gelijk-aan']" />
         </attvalues>
@@ -221,11 +220,12 @@
       <edge source="zes-weken-na-dagtekening-aanslagbiljet" target="invorderbaarheid" id="18" label="leidt-tot" />
       <edge source="zes-weken-na-dagtekening-aanslagbiljet" target="AR-9-1" id="19" label="afleidingsregels" />
       <edge source="zes-weken" target="zes-weken-na-dagtekening-aanslagbiljet" id="20" label="leidt-tot" />
-      <edge source="AR-9-1" target="invorderbaarheid-belastingaanslag" id="21" label="begrip" />
-      <edge source="AR-9-1" target="dagtekening-aanslagbiljet" id="22" label="invoer" />
-      <edge source="AR-9-1" target="belastingaanslag" id="23" label="invoer" />
-      <edge source="AR-9-1" target="zes-weken-na-dagtekening-aanslagbiljet" id="24" label="invoer" />
-      <edge source="AR-9-1" target="invorderbaarheid" id="25" label="uitvoer" />
+      <edge source="AR-9-1" target="iw1990-art9" id="21" label="afgeleid-van" />
+      <edge source="AR-9-1" target="invorderbaarheid-belastingaanslag" id="22" label="bepaalt" />
+      <edge source="AR-9-1" target="dagtekening-aanslagbiljet" id="23" label="invoer" />
+      <edge source="AR-9-1" target="belastingaanslag" id="24" label="invoer" />
+      <edge source="AR-9-1" target="zes-weken-na-dagtekening-aanslagbiljet" id="25" label="invoer" />
+      <edge source="AR-9-1" target="invorderbaarheid" id="26" label="uitvoer" />
     </edges>
   </graph>
 </gexf>

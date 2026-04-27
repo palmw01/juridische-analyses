@@ -102,11 +102,11 @@ tags:
   - afleidingsregel
   - wet/[wet-afkorting]
   - art/[nummer]
-bron: "Art. [A] lid [L] [W]"
+afgeleid-van: "[[annotaties/[wet]-art[nr]]]"
 peildatum: [YYYY-MM-DD]
-begrip: "[[begrippen/[slug]]]"
+bepaalt: "[[begrippen/[slug]]]"
 invoer: []
-uitvoer: ""
+uitvoer: []
 operators: []
 ---
 ```
