@@ -11,20 +11,20 @@ markering: "is invorderbaar"
 bron: "Art. 9 lid 1 IW 1990"
 bronnen:
   - "Art. 9 lid 1 IW 1990"
-peildatum: "2026-01-01"
+peildatum: 2026-01-01
 interpretatiemethode: grammaticaal
-toelichting-klasse: "De formulering 'is invorderbaar' drukt de rechtsbetrekking uit: het moment waarop de ontvanger bevoegd is tot invordering (rechthebbende) en de belastingschuldige verplicht is te betalen (plichthebbende). De rechtssubjecten zijn niet expliciet in lid 1 vernoemd; zij vloeien voort uit art. 2 lid 1 onderdeel k (belastingschuldige) en art. 3 lid 1 IW 1990 (ontvanger)."
-definitie: "de juridische toestand waarin de ontvanger bevoegd is tot actieve invordering van een belastingaanslag en de belastingschuldige gehouden is tot betaling"
+toelichting-klasse: "Het werkwoord 'is invorderbaar' drukt de juridische toestand uit die de rechtsbetrekking tussen ontvanger (rechthebbende) en belastingschuldige (plichthebbende) activeert. Rechtssubjecten worden in lid 1 niet expliciet benoemd; zij vloeien voort uit art. 2 en 3 IW 1990. Invorderbaarheid is de drempelvoorwaarde voor het inzetten van invorderingsmaatregelen."
+definitie: "De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke betalingstermijn is verstreken, op grond waarvan de ontvanger bevoegd is invorderingsmaatregelen te treffen jegens de belastingschuldige"
 soort: "waar-niet-waar"
 herkomst: "afgeleid"
 aliases:
-  - "invorderbaar"
+  - invorderbaar
 is-een: []
 heeft: []
 leidt-tot: []
 afleidingsregels:
   - "[[regels/AR-9-1]]"
-geldigheid-van: "2026-01-01"
+geldigheid-van: 2026-01-01
 geldigheid-tot: ""
 status: concept
 ---
@@ -33,26 +33,25 @@ status: concept
 
 *"is invorderbaar"* *(Art. 9 lid 1 IW 1990, peildatum 2026-01-01)*
 
-de juridische toestand waarin de ontvanger bevoegd is tot actieve invordering van een belastingaanslag en de belastingschuldige gehouden is tot betaling
-
-**Toelichting:** De markering ("is invorderbaar") omschrijft de kern van de rechtsbetrekking tussen ontvanger (rechthebbende) en belastingschuldige (plichthebbende). Invorderbaarheid is een afgeleide toestand: zij treedt in op het tijdstip berekend door de afleidingsregel (AR-9-1). Vóór dat tijdstip is de belastingaanslag opeisbaar, maar nog niet invorderbaar via dwangmiddelen. Het begrip is booleaans (waar/niet-waar): een aanslag is op enig moment wél of niet invorderbaar.
+De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke betalingstermijn is verstreken, op grond waarvan de ontvanger bevoegd is invorderingsmaatregelen te treffen jegens de belastingschuldige
 
 ## Voorbeelden
 
 | Stelling | Waar? | Toelichting |
 |----------|-------|-------------|
-| Een aanslag IB met dagtekening aanslagbiljet 1 januari 2026 is op 12 februari 2026 invorderbaar | ja | Zes weken na 1 januari 2026 is 12 februari 2026; op dat tijdstip treedt invorderbaarheid in (AR-9-1) |
-| De ontvanger mag op 11 februari 2026 al een dwangbevel uitvaardigen voor een aanslag met dagtekening 1 januari 2026 | nee | Grensgeval: invorderbaarheid is nog niet ingetreden; een dwangbevel vereist een invorderbare aanslag (art. 12 IW 1990) — het dwangbevel zou prematuur zijn |
-| De indiening van een bezwaarschrift schorst de invorderbaarheid van de belastingaanslag | nee | Art. 9 lid 12 IW 1990 bepaalt uitdrukkelijk dat de verplichting tot betaling niet wordt geschorst door indiening van een bezwaar- of beroepschrift |
+| Een aanslag IB 2024 op naam van Jan de Groot is gedagtekend 1 januari 2026. Op 12 februari 2026 (42 dagen later) is de aanslag invorderbaar. | ja | Zes weken na 1 januari 2026 is 12 februari 2026; op dat moment treedt invorderbaarheid in op grond van art. 9 lid 1 IW 1990. |
+| De ontvanger vaardigt op 11 februari 2026 een dwangbevel uit voor dezelfde aanslag. | nee | Grensgeval: de zes-wekentermijn is nog niet verstreken; invorderbaarheid is nog niet ingetreden. De ontvanger kan op dat moment nog geen dwangbevel uitvaardigen op grond van art. 9 lid 1. |
+| Een aanslag waarover bezwaar is ingediend, is niet invorderbaar zolang het bezwaar loopt. | nee | Art. 9 lid 12 IW 1990 bepaalt uitdrukkelijk dat indiening van een bezwaar- of beroepschrift de betalingsverplichting niet schorst; invorderbaarheid treedt gewoon in na het verstrijken van de betalingstermijn. |
 
 ## Kenmerken
 
-- Treedt in op het door de afleidingsregel (AR-9-1) bepaalde tijdstip
-- Geldt voor belastingaanslagen als bedoeld in art. 2 lid 1 onderdeel m IW 1990
-- Wordt niet geschorst door bezwaar of beroep (art. 9 lid 12 IW 1990)
-- Verschilt van opeisbaarheid: invorderbaarheid is de juridische grondslag voor dwangmiddelen; opeisbaarheid is het recht op betaling na het verstrijken van de betalingstermijn
+- Invorderbaarheid is een binaire toestand (wel/niet invorderbaar) die automatisch intreedt na het verstrijken van de wettelijke termijn.
+- De toestand is afgeleid: zij wordt bepaald door de afleidingsregel AR-9-1 op basis van de dagtekening van het aanslagbiljet en de termijn van zes weken.
+- De rechtssubjecten (ontvanger als rechthebbende, belastingschuldige als plichthebbende) zijn niet in lid 1 benoemd maar vloeien voort uit art. 2 en 3 IW 1990.
+- Invorderbaarheid is de drempelvoorwaarde voor dwanginvordering (dwangbevel, beslaglegging).
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
+| — | — | — |

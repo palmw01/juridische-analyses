@@ -1,18 +1,20 @@
 ---
 type: begrip
 begripsnaam: dagtekening-aanslagbiljet
-jas-klasse: rechtsfeit
+jas-klasse: tijdsaanduiding
 tags:
   - begrip
-  - jas/rechtsfeit
+  - jas/tijdsaanduiding
   - wet/iw1990
   - art/9
 markering: "de dagtekening van het aanslagbiljet"
 bron: "Art. 9 lid 1 IW 1990"
-peildatum: "2026-01-01"
+bronnen:
+  - "Art. 9 lid 1 IW 1990"
+peildatum: 2026-01-01
 interpretatiemethode: systematisch
-toelichting-klasse: "Primair geclassificeerd als rechtsfeit (systematische interpretatie): de dagtekening is het tijdstip waaraan de aanvang van de invorderingstermijn als rechtsgevolg is verbonden — dagtekening creëert het recht tot invordering na zes weken. Tevens uitlegbaar als tijdsaanduiding (grammaticale interpretatie): de dagtekening fungeert als peildatum voor de berekening van het invorderingstijdstip. Brondefinitie van aanslagbiljet: art. 2 lid 2 onderdeel d IW 1990."
-definitie: "de op het aanslagbiljet vermelde datum waarop de belastingaanslag door de inspecteur is vastgesteld en die de aanvang van de invorderingstermijn bepaalt"
+toelichting-klasse: "Dubbelclassificatie: (1) tijdsaanduiding — de dagtekening is het referentiepunt waarvan de invorderingstermijn van zes weken wordt berekend; (2) rechtsfeit — de dagtekening is de handeling (het formeel dateren/uitreiken van het aanslagbiljet) waaraan het rechtsgevolg (aanvang invorderingstermijn) is verbonden. Primaire classificatie: tijdsaanduiding, omdat het meetpunt in de voorwaardeconstructie van lid 1 centraal staat."
+definitie: "De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel is gedagtekend en die dient als het vaste referentiepunt voor de berekening van de invorderingstermijn"
 soort: "datum"
 herkomst: "direct"
 aliases: []
@@ -20,9 +22,8 @@ is-een: []
 heeft: []
 leidt-tot:
   - "[[begrippen/zes-weken-na-dagtekening-aanslagbiljet]]"
-  - "[[begrippen/invorderbaarheid]]"
 afleidingsregels: []
-geldigheid-van: "2026-01-01"
+geldigheid-van: 2026-01-01
 geldigheid-tot: ""
 status: concept
 ---
@@ -31,28 +32,24 @@ status: concept
 
 *"de dagtekening van het aanslagbiljet"* *(Art. 9 lid 1 IW 1990, peildatum 2026-01-01)*
 
-de op het aanslagbiljet vermelde datum waarop de belastingaanslag door de inspecteur is vastgesteld en die de aanvang van de invorderingstermijn bepaalt
-
-**Toelichting:** De dagtekening speelt een dubbele rol in art. 9 lid 1 IW 1990. Als rechtsfeit (primaire classificatie, systematische interpretatie): het is het juridische feit waaraan het rechtsgevolg van invorderbaarheid na zes weken is verbonden. Als tijdsaanduiding (secundaire classificatie, grammaticale interpretatie): het is de peildatum voor de termijnberekening. De dagtekening staat vermeld op het aanslagbiljet als bedoeld in art. 2 lid 2 onderdeel d IW 1990. De datum van ontvangst van het aanslagbiljet door de belastingschuldige is niet bepalend.
+De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel is gedagtekend en die dient als het vaste referentiepunt voor de berekening van de invorderingstermijn
 
 ## Voorbeelden
 
 | Stelling | Waar? | Toelichting |
 |----------|-------|-------------|
-| Het aanslagbiljet vermeldt als dagtekening 15 maart 2026; de belastingschuldige ontvangt het biljet pas op 20 maart 2026. De termijn van zes weken begint op 15 maart 2026 te lopen | ja | De wet koppelt de termijn aan de dagtekening van het biljet, niet aan de datum van ontvangst; de ontvangstdatum is juridisch niet relevant voor de invorderingstermijn |
-| Een aanslagbiljet zonder dagtekening leidt ertoe dat geen invorderingstermijn gaat lopen | ja | Grensgeval: de aanvang van de termijn is onbepaald bij ontbrekende dagtekening; de wettelijke systematiek vereist een dagtekening als triggering fact |
-| De dagtekening van het aanslagbiljet is gelijk aan het moment waarop de aanslag invorderbaar wordt | nee | Grensgeval: de dagtekening is het startpunt van de termijn, niet het eindpunt; invorderbaarheid treedt pas in zes weken ná de dagtekening |
+| Een aanslagbiljet IB 2024 vermeldt als dagtekening 10 maart 2026. De invorderingstermijn begint op 10 maart 2026 te lopen. | ja | De dagtekening op het biljet is het wettelijke referentiepunt; de datum waarop de belastingschuldige het biljet feitelijk ontvangt, is niet bepalend. |
+| Een aanslagbiljet is gedagtekend op zaterdag 21 februari 2026. Omdat de Algemene termijnenwet niet van toepassing is (art. 9 lid 10 IW 1990), eindigt de zes-wekentermijn op zaterdag 4 april 2026. | ja | Grensgeval: lid 10 sluit de Algemene termijnenwet uitdrukkelijk uit; weekenden en feestdagen verlengen de termijn niet. |
+| De ontvanger hanteert als dagtekening de datum waarop het aanslagbiljet feitelijk is verzonden, die afwijkt van de datum op het biljet. | nee | De dagtekening van het aanslagbiljet is de datum die op het biljet staat vermeld, niet de verzenddatum; de vermelde datum is bepalend. |
 
 ## Kenmerken
 
-- Betreft de datum vermeld op het aanslagbiljet (niet de ontvangstdatum)
-- Fungeert als startpunt (dies a quo) van de invorderingstermijn
-- Brondocument: aanslagbiljet als bedoeld in art. 2 lid 2 onderdeel d IW 1990
-- Heeft een dubbele functie: rechtsfeit (triggert rechtsgevolg) én peildatum voor termijnberekening
+- Observeerbaar gegeven: de dagtekening staat op het aanslagbiljet zelf vermeld.
+- Lid 10 IW 1990 sluit de Algemene termijnenwet uit, waardoor de dagtekening zonder correctie voor weekenden of feestdagen als rekenpunt fungeert.
+- In systematisch opzicht is de dagtekening tevens een rechtsfeit (de handeling die de invorderingstermijn doet aanvangen), maar de primaire classificatie is tijdsaanduiding omdat de datumfunctie in lid 1 centraal staat.
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
 | leidt tot | — | [[begrippen/zes-weken-na-dagtekening-aanslagbiljet]] |
-| leidt tot | — | [[begrippen/invorderbaarheid]] |

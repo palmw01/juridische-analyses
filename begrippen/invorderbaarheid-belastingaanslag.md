@@ -9,23 +9,24 @@ tags:
   - art/9
 markering: "Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet."
 bron: "Art. 9 lid 1 IW 1990"
-peildatum: "2026-01-01"
-interpretatiemethode: grammaticaal
-toelichting-klasse: "De volledige zin vormt een afleidingsregel: uit de dagtekening van het aanslagbiljet plus zes weken volgt het tijdstip waarop invorderbaarheid intreedt. De regel combineert kenmerken van een beslissingsregel (invorderbaar ja/nee) en een rekenregel (berekening van het tijdstip)."
-definitie: "de regel die bepaalt dat een belastingaanslag invorderbaar wordt op het tijdstip gelegen zes weken na de dagtekening van het aanslagbiljet"
+bronnen:
+  - "Art. 9 lid 1 IW 1990"
+peildatum: 2026-01-01
+interpretatiemethode: systematisch
+toelichting-klasse: "De volledige zin van lid 1 vormt een beslissingsregel (type afleidingsregel): als zes weken zijn verstreken na de dagtekening van het aanslagbiljet, dan is de belastingaanslag invorderbaar (ja/nee). Dit is de hoofdregel; de overige leden (2, 4–9, 11) bevatten specialisatieregels die 'in afwijking van het eerste lid' gelden."
+definitie: "De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken na de dagtekening van het aanslagbiljet"
 soort: "waar-niet-waar"
 herkomst: "afgeleid"
 aliases: []
 is-een: []
 heeft:
   - "[[begrippen/belastingaanslag]]"
-  - "[[begrippen/dagtekening-aanslagbiljet]]"
   - "[[begrippen/zes-weken-na-dagtekening-aanslagbiljet]]"
 leidt-tot:
   - "[[begrippen/invorderbaarheid]]"
 afleidingsregels:
   - "[[regels/AR-9-1]]"
-geldigheid-van: "2026-01-01"
+geldigheid-van: 2026-01-01
 geldigheid-tot: ""
 status: concept
 ---
@@ -34,30 +35,27 @@ status: concept
 
 *"Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet."* *(Art. 9 lid 1 IW 1990, peildatum 2026-01-01)*
 
-de regel die bepaalt dat een belastingaanslag invorderbaar wordt op het tijdstip gelegen zes weken na de dagtekening van het aanslagbiljet
-
-**Toelichting:** De markering omvat de volledige beslissing: gegeven het rechtsobject (belastingaanslag) en het rechtsfeit (dagtekening aanslagbiljet) plus de parameter (zes weken), volgt het rechtsgevolg (invorderbaarheid). De regel is primair gecategoriseerd als beslissingsregel (uitkomst: invorderbaar ja/nee); de berekening van het exacte tijdstip is een in de formulering besloten rekencomponent. Art. 9 lid 10 sluit de Algemene termijnenwet uit, zodat de termijn kalenderstrikt doorloopt.
+De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken na de dagtekening van het aanslagbiljet
 
 ## Voorbeelden
 
 | Stelling | Waar? | Toelichting |
 |----------|-------|-------------|
-| Belastingaanslag met dagtekening aanslagbiljet 1 januari 2026: op 12 februari 2026 (zes weken later) is de aanslag invorderbaar | ja | Zes weken na 1 januari 2026 is 12 februari 2026; op dat tijdstip treedt invorderbaarheid in op grond van lid 1 |
-| Belastingaanslag met dagtekening aanslagbiljet 1 januari 2026: op 11 februari 2026 (een dag vóór zes weken) is de aanslag al invorderbaar | nee | Grensgeval: zes weken zijn nog niet verstreken; invorderbaarheid treedt pas in op de volledige zes-wekentermijn, d.w.z. op 12 februari 2026 |
-| Navorderingsaanslag met dagtekening aanslagbiljet 1 januari 2026: invorderbaarheid treedt in na zes weken op grond van lid 1 | nee | Grensgeval: lid 2 bepaalt afwijkend dat een navorderingsaanslag invorderbaar is één maand na dagtekening — lid 1 is niet van toepassing |
+| Aanslag IB 2024 op naam van BV Acme, gedagtekend 10 maart 2026. Op 21 april 2026 (42 dagen later) is de beslissingsregel vervuld en is de aanslag invorderbaar. | ja | Het beoordelingstijdstip ligt op of na de dagtekening plus zes weken; de conditie van de beslissingsregel is vervuld. |
+| Dezelfde aanslag op 20 april 2026 (dag 41): de beslissingsregel levert 'niet invorderbaar' op. | ja | Grensgeval: de zes-wekentermijn is nog niet volledig verstreken; invorderbaarheid treedt pas de volgende dag in. |
+| Voor een naheffingsaanslag levert deze beslissingsregel hetzelfde resultaat op als voor een reguliere aanslag. | nee | Lid 2 IW 1990 bepaalt voor naheffingsaanslagen een termijn van veertien dagen; deze beslissingsregel (lid 1) is dan niet van toepassing. |
 
 ## Kenmerken
 
-- Geldt voor alle belastingaanslagen in de zin van art. 2 lid 1 onderdeel m IW 1990, tenzij een later lid een afwijkende termijn stelt
-- Lid 1 fungeert als hoofdregel; leden 2, 4, 5, 6, 7, 8 en 9 stellen afwijkingen in bijzondere gevallen
-- Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit: de termijn loopt strikt kalendertechnisch door
-- De telbasis is de dagtekening van het aanslagbiljet, niet de datum van ontvangst door de belastingschuldige
+- Beslissingsregel met één conditie: het verstrijken van de termijn van zes weken na de dagtekening van het aanslagbiljet.
+- Lid 1 is de hoofdregel; de leden 2, 4–9 en 11 bevatten specialisatieregels die bij specifieke aanslagsoorten in de plaats treden van lid 1.
+- Lid 10 sluit de Algemene termijnenwet uit, zodat de termijn van zes weken kalenderstrikt wordt berekend.
+- De uitkomst is de invorderbaarheid (ja/nee) van de belastingaanslag.
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
 | heeft | 1:1 | [[begrippen/belastingaanslag]] |
-| heeft | 1:1 | [[begrippen/dagtekening-aanslagbiljet]] |
 | heeft | 1:1 | [[begrippen/zes-weken-na-dagtekening-aanslagbiljet]] |
 | leidt tot | — | [[begrippen/invorderbaarheid]] |

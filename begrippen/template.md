@@ -57,6 +57,6 @@ Markeringen:
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| is een | — | [[begrippen/...]] |
-| heeft | 1:1 / 1:n / n:m | [[begrippen/...]] |
-| leidt tot | — | [[begrippen/...]] |
+| is een | — | begrippen/... |
+| heeft | 1:1 / 1:n / n:m | begrippen/... |
+| leidt tot | — | begrippen/... |

@@ -1,30 +1,32 @@
 ---
 type: begrip
 begripsnaam: zes-weken-na-dagtekening-aanslagbiljet
-jas-klasse: tijdsaanduiding
+jas-klasse: voorwaarde
 tags:
   - begrip
-  - jas/tijdsaanduiding
+  - jas/voorwaarde
   - wet/iw1990
   - art/9
 markering: "zes weken na de dagtekening van het aanslagbiljet"
 bron: "Art. 9 lid 1 IW 1990"
-peildatum: "2026-01-01"
+bronnen:
+  - "Art. 9 lid 1 IW 1990"
+peildatum: 2026-01-01
 interpretatiemethode: grammaticaal
-toelichting-klasse: "De gecombineerde uitdrukking duidt het tijdstip aan waarop invorderbaarheid van een reguliere belastingaanslag intreedt. Bestaat uit de parameter 'zes weken', de operator 'na' en de peildatum/het rechtsfeit 'de dagtekening van het aanslagbiljet'. Let op: art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit — de termijn van zes weken loopt strikt kalendertechnisch door, ook bij weekenden en feestdagen."
-definitie: "het tijdstip gelegen zes aaneengesloten weken na de dagtekening van het aanslagbiljet, berekend zonder toepassing van de Algemene termijnenwet, waarop een reguliere belastingaanslag invorderbaar wordt"
+toelichting-klasse: "De temporele zinsnede 'zes weken na de dagtekening van het aanslagbiljet' functioneert als de conditie waaraan voldaan moet zijn voor invorderbaarheid. De aanslag is pas invorderbaar nadat dit tijdvak is verstreken. De formulering bevat twee tijdsaanduidingen: de termijn ('zes weken') en het referentiepunt ('de dagtekening')."
+definitie: "De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet"
 soort: "datum"
 herkomst: "afgeleid"
 aliases: []
 is-een: []
 heeft:
-  - "[[begrippen/dagtekening-aanslagbiljet]]"
   - "[[begrippen/zes-weken]]"
+  - "[[begrippen/dagtekening-aanslagbiljet]]"
 leidt-tot:
   - "[[begrippen/invorderbaarheid]]"
 afleidingsregels:
   - "[[regels/AR-9-1]]"
-geldigheid-van: "2026-01-01"
+geldigheid-van: 2026-01-01
 geldigheid-tot: ""
 status: concept
 ---
@@ -33,29 +35,26 @@ status: concept
 
 *"zes weken na de dagtekening van het aanslagbiljet"* *(Art. 9 lid 1 IW 1990, peildatum 2026-01-01)*
 
-het tijdstip gelegen zes aaneengesloten weken na de dagtekening van het aanslagbiljet, berekend zonder toepassing van de Algemene termijnenwet, waarop een reguliere belastingaanslag invorderbaar wordt
-
-**Toelichting:** De tijdsaanduiding is een samenstelling van de parameter "zes weken", de relatie-operator "na" en het rechtsfeit/de peildatum "dagtekening van het aanslagbiljet". De uitdrukking geeft niet een periode maar een eindpunt (tijdstip van intreden invorderbaarheid). Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uitdrukkelijk uit: de termijn loopt strikt kalendermatig door, zonder verlenging bij weekenden of feestdagen. De tijdsaanduiding is afgeleid: zij wordt berekend door de afleidingsregel AR-9-1.
+De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet
 
 ## Voorbeelden
 
 | Stelling | Waar? | Toelichting |
 |----------|-------|-------------|
-| Dagtekening aanslagbiljet: 1 januari 2026 (donderdag). Zes weken later is 12 februari 2026 (donderdag). Op 12 februari 2026 wordt de aanslag invorderbaar | ja | Zes weken (42 dagen) na 1 januari 2026 is inderdaad 12 februari 2026; dit is het tijdstip van intreden invorderbaarheid |
-| Dagtekening aanslagbiljet: 30 januari 2026 (vrijdag). Het invorderingstijdstip valt op maandag 16 maart 2026 wegens het weekend | nee | Grensgeval: art. 9 lid 10 sluit de Algemene termijnenwet uit; het tijdstip valt op 13 maart 2026 (vrijdag), ook al is dat een werkdag na een weekend — de Algemene termijnenwet (uitstel tot eerstvolgende werkdag) is niet van toepassing |
-| De tijdsaanduiding 'zes weken na dagtekening aanslagbiljet' is gelijk aan 'één maand na dagtekening aanslagbiljet' | nee | Grensgeval: zes weken zijn altijd 42 dagen; één maand is kalendermaand-afhankelijk (28, 29, 30 of 31 dagen) — de begrippen zijn niet synoniem |
+| Een aanslagbiljet is gedagtekend 1 januari 2026. De conditie 'zes weken na de dagtekening' is vervuld op 12 februari 2026. | ja | Zes weken (42 kalenderdagen) na 1 januari 2026 is 12 februari 2026; op dat moment is de voorwaarde voldaan en wordt de aanslag invorderbaar. |
+| Een aanslagbiljet is gedagtekend op vrijdag 6 februari 2026. De conditie is vervuld op maandag 23 maart 2026 (eerste werkdag na 42 dagen). | nee | Grensgeval: de Algemene termijnenwet is uitgesloten (art. 9 lid 10 IW 1990); de termijn loopt kalenderstrikt. Zes weken na 6 februari 2026 is zaterdag 21 maart 2026 — dat is het moment van invorderbaarheid, niet de eerstvolgende werkdag. |
+| Voor een navorderingsaanslag geldt de conditie 'zes weken na de dagtekening' niet. | ja | Lid 2 wijkt af van lid 1 en stelt een termijn van één maand vast; de voorwaarde van zes weken is dan niet van toepassing. |
 
 ## Kenmerken
 
-- Geeft het eindtijdstip van de betalingstermijn aan (dies ad quem)
-- Berekend door optelling: dagtekening + 42 kalenderdagen
-- Algemene termijnenwet is niet van toepassing (art. 9 lid 10 IW 1990)
-- Alleen van toepassing op reguliere belastingaanslagen; afwijkende termijnen gelden voor navorderingsaanslagen (1 maand), naheffingsaanslagen (14 dagen) en andere gevallen (leden 4–9)
+- Samengestelde conditie: bestaat uit twee componenten — de tijdsduur (zes weken) en het referentiepunt (dagtekening aanslagbiljet).
+- Lid 10 sluit de Algemene termijnenwet uit, zodat de conditie strikt kalendermatig wordt berekend.
+- De conditie is de enige voorwaarde voor invorderbaarheid onder lid 1; er gelden geen aanvullende materiële voorwaarden.
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/dagtekening-aanslagbiljet]] |
 | heeft | 1:1 | [[begrippen/zes-weken]] |
+| heeft | 1:1 | [[begrippen/dagtekening-aanslagbiljet]] |
 | leidt tot | — | [[begrippen/invorderbaarheid]] |
