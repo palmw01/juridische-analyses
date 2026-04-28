@@ -114,7 +114,7 @@ brondefinitie
 
 | Veld | Inhoud |
 |------|--------|
-| **Definitie** | Regel die nieuwe feiten of waarden creëert op basis van bestaande feiten of waarden. Twee typen: **Beslissingsregel** (ja/nee, recht bestaat of niet) en **Rekenregel** (bedrag, duur, hoogte). |
+| **Definitie** | Regel die nieuwe feiten of waarden creëert op basis van bestaande feiten of waarden. Vier typen: **Beslissingsregel** (ja/nee, recht bestaat of niet), **Rekenregel** (bedrag, duur, hoogte), **Beperkingsregel** (beperkt of maximeert een waarde of recht), **Specialisatieregel** (specificeert een hoofdregel voor een deelgeval via "in afwijking van"-constructie). Zie `kaders-regels.md` voor taalpatronen per type. |
 | **Herkenningsvraag** | *Hoe wordt* een variabele berekend of afgeleid? *Hoe wordt* een specifiek rechtssubject of rechtsobject bepaald? |
 | **Taalkenmerken** | Is verminderd met, bedraagt vermeerderd met, wordt gesteld op, is het gezamenlijke bedrag van, berekend naar. |
 | **Invorderingscontext** | Berekening invorderingsrente (art. 28 IW 1990), vaststelling openstaand bedrag, belastingschuld na verrekening. |
@@ -180,7 +180,7 @@ brondefinitie
 
 | Veld | Inhoud |
 |------|--------|
-| **Definitie** | **Delegatiebevoegdheid**: De bevoegdheid om regels nader uit te werken in lagere regelgeving. **Delegatie-invulling**: De daadwerkelijke gedelegeerde regeling. |
+| **Definitie** | **Delegatiebevoegdheid**: De bevoegdheid om regels nader uit te werken in lagere regelgeving. **Delegatie-invulling**: De daadwerkelijke gedelegeerde regeling. Dit kader omvat uitsluitend delegatie strikt sensu (overdracht van regelgevende bevoegdheid). Mandaat (bevoegdheidsuitoefening namens een ander) en attributie (wettelijke toekenning van een nieuwe bevoegdheid) vallen buiten dit JAS-element. |
 | **Herkenningsvraag** | Geeft een bepaling *opdracht* nadere regels te stellen? Verwijst de tekst *naar een hogere wet*? |
 | **Taalkenmerken** | Verplicht: "bij (of krachtens) amvb worden regels gesteld". Facultatief: "kunnen regels worden gesteld". |
 | **Invorderingscontext** | Art. 73 IW 1990 → Uitvoeringsbesluit IW 1990 (UBIB 1990). |
@@ -215,7 +215,7 @@ Eén diagram per Rechtsbetrekking in het artikel. Bij meerdere Rechtsbetrekkinge
 
 ### Centrale klasse
 
-De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsbetrekking: het Rechtsfeit als centrale knoop.
+De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsbetrekking: het Rechtsfeit als centrale knoop. Naast Rechtsbetrekking en Rechtsfeit kunnen ook **Afleidingsregel** en **Voorwaarde** als centrale klasse fungeren — namelijk als het artikel primair een berekening, beslissing of conditie beschrijft zonder expliciete rechtsbetrekking.
 
 ### Randlabels per JAS-klasse-combinatie
 

@@ -6,6 +6,8 @@ agent: general-purpose
 
 # Skill: /begrip
 
+> **Conflictresolutie:** Bij tegenstrijdigheid tussen deze SKILL.md en `kaders.md` of `kaders-regels.md` zijn **de kaderdocumenten leidend**. SKILL.md geeft procesinstructies; de kaders geven de juridisch-inhoudelijke en analytische normen.
+
 **Trigger:** `/begrip [slug]` of `/begrip-alles art. [A] [W]`
 
 Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode. Leest de door `/annoteer` aangemaakte begrip-noten (met gevulde frontmatter) en vult de A3-inhoud in: definitie, voorbeelden, kenmerken en relaties. Bij JAS-klasse Afleidingsregel maakt de skill tevens een regel-noot aan in `regels/`.
@@ -23,9 +25,9 @@ De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline s
 ## Voorbereiding
 
 1. **Lees de begrip-noot** in `begrippen/[slug].md` — de frontmatter bevat alle benodigde informatie.
-2. **Zoek alle annotaties** die naar dit begrip verwijzen:
+2. **Zoek alle annotaties** die naar dit begrip verwijzen — vervang `BEGRIPSNAAM` door de waarde van het `begripsnaam`-veld uit de frontmatter:
    ```
-   grep -rl "begrippen/[slug]" annotaties/
+   grep -rl "begrippen/BEGRIPSNAAM" annotaties/
    ```
    Lees elke gevonden annotatie-noot. Verzamel per annotatie de rij uit de annotatietabel die betrekking heeft op dit begrip: `markering`, `interpretatiemethode` en de artikelreferentie. Dit zijn alle markeringen die de definitie moeten voeden.
 3. **Vul het `bronnen`-veld** in de frontmatter met alle gevonden artikelreferenties (als lijst). Het bestaande `bron`-veld blijft ongewijzigd.
@@ -71,7 +73,8 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 
 - Leg relaties met andere begrippen vast via de velden `is-een`, `heeft`, `leidt-tot` in de frontmatter.
 - Gebruik wiki-links naar betrokken begrip-noten: `[[begrippen/[slug]]]`.
-- Vul ook de `## Relaties`-tabel in de body in.
+- **Vul de `## Relaties`-tabel altijd in** — ook als de frontmatter-arrays leeg zijn. Een lege tabel is alleen toegestaan als het begrip aantoonbaar geen relaties heeft met andere begrippen in de vault.
+- Bij `herkomst: afgeleid` is minimaal één `leidt-tot`-relatie verplicht (het rechtsgevolg dat dit begrip teweegbrengt) of een `heeft`-relatie naar de invoerbegrippen van de afleidingsregel.
 - **Alleen uitgaande (forward) relaties opnemen** — nooit backward links die al als forward link in een ander begrip staan. Zie begrippenkader §Relaties en kardinaliteit.
 
 ---
@@ -172,6 +175,8 @@ Markeringen:
 ```
 
 Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
+
+> **Noot wiki-links in Relaties-body:** De `[[...]]`-links in de `## Relaties`-tabel zijn **verplichte wiki-links** in de definitieve begrip-noot — dit zijn geen template-wikilinks in de zin van CLAUDE.md §Templates (dat verbod geldt uitsluitend voor de template-bestanden zelf, niet voor de gegenereerde inhoud).
 
 ---
 

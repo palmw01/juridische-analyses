@@ -117,11 +117,22 @@ In afwijking van [naam hoofdregel]:
 indien [specificerende voorwaarde]
 ```
 
+- `[naam hoofdregel]`: gebruik de letterlijke waarde van het `naam`-veld van de hoofdregel-noot (platte tekst, geen wiki-link).
+- `invoer`: de voorwaardenbegrippen die het deelgeval specificeren (bijv. aanslagsoort, uitzondering).
+- `uitvoer`: het begrip waarop de afwijkende waarde van toepassing is — vaak hetzelfde uitvoerbegrip als de hoofdregel, maar met een andere waarde.
+
 ---
 
 ## Tussenresultaten in impliciete algoritmen
 
 Wetgeving bevat soms **impliciete algoritmen**: één wetsformulering bevat meerdere berekeningen of beslissingen (Handleiding p. 6–7). Elke tussenberekening of -beslissing moet als **eigen begrip** worden benoemd en als **eigen afleidingsregel** worden vastgelegd.
+
+### Heuristische triggertest
+
+Split in tussenresultaten als aan **ten minste één** van de volgende criteria is voldaan:
+- De wetsformulering bevat meer dan één rekenkundige operator (bijv. optelling én deling in dezelfde zin).
+- Een invoerbegrip van de afleidingsregel is zelf afgeleid (herkomst: afgeleid) maar bestaat nog niet als begrip-noot.
+- De Formele regel zou meer dan twee regels invoer bevatten voordat het uitvoerbegrip wordt bereikt.
 
 ### Werkwijze
 
@@ -145,7 +156,7 @@ De tag `#tussenresultaat` maakt afgeleide tussenberekeningen filterbaar in Obsid
 ## Invoer- en uitvoerbegrippen
 
 - **Invoer**: wiki-links naar begrip-noten die als variabele of parameter dienen (JAS-klasse: Variabele, Parameter, Tijdsaanduiding)
-- **Uitvoer**: één wiki-link naar het afgeleide begrip-noot (JAS-klasse: Afleidingsregel)
+- **Uitvoer**: in het `uitvoer`-veld een lijst met wiki-links naar de uitvoerbegrippen. Normaal één element. Bij meervoudig uitvoer (zeldzaam, bijv. een regel die zowel een rechtsbetrekking als een tijdsaanduiding bepaalt): maak aparte regel-noten per uitvoerbegrip in plaats van meerdere elementen in één `uitvoer`-lijst.
 - Het uitvoerbegrip heeft `herkomst: afgeleid` en een wiki-link in het `afleidingsregels`-veld terug naar deze regel-noot
 - Nooit losse tekst — altijd wiki-links naar begrip-noten
 
@@ -169,7 +180,10 @@ Koppelingspatroon:
 
 ## Voorbeeldreeksen
 
-Minimaal 2 reeksen; bij meerdere voorwaarden minimaal 1 reeks per tak.
+Minimaal 2 reeksen. Aanvullende eisen:
+- Bij meerdere conditionele takken (EN/OF-voorwaarden): minimaal **1 reeks per tak**.
+- Bij Specialisatieregels: altijd een reeks voor het deelgeval **én** een reeks die laat zien dat de hoofdregel voor dat deelgeval niet geldt.
+- Bij Beperkingsregels: altijd een reeks voor precies op de grenswaarde en een reeks waarbij de grenswaarde wordt overschreden.
 
 | Invoerwaarden | Verwachte uitkomst | Is voorspelling juridisch juist? |
 |--------------|-------------------|----------------------------------|

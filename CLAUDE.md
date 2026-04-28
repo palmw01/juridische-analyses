@@ -44,7 +44,9 @@ In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → roo
 
 ### Templates — geen wikilinks
 
-Templates mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
+De templatebestanden (`annotaties/template.md`, `begrippen/template.md`, `regels/template.md`) mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik in de templatebestanden bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
+
+Dit verbod geldt **niet** voor SKILL.md-instructiedocumenten of voor de gegenereerde output (annotatie-noten, begrip-noten, regel-noten). Die bevatten wél `[[...]]`-wikilinks — dat is vereist voor Obsidian Graph View-verbindingen.
 
 ### Annotatie → begrip: strikte volgorde
 
@@ -102,13 +104,13 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 | Skill | Bestand | Functie |
 |-------|---------|---------|
-| `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren + classificeren |
-| `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie + voorbeelden + afleidingsregels |
+| `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren + classificeren; bij conflict: kaders.md is leidend |
+| `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie + voorbeelden + afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties |
-| JAS kaders | `.claude/skills/annoteer/kaders.md` | Canonieke JAS v1.0.10 taxonomie (ongewijzigd) |
-| Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
-| Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak |
+| JAS kaders | `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 typen afleidingsregels, diagramregels, kleurcodering |
+| Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
+| Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: 4 typen, taalpatronen, tussenresultaat-heuristiek, RegelSpraaak, voorbeeldreeksen per tak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats |
+| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
 | Graph-export | `tools/export_graph.py`, `tools/generate_model.py`, `tools/graph-model.json` | Vault → GraphML/GEXF voor Gephi/Cytoscape |

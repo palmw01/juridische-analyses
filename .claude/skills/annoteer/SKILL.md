@@ -1,5 +1,7 @@
 # Skill: /annoteer
 
+> **Conflictresolutie:** Bij tegenstrijdigheid tussen deze SKILL.md en `kaders.md` is **`kaders.md` leidend**. SKILL.md geeft procesinstructies; `kaders.md` geeft de juridisch-inhoudelijke normen.
+
 **Trigger:** `/annoteer art. [A] [W]`
 
 Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificeren (A2b). Output is een lichte annotatie-noot per artikel en N begrip-noten met uitsluitend gevulde frontmatter (A2-tussenproduct). Begrip-inhoud (A3) wordt later ingevuld door `/begrip`.
@@ -15,7 +17,7 @@ Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificer
 3. **Haal brondefinities op** via `wettenbank_artikel` op het begripsbepalingen-artikel van dezelfde wet (zie `bwb-mapping.md` voor artikelnummer).
 4. **Noteer het `pad`-veld** letterlijk uit de MCP-response — dit is de structuurpositie. Neem dit nooit aan op basis van de artikelinhoud.
 5. **Noteer de peildatum** uit `versiedatum` in de MCP-response. Gebruik nooit de datum van vandaag.
-6. **Extraheer kruisreferenties** conform `.claude/skills/wettenbank/verwijzingen.md` en voeg de `kruisreferenties`-array toe aan de annotatie-frontmatter.
+6. **Extraheer kruisreferenties** conform `.claude/skills/wettenbank/verwijzingen.md` uit **alle leden van het artikel** — ook de leden die niet in de annotatietabel worden uitgewerkt — en voeg de `kruisreferenties`-array toe aan de annotatie-frontmatter.
 
 ---
 
@@ -23,7 +25,8 @@ Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificer
 
 ### Algemene markeringsregels
 
-- **Lidwoord altijd meenemen** in de markering (maakt volledigheidscheck mogelijk).
+- **Diagram-gedreven, niet uitputtend**: markeer alleen wetsformuleringen die deel uitmaken van een diagram van een centrale klasse of daarmee samenhangen. Vermijd "wilde weg" markeren van losse woorden zonder relatie tot een centrale klasse.
+- **Lidwoord altijd meenemen** in de markering (maakt volledigheidscheck mogelijk voor geclassificeerde tekst).
 - **Verwijzing altijd meenemen** als die in het te markeren stukje staat (draagt bij aan betekenis en klasse).
 - Markeer **precies dat stukje tekst** dat maximaal de betekenis representeert van de klasse die je wilt toekennen — dit is klasse-afhankelijk:
   - *Variabele*: neem werkwoord en voorwaarden mee (met lidwoord)
@@ -32,6 +35,7 @@ Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificer
 - **Markeringen mogen overlappen**: dezelfde wetsformulering kan meerdere klassen krijgen; zet elke klasse op een aparte rij in de annotatietabel.
 - **Begin bij de centrale klassen**: start met rechtsbetrekking en rechtsfeit; werk daarna naar context en randcondities.
 - **Start bij de klasse die gecreëerd of afgeleid wordt**, niet bij de context.
+- **Bij twijfel over de reikwijdte van een markering**: werk meteen met een concreet voorbeeld van de betekenis die je wilt duiden — dat maakt scherper wat je wel/niet in de markering opneemt.
 
 ### Klasse-specifieke markeringsregels
 
@@ -116,6 +120,7 @@ Body:
 | [doorlopend] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch | [[begrippen/[slug]]] | — |
 
 - Nummerering doorlopend over alle leden.
+- **Standaard: annoteer alle leden.** Als de scope beperkt is, documenteer dit op de eerste regel van de annotatietabel als cursieve noot: *Scope: lid [X]. Overige leden nog niet geannoteerd.*
 - Overlappende markeringen: elke klasse op aparte rij, zelfde citaat mag meerdere keren voorkomen.
 - **Signalering**: gebruik `—` als er geen bijzonderheden zijn. Gebruik `⚠ [toelichting]` bij meerduidigheid, spanning met andere artikelen, open normen of delegatiegaten (bijv. `⚠ meerduidig: ook uitlegbaar als voorwaarde` of `⚠ spanning met art. 4:81 Awb`).
 
@@ -127,9 +132,13 @@ Body:
 
 Bij geen delegatie: schrijf exact "Geen delegatiebevoegdheden in artikel [A]."
 
+Als een gedelegeerde regeling niet opvraagbaar is via `wettenbank_artikel` (fout-respons of geen versiedatum): schrijf in de kolom Invulling: "Niet beschikbaar via wettenbank — handmatige verificatie vereist."
+
 ### 2. Diagram (A2c)
 
 Maak na de annotatietabel de `## Diagram`-sectie aan. Volg `kaders.md §Diagramregels` volledig.
+
+> **Brugfunctie:** het diagram verbindt het juridisch scenario (A1) met de gemarkeerde wetsformuleringen (A2) en bereidt de betekenisgeving (A3) voor. Vertrekpunt is altijd de centrale klasse die bij de eerste relevante gebeurtenis uit het scenario hoort.
 
 Werkwijze:
 1. Identificeer alle Rechtsbetrekkingen in de annotatietabel. Eén diagram per Rechtsbetrekking.
@@ -138,7 +147,7 @@ Werkwijze:
 4. Knooplabels: `"[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
 5. Titel boven elk blok: `### Diagram [N] — lid [L]: [korte omschrijving rechtsbetrekking]`
 
-Bij geen Rechtsbetrekking en geen Rechtsfeit in het artikel: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
+Bij afwezigheid van Rechtsbetrekking én Rechtsfeit: gebruik Afleidingsregel of Voorwaarde als centrale klasse als het artikel primair een berekening, beslissing of conditie beschrijft (conform `kaders.md §Centrale klasse`). Alleen als alle vier ontbreken: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
 
 ### 3. Begrip-noten (lege frontmatter)
 
@@ -211,6 +220,8 @@ Print aan het einde van elke annotatie-run een overzicht van hergebruikte begrip
 **Hergebruikte begrippen (definitie mogelijk bijstellen):**
 - `[[begrippen/[slug]]]` — primaire bron: [bron-veld]; nieuw ook geannoteerd in Art. [A] [W]
 
-Voor elk hergebruikt begrip: voer `/begrip [slug]` uit om de definitie bij te stellen op basis van alle markeringen.
+**Voer `/begrip [slug]` niet automatisch uit vanuit deze skill.** `/begrip` start een aparte agent-context en kan niet worden gechaind vanuit `/annoteer`. Rapporteer de hergebruikte begrippen als actievelijst; de gebruiker roept daarna handmatig `/begrip [slug]` aan voor elk gerapporteerd begrip.
+
+Na het bijstellen van een begrip (via handmatige `/begrip`-aanroep): controleer via het `afleidingsregels`-veld of afhankelijke regel-noten in `regels/` nog kloppen — met name of invoer/uitvoer-begrippen en het taalpatroon nog overeenkomen met de bijgestelde definitie.
 
 Als er geen hergebruikte begrippen zijn: schrijf exact "Geen hergebruikte begrippen."

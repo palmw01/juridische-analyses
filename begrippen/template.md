@@ -11,8 +11,7 @@ tags-formaat:
   - art/[nummer]             # bijv. art/25
 markering: "[letterlijk geciteerd tekstfragment incl. lidwoord en verwijzingen]"
 bron: "Art. [A] lid [L] [W]"
-bronnen:
-  - "Art. [A] lid [L] [W]"   # primaire bron; aanvullen bij actualisatie met nieuwe artikelen
+bronnen: []   # gevuld door /begrip in stap 3 Voorbereiding; leeg laten na /annoteer
 peildatum: [YYYY-MM-DD]
 interpretatiemethode: [grammaticaal | systematisch | teleologisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
@@ -58,6 +57,6 @@ Markeringen:
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| is een | — | begrippen/… |
-| heeft | 1:1 / 1:n / n:m | begrippen/… |
-| leidt tot | — | begrippen/… |
+| is een | — | [[begrippen/...]] |
+| heeft | 1:1 / 1:n / n:m | [[begrippen/...]] |
+| leidt tot | — | [[begrippen/...]] |

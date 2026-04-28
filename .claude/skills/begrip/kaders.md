@@ -99,6 +99,8 @@ Kies één waarde:
 
 Voeg `[id]` toe als het begrip dient als unieke sleutel — zie §Identificatiebegrippen.
 
+> **Noot rechtssubjecten:** Personen en entiteiten (JAS-klasse: Rechtssubject) passen niet altijd in de bovenstaande datatypes. Gebruik `tekst` voor de naam of aanduiding van een rechtssubject. Leg het identificatieveld (bijv. BSN, RSIN) vast als een separaat Variabele-begrip met `soort: [datatype] [id]` (bijv. `getal [id]` voor BSN). Verwijs vanuit het rechtssubject-begrip naar dat identificatiebegrip via `heeft`.
+
 ### Herkomst — VERPLICHT voor gegevensmodel
 
 Dit veld is vereist voor A6d én A6e. Het onderscheidt observeerbare gegevens van berekende gegevens:
