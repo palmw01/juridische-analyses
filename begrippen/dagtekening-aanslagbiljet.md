@@ -11,6 +11,7 @@ markering: "de dagtekening van het aanslagbiljet"
 bron: "Art. 9 lid 1 IW 1990"
 bronnen:
   - "Art. 9 lid 1 IW 1990"
+  - "Art. 9 lid 5 IW 1990"
 peildatum: 2026-01-01
 interpretatiemethode: systematisch
 toelichting-klasse: "Dubbelclassificatie: (1) tijdsaanduiding — de dagtekening is het referentiepunt waarvan de invorderingstermijn van zes weken wordt berekend; (2) rechtsfeit — de dagtekening is de handeling (het formeel dateren/uitreiken van het aanslagbiljet) waaraan het rechtsgevolg (aanvang invorderingstermijn) is verbonden. Primaire classificatie: tijdsaanduiding, omdat het meetpunt in de voorwaardeconstructie van lid 1 centraal staat."

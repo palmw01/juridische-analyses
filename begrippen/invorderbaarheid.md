@@ -11,6 +11,7 @@ markering: "is invorderbaar"
 bron: "Art. 9 lid 1 IW 1990"
 bronnen:
   - "Art. 9 lid 1 IW 1990"
+  - "Art. 9 lid 5 IW 1990"
 peildatum: 2026-01-01
 interpretatiemethode: grammaticaal
 toelichting-klasse: "Het werkwoord 'is invorderbaar' drukt de juridische toestand uit die de rechtsbetrekking tussen ontvanger (rechthebbende) en belastingschuldige (plichthebbende) activeert. Rechtssubjecten worden in lid 1 niet expliciet benoemd; zij vloeien voort uit art. 2 en 3 IW 1990. Invorderbaarheid is de drempelvoorwaarde voor het inzetten van invorderingsmaatregelen."
