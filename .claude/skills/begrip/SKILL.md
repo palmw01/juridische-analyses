@@ -33,7 +33,11 @@ De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline s
 3. **Vul het `bronnen`-veld** in de frontmatter met alle gevonden artikelreferenties (als lijst). Het bestaande `bron`-veld blijft ongewijzigd.
 4. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor relaties (is-een, heeft, leidt-tot).
 
-Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld verwijst naar dat artikel, en verwerk ze achtereenvolgens.
+Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld **of** het `bronnen`-veld verwijst naar dat artikel, en verwerk ze achtereenvolgens:
+   ```
+   grep -rl "Art. [A] [W]" begrippen/
+   ```
+   Vervang `[A]` en `[W]` door het artikelnummer en de wet-afkorting (bijv. `Art. 25 IW 1990`).
 
 ---
 
@@ -41,7 +45,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 
 - Sluit zo nauw mogelijk aan bij de **letterlijke markering** in het frontmatter-veld `markering`.
 - Benoem interpretatie- en preciseringskeuzes expliciet.
-- Als de betekenis afwijkt van de letterlijke formulering: onderbouw dit in `toelichting-klasse`.
+- Onderbouw **altijd** de klassekeuze in `toelichting-klasse` — ook als die overeenkomt met de letterlijke formulering. Traceerbaarheid vereist expliciete motivering per element (Handleiding p.14–15).
 - Geen parafrase van de wetstekst — gebruik de markering als startpunt.
 - Vul altijd `soort` (datatype) en `herkomst` (direct/afgeleid) in conform begrippenkader §Eigenschappen.
 - Markeer identificatiebegrippen met `[id]` in het `soort`-veld conform begrippenkader §Identificatiebegrippen.
@@ -85,7 +89,7 @@ Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[
 - Vul altijd het `naam`-veld in met een leesbare naam (actieve werkwoordsvorm).
 - Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit.
 - Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan. Voeg de tag `#tussenresultaat` toe aan de tags-lijst van elke tussenresultaat-begrip-noot.
-- Kies het taalpatroon uit `## Formele regel` passend bij het `soort` en verwijder de overige blokken.
+- Kies het taalpatroon uit `## Formele regel` passend bij het `soort`-veld van de **regel-noot** (Beslissingsregel → EN/OF-patroon; Rekenregel → berekeningspatroon; Beperkingsregel → grenspatroon; Specialisatieregel → afwijkingspatroon — zie `kaders-regels.md §Taalpatronen`) en verwijder de overige blokken.
 - Controleer of het taalpatroon aansluit bij de RegelSpraaak-oriëntatie uit het regelkader.
 
 **Vier soorten:**
@@ -190,6 +194,7 @@ Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
 - Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
 - Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
 - Stel `status: concept` in op alle nieuw aangemaakte begrip-noten.
+- Het `geldigheid-van`-veld is altijd gelijk aan de `versiedatum` uit de annotatie-frontmatter (`peildatum`-veld) — nooit de datum van vandaag.
 
 ### Verplichte checklist-output na elk begrip
 

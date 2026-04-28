@@ -153,13 +153,7 @@ Bij afwezigheid van Rechtsbetrekking én Rechtsfeit: gebruik Afleidingsregel of 
 
 Maak per annotatierij een begrip-noot aan in `begrippen/[slug].md`. **Vul uitsluitend de frontmatter in** — definitie, voorbeelden en kenmerken blijven leeg (dat doet `/begrip`).
 
-Begripsnaam-vuistregels (Handleiding §3.5.2a):
-- Begin met **zelfstandig naamwoord** (uitzondering: afleidingsregel/rechtsfeit → actieve werkwoordsvorm)
-- **Enkelvoudsvorm**, tenzij de meervoudsvorm in de wet tot andere betekenis leidt
-- **Geen hoofdletters**, geen Romeinse cijfers, zo min mogelijk afkortingen
-- Sluit zo nauw mogelijk aan bij de **letterlijke markering**
-- Voeg wettelijke context toe als dezelfde formulering in meerdere wetten anders betekent (bijv. `verzekerde zorgtoeslag`)
-- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat
+Begripsnaam-vuistregels: zie `/begrip` §Begripsnaam-vuistregels (Handleiding §3.5.2a) — dat is de canonieke bron. Enige regel die al tijdens `/annoteer` geldt: **hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat.
 
 Frontmatter per begrip-noot (body leeg):
 ```yaml
@@ -210,6 +204,26 @@ Na aanmaken: update het `begrippen`-veld in de annotatie-noot met wiki-links naa
 - Begrip-noten bevatten na `/annoteer` uitsluitend frontmatter; A3-inhoud is taak van `/begrip`.
 - Markering-veld bevat altijd het letterlijke citaat inclusief lidwoord.
 - Delegatieketens volledig uitwerken — alle schakels ophalen via MCP.
+
+---
+
+## Verplichte checklist-output na elke annotatie-run
+
+Print na het opslaan van de annotatie-noot en begrip-noten de volgende checklist in de chat:
+
+```
+Annotatie-checklist — Art. [A] [W]
+✅/⬜ wetstekst volledig en letterlijk geciteerd
+✅/⬜ peildatum uit MCP (versiedatum), niet van vandaag
+✅/⬜ structuurpositie letterlijk uit pad-veld
+✅/⬜ alle leden geannoteerd (of scope gedocumenteerd als cursieve noot in annotatietabel)
+✅/⬜ alle 13 JAS-elementen intern afgevinkt
+✅/⬜ kruisreferenties gevuld (of "geen kruisreferenties" indien van toepassing)
+✅/⬜ delegatiestructuur uitgewerkt (of "geen delegatiebevoegdheden")
+✅/⬜ diagram aangemaakt (of reden ontbreken vermeld)
+✅/⬜ begrip-noten aangemaakt per annotatierij
+✅/⬜ begrippen-veld bijgewerkt in annotatie-noot
+```
 
 ---
 
