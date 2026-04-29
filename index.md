@@ -10,18 +10,21 @@ Welkom in de kennisomgeving voor de gestructureerde analyse van wet- en regelgev
 
 De analyses in deze vault worden uitgevoerd conform het <a href="https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10" target="_blank">Juridisch Analyseschema (JAS) v1.0.10</a>. Deze methode maakt interpretatie- en preciseringskeuzes in wetgeving traceerbaar en vormt een brug tussen de juridische brontekst en de uiteindelijke ICT-implementatie.
 
-De kern van de graaf bestaat uit drie verbonden entiteitstypen:
+De kern van de graaf bestaat uit vier verbonden entiteitstypen:
 
-1.  **Annotaties (A2):** De wetstekst voorzien van markeringen en classificaties.
-2.  **Begrippen (A3a):** Atomaire definities, kenmerken en onderlinge relaties tussen juridische entiteiten.
-3.  **Afleidingsregels (A3b):** De logica die bepaalt hoe rechtsgevolgen intreden op basis van feiten en omstandigheden.
+1.  **Wetsteksten:** De letterlijke wettekst op peildatum, objectief en ongewijzigd.
+2.  **Annotaties (A2):** De wetstekst voorzien van markeringen en JAS-classificaties.
+3.  **Begrippen (A3a):** Atomaire definities, kenmerken en onderlinge relaties tussen juridische entiteiten.
+4.  **Afleidingsregels (A3b):** De logica die bepaalt hoe rechtsgevolgen intreden op basis van feiten en omstandigheden.
 
 ## Navigatie
 
 De kennisbank is georganiseerd langs de lijnen van de JAS-artefacten:
 
+*   **[[wetteksten/index|Wetsteksten]]**  
+    *Letterlijke wetsteksten per bronregeling, objectief en MCP-afkomstig.*
 *   **[[annotaties/index|Annotaties]]**  
-    *Wetsartikelen per bronregeling, voorzien van classificaties en structuurdiagrammen.*
+    *Wetsartikelen per bronregeling, voorzien van JAS-classificaties en structuurdiagrammen.*
 *   **[[begrippen/index|Begrippenkader]]**  
     *Het geconsolideerde netwerk van juridische begrippen over verschillende wetten heen.*
 *   **[[regels/index|Afleidingsregels]]**  

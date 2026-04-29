@@ -28,3 +28,61 @@ Atomaire definities van juridische begrippen, afgeleid uit de annotaties. Elk be
 | Operator | Logische of rekenkundige operator | `#808080` |
 
 </details>
+
+## IW 1990 — Invorderingswet 1990
+
+### Rechtsbetrekking
+
+| Begrip | Omschrijving |
+|--------|--------------|
+| [[begrippen/invorderbaarheid\|invorderbaarheid]] | Afdwingbaarheid van een betalingsverplichting |
+
+### Rechtsobject
+
+| Begrip |
+|--------|
+| [[begrippen/belastingaanslag\|belastingaanslag]] |
+| [[begrippen/voorlopige-aanslag\|voorlopige aanslag]] |
+| [[begrippen/voorlopige-conserverende-aanslag-ib\|voorlopige conserverende aanslag IB]] |
+
+### Tijdsaanduiding
+
+| Begrip |
+|--------|
+| [[begrippen/dagtekening-aanslagbiljet\|dagtekening aanslagbiljet]] |
+| [[begrippen/dagtekening-in-vaststellingsjaar\|dagtekening in vaststellingsjaar]] |
+| [[begrippen/een-maand-na-dagtekening\|één maand na dagtekening]] |
+| [[begrippen/maand-dagtekening-aanslagbiljet\|maand dagtekening aanslagbiljet]] |
+| [[begrippen/telkens-een-maand-later\|telkens één maand later]] |
+| [[begrippen/zes-weken\|zes weken]] |
+| [[begrippen/zes-weken-na-dagtekening-aanslagbiljet\|zes weken na dagtekening aanslagbiljet]] |
+
+### Voorwaarde
+
+| Begrip |
+|--------|
+| [[begrippen/dagtekening-in-vaststellingsjaar\|dagtekening in vaststellingsjaar]] |
+| [[begrippen/in-afwijking-van-eerste-lid\|in afwijking van eerste lid]] |
+
+### Variabele
+
+| Begrip |
+|--------|
+| [[begrippen/resterende-maanden-jaar\|resterende maanden jaar]] |
+
+### Afleidingsregel (als begrip)
+
+| Begrip |
+|--------|
+| [[begrippen/invorderbaarheid-belastingaanslag\|invorderbaarheid belastingaanslag]] |
+| [[begrippen/invorderbaarheid-in-gelijke-termijnen\|invorderbaarheid in gelijke termijnen]] |
+| [[begrippen/termijnenberekening-resterende-maanden\|termijnenberekening resterende maanden]] |
+| [[begrippen/terugvalregel-lid-1\|terugvalregel lid 1]] |
+| [[begrippen/vervaldag-eerste-termijn\|vervaldag eerste termijn]] |
+| [[begrippen/vervaldag-volgende-termijnen\|vervaldag volgende termijnen]] |
+
+### Operator
+
+| Begrip |
+|--------|
+| [[begrippen/logische-of\|logische of]] |
