@@ -16,27 +16,53 @@ Je treedt op als **senior jurist bij de Belastingdienst, domein Inning**. Dat be
 
 ## Workflow
 
-De wetsanalyse werkt iteratief via twee micro-skills:
+De wetsanalyse werkt iteratief via drie micro-skills:
 
 ```
-/annoteer art. [A] [W]   →  A2: markeren + classificeren → annotatie-noot + lege begrip-noten
-/begrip-alles art. [A] [W]  →  A3: definitie + voorbeelden + relaties + (evt.) afleidingsregels
+/annoteer art. [A] [W]        →  Flow A: wetstekst-noot + index-noot (structuurankers)
+/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-noot + lege begrip-noten (A2)
+/begrip-alles art. [A] [W]    →  A3: definitie + voorbeelden + relaties + (evt.) afleidingsregels
+```
+
+Voor bronnen zonder leden (Leidraad, beleid):
+```
+/annoteer sectie [ref] [W]    →  Flow C: wetstekst-noot + directe annotatie-noot
 ```
 
 ### Vault-structuur
 
 ```
-annotaties/       ← lichte annotatie-noot per artikel (A2-tussenproduct)
+wetteksten/       ← letterlijke wetstekst per bron (objectief, MCP-afkomstig)
+  iw1990/         ← per wet een submap
+    art9.md       ← alle leden van art. 9 IW 1990
+annotaties/       ← interpretatief werk (A2-tussenproduct)
+  iw1990/         ← per wet een submap
+    art9.md       ← index-noot: structuuranker (READ-ONLY, geen annotaties)
+    art9-1.md     ← lid-annotatie lid 1: annotatietabel + diagram
+    art9-5.md     ← lid-annotatie lid 5: annotatietabel + diagram
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
 tools/            ← Python-scripts voor graph-export (GraphML/GEXF); draai met .venv/bin/python
 ```
 
+### Eenheid-slug
+
+De bestandsnaam van wetstekst- en annotatie-noten is een deterministische slug afgeleid van het MCP `pad`-veld:
+
+| Bron | MCP pad-segment | Slug |
+|------|-----------------|------|
+| Formele wet | `Artikel 9 > Lid 1` | `art9-1` |
+| Leidraad / beleid | `§ 1.1 De ontvanger` | `par1-1` |
+
+Zie `.claude/skills/annoteer/SKILL.md §Slug-transformatietabel` voor de volledige regels.
+
 ### Entiteitstypen en tags
 
 | Entiteit | Type-veld | Tags |
 |----------|-----------|------|
-| Annotatie-noot | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
+| Wetstekst-noot | `wetstekst` | `#wetstekst`, `#wet/[wet]`, `#art/[nr]` |
+| Index-noot (artikel) | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
+| Lid-annotatie-noot | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
 | Begrip-noot | `begrip` | `#begrip`, `#jas/[klasse]`, `#wet/[wet]`, `#art/[nr]` |
 | Afleidingsregel-noot | `afleidingsregel` | `#afleidingsregel`, `#wet/[wet]`, `#art/[nr]` |
 
@@ -44,7 +70,7 @@ In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → roo
 
 ### Templates — geen wikilinks
 
-De templatebestanden (`annotaties/template.md`, `begrippen/template.md`, `regels/template.md`) mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik in de templatebestanden bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
+De templatebestanden (`annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md`) mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik in de templatebestanden bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
 
 Dit verbod geldt **niet** voor SKILL.md-instructiedocumenten of voor de gegenereerde output (annotatie-noten, begrip-noten, regel-noten). Die bevatten wél `[[...]]`-wikilinks — dat is vereist voor Obsidian Graph View-verbindingen.
 
@@ -112,5 +138,5 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: 4 typen, taalpatronen, tussenresultaat-heuristiek, RegelSpraaak, voorbeeldreeksen per tak |
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
+| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
 | Graph-export | `tools/export_graph.py`, `tools/generate_model.py`, `tools/graph-model.json` | Vault → GraphML/GEXF voor Gephi/Cytoscape |

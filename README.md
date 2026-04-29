@@ -20,7 +20,9 @@ Het primaire artefact is een **Obsidian knowledge graph**: atomaire entiteitsbes
 ## Vault-structuur
 
 ```
-annotaties/       ← lichte annotatie-noot per artikel (wetstekst + annotatietabel + diagram)
+wetteksten/       ← letterlijke wetstekst per bron (objectief, MCP-afkomstig)
+annotaties/       ← interpretatief werk per artikel/lid (A2-tussenproduct)
+  iw1990/         ← per wet een submap; art[N].md = index-noot, art[N]-[L].md = lid-annotatie
 begrippen/        ← atomaire begrip-noten (definitie, voorbeelden, kenmerken, relaties)
 regels/           ← atomaire afleidingsregel-noten (als-dan, voorbeeldreeksen)
 tools/            ← Python-scripts voor graph-export naar GraphML/GEXF (Gephi/Cytoscape)
@@ -34,14 +36,21 @@ tools/            ← Python-scripts voor graph-export naar GraphML/GEXF (Gephi/
 ### Workflow
 
 ```
-/annoteer art. [A] [W]      →  A2: wetstekst ophalen, markeren, classificeren
-/begrip-alles art. [A] [W]  →  A3: definities, voorbeelden, relaties, afleidingsregels
+/annoteer art. [A] [W]         →  Flow A: wetstekst-noot + index-noot (structuurankers)
+/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-noot + lege begrip-noten (A2)
+/begrip-alles art. [A] [W]     →  A3: definities, voorbeelden, relaties, afleidingsregels
+```
+
+Voor bronnen zonder leden (Leidraad, beleid):
+```
+/annoteer sectie [ref] [W]     →  Flow C: wetstekst-noot + directe annotatie-noot
 ```
 
 Voorbeeld:
 ```
-/annoteer art. 25 IW 1990
-/begrip-alles art. 25 IW 1990
+/annoteer art. 9 IW 1990
+/annoteer art. 9 lid 1 IW 1990
+/begrip-alles art. 9 IW 1990
 ```
 
 ### Graph-export (Gephi / Cytoscape)
@@ -85,9 +94,10 @@ Alle entiteiten zijn voorzien van geneste tags zodat de graph filterbaar en kleu
 
 | Tag | Inhoud |
 |-----|--------|
+| `#wetstekst` | Alle wetstekst-noten |
+| `#annotatie` | Alle annotatie-noten (index + lid) |
 | `#begrip` | Alle begrip-noten |
 | `#afleidingsregel` | Alle regel-noten |
-| `#annotatie` | Alle annotatie-noten |
 | `#jas/rechtssubject` | Begrippen met klasse rechtssubject |
 | `#jas/rechtsbetrekking` | Begrippen met klasse rechtsbetrekking |
 | `#wet/iw1990` | Alles wat de IW 1990 betreft |

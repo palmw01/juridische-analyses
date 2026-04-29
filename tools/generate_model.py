@@ -184,7 +184,7 @@ def genereer_model(vault_root: Path) -> dict:
     for submap in sorted(vault_root.iterdir()):
         if not submap.is_dir() or submap.name.startswith("."):
             continue
-        md_bestanden = [f for f in sorted(submap.glob("*.md")) if f.name not in SKIP]
+        md_bestanden = [f for f in sorted(submap.glob("**/*.md")) if f.name not in SKIP]
         if not md_bestanden:
             continue
 
@@ -259,7 +259,6 @@ def genereer_model(vault_root: Path) -> dict:
                 "fallback_veld": "peildatum",
             },
             "wikilink_regex": "\\[\\[([^\\]]+)\\]\\]",
-            "slug_separator": "/",
         },
         "gephi": {
             "layout": "ForceAtlas2",

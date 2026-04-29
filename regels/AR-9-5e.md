@@ -7,7 +7,7 @@ tags:
   - afleidingsregel
   - wet/iw1990
   - art/9
-afgeleid-van: "[[annotaties/iw1990-art9]]"
+afgeleid-van: "[[annotaties/iw1990/art9-5]]"
 peildatum: 2026-01-01
 bepaalt: "[[begrippen/terugvalregel-lid-1]]"
 rechtsfeit: "[[begrippen/dagtekening-aanslagbiljet]]"

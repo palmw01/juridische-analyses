@@ -30,20 +30,20 @@
         "jas-klasse",
         "markering",
         "bron",
+        "bronnen",
         "peildatum",
         "interpretatiemethode",
         "toelichting-klasse",
         "definitie",
         "soort",
         "herkomst",
-        "is-een",
         "geldigheid-van",
         "geldigheid-tot",
         "status",
-        "afleidingsregels",
+        "is-een",
         "heeft",
-        "bronnen",
-        "leidt-tot"
+        "leidt-tot",
+        "afleidingsregels"
       ]
     },
     {
@@ -61,6 +61,22 @@
         "operators"
       ],
       "jas_klasse_override": "afleidingsregel"
+    },
+    {
+      "type": "wetstekst",
+      "bron_map": "wetteksten/",
+      "frontmatter_type": "wetstekst",
+      "label_veld": "artikel",
+      "klasse_veld": null,
+      "id_veld": null,
+      "attributen": [
+        "artikel",
+        "bwb-id",
+        "peildatum",
+        "structuurpositie",
+        "bronreferentie"
+      ],
+      "jas_klasse_override": "wetstekst"
     }
   ],
   "jas_klassen": [
@@ -137,10 +153,34 @@
   ],
   "edge_types": [
     {
+      "label": "onderdeel-van",
+      "van": "annotatie",
+      "naar": "annotatie",
+      "frontmatter_veld": "onderdeel-van",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "wetstekst",
+      "van": "annotatie",
+      "naar": "wetstekst",
+      "frontmatter_veld": "wetstekst",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
       "label": "begrippen",
       "van": "annotatie",
       "naar": "begrip",
       "frontmatter_veld": "begrippen",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "leden-noten",
+      "van": "annotatie",
+      "naar": "annotatie",
+      "frontmatter_veld": "leden-noten",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
@@ -165,6 +205,14 @@
       "van": "begrip",
       "naar": "afleidingsregel",
       "frontmatter_veld": "afleidingsregels",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "is-een",
+      "van": "begrip",
+      "naar": "begrip",
+      "frontmatter_veld": "is-een",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
@@ -225,8 +273,7 @@
       "end_veld": "geldigheid-tot",
       "fallback_veld": "peildatum"
     },
-    "wikilink_regex": "\\[\\[([^\\]]+)\\]\\]",
-    "slug_separator": "/"
+    "wikilink_regex": "\\[\\[([^\\]]+)\\]\\]"
   },
   "gephi": {
     "layout": "ForceAtlas2",

@@ -1,53 +1,146 @@
+# Templates voor annotatie-noten
+
+Vier templates, elk gekoppeld aan een flow uit SKILL.md.
+Geen wikilinks in placeholders (geen dubbele rechte haken rondom plaatshouders).
+
 ---
-type: annotatie
-tags:
-  - template
+
+## Template A1 — Wetstekst-noot (Flow A, stap 1)
+
+Pad: wetteksten/[wet]/art[A].md
+
+---
+type: wetstekst
 artikel: "Art. [A] [W]"
 bwb-id: [BWB-ID]
-peildatum: [YYYY-MM-DD]
-structuurpositie: "[pad-veld uit MCP, bijv. Hoofdstuk X > Afdeling Y > Artikel Z]"
-tags-formaat:
-  - annotatie
-  - wet/[wet-afkorting]   # bijv. wet/iw1990
-  - art/[nummer]          # bijv. art/25
-begrippen: []             # wiki-links naar begrippen/ — gevuld door /annoteer
-kruisreferenties: []      # "Art. X [wet]"-notatie — gevuld conform verwijzingen.md
+peildatum: [YYYY-MM-DD uit MCP versiedatum]
+structuurpositie: "[pad-veld letterlijk uit MCP]"
+tags:
+  - wetstekst
+  - wet/[wet-afkorting]
+  - art/[nummer]
+bronreferentie: "[bronreferentie-veld uit MCP]"
 ---
 
-## Wetstekst (letterlijk, peildatum [PD])
+Wetstekst (letterlijk):
 
-> **1** [letterlijke tekst lid 1]
-> **2** [letterlijke tekst lid 2]
+> **1** [tekst lid 1]
+> **2** [tekst lid 2]
+
+---
+
+## Template A2 — Index-noot, READ-ONLY (Flow A, stap 2)
+
+Pad: annotaties/[wet]/art[A].md
+
+Mag uitsluitend bevatten: frontmatter + delegatiestructuur.
+Nooit annotatierijen, diagrammen of interpretaties.
+
+---
+type: annotatie
+artikel: "Art. [A] [W]"
+bwb-id: [BWB-ID]
+peildatum: [YYYY-MM-DD uit MCP versiedatum]
+structuurpositie: "[pad-veld letterlijk uit MCP]"
+tags:
+  - annotatie
+  - wet/[wet-afkorting]
+  - art/[nummer]
+wetstekst: wetteksten/[wet]/art[A]
+leden-noten: []
+kruisreferenties: []
+---
+
+## Delegatiestructuur
+
+Geen delegatiebevoegdheden in artikel [A].
+
+---
+
+## Template B — Lid-annotatie-noot (Flow B)
+
+Pad: annotaties/[wet]/art[A]-[L].md
+
+---
+type: annotatie
+artikel: "Art. [A] lid [L] [W]"
+bwb-id: [BWB-ID]
+peildatum: [YYYY-MM-DD overnemen uit index-noot]
+structuurpositie: "[structuurpositie index-noot] > Lid [L]"
+tags:
+  - annotatie
+  - wet/[wet-afkorting]
+  - art/[nummer]
+onderdeel-van: annotaties/[wet]/art[A]
+wetstekst: wetteksten/[wet]/art[A]
+begrippen: []
+---
+
+## Wetstekst lid [L] (letterlijk)
+
+> **[L]** [tekst van dit lid]
 
 ## Annotatietabel
 
 | Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
 |----|------------------------------------------------------|-----------|---------------------|--------|-------------|
 | 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] | — |
-| 2  | "[citaat]" | **[klasse]** | systematisch | begrippen/[slug] | — |
 
 ## Diagram
 
-<!-- Één diagram per Rechtsbetrekking; bij meerdere: genummerde blokken conform kaders.md §Diagramregels -->
-
-### Diagram 1 — lid [L]: [korte omschrijving rechtsbetrekking]
+### Diagram 1 — lid [L]: [omschrijving rechtsbetrekking]
 
 ```mermaid
 graph LR
     RB["rechtsbetrekking<br/>'[markering ingekort]'"]:::rb
-    RS1["rechtssubject<br/>'[markering]'"]:::rs
-    RO["rechtsobject<br/>'[markering]'"]:::ro
-
-    RS1 -->|rechthebbende| RB
-    RB -->|voorwerp| RO
 
     classDef rb fill:#FF0000,color:#fff
-    classDef rs fill:#4472C4,color:#fff
-    classDef ro fill:#70AD47,color:#fff
+```
+
+---
+
+## Template C — Sectie-annotatie-noot (Flow C)
+
+Pad: annotaties/[wet]/[slug].md
+
+Gebruik voor bronnen zonder leden: Leidraad Invordering, beleidsregels, e.d.
+Geen onderdeel-van, geen leden-noten.
+
+---
+type: annotatie
+artikel: "[ref zoals in bron, bijv. par 1.1 LI 2008]"
+bwb-id: [BWB-ID]
+peildatum: [YYYY-MM-DD uit MCP versiedatum]
+structuurpositie: "[pad-veld letterlijk uit MCP]"
+tags:
+  - annotatie
+  - wet/[wet-afkorting]
+wetstekst: wetteksten/[wet]/[slug]
+begrippen: []
+kruisreferenties: []
+---
+
+## Wetstekst [ref] (letterlijk)
+
+> [tekst van de sectie]
+
+## Annotatietabel
+
+| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
+|----|------------------------------------------------------|-----------|---------------------|--------|-------------|
+| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] | — |
+
+## Diagram
+
+### Diagram 1 — [omschrijving rechtsbetrekking]
+
+```mermaid
+graph LR
+    RB["rechtsbetrekking<br/>'[markering ingekort]'"]:::rb
+
+    classDef rb fill:#FF0000,color:#fff
 ```
 
 ## Delegatiestructuur
 
-| Delegatiebevoegdheid | Vindplaats | Type | Invulling | Vindplaats invulling |
-|---------------------|------------|------|-----------|---------------------|
-| [omschrijving] | Art. [A] lid [L] [W] | Verplicht / Facultatief | [naam regeling] | Art. [Z] [regeling] |
+Geen delegatiebevoegdheden in [ref].

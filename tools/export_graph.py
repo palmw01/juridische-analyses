@@ -22,7 +22,7 @@ def load_model(model_path: Path) -> dict:
         return json.load(f)
 
 
-def extract_wikilinks(value, wikilink_re: re.Pattern, slug_sep: str) -> list[str]:
+def extract_wikilinks(value, wikilink_re: re.Pattern) -> list[str]:
     if not value:
         return []
     targets = [value] if isinstance(value, str) else value
@@ -30,8 +30,8 @@ def extract_wikilinks(value, wikilink_re: re.Pattern, slug_sep: str) -> list[str
     for t in targets:
         if isinstance(t, str):
             m = wikilink_re.search(t)
-            target = m.group(1) if m else t
-            result.append(target.split(slug_sep)[-1])
+            if m:
+                result.append(m.group(1))
     return result
 
 
@@ -39,7 +39,6 @@ def build_graph(vault_root: Path, model: dict) -> nx.DiGraph:
     export_cfg = model["export"]
     skip = set(export_cfg.get("skip_bestanden", []))
     wikilink_re = re.compile(export_cfg["wikilink_regex"])
-    slug_sep = export_cfg["slug_separator"]
     tijdsdim = export_cfg["tijdsdimensie"]
 
     kleur_map = {k["klasse"]: k["kleur"] for k in model["jas_klassen"]}
@@ -50,13 +49,13 @@ def build_graph(vault_root: Path, model: dict) -> nx.DiGraph:
         if not bron_map.exists():
             continue
 
-        for md_file in sorted(bron_map.glob("*.md")):
+        for md_file in sorted(bron_map.glob("**/*.md")):
             if md_file.name in skip:
                 continue
 
             post = frontmatter.load(md_file)
             fm = post.metadata
-            node_id = md_file.stem
+            node_id = str(md_file.relative_to(vault_root).with_suffix(""))
 
             jas_klasse = fm.get(node_def["klasse_veld"]) if node_def["klasse_veld"] else None
             jas_klasse = jas_klasse or node_def.get("jas_klasse_override") or ""
@@ -99,18 +98,18 @@ def build_graph(vault_root: Path, model: dict) -> nx.DiGraph:
         if not bron_map.exists():
             continue
 
-        for md_file in sorted(bron_map.glob("*.md")):
+        for md_file in sorted(bron_map.glob("**/*.md")):
             if md_file.name in skip:
                 continue
 
             post = frontmatter.load(md_file)
             fm = post.metadata
-            van_id = md_file.stem
+            van_id = str(md_file.relative_to(vault_root).with_suffix(""))
 
             if van_id not in G:
                 continue
 
-            doelen = extract_wikilinks(fm.get(veld), wikilink_re, slug_sep)
+            doelen = extract_wikilinks(fm.get(veld), wikilink_re)
             for naar_id in doelen:
                 if naar_id not in G:
                     print(f"  waarschuwing: onbekend doel '{naar_id}' in {md_file.name} ({veld})", file=sys.stderr)
