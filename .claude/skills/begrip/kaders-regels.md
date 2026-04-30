@@ -38,6 +38,30 @@ Regel-noten worden **alleen** aangemaakt bij begrip-noten met JAS-klasse `Afleid
 
 Kies het type dat het **rechtsgevolg** beschrijft, niet de wetsstructuur.
 
+### Beslisboom regeltype-classificatie
+
+Doorloop de vragen in volgorde; de eerste die met "ja" wordt beantwoord bepaalt het type:
+
+```
+1. Is de uitkomst uitsluitend ja of nee (recht bestaat of bestaat niet)?
+   → Beslissingsregel
+
+2. Bevat de bepaling een rekenkundige berekening (optelling, deling, vermenigvuldiging)?
+   2a. Begrenst of maximeert de bepaling ook de uitkomst van die berekening?
+       → Beperkingsregel  (de begrenzing prevaleert boven de berekening)
+   2b. Geen begrenzing?
+       → Rekenregel
+
+3. Wijkt de bepaling voor een specifiek deelgeval af van een elders vastgelegde hoofdregel
+   (formule "in afwijking van" of equivalente constructie)?
+   → Specialisatieregel
+
+4. Geen van bovenstaande van toepassing: herevalueer de wetsformulering —
+   controleer of er een impliciete berekening of beslissing aanwezig is.
+```
+
+Bij twijfel over 1 vs. 2: controleer het uitvoerbegrip. Een Beslissingsregel produceert een Booleaanse waarde (`waar` / `niet-waar`); een Rekenregel produceert een numerieke waarde of een tijdsduur.
+
 ---
 
 ## Naamgeving afleidingsregel
@@ -104,9 +128,17 @@ Bij meerdere stappen: elke stap als genummerd tussenresultaat (→ zie §Tussenr
 
 ### Beperkingsregel
 
+Gebruik variant A (met voorwaarde) als de begrenzing alleen geldt onder een bepaalde conditie. Gebruik variant B (zonder voorwaarde) als de begrenzing altijd geldt.
+
+**Variant A — met voorwaarde:**
 ```
 [uitvoerbegrip] bedraagt ten hoogste/ten minste [grenswaarde of -begrip]
 indien [voorwaarde]
+```
+
+**Variant B — onvoorwaardelijke begrenzing:**
+```
+[uitvoerbegrip] bedraagt ten hoogste/ten minste [grenswaarde of -begrip]
 ```
 
 ### Specialisatieregel

@@ -111,7 +111,7 @@ tags:
   - afleidingsregel
   - wet/[wet-afkorting]
   - art/[nummer]
-afgeleid-van: "[[annotaties/[wet]-art[nr]]]"
+afgeleid-van: "[[annotaties/[wet]/art[nr]]]"
 peildatum: [YYYY-MM-DD]
 bepaalt: "[[begrippen/[slug]]]"
 invoer: []

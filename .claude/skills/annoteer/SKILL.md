@@ -66,7 +66,7 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
    - Ja → meld "lid-noot bestaat al" en stop.
 3. Lees de wetstekst-noot `wetteksten/[wet]/art[A].md` in voor de tekst van lid [L].
 4. Haal brondefinities op indien nog niet beschikbaar.
-5. Peildatum en structuurpositie overnemen uit de index-noot (geen nieuwe MCP-aanroep).
+5. Peildatum en structuurpositie overnemen uit het opgeslagen frontmatter-bestand van de index-noot — lees de werkelijke waarden uit `annotaties/[wet]/art[A].md`. Gebruik nooit de versiedatum uit een lopende MCP-sessie (die kan afwijken bij een tussentijdse wetswijziging).
 
 ### Flow C — Sectie-annotatie
 
@@ -231,7 +231,8 @@ Na aanmaken: voeg `"[[annotaties/[wet]/art[A]-[L]]]"` toe aan `leden-noten` in d
 | [doorlopend vanaf 1] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch/wetshistorisch | [[begrippen/[slug]]] | — |
 
 - Nummerering begint bij 1 per lid-noot.
-- Overlappende markeringen: elke klasse op aparte rij, zelfde citaat mag meerdere keren voorkomen.
+- **Overlappende markeringen** (één tekstfragment past in meerdere JAS-klassen): gebruik altijd **aparte rijen** — één rij per klasse, zelfde citaat mag meerdere keren voorkomen. Kies per rij de klasse die die specifieke functie het best beschrijft. Vermeld de alternatieve klasse in de Signalering-kolom van de primaire rij: `⚠ alternatief: [klasse]`.
+- **Meerduidigheid binnen één klasse** (twijfel welke van twee klassen de juiste is): kies de meest specifieke klasse (zie kaders.md §Annotatieprincipe 3). Verantwoord de keuze in de Signalering-kolom: `⚠ overwogen: [alternatief], gekozen: [klasse] omdat [reden]`.
 - **Signalering**: gebruik `—` als er geen bijzonderheden zijn. Gebruik `⚠ [toelichting]` bij meerduidigheid, spanning met andere artikelen, open normen of delegatiegaten.
 
 ### Flow C — Wetstekst-noot (sectie)

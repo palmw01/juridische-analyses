@@ -52,7 +52,7 @@ tags:
   - wet/[wet-afkorting]
   - art/[nummer]
 wetstekst: wetteksten/[wet]/art[A]
-leden-noten: []
+leden-noten: []   # wordt bijgewerkt na elke Flow B: wikilink naar nieuwe lid-noot toevoegen, gesorteerd op lidnummer (zie annoteer/SKILL.md)
 kruisreferenties: []
 ---
 

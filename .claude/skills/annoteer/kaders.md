@@ -182,7 +182,8 @@ brondefinitie
 |------|--------|
 | **Definitie** | **Delegatiebevoegdheid**: De bevoegdheid om regels nader uit te werken in lagere regelgeving. **Delegatie-invulling**: De daadwerkelijke gedelegeerde regeling. Dit kader omvat uitsluitend delegatie strikt sensu (overdracht van regelgevende bevoegdheid). Mandaat (bevoegdheidsuitoefening namens een ander) en attributie (wettelijke toekenning van een nieuwe bevoegdheid) vallen buiten dit JAS-element. |
 | **Herkenningsvraag** | Geeft een bepaling *opdracht* nadere regels te stellen? Verwijst de tekst *naar een hogere wet*? |
-| **Taalkenmerken** | Verplicht: "bij (of krachtens) amvb worden regels gesteld". Facultatief: "kunnen regels worden gesteld". |
+| **Taalkenmerken** | Verplicht: "worden regels gesteld bij amvb" / "worden nadere regels gesteld". Facultatief: "kunnen regels worden gesteld" / "kan bij amvb worden bepaald". |
+| **Type-beslisregel** | **Verplicht**: passieve werkwoordsvorm zonder "kunnen" — de wetgever schrijft voor dat lagere regelgeving wordt vastgesteld. **Facultatief**: "kan" of "kunnen" in de delegatiezin — de wetgever staat lagere regelgeving toe maar schrijft het niet voor. Bij twijfel: is het mogelijk dat de gemachtigde wetgever géén nadere regels stelt zonder dat de wet wordt geschonden? Ja → facultatief. |
 | **Invorderingscontext** | Art. 73 IW 1990 → Uitvoeringsbesluit IW 1990 (UBIB 1990). |
 
 ---
