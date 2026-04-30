@@ -78,9 +78,9 @@ Wetsartikelen worden geannoteerd conform het **Juridisch Analyseschema v1.0.10**
 
 Het JAS maakt interpretatie- en preciseringskeuzes traceerbaar en vormt de basis voor ICT-implementatie van regelgeving.
 
-- **Annotatiekaders**: [`.claude/skills/annoteer/kaders.md`](./.claude/skills/annoteer/kaders.md) — alle 13 JAS-elementen; 4 typen afleidingsregels (Beslissingsregel, Rekenregel, Beperkingsregel, Specialisatieregel); Mermaid-diagramregels en kleurcodering
+- **Annotatiekaders**: [`.claude/skills/annoteer/kaders.md`](./.claude/skills/annoteer/kaders.md) — alle 13 JAS-elementen; 4 interpretatiemethoden (grammaticaal, systematisch, teleologisch, wetshistorisch); 4 typen afleidingsregels; diagram-centrum-prioritering; knooplabel-truncatieregels; delegatietype-beslisregel (verplicht/facultatief); Mermaid-diagramregels en kleurcodering
 - **Begrippenkader**: [`.claude/skills/begrip/kaders.md`](./.claude/skills/begrip/kaders.md) — naamgeving, definitie, soort, herkomst, kardinaliteit, identificatie (A3a + A6d)
-- **Regelkader**: [`.claude/skills/begrip/kaders-regels.md`](./.claude/skills/begrip/kaders-regels.md) — taalpatronen, tussenresultaten, RegelSpraaak-oriëntatie (A3b + A6e)
+- **Regelkader**: [`.claude/skills/begrip/kaders-regels.md`](./.claude/skills/begrip/kaders-regels.md) — beslisboom regeltype-classificatie; taalpatronen incl. Beperkingsregel variant A/B; tussenresultaten; RegelSpraaak-correspondentietabel incl. vergelijkingsoperatoren; Specialisatieregel-voorbeeldformat (A3b + A6e)
 - **Skill /annoteer**: [`.claude/skills/annoteer/SKILL.md`](./.claude/skills/annoteer/SKILL.md) — markeringen + classificaties + Mermaid-diagram (A2)
 - **Skill /begrip**: [`.claude/skills/begrip/SKILL.md`](./.claude/skills/begrip/SKILL.md) — begrippen + afleidingsregels (A3)
 - **BWB-mapping**: [`.claude/skills/wettenbank/bwb-mapping.md`](./.claude/skills/wettenbank/bwb-mapping.md)
