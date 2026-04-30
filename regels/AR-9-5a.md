@@ -43,9 +43,9 @@ De derde volzin van lid 5 bevat een terugvalregel (AR-9-5e): als de berekening n
 
 ## Voorbeeldreeksen
 
-| Invoerwaarden | Verwachte uitkomst | Is voorspelling juridisch juist? |
-|--------------|-------------------|---------------------------------|
-| Aanslagtype: voorlopige aanslag IB 2026; dagtekening: 15 april 2026 (in belastingjaar); termijnen: 8 (> 1) | invorderbaarheid-in-gelijke-termijnen: 8 termijnen | ja — aan alle kwalificatievoorwaarden is voldaan; specialisatieregel is van toepassing |
-| Aanslagtype: voorlopige aanslag VPB 2026; dagtekening: 1 februari 2026; termijnen: 10 (> 1) | invorderbaarheid-in-gelijke-termijnen: 10 termijnen | ja — voorlopige VPB-aanslag in het belastingjaar; 10 resterende maanden |
-| Aanslagtype: voorlopige aanslag IB 2026; dagtekening: 15 december 2026; termijnen: 0 (≤ 1) | invorderbaarheid-in-gelijke-termijnen: n.v.t.; lid 1 herneemt | ja — grensgeval: de terugvalregel activeert lid 1; invorderbaarheid zes weken na dagtekening |
-| Aanslagtype: definitieve aanslag IB 2026; dagtekening: 15 april 2026 | invorderbaarheid-in-gelijke-termijnen: n.v.t. | ja — randgeval: een definitieve aanslag voldoet niet aan het aanslagtype-criterium; lid 1 is van toepassing |
+| Scenario | Deelgeval van toepassing? | Uitkomst deelgeval | Uitkomst hoofdregel (art. 9 lid 1) |
+|----------|--------------------------|-------------------|-------------------------------------|
+| Voorlopige aanslag IB 2026; dagtekening 15 april 2026; 8 resterende maanden | ja — aanslagtype correct, dagtekening in belastingjaar, termijnen > 1 | invorderbaar in 8 gelijke maandelijkse termijnen | n.v.t. |
+| Voorlopige aanslag VPB 2026; dagtekening 1 februari 2026; 10 resterende maanden | ja — VPB valt ook onder de specialisatieregel; aan alle voorwaarden voldaan | invorderbaar in 10 gelijke maandelijkse termijnen | n.v.t. |
+| Voorlopige aanslag IB 2026; dagtekening 15 december 2026; 0 resterende maanden *(grensgeval)* | nee — terugvalregel art. 9 lid 5 derde volzin: termijnenberekening leidt tot ≤ 1 termijn | n.v.t. | invorderbaar zes weken na dagtekening aanslagbiljet |
+| Definitieve aanslag IB 2026; dagtekening 15 april 2026 *(randgeval)* | nee — aanslagtype voldoet niet; definitieve aanslag valt niet onder lid 5 | n.v.t. | invorderbaar zes weken na dagtekening aanslagbiljet |
