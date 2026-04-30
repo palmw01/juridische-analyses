@@ -24,6 +24,8 @@ De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline s
 
 ## Voorbereiding
 
+0. **Idempotentiecontrole:** Controleer of de body van `begrippen/[slug].md` al is ingevuld (d.w.z. `## Definitie` bevat meer dan de template-placeholder). Als de body al content heeft: meld "begrip-noot [slug] is al ingevuld" en stop — overschrijf nooit zonder expliciete bevestiging van de gebruiker.
+
 1. **Lees de begrip-noot** in `begrippen/[slug].md` — de frontmatter bevat alle benodigde informatie.
 2. **Zoek alle annotaties** die naar dit begrip verwijzen — vervang `BEGRIPSNAAM` door de waarde van het `begripsnaam`-veld uit de frontmatter:
    ```

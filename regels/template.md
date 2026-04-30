@@ -1,15 +1,13 @@
 ---
 type: afleidingsregel
-tags:
-  - template
 regel-id: AR-[art]-[nr]
 naam: ""
 soort: [Beslissingsregel | Rekenregel | Beperkingsregel | Specialisatieregel]
-tags-formaat:
+tags:
   - afleidingsregel
   - wet/[wet-afkorting]   # bijv. wet/iw1990
   - art/[nummer]          # bijv. art/25
-afgeleid-van: ""   # wiki-link naar annotatie-noot: annotaties/[wet]-art[nr]
+afgeleid-van: ""   # wiki-link naar annotatie-noot: annotaties/[wet]/art[nr]
 peildatum: [YYYY-MM-DD]
 bepaalt: ""   # wiki-link naar het begrip met jas-klasse: afleidingsregel (het begrip dat deze regel uitwerkt)
 rechtsfeit: ""                    # wiki-link naar het rechtsfeit dat deze regel triggert

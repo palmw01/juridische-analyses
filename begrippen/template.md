@@ -1,19 +1,17 @@
 ---
 type: begrip
-tags:
-  - template
 begripsnaam: ""
 jas-klasse: [één van de 13 JAS-elementen uit kaders.md]
-tags-formaat:
+tags:
   - begrip
   - jas/[klasse-slug]        # bijv. jas/rechtssubject, jas/rechtsbetrekking
   - wet/[wet-afkorting]      # bijv. wet/iw1990
   - art/[nummer]             # bijv. art/25
 markering: "[letterlijk geciteerd tekstfragment incl. lidwoord en verwijzingen]"
 bron: "Art. [A] lid [L] [W]"
-bronnen: []   # gevuld door /begrip in stap 3 Voorbereiding; leeg laten na /annoteer
+bronnen: []   # leeg laten bij aanmaak door /annoteer; wordt gevuld door /begrip stap 3
 peildatum: [YYYY-MM-DD]
-interpretatiemethode: [grammaticaal | systematisch | teleologisch]
+interpretatiemethode: [grammaticaal | systematisch | teleologisch | wetshistorisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
 definitie: "[begripsdefinitie — zo nauw mogelijk bij wetsformulering]"
 soort: ""           # getal | datum | waar-niet-waar | tekst | enumeratiewaarde [| id]

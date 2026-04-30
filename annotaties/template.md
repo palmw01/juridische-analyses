@@ -1,7 +1,12 @@
 # Templates voor annotatie-noten
 
 Vier templates, elk gekoppeld aan een flow uit SKILL.md.
-Geen wikilinks in placeholders (geen dubbele rechte haken rondom plaatshouders).
+Geen wikilinks in placeholders (geen dubbele rechte haken rondom plaatshouders) — dit voorkomt fantoomnodes in Obsidian Graph View.
+
+> **Relatie-velden in gegenereerde output wél met wikilinks:**
+> De velden `wetstekst`, `onderdeel-van`, `afgeleid-van` en `bepaalt` moeten in de feitelijke noten
+> `"[[pad/naar/noot]]"` bevatten (conform SKILL.md output-formaten). De templates tonen het pad als
+> platte tekst uitsluitend om Obsidian-scanning van het templatebestand zelf te vermijden.
 
 ---
 
@@ -84,7 +89,7 @@ begrippen: []
 
 | Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
 |----|------------------------------------------------------|-----------|---------------------|--------|-------------|
-| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] | — |
+| 1  | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch/wetshistorisch | begrippen/[slug] | — |
 
 ## Diagram
 
@@ -128,7 +133,7 @@ kruisreferenties: []
 
 | Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
 |----|------------------------------------------------------|-----------|---------------------|--------|-------------|
-| 1  | "[citaat]" | **[klasse]** | grammaticaal | begrippen/[slug] | — |
+| 1  | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch/wetshistorisch | begrippen/[slug] | — |
 
 ## Diagram
 

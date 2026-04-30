@@ -203,7 +203,7 @@ brondefinitie
 1. **Lees de wetstekst altijd eerst.** Snippets of losse zoekresultaten zijn nooit voldoende grondslag.
 2. **Citeer precies.** Koppel elk geclassificeerd element aan het exacte artikel, lid en zinsdeel.
 3. **Kies de meest specifieke klasse.** Tijdsaanduiding is specifieker dan variabele; plaatsaanduiding is specifieker dan parameter.
-4. **Interpretatie expliciet benoemen.** Leg grammaticale, systematische en teleologische afwegingen vast.
+4. **Interpretatie expliciet benoemen.** Leg grammaticale, systematische, teleologische en wetshistorische afwegingen vast. Vier erkende methoden (Handleiding §3.5.3): grammaticaal (taalkundige betekenis), systematisch (samenhang met andere bepalingen), teleologisch (doel van de wet) en wetshistorisch (bedoeling wetgever uit wetsgeschiedenis).
 5. **Spanning en meerduidigheid signaleren.** Benoem expliciet wanneer een bepaling dubbelzinnig is of conflicteert met andere regels.
 6. **Delegatieketens traceren.** Breng altijd de volledige keten in kaart (wet → amvb → ministeriële regeling).
 

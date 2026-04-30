@@ -228,7 +228,7 @@ Na aanmaken: voeg `"[[annotaties/[wet]/art[A]-[L]]]"` toe aan `leden-noten` in d
 
 | Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
 |----|------------------------------------------------------|-----------|---------------------|--------|-------------|
-| [doorlopend vanaf 1] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch | [[begrippen/[slug]]] | — |
+| [doorlopend vanaf 1] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch/wetshistorisch | [[begrippen/[slug]]] | — |
 
 - Nummerering begint bij 1 per lid-noot.
 - Overlappende markeringen: elke klasse op aparte rij, zelfde citaat mag meerdere keren voorkomen.
@@ -283,7 +283,7 @@ markering: "[letterlijk geciteerd incl. lidwoord en verwijzingen]"
 bron: "Art. [A] lid [L] [W]"
 bronnen: []
 peildatum: [YYYY-MM-DD uit MCP]
-interpretatiemethode: [grammaticaal | systematisch | teleologisch]
+interpretatiemethode: [grammaticaal | systematisch | teleologisch | wetshistorisch]
 toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
 definitie: ""
 soort: ""
@@ -372,6 +372,20 @@ Lid-annotatie-checklist — Art. [A] lid [L] [W]
 ✅/⬜ begrip-noten aangemaakt per annotatierij
 ✅/⬜ begrippen-veld bijgewerkt in lid-noot
 ✅/⬜ leden-noten-veld bijgewerkt in index-noot (gesorteerd)
+```
+
+**Flow C:**
+```
+Sectie-annotatie-checklist — [ref] [W]
+✅/⬜ wetstekst-noot aangemaakt in wetteksten/[wet]/[slug].md
+✅/⬜ annotatie-noot aangemaakt in annotaties/[wet]/[slug].md
+✅/⬜ wetstekst sectie volledig en letterlijk geciteerd
+✅/⬜ alle 13 JAS-elementen intern afgevinkt
+✅/⬜ annotatietabel ingevuld
+✅/⬜ diagram aangemaakt (of reden ontbreken vermeld)
+✅/⬜ delegatiestructuur beschreven (of "geen delegatiebevoegdheden")
+✅/⬜ begrip-noten aangemaakt per annotatierij
+✅/⬜ begrippen-veld bijgewerkt in annotatie-noot
 ```
 
 ---
