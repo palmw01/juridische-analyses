@@ -63,7 +63,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 - **Geen hoofdletters**, geen Romeinse cijfers, zo min mogelijk afkortingen (bij gebruik: uitschrijven in definitie)
 - Sluit zo nauw mogelijk aan bij de letterlijke markering
 - Voeg wettelijke context toe als dezelfde formulering in meerdere wetten anders betekent
-- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat
+- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat. Identiek betekent: dezelfde wettelijke betekenis én hetzelfde toepassingsbereik (zelfde wet, zelfde definitienorm). Bij twijfel: maak een nieuw begrip met een onderscheidende context-suffix (bijv. `betalingstermijn-belastingaanslag` naast `betalingstermijn-naheffingsaanslag`)
 
 ---
 
@@ -89,7 +89,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 
 Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[art]-[nr].md`.
 - Vul altijd het `naam`-veld in met een leesbare naam (actieve werkwoordsvorm).
-- Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit.
+- Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit. **Uitzondering voor tussenresultaat-regel-noten** (regel-noten met tag `#tussenresultaat`): als er geen zelfstandig rechtsfeit bestaat dat dit tussenresultaat triggert, gebruik `rechtsfeit: ""` (leeg) en noteer in `## Toelichting` welke hoofdregel dit tussenresultaat aanroept.
 - Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan. Voeg de tag `#tussenresultaat` toe aan de tags-lijst van elke tussenresultaat-begrip-noot.
 - Kies het taalpatroon uit `## Formele regel` passend bij het `soort`-veld van de **regel-noot** (Beslissingsregel → EN/OF-patroon; Rekenregel → berekeningspatroon; Beperkingsregel → grenspatroon; Specialisatieregel → afwijkingspatroon — zie `kaders-regels.md §Taalpatronen`) en verwijder de overige blokken.
 - Controleer of het taalpatroon aansluit bij de RegelSpraaak-oriëntatie uit het regelkader.

@@ -37,6 +37,8 @@ De eenheid-slug wordt deterministisch afgeleid van het MCP `pad`-veld. Verwijder
 
 Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden weggelaten. De slug bevat uitsluitend lowercase letters, cijfers en koppeltekens.
 
+**Fallback voor nummerloos sectie-kopje** (geen §-nummer, geen paragraafaanduiding): slugify de volledige kopnaam — zet om naar lowercase, vervang spaties door koppeltekens, verwijder speciale tekens. Bijv. `"Algemeen"` → `algemeen`, `"Inleiding en reikwijdte"` → `inleiding-en-reikwijdte`. Bij een kopnaam die niet uniek is binnen de wet: voeg een volgnummer toe (`algemeen-2`).
+
 ---
 
 ## Voorbereiding — per flow
@@ -44,6 +46,8 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 **Lees vóór alle flows eerst `.claude/skills/annoteer/kaders.md` volledig in.**
 
 ### Flow A — Artikel-index
+
+> **Aanbevolen vertrekpunt (A1):** Juridische scenario's zijn de scope-afbakening voor Flow A. Als de gebruiker geen scenario's heeft geformuleerd vóór de aanroep, attendeer dan op dit hiaat — maar blokkeer de flow niet. De annotatie kan doorgaan; de scope-verantwoordelijkheid ligt bij de gebruiker (A1 valt buiten de AI-scope).
 
 1. Controleer of wetstekst-noot bestaat: `find wetteksten/[wet]/ -name "art[A].md"`.
    - Nee → haal wetstekst op via `wettenbank_artikel` en maak aan.
@@ -321,7 +325,7 @@ Werkwijze:
 4. Knooplabels: `"[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
 5. Titel boven elk blok: `### Diagram [N] — lid [L]: [korte omschrijving rechtsbetrekking]`
 
-Bij afwezigheid van Rechtsbetrekking én Rechtsfeit: gebruik Afleidingsregel of Voorwaarde als centrale klasse als het artikel primair een berekening, beslissing of conditie beschrijft (conform `kaders.md §Centrale klasse`). Alleen als alle vier ontbreken: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
+Kies de centrale klasse conform de prioriteitsvolgorde in `kaders.md §Centrale klasse` (1. Rechtsbetrekking → 2. Rechtsfeit → 3. Afleidingsregel → 4. Voorwaarde). Alleen als alle vier ontbreken: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
 
 #### Delegatiestructuur-formaat
 

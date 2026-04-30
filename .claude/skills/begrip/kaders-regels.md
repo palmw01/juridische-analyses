@@ -214,7 +214,12 @@ Koppelingspatroon:
 
 Minimaal 2 reeksen. Aanvullende eisen:
 - Bij meerdere conditionele takken (EN/OF-voorwaarden): minimaal **1 reeks per tak**.
-- Bij Specialisatieregels: altijd een reeks voor het deelgeval **én** een reeks die laat zien dat de hoofdregel voor dat deelgeval niet geldt.
+- Bij Specialisatieregels: altijd een reeks voor het deelgeval **én** een reeks die laat zien dat de hoofdregel voor het deelgeval niet geldt. Gebruik het volgende tabelformaat om het onderscheid zichtbaar te maken:
+
+  | Scenario | Deelgeval van toepassing? | Uitkomst deelgeval | Uitkomst hoofdregel |
+  |----------|--------------------------|-------------------|---------------------|
+  | [normaal geval — deelgeval niet van toepassing] | nee | n.v.t. | [uitkomst hoofdregel] |
+  | [deelgeval — specificerende voorwaarde vervuld] | ja | [uitkomst deelgeval] | [afwijkend van hoofdregel] |
 - Bij Beperkingsregels: altijd een reeks voor precies op de grenswaarde en een reeks waarbij de grenswaarde wordt overschreden.
 
 | Invoerwaarden | Verwachte uitkomst | Is voorspelling juridisch juist? |
@@ -242,6 +247,11 @@ Correspondentietabel:
 | `ten minste` | `minimaal` |
 | `indien` | `Geldig als` |
 | `in afwijking van` | `In afwijking van` (identiek) |
+| `kleiner dan [waarde]` | `kleiner dan [waarde]` (identiek) |
+| `groter dan [waarde]` | `groter dan [waarde]` (identiek) |
+| `kleiner dan of gelijk aan [waarde]` | `kleiner dan of gelijk aan [waarde]` (identiek) |
+| `groter dan of gelijk aan [waarde]` | `groter dan of gelijk aan [waarde]` (identiek) |
+| `niet gelijk aan [waarde]` | `ongelijk aan [waarde]` |
 
 **Rolverdeling**: De jurist legt het taalpatroon vast in de regel-noot; de regelanalist (Leidraad, disciplinetabel) zet dit om naar RegelSpraaak. Dit kader beschrijft de **juridische laag** — de regelanalist vertaalt naar de IT-laag.
 

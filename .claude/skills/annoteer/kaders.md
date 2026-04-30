@@ -216,7 +216,16 @@ Eén diagram per Rechtsbetrekking in het artikel. Bij meerdere Rechtsbetrekkinge
 
 ### Centrale klasse
 
-De Rechtsbetrekking is altijd de centrale knoop. Bij afwezigheid van een Rechtsbetrekking: het Rechtsfeit als centrale knoop. Naast Rechtsbetrekking en Rechtsfeit kunnen ook **Afleidingsregel** en **Voorwaarde** als centrale klasse fungeren — namelijk als het artikel primair een berekening, beslissing of conditie beschrijft zonder expliciete rechtsbetrekking.
+Prioriteitsvolgorde voor de centrale knoop (gebruik de eerste die aanwezig is):
+
+1. **Rechtsbetrekking** — altijd eerste keuze
+2. **Rechtsfeit** — als geen Rechtsbetrekking aanwezig is
+3. **Afleidingsregel** — als het artikel primair een berekening of beslissing beschrijft zonder expliciete rechtsbetrekking of rechtsfeit
+4. **Voorwaarde** — als het artikel primair een conditie of begrenzing beschrijft en geen van de bovenstaande klassen aanwezig is
+
+> **Noot:** De markeringsregel "begin bij rechtsbetrekking en rechtsfeit" beschrijft de annotatievolgorde (wat eerst markeren), niet de diagramcentrum-selectie. Het diagram-centrum volgt de prioriteitsvolgorde hierboven — die kan afwijken van de annotatiestartpunt als een Afleidingsregel of Voorwaarde de kern van het artikel vormt.
+
+Alleen als alle vier ontbreken: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
 
 ### Randlabels per JAS-klasse-combinatie
 
@@ -258,7 +267,7 @@ Rechtssubjecten die als plichthebbende optreden (kenbaar uit de rechtsbetrekking
 "[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"
 ```
 
-Markering inkorten: begin bij het zelfstandig naamwoord, laat hulpwerkwoorden weg, voeg `…` toe indien afgekort.
+Markering inkorten: neem de eerste 4–6 woorden, eindigend op een zelfstandig naamwoord of werkwoord; laat hulpwerkwoorden weg; voeg `…` toe indien afgekort. Maximum: 40 tekens inclusief `…`. Bij markeringen zonder zelfstandig naamwoord (bijv. puur werkwoordelijk): neem de actieve werkwoordsvorm als startpunt.
 
 ### classDef per JAS-klasse (Mermaid)
 
