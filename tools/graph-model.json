@@ -264,8 +264,8 @@
     ],
     "output_map": "tools/",
     "skip_bestanden": [
-      "template.md",
-      "index.md"
+      "index.md",
+      "template.md"
     ],
     "tijdsdimensie": {
       "actief": true,
