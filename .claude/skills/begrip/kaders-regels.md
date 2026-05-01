@@ -185,6 +185,52 @@ De tag `#tussenresultaat` maakt afgeleide tussenberekeningen filterbaar in Obsid
 
 ---
 
+## Reeks-producerende rekenregels
+
+Een rekenregel produceert soms niet één waarde maar een **geordende reeks** van waarden (vervaldatums, termijnbedragen, staffelwaarden). Bij zo'n reeks ontbreekt vrijwel altijd een bijbehorende beslissingsregel die de **status van elk element op een gegeven tijdstip** bepaalt.
+
+### Heuristische triggertest
+
+Controleer na het opstellen van een rekenregel of de uitvoer een reeks is:
+
+```
+Is het uitvoerbegrip een verzameling van gelijksoortige waarden
+(bijv. N vervaldatums, N termijnbedragen)?
+→ ja: voer de reeks-statustoets uit (zie hieronder)
+→ nee: geen aanvullende actie vereist
+```
+
+### Reeks-statustoets
+
+Doorloop de volgende vragen:
+
+1. **Peildatum-afhankelijkheid**: is de status van een element in de reeks afhankelijk van een vergelijking met een peildatum of ander extern tijdstip?
+   - ja → er is een beslissingsregel nodig: `bepalen status [element] op peildatum`
+2. **Partieel rechtsgevolg**: heeft het vervallen van één element een zelfstandig rechtsgevolg (bijv. invorderbaarheid van dat deel, opeisbaarheid van dat termijnbedrag)?
+   - ja → maak ook een rekenregel aan: `berekenen [invorderbaar/opeisbaar] bedrag op peildatum`
+3. **Binaire samenvattingsvraag**: is er ook een overkoepelende ja/nee-vraag ("is de aanslag al invorderbaar?") die volgt uit de reeksstatus?
+   - ja → de bestaande beslissingsregel voor het overkoepelende begrip moet verwijzen naar de reeks-statusregel als invoer
+
+### Begrippen die bij een reeks-statusregel horen
+
+| Begrip | JAS-klasse | soort | Toelichting |
+|--------|-----------|-------|-------------|
+| `[element]-reeks` | variabele | lijst | de berekende reeks zelf (uitvoer van de rekenregel) |
+| `status-[element]-op-peildatum` | afleidingsregel | waar-niet-waar | is dit element vervallen/opeisbaar op de peildatum? |
+| `aantal-vervallen-[elementen]-op-peildatum` | variabele | getal | tussenresultaat: hoeveel elementen zijn al vervallen? |
+| `[invorderbaar/opeisbaar]-bedrag-op-peildatum` | afleidingsregel | getal | partieel rechtsgevolg (indien van toepassing) |
+
+Maak alleen de begrippen aan die juridisch relevant zijn voor het scenario; niet alle vier zijn altijd nodig.
+
+### Voorbeeld (art. 9 lid 5 IW 1990)
+
+| Rekenregel (aanwezig) | Ontbrekende beslissingsregel |
+|-----------------------|------------------------------|
+| `berekenen vervaldag eerste termijn` (AR-9-5c) | `bepalen status termijn op peildatum`: vervaldag-termijn ≤ peildatum → termijn vervallen |
+| `berekenen vervaldag volgende termijnen` (AR-9-5d) | `berekenen invorderbaar bedrag op peildatum`: N vervallen termijnen × termijnbedrag |
+
+---
+
 ## Invoer- en uitvoerbegrippen
 
 - **Invoer**: wiki-links naar begrip-noten die als variabele of parameter dienen (JAS-klasse: Variabele, Parameter, Tijdsaanduiding)

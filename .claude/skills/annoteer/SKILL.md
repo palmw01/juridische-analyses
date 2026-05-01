@@ -407,3 +407,15 @@ Print aan het einde van elke annotatie-run een overzicht van hergebruikte begrip
 Na het bijstellen van een begrip: controleer via het `afleidingsregels`-veld of afhankelijke regel-noten in `regels/` nog kloppen.
 
 Als er geen hergebruikte begrippen zijn: schrijf exact "Geen hergebruikte begrippen."
+
+### Soort-consistentiecheck bij hergebruik (verplicht)
+
+Controleer bij elk hergebruikt begrip of het `soort`-veld nog semantisch passend is in de nieuwe context:
+
+| soort in bestaand begrip | Signaal in nieuwe context | Actie |
+|--------------------------|--------------------------|-------|
+| `waar-niet-waar` | het begrip werkt in de nieuwe context per element (bijv. per termijn, per deelbedrag) | ⚠ signaleer in annotatietabel: "hergebruikt begrip is binair; in deze context werkt het per [element] — overweeg nieuw begrip" |
+| `getal` | de nieuwe context vereist een binaire uitkomst | ⚠ signaleer idem |
+| Elk soort | het soort is passend — geen actie | — |
+
+Noteer de uitkomst van deze check in de Signalering-kolom van de annotatierij, ook als er geen probleem is (`soort passend`). Dit maakt de keuze traceerbaar voor A4-validatie.

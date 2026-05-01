@@ -15,7 +15,7 @@ peildatum: 2026-01-01
 interpretatiemethode: grammaticaal
 toelichting-klasse: "Rekenregel die de vervaldatums van alle opvolgende termijnen bepaalt. Input: vervaldatum vorige termijn. Output: vervaldatum volgende termijn = vorige vervaldatum + één maand. De regel wordt iteratief toegepast voor elke volgende termijn."
 definitie: "De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand op te tellen"
-soort: "datum"
+soort: "datum (reeks)"
 herkomst: "afgeleid"
 aliases: []
 is-een: []
