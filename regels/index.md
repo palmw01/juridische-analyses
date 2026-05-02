@@ -24,4 +24,5 @@ Logische beslissings- en berekeningsregels afgeleid uit de annotaties. Elke rege
 | [[regels/AR-9-5b\|AR-9-5b]] | Rekenregel | Art. 9 lid 5 |
 | [[regels/AR-9-5c\|AR-9-5c]] | Rekenregel | Art. 9 lid 5 |
 | [[regels/AR-9-5d\|AR-9-5d]] | Rekenregel | Art. 9 lid 5 |
+| [[regels/AR-9-5f\|AR-9-5f]] | Rekenregel | Art. 9 lid 5 |
 | [[regels/AR-9-5e\|AR-9-5e]] | Beslissingsregel | Art. 9 lid 5 |

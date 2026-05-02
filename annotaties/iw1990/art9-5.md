@@ -26,6 +26,8 @@ begrippen:
   - "[[begrippen/vervaldag-volgende-termijnen]]"
   - "[[begrippen/telkens-een-maand-later]]"
   - "[[begrippen/terugvalregel-lid-1]]"
+  - "[[begrippen/termijnbedrag]]"
+  - "[[begrippen/totaalbedrag-belastingaanslag]]"
 ---
 
 ## Wetstekst lid 5 (letterlijk)
@@ -52,6 +54,9 @@ begrippen:
 | 14 | "elk van de volgende termijnen telkens een maand later" | **afleidingsregel** | grammaticaal | [[begrippen/vervaldag-volgende-termijnen]] | ⚠ reeks-statustoets: deze rekenregel produceert een reeks van N−1 vervaldatums (iteratief). Zie ook markering 12. |
 | 15 | "telkens een maand later" | **tijdsaanduiding** | grammaticaal | [[begrippen/telkens-een-maand-later]] | — |
 | 16 | "Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing." | **afleidingsregel** | systematisch | [[begrippen/terugvalregel-lid-1]] | ⚠ beslissingsregel (terugvalregel); art. 9 lid 1 herneemt toepassing als het termijnenantal ≤ 1 is (bij dagtekening in december) |
+| 17 | "gelijke" | **afleidingsregel** | systematisch | [[regels/AR-9-5f]] | ⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen |
+| 18 | "gelijke termijnen" | **variabele** | systematisch | [[begrippen/termijnbedrag]] | ⚠ de variabele die de uitkomst van AR-9-5f representeert |
+| 19 | "een belastingaanslag" | **variabele** | systematisch | [[begrippen/totaalbedrag-belastingaanslag]] | ⚠ hergebruik markering uit lid 1; het totaalbedrag is noodzakelijk voor de berekening van het termijnbedrag (invoer voor AR-9-5f) |
 
 ## Diagram
 
@@ -66,10 +71,13 @@ graph LR
     VW1["voorwaarde<br/>'In afwijking van het eerste lid'"]:::vw
     VW2["voorwaarde<br/>'dagtekening in vaststellingsjaar'"]:::vw
     AR1["afleidingsregel<br/>'in zoveel gelijke termijnen…'"]:::ar
+    AR1f["afleidingsregel<br/>'berekenen termijnbedrag'"]:::ar
     AR2["afleidingsregel<br/>'eerste termijn vervalt één maand…'"]:::ar
     AR3["afleidingsregel<br/>'volgende termijnen een maand later'"]:::ar
     AR4["afleidingsregel<br/>'terugval lid 1 bij ≤ 1 termijn'"]:::ar
     VA["variabele<br/>'maanden van het jaar overblijven'"]:::va
+    VA2["variabele<br/>'totaalbedrag belastingaanslag'"]:::va
+    VA3["variabele<br/>'termijnbedrag'"]:::va
     TA["tijdsaanduiding<br/>'maand dagtekening aanslagbiljet'"]:::ta
 
     RF -->|triggert| RB
@@ -78,11 +86,15 @@ graph LR
     RB -->|geldig indien| VW1
     RB -->|geldig indien| VW2
     RB -->|nader uitgewerkt in| AR1
+    RB -->|nader uitgewerkt in| AR1f
     RB -->|nader uitgewerkt in| AR2
     RB -->|nader uitgewerkt in| AR3
     RB -->|nader uitgewerkt in| AR4
     AR1 -->|gebruikt| VA
     AR1 -->|gebruikt| TA
+    AR1f -->|gebruikt| VA2
+    AR1f -->|gebruikt| VA
+    AR1f -->|gebruikt| VA3
 
     classDef rb fill:#FF0000,color:#fff
     classDef ro fill:#70AD47,color:#fff

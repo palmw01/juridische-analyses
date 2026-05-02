@@ -69,6 +69,8 @@ Atomaire definities van juridische begrippen, afgeleid uit de annotaties. Elk be
 | Begrip |
 |--------|
 | [[begrippen/resterende-maanden-jaar\|resterende maanden jaar]] |
+| [[begrippen/termijnbedrag\|termijnbedrag]] |
+| [[begrippen/totaalbedrag-belastingaanslag\|totaalbedrag belastingaanslag]] |
 
 ### Afleidingsregel (als begrip)
 

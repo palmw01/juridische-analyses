@@ -14,8 +14,7 @@
         "bwb-id",
         "peildatum",
         "structuurpositie",
-        "kruisreferenties",
-        "leden-noten"
+        "kruisreferenties"
       ],
       "jas_klasse_override": "annotatie"
     },
@@ -174,6 +173,14 @@
       "van": "annotatie",
       "naar": "begrip",
       "frontmatter_veld": "begrippen",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "leden-noten",
+      "van": "annotatie",
+      "naar": "annotatie",
+      "frontmatter_veld": "leden-noten",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
