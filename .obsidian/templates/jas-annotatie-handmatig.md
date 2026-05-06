@@ -12,7 +12,7 @@ tags:
   - <% tp.system.prompt("Wet-tag (bijv. iw1990, awb, li2008)") %>
   - <% tp.system.prompt("Artikel-tag (bijv. art9, art25, art4-86)") %>
 aliases:
-  - "<% tp.system.prompt("Alias (bijv. Art. 25 IW 1990 (2026-04-22))") %>"
+  - '<% tp.system.prompt("Alias (bijv. Art. 25 IW 1990 (2026-04-22))") %>'
 kruisreferenties: []
 ---
 
