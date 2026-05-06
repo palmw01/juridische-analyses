@@ -1,5 +1,5 @@
 ---
-description: Haal wetstekst op via de wettenbank MCP en extraheer kruisreferenties. Gebruik: /wettenbank art. 25 IW 1990
+description: "Haal wetstekst op via de wettenbank MCP en extraheer kruisreferenties. Gebruik: /wettenbank art. 25 IW 1990"
 context: fork
 agent: general-purpose
 ---

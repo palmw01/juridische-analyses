@@ -1,5 +1,5 @@
 ---
-description: Exporteer de vault naar graph-model.json + GEXF/GraphML. Gebruik: /graph of /graph model
+description: "Exporteer de vault naar graph-model.json + GEXF/GraphML. Gebruik: /graph of /graph model"
 context: fork
 agent: general-purpose
 ---

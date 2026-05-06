@@ -1,5 +1,5 @@
 ---
-description: Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]
+description: "Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]"
 context: fork
 agent: general-purpose
 ---
