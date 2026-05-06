@@ -6,6 +6,13 @@ agent: general-purpose
 
 # /wettenbank — Dataverwerving
 
+## Triggervormen
+
+| Trigger | Wanneer gebruiken |
+|---------|-------------------|
+| `/wettenbank art. [A] [W]` | Volledige wetstekst + kruisreferenties voor een artikel ophalen |
+| `/wettenbank art. [A] lid [L] [W]` | Wetstekst beperkt tot één lid ophalen |
+
 **Argument:** `$ARGUMENTS`
 
 Voer onderstaande stappen uit. Het doel is alle wetstekst, structuurdata en kruisreferenties beschikbaar te stellen voor de analyse-skills.
@@ -42,7 +49,7 @@ Extraheer per response:
 **Structuurcontext:** als `pad` afwezig is in de response voor `[A]`: roep `wettenbank_structuur(bwbId=[B])` aan en zoek het knooppunt voor artikel `[A]` in de `structuur`-array. Geeft ook dat geen resultaat: noteer "Structuurpositie niet beschikbaar".
 
 **Lid-niveau controle:** tel `leden.length` in de response voor `[A]`.
-- Als `[L]` niet opgegeven EN `leden.length > 3`: stop. Meld: *"Art. [A] [W] heeft [N] leden. Specificeer een lid: `/jas art. [A] lid [N] [W]`"* en lijst alle beschikbare lidnummers op.
+- Als `[L]` niet opgegeven EN `leden.length > 3`: stop. Meld: *"Art. [A] [W] heeft [N] leden. Specificeer een lid: `/wettenbank art. [A] lid [N] [W]`"* en lijst alle beschikbare lidnummers op.
 - Anders: ga door.
 
 Noteer uit `[BD]` alle begripsomschrijvingen voor termen in artikel `[A]` als `[brondefinities]`.

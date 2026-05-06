@@ -1,14 +1,19 @@
 ---
-description: "Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]"
+description: "Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode: definitie, voorbeelden, kenmerken en afleidingsregels op basis van annotaties. Gebruik: /begrip [slug] | /begrip-alles art. [A] [W]"
 context: fork
 agent: general-purpose
 ---
 
-# Skill: /begrip
+# /begrip — Activiteit 3: begrippen en afleidingsregels
 
 > **Conflictresolutie:** Bij tegenstrijdigheid tussen deze SKILL.md en `kaders.md` of `kaders-regels.md` zijn **de kaderdocumenten leidend**. SKILL.md geeft procesinstructies; de kaders geven de juridisch-inhoudelijke en analytische normen.
 
-**Trigger:** `/begrip [slug]` of `/begrip-alles art. [A] [W]`
+## Triggervormen
+
+| Trigger | Wanneer gebruiken |
+|---------|-------------------|
+| `/begrip [slug]` | Één begrip-noot invullen op basis van gevulde frontmatter |
+| `/begrip-alles art. [A] [W]` | Alle begrip-noten van een artikel achtereenvolgens verwerken |
 
 Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode. Leest de door `/annoteer` aangemaakte begrip-noten (met gevulde frontmatter) en vult de A3-inhoud in: definitie, voorbeelden, kenmerken en relaties. Bij JAS-klasse Afleidingsregel maakt de skill tevens een regel-noot aan in `regels/`.
 

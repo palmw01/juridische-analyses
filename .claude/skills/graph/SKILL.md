@@ -6,6 +6,13 @@ agent: general-purpose
 
 # /graph — Graph-export
 
+## Triggervormen
+
+| Trigger | Wanneer gebruiken |
+|---------|-------------------|
+| `/graph` | Exporteer de vault naar GEXF + GraphML (bestaand graph-model.json hergebruiken) |
+| `/graph model` | Hergenereeer graph-model.json en exporteer daarna |
+
 **Argument:** `$ARGUMENTS`
 
 Voer onderstaande stappen uit. De scripts staan in `$CLAUDE_SKILL_DIR`; output gaat naar `graaf/` in de vault-root.

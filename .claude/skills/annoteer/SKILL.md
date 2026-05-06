@@ -1,4 +1,10 @@
-# Skill: /annoteer
+---
+description: "Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a), classificeren (A2b) en structuurdiagram (A2c). Gebruik: /annoteer art. [A] [W] | /annoteer art. [A] lid [L] [W] | /annoteer sectie [ref] [W]"
+context: fork
+agent: general-purpose
+---
+
+# /annoteer — Activiteit 2: markeren en classificeren
 
 > **Conflictresolutie:** Bij tegenstrijdigheid tussen deze SKILL.md en `kaders.md` is **`kaders.md` leidend**. SKILL.md geeft procesinstructies; `kaders.md` geeft de juridisch-inhoudelijke normen.
 
