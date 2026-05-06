@@ -1,0 +1,24 @@
+# Obsidian-configuratie en Claude-skills: geen vault-inhoud
+.obsidian/
+.claude/
+
+# Graph-output: geen input voor graphify
+graaf/
+graphify-out/
+
+# Template-bestanden: schema zonder inhoud
+begrippen/template.md
+annotaties/template.md
+regels/template.md
+wetteksten/template.md
+
+# Vault-beheerbestanden
+README.md
+CLAUDE.md
+
+# Index-bestanden per map (inhoudsopgaven, geen juridische inhoud)
+index.md
+begrippen/index.md
+annotaties/index.md
+regels/index.md
+wetteksten/index.md
