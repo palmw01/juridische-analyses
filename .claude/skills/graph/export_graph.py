@@ -17,6 +17,38 @@ import frontmatter
 import networkx as nx
 
 
+def check_staleness(vault_root: Path, output_dir: Path, model: dict) -> None:
+    """Waarschuw als vault-bestanden nieuwer zijn dan de laatste GEXF-export."""
+    gexf = output_dir / "graph.gexf"
+    if not gexf.exists():
+        return
+
+    export_mtime = gexf.stat().st_mtime
+    skip = set(model["export"].get("skip_bestanden", []))
+
+    nieuwere = []
+    for node_def in model["node_types"]:
+        bron_map = vault_root / node_def["bron_map"]
+        if not bron_map.exists():
+            continue
+        for md_file in bron_map.glob("**/*.md"):
+            if md_file.name in skip:
+                continue
+            if md_file.stat().st_mtime > export_mtime:
+                nieuwere.append(md_file.relative_to(vault_root))
+
+    if nieuwere:
+        print(
+            f"  waarschuwing: {len(nieuwere)} vault-bestand(en) zijn nieuwer dan de laatste export "
+            f"({gexf.name}). Voer /graph opnieuw uit om de graaf bij te werken.",
+            file=sys.stderr,
+        )
+        for f in sorted(nieuwere)[:5]:
+            print(f"    {f}", file=sys.stderr)
+        if len(nieuwere) > 5:
+            print(f"    … en {len(nieuwere) - 5} andere(n)", file=sys.stderr)
+
+
 def load_model(model_path: Path) -> dict:
     with model_path.open() as f:
         return json.load(f)
@@ -42,7 +74,7 @@ def build_graph(vault_root: Path, model: dict) -> nx.DiGraph:
     tijdsdim = export_cfg["tijdsdimensie"]
 
     kleur_map = {k["klasse"]: k["kleur"] for k in model["jas_klassen"]}
-    G = nx.DiGraph()
+    G = nx.MultiDiGraph()
 
     for node_def in model["node_types"]:
         bron_map = vault_root / node_def["bron_map"]
@@ -133,12 +165,15 @@ def main():
     print(f"Model: {model_path}")
 
     model = load_model(model_path)
-    G = build_graph(vault_root, model)
-
-    print(f"Graaf: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
     output_dir = vault_root / "graaf"
     output_dir.mkdir(exist_ok=True)
+
+    check_staleness(vault_root, output_dir, model)
+
+    G = build_graph(vault_root, model)
+
+    print(f"Graaf: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
     for formaat in model["export"].get("formaten", ["gexf"]):
         out = output_dir / f"graph.{formaat}"

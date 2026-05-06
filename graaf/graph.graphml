@@ -880,424 +880,457 @@
   <data key="d29">jci1.3:c:BWBR0024096&amp;artikel=9</data>
   <data key="d8">2026-01-01</data>
 </node>
-<edge source="annotaties/iw1990/art9-1" target="annotaties/iw1990/art9">
+<edge source="annotaties/iw1990/art9-1" target="annotaties/iw1990/art9" id="0">
   <data key="d30">onderdeel-van</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="wetteksten/iw1990/art9">
+<edge source="annotaties/iw1990/art9-1" target="wetteksten/iw1990/art9" id="0">
   <data key="d30">wetstekst</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/belastingaanslag">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/belastingaanslag" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/invorderbaarheid">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/zes-weken">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/zes-weken" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-1" target="begrippen/invorderbaarheid-belastingaanslag">
+<edge source="annotaties/iw1990/art9-1" target="begrippen/invorderbaarheid-belastingaanslag" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="annotaties/iw1990/art9">
+<edge source="annotaties/iw1990/art9-5" target="annotaties/iw1990/art9" id="0">
   <data key="d30">onderdeel-van</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="wetteksten/iw1990/art9">
+<edge source="annotaties/iw1990/art9-5" target="wetteksten/iw1990/art9" id="0">
   <data key="d30">wetstekst</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/voorlopige-aanslag">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/voorlopige-aanslag" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/logische-of">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/logische-of" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/voorlopige-conserverende-aanslag-ib">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/voorlopige-conserverende-aanslag-ib" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/in-afwijking-van-eerste-lid">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/in-afwijking-van-eerste-lid" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/dagtekening-in-vaststellingsjaar">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/dagtekening-in-vaststellingsjaar" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/maand-dagtekening-aanslagbiljet">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/maand-dagtekening-aanslagbiljet" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/termijnenberekening-resterende-maanden">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/termijnenberekening-resterende-maanden" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/resterende-maanden-jaar">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/resterende-maanden-jaar" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/invorderbaarheid-in-gelijke-termijnen">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/vervaldag-eerste-termijn">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/vervaldag-eerste-termijn" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/een-maand-na-dagtekening">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/een-maand-na-dagtekening" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/vervaldag-volgende-termijnen">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/vervaldag-volgende-termijnen" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/telkens-een-maand-later">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/telkens-een-maand-later" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9-5" target="begrippen/terugvalregel-lid-1">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/terugvalregel-lid-1" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/iw1990/art9" target="wetteksten/iw1990/art9">
+<edge source="annotaties/iw1990/art9-5" target="begrippen/termijnbedrag" id="0">
+  <data key="d30">begrippen</data>
+</edge>
+<edge source="annotaties/iw1990/art9-5" target="begrippen/totaalbedrag-belastingaanslag" id="0">
+  <data key="d30">begrippen</data>
+</edge>
+<edge source="annotaties/iw1990/art9" target="wetteksten/iw1990/art9" id="0">
   <data key="d30">wetstekst</data>
 </edge>
-<edge source="annotaties/iw1990/art9" target="annotaties/iw1990/art9-1">
+<edge source="annotaties/iw1990/art9" target="annotaties/iw1990/art9-1" id="0">
   <data key="d30">leden-noten</data>
 </edge>
-<edge source="annotaties/iw1990/art9" target="annotaties/iw1990/art9-5">
+<edge source="annotaties/iw1990/art9" target="annotaties/iw1990/art9-5" id="0">
   <data key="d30">leden-noten</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="wetteksten/li2008/art9-9-1">
+<edge source="annotaties/li2008/art9-9-1" target="wetteksten/li2008/art9-9-1" id="0">
   <data key="d30">wetstekst</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/voorlopige-aanslag">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/voorlopige-aanslag" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/dagtekening-in-november-of-eerder">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/dagtekening-in-november-of-eerder" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/termijn-eindigt-voor-31-december">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/termijn-eindigt-voor-31-december" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/vervaldag-31-december">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/vervaldag-31-december" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/31-december">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/31-december" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/afwijkend-boekjaar">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/afwijkend-boekjaar" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="annotaties/li2008/art9-9-1" target="begrippen/vervaldag-laatste-dag-maand">
+<edge source="annotaties/li2008/art9-9-1" target="begrippen/vervaldag-laatste-dag-maand" id="0">
   <data key="d30">begrippen</data>
 </edge>
-<edge source="begrippen/belastingaanslag" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/belastingaanslag" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/dagtekening-aanslagbiljet" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet">
+<edge source="begrippen/dagtekening-aanslagbiljet" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/dagtekening-in-november-of-eerder" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/dagtekening-in-november-of-eerder" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="begrippen/invorderbaarheid-in-gelijke-termijnen">
+<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="regels/AR-9-5a">
+<edge source="begrippen/dagtekening-in-vaststellingsjaar" target="regels/AR-9-5a" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/een-maand-na-dagtekening" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/een-maand-na-dagtekening" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/een-maand-na-dagtekening" target="begrippen/vervaldag-eerste-termijn">
+<edge source="begrippen/een-maand-na-dagtekening" target="begrippen/vervaldag-eerste-termijn" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/een-maand-na-dagtekening" target="regels/AR-9-5c">
+<edge source="begrippen/een-maand-na-dagtekening" target="regels/AR-9-5c" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/in-afwijking-van-eerste-lid" target="begrippen/invorderbaarheid-in-gelijke-termijnen">
+<edge source="begrippen/in-afwijking-van-eerste-lid" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/in-afwijking-van-eerste-lid" target="regels/AR-9-5a">
+<edge source="begrippen/in-afwijking-van-eerste-lid" target="regels/AR-9-5a" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/belastingaanslag">
+<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/belastingaanslag" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet">
+<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/invorderbaarheid">
+<edge source="begrippen/invorderbaarheid-belastingaanslag" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-belastingaanslag" target="regels/AR-9-1">
+<edge source="begrippen/invorderbaarheid-belastingaanslag" target="regels/AR-9-1" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/voorlopige-aanslag">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/voorlopige-aanslag" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/voorlopige-conserverende-aanslag-ib">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/voorlopige-conserverende-aanslag-ib" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/dagtekening-in-vaststellingsjaar">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/dagtekening-in-vaststellingsjaar" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/termijnenberekening-resterende-maanden">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/termijnenberekening-resterende-maanden" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/vervaldag-eerste-termijn">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/vervaldag-eerste-termijn" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/vervaldag-volgende-termijnen">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/vervaldag-volgende-termijnen" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="regels/AR-9-5a">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="regels/AR-9-5a" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/invorderbaarheid">
+<edge source="begrippen/invorderbaarheid-in-gelijke-termijnen" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">is-een</data>
 </edge>
-<edge source="begrippen/invorderbaarheid" target="regels/AR-9-1">
+<edge source="begrippen/invorderbaarheid" target="regels/AR-9-1" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/maand-dagtekening-aanslagbiljet" target="begrippen/resterende-maanden-jaar">
+<edge source="begrippen/maand-dagtekening-aanslagbiljet" target="begrippen/resterende-maanden-jaar" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/resterende-maanden-jaar" target="begrippen/maand-dagtekening-aanslagbiljet">
+<edge source="begrippen/resterende-maanden-jaar" target="begrippen/maand-dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/resterende-maanden-jaar" target="begrippen/termijnenberekening-resterende-maanden">
+<edge source="begrippen/resterende-maanden-jaar" target="begrippen/termijnenberekening-resterende-maanden" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/resterende-maanden-jaar" target="regels/AR-9-5b">
+<edge source="begrippen/resterende-maanden-jaar" target="regels/AR-9-5b" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/telkens-een-maand-later" target="begrippen/vervaldag-volgende-termijnen">
+<edge source="begrippen/telkens-een-maand-later" target="begrippen/vervaldag-volgende-termijnen" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/telkens-een-maand-later" target="regels/AR-9-5d">
+<edge source="begrippen/telkens-een-maand-later" target="regels/AR-9-5d" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/termijn-eindigt-voor-31-december" target="begrippen/invorderbaarheid-belastingaanslag">
+<edge source="begrippen/termijn-eindigt-voor-31-december" target="begrippen/invorderbaarheid-belastingaanslag" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/termijnbedrag" target="regels/AR-9-5f">
+<edge source="begrippen/termijnbedrag" target="regels/AR-9-5f" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/maand-dagtekening-aanslagbiljet">
+<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/maand-dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/resterende-maanden-jaar">
+<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/resterende-maanden-jaar" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/invorderbaarheid-in-gelijke-termijnen">
+<edge source="begrippen/termijnenberekening-resterende-maanden" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/termijnenberekening-resterende-maanden" target="regels/AR-9-5b">
+<edge source="begrippen/termijnenberekening-resterende-maanden" target="regels/AR-9-5b" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/terugvalregel-lid-1" target="begrippen/termijnenberekening-resterende-maanden">
+<edge source="begrippen/terugvalregel-lid-1" target="begrippen/termijnenberekening-resterende-maanden" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/terugvalregel-lid-1" target="begrippen/resterende-maanden-jaar">
+<edge source="begrippen/terugvalregel-lid-1" target="begrippen/resterende-maanden-jaar" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/terugvalregel-lid-1" target="begrippen/invorderbaarheid-belastingaanslag">
+<edge source="begrippen/terugvalregel-lid-1" target="begrippen/invorderbaarheid-belastingaanslag" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/terugvalregel-lid-1" target="regels/AR-9-5e">
+<edge source="begrippen/terugvalregel-lid-1" target="regels/AR-9-5e" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/totaalbedrag-belastingaanslag" target="begrippen/termijnbedrag">
+<edge source="begrippen/totaalbedrag-belastingaanslag" target="begrippen/termijnbedrag" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/vervaldag-31-december" target="begrippen/31-december">
+<edge source="begrippen/vervaldag-31-december" target="begrippen/31-december" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/vervaldag-31-december" target="begrippen/invorderbaarheid">
+<edge source="begrippen/vervaldag-31-december" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/vervaldag-31-december" target="regels/AR-LI-9-1a">
+<edge source="begrippen/vervaldag-31-december" target="regels/AR-LI-9-1a" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/vervaldag-eerste-termijn" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/vervaldag-eerste-termijn" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/vervaldag-eerste-termijn" target="begrippen/een-maand-na-dagtekening">
+<edge source="begrippen/vervaldag-eerste-termijn" target="begrippen/een-maand-na-dagtekening" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/vervaldag-eerste-termijn" target="regels/AR-9-5c">
+<edge source="begrippen/vervaldag-eerste-termijn" target="regels/AR-9-5c" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/vervaldag-laatste-dag-maand" target="begrippen/invorderbaarheid">
+<edge source="begrippen/vervaldag-laatste-dag-maand" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/vervaldag-laatste-dag-maand" target="regels/AR-LI-9-1b">
+<edge source="begrippen/vervaldag-laatste-dag-maand" target="regels/AR-LI-9-1b" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/vervaldag-volgende-termijnen" target="begrippen/vervaldag-eerste-termijn">
+<edge source="begrippen/vervaldag-volgende-termijnen" target="begrippen/vervaldag-eerste-termijn" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/vervaldag-volgende-termijnen" target="begrippen/telkens-een-maand-later">
+<edge source="begrippen/vervaldag-volgende-termijnen" target="begrippen/telkens-een-maand-later" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/vervaldag-volgende-termijnen" target="regels/AR-9-5d">
+<edge source="begrippen/vervaldag-volgende-termijnen" target="regels/AR-9-5d" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="begrippen/voorlopige-aanslag" target="begrippen/belastingaanslag">
+<edge source="begrippen/voorlopige-aanslag" target="begrippen/belastingaanslag" id="0">
   <data key="d30">is-een</data>
 </edge>
-<edge source="begrippen/voorlopige-conserverende-aanslag-ib" target="begrippen/belastingaanslag">
+<edge source="begrippen/voorlopige-conserverende-aanslag-ib" target="begrippen/belastingaanslag" id="0">
   <data key="d30">is-een</data>
 </edge>
-<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/zes-weken">
+<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/zes-weken" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">heeft</data>
 </edge>
-<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/invorderbaarheid">
+<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">leidt-tot</data>
 </edge>
-<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="regels/AR-9-1">
+<edge source="begrippen/zes-weken-na-dagtekening-aanslagbiljet" target="regels/AR-9-1" id="0">
   <data key="d30">afleidingsregels</data>
 </edge>
-<edge source="regels/AR-9-1" target="annotaties/iw1990/art9-1">
+<edge source="regels/AR-9-1" target="annotaties/iw1990/art9-1" id="0">
   <data key="d30">afgeleid-van</data>
 </edge>
-<edge source="regels/AR-9-1" target="begrippen/invorderbaarheid-belastingaanslag">
+<edge source="regels/AR-9-1" target="begrippen/invorderbaarheid-belastingaanslag" id="0">
   <data key="d30">bepaalt</data>
 </edge>
-<edge source="regels/AR-9-1" target="begrippen/dagtekening-aanslagbiljet">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-1" target="begrippen/belastingaanslag">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-1" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-1" target="begrippen/invorderbaarheid">
-  <data key="d30">uitvoer</data>
-</edge>
-<edge source="regels/AR-9-5a" target="annotaties/iw1990/art9-5">
-  <data key="d30">afgeleid-van</data>
-</edge>
-<edge source="regels/AR-9-5a" target="begrippen/invorderbaarheid-in-gelijke-termijnen">
-  <data key="d30">uitvoer</data>
-</edge>
-<edge source="regels/AR-9-5a" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="regels/AR-9-1" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">rechtsfeit</data>
 </edge>
-<edge source="regels/AR-9-5a" target="begrippen/voorlopige-aanslag">
+<edge source="regels/AR-9-1" target="begrippen/dagtekening-aanslagbiljet" id="1">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5a" target="begrippen/voorlopige-conserverende-aanslag-ib">
+<edge source="regels/AR-9-1" target="begrippen/belastingaanslag" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5a" target="begrippen/dagtekening-in-vaststellingsjaar">
+<edge source="regels/AR-9-1" target="begrippen/zes-weken-na-dagtekening-aanslagbiljet" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5a" target="begrippen/termijnenberekening-resterende-maanden">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5b" target="annotaties/iw1990/art9-5">
-  <data key="d30">afgeleid-van</data>
-</edge>
-<edge source="regels/AR-9-5b" target="begrippen/resterende-maanden-jaar">
+<edge source="regels/AR-9-1" target="begrippen/invorderbaarheid" id="0">
   <data key="d30">uitvoer</data>
 </edge>
-<edge source="regels/AR-9-5b" target="begrippen/dagtekening-aanslagbiljet">
-  <data key="d30">rechtsfeit</data>
-</edge>
-<edge source="regels/AR-9-5b" target="begrippen/maand-dagtekening-aanslagbiljet">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5c" target="annotaties/iw1990/art9-5">
+<edge source="regels/AR-9-5a" target="annotaties/iw1990/art9-5" id="0">
   <data key="d30">afgeleid-van</data>
 </edge>
-<edge source="regels/AR-9-5c" target="begrippen/vervaldag-eerste-termijn">
-  <data key="d30">uitvoer</data>
-</edge>
-<edge source="regels/AR-9-5c" target="begrippen/dagtekening-aanslagbiljet">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5c" target="begrippen/een-maand-na-dagtekening">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5d" target="annotaties/iw1990/art9-5">
-  <data key="d30">afgeleid-van</data>
-</edge>
-<edge source="regels/AR-9-5d" target="begrippen/vervaldag-volgende-termijnen">
-  <data key="d30">uitvoer</data>
-</edge>
-<edge source="regels/AR-9-5d" target="begrippen/dagtekening-aanslagbiljet">
-  <data key="d30">rechtsfeit</data>
-</edge>
-<edge source="regels/AR-9-5d" target="begrippen/vervaldag-eerste-termijn">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5d" target="begrippen/telkens-een-maand-later">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-9-5e" target="annotaties/iw1990/art9-5">
-  <data key="d30">afgeleid-van</data>
-</edge>
-<edge source="regels/AR-9-5e" target="begrippen/terugvalregel-lid-1">
+<edge source="regels/AR-9-5a" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="0">
   <data key="d30">bepaalt</data>
 </edge>
-<edge source="regels/AR-9-5e" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="regels/AR-9-5a" target="begrippen/invorderbaarheid-in-gelijke-termijnen" id="1">
+  <data key="d30">uitvoer</data>
+</edge>
+<edge source="regels/AR-9-5a" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">rechtsfeit</data>
 </edge>
-<edge source="regels/AR-9-5e" target="begrippen/resterende-maanden-jaar">
+<edge source="regels/AR-9-5a" target="begrippen/voorlopige-aanslag" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5e" target="begrippen/termijnenberekening-resterende-maanden">
+<edge source="regels/AR-9-5a" target="begrippen/voorlopige-conserverende-aanslag-ib" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5e" target="begrippen/invorderbaarheid-belastingaanslag">
-  <data key="d30">uitvoer</data>
+<edge source="regels/AR-9-5a" target="begrippen/dagtekening-in-vaststellingsjaar" id="0">
+  <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5f" target="annotaties/iw1990/art9-5">
+<edge source="regels/AR-9-5a" target="begrippen/termijnenberekening-resterende-maanden" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-9-5b" target="annotaties/iw1990/art9-5" id="0">
   <data key="d30">afgeleid-van</data>
 </edge>
-<edge source="regels/AR-9-5f" target="begrippen/termijnbedrag">
+<edge source="regels/AR-9-5b" target="begrippen/resterende-maanden-jaar" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-9-5b" target="begrippen/resterende-maanden-jaar" id="1">
   <data key="d30">uitvoer</data>
 </edge>
-<edge source="regels/AR-9-5f" target="begrippen/dagtekening-aanslagbiljet">
+<edge source="regels/AR-9-5b" target="begrippen/dagtekening-aanslagbiljet" id="0">
   <data key="d30">rechtsfeit</data>
 </edge>
-<edge source="regels/AR-9-5f" target="begrippen/totaalbedrag-belastingaanslag">
+<edge source="regels/AR-9-5b" target="begrippen/maand-dagtekening-aanslagbiljet" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-9-5f" target="begrippen/resterende-maanden-jaar">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-LI-9-1a" target="annotaties/li2008/art9-9-1">
+<edge source="regels/AR-9-5c" target="annotaties/iw1990/art9-5" id="0">
   <data key="d30">afgeleid-van</data>
 </edge>
-<edge source="regels/AR-LI-9-1a" target="begrippen/vervaldag-31-december">
+<edge source="regels/AR-9-5c" target="begrippen/vervaldag-eerste-termijn" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-9-5c" target="begrippen/vervaldag-eerste-termijn" id="1">
   <data key="d30">uitvoer</data>
 </edge>
-<edge source="regels/AR-LI-9-1a" target="begrippen/voorlopige-aanslag">
+<edge source="regels/AR-9-5c" target="begrippen/dagtekening-aanslagbiljet" id="0">
+  <data key="d30">rechtsfeit</data>
+</edge>
+<edge source="regels/AR-9-5c" target="begrippen/dagtekening-aanslagbiljet" id="1">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-LI-9-1a" target="begrippen/dagtekening-in-november-of-eerder">
+<edge source="regels/AR-9-5c" target="begrippen/een-maand-na-dagtekening" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-LI-9-1a" target="begrippen/termijn-eindigt-voor-31-december">
-  <data key="d30">invoer</data>
-</edge>
-<edge source="regels/AR-LI-9-1b" target="annotaties/li2008/art9-9-1">
+<edge source="regels/AR-9-5d" target="annotaties/iw1990/art9-5" id="0">
   <data key="d30">afgeleid-van</data>
 </edge>
-<edge source="regels/AR-LI-9-1b" target="begrippen/vervaldag-laatste-dag-maand">
+<edge source="regels/AR-9-5d" target="begrippen/vervaldag-volgende-termijnen" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-9-5d" target="begrippen/vervaldag-volgende-termijnen" id="1">
   <data key="d30">uitvoer</data>
 </edge>
-<edge source="regels/AR-LI-9-1b" target="begrippen/voorlopige-aanslag">
+<edge source="regels/AR-9-5d" target="begrippen/dagtekening-aanslagbiljet" id="0">
+  <data key="d30">rechtsfeit</data>
+</edge>
+<edge source="regels/AR-9-5d" target="begrippen/vervaldag-eerste-termijn" id="0">
   <data key="d30">invoer</data>
 </edge>
-<edge source="regels/AR-LI-9-1b" target="begrippen/afwijkend-boekjaar">
+<edge source="regels/AR-9-5d" target="begrippen/telkens-een-maand-later" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-9-5e" target="annotaties/iw1990/art9-5" id="0">
+  <data key="d30">afgeleid-van</data>
+</edge>
+<edge source="regels/AR-9-5e" target="begrippen/terugvalregel-lid-1" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-9-5e" target="begrippen/dagtekening-aanslagbiljet" id="0">
+  <data key="d30">rechtsfeit</data>
+</edge>
+<edge source="regels/AR-9-5e" target="begrippen/resterende-maanden-jaar" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-9-5e" target="begrippen/termijnenberekening-resterende-maanden" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-9-5e" target="begrippen/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d30">uitvoer</data>
+</edge>
+<edge source="regels/AR-9-5f" target="annotaties/iw1990/art9-5" id="0">
+  <data key="d30">afgeleid-van</data>
+</edge>
+<edge source="regels/AR-9-5f" target="begrippen/termijnbedrag" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-9-5f" target="begrippen/termijnbedrag" id="1">
+  <data key="d30">uitvoer</data>
+</edge>
+<edge source="regels/AR-9-5f" target="begrippen/dagtekening-aanslagbiljet" id="0">
+  <data key="d30">rechtsfeit</data>
+</edge>
+<edge source="regels/AR-9-5f" target="begrippen/totaalbedrag-belastingaanslag" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-9-5f" target="begrippen/resterende-maanden-jaar" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="annotaties/li2008/art9-9-1" id="0">
+  <data key="d30">afgeleid-van</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="begrippen/vervaldag-31-december" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="begrippen/vervaldag-31-december" id="1">
+  <data key="d30">uitvoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="begrippen/voorlopige-aanslag" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="begrippen/dagtekening-in-november-of-eerder" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1a" target="begrippen/termijn-eindigt-voor-31-december" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1b" target="annotaties/li2008/art9-9-1" id="0">
+  <data key="d30">afgeleid-van</data>
+</edge>
+<edge source="regels/AR-LI-9-1b" target="begrippen/vervaldag-laatste-dag-maand" id="0">
+  <data key="d30">bepaalt</data>
+</edge>
+<edge source="regels/AR-LI-9-1b" target="begrippen/vervaldag-laatste-dag-maand" id="1">
+  <data key="d30">uitvoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1b" target="begrippen/voorlopige-aanslag" id="0">
+  <data key="d30">invoer</data>
+</edge>
+<edge source="regels/AR-LI-9-1b" target="begrippen/afwijkend-boekjaar" id="0">
   <data key="d30">invoer</data>
 </edge>
 </graph></graphml>

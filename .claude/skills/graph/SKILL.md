@@ -59,7 +59,9 @@ Extraheer uit de stdout:
 - Aantal edges
 - Geschreven bestanden (GEXF en/of GraphML)
 
-Meld eventuele fouten of waarschuwingen aan de gebruiker.
+**Staleness-waarschuwing (stderr):** Als vault-bestanden nieuwer zijn dan de bestaande GEXF, print het script een waarschuwing met de gewijzigde bestanden. Meld dit aan de gebruiker: de export is al bijgewerkt, maar de waarschuwing geeft aan welke bestanden de aanleiding waren.
+
+Meld eventuele andere fouten of waarschuwingen aan de gebruiker.
 
 ---
 
