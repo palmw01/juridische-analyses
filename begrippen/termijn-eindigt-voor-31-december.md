@@ -21,7 +21,8 @@ aliases: []
 is-een: []
 heeft:
   - "[[begrippen/invorderbaarheid-belastingaanslag]]"
-leidt-tot: []
+leidt-tot:
+  - "[[begrippen/vervaldag-31-december]]"
 afleidingsregels: []
 geldigheid-van: 2026-01-01
 geldigheid-tot: ""
@@ -51,3 +52,4 @@ Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
 | heeft | 1:1 | [[begrippen/invorderbaarheid-belastingaanslag]] |
+| leidt tot | — | [[begrippen/vervaldag-31-december]] |

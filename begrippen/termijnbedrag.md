@@ -46,3 +46,9 @@ Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de 
 - Afgeleide numerieke waarde.
 - Wordt gebruikt om de omvang van de betalingsverplichting per vervaldatum vast te stellen.
 - Borgt de wettelijke eis van 'gelijkheid' van termijnen.
+
+## Relaties
+
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| — | — | — |

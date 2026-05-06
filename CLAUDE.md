@@ -29,51 +29,6 @@ Voor bronnen zonder leden (Leidraad, beleid):
 /annoteer sectie [ref] [W]    →  Flow C: wetstekst-noot + directe annotatie-noot
 ```
 
-### Vault-structuur
-
-```
-wetteksten/       ← letterlijke wetstekst per bron (objectief, MCP-afkomstig)
-  iw1990/         ← per wet een submap
-    art9.md       ← alle leden van art. 9 IW 1990
-annotaties/       ← interpretatief werk (A2-tussenproduct)
-  iw1990/         ← per wet een submap
-    art9.md       ← index-noot: structuuranker (READ-ONLY, geen annotaties)
-    art9-1.md     ← lid-annotatie lid 1: annotatietabel + diagram
-    art9-5.md     ← lid-annotatie lid 5: annotatietabel + diagram
-begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
-regels/           ← atomaire afleidingsregel-noten (A3b-output)
-graaf/            ← graph-export output (GraphML/GEXF); gegenereerd via /graph
-```
-
-### Eenheid-slug
-
-De bestandsnaam van wetstekst- en annotatie-noten is een deterministische slug afgeleid van het MCP `pad`-veld:
-
-| Bron | MCP pad-segment | Slug |
-|------|-----------------|------|
-| Formele wet | `Artikel 9 > Lid 1` | `art9-1` |
-| Leidraad / beleid | `§ 1.1 De ontvanger` | `par1-1` |
-
-Zie `.claude/skills/annoteer/SKILL.md §Slug-transformatietabel` voor de volledige regels.
-
-### Entiteitstypen en tags
-
-| Entiteit | Type-veld | Tags |
-|----------|-----------|------|
-| Wetstekst-noot | `wetstekst` | `#wetstekst`, `#wet/[wet]`, `#art/[nr]` |
-| Index-noot (artikel) | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
-| Lid-annotatie-noot | `annotatie` | `#annotatie`, `#wet/[wet]`, `#art/[nr]` |
-| Begrip-noot | `begrip` | `#begrip`, `#jas/[klasse]`, `#wet/[wet]`, `#art/[nr]` |
-| Afleidingsregel-noot | `afleidingsregel` | `#afleidingsregel`, `#wet/[wet]`, `#art/[nr]` |
-
-In Obsidian Graph View: kleur instellen per tag (`#jas/rechtsbetrekking` → rood, `#jas/rechtssubject` → blauw, enz.) conform kaders.md §Kleurcodering.
-
-### Templates — geen wikilinks
-
-De templatebestanden (`annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md`) mogen **nooit** `[[...]]`-wikilinks bevatten — ook niet in YAML-comments of in de markdown-body. Obsidian scant de volledige bestandsinhoud op `[[...]]`-patronen en maakt van elke match een node in de Graph View, inclusief fantoomnodes met placeholdernamen zoals `[slug]` of `…`. Gebruik in de templatebestanden bij voorbeelden en hints altijd platte tekst: `begrippen/[slug]` in plaats van `[[begrippen/[slug]]]`.
-
-Dit verbod geldt **niet** voor SKILL.md-instructiedocumenten of voor de gegenereerde output (annotatie-noten, begrip-noten, regel-noten). Die bevatten wél `[[...]]`-wikilinks — dat is vereist voor Obsidian Graph View-verbindingen.
-
 ### Annotatie → begrip: strikte volgorde
 
 De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in de begrip-frontmatter zijn de enige bron voor de definitie.
@@ -146,4 +101,3 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraaak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |

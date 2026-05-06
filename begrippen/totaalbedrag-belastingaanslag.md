@@ -45,3 +45,9 @@ Het totale bedrag van de belastingaanslag dat bij aanvang van de invordering ver
 - Numerieke waarde (getal).
 - Direct herleidbaar uit het aanslagbiljet.
 - Vormt de basis (`teller`) voor de berekening van het termijnbedrag in artikel 9 lid 5 IW 1990.
+
+## Relaties
+
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| leidt tot | — | [[begrippen/termijnbedrag]] |

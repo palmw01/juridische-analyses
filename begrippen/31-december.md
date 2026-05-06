@@ -38,7 +38,8 @@ De eenendertigste dag van de twaalfde maand van een kalenderjaar
 
 | Stelling | Waar? | Toelichting |
 |----------|-------|-------------|
-| 31-december: De datum 31-12-2008 | ja | Dit is de kalenderdatum. |
+| De datum 31 december 2026 is de dag waarop de LI 2008 § 9.1 de vervaldag stelt. | ja | 31 december is de eenendertigste dag van december; dat is de door § 9.1 aangewezen dag. |
+| De datum 30 december 2026 is gelijk aan 31 december in de zin van § 9.1 LI 2008. | nee | Grensgeval: § 9.1 LI 2008 verwijst uitdrukkelijk naar "31 december"; 30 december is een andere kalenderdag en valt buiten de definitie. |
 
 ## Kenmerken
 

@@ -10,6 +10,7 @@ tags:
 afgeleid-van: "[[annotaties/li2008/art9-9-1]]"
 peildatum: 2026-01-01
 bepaalt: "[[begrippen/vervaldag-laatste-dag-maand]]"
+rechtsfeit: "[[begrippen/dagtekening-aanslagbiljet]]"
 invoer:
   - "[[begrippen/voorlopige-aanslag]]"
   - "[[begrippen/afwijkend-boekjaar]]"

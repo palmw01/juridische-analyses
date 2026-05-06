@@ -51,4 +51,4 @@ Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor de ber
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/zes-weken-na-dagtekening-aanslagbiljet]] |
+| — | — | — |

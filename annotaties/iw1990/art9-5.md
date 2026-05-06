@@ -54,7 +54,7 @@ begrippen:
 | 14 | "elk van de volgende termijnen telkens een maand later" | **afleidingsregel** | grammaticaal | [[begrippen/vervaldag-volgende-termijnen]] | ⚠ reeks-statustoets: deze rekenregel produceert een reeks van N−1 vervaldatums (iteratief). Zie ook markering 12. |
 | 15 | "telkens een maand later" | **tijdsaanduiding** | grammaticaal | [[begrippen/telkens-een-maand-later]] | — |
 | 16 | "Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing." | **afleidingsregel** | systematisch | [[begrippen/terugvalregel-lid-1]] | ⚠ beslissingsregel (terugvalregel); art. 9 lid 1 herneemt toepassing als het termijnenantal ≤ 1 is (bij dagtekening in december) |
-| 17 | "gelijke" | **afleidingsregel** | systematisch | [[regels/AR-9-5f]] | ⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen |
+| 17 | "gelijke" | **afleidingsregel** | systematisch | [[begrippen/termijnbedrag]] | ⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen |
 | 18 | "gelijke termijnen" | **variabele** | systematisch | [[begrippen/termijnbedrag]] | ⚠ de variabele die de uitkomst van AR-9-5f representeert |
 | 19 | "een belastingaanslag" | **variabele** | systematisch | [[begrippen/totaalbedrag-belastingaanslag]] | ⚠ hergebruik markering uit lid 1; het totaalbedrag is noodzakelijk voor de berekening van het termijnbedrag (invoer voor AR-9-5f) |
 
