@@ -128,15 +128,22 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 ## Skill-documentatie
 
+### Skills
+
 | Skill | Bestand | Functie |
 |-------|---------|---------|
-| `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren + classificeren; bij conflict: kaders.md is leidend |
-| `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie + voorbeelden + afleidingsregels; bij conflict: kaders zijn leidend |
-| `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties |
-| JAS kaders | `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 interpretatiemethoden, 4 typen afleidingsregels, diagram-centrum-prioritering, knooplabel-truncatieregels, delegatietype-beslisregel, kleurcodering |
-| Begrippenkader | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
-| Regelkader | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraaak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
-| BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
-| Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
+| `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
+| `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
+| `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
 | `/graph` | `.claude/skills/graph/SKILL.md` | Graph-export: vault → GEXF/GraphML; `/graph model` hergenereert ook graph-model.json |
+
+### Kaders en ondersteunende bestanden
+
+| Bestand | Inhoud |
+|---------|--------|
+| `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 interpretatiemethoden, 4 typen afleidingsregels, diagram-centrum-prioritering, knooplabel-truncatieregels, delegatietype-beslisregel, kleurcodering |
+| `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
+| `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraaak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
+| `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
+| `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
+| `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
