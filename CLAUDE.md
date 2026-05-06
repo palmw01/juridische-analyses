@@ -42,7 +42,7 @@ annotaties/       ← interpretatief werk (A2-tussenproduct)
     art9-5.md     ← lid-annotatie lid 5: annotatietabel + diagram
 begrippen/        ← atomaire begrip-noten (A3a-output, afgeleid van annotatie)
 regels/           ← atomaire afleidingsregel-noten (A3b-output)
-tools/            ← Python-scripts voor graph-export (GraphML/GEXF); draai met .venv/bin/python
+graaf/            ← graph-export output (GraphML/GEXF); gegenereerd via /graph
 ```
 
 ### Eenheid-slug
@@ -139,4 +139,4 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | BWB-mapping | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | Kruisreferentieprotocol | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
 | Templates | `annotaties/template.md`, `begrippen/template.md`, `regels/template.md`, `wetteksten/template.md` | Noot-formats (geen wikilinks; `bronnen: []` na `/annoteer`) |
-| Graph-export | `tools/export_graph.py`, `tools/generate_model.py`, `tools/graph-model.json` | Vault → GraphML/GEXF voor Gephi/Cytoscape |
+| `/graph` | `.claude/skills/graph/SKILL.md` | Graph-export: vault → GEXF/GraphML; `/graph model` hergenereert ook graph-model.json |

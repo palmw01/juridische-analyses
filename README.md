@@ -25,8 +25,8 @@ annotaties/       ← interpretatief werk per artikel/lid (A2-tussenproduct)
   iw1990/         ← per wet een submap; art[N].md = index-noot, art[N]-[L].md = lid-annotatie
 begrippen/        ← atomaire begrip-noten (definitie, voorbeelden, kenmerken, relaties)
 regels/           ← atomaire afleidingsregel-noten (als-dan, voorbeeldreeksen)
-tools/            ← Python-scripts voor graph-export naar GraphML/GEXF (Gephi/Cytoscape)
-.claude/skills/   ← skill-documentatie voor Claude Code
+graaf/            ← graph-export output: graph.gexf + graph.graphml (gegenereerd via /graph)
+.claude/skills/   ← skill-documentatie en graph-exportscripts voor Claude Code
 ```
 
 ---
@@ -57,13 +57,12 @@ Voorbeeld:
 
 De vault is exporteerbaar als GraphML en GEXF voor analyse in Gephi of Cytoscape:
 
-```sh
-cd tools/
-.venv/bin/python export_graph.py        # → graph.graphml + graph.gexf
-.venv/bin/python generate_model.py      # → graph-model.json (na toevoeging nieuwe frontmatter-velden)
+```
+/graph            →  exporteer naar graaf/graph.gexf + graaf/graph.graphml
+/graph model      →  hergenereeer graph-model.json + exporteer
 ```
 
-Het `graph-model.json` beschrijft node-types, edge-types, JAS-kleurcodering en exportinstellingen. Pas het model bij als er nieuwe frontmatter-velden worden toegevoegd aan de templates — of regenereer het automatisch met `generate_model.py`.
+Het `graph-model.json` beschrijft node-types, edge-types, JAS-kleurcodering en exportinstellingen. Gebruik `/graph model` nadat nieuwe frontmatter-velden aan de templates zijn toegevoegd.
 
 ### Installatie
 
@@ -83,6 +82,7 @@ Het JAS maakt interpretatie- en preciseringskeuzes traceerbaar en vormt de basis
 - **Regelkader**: [`.claude/skills/begrip/kaders-regels.md`](./.claude/skills/begrip/kaders-regels.md) — beslisboom regeltype-classificatie; taalpatronen incl. Beperkingsregel variant A/B; tussenresultaten; RegelSpraaak-correspondentietabel incl. vergelijkingsoperatoren; Specialisatieregel-voorbeeldformat (A3b + A6e)
 - **Skill /annoteer**: [`.claude/skills/annoteer/SKILL.md`](./.claude/skills/annoteer/SKILL.md) — markeringen + classificaties + Mermaid-diagram (A2)
 - **Skill /begrip**: [`.claude/skills/begrip/SKILL.md`](./.claude/skills/begrip/SKILL.md) — begrippen + afleidingsregels (A3)
+- **Skill /graph**: [`.claude/skills/graph/SKILL.md`](./.claude/skills/graph/SKILL.md) — vault → GEXF/GraphML; `/graph model` hergenereert ook graph-model.json
 - **BWB-mapping**: [`.claude/skills/wettenbank/bwb-mapping.md`](./.claude/skills/wettenbank/bwb-mapping.md)
 - **Kruisreferentieprotocol**: [`.claude/skills/wettenbank/verwijzingen.md`](./.claude/skills/wettenbank/verwijzingen.md) — JCI URI-extractie, forward/backward kruisreferenties
 

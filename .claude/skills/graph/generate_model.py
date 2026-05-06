@@ -250,7 +250,7 @@ def genereer_model(vault_root: Path) -> dict:
         "edge_types": alle_edges,
         "export": {
             "formaten": ["gexf", "graphml"],
-            "output_map": "tools/",
+            "output_map": "graaf/",
             "skip_bestanden": list(SKIP),
             "tijdsdimensie": {
                 "actief": True,

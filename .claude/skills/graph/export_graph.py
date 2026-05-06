@@ -137,8 +137,11 @@ def main():
 
     print(f"Graaf: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
+    output_dir = vault_root / "graaf"
+    output_dir.mkdir(exist_ok=True)
+
     for formaat in model["export"].get("formaten", ["gexf"]):
-        out = script_dir / f"graph.{formaat}"
+        out = output_dir / f"graph.{formaat}"
         if formaat == "gexf":
             nx.write_gexf(G, out)
         elif formaat == "graphml":
