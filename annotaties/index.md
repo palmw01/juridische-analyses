@@ -1,10 +1,10 @@
 ---
-title: Annotaties
+title: Annotaties (Activiteit 2)
 ---
 
-# Annotaties
+# Annotaties — Activiteit 2: Zichtbaar maken van de juridische structuur
 
-Wetsartikelen voorzien van JAS-markeringen, classificaties en structuurdiagrammen. De annotatie is het startpunt van het analysegraf: zij verbindt de letterlijke wetstekst met begrippen en afleidingsregels.
+Wetsartikelen voorzien van markeringen, JAS-classificaties en structuurdiagrammen. De annotatie verbindt de letterlijke wetstekst met de begrippen en afleidingsregels uit Activiteit 3.
 
 Er zijn twee soorten annotatie-noten:
 

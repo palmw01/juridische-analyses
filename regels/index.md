@@ -1,10 +1,10 @@
 ---
-title: Regels
+title: Afleidingsregels (Activiteit 3b)
 ---
 
-# Afleidingsregels
+# Afleidingsregels — Activiteit 3b: Vaststellen van de betekenis
 
-Logische beslissings- en berekeningsregels afgeleid uit de annotaties. Elke regel is direct herleidbaar naar een specifiek lid van een wetsartikel.
+Logische beslissings- en berekeningsregels afgeleid uit de annotaties (Activiteit 2). Elke regel is direct herleidbaar naar een specifiek lid van een wetsartikel.
 
 ## Regeltypen
 

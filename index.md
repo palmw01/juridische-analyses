@@ -1,46 +1,60 @@
 ---
-title: Juridische Wetsanalyse
+title: Juridische wetsanalyse
 ---
 
-# Juridische Wetsanalyse
+# Juridische wetsanalyse
 
-Welkom in de kennisomgeving voor de gestructureerde analyse van wet- en regelgeving. Deze omgeving fungeert als een **knowledge graph** waarin juridische teksten worden getransformeerd naar een samenhangend model van begrippen, regels en relaties.
+Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijksbelastingen**. Doel is wetgeving zo te analyseren dat de resultaten bruikbaar zijn voor de uitvoeringspraktijk: rechtmatig, uitlegbaar en controleerbaar.
 
-## Methodiek: Juridisch Analyseschema (JAS)
+## Methodiek: Wetsanalyse
 
-De analyses in deze vault worden uitgevoerd conform het <a href="https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10" target="_blank">Juridisch Analyseschema (JAS) v1.0.10</a>. Deze methode maakt interpretatie- en preciseringskeuzes in wetgeving traceerbaar en vormt een brug tussen de juridische brontekst en de uiteindelijke ICT-implementatie.
+Wetsanalyse is een multidisciplinaire methode voor het expliciet maken, concretiseren en vastleggen van de betekenis van wet- en regelgeving. De activiteiten worden iteratief uitgevoerd — per artikel, per lid, steeds verder verfijnd — vanuit het perspectief van de uitvoeringspraktijk.
 
-De kern van de graaf bestaat uit vier verbonden entiteitstypen:
+| # | Activiteit | Omschrijving | AI |
+|---|-----------|-------------|-----|
+| 1 | Bepalen van het werkgebied | Scope, juridische scenario's, bronnenselectie | — |
+| **2** | **Zichtbaar maken van de juridische structuur** | Markeren, classificeren (JAS), structuurdiagram | **✓** |
+| **3** | **Vaststellen van de betekenis** | Begrippen, afleidingsregels, traceerbaarheid | **✓** |
+| 4 | Valideren van de analyseresultaten | Toetsing met juridische scenario's en voorbeeldreeksen | — |
+| 5 | Signaleren van ontbrekende beleidsregels | Interpretaties en nadere invullingen ter oplevering | — |
+| 6 | Opstellen van een kennismodel | Gegevensmodel, regelmodel, procesmodel | — |
 
-1.  **Wetsteksten:** De letterlijke wettekst op peildatum, objectief en ongewijzigd.
-2.  **Annotaties (A2):** De wetstekst voorzien van markeringen en JAS-classificaties.
-3.  **Begrippen (A3a):** Atomaire definities, kenmerken en onderlinge relaties tussen juridische entiteiten.
-4.  **Afleidingsregels (A3b):** De logica die bepaalt hoe rechtsgevolgen intreden op basis van feiten en omstandigheden.
+De AI-output — annotatie-noten (A2), begrip-noten (A3a) en afleidingsregel-noten (A3b) — vormt het analysemateriaal dat input is voor A4–A6. Die activiteiten vallen buiten de scope van deze werkruimte.
 
 ## Navigatie
 
-De kennisbank is georganiseerd langs de lijnen van de JAS-artefacten:
-
 *   **[[wetteksten/index|Wetsteksten]]**  
-    *Letterlijke wetsteksten per bronregeling, objectief en MCP-afkomstig.*
-*   **[[annotaties/index|Annotaties]]**  
-    *Wetsartikelen per bronregeling, voorzien van JAS-classificaties en structuurdiagrammen.*
-*   **[[begrippen/index|Begrippenkader]]**  
-    *Het geconsolideerde netwerk van juridische begrippen over verschillende wetten heen.*
-*   **[[regels/index|Afleidingsregels]]**  
-    *De logische bouwstenen en algoritmen afgeleid uit de regelgeving.*
+    *Letterlijke wetsteksten per bronregeling, objectief en MCP-afkomstig. Input voor Activiteit 2.*
+*   **[[annotaties/index|Annotaties (A2)]]**  
+    *Wetsartikelen voorzien van markeringen, JAS-classificaties en structuurdiagrammen.*
+*   **[[begrippen/index|Begrippen (A3a)]]**  
+    *Atomaire definities, kenmerken en relaties van juridische begrippen.*
+*   **[[regels/index|Afleidingsregels (A3b)]]**  
+    *Beslissings-, reken-, beperkings- en specialisatieregels afgeleid uit de regelgeving.*
 
 ---
 
-## Verkenning & Analyse
+## Traceerbaarheid
 
-Deze vault is ontworpen voor visuele en data-gedreven analyse via **Obsidian**:
+Rechtmatigheid vereist dat beslissingen in de uitvoeringspraktijk traceerbaar zijn naar wet- en regelgeving. De wikilink-keten in de vault maakt dit zichtbaar:
 
-- **Visualisatie:** Via de *Graph View* worden dwarsverbanden tussen verschillende wetten en begrippen direct zichtbaar.
-- **Traceerbaarheid:** Elk begrip en elke regel is direct herleidbaar naar de onderliggende annotatie van de wetstekst.
-- **Kleurcodering:** De graph hanteert de JAS-standaard voor snelle interpretatie (o.a. blauw voor rechtssubjecten, rood voor rechtsbetrekkingen).
+```
+begrip-noot  →  annotatie-noot  →  wetstekst-noot
+```
 
-*Onderdeel van de digitale transformatie van juridische kaders binnen de Belastingdienst.*
+Elk begrip verwijst naar de annotatie waaruit het is afgeleid. De annotatie verwijst naar de wetstekst-noot met de letterlijke wettekst. Zo is elk analyseresultaat direct herleidbaar naar de primaire juridische bron.
+
+---
+
+## Obsidian Graph View
+
+De graph is filterbaar en kleurbaar via geneste tags. Kleuren volgen de JAS-kleurcodering: blauw voor rechtssubjecten, rood voor rechtsbetrekkingen, geel voor rechtsfeiten, enzovoort.
+
+| Filter | Resultaat |
+|--------|-----------|
+| `tag:#wet/iw1990` | Alles m.b.t. IW 1990 |
+| `tag:#jas/rechtsbetrekking` | Alleen rechtsbetrekkingen |
+| `path:begrippen/` | Alleen begrip-noten |
 
 ---
 

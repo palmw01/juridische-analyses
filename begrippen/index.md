@@ -1,10 +1,10 @@
 ---
-title: Begrippen
+title: Begrippen (Activiteit 3a)
 ---
 
-# Begrippenkader
+# Begrippen — Activiteit 3a: Vaststellen van de betekenis
 
-Atomaire definities van juridische begrippen, afgeleid uit de annotaties. Elk begrip is direct herleidbaar naar de specifieke markering in de wetstekst — niet naar de wetstekst zelf.
+Atomaire definities van juridische begrippen, afgeleid uit de annotaties (Activiteit 2). Elk begrip is direct herleidbaar naar de specifieke markering in de annotatie — nooit rechtstreeks uit de wetstekst.
 
 ## JAS-entiteitstypen
 
