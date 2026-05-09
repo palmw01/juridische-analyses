@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder",
+  "slug": "dagtekening-in-november-of-eerder",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| dagtekening-in-november-of-eerder: Een aanslag met dagtekening 15 november 2008 | ja | November valt binnen de reikwijdte 'november of eerder'. |\n| dagtekening-in-november-of-eerder: Een aanslag met dagtekening 1 december 2008 | nee | December valt buiten de reikwijdte. |\n| dagtekening-in-november-of-eerder: Een aanslag met dagtekening 31 oktober 2008 | ja | Oktober is eerder dan november. |",
+  "kenmerken": "- Gebaseerd op de maandnaam in de dagtekening."
+}

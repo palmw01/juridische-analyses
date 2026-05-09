@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/een-maand-na-dagtekening",
+  "slug": "een-maand-na-dagtekening",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| Een aanslagbiljet gedagtekend 15 maart 2026 heeft als eerste vervaldatum 15 april 2026. | ja | Één kalendermaand na 15 maart 2026 is 15 april 2026; dit is de vervaldatum van de eerste termijn. |\n| Een aanslagbiljet gedagtekend 31 januari 2026 heeft als eerste vervaldatum 31 februari 2026. | nee | Grensgeval: februari telt maximaal 28 of 29 dagen; bij maandberekening geldt in de praktijk de laatste dag van de doelmaand (28 februari 2026); de Algemene termijnenwet is uitgesloten (lid 10) maar de maandberekeningssystematiek voor korte maanden is niet nader geregeld in lid 5 zelf. |",
+  "kenmerken": "- De tijdsaanduiding is relatief: zij wordt berekend door één kalendermaand op te tellen bij de dagtekening van het aanslagbiljet.\n- Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit, zodat de maandtermijn kalenderstrikt loopt.\n- De tijdsaanduiding geldt uitsluitend voor de eerste termijn; de volgende termijnen worden berekend via `telkens-een-maand-later`."
+}

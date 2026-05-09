@@ -1,0 +1,147 @@
+{
+  "annotatie-id": "BWBR0008003/par9-1",
+  "bwb-id": "BWBR0024096",
+  "wet": "LI 2008",
+  "artikel": "9",
+  "lid": "9.1",
+  "peildatum": "2026-01-01",
+  "structuurpositie": "Artikel 1 Inleiding en toepassingsgebied > Artikel 9 Betalingstermijnen > Lid 9.1",
+  "wetstekst": "**[9.1]** In de gevallen waarin voor voorlopige aanslagen (bedoeld in [artikel 9, vijfde lid, van de wet](jci1.3:c:BWBR0004770&artikel=9)) die zijn gedagtekend in november of eerder, toepassing van de [wet](jci1.3:c:BWBR0004770) er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december, dan wordt de vervaldag van deze termijn op 31 december gesteld. Bij afwijkende boekjaren wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld.",
+  "annotatierijen": [
+    {
+      "rij-id": "r-001",
+      "markering": "voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)",
+      "jas-klasse": "rechtsobject",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-002",
+      "markering": "die zijn gedagtekend in november of eerder",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-003",
+      "markering": "toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-004",
+      "markering": "dan wordt de vervaldag van deze termijn op 31 december gesteld",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-31-december",
+      "toelichting-klasse": "",
+      "signalering": "**type**: Specialisatieregel (in afwijking van de hoofdregel in art. 9 lid 5 IW 1990)"
+    },
+    {
+      "rij-id": "r-005",
+      "markering": "31 december",
+      "jas-klasse": "tijdsaanduiding",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/31-december",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-006",
+      "markering": "Bij afwijkende boekjaren",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/afwijkend-boekjaar",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-007",
+      "markering": "wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand",
+      "toelichting-klasse": "",
+      "signalering": "**type**: Specialisatieregel"
+    }
+  ],
+  "diagram": {
+    "centrale-klasse": "afleidingsregel",
+    "knopen": [
+      {
+        "id": "AR1",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervaldag op 31 december gesteld'",
+        "begrip-id": null
+      },
+      {
+        "id": "VW1",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'gedagtekend in november of eerder'",
+        "begrip-id": null
+      },
+      {
+        "id": "VW2",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'termijn eindigt voor 31 december'",
+        "begrip-id": null
+      },
+      {
+        "id": "RO",
+        "jas-klasse": "rechtsobject",
+        "label": "rechtsobject 'voorlopige aanslagen'",
+        "begrip-id": null
+      },
+      {
+        "id": "TA",
+        "jas-klasse": "tijdsaanduiding",
+        "label": "tijdsaanduiding '31 december'",
+        "begrip-id": null
+      }
+    ],
+    "kanten": [
+      {
+        "van": "VW1",
+        "naar": "RO",
+        "label": null
+      },
+      {
+        "van": "VW2",
+        "naar": "RO",
+        "label": null
+      },
+      {
+        "van": "AR1",
+        "naar": "VW1",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR1",
+        "naar": "VW2",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR1",
+        "naar": "TA",
+        "label": "gebruikt"
+      }
+    ]
+  },
+  "kruisreferenties": [
+    {
+      "doel-bwb-id": "BWBR0004770",
+      "doel-artikel": "9",
+      "doel-lid": null,
+      "richting": "forward",
+      "confidence": 1.0,
+      "ruwe-tekst": "Art. 9 IW 1990"
+    }
+  ]
+}

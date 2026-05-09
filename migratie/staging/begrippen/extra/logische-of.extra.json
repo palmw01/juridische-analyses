@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/logische-of",
+  "slug": "logische-of",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| Een voorlopige aanslag VPB 2026 voldoet aan het aanslagtype-criterium van lid 5, ook al is er geen IB-aanslag. | ja | De logische OR is inclusief; aan het criterium is voldaan zodra ten minste één van de alternatieven (IB of VPB) van toepassing is. |\n| Een voorlopige aanslag dividendbelasting 2026 voldoet aan het aanslagtype-criterium van lid 5. | nee | Grensgeval: de opsomming in lid 5 is limitatief (IB of VPB); dividendbelasting valt niet onder de genoemde alternatieven. |",
+  "kenmerken": "- In lid 5 verbindt de operator 'of' uitsluitend de aanslagtypen IB en VPB; de enumratie is limitatief.\n- De operator fungeert als selectiecriterium voor het toepassingsbereik van de termijnenregeling van lid 5."
+}

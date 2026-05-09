@@ -1,0 +1,106 @@
+[
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
+    "begripsnaam": "dagtekening-aanslagbiljet",
+    "aangemeld-op": "2026-05-10",
+    "markeringen-count": 2,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "de dagtekening van het aanslagbiljet",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      },
+      {
+        "markering-id": "m-002",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "de dagtekening van het aanslagbiljet",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "context",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Dubbelclassificatie in art9-1: tijdsaanduiding (rij 5) en rechtsfeit (rij 6). In IW 1990-context is dagtekening een datumgegeven (ankerpunt voor termijnberekening), niet de handeling van uitreiken. Rechtsfeit-functie hoort bij AWR art. 11, niet bij art. 9 IW 1990.",
+    "advies": "één begrip behouden — tijdsaanduiding primair",
+    "beslissing": "context — m-002 bijdrage: context, definitie ongewijzigd, status: concept",
+    "besloten-op": "2026-05-10",
+    "besloten-door": "senior jurist Belastingdienst domein Invordering"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid",
+    "begripsnaam": "invorderbaarheid",
+    "aangemeld-op": "2026-05-10",
+    "markeringen-count": 2,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "is invorderbaar",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      },
+      {
+        "markering-id": "m-002",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "is invorderbaar",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "context",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Identieke markering in lid 1 en lid 5. Lid 1 beschrijft eenmalig omslagmoment (6 weken na dagtekening). Lid 5 beschrijft N omslagmomenten per termijn. De definitie 'zodra de wettelijke betalingstermijn is verstreken' is in beide contexten geldig — het begrip is generiek, de variatie zit in de afleidingsregels (AR-9-1 vs AR-9-5b t/m AR-9-5e).",
+    "advies": "context — geen afsplitsing",
+    "beslissing": "context — m-002 bijdrage: context, definitie ongewijzigd, status: concept",
+    "besloten-op": "2026-05-10",
+    "besloten-door": "senior jurist Belastingdienst domein Invordering"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+    "begripsnaam": "voorlopige-aanslag",
+    "aangemeld-op": "2026-05-10",
+    "markeringen-count": 2,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      },
+      {
+        "markering-id": "m-002",
+        "bron-annotatie-id": "BWBR0008003/par9-1",
+        "tekst": "voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "context",
+        "bevestigd": true,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "LI 2008-markering is een terugverwijzing naar art. 9 lid 5 IW 1990 ('bedoeld in artikel 9, vijfde lid, van de wet') — geen zelfstandige definitie. Soort gecorrigeerd van MIGRATIE-ONBEKEND naar enumeratie (voorlopig aanslag is een aanslagsoort); soort-id gecorrigeerd naar false (identificatie loopt via aanslagnummer op belastingaanslag).",
+    "advies": "context — geen afsplitsing; soort corrigeren",
+    "beslissing": "context — soort: enumeratie, soort-id: false, m-001 primair (IW 1990), m-002 context (LI 2008), status: concept",
+    "besloten-op": "2026-05-10",
+    "besloten-door": "senior jurist Belastingdienst domein Invordering"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
+    "begripsnaam": "termijnbedrag",
+    "aangemeld-op": "2026-05-10",
+    "markeringen-count": 1,
+    "delta-analyse": "Rijen 17 en 18 in art9-5 verwijzen beide naar termijnbedrag (rij 17: afleidingsregel 'gelijke', rij 18: variabele 'gelijke termijnen'). Modellering is correct: termijnbedrag is de variabele (uitkomst) van AR-9-5f. Geen afzonderlijk begrip voor de berekening nodig — de regel-noot dekt dat.",
+    "advies": "geen actie — vals alarm",
+    "beslissing": "gesloten — modellering correct, begrip verwijderd uit actieve queue",
+    "besloten-op": "2026-05-10",
+    "besloten-door": "senior jurist Belastingdienst domein Invordering"
+  }
+]

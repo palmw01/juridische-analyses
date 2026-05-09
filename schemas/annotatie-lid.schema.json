@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "annotatie-lid",
+  "title": "Annotatie-lid",
+  "description": "JAS-annotatie van één lid van een wetsartikel",
+  "type": "object",
+  "required": ["annotatie-id", "bwb-id", "wet", "artikel", "lid", "peildatum", "structuurpositie", "wetstekst", "annotatierijen", "kruisreferenties"],
+  "additionalProperties": false,
+  "properties": {
+    "annotatie-id": {
+      "type": "string",
+      "description": "Samengestelde ID: {bwb-id}/art{N}/lid{L} of {bwb-id}/par{ref} voor paragraaf-bronnen",
+      "pattern": "^[A-Z0-9]+/(?:art[0-9]+[a-z]?/lid[0-9]+|par[0-9][0-9.-]*)$"
+    },
+    "bwb-id": { "type": "string", "pattern": "^BWBR[0-9]+$" },
+    "wet": { "type": "string" },
+    "artikel": { "type": "string" },
+    "lid": { "type": "string" },
+    "peildatum": { "type": "string", "format": "date" },
+    "structuurpositie": { "type": "string" },
+    "wetstekst": { "type": "string", "minLength": 1 },
+    "annotatierijen": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rij-id", "markering", "jas-klasse", "interpretatiemethode", "begrip-id", "toelichting-klasse"],
+        "additionalProperties": false,
+        "properties": {
+          "rij-id": { "type": "string" },
+          "markering": { "type": "string", "minLength": 1 },
+          "jas-klasse": {
+            "type": "string",
+            "enum": ["rechtssubject", "rechtsobject", "rechtsbetrekking", "rechtsfeit", "voorwaarde", "afleidingsregel", "variabele", "variabelewaarde", "parameter", "parameterwaarde", "operator", "tijdsaanduiding", "plaatsaanduiding", "delegatiebevoegdheid", "delegatie-invulling", "brondefinitie"]
+          },
+          "interpretatiemethode": {
+            "type": "string",
+            "enum": ["grammaticaal", "systematisch", "teleologisch", "wetshistorisch"]
+          },
+          "begrip-id": { "type": "string" },
+          "toelichting-klasse": { "type": "string" },
+          "signalering": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "required": ["centrale-klasse", "knopen", "kanten"],
+      "properties": {
+        "centrale-klasse": { "type": ["string", "null"] },
+        "knopen": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "jas-klasse", "label"],
+            "properties": {
+              "id": { "type": "string" },
+              "jas-klasse": { "type": "string" },
+              "label": { "type": "string" },
+              "begrip-id": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "kanten": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["van", "naar", "label"],
+            "properties": {
+              "van": { "type": "string" },
+              "naar": { "type": "string" },
+              "label": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "kruisreferenties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["doel-bwb-id", "doel-artikel", "richting", "confidence"],
+        "properties": {
+          "doel-bwb-id": { "type": "string" },
+          "doel-artikel": { "type": ["string", "null"] },
+          "doel-lid": { "type": ["string", "null"] },
+          "richting": { "type": "string", "enum": ["forward", "backward", "intern"] },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "ruwe-tekst": { "type": "string" }
+        }
+      }
+    },
+    "delegatiestructuur": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "omschrijving": { "type": "string" },
+          "vindplaats": { "type": "string" },
+          "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
+          "invulling": { "type": ["string", "null"] },
+          "vindplaats-invulling": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

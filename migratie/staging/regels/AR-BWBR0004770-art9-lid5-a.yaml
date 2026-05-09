@@ -1,0 +1,76 @@
+regel-id: AR-BWBR0004770-art9-lid5-a
+naam: bepalen invorderbaarheid voorlopige aanslag in gelijke termijnen
+soort: Specialisatieregel
+bwb-id: BWBR0004770
+artikel: '9'
+lid: '5'
+peildatum: '2026-01-01'
+annotatie-id: '[[annotaties/iw1990/art9-5]]'
+rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+invoer:
+- BWBR0004770/art9/lid5/voorlopige-aanslag
+- BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib
+- BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar
+- BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
+uitvoer:
+- BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
+operators:
+- EN
+- OF
+- groter-dan
+formele-regel: '**In afwijking van bepalen invorderbaarheid belastingaanslag:**
+
+  invorderbaarheid-in-gelijke-termijnen is van toepassing
+
+  indien aan alle volgende voorwaarden is voldaan:
+
+  - het aanslagtype is een voorlopige aanslag IB of VPB, of een voorlopige conserverende
+  aanslag IB
+
+  - het aanslagbiljet heeft een dagtekening in het jaar waarover de aanslag is vastgesteld
+
+  - de termijnenberekening-resterende-maanden leidt tot meer dan één termijn'
+toelichting: 'Herleidbaar tot art. 9 lid 5 IW 1990, eerste volzin: *"In afwijking
+  van het eerste lid is een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting
+  en een voorlopige conserverende aanslag in de inkomstenbelasting, waarvan het aanslagbiljet
+  een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld, invorderbaar
+  in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet
+  is vermeld, nog maanden van het jaar overblijven."*
+
+
+  Systematische interpretatie: lid 5 is lex specialis ten opzichte van de hoofdregel
+  van lid 1 (AR-9-1). De specialisatieregel is van toepassing als aan twee cumulatieve
+  kwalificatievoorwaarden is voldaan: (1) het juiste aanslagtype; (2) dagtekening
+  in het belastingjaar. Het uitvoerbegrip is het aantal gelijke termijnen, berekend
+  door AR-9-5b.
+
+
+  De derde volzin van lid 5 bevat een terugvalregel (AR-9-5e): als de berekening niet
+  leidt tot meer dan één termijn, herneemt lid 1. Deze terugvalregel is een derde
+  conditie die impliciet onderdeel uitmaakt van de specialisatieregel: de specialisatie
+  geldt alleen bij meer dan één termijn.'
+voorbeeldreeksen:
+- invoerwaarden: Voorlopige aanslag IB 2026; dagtekening 15 april 2026; 8 resterende
+    maanden
+  verwachte-uitkomst: ja — aanslagtype correct, dagtekening in belastingjaar, termijnen
+    > 1
+  juridisch-juist: false
+  toelichting: n.v.t.
+- invoerwaarden: Voorlopige aanslag VPB 2026; dagtekening 1 februari 2026; 10 resterende
+    maanden
+  verwachte-uitkomst: ja — VPB valt ook onder de specialisatieregel; aan alle voorwaarden
+    voldaan
+  juridisch-juist: false
+  toelichting: n.v.t.
+- invoerwaarden: Voorlopige aanslag IB 2026; dagtekening 15 december 2026; 0 resterende
+    maanden *(grensgeval)*
+  verwachte-uitkomst: 'nee — terugvalregel art. 9 lid 5 derde volzin: termijnenberekening
+    leidt tot ≤ 1 termijn'
+  juridisch-juist: false
+  toelichting: invorderbaar zes weken na dagtekening aanslagbiljet
+- invoerwaarden: Definitieve aanslag IB 2026; dagtekening 15 april 2026 *(randgeval)*
+  verwachte-uitkomst: nee — aanslagtype voldoet niet; definitieve aanslag valt niet
+    onder lid 5
+  juridisch-juist: false
+  toelichting: invorderbaar zes weken na dagtekening aanslagbiljet
+tussenresultaat: false

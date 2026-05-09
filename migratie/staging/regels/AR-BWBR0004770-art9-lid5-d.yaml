@@ -1,0 +1,50 @@
+regel-id: AR-BWBR0004770-art9-lid5-d
+naam: berekenen vervaldag volgende termijnen voorlopige aanslag
+soort: Rekenregel
+bwb-id: BWBR0004770
+artikel: '9'
+lid: '5'
+peildatum: '2026-01-01'
+annotatie-id: '[[annotaties/iw1990/art9-5]]'
+rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+invoer:
+- BWBR0004770/art9/lid5/vervaldag-eerste-termijn
+- BWBR0004770/art9/lid5/telkens-een-maand-later
+uitvoer:
+- BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
+operators:
+- plus
+formele-regel: '**vervaldag-volgende-termijnen moet berekend worden als**
+
+  vervaldag vorige termijn plus één kalendermaand
+
+
+  *(iteratief toe te passen voor elke termijn na de eerste, totdat alle termijnen
+  zijn vastgesteld)*'
+toelichting: 'Herleidbaar tot art. 9 lid 5 IW 1990, tweede volzin: *"elk van de volgende
+  termijnen telkens een maand later."*
+
+
+  Grammaticale interpretatie: de vervaldatum van elke termijn na de eerste wordt berekend
+  door één kalendermaand op te tellen bij de vervaldatum van de vorige termijn. De
+  berekening is iteratief en wordt herhaald voor elke volgende termijn. Invoer voor
+  de eerste iteratie is de uitkomst van AR-9-5c (vervaldag eerste termijn). Art. 9
+  lid 10 IW 1990 sluit de Algemene termijnenwet uit.'
+voorbeeldreeksen:
+- invoerwaarden: 'vervaldag eerste termijn: 15 april 2026 (dagtekening 15 maart);
+    resterende-maanden-jaar: 9'
+  verwachte-uitkomst: 'vervaldagen: 15 april, 15 mei, 15 juni, 15 juli, 15 aug, 15
+    sept, 15 okt, 15 nov, 15 dec 2026'
+  juridisch-juist: true
+  toelichting: null
+- invoerwaarden: 'vervaldag eerste termijn: 1 oktober 2026 (dagtekening 1 september);
+    resterende-maanden-jaar: 3'
+  verwachte-uitkomst: 'vervaldagen: 1 okt, 1 nov, 1 dec 2026'
+  juridisch-juist: true
+  toelichting: null
+- invoerwaarden: 'vervaldag eerste termijn: 15 november 2026 (dagtekening 15 oktober);
+    resterende-maanden-jaar: 2'
+  verwachte-uitkomst: 'vervaldagen: 15 nov, 15 dec 2026'
+  juridisch-juist: true
+  toelichting: null
+tussenresultaat: false

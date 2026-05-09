@@ -15,7 +15,8 @@ agent: general-purpose
 
 **Argument:** `$ARGUMENTS`
 
-Voer onderstaande stappen uit. De scripts staan in `$CLAUDE_SKILL_DIR`; output gaat naar `graaf/` in de vault-root.
+De scripts lezen `begrippen/*.yaml`, `regels/*.yaml` en `annotaties/**/*.json` — geen Markdown meer.
+Output gaat naar `graaf/` in de vault-root.
 
 ---
 
@@ -29,8 +30,6 @@ Controleer of `$ARGUMENTS` de waarde `model` bevat (hoofdletterongevoelig).
 ---
 
 ## Stap 2 — Modelgeneratie (alleen bij `/graph model`)
-
-Voer uit:
 
 ```
 cd "$CLAUDE_SKILL_DIR" && .venv/bin/python generate_model.py --vault-root "$CLAUDE_PROJECT_DIR"
@@ -48,8 +47,6 @@ Meld eventuele fouten aan de gebruiker en stop.
 
 ## Stap 3 — Graph-export
 
-Voer uit:
-
 ```
 cd "$CLAUDE_SKILL_DIR" && .venv/bin/python export_graph.py --vault-root "$CLAUDE_PROJECT_DIR"
 ```
@@ -59,15 +56,13 @@ Extraheer uit de stdout:
 - Aantal edges
 - Geschreven bestanden (GEXF en/of GraphML)
 
-**Staleness-waarschuwing (stderr):** Als vault-bestanden nieuwer zijn dan de bestaande GEXF, print het script een waarschuwing met de gewijzigde bestanden. Meld dit aan de gebruiker: de export is al bijgewerkt, maar de waarschuwing geeft aan welke bestanden de aanleiding waren.
+**Staleness-waarschuwing (stderr):** Als vault-bestanden nieuwer zijn dan de bestaande GEXF, print het script een waarschuwing. Meld dit aan de gebruiker.
 
 Meld eventuele andere fouten of waarschuwingen aan de gebruiker.
 
 ---
 
 ## Stap 4 — Rapportage
-
-Geef een korte samenvatting in deze vorm:
 
 ```
 Graph-export voltooid.

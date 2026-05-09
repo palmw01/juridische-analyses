@@ -8,9 +8,15 @@ agent: general-purpose
 
 > **Conflictresolutie:** Bij tegenstrijdigheid tussen deze SKILL.md en `kaders.md` is **`kaders.md` leidend**. SKILL.md geeft procesinstructies; `kaders.md` geeft de juridisch-inhoudelijke normen.
 
-Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a) en classificeren (A2b). Output is een lichte annotatie-noot per eenheid en N begrip-noten met uitsluitend gevulde frontmatter (A2-tussenproduct). Begrip-inhoud (A3) wordt later ingevuld door `/begrip`.
+Voert Activiteit 2 uit van de Wetsanalyse-methode: markeren (A2a), classificeren (A2b) en diagram (A2c). Output zijn JSON/YAML-bestanden: één annotatie-JSON per lid, één begrip-YAML per annotatierij. Begrip-inhoud (A3) wordt later ingevuld door `/begrip`.
 
 **Lees vóór elke annotatie-run eerst `.claude/skills/annoteer/kaders.md` volledig in.** De taxonomie (13 JAS-elementen), annotatieregels per element, en kleurcodering in dat bestand zijn bindend voor elke classificatiebeslissing in deze skill.
+
+**Bestandsformaten:**
+- Annotatie-index: `annotaties/{bwb-id}/art{N}.json` (JSON, schema: `schemas/annotatie-index.schema.json`)
+- Lid-annotatie: `annotaties/{bwb-id}/art{N}-lid{L}.json` (JSON, schema: `schemas/annotatie-lid.schema.json`)
+- Sectie-annotatie: `annotaties/{bwb-id}/{slug}.json` (JSON, schema: `schemas/annotatie-lid.schema.json`)
+- Begrip-stub: `begrippen/{slug}.yaml` (YAML, schema: `schemas/begrip.schema.json`)
 
 ---
 
@@ -24,26 +30,28 @@ Drie flows, elk met eigen existentiecontrole en output:
 | `/annoteer art. [A] lid [L] [W]` | **B — Lid-annotatie** | Annoteren van één lid van een formeel artikel |
 | `/annoteer sectie [ref] [W]` | **C — Sectie-annotatie** | Bronnen zonder leden: Leidraad, beleid, beleidsregels |
 
-Flow A maakt uitsluitend de structuurankers aan (wetstekst-noot + index-noot). Flow B voegt de inhoudelijke annotatie toe. Flow C is voor bronnen die geen leden kennen.
+Flow A maakt uitsluitend de structuurankers aan (index-JSON). Flow B voegt de inhoudelijke annotatie toe (lid-JSON + begrip-YAML-stubs). Flow C is voor bronnen die geen leden kennen.
 
 ---
 
 ## Slug-transformatietabel
 
-De eenheid-slug wordt deterministisch afgeleid van het MCP `pad`-veld. Verwijder tekstdelen; houd structuursymbolen en cijfers:
+De eenheid-slug wordt deterministisch afgeleid van het MCP `pad`-veld:
 
 | MCP `pad`-segment | Transformatieregel | Slug-resultaat |
 |-------------------|--------------------|----------------|
 | `Artikel 9` | `art` + nummer | `art9` |
 | `Artikel 2a` | `art` + nummer + letter | `art2a` |
-| `Lid 1` | suffix `-` + nummer op artikel-slug | `art9-1` |
+| `Lid 1` | bestandsnaam `art{N}-lid{L}` | `art9-lid1.json` |
 | `§ 1.1 De ontvanger` | `par` + punten → koppeltekens | `par1-1` |
 | `§ 1.1.1 Inleiding` | `par` + punten → koppeltekens | `par1-1-1` |
 | `Paragraaf 3` | `par` + nummer | `par3` |
 
-Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden weggelaten. De slug bevat uitsluitend lowercase letters, cijfers en koppeltekens.
+Tekstdelen na het structuursymbool worden weggelaten. De slug bevat uitsluitend lowercase letters, cijfers en koppeltekens.
 
-**Fallback voor nummerloos sectie-kopje** (geen §-nummer, geen paragraafaanduiding): slugify de volledige kopnaam — zet om naar lowercase, vervang spaties door koppeltekens, verwijder speciale tekens. Bijv. `"Algemeen"` → `algemeen`, `"Inleiding en reikwijdte"` → `inleiding-en-reikwijdte`. Bij een kopnaam die niet uniek is binnen de wet: voeg een volgnummer toe (`algemeen-2`).
+**Begrip-slug** (voor de `begrip-id` URI en bestandsnaam): deriveer van de begripsnaam — lowercase, spaties → koppeltekens, bijzondere tekens weglaten. Bijv. `"een belastingaanslag"` → `belastingaanslag`, `"is invorderbaar"` → `invorderbaarheid`.
+
+**URI-formaat begrip-id:** `{bwb-id}/art{N}/lid{L}/{slug}` of `{bwb-id}/par{ref}/{slug}`.
 
 ---
 
@@ -53,40 +61,38 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 
 ### Flow A — Artikel-index
 
-> **Aanbevolen vertrekpunt (A1):** Juridische scenario's zijn de scope-afbakening voor Flow A. Als de gebruiker geen scenario's heeft geformuleerd vóór de aanroep, attendeer dan op dit hiaat — maar blokkeer de flow niet. De annotatie kan doorgaan; de scope-verantwoordelijkheid ligt bij de gebruiker (A1 valt buiten de AI-scope).
+> **Aanbevolen vertrekpunt (A1):** Als de gebruiker geen scenario's heeft geformuleerd vóór de aanroep, attendeer dan op dit hiaat — maar blokkeer de flow niet.
 
-1. Controleer of wetstekst-noot bestaat: `find wetteksten/[wet]/ -name "art[A].md"`.
-   - Nee → haal wetstekst op via `wettenbank_artikel` en maak aan.
-   - Ja → gebruik bestaande noot; geen nieuwe MCP-aanroep.
-2. Controleer of index-noot bestaat: `find annotaties/[wet]/ -name "art[A].md"`.
+1. Controleer of bronbestand bestaat: `find bronnen/[B]/ -name "art[A].json"`.
+   - Nee → voer `/wettenbank art. [A] [W]` uit om de wetstekst op te halen.
+   - Ja → gebruik bestaand bronbestand; geen nieuwe MCP-aanroep.
+2. Controleer of index-JSON bestaat: `find annotaties/[B]/ -name "art[A].json"`.
    - Nee → maak aan.
-   - Ja → meld "index-noot bestaat al" en stop.
-3. Haal brondefinities op via `wettenbank_artikel` op het begripsbepalingen-artikel (zie `bwb-mapping.md`).
-4. Noteer het `pad`-veld letterlijk uit MCP → structuurpositie.
-5. Noteer de peildatum uit `versiedatum`. Gebruik nooit de datum van vandaag.
-6. Extraheer kruisreferenties conform `verwijzingen.md` uit alle leden.
+   - Ja → meld "index-annotatie bestaat al" en stop.
+3. Noteer het `pad`-veld uit het bronbestand → structuurpositie.
+4. Noteer de peildatum uit `versiedatum` in het bronbestand. Gebruik nooit de datum van vandaag.
+5. Extraheer kruisreferenties uit `bronnen/[B]/art[A].kruisrefs.json`.
 
 ### Flow B — Lid-annotatie
 
-1. Controleer of index-noot bestaat: `find annotaties/[wet]/ -name "art[A].md"`.
+1. Controleer of index-JSON bestaat: `find annotaties/[B]/ -name "art[A].json"`.
    - Nee → voer Flow A eerst uit.
    - Ja → ga door.
-2. Controleer of lid-noot bestaat: `find annotaties/[wet]/ -name "art[A]-[L].md"`.
+2. Controleer of lid-JSON bestaat: `find annotaties/[B]/ -name "art[A]-lid[L].json"`.
    - Nee → maak aan.
-   - Ja → meld "lid-noot bestaat al" en stop.
-3. Lees de wetstekst-noot `wetteksten/[wet]/art[A].md` in voor de tekst van lid [L].
-4. Haal brondefinities op indien nog niet beschikbaar.
-5. Peildatum en structuurpositie overnemen uit het opgeslagen frontmatter-bestand van de index-noot — lees de werkelijke waarden uit `annotaties/[wet]/art[A].md`. Gebruik nooit de versiedatum uit een lopende MCP-sessie (die kan afwijken bij een tussentijdse wetswijziging).
+   - Ja → meld "lid-annotatie bestaat al" en stop.
+3. Lees de wetstekst voor lid `[L]` uit `bronnen/[B]/art[A].json` (`leden[].tekst` waar `lid == "[L]"`).
+4. Peildatum en structuurpositie overnemen uit `annotaties/[B]/art[A].json`. Gebruik nooit een datum uit een lopende MCP-sessie.
 
 ### Flow C — Sectie-annotatie
 
-1. Leid slug af van het MCP `pad`-veld via de slug-transformatietabel.
-2. Controleer of wetstekst-noot bestaat: `find wetteksten/[wet]/ -name "[slug].md"`.
-   - Nee → haal tekst op via MCP en maak aan.
-   - Ja → gebruik bestaande noot.
-3. Controleer of annotatie-noot bestaat: `find annotaties/[wet]/ -name "[slug].md"`.
+1. Leid `[slug]` af van het `pad`-veld via de slug-transformatietabel.
+2. Controleer of bronbestand bestaat: `find bronnen/[B]/ -name "[slug].json"`.
+   - Nee → voer `/wettenbank sectie [ref] [W]` uit.
+   - Ja → gebruik bestaand bronbestand.
+3. Controleer of sectie-JSON bestaat: `find annotaties/[B]/ -name "[slug].json"`.
    - Nee → maak aan.
-   - Ja → meld "annotatie-noot bestaat al" en stop.
+   - Ja → meld "sectie-annotatie bestaat al" en stop.
 
 ---
 
@@ -94,17 +100,13 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 
 ### Algemene markeringsregels
 
-- **Diagram-gedreven, niet uitputtend**: markeer alleen wetsformuleringen die deel uitmaken van een diagram van een centrale klasse of daarmee samenhangen. Vermijd "wilde weg" markeren van losse woorden zonder relatie tot een centrale klasse.
-- **Lidwoord altijd meenemen** in de markering (maakt volledigheidscheck mogelijk voor geclassificeerde tekst).
-- **Verwijzing altijd meenemen** als die in het te markeren stukje staat (draagt bij aan betekenis en klasse).
-- Markeer **precies dat stukje tekst** dat maximaal de betekenis representeert van de klasse die je wilt toekennen — dit is klasse-afhankelijk:
-  - *Variabele*: neem werkwoord en voorwaarden mee (met lidwoord)
-  - *Afleidingsregel*: neem werkwoorden + voorwaarden mee incl. lidwoord, verwijzing en punt
-  - *Voorwaarde*: markeer bij voorkeur de gehele zin of het zinsdeel
-- **Markeringen mogen overlappen**: dezelfde wetsformulering kan meerdere klassen krijgen; zet elke klasse op een aparte rij in de annotatietabel.
-- **Begin bij de centrale klassen**: start met rechtsbetrekking en rechtsfeit; werk daarna naar context en randcondities.
+- **Diagram-gedreven, niet uitputtend**: markeer alleen wetsformuleringen die deel uitmaken van een diagram van een centrale klasse of daarmee samenhangen.
+- **Lidwoord altijd meenemen** in de markering.
+- **Verwijzing altijd meenemen** als die in het te markeren stukje staat.
+- Markeer **precies dat stukje tekst** dat maximaal de betekenis representeert van de klasse die je wilt toekennen.
+- **Markeringen mogen overlappen**: dezelfde wetsformulering kan meerdere klassen krijgen; zet elke klasse op een aparte rij.
+- **Begin bij de centrale klassen**: start met rechtsbetrekking en rechtsfeit.
 - **Start bij de klasse die gecreëerd of afgeleid wordt**, niet bij de context.
-- **Bij twijfel over de reikwijdte van een markering**: werk meteen met een concreet voorbeeld van de betekenis die je wilt duiden — dat maakt scherper wat je wel/niet in de markering opneemt.
 
 ### Klasse-specifieke markeringsregels
 
@@ -113,13 +115,13 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 | Rechtssubject | Zelfstandig naamwoord voor persoon/entiteit, incl. lidwoord |
 | Rechtsobject | Zelfstandig naamwoord voor het voorwerp, incl. lidwoord |
 | Rechtsbetrekking | Werkwoord + hulpwerkwoord (kan, mag, is verplicht, dient te) |
-| Rechtsfeit | Actieve werkwoordsvorm + tijdsverloop (indienen, verstrijken, betekenen) |
+| Rechtsfeit | Actieve werkwoordsvorm + tijdsverloop |
 | Voorwaarde | Gehele zin of zinsdeel m.i.v. voegwoord (indien, als, tenzij, mits) |
 | Afleidingsregel | Volledige als-dan constructie incl. lidwoord, werkwoorden en punt |
-| Variabele | Zelfstandig naamwoord (kenmerk) + lidwoord — géén werkwoord, géén voorwaarden |
+| Variabele | Zelfstandig naamwoord (kenmerk) + lidwoord |
 | Parameter | Tariefwaarde, drempel, maximum, minimum |
-| Tijdsaanduiding | Tijdstip, tijdvak, termijn (specifieker dan variabele — gebruik dit bij twijfel) |
-| Plaatsaanduiding | Geografische aanduiding, jurisdictie (specifieker dan parameter) |
+| Tijdsaanduiding | Tijdstip, tijdvak, termijn |
+| Plaatsaanduiding | Geografische aanduiding, jurisdictie |
 | Delegatiebevoegdheid | Volledige delegatiezin incl. "bij amvb" of "bij ministeriële regeling" |
 | Brondefinitie | Volledige aanhef + onderdelen van de begripsomschrijving |
 | Operator | Rekenkundig teken of logisch woord (vermeerderd met, EN, OF, NIET) |
@@ -129,9 +131,9 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 ## Classificeren (A2b) — kaders.md
 
 - **Meest specifieke klasse**: tijdsaanduiding is specifieker dan variabele; plaatsaanduiding is specifieker dan parameter.
-- **Interpretatiemethode expliciet benoemen** per element: grammaticaal / systematisch / teleologisch.
-- **Meerduidigheid of spanning signaleren** als een element meerdere klassificaties verdient of conflicteert met andere bepalingen.
-- **Delegatieketens volledig traceren**: wet → amvb → ministeriële regeling; haal alle schakels op via MCP.
+- **Interpretatiemethode expliciet benoemen** per element: grammaticaal / systematisch / teleologisch / wetshistorisch.
+- **Meerduidigheid of spanning signaleren** als een element meerdere klassificaties verdient.
+- **Delegatieketens volledig traceren**: wet → amvb → ministeriële regeling.
 - **Alle 13 JAS-elementen intern afvinken** voor volledigheid (niet in output, wel als interne controle).
 
 ### De 13 JAS-elementen (intern afvinklijst)
@@ -156,272 +158,241 @@ Tekstdelen na het structuursymbool (zoals "De ontvanger" of "Inleiding") worden 
 
 ## Output — per flow
 
-### Flow A — Wetstekst-noot
+### Flow A — Annotatie-index JSON
 
-Sla op als `wetteksten/[wet]/art[A].md`.
+Sla op als `annotaties/[B]/art[A].json`.
 
-```yaml
----
-type: wetstekst
-artikel: "Art. [A] [W]"
-bwb-id: [B]
-peildatum: [YYYY-MM-DD uit MCP versiedatum]
-structuurpositie: "[pad-veld letterlijk uit MCP]"
-tags:
-  - wetstekst
-  - wet/[wet-afkorting]
-  - art/[nummer]
-bronreferentie: "[bronreferentie-veld uit MCP]"
----
+```json
+{
+  "artikel-id": "[B]/art[A]",
+  "bwb-id": "[B]",
+  "wet": "[citeertitel-afkorting]",
+  "artikel": "[A]",
+  "peildatum": "[YYYY-MM-DD uit bronbestand versiedatum]",
+  "structuurpositie": "[pad-veld uit bronbestand]",
+  "leden-annotaties": [],
+  "kruisreferenties": ["Art. X W", "..."]
+}
 ```
 
-Body: alle leden letterlijk als `> **[nr]** [tekst]`. Geen interpretatie, geen annotatie.
+> **Read-only principe:** De index-JSON is uitsluitend structuurdrager. Vul `leden-annotaties` bij na het aanmaken van elke lid-annotatie.
 
-### Flow A — Index-noot (READ-ONLY)
+### Flow B — Lid-annotatie JSON
 
-Sla op als `annotaties/[wet]/art[A].md`.
+Sla op als `annotaties/[B]/art[A]-lid[L].json`.
 
-```yaml
----
-type: annotatie
-artikel: "Art. [A] [W]"
-bwb-id: [B]
-peildatum: [YYYY-MM-DD uit MCP versiedatum]
-structuurpositie: "[pad-veld letterlijk uit MCP]"
-tags:
-  - annotatie
-  - wet/[wet-afkorting]
-  - art/[nummer]
-wetstekst: "[[wetteksten/[wet]/art[A]]]"
-leden-noten: []
-kruisreferenties: []
----
+```json
+{
+  "annotatie-id": "[B]/art[A]/lid[L]",
+  "bwb-id": "[B]",
+  "wet": "[citeertitel-afkorting]",
+  "artikel": "[A]",
+  "lid": "[L]",
+  "peildatum": "[YYYY-MM-DD — overnemen uit index-JSON]",
+  "structuurpositie": "[structuurpositie index-JSON] > Lid [L]",
+  "wetstekst": "[tekst van uitsluitend dit lid, letterlijk]",
+  "annotatierijen": [
+    {
+      "rij-id": "r-001",
+      "markering": "[citaat incl. lidwoord en verwijzingen]",
+      "jas-klasse": "[klasse]",
+      "interpretatiemethode": "[grammaticaal|systematisch|teleologisch|wetshistorisch]",
+      "begrip-id": "[B]/art[A]/lid[L]/[slug]",
+      "toelichting-klasse": "[motivering klassekeuze; meerduidigheid benoemen]",
+      "signalering": null
+    }
+  ],
+  "diagram": {
+    "centrale-klasse": "[jas-klasse van de centrale knoop]",
+    "knopen": [
+      { "id": "RB", "jas-klasse": "rechtsbetrekking", "label": "rechtsbetrekking 'invorderbaar'", "begrip-id": null }
+    ],
+    "kanten": [
+      { "van": "RF", "naar": "RB", "label": "triggert" }
+    ]
+  },
+  "kruisreferenties": [],
+  "delegatiestructuur": []
+}
 ```
 
-Body: uitsluitend `## Delegatiestructuur`. Geen wetstekst, geen annotatietabel, geen diagram.
+**Annotatierijen-regels:**
+- Nummerering `rij-id` begint bij `r-001` per lid-annotatie.
+- Overlappende markeringen (één tekstfragment in meerdere JAS-klassen): één rij per klasse, zelfde markering mag herhalen. Noteer alternatieve klasse in `toelichting-klasse`.
+- `signalering`: gebruik `null` als er geen bijzonderheden zijn; gebruik een string bij meerduidigheid, spanning of open normen.
 
-> **⚠ Read-only principe — niet-onderhandelbaar**
-> De index-noot is uitsluitend structuurdrager. Zij mag **nooit** bevatten:
-> annotatierijen, annotatietabellen, mermaid-diagrammen, interpretaties, kwalificaties of signaleringen.
-> Vervuiling ongedaan maken zodra ontdekt.
-> Reden: de index-noot is het structuuranker. Vervuiling trekt ruis in bij alle querytypes die op artikelniveau filteren.
+**Diagram-regels:**
+- Construeer diagram als JSON (knopen + kanten) — Mermaid wordt gegenereerd door `generate_views.py`.
+- Centrale knoop: kies conform `kaders.md §Centrale klasse` (1. Rechtsbetrekking → 2. Rechtsfeit → 3. Afleidingsregel → 4. Voorwaarde).
+- Knoop-id's: korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
+- Label-tekst: `"[jas-klasse] '[markering ingekort tot max. 40 tekens]'"`.
+- `begrip-id` in knoop: vul in als de knoop direct overeenkomt met een begrip-slug; anders `null`.
 
-### Flow B — Lid-annotatie-noot
+Na aanmaken: voeg `"[B]/art[A]/lid[L]"` toe aan `leden-annotaties` in de index-JSON. Lijst altijd gesorteerd op oplopend lidnummer.
 
-Sla op als `annotaties/[wet]/art[A]-[L].md`.
+### Flow C — Sectie-annotatie JSON
 
+Sla op als `annotaties/[B]/[slug].json`. Gebruikt hetzelfde formaat als lid-annotatie, maar:
+- `annotatie-id`: `"[B]/[slug]"`
+- `lid`: `""` (leeg)
+- Geen apart index-JSON-bestand voor sectie-bronnen.
+
+### Begrip-stubs (YAML) — alle flows
+
+Maak per annotatierij een begrip-YAML aan in `begrippen/[slug].yaml`. **Vul uitsluitend de kernvelden in** — definitie en relaties blijven leeg (dat doet `/begrip`).
+
+**Begripsnaam-vuistregels:** zie `/begrip` §Begripsnaam-vuistregels — dat is de canonieke bron. Enige regel die al tijdens `/annoteer` geldt: **hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is.
+
+YAML-formaat per begrip-stub:
 ```yaml
----
-type: annotatie
-artikel: "Art. [A] lid [L] [W]"
-bwb-id: [B]
-peildatum: [YYYY-MM-DD — overnemen uit index-noot]
-structuurpositie: "[structuurpositie index-noot] > Lid [L]"
-tags:
-  - annotatie
-  - wet/[wet-afkorting]
-  - art/[nummer]
-onderdeel-van: "[[annotaties/[wet]/art[A]]]"
-wetstekst: "[[wetteksten/[wet]/art[A]]]"
-begrippen: []
----
-```
-
-Body:
-- `## Wetstekst lid [L] (letterlijk)` — tekst van uitsluitend dit lid als `> **[L]** [tekst]`
-- `## Annotatietabel` — zie tabelformaat hieronder
-- `## Diagram` — zie Diagram (A2c) hieronder
-
-Na aanmaken: voeg `"[[annotaties/[wet]/art[A]-[L]]]"` toe aan `leden-noten` in de index-noot. Lijst altijd gesorteerd op oplopend lidnummer.
-
-#### Annotatietabel-formaat
-
-| Nr | Markering (letterlijk incl. lidwoord en verwijzingen) | JAS-klasse | Interpretatiemethode | Begrip | Signalering |
-|----|------------------------------------------------------|-----------|---------------------|--------|-------------|
-| [doorlopend vanaf 1] | "[citaat]" | **[klasse]** | grammaticaal/systematisch/teleologisch/wetshistorisch | [[begrippen/[slug]]] | — |
-
-- Nummerering begint bij 1 per lid-noot.
-- **Overlappende markeringen** (één tekstfragment past in meerdere JAS-klassen): gebruik altijd **aparte rijen** — één rij per klasse, zelfde citaat mag meerdere keren voorkomen. Kies per rij de klasse die die specifieke functie het best beschrijft. Vermeld de alternatieve klasse in de Signalering-kolom van de primaire rij: `⚠ alternatief: [klasse]`.
-- **Meerduidigheid binnen één klasse** (twijfel welke van twee klassen de juiste is): kies de meest specifieke klasse (zie kaders.md §Annotatieprincipe 3). Verantwoord de keuze in de Signalering-kolom: `⚠ overwogen: [alternatief], gekozen: [klasse] omdat [reden]`.
-- **Signalering**: gebruik `—` als er geen bijzonderheden zijn. Gebruik `⚠ [toelichting]` bij meerduidigheid, spanning met andere artikelen, open normen of delegatiegaten.
-
-### Flow C — Wetstekst-noot (sectie)
-
-Sla op als `wetteksten/[wet]/[slug].md`. Identiek aan Flow A-wetstekst-noot, maar met sectie-slug en sectiestructuurpositie.
-
-### Flow C — Directe annotatie-noot (sectie)
-
-Sla op als `annotaties/[wet]/[slug].md`.
-
-```yaml
----
-type: annotatie
-artikel: "[ref zoals in bron, bijv. § 1.1 LI 2008]"
-bwb-id: [B]
-peildatum: [YYYY-MM-DD uit MCP]
-structuurpositie: "[pad-veld letterlijk uit MCP]"
-tags:
-  - annotatie
-  - wet/[wet-afkorting]
-begrippen: []
-wetstekst: "[[wetteksten/[wet]/[slug]]]"
-kruisreferenties: []
----
-```
-
-Body: `## Wetstekst [ref] (letterlijk)`, `## Annotatietabel`, `## Diagram`, `## Delegatiestructuur`.
-
-Geen `onderdeel-van` (geen index-noot voor sectie-bronnen). Geen `leden-noten`.
-
-### Begrip-noten (lege frontmatter) — alle flows
-
-Maak per annotatierij een begrip-noot aan in `begrippen/[slug].md`. **Vul uitsluitend de frontmatter in** — definitie, voorbeelden en kenmerken blijven leeg (dat doet `/begrip`).
-
-Begripsnaam-vuistregels: zie `/begrip` §Begripsnaam-vuistregels (Handleiding §3.5.2a) — dat is de canonieke bron. Enige regel die al tijdens `/annoteer` geldt: **hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat.
-
-Frontmatter per begrip-noot (body leeg):
-```yaml
----
-type: begrip
+begrip-id: [B]/art[A]/lid[L]/[slug]
 begripsnaam: [slug]
-jas-klasse: [JAS-element]
-tags:
-  - begrip
-  - jas/[klasse-slug]
-  - wet/[wet-afkorting]
-  - art/[nummer]
-markering: "[letterlijk geciteerd incl. lidwoord en verwijzingen]"
-bron: "Art. [A] lid [L] [W]"
-bronnen: []
-peildatum: [YYYY-MM-DD uit MCP]
-interpretatiemethode: [grammaticaal | systematisch | teleologisch | wetshistorisch]
-toelichting-klasse: "[waarom deze klasse boven alternatieven; meerduidigheid benoemen]"
-definitie: ""
-soort: ""
-herkomst: ""
 aliases: []
-is-een: []
-heeft: []
-leidt-tot: []
-afleidingsregels: []
-geldigheid-van: [YYYY-MM-DD uit MCP versiedatum]
-geldigheid-tot: ""
+soort: ""
+soort-id: false
+herkomst: direct        # afgeleid bij JAS-klasse: afleidingsregel
 status: concept
----
+definitie: ""
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: [B]/art[A]/lid[L]
+  tekst: "[letterlijk geciteerd incl. lidwoord en verwijzingen]"
+  interpretatiemethode: [grammaticaal|systematisch|teleologisch|wetshistorisch]
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "[YYYY-MM-DD uit bronbestand versiedatum]"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false
 ```
 
-> **⚠ Valkuil — JAS-klasse ≠ entiteitstype**
-> Het `type`-veld is altijd `begrip` — ook als de `jas-klasse` `afleidingsregel` is.
-> De `jas-klasse` beschrijft de juridische functie; `type` beschrijft het entiteitstype in de vault.
-> Tags bij JAS-klasse afleidingsregel: `[begrip, jas/afleidingsregel, wet/..., art/...]`
-> — **nooit** `[afleidingsregel, ...]` (dat is het patroon voor regel-noten in `regels/`).
+**Hergebruik van een bestaand begrip:** als de begripsnaam al bestaat in `begrippen/`, voeg een tweede markering toe aan de bestaande YAML (`markering-id: m-002`, `bijdrage: context` tenzij de nieuwe bron een sterkere claim heeft). Meld dit als hergebruikte begrip in de hergebruiksrapportage. Voeg het begrip toe aan `rapporten/enrichment-queue.json` als de nieuwe markering afwijkt van de bestaande definitie.
 
-Na aanmaken: update het `begrippen`-veld in de annotatie-noot (lid-noot of sectie-noot) met wikilinks naar alle aangemaakte begrip-noten.
+> **Valkuil — herkomst bij JAS-klasse afleidingsregel**
+> Bij JAS-klasse `afleidingsregel`: zet `herkomst: afgeleid`. Bij alle andere klassen: zet `herkomst: direct`.
 
-### Diagram (A2c)
+---
 
-Maak na de annotatietabel de `## Diagram`-sectie aan. Volg `kaders.md §Diagramregels` volledig.
+## Delegatiestructuur (alle flows)
 
-> **Brugfunctie:** het diagram verbindt het juridisch scenario (A1) met de gemarkeerde wetsformuleringen (A2) en bereidt de betekenisgeving (A3) voor. Vertrekpunt is altijd de centrale klasse die bij de eerste relevante gebeurtenis uit het scenario hoort.
+Vul `delegatiestructuur` in de annotatie-JSON als een array van objecten:
+```json
+[
+  {
+    "omschrijving": "[bevoegdheidsomschrijving]",
+    "vindplaats": "Art. [A] lid [L] [W]",
+    "type": "Verplicht|Facultatief",
+    "invulling": "[naam regeling of null]",
+    "vindplaats-invulling": "[artikel regeling of null]"
+  }
+]
+```
+Bij geen delegatie: gebruik `[]`.
 
-Werkwijze:
-1. Identificeer alle Rechtsbetrekkingen in de annotatietabel. Eén diagram per Rechtsbetrekking.
-2. Per diagram: bepaal de centrale knoop (Rechtsbetrekking), voeg alle elementen toe die in de annotatietabel aan dit lid zijn gerelateerd, verbind ze met de randlabels uit de relatieschematabel.
-3. Neem alleen de `classDef`-regels op voor de klassen die daadwerkelijk in het diagram voorkomen.
-4. Knooplabels: `"[JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens]'"` — inkorten bij het zelfstandig naamwoord, hulpwerkwoorden weglaten, `…` toevoegen indien afgekort.
-5. Titel boven elk blok: `### Diagram [N] — lid [L]: [korte omschrijving rechtsbetrekking]`
+Als een gedelegeerde regeling niet opvraagbaar is via MCP: stel `"invulling": "Niet beschikbaar via wettenbank — handmatige verificatie vereist"`.
 
-Kies de centrale klasse conform de prioriteitsvolgorde in `kaders.md §Centrale klasse` (1. Rechtsbetrekking → 2. Rechtsfeit → 3. Afleidingsregel → 4. Voorwaarde). Alleen als alle vier ontbreken: schrijf exact `Geen centrale klasse gevonden; diagram niet van toepassing.`
+---
 
-#### Delegatiestructuur-formaat
+## Validatie en views (na elk schrijfcommando)
 
-| Delegatiebevoegdheid | Vindplaats | Type | Invulling | Vindplaats invulling |
-|---------------------|------------|------|-----------|---------------------|
-| [omschrijving] | Art. [A] lid [L] [W] | Verplicht / Facultatief | [naam regeling] | Art. [Z] [regeling] |
+Na het aanmaken of bijwerken van annotatie-JSON én begrip-YAML bestanden:
 
-Bij geen delegatie: schrijf exact "Geen delegatiebevoegdheden in artikel [A]."
+```
+cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file annotaties/[B]/art[A]-lid[L].json
+```
 
-Als een gedelegeerde regeling niet opvraagbaar is via `wettenbank_artikel`: schrijf in kolom Invulling "Niet beschikbaar via wettenbank — handmatige verificatie vereist."
+Bij blokkerende fouten (L1/L2): herstel en hervalideer vóór je verdergaat. L3-waarschuwingen rapporteren aan de gebruiker maar blokkeren niet.
+
+Daarna views genereren voor Obsidian:
+```
+cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/generate_views.py --type annotatie --file annotaties/[B]/art[A]-lid[L].json
+```
 
 ---
 
 ## Kwaliteitseisen (niet-onderhandelbaar)
 
 - Wetstekst altijd volledig en letterlijk citeren — nooit parafraseren.
-- Peildatum altijd uit MCP (`versiedatum`), nooit de datum van vandaag.
-- Structuurpositie altijd letterlijk uit `pad`-veld, nooit aangenomen.
-- Begrip-noten bevatten na `/annoteer` uitsluitend frontmatter; A3-inhoud is taak van `/begrip`.
-- Markering-veld bevat altijd het letterlijke citaat inclusief lidwoord.
+- Peildatum altijd uit het bronbestand (`versiedatum`), nooit de datum van vandaag.
+- Structuurpositie altijd letterlijk uit het `pad`-veld in het bronbestand.
+- Begrip-stubs bevatten na `/annoteer` een lege `definitie: ""`; A3-inhoud is taak van `/begrip`.
+- `markering.tekst` bevat altijd het letterlijke citaat inclusief lidwoord.
+- `begrip-id` URI is deterministisch: `{bwb-id}/art{N}/lid{L}/{slug}`.
+- Index-JSON is uitsluitend structuurdrager — nooit annotatierijen of diagrammen.
 - Delegatieketens volledig uitwerken — alle schakels ophalen via MCP.
-- **Index-noot is uitsluitend structuurdrager** — nooit annotatierijen, diagrammen of interpretaties. Vervuiling ongedaan maken zodra ontdekt.
-- Regelbestanden (`regels/AR-*.md`): `afgeleid-van` verwijst naar de lid-noot of sectie-annotatie-noot, nooit naar de index-noot.
 
 ---
 
 ## Verplichte checklist-output na elke annotatie-run
 
-Print na het opslaan de volgende checklist in de chat:
+Print na het opslaan:
 
 **Flow A:**
 ```
 Artikel-index-checklist — Art. [A] [W]
-✅/⬜ wetstekst-noot aangemaakt in wetteksten/[wet]/art[A].md
-✅/⬜ index-noot aangemaakt in annotaties/[wet]/art[A].md (leeg behalve delegatiestructuur)
-✅/⬜ peildatum uit MCP (versiedatum)
+✅/⬜ index-JSON aangemaakt in annotaties/[B]/art[A].json
+✅/⬜ peildatum uit bronbestand (versiedatum)
 ✅/⬜ structuurpositie letterlijk uit pad-veld
-✅/⬜ kruisreferenties gevuld
-✅/⬜ delegatiestructuur uitgewerkt (of "geen delegatiebevoegdheden")
+✅/⬜ kruisreferenties gevuld vanuit bronnen/[B]/art[A].kruisrefs.json
+✅/⬜ delegatiestructuur uitgewerkt (of [])
+✅/⬜ validatie geslaagd (validate_note.py)
 ```
 
 **Flow B:**
 ```
 Lid-annotatie-checklist — Art. [A] lid [L] [W]
-✅/⬜ lid-noot aangemaakt in annotaties/[wet]/art[A]-[L].md
+✅/⬜ lid-JSON aangemaakt in annotaties/[B]/art[A]-lid[L].json
 ✅/⬜ wetstekst lid [L] volledig en letterlijk geciteerd
 ✅/⬜ alle 13 JAS-elementen intern afgevinkt
-✅/⬜ diagram aangemaakt (of reden ontbreken vermeld)
-✅/⬜ begrip-noten aangemaakt per annotatierij
-✅/⬜ begrippen-veld bijgewerkt in lid-noot
-✅/⬜ leden-noten-veld bijgewerkt in index-noot (gesorteerd)
+✅/⬜ diagram aangemaakt (centrale-klasse + knopen + kanten)
+✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
+✅/⬜ leden-annotaties bijgewerkt in index-JSON
+✅/⬜ validatie geslaagd (validate_note.py)
+✅/⬜ views gegenereerd (generate_views.py)
 ```
 
 **Flow C:**
 ```
 Sectie-annotatie-checklist — [ref] [W]
-✅/⬜ wetstekst-noot aangemaakt in wetteksten/[wet]/[slug].md
-✅/⬜ annotatie-noot aangemaakt in annotaties/[wet]/[slug].md
+✅/⬜ sectie-JSON aangemaakt in annotaties/[B]/[slug].json
 ✅/⬜ wetstekst sectie volledig en letterlijk geciteerd
 ✅/⬜ alle 13 JAS-elementen intern afgevinkt
-✅/⬜ annotatietabel ingevuld
-✅/⬜ diagram aangemaakt (of reden ontbreken vermeld)
-✅/⬜ delegatiestructuur beschreven (of "geen delegatiebevoegdheden")
-✅/⬜ begrip-noten aangemaakt per annotatierij
-✅/⬜ begrippen-veld bijgewerkt in annotatie-noot
+✅/⬜ annotatierijen ingevuld
+✅/⬜ diagram aangemaakt
+✅/⬜ delegatiestructuur beschreven (of [])
+✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
+✅/⬜ validatie geslaagd (validate_note.py)
+✅/⬜ views gegenereerd (generate_views.py)
 ```
 
 ---
 
 ## Hergebruiksrapportage
 
-Print aan het einde van elke annotatie-run een overzicht van hergebruikte begrippen — begrip-noten die al bestonden vóór deze run en nu een extra markering hebben gekregen:
+Print aan het einde van elke annotatie-run:
 
 **Hergebruikte begrippen (definitie mogelijk bijstellen):**
-- `[[begrippen/[slug]]]` — primaire bron: [bron-veld]; nieuw ook geannoteerd in Art. [A] lid [L] [W]
+- `begrippen/[slug].yaml` — primaire bron: [bron-annotatie-id]; nieuw ook geannoteerd in Art. [A] lid [L] [W]
 
-**Voer `/begrip [slug]` niet automatisch uit vanuit deze skill.** Rapporteer de hergebruikte begrippen als actievelijst; de gebruiker roept daarna handmatig `/begrip [slug]` aan.
-
-Na het bijstellen van een begrip: controleer via het `afleidingsregels`-veld of afhankelijke regel-noten in `regels/` nog kloppen.
+**Voer `/begrip [slug]` niet automatisch uit vanuit deze skill.** Rapporteer als actievelijst.
 
 Als er geen hergebruikte begrippen zijn: schrijf exact "Geen hergebruikte begrippen."
 
 ### Soort-consistentiecheck bij hergebruik (verplicht)
 
-Controleer bij elk hergebruikt begrip of het `soort`-veld nog semantisch passend is in de nieuwe context:
-
 | soort in bestaand begrip | Signaal in nieuwe context | Actie |
 |--------------------------|--------------------------|-------|
-| `waar-niet-waar` | het begrip werkt in de nieuwe context per element (bijv. per termijn, per deelbedrag) | ⚠ signaleer in annotatietabel: "hergebruikt begrip is binair; in deze context werkt het per [element] — overweeg nieuw begrip" |
-| `getal` | de nieuwe context vereist een binaire uitkomst | ⚠ signaleer idem |
-| Elk soort | het soort is passend — geen actie | — |
+| `booleaans` | het begrip werkt in de nieuwe context per element (bijv. per termijn) | ⚠ signaleer in `toelichting-klasse`: "hergebruikt begrip is binair; in deze context werkt het per [element] — overweeg nieuw begrip" |
+| Elk soort | het soort is passend | — |
 
-Noteer de uitkomst van deze check in de Signalering-kolom van de annotatierij, ook als er geen probleem is (`soort passend`). Dit maakt de keuze traceerbaar voor A4-validatie.
+Noteer de uitkomst in `toelichting-klasse` van de annotatierij.

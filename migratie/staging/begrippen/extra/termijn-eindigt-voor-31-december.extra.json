@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december",
+  "slug": "termijn-eindigt-voor-31-december",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| termijn-eindigt-voor-31-december: De laatste termijn van een voorlopige aanslag vervalt op 15 december | ja | 15 december is vóór 31 december. |\n| termijn-eindigt-voor-31-december: De laatste termijn vervalt op 31 december | nee | Is niet vóór 31 december. |\n| termijn-eindigt-voor-31-december: Er is maar één termijn en die vervalt op 30 november | ja | De enige termijn is ook de laatste. |",
+  "kenmerken": "- Vereist voorafgaande berekening conform art. 9 lid 5 IW 1990."
+}

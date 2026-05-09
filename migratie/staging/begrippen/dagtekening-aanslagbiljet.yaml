@@ -1,0 +1,40 @@
+begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+begripsnaam: dagtekening-aanslagbiljet
+aliases: []
+soort: datum
+soort-id: false
+herkomst: direct
+status: te-verrijken
+definitie: De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel
+  is gedagtekend en die dient als het vaste referentiepunt voor de berekening van
+  de invorderingstermijn
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid1
+  tekst: de dagtekening van het aanslagbiljet
+  interpretatiemethode: systematisch
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+- markering-id: m-002
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: de dagtekening van het aanslagbiljet
+  interpretatiemethode: systematisch
+  bijdrage: aanvullend
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet
+    relatie-soort: causaal
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

@@ -1,0 +1,36 @@
+begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
+begripsnaam: resterende-maanden-jaar
+aliases: []
+soort: MIGRATIE-ONBEKEND
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: Het aantal kalendermaanden dat in het belastingjaar resteert na de maand
+  die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het
+  aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van
+  art. 9 lid 5 IW 1990
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: nog maanden van het jaar overblijven
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet
+    kardinaliteit: '1:1'
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
+    relatie-soort: causaal
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-b
+tussenresultaat: true

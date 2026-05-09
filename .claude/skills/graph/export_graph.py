@@ -1,10 +1,10 @@
 """
-Exporteert een Obsidian-vault naar graph.gexf en graph.graphml.
-Volledig geconfigureerd via graph-model.json — geen hardcoded vault-specifieke waarden.
+Exporteert vault naar graph.gexf en graph.graphml.
+Leest begrippen/*.yaml, regels/*.yaml, annotaties/**/*.json.
 
 Gebruik:
-    cd tools/
-    .venv/bin/python export_graph.py [--vault-root ..] [--model graph-model.json]
+    cd .claude/skills/graph/
+    .venv/bin/python export_graph.py [--vault-root ../../..]
 """
 
 import argparse
@@ -13,29 +13,27 @@ import re
 import sys
 from pathlib import Path
 
-import frontmatter
+import yaml
 import networkx as nx
 
+FALLBACK_KLEUR = "#CCCCCC"
 
-def check_staleness(vault_root: Path, output_dir: Path, model: dict) -> None:
+
+def check_staleness(vault_root: Path, output_dir: Path) -> None:
     """Waarschuw als vault-bestanden nieuwer zijn dan de laatste GEXF-export."""
     gexf = output_dir / "graph.gexf"
     if not gexf.exists():
         return
 
     export_mtime = gexf.stat().st_mtime
-    skip = set(model["export"].get("skip_bestanden", []))
-
     nieuwere = []
-    for node_def in model["node_types"]:
-        bron_map = vault_root / node_def["bron_map"]
-        if not bron_map.exists():
-            continue
-        for md_file in bron_map.glob("**/*.md"):
-            if md_file.name in skip:
+
+    for patroon in ["begrippen/*.yaml", "regels/*.yaml", "annotaties/**/*.json"]:
+        for f in vault_root.glob(patroon):
+            if f.name.startswith("."):
                 continue
-            if md_file.stat().st_mtime > export_mtime:
-                nieuwere.append(md_file.relative_to(vault_root))
+            if f.stat().st_mtime > export_mtime:
+                nieuwere.append(f.relative_to(vault_root))
 
     if nieuwere:
         print(
@@ -49,142 +47,237 @@ def check_staleness(vault_root: Path, output_dir: Path, model: dict) -> None:
             print(f"    … en {len(nieuwere) - 5} andere(n)", file=sys.stderr)
 
 
-def load_model(model_path: Path) -> dict:
-    with model_path.open() as f:
-        return json.load(f)
+def lees_kleuren(vault_root: Path) -> dict[str, str]:
+    """Laadt kleur per JAS-klasse uit .obsidian/graph.json."""
+    graph_json = vault_root / ".obsidian" / "graph.json"
+    if not graph_json.exists():
+        return {}
+    with graph_json.open() as f:
+        data = json.load(f)
+    kleur_map: dict[str, str] = {}
+    for groep in data.get("colorGroups", []):
+        query = groep.get("query", "")
+        rgb_int = groep.get("color", {}).get("rgb")
+        if not rgb_int:
+            continue
+        m = re.search(r"tag:#(?:jas/)?(\S+)", query)
+        if m:
+            kleur_map[m.group(1)] = f"#{rgb_int:06X}"
+    return kleur_map
 
 
-def extract_wikilinks(value, wikilink_re: re.Pattern) -> list[str]:
-    if not value:
-        return []
-    targets = [value] if isinstance(value, str) else value
-    result = []
-    for t in targets:
-        if isinstance(t, str):
-            m = wikilink_re.search(t)
-            if m:
-                result.append(m.group(1))
-    return result
-
-
-def build_graph(vault_root: Path, model: dict) -> nx.DiGraph:
-    export_cfg = model["export"]
-    skip = set(export_cfg.get("skip_bestanden", []))
-    wikilink_re = re.compile(export_cfg["wikilink_regex"])
-    tijdsdim = export_cfg["tijdsdimensie"]
-
-    kleur_map = {k["klasse"]: k["kleur"] for k in model["jas_klassen"]}
+def build_graph(vault_root: Path) -> nx.MultiDiGraph:
+    kleur_map = lees_kleuren(vault_root)
     G = nx.MultiDiGraph()
 
-    for node_def in model["node_types"]:
-        bron_map = vault_root / node_def["bron_map"]
-        if not bron_map.exists():
-            continue
-
-        for md_file in sorted(bron_map.glob("**/*.md")):
-            if md_file.name in skip:
+    # --- Begrip-nodes ---
+    begrippen_dir = vault_root / "begrippen"
+    if begrippen_dir.exists():
+        for yaml_file in sorted(begrippen_dir.glob("*.yaml")):
+            with yaml_file.open(encoding="utf-8") as f:
+                fm = yaml.safe_load(f)
+            if not fm or not isinstance(fm, dict):
                 continue
 
-            post = frontmatter.load(md_file)
-            fm = post.metadata
-            node_id = str(md_file.relative_to(vault_root).with_suffix(""))
+            node_id = fm.get("begrip-id") or yaml_file.stem
+            label = fm.get("begripsnaam") or node_id
+            jas_klasse = ""
+            for markering in fm.get("markeringen", []):
+                if markering.get("bijdrage") == "primair":
+                    jas_klasse = markering.get("jas-klasse", "")
+                    break
 
-            jas_klasse = fm.get(node_def["klasse_veld"]) if node_def["klasse_veld"] else None
-            jas_klasse = jas_klasse or node_def.get("jas_klasse_override") or ""
-            label = fm.get(node_def["label_veld"]) or node_id
-
-            attrs = {
+            attrs: dict = {
                 "label": str(label),
-                "node_type": node_def["type"],
+                "node_type": "begrip",
+                "soort": str(fm.get("soort") or ""),
+                "herkomst": str(fm.get("herkomst") or ""),
+                "status": str(fm.get("status") or ""),
                 "jas_klasse": jas_klasse,
-                "color": kleur_map.get(jas_klasse, "#CCCCCC"),
+                "color": kleur_map.get(jas_klasse, FALLBACK_KLEUR),
             }
-
-            for veld in node_def.get("attributen", []):
-                waarde = fm.get(veld)
-                if waarde is not None:
-                    attrs[veld.replace("-", "_")] = str(waarde)
-
-            if tijdsdim.get("actief"):
-                start = fm.get(tijdsdim["start_veld"]) or fm.get(tijdsdim["fallback_veld"], "")
-                end = fm.get(tijdsdim["end_veld"], "")
-                if start:
-                    attrs["start"] = str(start)
-                if end:
-                    attrs["end"] = str(end)
+            if fm.get("geldigheid-van"):
+                attrs["start"] = str(fm["geldigheid-van"])
+            if fm.get("geldigheid-tot"):
+                attrs["end"] = str(fm["geldigheid-tot"])
 
             G.add_node(node_id, **attrs)
 
-    node_type_map = {nd["type"]: nd for nd in model["node_types"]}
-
-    for edge_def in model["edge_types"]:
-        veld = edge_def["frontmatter_veld"]
-        label = edge_def["label"]
-        van_type = edge_def["van"]
-
-        node_def = node_type_map.get(van_type)
-        if not node_def:
-            continue
-
-        bron_map = vault_root / node_def["bron_map"]
-        if not bron_map.exists():
-            continue
-
-        for md_file in sorted(bron_map.glob("**/*.md")):
-            if md_file.name in skip:
+    # --- Regel-nodes ---
+    regels_dir = vault_root / "regels"
+    if regels_dir.exists():
+        for yaml_file in sorted(regels_dir.glob("*.yaml")):
+            with yaml_file.open(encoding="utf-8") as f:
+                fm = yaml.safe_load(f)
+            if not fm or not isinstance(fm, dict):
                 continue
 
-            post = frontmatter.load(md_file)
-            fm = post.metadata
-            van_id = str(md_file.relative_to(vault_root).with_suffix(""))
+            node_id = fm.get("regel-id") or yaml_file.stem
+            label = fm.get("naam") or node_id
+            jas_klasse = "afleidingsregel"
 
+            attrs = {
+                "label": str(label),
+                "node_type": "afleidingsregel",
+                "jas_klasse": jas_klasse,
+                "soort": str(fm.get("soort") or ""),
+                "bwb_id": str(fm.get("bwb-id") or ""),
+                "artikel": str(fm.get("artikel") or ""),
+                "color": kleur_map.get(jas_klasse, FALLBACK_KLEUR),
+            }
+            if fm.get("peildatum"):
+                attrs["start"] = str(fm["peildatum"])
+
+            G.add_node(node_id, **attrs)
+
+    # --- Annotatie-nodes ---
+    annotaties_dir = vault_root / "annotaties"
+    if annotaties_dir.exists():
+        for json_file in sorted(annotaties_dir.glob("**/*.json")):
+            if json_file.name.startswith("."):
+                continue
+            with json_file.open(encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                except json.JSONDecodeError:
+                    continue
+
+            node_id = data.get("annotatie-id") or str(json_file.relative_to(vault_root).with_suffix(""))
+            artikel = data.get("artikel", "?")
+            lid = data.get("lid", "")
+            wet = data.get("wet", "")
+            label = f"Art. {artikel}{(' lid ' + lid) if lid else ''} {wet}".strip()
+
+            attrs = {
+                "label": label,
+                "node_type": "annotatie",
+                "jas_klasse": "annotatie",
+                "bwb_id": str(data.get("bwb-id") or ""),
+                "wet": str(wet),
+                "artikel": str(artikel),
+                "color": kleur_map.get("annotatie", FALLBACK_KLEUR),
+            }
+            if data.get("peildatum"):
+                attrs["start"] = str(data["peildatum"])
+
+            G.add_node(node_id, **attrs)
+
+    # --- Typed edges: begrip-relaties ---
+    if begrippen_dir.exists():
+        for yaml_file in sorted(begrippen_dir.glob("*.yaml")):
+            with yaml_file.open(encoding="utf-8") as f:
+                fm = yaml.safe_load(f)
+            if not fm or not isinstance(fm, dict):
+                continue
+
+            van_id = fm.get("begrip-id") or yaml_file.stem
             if van_id not in G:
                 continue
 
-            doelen = extract_wikilinks(fm.get(veld), wikilink_re)
-            for naar_id in doelen:
-                if naar_id not in G:
-                    print(f"  waarschuwing: onbekend doel '{naar_id}' in {md_file.name} ({veld})", file=sys.stderr)
+            relaties = fm.get("relaties") or {}
+
+            for doel in relaties.get("is-een") or []:
+                if isinstance(doel, str) and doel in G:
+                    G.add_edge(van_id, doel, label="is-een", edge_type="is-een")
+
+            for item in relaties.get("heeft") or []:
+                doel = item.get("begrip-id") if isinstance(item, dict) else item
+                if doel and doel in G:
+                    G.add_edge(van_id, doel, label="heeft", edge_type="heeft")
+
+            for item in relaties.get("leidt-tot") or []:
+                if isinstance(item, dict):
+                    doel = item.get("begrip-id")
+                    relatie_soort = item.get("relatie-soort") or "leidt-tot"
+                else:
+                    doel = item
+                    relatie_soort = "leidt-tot"
+                if doel and doel in G:
+                    G.add_edge(van_id, doel, label=relatie_soort, edge_type="leidt-tot")
+
+            ar_id = fm.get("afleidingsregel-id")
+            if ar_id and ar_id in G:
+                G.add_edge(van_id, ar_id, label="afgeleid-via", edge_type="afgeleid-via")
+
+    # --- Typed edges: annotatie → begrip (via annotatierijen) ---
+    if annotaties_dir.exists():
+        for json_file in sorted(annotaties_dir.glob("**/*.json")):
+            if json_file.name.startswith("."):
+                continue
+            with json_file.open(encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                except json.JSONDecodeError:
                     continue
-                G.add_edge(van_id, naar_id, label=label)
+
+            annotatie_id = data.get("annotatie-id") or str(json_file.relative_to(vault_root).with_suffix(""))
+            if annotatie_id not in G:
+                continue
+
+            for rij in data.get("annotatierijen") or []:
+                begrip_id = rij.get("begrip-id")
+                if begrip_id and begrip_id in G:
+                    G.add_edge(annotatie_id, begrip_id, label="markeert", edge_type="markeert")
+
+            diagram = data.get("diagram") or {}
+            knoop_map = {k["id"]: k.get("begrip-id") for k in diagram.get("knopen") or []}
+            for kant in diagram.get("kanten") or []:
+                van_begrip = knoop_map.get(kant.get("van"))
+                naar_begrip = knoop_map.get(kant.get("naar"))
+                label = kant.get("label") or "relatie"
+                if van_begrip and naar_begrip and van_begrip in G and naar_begrip in G:
+                    G.add_edge(van_begrip, naar_begrip, label=label, edge_type="diagram")
+
+    # --- Edges: regel → begrip (invoer/uitvoer) ---
+    if regels_dir.exists():
+        for yaml_file in sorted(regels_dir.glob("*.yaml")):
+            with yaml_file.open(encoding="utf-8") as f:
+                fm = yaml.safe_load(f)
+            if not fm or not isinstance(fm, dict):
+                continue
+
+            van_id = fm.get("regel-id") or yaml_file.stem
+            if van_id not in G:
+                continue
+
+            for begrip_id in fm.get("uitvoer") or []:
+                if begrip_id in G:
+                    G.add_edge(van_id, begrip_id, label="bepaalt", edge_type="bepaalt")
+
+            for begrip_id in fm.get("invoer") or []:
+                if begrip_id in G:
+                    G.add_edge(begrip_id, van_id, label="invoer-voor", edge_type="invoer-voor")
 
     return G
 
 
 def main():
     parser = argparse.ArgumentParser(description="Vault → GraphML/GEXF export")
-    parser.add_argument("--vault-root", default="..", help="Pad naar vault-root (default: ..)")
-    parser.add_argument("--model", default="graph-model.json", help="Pad naar model-JSON (default: graph-model.json)")
+    parser.add_argument("--vault-root", default="../../..", help="Pad naar vault-root (default: ../../..)")
     args = parser.parse_args()
 
     script_dir = Path(__file__).parent
     vault_root = (script_dir / args.vault_root).resolve()
-    model_path = (script_dir / args.model).resolve()
 
     print(f"Vault: {vault_root}")
-    print(f"Model: {model_path}")
-
-    model = load_model(model_path)
 
     output_dir = vault_root / "graaf"
     output_dir.mkdir(exist_ok=True)
 
-    check_staleness(vault_root, output_dir, model)
+    check_staleness(vault_root, output_dir)
 
-    G = build_graph(vault_root, model)
+    G = build_graph(vault_root)
 
     print(f"Graaf: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
-    for formaat in model["export"].get("formaten", ["gexf"]):
-        out = output_dir / f"graph.{formaat}"
-        if formaat == "gexf":
-            nx.write_gexf(G, out)
-        elif formaat == "graphml":
-            nx.write_graphml(G, out)
-        else:
-            print(f"  onbekend formaat '{formaat}', overgeslagen", file=sys.stderr)
-            continue
-        print(f"Geschreven: {out}")
+    out_gexf = output_dir / "graph.gexf"
+    out_graphml = output_dir / "graph.graphml"
+
+    nx.write_gexf(G, out_gexf)
+    print(f"Geschreven: {out_gexf}")
+
+    nx.write_graphml(G, out_graphml)
+    print(f"Geschreven: {out_graphml}")
 
 
 if __name__ == "__main__":

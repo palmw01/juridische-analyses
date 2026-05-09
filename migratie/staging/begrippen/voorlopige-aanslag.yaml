@@ -1,0 +1,39 @@
+begrip-id: BWBR0004770/art9/lid5/voorlopige-aanslag
+begripsnaam: voorlopige-aanslag
+aliases:
+- voorlopige belastingaanslag
+soort: MIGRATIE-ONBEKEND
+soort-id: true
+herkomst: direct
+status: te-verrijken
+definitie: Belastingaanslag die voorafgaand aan de definitieve vaststelling van de
+  belastingschuld wordt opgelegd
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)
+  interpretatiemethode: systematisch
+  bijdrage: aanvullend
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+- markering-id: m-002
+  bron-annotatie-id: BWBR0008003/par9-1
+  tekst: voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)
+  interpretatiemethode: systematisch
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een:
+  - BWBR0004770/art9/lid1/belastingaanslag
+  heeft: []
+  leidt-tot: []
+identificatiebegrip: true
+afleidingsregel-id: null
+tussenresultaat: false

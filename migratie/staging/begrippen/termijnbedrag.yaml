@@ -1,0 +1,30 @@
+begrip-id: BWBR0004770/art9/lid5/termijnbedrag
+begripsnaam: termijnbedrag
+aliases: []
+soort: monetair-bedrag
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag
+  van de belastingaanslag te delen door het aantal termijnen
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: gelijke termijnen
+  interpretatiemethode: systematisch
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-f
+tussenresultaat: false

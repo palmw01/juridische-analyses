@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar",
+  "slug": "resterende-maanden-jaar",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| Een aanslagbiljet gedagtekend in maart 2026 levert een resterende-maanden-jaar van 9. | ja | Na maart resteren in 2026 negen maanden (april t/m december); de voorlopige aanslag is invorderbaar in negen gelijke termijnen. |\n| Een aanslagbiljet gedagtekend in november 2026 levert een resterende-maanden-jaar van 1. | ja | Grensgeval: na november resteert slechts één maand (december). De derde volzin van lid 5 bepaalt dat bij niet méér dan één termijn lid 1 herneemt; lid 5 leidt dan niet tot termijneninvordering. |\n| Een aanslagbiljet gedagtekend in januari 2026 levert een resterende-maanden-jaar van 11. | ja | Na januari resteren elf maanden (februari t/m december); de aanslag is invorderbaar in elf gelijke termijnen. |",
+  "kenmerken": "- De variabele is een tussenresultaat: zij wordt berekend als invoer voor de hoofdregel van lid 5 (het aantal termijnen).\n- Bereik: 0 (december) t/m 11 (januari); bij 0 of 1 treedt de terugvalregel van de derde volzin in werking.\n- De waarde is afhankelijk van de maand van dagtekening en wordt bepaald door de rekenregel `AR-9-5b`."
+}

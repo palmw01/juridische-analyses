@@ -1,0 +1,356 @@
+{
+  "annotatie-id": "BWBR0004770/art9/lid5",
+  "bwb-id": "BWBR0004770",
+  "wet": "IW 1990",
+  "artikel": "9",
+  "lid": "5",
+  "peildatum": "2026-01-01",
+  "structuurpositie": "Hoofdstuk II Invordering in eerste aanleg > Artikel 9 > Lid 5",
+  "wetstekst": "In afwijking van het eerste lid is een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting en een voorlopige conserverende aanslag in de inkomstenbelasting, waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld, invorderbaar in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven. De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet en elk van de volgende termijnen telkens een maand later. Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing.",
+  "annotatierijen": [
+    {
+      "rij-id": "r-001",
+      "markering": "een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting",
+      "jas-klasse": "rechtsobject",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-002",
+      "markering": "of",
+      "jas-klasse": "operator",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/logische-of",
+      "toelichting-klasse": "",
+      "signalering": "⚠ logische OR; verbindt IB en VPB als alternatieve belastingsoorten voor het toepassingsbereik van lid 5"
+    },
+    {
+      "rij-id": "r-003",
+      "markering": "een voorlopige conserverende aanslag in de inkomstenbelasting",
+      "jas-klasse": "rechtsobject",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-004",
+      "markering": "is ... invorderbaar",
+      "jas-klasse": "rechtsbetrekking",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid",
+      "toelichting-klasse": "",
+      "signalering": "⚠ hergebruik begrip-noot; rechtssubjecten niet expliciet in lid 5; impliciet via art. 3 IW 1990. Soort-consistentiecheck: `invorderbaarheid` heeft `soort: waar-niet-waar` (binair); in lid-5-context is invorderbaarheid per termijn — soort incompatibel. A5-signaal: de wet bepaalt wanneer termijnen vervallen maar articuleert niet hoe de status per termijn op een peildatum wordt vastgesteld; dit vereist uitvoeringsbeleid of een implementatielaag."
+    },
+    {
+      "rij-id": "r-005",
+      "markering": "In afwijking van het eerste lid",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid",
+      "toelichting-klasse": "",
+      "signalering": "⚠ specialisatiebepaling; markeert lid 5 als lex specialis t.o.v. art. 9 lid 1 voor de genoemde voorlopige aanslagen"
+    },
+    {
+      "rij-id": "r-006",
+      "markering": "waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar",
+      "toelichting-klasse": "",
+      "signalering": "⚠ kwalificatieconditie: beperkt lid 5 tot aanslagen met een dagtekening in het belastingjaar; aanslagen vóór het jaar vallen onder lid 7"
+    },
+    {
+      "rij-id": "r-007",
+      "markering": "de dagtekening van het aanslagbiljet",
+      "jas-klasse": "rechtsfeit",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
+      "toelichting-klasse": "",
+      "signalering": "⚠ hergebruik begrip-noot; hier als ankerpunt voor de termijnenberekening in lid 5"
+    },
+    {
+      "rij-id": "r-008",
+      "markering": "de maand, die in de dagtekening van het aanslagbiljet is vermeld",
+      "jas-klasse": "tijdsaanduiding",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-009",
+      "markering": "in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-010",
+      "markering": "nog maanden van het jaar overblijven",
+      "jas-klasse": "variabele",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-011",
+      "markering": "In afwijking van het eerste lid is een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting en een voorlopige conserverende aanslag in de inkomstenbelasting, waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld, invorderbaar in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven.",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen",
+      "toelichting-klasse": "",
+      "signalering": "⚠ specialisatieregel t.o.v. art. 9 lid 1; als-dan: als aan beide kwalificatievoorwaarden is voldaan (aanslagtype én dagtekening in jaar), dan invorderbaar in gelijke maandelijkse termijnen"
+    },
+    {
+      "rij-id": "r-012",
+      "markering": "De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-eerste-termijn",
+      "toelichting-klasse": "",
+      "signalering": "⚠ reeks-statustoets: deze rekenregel produceert één vervaldatum; samen met markering 14 vormt het een reeks van N datums. De status van elke datum t.o.v. een peildatum is niet in de wettekst gearticuleerd — A5-signaal: ontbrekend uitvoeringsbeleid."
+    },
+    {
+      "rij-id": "r-013",
+      "markering": "één maand na de dagtekening van het aanslagbiljet",
+      "jas-klasse": "tijdsaanduiding",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/een-maand-na-dagtekening",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-014",
+      "markering": "elk van de volgende termijnen telkens een maand later",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-volgende-termijnen",
+      "toelichting-klasse": "",
+      "signalering": "⚠ reeks-statustoets: deze rekenregel produceert een reeks van N−1 vervaldatums (iteratief). Zie ook markering 12."
+    },
+    {
+      "rij-id": "r-015",
+      "markering": "telkens een maand later",
+      "jas-klasse": "tijdsaanduiding",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/telkens-een-maand-later",
+      "toelichting-klasse": "",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-016",
+      "markering": "Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing.",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/terugvalregel-lid-1",
+      "toelichting-klasse": "",
+      "signalering": "⚠ beslissingsregel (terugvalregel); art. 9 lid 1 herneemt toepassing als het termijnenantal ≤ 1 is (bij dagtekening in december)"
+    },
+    {
+      "rij-id": "r-017",
+      "markering": "gelijke",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
+      "toelichting-klasse": "",
+      "signalering": "⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen"
+    },
+    {
+      "rij-id": "r-018",
+      "markering": "gelijke termijnen",
+      "jas-klasse": "variabele",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
+      "toelichting-klasse": "",
+      "signalering": "⚠ de variabele die de uitkomst van AR-9-5f representeert"
+    },
+    {
+      "rij-id": "r-019",
+      "markering": "een belastingaanslag",
+      "jas-klasse": "variabele",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag",
+      "toelichting-klasse": "",
+      "signalering": "⚠ hergebruik markering uit lid 1; het totaalbedrag is noodzakelijk voor de berekening van het termijnbedrag (invoer voor AR-9-5f)"
+    }
+  ],
+  "diagram": {
+    "centrale-klasse": "rechtsbetrekking",
+    "knopen": [
+      {
+        "id": "RF",
+        "jas-klasse": "rechtsfeit",
+        "label": "rechtsfeit 'dagtekening van het aanslagbiljet'",
+        "begrip-id": null
+      },
+      {
+        "id": "RB",
+        "jas-klasse": "rechtsbetrekking",
+        "label": "rechtsbetrekking 'invorderbaar'",
+        "begrip-id": null
+      },
+      {
+        "id": "RO1",
+        "jas-klasse": "rechtsobject",
+        "label": "rechtsobject 'voorlopige aanslag (IB/VPB)'",
+        "begrip-id": null
+      },
+      {
+        "id": "RO2",
+        "jas-klasse": "rechtsobject",
+        "label": "rechtsobject 'voorlopige conserverende…'",
+        "begrip-id": null
+      },
+      {
+        "id": "VW1",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'In afwijking van het eerste lid'",
+        "begrip-id": null
+      },
+      {
+        "id": "VW2",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'dagtekening in vaststellingsjaar'",
+        "begrip-id": null
+      },
+      {
+        "id": "AR1",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'in zoveel gelijke termijnen…'",
+        "begrip-id": null
+      },
+      {
+        "id": "AR1f",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'berekenen termijnbedrag'",
+        "begrip-id": null
+      },
+      {
+        "id": "AR2",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'eerste termijn vervalt één maand…'",
+        "begrip-id": null
+      },
+      {
+        "id": "AR3",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'volgende termijnen een maand later'",
+        "begrip-id": null
+      },
+      {
+        "id": "AR4",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'terugval lid 1 bij ≤ 1 termijn'",
+        "begrip-id": null
+      },
+      {
+        "id": "VA",
+        "jas-klasse": "variabele",
+        "label": "variabele 'maanden van het jaar overblijven'",
+        "begrip-id": null
+      },
+      {
+        "id": "VA2",
+        "jas-klasse": "variabele",
+        "label": "variabele 'totaalbedrag belastingaanslag'",
+        "begrip-id": null
+      },
+      {
+        "id": "VA3",
+        "jas-klasse": "variabele",
+        "label": "variabele 'termijnbedrag'",
+        "begrip-id": null
+      },
+      {
+        "id": "TA",
+        "jas-klasse": "tijdsaanduiding",
+        "label": "tijdsaanduiding 'maand dagtekening aanslagbiljet'",
+        "begrip-id": null
+      }
+    ],
+    "kanten": [
+      {
+        "van": "RF",
+        "naar": "RB",
+        "label": "triggert"
+      },
+      {
+        "van": "RB",
+        "naar": "RO1",
+        "label": "voorwerp"
+      },
+      {
+        "van": "RB",
+        "naar": "RO2",
+        "label": "voorwerp"
+      },
+      {
+        "van": "RB",
+        "naar": "VW1",
+        "label": "geldig indien"
+      },
+      {
+        "van": "RB",
+        "naar": "VW2",
+        "label": "geldig indien"
+      },
+      {
+        "van": "RB",
+        "naar": "AR1",
+        "label": "nader uitgewerkt in"
+      },
+      {
+        "van": "RB",
+        "naar": "AR1f",
+        "label": "nader uitgewerkt in"
+      },
+      {
+        "van": "RB",
+        "naar": "AR2",
+        "label": "nader uitgewerkt in"
+      },
+      {
+        "van": "RB",
+        "naar": "AR3",
+        "label": "nader uitgewerkt in"
+      },
+      {
+        "van": "RB",
+        "naar": "AR4",
+        "label": "nader uitgewerkt in"
+      },
+      {
+        "van": "AR1",
+        "naar": "VA",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR1",
+        "naar": "TA",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR1f",
+        "naar": "VA2",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR1f",
+        "naar": "VA",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR1f",
+        "naar": "VA3",
+        "label": "gebruikt"
+      }
+    ]
+  },
+  "kruisreferenties": []
+}

@@ -1,0 +1,34 @@
+begrip-id: BWBR0004770/art9/lid5/vervaldag-eerste-termijn
+begripsnaam: vervaldag-eerste-termijn
+aliases: []
+soort: datum
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn
+  vaststelt als het tijdstip gelegen één kalendermaand na de dagtekening van het aanslagbiljet
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+    kardinaliteit: '1:1'
+  - begrip-id: BWBR0004770/art9/lid5/een-maand-na-dagtekening
+    kardinaliteit: '1:1'
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-c
+tussenresultaat: false

@@ -1,0 +1,30 @@
+begrip-id: BWBR0004770/art9/lid5/31-december
+begripsnaam: 31-december
+aliases:
+- Oudejaarsdag
+soort: datum
+soort-id: false
+herkomst: direct
+status: concept
+definitie: De eenendertigste dag van de twaalfde maand van een kalenderjaar
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0008003/par9-1
+  tekst: 31 december
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

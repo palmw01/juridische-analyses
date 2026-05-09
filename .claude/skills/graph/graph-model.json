@@ -1,82 +1,53 @@
 {
-  "versie": "1.0",
+  "versie": "2.0",
   "beschrijving": "Gegenereerd model voor vault: juridische-analyses",
   "node_types": [
     {
-      "type": "annotatie",
-      "bron_map": "annotaties/",
-      "frontmatter_type": "annotatie",
-      "label_veld": "artikel",
-      "klasse_veld": null,
-      "id_veld": null,
-      "attributen": [
-        "artikel",
-        "bwb-id",
-        "peildatum",
-        "structuurpositie",
-        "kruisreferenties"
-      ],
-      "jas_klasse_override": "annotatie"
-    },
-    {
       "type": "begrip",
       "bron_map": "begrippen/",
-      "frontmatter_type": "begrip",
+      "bestand_extensie": ".yaml",
+      "id_veld": "begrip-id",
       "label_veld": "begripsnaam",
-      "klasse_veld": "jas-klasse",
-      "id_veld": "begripsnaam",
+      "klasse_veld": null,
+      "jas_klasse_override": null,
       "attributen": [
-        "begripsnaam",
-        "jas-klasse",
-        "markering",
-        "bron",
-        "bronnen",
-        "peildatum",
-        "interpretatiemethode",
-        "toelichting-klasse",
-        "definitie",
         "soort",
         "herkomst",
-        "geldigheid-van",
-        "geldigheid-tot",
         "status",
-        "is-een",
-        "heeft",
-        "leidt-tot",
-        "afleidingsregels"
+        "geldigheid-van",
+        "geldigheid-tot"
       ]
     },
     {
       "type": "afleidingsregel",
       "bron_map": "regels/",
-      "frontmatter_type": "afleidingsregel",
+      "bestand_extensie": ".yaml",
+      "id_veld": "regel-id",
       "label_veld": "naam",
       "klasse_veld": null,
-      "id_veld": "regel-id",
+      "jas_klasse_override": "afleidingsregel",
       "attributen": [
-        "regel-id",
-        "naam",
         "soort",
-        "peildatum",
-        "operators"
-      ],
-      "jas_klasse_override": "afleidingsregel"
+        "bwb-id",
+        "artikel",
+        "peildatum"
+      ]
     },
     {
-      "type": "wetstekst",
-      "bron_map": "wetteksten/",
-      "frontmatter_type": "wetstekst",
+      "type": "annotatie",
+      "bron_map": "annotaties/",
+      "bestand_extensie": ".json",
+      "id_veld": "annotatie-id",
       "label_veld": "artikel",
       "klasse_veld": null,
-      "id_veld": null,
+      "jas_klasse_override": "annotatie",
       "attributen": [
-        "artikel",
         "bwb-id",
-        "peildatum",
-        "structuurpositie",
-        "bronreferentie"
-      ],
-      "jas_klasse_override": "wetstekst"
+        "wet",
+        "artikel",
+        "lid",
+        "peildatum"
+      ]
     }
   ],
   "jas_klassen": [
@@ -153,118 +124,103 @@
   ],
   "edge_types": [
     {
-      "label": "onderdeel-van",
-      "van": "annotatie",
-      "naar": "annotatie",
-      "frontmatter_veld": "onderdeel-van",
+      "label": "",
+      "van": "rechtssubject",
+      "naar": "rechtsbetrekking",
+      "frontmatter_veld": "",
+      "richting": "forward",
+      "kardinaliteit": "n:m"
+    },
+    {
+      "label": "",
+      "van": "rechtssubject",
+      "naar": "rechtsbetrekking",
+      "frontmatter_veld": "",
+      "richting": "forward",
+      "kardinaliteit": "n:m"
+    },
+    {
+      "label": "",
+      "van": "rechtsbetrekking",
+      "naar": "rechtsobject",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "wetstekst",
-      "van": "annotatie",
-      "naar": "wetstekst",
-      "frontmatter_veld": "wetstekst",
+      "label": "",
+      "van": "rechtsbetrekking",
+      "naar": "voorwaarde",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "begrippen",
-      "van": "annotatie",
-      "naar": "begrip",
-      "frontmatter_veld": "begrippen",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "leden-noten",
-      "van": "annotatie",
-      "naar": "annotatie",
-      "frontmatter_veld": "leden-noten",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "heeft",
-      "van": "begrip",
-      "naar": "begrip",
-      "frontmatter_veld": "heeft",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "leidt-tot",
-      "van": "begrip",
-      "naar": "begrip",
-      "frontmatter_veld": "leidt-tot",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "afleidingsregels",
-      "van": "begrip",
+      "label": "",
+      "van": "rechtsbetrekking",
       "naar": "afleidingsregel",
-      "frontmatter_veld": "afleidingsregels",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "is-een",
-      "van": "begrip",
-      "naar": "begrip",
-      "frontmatter_veld": "is-een",
+      "label": "",
+      "van": "rechtsfeit",
+      "naar": "rechtsbetrekking",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "afgeleid-van",
+      "label": "",
+      "van": "rechtsfeit",
+      "naar": "afleidingsregel",
+      "frontmatter_veld": "",
+      "richting": "forward",
+      "kardinaliteit": "1:n"
+    },
+    {
+      "label": "",
       "van": "afleidingsregel",
-      "naar": "annotatie",
-      "frontmatter_veld": "afgeleid-van",
+      "naar": "variabele",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "bepaalt",
+      "label": "",
       "van": "afleidingsregel",
-      "naar": "begrip",
-      "frontmatter_veld": "bepaalt",
+      "naar": "parameter",
+      "frontmatter_veld": "",
       "richting": "forward",
       "kardinaliteit": "1:n"
     },
     {
-      "label": "rechtsfeit",
-      "van": "afleidingsregel",
-      "naar": "begrip",
-      "frontmatter_veld": "rechtsfeit",
+      "label": "",
+      "van": "delegatiebevoegdheid",
+      "naar": "rechtsbetrekking",
+      "frontmatter_veld": "",
       "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "invoer",
-      "van": "afleidingsregel",
-      "naar": "begrip",
-      "frontmatter_veld": "invoer",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
-    },
-    {
-      "label": "uitvoer",
-      "van": "afleidingsregel",
-      "naar": "begrip",
-      "frontmatter_veld": "uitvoer",
-      "richting": "forward",
-      "kardinaliteit": "1:n"
+      "kardinaliteit": "1:1"
     }
   ],
+  "statistieken": {
+    "begrip_soorten": {
+      "datum": 7,
+      "booleaans": 9,
+      "enumeratie": 3,
+      "tijdsduur": 4,
+      "MIGRATIE-ONBEKEND": 3,
+      "monetair-bedrag": 2
+    }
+  },
   "export": {
     "formaten": [
       "gexf",
       "graphml"
     ],
-    "output_map": "tools/",
+    "output_map": "graaf/",
     "skip_bestanden": [
-      "template.md",
       "index.md"
     ],
     "tijdsdimensie": {
@@ -272,8 +228,7 @@
       "start_veld": "geldigheid-van",
       "end_veld": "geldigheid-tot",
       "fallback_veld": "peildatum"
-    },
-    "wikilink_regex": "\\[\\[([^\\]]+)\\]\\]"
+    }
   },
   "gephi": {
     "layout": "ForceAtlas2",

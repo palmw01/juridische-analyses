@@ -1,0 +1,34 @@
+begrip-id: BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid
+begripsnaam: in-afwijking-van-eerste-lid
+aliases: []
+soort: booleaans
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie
+  heeft ten opzichte van de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn
+  van lid 1 voor de genoemde voorlopige aanslagen wordt verdrongen door de gelijke-termijnenregeling
+  van lid 5
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: In afwijking van het eerste lid
+  interpretatiemethode: systematisch
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
+    relatie-soort: causaal
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-a
+tussenresultaat: false

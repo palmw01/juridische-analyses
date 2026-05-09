@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "annotatie-index",
+  "title": "Annotatie-index",
+  "description": "Structuuranker voor een wetsartikel",
+  "type": "object",
+  "required": ["artikel-id", "bwb-id", "wet", "artikel", "peildatum", "structuurpositie", "leden-annotaties", "kruisreferenties"],
+  "additionalProperties": false,
+  "properties": {
+    "artikel-id": {
+      "type": "string",
+      "description": "Samengestelde ID: {bwb-id}/art{N}",
+      "pattern": "^[A-Z0-9]+/art[0-9]+[a-z]?$"
+    },
+    "bwb-id": { "type": "string", "pattern": "^BWBR[0-9]+$" },
+    "wet": { "type": "string" },
+    "artikel": { "type": "string" },
+    "peildatum": { "type": "string", "format": "date" },
+    "structuurpositie": { "type": "string" },
+    "leden-annotaties": {
+      "type": "array",
+      "items": { "type": "string", "description": "annotatie-id van lid-annotaties" }
+    },
+    "kruisreferenties": {
+      "type": "array",
+      "items": { "type": "string", "description": "Art. X W strings" }
+    },
+    "delegatiestructuur": { "type": "array", "items": { "type": "object" } }
+  }
+}

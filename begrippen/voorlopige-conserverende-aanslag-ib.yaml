@@ -1,0 +1,33 @@
+begrip-id: BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib
+begripsnaam: voorlopige-conserverende-aanslag-ib
+aliases: []
+soort: enumeratie
+soort-id: false
+herkomst: direct
+status: concept
+definitie: Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende
+  aard, die — mits het aanslagbiljet is gedagtekend in het belastingjaar waarover
+  hij is vastgesteld — invorderbaar is in gelijke maandelijkse termijnen overeenkomstig
+  art. 9 lid 5 IW 1990
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: een voorlopige conserverende aanslag in de inkomstenbelasting
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een:
+  - BWBR0004770/art9/lid1/belastingaanslag
+  heeft: []
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

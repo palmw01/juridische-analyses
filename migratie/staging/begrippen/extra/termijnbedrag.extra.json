@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
+  "slug": "termijnbedrag",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| Bij een aanslag van € 1.200 en 8 termijnen is het termijnbedrag € 150. | ja | 1200 / 8 = 150. De termijnen zijn gelijk. |\n| Bij een aanslag van € 1.000 en 11 termijnen is het termijnbedrag afgerond € 90,91. | ja | De wet schrijft 'gelijke' termijnen voor; afrondingsverschillen worden in de uitvoering verwerkt (zie AR-9-5f). |",
+  "kenmerken": "- Afgeleide numerieke waarde.\n- Wordt gebruikt om de omvang van de betalingsverplichting per vervaldatum vast te stellen.\n- Borgt de wettelijke eis van 'gelijkheid' van termijnen."
+}

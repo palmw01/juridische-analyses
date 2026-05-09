@@ -12,52 +12,54 @@ agent: general-purpose
 
 | Trigger | Wanneer gebruiken |
 |---------|-------------------|
-| `/begrip [slug]` | Één begrip-noot invullen op basis van gevulde frontmatter |
-| `/begrip-alles art. [A] [W]` | Alle begrip-noten van een artikel achtereenvolgens verwerken |
+| `/begrip [slug]` | Één begrip-YAML invullen op basis van gevulde `markeringen`-lijst |
+| `/begrip-alles art. [A] [W]` | Alle begrip-YAML's van een artikel achtereenvolgens verwerken |
 
-Voert Activiteit 3a en 3b uit van de Wetsanalyse-methode. Leest de door `/annoteer` aangemaakte begrip-noten (met gevulde frontmatter) en vult de A3-inhoud in: definitie, voorbeelden, kenmerken en relaties. Bij JAS-klasse Afleidingsregel maakt de skill tevens een regel-noot aan in `regels/`.
+Voert Activiteit 3a en 3b uit. Leest de door `/annoteer` aangemaakte begrip-YAML-stubs en vult de A3-inhoud in: definitie, soort, herkomst, relaties en kenmerken. Bij JAS-klasse Afleidingsregel maakt de skill tevens een regel-YAML aan in `regels/`.
 
-**De wetstekst wordt niet opnieuw opgehaald.** De annotatiefrontmatter (`markering`, `jas-klasse`, `bron`, `peildatum`, `interpretatiemethode`) is de enige bron.
+**Bronbestanden zijn `.yaml`-bestanden in `begrippen/` — geen Markdown.**
+**De wetstekst wordt niet opnieuw opgehaald.** De `markeringen[].tekst`-velden in de begrip-YAML zijn de enige bron.
 
 **Lees vóór elke run eerst beide kaderdocumenten volledig in:**
-- `.claude/skills/begrip/kaders.md` — begrippenkader (A3a + A6d): naamgeving, definitie, soort, herkomst, relaties, identificatie
-- `.claude/skills/begrip/kaders-regels.md` — regelkader (A3b + A6e): typen, taalpatronen, rechtsfeit, tussenresultaten, RegelSpraaak
-
-De kaders zijn bindend voor elke beslissing in A3a en A3b. De bestaande inline secties hieronder zijn beknopte verwijzingslagen; de kaders bevatten de gezaghebbende volledige uitwerking.
+- `.claude/skills/begrip/kaders.md` — begrippenkader (A3a + A6d)
+- `.claude/skills/begrip/kaders-regels.md` — regelkader (A3b + A6e)
 
 ---
 
 ## Voorbereiding
 
-0. **Idempotentiecontrole:** Controleer of de body van `begrippen/[slug].md` al is ingevuld (d.w.z. `## Definitie` bevat meer dan de template-placeholder). Als de body al content heeft: meld "begrip-noot [slug] is al ingevuld" en stop — overschrijf nooit zonder expliciete bevestiging van de gebruiker.
+0. **Idempotentiecontrole:** Controleer of `definitie` in `begrippen/[slug].yaml` al is ingevuld (d.w.z. niet `""` en niet leeg). Als de definitie al content heeft: meld "begrip [slug] is al ingevuld" en stop — overschrijf nooit zonder expliciete bevestiging van de gebruiker.
 
-1. **Lees de begrip-noot** in `begrippen/[slug].md` — de frontmatter bevat alle benodigde informatie.
-2. **Zoek alle annotaties** die naar dit begrip verwijzen — vervang `BEGRIPSNAAM` door de waarde van het `begripsnaam`-veld uit de frontmatter:
-   ```
-   grep -rl "begrippen/BEGRIPSNAAM" annotaties/
-   ```
-   Lees elke gevonden annotatie-noot. Verzamel per annotatie de rij uit de annotatietabel die betrekking heeft op dit begrip: `markering`, `interpretatiemethode` en de artikelreferentie. Dit zijn alle markeringen die de definitie moeten voeden.
-3. **Vul het `bronnen`-veld** in de frontmatter met alle gevonden artikelreferenties (als lijst). Het bestaande `bron`-veld blijft ongewijzigd.
-4. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor relaties (is-een, heeft, leidt-tot).
+1. **Lees de begrip-YAML** in `begrippen/[slug].yaml`. De `markeringen`-lijst bevat alle benodigde informatie.
 
-Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld **of** het `bronnen`-veld verwijst naar dat artikel, en verwerk ze achtereenvolgens:
+2. **Controleer de enrichment-queue:** Lees `rapporten/enrichment-queue.json` en controleer of dit begrip daarin voorkomt. Als er een open beslissing is (d.w.z. geen `beslissing`-veld of status `te-verrijken`): stop en meld "begrip [slug] staat open in enrichment-queue — los de enrichment-beslissing eerst op". Als de beslissing is genomen: voer die uit vóórdat je de definitie opstelt.
+
+3. **Zoek alle annotaties** die dit begrip markeren — zoek op `begrip-id` in alle annotatie-JSON's:
    ```
-   grep -rl "Art. [A] [W]" begrippen/
+   grep -rl "[begrip-id]" annotaties/
    ```
-   Vervang `[A]` en `[W]` door het artikelnummer en de wet-afkorting (bijv. `Art. 25 IW 1990`).
+   Lees elke gevonden annotatie-JSON. Verzamel per annotatie de rij uit `annotatierijen` die betrekking heeft op dit begrip: `markering`, `interpretatiemethode`, `jas-klasse`, `toelichting-klasse` en het annotatie-id. Gebruik dit om de `markeringen`-lijst in de begrip-YAML te verifiëren en bij te werken.
+
+4. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor de relaties (`is-een`, `heeft`, `leidt-tot`).
+
+Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-YAML's waarvan een markering een `bron-annotatie-id` heeft dat begint met `[B]/art[A]`:
+   ```
+   grep -rl "bron-annotatie-id.*[B]/art[A]" begrippen/
+   ```
+   Vervang `[B]` door het BWB-id en `[A]` door het artikelnummer. Verwerk ze achtereenvolgens.
 
 ---
 
 ## Definitie opstellen (A3a)
 
-- Sluit zo nauw mogelijk aan bij de **letterlijke markering** in het frontmatter-veld `markering`.
+- Sluit zo nauw mogelijk aan bij de **letterlijke tekst** in `markeringen[0].tekst` (de primaire markering).
 - Benoem interpretatie- en preciseringskeuzes expliciet.
-- Onderbouw **altijd** de klassekeuze in `toelichting-klasse` — ook als die overeenkomt met de letterlijke formulering. Traceerbaarheid vereist expliciete motivering per element (Handleiding p.14–15).
+- Onderbouw **altijd** de klassekeuze — ook als die overeenkomt met de letterlijke formulering.
 - Geen parafrase van de wetstekst — gebruik de markering als startpunt.
-- Vul altijd `soort` (datatype) en `herkomst` (direct/afgeleid) in conform begrippenkader §Eigenschappen.
-- Markeer identificatiebegrippen met `[id]` in het `soort`-veld conform begrippenkader §Identificatiebegrippen.
-- Vul `aliases` in met bekende juridische synoniemen (of laat leeg als er geen synoniemen bestaan).
-- Leg kardinaliteit vast in de `## Relaties`-tabel (1:1 / 1:n / n:m) conform begrippenkader §Relaties en kardinaliteit.
+- Definitie bevat **geen punt** aan het einde.
+- Test altijd of de definitietekst het begrip kan vervangen in een zin zonder betekenisverlies (substitutietest).
+
+**Bij meerdere markeringen (multi-annotatie):** de definitie is een synthese van alle markeringen. De primaire markering (`bijdrage: primair`) is leidend; aanvullende (`aanvullend`) en context-markeringen (`context`) verfijnen de definitie.
 
 ---
 
@@ -65,158 +67,207 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-noten waarvan het `bron`-veld
 
 - Begin met **zelfstandig naamwoord** (uitzondering: afleidingsregel/rechtsfeit → actieve werkwoordsvorm)
 - **Enkelvoudsvorm**, tenzij meervoud in de wet tot andere betekenis leidt
-- **Geen hoofdletters**, geen Romeinse cijfers, zo min mogelijk afkortingen (bij gebruik: uitschrijven in definitie)
+- **Geen hoofdletters**, geen Romeinse cijfers, zo min mogelijk afkortingen
 - Sluit zo nauw mogelijk aan bij de letterlijke markering
 - Voeg wettelijke context toe als dezelfde formulering in meerdere wetten anders betekent
-- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat. Identiek betekent: dezelfde wettelijke betekenis én hetzelfde toepassingsbereik (zelfde wet, zelfde definitienorm). Bij twijfel: maak een nieuw begrip met een onderscheidende context-suffix (bijv. `betalingstermijn-belastingaanslag` naast `betalingstermijn-naheffingsaanslag`)
+- **Hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is — maak géén duplicaat
 
 ---
 
-## Voorbeelden opstellen (Leidraad product #13)
+## Soort-systeem (8 typen)
 
-- Minimaal **2 stellingen** (waar/niet-waar) die de grenzen van het begrip toetsen.
-- Minimaal **1 grensgeval** dat de precieze afbakening demonstreert.
-- Stellingen zijn concreet en toetsbaar (geen vage parafrasen).
+| soort | Gebruik |
+|-------|---------|
+| `monetair-bedrag` | Geldbedrag (euro, cent) |
+| `percentage` | Percentage of breuk |
+| `tijdsduur` | Duur (weken, maanden, jaren) |
+| `datum` | Kalenderdatum (ankerpunt) |
+| `booleaans` | Binaire uitkomst (ja/nee, waar/niet-waar) |
+| `tekst` | Vrije tekst of kwalitatieve aanduiding |
+| `enumeratie` | Gesloten lijst van waarden |
+| `entiteit` | Rechtspersoon, object of samengesteld gegeven |
+
+`soort-id: true` als dit begrip dient als unieke identificatiesleutel voor een entiteit (bijv. aanslagnummer, BSN).
 
 ---
 
 ## Kenmerken en relaties (Leidraad product #14)
 
-- Leg relaties met andere begrippen vast via de velden `is-een`, `heeft`, `leidt-tot` in de frontmatter.
-- Gebruik wiki-links naar betrokken begrip-noten: `[[begrippen/[slug]]]`.
-- **Vul de `## Relaties`-tabel altijd in** — ook als de frontmatter-arrays leeg zijn. Een lege tabel is alleen toegestaan als het begrip aantoonbaar geen relaties heeft met andere begrippen in de vault.
-- Bij `herkomst: afgeleid` is minimaal één `leidt-tot`-relatie verplicht (het rechtsgevolg dat dit begrip teweegbrengt) of een `heeft`-relatie naar de invoerbegrippen van de afleidingsregel.
-- **Alleen uitgaande (forward) relaties opnemen** — nooit backward links die al als forward link in een ander begrip staan. Zie begrippenkader §Relaties en kardinaliteit.
+Leg relaties vast via de `relaties`-sectie in de YAML:
+```yaml
+relaties:
+  is-een:
+  - begrip-id: BWBR0004770/art9/lid1/belastingaanslag
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+    kardinaliteit: "1:1"
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
+    relatie-soort: causaal
+    kardinaliteit: null
+```
+
+- `is-een`: array van `begrip-id` strings (generalisatierelatie — naar bovenliggend type)
+- `heeft`: array van objecten met `begrip-id` + `kardinaliteit` (`1:1`, `1:n`, `n:m`)
+- `leidt-tot`: array van objecten met `begrip-id` + `relatie-soort` (`causaal`, `procedureel`, `definitoir`) + optioneel `kardinaliteit`
+
+**Alleen uitgaande (forward) relaties opnemen** — nooit backward links die al als forward link in een ander begrip staan.
+
+Bij `herkomst: afgeleid` is minimaal één `leidt-tot`-relatie verplicht (of een `heeft`-relatie naar de invoerbegrippen van de afleidingsregel).
 
 ---
 
-## Afleidingsregel-noot (A3b — alleen bij JAS-klasse Afleidingsregel)
+## Extra-bestand: voorbeelden en kenmerken
 
-Bij JAS-klasse **Afleidingsregel**: maak aanvullend een noot aan in `regels/AR-[art]-[nr].md`.
-- Vul altijd het `naam`-veld in met een leesbare naam (actieve werkwoordsvorm).
-- Vul altijd het `rechtsfeit`-veld in met een wiki-link naar het triggerende rechtsfeit. **Uitzondering voor tussenresultaat-regel-noten** (regel-noten met tag `#tussenresultaat`): als er geen zelfstandig rechtsfeit bestaat dat dit tussenresultaat triggert, gebruik `rechtsfeit: ""` (leeg) en noteer in `## Toelichting` welke hoofdregel dit tussenresultaat aanroept.
-- Identificeer tussenresultaten in impliciete algoritmen en maak daarvoor eigen begrip-noten + regel-noten aan. Voeg de tag `#tussenresultaat` toe aan de tags-lijst van elke tussenresultaat-begrip-noot.
-- Kies het taalpatroon uit `## Formele regel` passend bij het `soort`-veld van de **regel-noot** (Beslissingsregel → EN/OF-patroon; Rekenregel → berekeningspatroon; Beperkingsregel → grenspatroon; Specialisatieregel → afwijkingspatroon — zie `kaders-regels.md §Taalpatronen`) en verwijder de overige blokken.
-- Controleer of het taalpatroon aansluit bij de RegelSpraaak-oriëntatie uit het regelkader.
+Schrijf voorbeelden en kenmerken naar `begrippen/[slug].extra.json`:
+```json
+{
+  "begrip-id": "[B]/art[A]/lid[L]/[slug]",
+  "voorbeelden": [
+    { "stelling": "[concrete stelling]", "waar": true, "toelichting": "[waarom?]" },
+    { "stelling": "[grensgeval]", "waar": false, "toelichting": "[waarom niet?]" }
+  ],
+  "kenmerken": [
+    "[eigenschap 1]",
+    "[eigenschap 2]"
+  ]
+}
+```
+
+- Minimaal **2 stellingen** (waar/niet-waar) die de grenzen van het begrip toetsen.
+- Minimaal **1 grensgeval**.
+- Alle stellingen zijn concreet en toetsbaar.
+
+---
+
+## Afleidingsregel-YAML (A3b — alleen bij JAS-klasse Afleidingsregel)
+
+Bij JAS-klasse **afleidingsregel**: maak aanvullend een YAML aan in `regels/AR-[bwb-id]-art[N]-lid[L]-[nr].yaml`.
+
+```yaml
+regel-id: AR-[bwb-id]-art[N]-lid[L]-[nr]
+naam: "[leesbare naam, actieve werkwoordsvorm]"
+soort: [Beslissingsregel|Rekenregel|Beperkingsregel|Specialisatieregel]
+bwb-id: [B]
+artikel: "[A]"
+lid: "[L]"
+peildatum: "[YYYY-MM-DD]"
+annotatie-id: [B]/art[A]/lid[L]
+rechtsfeit-id: "[begrip-id van het triggerende rechtsfeit, of null bij tussenresultaat]"
+invoer:
+- [begrip-id]
+uitvoer:
+- [begrip-id]
+operators:
+- [operator-naam]
+formele-regel: |
+  [als-dan structuur — kies taalpatroon uit kaders-regels.md]
+toelichting: |
+  [tracering naar specifiek lid + interpretatiemotivering]
+voorbeeldreeksen:
+- invoerwaarden: "[beschrijving invoerwaarden]"
+  verwachte-uitkomst: "[beschrijving uitkomst]"
+  juridisch-juist: true
+  toelichting: "[waarom juridisch juist]"
+- invoerwaarden: "[beschrijving invoerwaarden]"
+  verwachte-uitkomst: "[beschrijving uitkomst]"
+  juridisch-juist: false
+  toelichting: "[waarom onjuist of grenswaarde]"
+tussenresultaat: false
+```
 
 **Vier soorten:**
 - **Beslissingsregel**: ja/nee uitkomst (recht bestaat of niet)
 - **Rekenregel**: numerieke berekening (bedrag, duur, hoogte)
 - **Beperkingsregel**: beperkt of maximeert een waarde of recht
-- **Specialisatieregel**: specificeert of preciseert een algemene regel voor een deelgeval
+- **Specialisatieregel**: specificeert een algemene regel voor een deelgeval
 
-Frontmatter:
+Kies het taalpatroon uit `kaders-regels.md §Taalpatronen` passend bij het regeltype.
+
+Na aanmaken: zet `afleidingsregel-id` in de begrip-YAML op de nieuwe `regel-id`.
+
+**Tussenresultaat:** zet `tussenresultaat: true` als het begrip uitsluitend als invoer voor een andere regel dient. In dat geval: `rechtsfeit-id: null` en noteer in `toelichting` welke hoofdregel dit tussenresultaat aanroept.
+
+---
+
+## Bijwerken begrip-YAML
+
+Werk na het opstellen van definitie en relaties de begrip-YAML bij:
+
 ```yaml
----
-type: afleidingsregel
-regel-id: AR-[art]-[nr]
-naam: ""            # leesbare naam, bijv. "bepalen invorderbaarheid belastingaanslag"
-soort: [Beslissingsregel | Rekenregel | Beperkingsregel | Specialisatieregel]
-tags:
-  - afleidingsregel
-  - wet/[wet-afkorting]
-  - art/[nummer]
-afgeleid-van: "[[annotaties/[wet]/art[nr]]]"
-peildatum: [YYYY-MM-DD]
-bepaalt: "[[begrippen/[slug]]]"
-invoer: []
-uitvoer: []
-operators: []
----
+# Velden die /begrip invult (bestaande velden overschrijven):
+soort: [kies uit 8 typen]
+soort-id: false           # true als identificatiebegrip
+herkomst: direct          # of afgeleid
+definitie: "[definitietekst zonder punt aan het einde]"
+definitie-versie: 1       # verhoog bij herziening
+definitie-gebaseerd-op:   # lijst van markering-id's die de definitie staven
+- m-001
+aliases:
+- "[bekend juridisch synoniem]"
+identificatiebegrip: false # true als unieke sleutel
+afleidingsregel-id: null   # of regel-id als herkomst: afgeleid
+tussenresultaat: false
+relaties:
+  is-een: [...]
+  heeft: [...]
+  leidt-tot: [...]
 ```
 
-Body:
-- `## Formele regel` — als-dan structuur met invoerbegrippen en uitvoerbegrip
-- `## Toelichting` — tracering naar specifiek lid + interpretatiemotivering
-- `## Voorbeeldreeksen` — minimaal 2 invoer/uitkomst-combinaties (Leidraad product #20)
+Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
 
-Na aanmaken: update het `afleidingsregels`-veld in de bijbehorende begrip-noot met een wiki-link.
+`status` na invullen: laat op `concept` staan — status-wijziging is een A4-taak.
 
 ---
 
-## Output per begrip
+## Validatie en views (na elk schrijfcommando)
 
-Vul de body van `begrippen/[slug].md` volledig in:
+Na het bijwerken van de begrip-YAML:
 
-**Definitie-blok bij één markering:**
-```markdown
-## Definitie
-
-*[markering]* *(Art. [A] lid [L] [W], peildatum [PD])*
-
-[begripsdefinitie]
+```
+cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml
 ```
 
-**Definitie-blok bij meerdere markeringen (na multi-annotatie actualisatie):**
-```markdown
-## Definitie
+Bij blokkerende fouten (L1/L2): herstel en hervalideer vóór je verdergaat.
 
-Markeringen:
-- *[markering 1]* *(Art. [A] lid [L] [W], peildatum [PD], [interpretatiemethode])*
-- *[markering 2]* *(Art. [B] lid [M] [W], peildatum [PD], [interpretatiemethode])*
-
-[begripsdefinitie — synthese van alle markeringen]
+Daarna views genereren:
+```
+cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/generate_views.py --type begrip --file begrippen/[slug].yaml
 ```
 
-**Volledige body-structuur:**
-```markdown
-## Definitie
-
-[zie bovenstaande blokken — kies passende variant]
-
-## Voorbeelden
-
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| [concrete stelling] | ja / nee | [waarom geldt het (niet)?] |
-| [grensgeval] | ja / nee | [waarom geldt het (niet)?] |
-
-## Kenmerken
-
-- [eigenschap 1]
-- [eigenschap 2]
-
-## Relaties
-
-| Type | Kardinaliteit | Begrip |
-|------|---------------|--------|
-| is een | — | [[begrippen/...]] |
-| heeft | 1:1 / 1:n / n:m | [[begrippen/...]] |
-| leidt tot | — | [[begrippen/...]] |
+Bij aanmaken van een regel-YAML: valideer ook de regel:
 ```
-
-Update tevens de frontmatter-velden `definitie`, `is-een`, `heeft`, `leidt-tot`.
-
-> **Noot wiki-links in Relaties-body:** De `[[...]]`-links in de `## Relaties`-tabel zijn **verplichte wiki-links** in de definitieve begrip-noot — dit zijn geen template-wikilinks in de zin van CLAUDE.md §Templates (dat verbod geldt uitsluitend voor de template-bestanden zelf, niet voor de gegenereerde inhoud).
+cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file regels/AR-[...].yaml
+```
 
 ---
 
 ## Kwaliteitseisen (niet-onderhandelbaar)
 
-- Definitie uitsluitend gebaseerd op de `markering` in de frontmatter — nooit rechtstreeks uit de wetstekst of eigen kennis.
-- Definitie is substitueerbaar: test altijd of de definitietekst het begrip kan vervangen in een zin zonder betekenisverlies.
+- Definitie uitsluitend gebaseerd op `markeringen[].tekst` — nooit rechtstreeks uit de wetstekst of eigen kennis.
+- Definitie is substitueerbaar: test altijd of de definitietekst het begrip kan vervangen.
 - Definitie bevat geen punt aan het einde.
-- Voorbeelden bevatten altijd minimaal één grensgeval, elk met toelichting (waarom geldt het wel/niet?).
-- Relaties zijn altijd wiki-links, nooit losse tekst.
-- Bij JAS-klasse Afleidingsregel: regel-noot in `regels/` is verplicht.
-- Regel-noten bevatten altijd voorbeeldreeksen voor validatie.
-- Stel `status: concept` in op alle nieuw aangemaakte begrip-noten.
-- Het `geldigheid-van`-veld is altijd gelijk aan de `versiedatum` uit de annotatie-frontmatter (`peildatum`-veld) — nooit de datum van vandaag.
+- Voorbeelden bevatten altijd minimaal één grensgeval, elk met toelichting.
+- Bij JAS-klasse Afleidingsregel: regel-YAML in `regels/` is verplicht.
+- Regel-YAML's bevatten altijd voorbeeldreeksen: minimaal 1 positief + 1 negatief of grenswaarde voorbeeld.
+- `geldigheid-van` altijd gelijk aan de `versiedatum` uit de annotatie (`peildatum`-veld in de markering).
 
 ### Verplichte checklist-output na elk begrip
-
-Print na het opslaan van elke begrip-noot de volgende checklist in de chat (vink af op basis van de daadwerkelijk ingevulde frontmatter):
 
 ```
 Kennismodel-checklist — [begripsnaam]
 ✅/⬜ soort ingevuld
 ✅/⬜ herkomst ingevuld
-✅/⬜ kardinaliteit in relaties-tabel
-✅/⬜ [id]-markering (n.v.t. indien geen identificatiebegrip)
-✅/⬜ wiki-link afleidingsregel (n.v.t. indien herkomst: direct)
+✅/⬜ definitie ingevuld (substitueerbaar, geen punt)
+✅/⬜ relaties ingevuld (of expliciet leeg)
+✅/⬜ soort-id ingevuld
+✅/⬜ identificatiebegrip ingevuld
 ✅/⬜ aliases aanwezig (leeg is toegestaan indien geen synoniemen)
-✅/⬜ geldigheid-van ingevuld
-✅/⬜ status: concept
+✅/⬜ extra-JSON aangemaakt met voorbeelden + kenmerken
+✅/⬜ wiki-link afleidingsregel (n.v.t. indien herkomst: direct)
+✅/⬜ enrichment-queue gecheckt
+✅/⬜ validatie geslaagd (validate_note.py)
+✅/⬜ views gegenereerd (generate_views.py)
 ```
 
 Bij `/begrip-alles`: print de checklist per begrip afzonderlijk, direct nadat dat begrip is opgeslagen.

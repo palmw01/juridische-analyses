@@ -1,0 +1,6 @@
+{
+  "begrip-id": "BWBR0004770/art9/lid5/vervaldag-eerste-termijn",
+  "slug": "vervaldag-eerste-termijn",
+  "voorbeelden": "| Stelling | Waar? | Toelichting |\n|----------|-------|-------------|\n| Een aanslagbiljet gedagtekend 15 maart 2026 heeft als eerste vervaldatum 15 april 2026. | ja | Één maand na 15 maart 2026 is 15 april 2026; de eerste termijn vervalt op dat tijdstip. |\n| Een aanslagbiljet gedagtekend 15 maart 2026 heeft als eerste vervaldatum 15 mei 2026. | nee | De eerste termijn vervalt één maand na de dagtekening (15 april 2026), niet twee maanden later; 15 mei 2026 is de vervaldatum van de tweede termijn. |\n| Een aanslagbiljet gedagtekend 1 september 2026 heeft als eerste vervaldatum 1 oktober 2026. | ja | Grensgeval: één maand na 1 september 2026 is 1 oktober 2026; de aanslag is (bij dagtekening in september) invorderbaar in drie gelijke termijnen, waarvan de eerste op 1 oktober 2026 vervalt. |",
+  "kenmerken": "- De rekenregel berekent uitsluitend de vervaldatum van de eerste termijn; de vervaldatums van de volgende termijnen worden bepaald door `vervaldag-volgende-termijnen`.\n- Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit; de maandtermijn loopt kalenderstrikt.\n- Invoer is de dagtekening van het aanslagbiljet; uitvoer is een datum (de vervaldatum van de eerste termijn)."
+}

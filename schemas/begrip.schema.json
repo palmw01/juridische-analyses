@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "begrip",
+  "title": "Begrip",
+  "description": "SKOS-compatibel begrip, afgeleid van JAS-annotatie",
+  "type": "object",
+  "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip"],
+  "additionalProperties": false,
+  "properties": {
+    "begrip-id": { "type": "string", "minLength": 1 },
+    "begripsnaam": { "type": "string", "minLength": 1 },
+    "aliases": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "soort": {
+      "type": "string",
+      "enum": ["monetair-bedrag", "percentage", "tijdsduur", "datum", "booleaans", "tekst", "enumeratie", "entiteit", "MIGRATIE-ONBEKEND"]
+    },
+    "soort-id": {
+      "type": "boolean",
+      "description": "true als dit begrip dient als unieke sleutel (voorheen [id]-suffix)"
+    },
+    "herkomst": { "type": "string", "enum": ["direct", "afgeleid"] },
+    "status": { "type": "string", "enum": ["concept", "ter-review", "gevalideerd", "vervallen", "te-verrijken"] },
+    "definitie": { "type": "string" },
+    "definitie-versie": { "type": "integer", "minimum": 1 },
+    "definitie-gebaseerd-op": {
+      "type": "array",
+      "items": { "type": "string", "description": "markering-id's" },
+      "minItems": 1
+    },
+    "markeringen": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["markering-id", "bron-annotatie-id", "tekst", "interpretatiemethode", "bijdrage", "bevestigd"],
+        "additionalProperties": false,
+        "properties": {
+          "markering-id": { "type": "string" },
+          "bron-annotatie-id": { "type": "string" },
+          "tekst": { "type": "string", "minLength": 1 },
+          "interpretatiemethode": {
+            "type": "string",
+            "enum": ["grammaticaal", "systematisch", "teleologisch", "wetshistorisch"]
+          },
+          "bijdrage": {
+            "type": "string",
+            "enum": ["primair", "aanvullend", "context", "conflicterend", "kandidaat"]
+          },
+          "bevestigd": { "type": "boolean" },
+          "bevestigd-op": { "type": ["string", "null"], "format": "date" }
+        }
+      }
+    },
+    "geldigheid-van": { "type": "string", "format": "date" },
+    "geldigheid-tot": { "type": ["string", "null"] },
+    "vervangen-door": { "type": ["string", "null"], "description": "begrip-id van opvolger" },
+    "relaties": {
+      "type": "object",
+      "required": ["is-een", "heeft", "leidt-tot"],
+      "properties": {
+        "is-een": {
+          "type": "array",
+          "items": { "type": "string", "description": "begrip-id" }
+        },
+        "heeft": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["begrip-id", "kardinaliteit"],
+            "properties": {
+              "begrip-id": { "type": "string" },
+              "kardinaliteit": { "type": "string", "enum": ["1:1", "1:n", "n:m"] }
+            }
+          }
+        },
+        "leidt-tot": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["begrip-id", "relatie-soort"],
+            "properties": {
+              "begrip-id": { "type": "string" },
+              "kardinaliteit": { "type": ["string", "null"] },
+              "relatie-soort": { "type": "string", "enum": ["causaal", "procedureel", "definitoir"] }
+            }
+          }
+        }
+      }
+    },
+    "identificatiebegrip": { "type": "boolean" },
+    "afleidingsregel-id": { "type": ["string", "null"] },
+    "tussenresultaat": { "type": "boolean", "default": false }
+  }
+}

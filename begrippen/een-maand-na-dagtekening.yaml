@@ -1,0 +1,35 @@
+begrip-id: BWBR0004770/art9/lid5/een-maand-na-dagtekening
+begripsnaam: een-maand-na-dagtekening
+aliases: []
+soort: tijdsduur
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het
+  aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op
+  grond van art. 9 lid 5 IW 1990
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: één maand na de dagtekening van het aanslagbiljet
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+    kardinaliteit: '1:1'
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid5/vervaldag-eerste-termijn
+    relatie-soort: causaal
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-c
+tussenresultaat: false

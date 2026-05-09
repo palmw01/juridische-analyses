@@ -1,0 +1,48 @@
+regel-id: AR-BWBR0008003-art9-par1-a
+naam: vaststellen vervaldag voorlopige aanslag einde kalenderjaar
+soort: Specialisatieregel
+bwb-id: BWBR0004770
+artikel: '9'
+lid: par1
+peildatum: '2026-01-01'
+annotatie-id: '[[annotaties/li2008/art9-9-1]]'
+rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+invoer:
+- BWBR0004770/art9/lid5/voorlopige-aanslag
+- BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder
+- BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december
+uitvoer:
+- BWBR0004770/art9/lid5/vervaldag-31-december
+operators:
+- EN
+formele-regel: 'In afwijking van vaststellen betalingstermijn belastingaanslag:
+
+  [[begrippen/vervaldag-31-december]] is [[begrippen/31-december]]
+
+  indien aan alle volgende voorwaarden is voldaan:
+
+  - [[begrippen/voorlopige-aanslag]] is van toepassing
+
+  - [[begrippen/dagtekening-in-november-of-eerder]] is waar
+
+  - [[begrippen/termijn-eindigt-voor-31-december]] is waar'
+toelichting: Deze regel specificeert dat voor voorlopige aanslagen die gedagtekend
+  zijn in november of eerder, de vervaldag van de laatste termijn naar 31 december
+  wordt verschoven als deze anders eerder zou vallen. Dit is een begunstigende afwijking
+  van de wettelijke termijnregels in art. 9 lid 5 IW 1990.
+voorbeeldreeksen:
+- invoerwaarden: Voorlopige aanslag gedagtekend in november, laatste termijn valt
+    volgens wet op 15 december
+  verwachte-uitkomst: ja
+  juridisch-juist: false
+  toelichting: 15 december
+- invoerwaarden: Voorlopige aanslag gedagtekend in december
+  verwachte-uitkomst: nee
+  juridisch-juist: false
+  toelichting: datum volgens art. 9 lid 5 IW 1990
+- invoerwaarden: Voorlopige aanslag gedagtekend in oktober, laatste termijn valt volgens
+    wet op 31 december
+  verwachte-uitkomst: nee
+  juridisch-juist: false
+  toelichting: 31 december (voldoet niet aan 'eindigt vóór')
+tussenresultaat: false

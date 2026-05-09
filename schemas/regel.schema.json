@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "regel",
+  "title": "Afleidingsregel",
+  "description": "Formele afleidingsregel in RegelSpraaak-oriëntatie",
+  "type": "object",
+  "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "voorbeeldreeksen"],
+  "additionalProperties": false,
+  "properties": {
+    "regel-id": { "type": "string", "pattern": "^AR-" },
+    "naam": { "type": "string", "minLength": 1 },
+    "soort": {
+      "type": "string",
+      "enum": ["Beslissingsregel", "Rekenregel", "Beperkingsregel", "Specialisatieregel"]
+    },
+    "bwb-id": { "type": "string" },
+    "artikel": { "type": "string" },
+    "lid": { "type": "string" },
+    "peildatum": { "type": "string", "format": "date" },
+    "annotatie-id": { "type": "string", "description": "bronannotatie-id" },
+    "rechtsfeit-id": { "type": ["string", "null"], "description": "begrip-id van triggerende rechtsfeit; null bij tussenresultaat" },
+    "invoer": {
+      "type": "array",
+      "items": { "type": "string", "description": "begrip-id" }
+    },
+    "uitvoer": {
+      "type": "array",
+      "items": { "type": "string", "description": "begrip-id" },
+      "minItems": 1
+    },
+    "operators": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "formele-regel": { "type": "string", "minLength": 1 },
+    "toelichting": { "type": "string" },
+    "voorbeeldreeksen": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["invoerwaarden", "verwachte-uitkomst", "juridisch-juist"],
+        "properties": {
+          "invoerwaarden": { "type": "string" },
+          "verwachte-uitkomst": { "type": "string" },
+          "juridisch-juist": { "type": "boolean" },
+          "toelichting": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "tussenresultaat": { "type": "boolean", "default": false },
+    "vervangt-regel-id": { "type": ["string", "null"] }
+  }
+}

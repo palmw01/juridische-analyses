@@ -1,0 +1,35 @@
+begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
+begripsnaam: vervaldag-volgende-termijnen
+aliases: []
+soort: datum
+soort-id: false
+herkomst: afgeleid
+status: concept
+definitie: De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum
+  vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand
+  op te tellen
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art9/lid5
+  tekst: elk van de volgende termijnen telkens een maand later
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid5/vervaldag-eerste-termijn
+    kardinaliteit: '1:1'
+  - begrip-id: BWBR0004770/art9/lid5/telkens-een-maand-later
+    kardinaliteit: '1:1'
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-d
+tussenresultaat: false

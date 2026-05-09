@@ -1,0 +1,32 @@
+begrip-id: BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder
+begripsnaam: dagtekening-in-november-of-eerder
+aliases: []
+soort: booleaans
+soort-id: false
+herkomst: direct
+status: concept
+definitie: Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de
+  periode van 1 januari tot en met 30 november van het kalenderjaar
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0008003/par9-1
+  tekst: die zijn gedagtekend in november of eerder
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: true
+  bevestigd-op: '2026-01-01'
+geldigheid-van: '2026-01-01'
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+    kardinaliteit: '1:1'
+  leidt-tot: []
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false
