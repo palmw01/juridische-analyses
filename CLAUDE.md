@@ -101,3 +101,13 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraaak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
+
+### Python-tools (vault-root/tools/)
+
+| Script | Gebruik | Wanneer uitvoeren |
+|--------|---------|-------------------|
+| `check_enrichment.py` | `tools/.venv/bin/python tools/check_enrichment.py [--dry-run]` | Na elke batch van `/annoteer`-runs — detecteert begrippen met conflicterende of aanvullende markeringen en meldt deze in `rapporten/enrichment-queue.json` |
+| `validate_note.py` | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | Na elke `/annoteer` of `/begrip` write — L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen |
+| `generate_views.py` | `tools/.venv/bin/python tools/generate_views.py [--type begrip\|annotatie\|regel]` | Na validatie — genereert Obsidian-views in `views/` vanuit JSON/YAML-bronbestanden |
+| `fetch_wettenbank.py` | aangeroepen via `/wettenbank` skill | Normaliseert MCP-response naar `bronnen/{bwb-id}/art{N}.json` |
+| `extract_kruisrefs.py` | aangeroepen via `/wettenbank` skill | Extraheert JCI URI-kruisreferenties naar `bronnen/{bwb-id}/art{N}.kruisrefs.json` |
