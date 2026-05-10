@@ -113,7 +113,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
-| `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
+| `make ci` | Validatie + views + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |

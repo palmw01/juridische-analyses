@@ -2,7 +2,8 @@ VENV      = tools/.venv/bin/python
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: setup install-hooks validate views export-rdf export-graph pdf-graph check-enrichment query-rdf fetch-wettenbank lock clean ci
+.PHONY: setup install-hooks validate views export-rdf export-graph pdf-graph
+.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -54,5 +55,5 @@ clean:
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"
 
-ci: validate views
+ci: validate views export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"

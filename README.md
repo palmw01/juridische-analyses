@@ -132,19 +132,13 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `make export-graph` | Exporteert GEXF + GraphML (Gephi) | Na wijziging begrippen |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
-| `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
+| `make ci` | Validatie + views + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |
-| `validate_note.py` | 3-laags validatie (schema/integriteit/kwaliteit) | Na elke schrijfactie |
-| `generate_views.py` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
-| `check_enrichment.py` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
-| `export_rdf.py` | Exporteert begrippen naar RDF Turtle (SKOS) | Bij externe koppeling |
+| `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
 | `fetch_wettenbank.py` | Normaliseert MCP-responses naar `bronnen/` | Via `/wettenbank` skill |
 | `extract_kruisrefs.py` | Extraheert JCI URI-verwijzingen | Via `/wettenbank` skill |
-| `generate_pdf_graph.py` | Genereert PDF-visualisatie | Na export_rdf.py |
-| `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
-| `make fetch-wettenbank` | Normaliseert MCP-response naar `bronnen/` | Via `/wettenbank` skill |
 
 ---
 
