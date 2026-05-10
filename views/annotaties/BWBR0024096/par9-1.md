@@ -1,6 +1,6 @@
 ---
 type: annotatie
-annotatie-id: BWBR0008003/par9-1
+annotatie-id: BWBR0024096/par9-1
 artikel: "Art. 9 lid 9.1 LI 2008"
 bwb-id: BWBR0024096
 peildatum: 2026-01-01

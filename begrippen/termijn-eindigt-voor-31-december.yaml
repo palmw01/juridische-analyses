@@ -13,7 +13,7 @@ definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
-  bron-annotatie-id: BWBR0008003/par9-1
+  bron-annotatie-id: BWBR0024096/par9-1
   tekst: toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn
     eindigt voor 31 december
   interpretatiemethode: systematisch
@@ -32,5 +32,5 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/vervaldag-31-december
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0008003-par9-1-a
+afleidingsregel-id: AR-BWBR0024096-par9-1-a
 tussenresultaat: true

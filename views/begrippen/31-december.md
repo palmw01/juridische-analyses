@@ -17,7 +17,7 @@ aliases:
 
 ## Definitie
 
-*"31 december"* *(BWBR0008003/par9-1, grammaticaal)*
+*"31 december"* *(BWBR0024096/par9-1, grammaticaal)*
 
 De eenendertigste dag van de twaalfde maand van een kalenderjaar
 
@@ -25,7 +25,7 @@ De eenendertigste dag van de twaalfde maand van een kalenderjaar
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0008003/par9-1 | 31 december | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | 31 december | primair | grammaticaal | ja |
 
 ## Voorbeelden
 

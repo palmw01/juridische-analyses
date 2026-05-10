@@ -12,7 +12,7 @@ definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
-  bron-annotatie-id: BWBR0008003/par9-1
+  bron-annotatie-id: BWBR0024096/par9-1
   tekst: dan wordt de vervaldag van deze termijn op 31 december gesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
@@ -30,5 +30,5 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0008003-art9-par1-a
+afleidingsregel-id: AR-BWBR0024096-art9-par1-a
 tussenresultaat: false

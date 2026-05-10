@@ -14,7 +14,7 @@ begrip:BWBR0004770_art9_lid5_31_december
     skos:altLabel "Oudejaarsdag"@nl ;
     skos:definition "De eenendertigste dag van de twaalfde maand van een kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
@@ -23,7 +23,7 @@ begrip:BWBR0004770_art9_lid5_afwijkend_boekjaar
     skos:prefLabel "afwijkend-boekjaar"@nl ;
     skos:definition "Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" .
 
@@ -53,7 +53,7 @@ begrip:BWBR0004770_art9_lid5_dagtekening_in_november_of_eerder
     skos:prefLabel "dagtekening-in-november-of-eerder"@nl ;
     skos:definition "Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de periode van 1 januari tot en met 30 november van het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" .
@@ -182,12 +182,12 @@ begrip:BWBR0004770_art9_lid5_termijn_eindigt_voor_31_december
     skos:prefLabel "termijn-eindigt-voor-31-december"@nl ;
     skos:definition "Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet valt op een datum vóór 31 december van het betreffende jaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_31_december ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0008003-par9-1-a" .
+    jas:afleidingsregel "AR-BWBR0024096-par9-1-a" .
 
 begrip:BWBR0004770_art9_lid5_termijnbedrag
     a skos:Concept ;
@@ -240,12 +240,12 @@ begrip:BWBR0004770_art9_lid5_vervaldag_31_december
     skos:prefLabel "vervaldag-31-december"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_31_december ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0008003-art9-par1-a" .
+    jas:afleidingsregel "AR-BWBR0024096-art9-par1-a" .
 
 begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn
     a skos:Concept ;
@@ -264,11 +264,11 @@ begrip:BWBR0004770_art9_lid5_vervaldag_laatste_dag_maand
     skos:prefLabel "vervaldag-laatste-dag-maand"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0008003-art9-par1-b" .
+    jas:afleidingsregel "AR-BWBR0024096-art9-par1-b" .
 
 begrip:BWBR0004770_art9_lid5_vervaldag_volgende_termijnen
     a skos:Concept ;
@@ -289,7 +289,7 @@ begrip:BWBR0004770_art9_lid5_voorlopige_aanslag
     skos:definition "Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
-    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     skos:broader begrip:BWBR0004770_art9_lid1_belastingaanslag ;
     jas:jasKlasse "rechtsobject" ;
     jas:status "concept" .

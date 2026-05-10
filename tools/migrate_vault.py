@@ -65,8 +65,8 @@ REGEL_ID_MAPPING = {
     "AR-9-5d": "AR-BWBR0004770-art9-lid5-d",
     "AR-9-5e": "AR-BWBR0004770-art9-lid5-e",
     "AR-9-5f": "AR-BWBR0004770-art9-lid5-f",
-    "AR-LI-9-1a": "AR-BWBR0008003-art9-par1-a",
-    "AR-LI-9-1b": "AR-BWBR0008003-art9-par1-b",
+    "AR-LI-9-1a": "AR-BWBR0024096-art9-par1-a",
+    "AR-LI-9-1b": "AR-BWBR0024096-art9-par1-b",
 }
 
 SOORT_MAPPING = {
@@ -119,7 +119,7 @@ def bron_naar_annotatie_id(bron: str) -> str:
         return f"BWBR0004770/art{m.group(1)}"
     m = re.match(r'§\s*([\d.]+)\s+LI\s+2008', bron)
     if m:
-        return f"BWBR0008003/par{m.group(1).replace('.', '-')}"
+        return f"BWBR0024096/par{m.group(1).replace('.', '-')}"
     return bron
 
 
@@ -132,7 +132,7 @@ def annotatie_link_naar_id(slug: str) -> str:
     # art9-9-1 stijl (LI2008)
     m = re.match(r'art(\d+)-(\d+)-(\d+)$', slug)
     if m:
-        return f"BWBR0008003/art{m.group(1)}/par{m.group(2)}-{m.group(3)}"
+        return f"BWBR0024096/art{m.group(1)}/par{m.group(2)}-{m.group(3)}"
     return slug
 
 
@@ -303,7 +303,7 @@ def artikel_naar_annotatie_id(artikel: str) -> str:
     m = re.match(r'§\s*([\d.]+)\s+LI\s+2008', artikel)
     if m:
         par = m.group(1).replace('.', '-')
-        return f"BWBR0008003/par{par}"
+        return f"BWBR0024096/par{par}"
     return artikel
 
 
@@ -497,7 +497,7 @@ def migrate_regel(regel_id_oud: str, fm: dict, body: str) -> dict:
     # Artikel en lid afleiden uit nieuw_id
     # AR-BWBR0004770-art9-lid1-1 → artikel=9, lid=1
     # AR-BWBR0004770-art9-lid5-a → artikel=9, lid=5
-    # AR-BWBR0008003-art9-par1-a → artikel=9, lid=par1
+    # AR-BWBR0024096-art9-par1-a → artikel=9, lid=par1
     art_m = re.search(r'-art(\d+)-', nieuw_id)
     artikel = art_m.group(1) if art_m else "9"
     lid_m = re.search(r'-lid(\d+)-', nieuw_id)

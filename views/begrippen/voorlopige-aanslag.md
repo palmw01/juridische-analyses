@@ -26,7 +26,7 @@ Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastin
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
 | m-001 | BWBR0004770/art9/lid5 | een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting | primair | grammaticaal | ja |
-| m-002 | BWBR0008003/par9-1 | voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet) | context | systematisch | ja |
+| m-002 | BWBR0024096/par9-1 | voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet) | context | systematisch | ja |
 
 ## Voorbeelden
 

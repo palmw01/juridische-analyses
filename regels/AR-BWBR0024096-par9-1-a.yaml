@@ -1,11 +1,11 @@
-regel-id: AR-BWBR0008003-par9-1-a
+regel-id: AR-BWBR0024096-par9-1-a
 naam: bepalen of betalingstermijn eindigt voor 31 december
 soort: Beslissingsregel
-bwb-id: BWBR0008003
+bwb-id: BWBR0024096
 artikel: '9'
 lid: par9-1
 peildatum: '2026-01-01'
-annotatie-id: BWBR0008003/par9-1
+annotatie-id: BWBR0024096/par9-1
 rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
 invoer:
 - BWBR0004770/art9/lid5/vervaldag-volgende-termijnen

@@ -32,7 +32,7 @@ BWB_NAAR_WET: dict[str, str] = {
     "BWBR0004770": "iw1990",
     "BWBR0002226": "awr",
     "BWBR0005537": "awb",
-    "BWBR0008003": "li2008",
+    "BWBR0024096": "li2008",
     "BWBR0003738": "ubib1990",
     "BWBR0024096": "li2008",  # alternatief BWB-id LI 2008
 }

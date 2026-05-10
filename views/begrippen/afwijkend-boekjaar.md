@@ -15,7 +15,7 @@ tags:
 
 ## Definitie
 
-*"Bij afwijkende boekjaren"* *(BWBR0008003/par9-1, grammaticaal)*
+*"Bij afwijkende boekjaren"* *(BWBR0024096/par9-1, grammaticaal)*
 
 Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar
 
@@ -23,7 +23,7 @@ Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het 
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0008003/par9-1 | Bij afwijkende boekjaren | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | Bij afwijkende boekjaren | primair | grammaticaal | ja |
 
 ## Voorbeelden
 

@@ -11,12 +11,12 @@ tags:
   - jas/afleidingsregel
   - wet/iw1990
   - art/9
-afleidingsregel: "[[views/regels/AR-BWBR0008003-art9-par1-a]]"
+afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 ---
 
 ## Definitie
 
-*"dan wordt de vervaldag van deze termijn op 31 december gesteld"* *(BWBR0008003/par9-1, grammaticaal)*
+*"dan wordt de vervaldag van deze termijn op 31 december gesteld"* *(BWBR0024096/par9-1, grammaticaal)*
 
 Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar
 
@@ -24,7 +24,7 @@ Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0008003/par9-1 | dan wordt de vervaldag van deze termijn op 31 december gesteld | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | dan wordt de vervaldag van deze termijn op 31 december gesteld | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
@@ -43,4 +43,4 @@ Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 
 
 ## Afleidingsregel
 
-[[views/regels/AR-BWBR0008003-art9-par1-a]]
+[[views/regels/AR-BWBR0024096-art9-par1-a]]
