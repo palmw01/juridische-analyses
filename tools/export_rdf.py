@@ -11,8 +11,6 @@ Gebruik:
     tools/.venv/bin/python tools/export_rdf.py [--vault-root .] [--out kennisgraaf/begrippen.ttl]
 """
 
-from __future__ import annotations
-
 import argparse
 import sys
 from pathlib import Path

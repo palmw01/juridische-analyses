@@ -13,8 +13,6 @@ Gebruik:
     tools/.venv/bin/python tools/generate_views.py [--vault-root .] [--type begrip|annotatie|regel] [--file PAD]
 """
 
-from __future__ import annotations
-
 import argparse
 import json
 import re

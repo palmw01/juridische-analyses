@@ -20,8 +20,6 @@ Opties:
     --verbose           Toon ook begrippen die al in de queue zitten
 """
 
-from __future__ import annotations
-
 import argparse
 import json
 import sys

@@ -49,7 +49,7 @@ wetstekst                     kennisgraaf
 | Begrippen (A3a) — 28 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 10 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
-| Validatie (L1–L3) — 41 bestanden, 0 fouten | ✅ Gereed |
+| Validatie (L1–L3) — 40 bestanden, 0 fouten | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML/PDF) | ✅ Gereed |
 | **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
