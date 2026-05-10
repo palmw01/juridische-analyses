@@ -91,7 +91,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
 
             node_id = fm.get("begrip-id") or yaml_file.stem
             label = fm.get("begripsnaam") or node_id
-            jas_klasse = jas_index.get(node_id, "")
+            jas_klasse = jas_index.get(node_id, "") or str(fm.get("jas-klasse") or "")
 
             attrs: dict = {
                 "label": str(label),

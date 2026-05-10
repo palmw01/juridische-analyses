@@ -476,7 +476,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Gebaseerd op: {m_ids}</div>'
         mark_tbl = ""
         for m in b.get("markeringen", []):
-            jc = m.get("jas-klasse") or ""
+            jc = b["jas_klasse"] or ""
             mark_tbl += f'<tr><td>{m.get("markering-id","")}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td></tr>\n'
         mp = ""
         if mark_tbl:
