@@ -1,4 +1,4 @@
-VENV      = tools/.venv/bin/python
+VENV     := $(shell [ -f tools/.venv/bin/python ] && echo "tools/.venv/bin/python" || echo "python3")
 TOOLS     = tools
 SCRIPTS   = scripts
 
