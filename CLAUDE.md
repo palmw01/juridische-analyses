@@ -90,7 +90,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
-| `/graph` | `.claude/skills/graph/SKILL.md` | Graph-export: vault → GEXF/GraphML; `/graph model` hergenereert ook graph-model.json |
+| `make export-graph` | `tools/export_graph.py` | Graph-export: vault → GEXF/GraphML |
 
 ### Kaders en ondersteunende bestanden
 

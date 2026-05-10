@@ -3,8 +3,7 @@ Exporteert vault naar graph.gexf en graph.graphml.
 Leest begrippen/*.yaml, regels/*.yaml, annotaties/**/*.json.
 
 Gebruik:
-    cd .claude/skills/graph/
-    .venv/bin/python export_graph.py [--vault-root ../../..]
+    tools/.venv/bin/python tools/export_graph.py [--vault-root .]
 """
 
 import argparse
@@ -16,11 +15,7 @@ from pathlib import Path
 import yaml
 import networkx as nx
 
-# Import shared bouw_jas_index from tools lib
-SCRIPT_DIR = Path(__file__).resolve().parent
-TOOLS_LIB = SCRIPT_DIR.parent.parent / "tools"
-sys.path.insert(0, str(TOOLS_LIB))
-from jas_index_lib import bouw_jas_index  # noqa: E402
+from jas_index_lib import bouw_jas_index
 
 FALLBACK_KLEUR = "#CCCCCC"
 
@@ -264,11 +259,10 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
 
 def main():
     parser = argparse.ArgumentParser(description="Vault → GraphML/GEXF export")
-    parser.add_argument("--vault-root", default="../../..", help="Pad naar vault-root (default: ../../..)")
+    parser.add_argument("--vault-root", default=".", help="Pad naar vault-root (default: .)")
     args = parser.parse_args()
 
-    script_dir = Path(__file__).parent
-    vault_root = (script_dir / args.vault_root).resolve()
+    vault_root = Path(args.vault_root).resolve()
 
     print(f"Vault: {vault_root}")
 

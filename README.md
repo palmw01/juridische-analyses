@@ -108,7 +108,7 @@ make views
 make check-enrichment
 
 # 6. Kennismodel exporteren
-/graph                                   # GEXF + GraphML
+make export-graph                        # GEXF + GraphML
 make pdf-graph                           # RDF Turtle + PDF-visualisatie
 ```
 
@@ -129,6 +129,7 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
 | `make views` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
 | `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
+| `make export-graph` | Exporteert GEXF + GraphML (Gephi) | Na wijziging begrippen |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |

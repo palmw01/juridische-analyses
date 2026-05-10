@@ -2,7 +2,7 @@ VENV      = tools/.venv/bin/python
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: setup install-hooks validate views export-rdf pdf-graph check-enrichment query-rdf fetch-wettenbank lock clean ci
+.PHONY: setup install-hooks validate views export-rdf export-graph pdf-graph check-enrichment query-rdf fetch-wettenbank lock clean ci
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -26,6 +26,9 @@ views:
 
 export-rdf:
 	@$(VENV) $(TOOLS)/export_rdf.py
+
+export-graph:
+	@$(VENV) $(TOOLS)/export_graph.py
 
 pdf-graph: export-rdf
 	@$(VENV) $(TOOLS)/generate_pdf_graph.py
