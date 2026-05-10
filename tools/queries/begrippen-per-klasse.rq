@@ -1,0 +1,6 @@
+PREFIX jas: <http://regels.overheid.nl/jas/ontology#>
+
+SELECT ?klasse (COUNT(?s) AS ?aantal)
+WHERE { ?s jas:jasKlasse ?klasse . }
+GROUP BY ?klasse
+ORDER BY DESC(?aantal)

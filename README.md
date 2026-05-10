@@ -110,6 +110,11 @@ make check-enrichment
 # 6. Kennismodel exporteren
 make export-graph                        # GEXF + GraphML
 make pdf-graph                           # RDF Turtle + PDF-visualisatie
+
+# 7. RDF-bevraging
+make query-rdf                           # Alle ingebouwde queries
+make query-rdf ARGS="--list"             # Toon beschikbare queries
+make query-rdf 'ARGS=-q "SELECT * { ?s ?p ?o } LIMIT 10"'  # Eigen query
 ```
 
 Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie + validatierapport wordt ververst).

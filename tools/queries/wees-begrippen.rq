@@ -1,0 +1,15 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX jas: <http://regels.overheid.nl/jas/ontology#>
+
+SELECT ?label
+WHERE {
+    ?s a skos:Concept .
+    ?s skos:prefLabel ?label .
+    FILTER NOT EXISTS { ?s skos:broader ?o }
+    FILTER NOT EXISTS { ?i skos:broader ?s }
+    FILTER NOT EXISTS { ?s jas:heeft ?o2 }
+    FILTER NOT EXISTS { ?i2 jas:heeft ?s }
+    FILTER NOT EXISTS { ?s jas:leidtTot ?o3 }
+    FILTER NOT EXISTS { ?i3 jas:leidtTot ?s }
+}
+ORDER BY ?label

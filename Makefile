@@ -39,7 +39,7 @@ check-enrichment:
 	@$(VENV) $(TOOLS)/check_enrichment.py
 
 query-rdf:
-	@$(VENV) $(TOOLS)/query_rdf.py
+	@$(VENV) $(TOOLS)/query_rdf.py $(ARGS)
 
 fetch-wettenbank:
 	@echo "Gebruik: $(VENV) $(TOOLS)/fetch_wettenbank.py --input <bestand> --vault-root ."
