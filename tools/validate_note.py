@@ -315,6 +315,22 @@ def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
     return warnings
 
 
+def validate_quality_annotatie_lid(data: dict, filepath: Path) -> list[str]:
+    """Laag 3: Kwaliteitscontrole voor annotatie-lid bestanden."""
+    warnings = []
+    rijen = data.get("annotatierijen") or []
+    if not rijen:
+        warnings.append("[L3] annotatierijen leeg — geen markeringen vastgelegd")
+    diagram = data.get("diagram") or {}
+    knopen = diagram.get("knopen") or []
+    kanten = diagram.get("kanten") or []
+    if not knopen and not kanten:
+        warnings.append("[L3] diagram ontbreekt of is leeg (geen knopen/kanten)")
+    elif knopen and not kanten:
+        warnings.append("[L3] diagram heeft knopen maar geen kanten (geen relaties)")
+    return warnings
+
+
 def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
     """Laag 3: Kwaliteitscontrole voor regel-bestanden."""
     warnings = []
@@ -380,6 +396,8 @@ def validate_file(
         result.warnings.extend(validate_quality_begrip(data, filepath))
     elif schema_name == "regel":
         result.warnings.extend(validate_quality_regel(data, filepath))
+    elif schema_name == "annotatie-lid":
+        result.warnings.extend(validate_quality_annotatie_lid(data, filepath))
 
     return result
 
@@ -571,14 +589,12 @@ def main():
         dp = Path(args.dir)
         if not dp.is_absolute():
             dp = vault_root / dp
-        schema_name = args.schema
-        if not schema_name:
-            print("FOUT: --schema vereist bij --dir", file=sys.stderr)
-            sys.exit(1)
         for fp in sorted(dp.rglob("*.md")) + sorted(dp.rglob("*.yaml")) + sorted(dp.rglob("*.json")):
             if fp.name == "index.md":
                 continue
-            to_validate.append((fp, schema_name))
+            schema_detected = args.schema or detect_schema(fp, vault_root)
+            if schema_detected:
+                to_validate.append((fp, schema_detected))
     else:
         parser.print_help()
         sys.exit(0)

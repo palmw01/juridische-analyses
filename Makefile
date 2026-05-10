@@ -2,7 +2,7 @@ VENV      = tools/.venv/bin/python
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: setup install-hooks validate views export-rdf pdf-graph check-enrichment lock clean ci
+.PHONY: setup install-hooks validate views export-rdf pdf-graph check-enrichment query-rdf fetch-wettenbank lock clean ci
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -33,6 +33,12 @@ pdf-graph: export-rdf
 
 check-enrichment:
 	@$(VENV) $(TOOLS)/check_enrichment.py
+
+query-rdf:
+	@$(VENV) $(TOOLS)/query_rdf.py
+
+fetch-wettenbank:
+	@echo "Gebruik: $(VENV) $(TOOLS)/fetch_wettenbank.py --input <bestand> --vault-root ."
 
 lock:
 	@tools/.venv/bin/pip install -r requirements.lock

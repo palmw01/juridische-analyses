@@ -28,7 +28,7 @@ Voert Activiteit 3a en 3b uit. Leest de door `/annoteer` aangemaakte begrip-YAML
 
 ## Voorbereiding
 
-0. **Idempotentiecontrole:** Controleer of `definitie` in `begrippen/[slug].yaml` al is ingevuld (d.w.z. niet `""` en niet leeg). Als de definitie al content heeft: meld "begrip [slug] is al ingevuld" en stop — overschrijf nooit zonder expliciete bevestiging van de gebruiker.
+0. **Idempotentiecontrole:** Controleer of `definitie`, `soort`, `herkomst` en `relaties` in `begrippen/[slug].yaml` al zijn ingevuld. Een begrip is "afgerond" als `definitie` niet leeg is, `soort` een geldige waarde heeft, `herkomst` is ingevuld, en `relaties` minstens één niet-lege lijst heeft. Als alles al is ingevuld: meld "begrip [slug] is al afgerond (definitie + soort + herkomst + relaties)" en stop — overschrijf nooit zonder expliciete bevestiging van de gebruiker.
 
 1. **Lees de begrip-YAML** in `begrippen/[slug].yaml`. De `markeringen`-lijst bevat alle benodigde informatie.
 

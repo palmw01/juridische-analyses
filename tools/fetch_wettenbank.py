@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """
 fetch_wettenbank.py — Normaliseer een MCP-response van de wettenbank API naar bronnen/-formaat.
+Optioneel: genereer direct kruisreferenties via --kruisrefs.
 
 Gebruik:
     python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --vault-root .
     echo '{...}' | python tools/fetch_wettenbank.py --vault-root .
+    python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --vault-root . --kruisrefs
 """
 
 import argparse
 import json
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
@@ -33,6 +36,11 @@ def parse_args() -> argparse.Namespace:
         "--force", "-f",
         action="store_true",
         help="Overschrijf het uitvoerbestand als het al bestaat",
+    )
+    parser.add_argument(
+        "--kruisrefs", "-k",
+        action="store_true",
+        help="Genereer ook kruisreferenties (.kruisrefs.json) na het schrijven",
     )
     return parser.parse_args()
 
@@ -117,6 +125,18 @@ def main() -> None:
     record = normalize(data)
     output_path = write_output(record, vault_root, args.force)
     print(str(output_path))
+
+    if args.kruisrefs:
+        kruisrefs_pad = output_path.with_suffix(".kruisrefs.json")
+        extract_py = str(Path(__file__).resolve().parent / "extract_kruisrefs.py")
+        result = subprocess.run(
+            [sys.executable, extract_py, "--input", str(output_path), "--output", str(kruisrefs_pad)],
+            capture_output=True, text=True,
+        )
+        if result.returncode == 0:
+            print(f"  + kruisrefs: {kruisrefs_pad}")
+        else:
+            print(f"  - kruisrefs fout: {result.stderr.strip()}", file=sys.stderr)
 
 
 if __name__ == "__main__":

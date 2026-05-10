@@ -112,6 +112,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
+| `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
 | `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |

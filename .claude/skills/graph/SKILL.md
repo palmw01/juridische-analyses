@@ -62,6 +62,19 @@ Meld eventuele andere fouten of waarschuwingen aan de gebruiker.
 
 ---
 
+## Stap 3b — PDF-kennisgraaf (optioneel)
+
+Voer dit uit als de gebruiker ook een PDF-overzicht wil:
+
+```
+cd "$CLAUDE_PROJECT_DIR" && make pdf-graph
+```
+
+Extraheer uit de stdout:
+- Pad van de gegenereerde PDF
+
+---
+
 ## Stap 4 — Rapportage
 
 ```

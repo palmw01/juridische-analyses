@@ -86,14 +86,17 @@ scripts/               Pre-commit hook (L1/L2-validatie bij commit)
 
 ## Workflow
 
-```bash
-# 1. Structuur ophalen en annoteren
-/annoteer art. 9 IW 1990
-/annoteer art. 9 lid 1 IW 1990
-/annoteer art. 9 lid 5 IW 1990
+### Nieuw artikel analyseren
 
-# 2. Betekenis vastleggen
-/begrip-alles art. 9 IW 1990
+Vervang `[A]` door het artikelnummer en `[W]` door de wetsaanduiding (bijv. `9` en `IW 1990`):
+
+```bash
+# 1. Structuur ophalen en annoteren (Flow A: wetstekst → A2)
+/annoteer art. [A] [W]                  # index aanmaken
+/annoteer art. [A] lid [L] [W]           # per lid annoteren
+
+# 2. Betekenis vastleggen (Flow B+C: markering → begrippen → regels)
+/begrip-alles art. [A] [W]               # alle begrippen voor dit artikel
 
 # 3. Valideren (lokaal)
 make validate
@@ -101,14 +104,12 @@ make validate
 # 4. Views genereren
 make views
 
-# 5. Enrichment-controleren (bij meerdere bronnen per begrip)
-tools/.venv/bin/python tools/check_enrichment.py
+# 5. Enrichment controleren
+make check-enrichment
 
 # 6. Kennismodel exporteren
 /graph                                   # GEXF + GraphML
-tools/.venv/bin/python tools/export_rdf.py  # RDF Turtle
-make pdf-graph                           # PDF-visualisatie uit RDF
-
+make pdf-graph                           # RDF Turtle + PDF-visualisatie
 ```
 
 Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie van gestagede vault-bestanden).
@@ -141,7 +142,8 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `fetch_wettenbank.py` | Normaliseert MCP-responses naar `bronnen/` | Via `/wettenbank` skill |
 | `extract_kruisrefs.py` | Extraheert JCI URI-verwijzingen | Via `/wettenbank` skill |
 | `generate_pdf_graph.py` | Genereert PDF-visualisatie | Na export_rdf.py |
-| `query_rdf.py` | SPARQL-query op RDF-model | Bij analyse |
+| `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
+| `make fetch-wettenbank` | Normaliseert MCP-response naar `bronnen/` | Via `/wettenbank` skill |
 
 ---
 
