@@ -33,7 +33,7 @@ relaties:
   is-een:
   - BWBR0004770/art9/lid1/invorderbaarheid
   heeft:
-  - begrip-id: BWBR0004770/art9/lid5/voorlopige-aanslag
+  - begrip-id: BWBR0024096/par9-1/voorlopige-aanslag
     kardinaliteit: '1:1'
   - begrip-id: BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib
     kardinaliteit: '1:1'

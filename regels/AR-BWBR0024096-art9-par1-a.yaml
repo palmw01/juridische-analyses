@@ -8,11 +8,11 @@ peildatum: '2026-01-01'
 annotatie-id: '[[annotaties/li2008/art9-9-1]]'
 rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
 invoer:
-- BWBR0004770/art9/lid5/voorlopige-aanslag
-- BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder
-- BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december
+- BWBR0024096/par9-1/voorlopige-aanslag
+- BWBR0024096/par9-1/dagtekening-in-november-of-eerder
+- BWBR0024096/par9-1/termijn-eindigt-voor-31-december
 uitvoer:
-- BWBR0004770/art9/lid5/vervaldag-31-december
+- BWBR0024096/par9-1/vervaldag-31-december
 operators:
 - EN
 formele-regel: 'In afwijking van vaststellen betalingstermijn belastingaanslag:

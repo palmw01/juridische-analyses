@@ -33,7 +33,7 @@ BEGRIP_ID_MAPPING = {
     "zes-weken": "BWBR0004770/art9/lid1/zes-weken",
     "dagtekening-aanslagbiljet": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
     "invorderbaarheid-belastingaanslag": "BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag",
-    "voorlopige-aanslag": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+    "voorlopige-aanslag": "BWBR0024096/par9-1/voorlopige-aanslag",
     "logische-of": "BWBR0004770/art9/lid5/logische-of",
     "voorlopige-conserverende-aanslag-ib": "BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib",
     "in-afwijking-van-eerste-lid": "BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid",
@@ -49,12 +49,12 @@ BEGRIP_ID_MAPPING = {
     "terugvalregel-lid-1": "BWBR0004770/art9/lid5/terugvalregel-lid-1",
     "termijnbedrag": "BWBR0004770/art9/lid5/termijnbedrag",
     "totaalbedrag-belastingaanslag": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag",
-    "vervaldag-31-december": "BWBR0004770/art9/lid5/vervaldag-31-december",
-    "vervaldag-laatste-dag-maand": "BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand",
-    "termijn-eindigt-voor-31-december": "BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december",
-    "afwijkend-boekjaar": "BWBR0004770/art9/lid5/afwijkend-boekjaar",
-    "dagtekening-in-november-of-eerder": "BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder",
-    "31-december": "BWBR0004770/art9/lid5/31-december",
+    "vervaldag-31-december": "BWBR0024096/par9-1/vervaldag-31-december",
+    "vervaldag-laatste-dag-maand": "BWBR0024096/par9-1/vervaldag-laatste-dag-maand",
+    "termijn-eindigt-voor-31-december": "BWBR0024096/par9-1/termijn-eindigt-voor-31-december",
+    "afwijkend-boekjaar": "BWBR0024096/par9-1/afwijkend-boekjaar",
+    "dagtekening-in-november-of-eerder": "BWBR0024096/par9-1/dagtekening-in-november-of-eerder",
+    "31-december": "BWBR0024096/par9-1/31-december",
 }
 
 REGEL_ID_MAPPING = {

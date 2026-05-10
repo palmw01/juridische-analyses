@@ -1,4 +1,4 @@
-begrip-id: BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december
+begrip-id: BWBR0024096/par9-1/termijn-eindigt-voor-31-december
 begripsnaam: termijn-eindigt-voor-31-december
 aliases: []
 soort: booleaans
@@ -29,7 +29,7 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag
     kardinaliteit: '1:1'
   leidt-tot:
-  - begrip-id: BWBR0004770/art9/lid5/vervaldag-31-december
+  - begrip-id: BWBR0024096/par9-1/vervaldag-31-december
     relatie-soort: causaal
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0024096-par9-1-a

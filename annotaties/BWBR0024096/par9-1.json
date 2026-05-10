@@ -13,7 +13,7 @@
       "markering": "voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)",
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "systematisch",
-      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+      "begrip-id": "BWBR0024096/par9-1/voorlopige-aanslag",
       "toelichting-klasse": "",
       "signalering": null
     },
@@ -22,7 +22,7 @@
       "markering": "die zijn gedagtekend in november of eerder",
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder",
+      "begrip-id": "BWBR0024096/par9-1/dagtekening-in-november-of-eerder",
       "toelichting-klasse": "",
       "signalering": null
     },
@@ -31,7 +31,7 @@
       "markering": "toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december",
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "systematisch",
-      "begrip-id": "BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december",
+      "begrip-id": "BWBR0024096/par9-1/termijn-eindigt-voor-31-december",
       "toelichting-klasse": "",
       "signalering": null
     },
@@ -40,7 +40,7 @@
       "markering": "dan wordt de vervaldag van deze termijn op 31 december gesteld",
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-31-december",
+      "begrip-id": "BWBR0024096/par9-1/vervaldag-31-december",
       "toelichting-klasse": "",
       "signalering": "**type**: Specialisatieregel (in afwijking van de hoofdregel in art. 9 lid 5 IW 1990)"
     },
@@ -49,7 +49,7 @@
       "markering": "31 december",
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0004770/art9/lid5/31-december",
+      "begrip-id": "BWBR0024096/par9-1/31-december",
       "toelichting-klasse": "",
       "signalering": null
     },
@@ -58,7 +58,7 @@
       "markering": "Bij afwijkende boekjaren",
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0004770/art9/lid5/afwijkend-boekjaar",
+      "begrip-id": "BWBR0024096/par9-1/afwijkend-boekjaar",
       "toelichting-klasse": "",
       "signalering": null
     },
@@ -67,7 +67,7 @@
       "markering": "wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld",
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand",
+      "begrip-id": "BWBR0024096/par9-1/vervaldag-laatste-dag-maand",
       "toelichting-klasse": "",
       "signalering": "**type**: Specialisatieregel"
     }

@@ -1,5 +1,5 @@
 ---
-begrip-id: BWBR0004770/art9/lid5/31-december
+begrip-id: BWBR0024096/par9-1/31-december
 begripsnaam: 31-december
 jas-klasse: tijdsaanduiding
 soort: datum
@@ -9,8 +9,7 @@ geldigheid-van: 2026-01-01
 tags:
   - begrip
   - jas/tijdsaanduiding
-  - wet/iw1990
-  - art/9
+  - wet/li2008
 aliases:
   - Oudejaarsdag
 ---

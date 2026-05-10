@@ -1,4 +1,4 @@
-begrip-id: BWBR0004770/art9/lid5/vervaldag-31-december
+begrip-id: BWBR0024096/par9-1/vervaldag-31-december
 begripsnaam: vervaldag-31-december
 aliases: []
 soort: datum
@@ -24,7 +24,7 @@ vervangen-door: null
 relaties:
   is-een: []
   heeft:
-  - begrip-id: BWBR0004770/art9/lid5/31-december
+  - begrip-id: BWBR0024096/par9-1/31-december
     kardinaliteit: '1:1'
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid

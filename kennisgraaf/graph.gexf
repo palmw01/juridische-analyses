@@ -20,7 +20,7 @@
       <attribute id="8" title="wet" type="string" />
     </attributes>
     <nodes>
-      <node id="BWBR0004770/art9/lid5/31-december" label="31-december" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/31-december" label="31-december" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="datum" />
@@ -30,7 +30,7 @@
           <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/afwijkend-boekjaar" label="afwijkend-boekjaar" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/afwijkend-boekjaar" label="afwijkend-boekjaar" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="booleaans" />
@@ -60,7 +60,7 @@
           <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder" label="dagtekening-in-november-of-eerder" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" label="dagtekening-in-november-of-eerder" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="booleaans" />
@@ -170,7 +170,7 @@
           <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" label="termijn-eindigt-voor-31-december" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" label="termijn-eindigt-voor-31-december" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="booleaans" />
@@ -220,7 +220,7 @@
           <attvalue for="5" value="#92D050" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/vervaldag-31-december" label="vervaldag-31-december" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/vervaldag-31-december" label="vervaldag-31-december" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="datum" />
@@ -240,7 +240,7 @@
           <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" label="vervaldag-laatste-dag-maand" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" label="vervaldag-laatste-dag-maand" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="datum" />
@@ -260,7 +260,7 @@
           <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
-      <node id="BWBR0004770/art9/lid5/voorlopige-aanslag" label="voorlopige-aanslag" start="2026-01-01">
+      <node id="BWBR0024096/par9-1/voorlopige-aanslag" label="voorlopige-aanslag" start="2026-01-01">
         <attvalues>
           <attvalue for="0" value="begrip" />
           <attvalue for="1" value="enumeratie" />
@@ -442,7 +442,7 @@
       </node>
     </nodes>
     <edges>
-      <edge source="BWBR0004770/art9/lid5/afwijkend-boekjaar" target="AR-BWBR0024096-art9-par1-b" id="0" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/afwijkend-boekjaar" target="AR-BWBR0024096-art9-par1-b" id="0" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
@@ -478,13 +478,13 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="6" label="heeft">
+      <edge source="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="6" label="heeft">
         <attvalues>
           <attvalue for="9" value="heeft" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder" target="AR-BWBR0024096-art9-par1-a" id="7" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" target="AR-BWBR0024096-art9-par1-a" id="7" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
@@ -580,7 +580,7 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/voorlopige-aanslag" id="23" label="heeft">
+      <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0024096/par9-1/voorlopige-aanslag" id="23" label="heeft">
         <attvalues>
           <attvalue for="9" value="heeft" />
           <attvalue for="10" value="0" />
@@ -694,25 +694,25 @@
           <attvalue for="10" value="1" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="42" label="heeft">
+      <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="42" label="heeft">
         <attvalues>
           <attvalue for="9" value="heeft" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" target="BWBR0004770/art9/lid5/vervaldag-31-december" id="43" label="causaal">
+      <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0024096/par9-1/vervaldag-31-december" id="43" label="causaal">
         <attvalues>
           <attvalue for="9" value="leidt-tot" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-par9-1-a" id="44" label="afgeleid-via">
+      <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-par9-1-a" id="44" label="afgeleid-via">
         <attvalues>
           <attvalue for="9" value="afgeleid-via" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-art9-par1-a" id="45" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-art9-par1-a" id="45" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
@@ -796,19 +796,19 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/vervaldag-31-december" target="BWBR0004770/art9/lid5/31-december" id="59" label="heeft">
+      <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0024096/par9-1/31-december" id="59" label="heeft">
         <attvalues>
           <attvalue for="9" value="heeft" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/vervaldag-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid" id="60" label="causaal">
+      <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid" id="60" label="causaal">
         <attvalues>
           <attvalue for="9" value="leidt-tot" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/vervaldag-31-december" target="AR-BWBR0024096-art9-par1-a" id="61" label="afgeleid-via">
+      <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="AR-BWBR0024096-art9-par1-a" id="61" label="afgeleid-via">
         <attvalues>
           <attvalue for="9" value="afgeleid-via" />
           <attvalue for="10" value="0" />
@@ -838,13 +838,13 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" target="BWBR0004770/art9/lid1/invorderbaarheid" id="66" label="causaal">
+      <edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="BWBR0004770/art9/lid1/invorderbaarheid" id="66" label="causaal">
         <attvalues>
           <attvalue for="9" value="leidt-tot" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" target="AR-BWBR0024096-art9-par1-b" id="67" label="afgeleid-via">
+      <edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="AR-BWBR0024096-art9-par1-b" id="67" label="afgeleid-via">
         <attvalues>
           <attvalue for="9" value="afgeleid-via" />
           <attvalue for="10" value="0" />
@@ -874,25 +874,25 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/voorlopige-aanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="72" label="is-een">
+      <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="72" label="is-een">
         <attvalues>
           <attvalue for="9" value="is-een" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/voorlopige-aanslag" target="AR-BWBR0004770-art9-lid5-a" id="73" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0004770-art9-lid5-a" id="73" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-a" id="74" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-a" id="74" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-b" id="75" label="invoer-voor">
+      <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-b" id="75" label="invoer-voor">
         <attvalues>
           <attvalue for="9" value="invoer-voor" />
           <attvalue for="10" value="0" />
@@ -994,19 +994,19 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="AR-BWBR0024096-art9-par1-a" target="BWBR0004770/art9/lid5/vervaldag-31-december" id="92" label="bepaalt">
+      <edge source="AR-BWBR0024096-art9-par1-a" target="BWBR0024096/par9-1/vervaldag-31-december" id="92" label="bepaalt">
         <attvalues>
           <attvalue for="9" value="bepaalt" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="AR-BWBR0024096-art9-par1-b" target="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" id="93" label="bepaalt">
+      <edge source="AR-BWBR0024096-art9-par1-b" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="93" label="bepaalt">
         <attvalues>
           <attvalue for="9" value="bepaalt" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="AR-BWBR0024096-par9-1-a" target="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" id="94" label="bepaalt">
+      <edge source="AR-BWBR0024096-par9-1-a" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="94" label="bepaalt">
         <attvalues>
           <attvalue for="9" value="bepaalt" />
           <attvalue for="10" value="0" />
@@ -1054,7 +1054,7 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/voorlopige-aanslag" id="102" label="markeert">
+      <edge source="BWBR0004770/art9/lid5" target="BWBR0024096/par9-1/voorlopige-aanslag" id="102" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
@@ -1168,43 +1168,43 @@
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/voorlopige-aanslag" id="121" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/voorlopige-aanslag" id="121" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder" id="122" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" id="122" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" id="123" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="123" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/vervaldag-31-december" id="124" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-31-december" id="124" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/31-december" id="125" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/31-december" id="125" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/afwijkend-boekjaar" id="126" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/afwijkend-boekjaar" id="126" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />
         </attvalues>
       </edge>
-      <edge source="BWBR0024096/par9-1" target="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" id="127" label="markeert">
+      <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="127" label="markeert">
         <attvalues>
           <attvalue for="9" value="markeert" />
           <attvalue for="10" value="0" />

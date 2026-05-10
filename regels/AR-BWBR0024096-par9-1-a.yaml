@@ -11,7 +11,7 @@ invoer:
 - BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
 - BWBR0004770/art9/lid5/resterende-maanden-jaar
 uitvoer:
-- BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december
+- BWBR0024096/par9-1/termijn-eindigt-voor-31-december
 operators:
 - kleiner-dan
 formele-regel: "**termijn-eindigt-voor-31-december is waar**\nindien aan alle volgende\

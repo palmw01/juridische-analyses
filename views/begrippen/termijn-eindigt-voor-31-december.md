@@ -1,5 +1,5 @@
 ---
-begrip-id: BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december
+begrip-id: BWBR0024096/par9-1/termijn-eindigt-voor-31-december
 begripsnaam: termijn-eindigt-voor-31-december
 jas-klasse: voorwaarde
 soort: booleaans
@@ -9,8 +9,7 @@ geldigheid-van: 2026-01-01
 tags:
   - begrip
   - jas/voorwaarde
-  - wet/iw1990
-  - art/9
+  - wet/li2008
 afleidingsregel: "[[views/regels/AR-BWBR0024096-par9-1-a]]"
 ---
 

@@ -8,7 +8,7 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix begrip: <urn:jas:begrip:> .
 
-begrip:BWBR0004770_art9_lid5_31_december
+begrip:BWBR0024096_par9_1_31_december
     a skos:Concept ;
     skos:prefLabel "31-december"@nl ;
     skos:altLabel "Oudejaarsdag"@nl ;
@@ -18,7 +18,7 @@ begrip:BWBR0004770_art9_lid5_31_december
     jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
-begrip:BWBR0004770_art9_lid5_afwijkend_boekjaar
+begrip:BWBR0024096_par9_1_afwijkend_boekjaar
     a skos:Concept ;
     skos:prefLabel "afwijkend-boekjaar"@nl ;
     skos:definition "Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar"@nl ;
@@ -48,7 +48,7 @@ begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet
     jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
-begrip:BWBR0004770_art9_lid5_dagtekening_in_november_of_eerder
+begrip:BWBR0024096_par9_1_dagtekening_in_november_of_eerder
     a skos:Concept ;
     skos:prefLabel "dagtekening-in-november-of-eerder"@nl ;
     skos:definition "Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de periode van 1 januari tot en met 30 november van het kalenderjaar"@nl ;
@@ -113,7 +113,7 @@ begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     skos:broader begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
-    jas:heeft begrip:BWBR0004770_art9_lid5_voorlopige_aanslag ;
+    jas:heeft begrip:BWBR0024096_par9_1_voorlopige_aanslag ;
     jas:heeft begrip:BWBR0004770_art9_lid5_voorlopige_conserverende_aanslag_ib ;
     jas:heeft begrip:BWBR0004770_art9_lid5_dagtekening_in_vaststellingsjaar ;
     jas:heeft begrip:BWBR0004770_art9_lid5_termijnenberekening_resterende_maanden ;
@@ -177,14 +177,14 @@ begrip:BWBR0004770_art9_lid5_telkens_een_maand_later
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-d" .
 
-begrip:BWBR0004770_art9_lid5_termijn_eindigt_voor_31_december
+begrip:BWBR0024096_par9_1_termijn_eindigt_voor_31_december
     a skos:Concept ;
     skos:prefLabel "termijn-eindigt-voor-31-december"@nl ;
     skos:definition "Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet valt op een datum vóór 31 december van het betreffende jaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0024096/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag ;
-    jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_31_december ;
+    jas:leidtTot begrip:BWBR0024096_par9_1_vervaldag_31_december ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0024096-par9-1-a" .
@@ -235,13 +235,13 @@ begrip:BWBR0004770_art9_lid5_totaalbedrag_belastingaanslag
     jas:jasKlasse "variabele" ;
     jas:status "concept" .
 
-begrip:BWBR0004770_art9_lid5_vervaldag_31_december
+begrip:BWBR0024096_par9_1_vervaldag_31_december
     a skos:Concept ;
     skos:prefLabel "vervaldag-31-december"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0024096/par9-1" ;
-    jas:heeft begrip:BWBR0004770_art9_lid5_31_december ;
+    jas:heeft begrip:BWBR0024096_par9_1_31_december ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
@@ -259,7 +259,7 @@ begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-c" .
 
-begrip:BWBR0004770_art9_lid5_vervaldag_laatste_dag_maand
+begrip:BWBR0024096_par9_1_vervaldag_laatste_dag_maand
     a skos:Concept ;
     skos:prefLabel "vervaldag-laatste-dag-maand"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen"@nl ;
@@ -282,7 +282,7 @@ begrip:BWBR0004770_art9_lid5_vervaldag_volgende_termijnen
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-d" .
 
-begrip:BWBR0004770_art9_lid5_voorlopige_aanslag
+begrip:BWBR0024096_par9_1_voorlopige_aanslag
     a skos:Concept ;
     skos:prefLabel "voorlopige-aanslag"@nl ;
     skos:altLabel "voorlopige belastingaanslag"@nl ;
