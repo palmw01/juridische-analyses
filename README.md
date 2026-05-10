@@ -55,7 +55,7 @@ wetstekst                     kennisgraaf
 | **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
 | Uitbreiding naar andere artikelen | 🔜 Volgende fase |
 
-📊 Grafische weergave van het kennismodel: [`kennisgraaf/juridisch_kennismodel.pdf`](./kennisgraaf/juridisch_kennismodel.pdf)
+📊 Grafische weergave van het kennismodel: genereer met `make pdf-graph` (zie stap 6)
 
 ---
 
