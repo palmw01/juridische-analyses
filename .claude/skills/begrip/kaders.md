@@ -128,6 +128,25 @@ Veld voor kwaliteitsbewaking:
 - `ter-review` — in bespreking
 - `gevalideerd` — getoetst door het multidisciplinaire team (buiten AI-scope)
 
+### JAS-klasse
+
+Het `jas-klasse`-veld bevat de JAS-classificatie van het begrip, overgenomen uit de primaire annotatierij. Dit veld wordt tijdens A2 (annoteer) gezet en tijdens A3 (begrip) **niet** gewijzigd. Mogelijke waarden:
+
+| JAS-klasse | Betekenis | Voorbeelden in invordering |
+|------------|-----------|---------------------------|
+| `rechtssubject` | Drager van rechten en plichten | belastingschuldige, ontvanger |
+| `rechtsobject` | Voorwerp van rechtsbetrekking | belastingaanslag, voorlopige-aanslag |
+| `rechtsbetrekking` | Juridische relatie | invorderbaarheid |
+| `rechtsfeit` | Handeling/gebeurtenis met rechtsgevolg | dagtekening-aanslagbiljet |
+| `voorwaarde` | Conditie in een als-dan-regel | dagtekening-in-vaststellingsjaar, afwijkend-boekjaar |
+| `afleidingsregel` | Beslissings- of rekenregel | invorderbaarheid-belastingaanslag, terugvalregel-lid-1 |
+| `operator` | Logische of rekenkundige operator | logische-of |
+| `variabele` | Numerieke of tekstuele waarde | termijnbedrag, resterende-maanden-jaar |
+| `tijdsaanduiding` | Datum, tijdstip of tijdsduur | 31-december, zes-weken |
+| `parameter` | Vaste drempel- of referentiewaarde | — |
+| `plaatsaanduiding` | Geografische aanduiding | — |
+| `delegatiebevoegdheid` | Bevoegdheid tot delegatie | — |
+
 ### Uitleg klasse
 
 Het `toelichting-klasse`-veld bevat:

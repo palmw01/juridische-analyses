@@ -38,7 +38,7 @@ Voert Activiteit 3a en 3b uit. Leest de door `/annoteer` aangemaakte begrip-YAML
    ```
    grep -rl "[begrip-id]" annotaties/
    ```
-   Lees elke gevonden annotatie-JSON. Verzamel per annotatie de rij uit `annotatierijen` die betrekking heeft op dit begrip: `markering`, `interpretatiemethode`, `jas-klasse`, `toelichting-klasse` en het annotatie-id. Gebruik dit om de `markeringen`-lijst in de begrip-YAML te verifiëren en bij te werken.
+   Lees elke gevonden annotatie-JSON. Verzamel per annotatie de rij uit `annotatierijen` die betrekking heeft op dit begrip: `markering`, `interpretatiemethode`, `jas-klasse`, `toelichting-klasse` en het annotatie-id. Gebruik dit om de `markeringen`-lijst te verifiëren en de top-level velden `jas-klasse` en `toelichting-klasse` in de begrip-YAML bij te werken.
 
 4. **Controleer bestaande begrippen** in `begrippen/` op verwante begrippen voor de relaties (`is-een`, `heeft`, `leidt-tot`).
 
@@ -214,7 +214,7 @@ relaties:
   leidt-tot: [...]
 ```
 
-Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
+Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
 
 `status` na invullen: laat op `concept` staan — status-wijziging is een A4-taak.
 

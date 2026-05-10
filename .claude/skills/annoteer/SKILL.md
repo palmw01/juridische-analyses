@@ -243,15 +243,17 @@ Maak per annotatierij een begrip-YAML aan in `begrippen/[slug].yaml`. **Vul uits
 
 **Begripsnaam-vuistregels:** zie `/begrip` §Begripsnaam-vuistregels — dat is de canonieke bron. Enige regel die al tijdens `/annoteer` geldt: **hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is.
 
-YAML-formaat per begrip-stub:
-```yaml
-begrip-id: [B]/art[A]/lid[L]/[slug]
-begripsnaam: [slug]
-aliases: []
-soort: ""
-soort-id: false
-herkomst: direct        # afgeleid bij JAS-klasse: afleidingsregel
-status: concept
+ YAML-formaat per begrip-stub:
+ ```yaml
+ begrip-id: [B]/art[A]/lid[L]/[slug]
+ begripsnaam: [slug]
+ aliases: []
+ soort: ""
+ soort-id: false
+ jas-klasse: [klasse]      # JAS-classificatie uit annotatierij; bepaalt kleur codering in kennisgraaf
+ toelichting-klasse: ""    # juridische motivering van JAS-klassekeuze
+ herkomst: direct          # afgeleid bij JAS-klasse: afleidingsregel
+ status: concept
 definitie: ""
 definitie-versie: 1
 definitie-gebaseerd-op:
