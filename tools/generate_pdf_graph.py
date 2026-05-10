@@ -69,6 +69,10 @@ def main():
 
     JAS = Namespace("http://regels.overheid.nl/jas/ontology#")
     SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
+    RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+
+    # Regel prefix voor regel-nodes
+    REGEL_NS = "urn:jas:regel:"
 
     dot_content = [
         'digraph G {',
@@ -81,8 +85,15 @@ def main():
         ''
     ]
 
-    # Knopen toevoegen
+    # 1. Begrip-knopen (skos:Concept)
     for s in g.subjects(SKOS.prefLabel, None):
+        if (s, None, RDF.type) not in g:
+            continue
+        types = list(g.objects(s, RDF.type))
+        type_strs = [str(t) for t in types]
+        if "http://www.w3.org/2004/02/skos/core#Concept" not in type_strs:
+            if "http://www.w3.org/ns/prov#Entity" in type_strs:
+                pass  # fall through — prov entities might be concepts too
         label = str(g.value(s, SKOS.prefLabel))
         jas_klasse = str(g.value(s, JAS.jasKlasse))
         
@@ -92,28 +103,38 @@ def main():
         node_id = f'"{s}"'
         dot_content.append(f'  {node_id} [label="{label}", fillcolor="{color}", fontcolor="{fontcolor}"];')
 
+    # 2. Regel-knopen (jas:Afleidingsregel)
+    for s in g.subjects(RDF.type, JAS.Afleidingsregel):
+        label = str(g.value(s, SKOS.prefLabel) or str(s).split(":")[-1].replace("_", "-"))
+        color = jas_kleuren.get("afleidingsregel", "#00B0F0")
+        node_id = f'"{s}"'
+        dot_content.append(f'  {node_id} [label="{label}", shape=hexagon, fillcolor="{color}", fontcolor="black"];')
+
     dot_content.append('')
 
     # Relaties toevoegen
-    # 1. Broader (Hiërarchie)
+    # 3. Broader (Hierarchie)
     for s, o in g.subject_objects(SKOS.broader):
         dot_content.append(f'  "{s}" -> "{o}" [label="is-een", style=dashed, arrowhead=empty];')
 
-    # 2. Heeft
+    # 4. Heeft
     for s, o in g.subject_objects(JAS.heeft):
         dot_content.append(f'  "{s}" -> "{o}" [label="heeft"];')
 
-    # 3. LeidtTot (met regel-labels)
+    # 5. LeidtTot (met regel-labels)
     for s, o in g.subject_objects(JAS.leidtTot):
-        # Check of het doel-begrip (o) een afleidingsregel heeft
         regel_id = g.value(o, JAS.afleidingsregel)
         label = "leidt-tot"
         if regel_id:
-            # Maak het regel-id iets korter voor de visuele weergave (bijv. alleen het einde)
-            short_id = str(regel_id).split("-")[-1]
             label = f"leidt-tot\\n({str(regel_id)})"
-        
         dot_content.append(f'  "{s}" -> "{o}" [label="{label}", color="#FF0000", penwidth=2, fontcolor="#CC0000", fontsize=9];')
+
+    # 6. Regel-relaties: bepaalt (regel -> uitvoer)
+    for s in g.subjects(RDF.type, JAS.Afleidingsregel):
+        for o in g.objects(s, JAS.bepaalt):
+            dot_content.append(f'  "{s}" -> "{o}" [label="bepaalt", style=dotted, color="#00B0F0", penwidth=1.5];')
+        for o in g.objects(s, JAS.gebruikt):
+            dot_content.append(f'  "{o}" -> "{s}" [label="invoer", style=dotted, color="#00B0F0", penwidth=1.5];')
 
     dot_content.append('}')
 

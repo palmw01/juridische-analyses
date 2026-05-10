@@ -32,7 +32,7 @@ def turtle_literal(waarde: str, lang: str = "nl") -> str:
 
 
 def slug_van_id(begrip_id: str) -> str:
-    return begrip_id.replace("/", "_").replace("-", "_")
+    return begrip_id.replace("/", "_")
 
 
 # ---------------------------------------------------------------------------

@@ -331,6 +331,15 @@ def validate_quality_annotatie_lid(data: dict, filepath: Path) -> list[str]:
     return warnings
 
 
+def validate_quality_annotatie_index(data: dict, filepath: Path) -> list[str]:
+    """Laag 3: Kwaliteitscontrole voor annotatie-index bestanden."""
+    warnings = []
+    leden = data.get("leden-annotaties") or []
+    if not leden:
+        warnings.append("[L3] leden-annotaties leeg — geen lid-annotaties geregistreerd")
+    return warnings
+
+
 def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
     """Laag 3: Kwaliteitscontrole voor regel-bestanden."""
     warnings = []
@@ -398,6 +407,8 @@ def validate_file(
         result.warnings.extend(validate_quality_regel(data, filepath))
     elif schema_name == "annotatie-lid":
         result.warnings.extend(validate_quality_annotatie_lid(data, filepath))
+    elif schema_name == "annotatie-index":
+        result.warnings.extend(validate_quality_annotatie_index(data, filepath))
 
     return result
 

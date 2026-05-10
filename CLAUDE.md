@@ -91,6 +91,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
 | `/graph` | `.claude/skills/graph/SKILL.md` | Graph-export: vault → GEXF/GraphML; `/graph model` hergenereert ook graph-model.json |
+| `/quartz` | `.claude/skills/quartz/SKILL.md` | Publiceer vault naar Quartz-hosted website |
 
 ### Kaders en ondersteunende bestanden
 

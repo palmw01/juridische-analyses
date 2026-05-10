@@ -16,6 +16,12 @@ from pathlib import Path
 import yaml
 import networkx as nx
 
+# Import shared bouw_jas_index from tools lib
+SCRIPT_DIR = Path(__file__).resolve().parent
+TOOLS_LIB = SCRIPT_DIR.parent.parent / "tools"
+sys.path.insert(0, str(TOOLS_LIB))
+from jas_index_lib import bouw_jas_index  # noqa: E402
+
 FALLBACK_KLEUR = "#CCCCCC"
 
 
@@ -25,28 +31,6 @@ def is_verborgen_pad(fp: Path, root: Path) -> bool:
         return any(part.startswith(".") for part in fp.relative_to(root).parts)
     except ValueError:
         return False
-
-
-def bouw_jas_index(vault_root: Path) -> dict[str, str]:
-    """Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen."""
-    index: dict[str, str] = {}
-    annotaties_dir = vault_root / "annotaties"
-    if not annotaties_dir.exists():
-        return index
-    for json_file in sorted(annotaties_dir.glob("**/*.json")):
-        if is_verborgen_pad(json_file, annotaties_dir):
-            continue
-        with json_file.open(encoding="utf-8") as f:
-            try:
-                data = json.load(f)
-            except json.JSONDecodeError:
-                continue
-        for rij in data.get("annotatierijen") or []:
-            bid = rij.get("begrip-id")
-            jas = rij.get("jas-klasse")
-            if bid and jas and bid not in index:
-                index[bid] = jas
-    return index
 
 
 def check_staleness(vault_root: Path, output_dir: Path) -> None:
