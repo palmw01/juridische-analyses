@@ -2,9 +2,8 @@
 """
 export_rdf.py — Exporteer begrippen-vault naar RDF Turtle (SKOS-compatibel).
 
-Leest begrippen/*.yaml en genereert kennisgraaf/begrippen.ttl op basis van de
-SKOS-mapping in ontologie/skos-mapping.yaml. Geen rdflib nodig — Turtle
-wordt als tekst gegenereerd.
+Leest begrippen/*.yaml en genereert kennisgraaf/begrippen.ttl. Geen rdflib
+nodig — Turtle wordt als tekst gegenereerd.
 
 Gebruik:
     cd vault-root/

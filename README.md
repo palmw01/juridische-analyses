@@ -112,8 +112,8 @@ make export-graph                        # GEXF + GraphML
 make pdf-graph                           # RDF Turtle + PDF-visualisatie
 ```
 
-Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie van gestagede vault-bestanden).
-Bij elke push naar `main` draait **GitHub Actions** (volledige vault-validatie + view-generatie).
+Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie + validatierapport wordt ververst).
+Bij elke push naar `main` draait **GitHub Actions** (volledige validatie + views + RDF-export + PDF-graaf + enrichment-check).
 
 ---
 

@@ -117,10 +117,10 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |
-| `tools/.venv/bin/python tools/check_enrichment.py [--dry-run]` | Detecteert begrippen met conflicterende of aanvullende markeringen | Na elke batch van `/annoteer`-runs |
+| `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na elke batch van `/annoteer`-runs |
 | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
-| `tools/.venv/bin/python tools/generate_views.py [--type begrip\|annotatie\|regel]` | Genereert Obsidian-views in `views/` vanuit JSON/YAML-bronbestanden | Na validatie |
+| `make views` | Genereert Obsidian-views in `views/` | Na validatie |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (via Graphviz) | Na wijziging begrippen |
 
-**CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `validate_note.py --full` + `generate_views.py`.  
+**CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `make ci`.  
 **Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede vault-bestanden. Installeer met `make install-hooks`.
