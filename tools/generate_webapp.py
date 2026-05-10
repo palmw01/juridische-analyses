@@ -257,6 +257,10 @@ def pagina(title: str, body: str, active: str = "", p: str = "") -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Belastingdienst</title>
+<link rel="icon" type="image/svg+xml" href="{p}icons/icon.svg">
+<link rel="apple-touch-icon" href="{p}icons/apple-touch-icon.png">
+<link rel="manifest" href="{p}manifest.json">
+<meta name="theme-color" content="#0047A0">
 <link rel="stylesheet" href="{p}css/style.css">
 </head>
 <body>
@@ -785,6 +789,41 @@ def gen_css_js(out: Path):
     (out / "js/app.js").write_text(js)
 
 
+def gen_icons(out: Path):
+    (out / "icons").mkdir(parents=True, exist_ok=True)
+    svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="16" fill="#0047A0"/>
+  <text x="50" y="68" font-family="system-ui,-apple-system,sans-serif" font-size="56" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="middle">K</text>
+</svg>"""
+    (out / "icons/icon.svg").write_text(svg)
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+        for size in (192, 512):
+            img = Image.new("RGBA", (size, size), (0, 71, 160, 255))
+            draw = ImageDraw.Draw(img)
+            try:
+                font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", int(size * 0.5))
+            except Exception:
+                font = ImageFont.load_default()
+            bbox = draw.textbbox((0, 0), "K", font=font)
+            tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+            x, y = (size - tw) // 2, (size - th) // 2
+            draw.text((x, y), "K", fill=(255, 255, 255, 255), font=font)
+            img.save(out / f"icons/icon-{size}.png")
+        # Apple touch uses 180x180
+        apple = Image.new("RGBA", (180, 180), (0, 71, 160, 255))
+        draw = ImageDraw.Draw(apple)
+        bbox = draw.textbbox((0, 0), "K", font=font)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        x, y = (180 - tw) // 2, (180 - th) // 2
+        draw.text((x, y), "K", fill=(255, 255, 255, 255), font=font)
+        apple.save(out / "icons/apple-touch-icon.png")
+    except Exception:
+        pass
+    manifest = """{"name":"Belastingdienst — Kennismodel Invordering","short_name":"Kennismodel","start_url":".","display":"standalone","background_color":"#0047A0","theme_color":"#0047A0","icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml"},{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"}]}"""
+    (out / "manifest.json").write_text(manifest)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Genereer statische webapp uit vault")
     parser.add_argument("--vault-root", default=".", help="Pad naar vault-root")
@@ -804,6 +843,7 @@ def main():
 
     print("CSS en JS genereren...", file=sys.stderr)
     gen_css_js(out)
+    gen_icons(out)
 
     print("Pagina's genereren...", file=sys.stderr)
     gen_index(out, begrippen, annotaties, regels)
