@@ -741,7 +741,7 @@ def main() -> int:
     parser.add_argument("--vault-root", default=".", help="Pad naar de vault-root (default: .)")
     parser.add_argument(
         "--type",
-        choices=["begrip", "annotatie", "regel"],
+        choices=["begrip", "annotatie", "regel", "wetstekst"],
         help="Alleen dit type views genereren",
     )
     parser.add_argument(
@@ -781,11 +781,100 @@ def main() -> int:
         regels_count = genereer_regel_views(vault_root, jas_kleuren,
                                             eb if not args.type else enkel_bestand)
 
+    if args.type in (None, "wetstekst"):
+        eb = enkel_bestand if (enkel_bestand and enkel_bestand.suffix == ".json"
+                               and "bronnen" in str(enkel_bestand)) else None
+        wetsteksten_count = genereer_wetstekst_views(vault_root, eb if not args.type else enkel_bestand)
+
     print(
         f"Views gegenereerd: {begrippen_count} begrippen, "
-        f"{annotaties_count} annotaties, {regels_count} regels"
+        f"{annotaties_count} annotaties, {regels_count} regels, {wetsteksten_count} wetsteksten"
     )
     return 0
+
+
+def genereer_wetstekst_view(json_file: Path, vault_root: Path) -> str:
+    with json_file.open(encoding="utf-8") as f:
+        data = json.load(f)
+
+    bwb_id = data.get("bwb-id") or data.get("bwbId")
+    artikel = data.get("artikel", "")
+    citeertitel = data.get("citeertitel", "")
+    versiedatum = data.get("versiedatum", "")
+    pad = data.get("pad", "")
+    bronreferentie = data.get("bronreferentie", "")
+
+    wet = wet_van_bwb(bwb_id)
+
+    lines = [
+        "---",
+        "type: wetstekst",
+        f'title: "{artikel} {citeertitel}"',
+        f"bwb-id: {bwb_id}",
+        f'artikel: "{artikel}"',
+        f"peildatum: {versiedatum}",
+        f'structuurpositie: "{pad}"',
+        "tags:",
+        "  - wetstekst",
+    ]
+    if wet:
+        lines.append(f"  - wet/{wet}")
+    if artikel:
+        m = re.match(r"(\d+[a-z]?)$", str(artikel))
+        if m:
+            lines.append(f"  - art/{m.group(1)}")
+
+    lines.extend([
+        f'bronreferentie: "{bronreferentie}"',
+        "---",
+        "",
+        f"# {artikel} {citeertitel}",
+        "",
+    ])
+
+    for lid_obj in data.get("leden", []):
+        lid_nr = lid_obj.get("lid", "")
+        tekst = lid_obj.get("tekst", "")
+        if lid_nr:
+            lines.append(f"> **{lid_nr}** {tekst}")
+        else:
+            lines.append(f"> {tekst}")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def genereer_wetstekst_views(vault_root: Path, enkel_bestand: Path | None) -> int:
+    bronnen_dir = vault_root / "bronnen"
+    output_base = vault_root / "views" / "wetteksten"
+    output_base.mkdir(parents=True, exist_ok=True)
+    count = 0
+
+    if enkel_bestand:
+        bestanden = [enkel_bestand]
+    else:
+        bestanden = sorted(bronnen_dir.rglob("*.json"))
+
+    for fp in bestanden:
+        if not fp.suffix == ".json":
+            continue
+        try:
+            content = genereer_wetstekst_view(fp, vault_root)
+            # Pad bepalen: views/wetteksten/{wet}/{artikel}.md
+            with fp.open(encoding="utf-8") as f:
+                data = json.load(f)
+            bwb_id = data.get("bwb-id") or data.get("bwbId")
+            wet_slug = wet_van_bwb(bwb_id) or bwb_id.lower()
+            art_slug = str(data.get("artikel", fp.stem)).replace(".", "-").lower()
+
+            output_path = output_base / wet_slug / f"art{art_slug}.md"
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(content, encoding="utf-8")
+            count += 1
+        except Exception as e:
+            print(f"  WAARSCHUWING wetstekst {fp.name}: {e}", file=sys.stderr)
+
+    return count
 
 
 if __name__ == "__main__":
