@@ -2,6 +2,7 @@
 """
 generate_pdf_graph.py — Genereer een visuele PDF-graaf van de begrippen-vault.
 Gebruikt rdflib voor data en Graphviz (dot) voor de PDF-generatie.
+Kleuren worden geladen uit ontologie/jas-ontologie.yaml.
 """
 
 import sys
@@ -9,27 +10,57 @@ import subprocess
 from pathlib import Path
 from rdflib import Graph, Namespace
 
-# JAS Kleuren (overeenkomstig met de ontologie)
-JAS_KLEUREN = {
-    "rechtsbetrekking": "#FF0000",
-    "rechtssubject": "#4472C4",
-    "rechtsobject": "#70AD47",
-    "rechtsfeit": "#FFC000",
-    "voorwaarde": "#7030A0",
-    "afleidingsregel": "#00B0F0",
-    "variabele": "#92D050",
-    "parameter": "#FFD966",
-    "tijdsaanduiding": "#F4B942",
-    "plaatsaanduiding": "#9DC3E6",
+import yaml
+
+JAS_CODE_NAAR_NAAM = {
+    "rb": "rechtsbetrekking",
+    "rs": "rechtssubject",
+    "ro": "rechtsobject",
+    "rf": "rechtsfeit",
+    "vw": "voorwaarde",
+    "ar": "afleidingsregel",
+    "va": "variabele",
+    "pa": "parameter",
+    "ta": "tijdsaanduiding",
+    "pl": "plaatsaanduiding",
+    "db": "delegatiebevoegdheid",
+    "bd": "brondefinitie",
+    "op": "operator",
 }
 
+
+def laad_jas_kleuren(ontologie_pad: Path) -> dict[str, str]:
+    """Laad JAS-kleuren uit ontologie/jas-ontologie.yaml, geeft full-name → hex dict terug."""
+    if not ontologie_pad.exists():
+        return {}
+    with ontologie_pad.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    if not isinstance(data, dict):
+        return {}
+    code_kleuren = data.get("classDef-kleuren") or {}
+    result: dict[str, str] = {}
+    for code, css in code_kleuren.items():
+        full_name = JAS_CODE_NAAR_NAAM.get(code)
+        if not full_name:
+            continue
+        hex_match = __import__("re").search(r"#([0-9A-Fa-f]{6})", css)
+        if hex_match:
+            result[full_name] = f"#{hex_match.group(1)}"
+    return result
+
 def main():
+    script_dir = Path(__file__).resolve().parent
+    vault_root = script_dir.parent
+    ontologie_pad = vault_root / "ontologie" / "jas-ontologie.yaml"
+    jas_kleuren = laad_jas_kleuren(ontologie_pad)
+
     rdf_path = Path("kennisgraaf/begrippen.ttl")
     dot_path = Path("kennisgraaf/model_graph.dot")
     pdf_path = Path("kennisgraaf/juridisch_kennismodel.pdf")
 
     if not rdf_path.exists():
         print(f"Fout: {rdf_path} niet gevonden.")
+        print("  Run eerst 'make export-rdf' of 'make pdf-graph' (doet dit automatisch).")
         sys.exit(1)
 
     print(f"Laden van {rdf_path}...")
@@ -55,7 +86,7 @@ def main():
         label = str(g.value(s, SKOS.prefLabel))
         jas_klasse = str(g.value(s, JAS.jasKlasse))
         
-        color = JAS_KLEUREN.get(jas_klasse, "#808080")
+        color = jas_kleuren.get(jas_klasse, "#808080")
         fontcolor = "white" if jas_klasse in ["rechtsbetrekking", "rechtssubject", "voorwaarde"] else "black"
         
         node_id = f'"{s}"'
@@ -95,6 +126,8 @@ def main():
     try:
         subprocess.run(["dot", "-Tpdf", str(dot_path), "-o", str(pdf_path)], check=True)
         print(f"PDF succesvol gegenereerd: {pdf_path}")
+    except FileNotFoundError:
+        print("Fout: Graphviz (dot) niet gevonden. Installeer met: sudo apt install graphviz")
     except Exception as e:
         print(f"Fout bij PDF generatie: {e}")
 

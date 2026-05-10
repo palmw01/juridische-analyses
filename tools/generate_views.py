@@ -20,9 +20,10 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any
 
 import yaml
+
+from jas_index_lib import bouw_jas_index
 
 # ---------------------------------------------------------------------------
 # Constanten
@@ -139,30 +140,7 @@ def laad_jas_kleuren(vault_root: Path) -> dict[str, str]:
     return data.get("classDef-kleuren", {}) if isinstance(data, dict) else {}
 
 
-def bouw_begrip_jas_index(vault_root: Path) -> dict[str, str]:
-    """
-    Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen.
-    Wordt gebruikt om de jas-klasse in begrip-views op te nemen.
-    """
-    index: dict[str, str] = {}
-    annotaties_dir = vault_root / "annotaties"
-    if not annotaties_dir.exists():
-        return index
-    for json_file in annotaties_dir.glob("**/*.json"):
-        rel_parts = json_file.relative_to(annotaties_dir).parts
-        if any(part.startswith(".") for part in rel_parts):
-            continue
-        with json_file.open(encoding="utf-8") as f:
-            try:
-                data = json.load(f)
-            except json.JSONDecodeError:
-                continue
-        for rij in data.get("annotatierijen") or []:
-            bid = rij.get("begrip-id")
-            jas = rij.get("jas-klasse")
-            if bid and jas and bid not in index:
-                index[bid] = jas
-    return index
+# bouw_begrip_jas_index wordt geïmporteerd uit jas_index_lib
 
 
 # ---------------------------------------------------------------------------
@@ -752,7 +730,7 @@ def main() -> int:
 
     vault_root = Path(args.vault_root).resolve()
     jas_kleuren = laad_jas_kleuren(vault_root)
-    jas_index = bouw_begrip_jas_index(vault_root)
+    jas_index = bouw_jas_index(vault_root)
 
     enkel_bestand: Path | None = None
     if args.file:

@@ -21,10 +21,20 @@ jobs:
           cache-dependency-path: requirements.lock
 
       - name: Installeer dependencies
-        run: pip install -r requirements.lock
+        run: |
+          pip install -r requirements.lock
+          sudo apt-get update && sudo apt-get install -y graphviz
 
       - name: Validatie (L1 + L2 + L3)
         run: python tools/validate_note.py --full
 
       - name: Genereer views
         run: python tools/generate_views.py
+
+      - name: Exporteer RDF + genereer PDF-graaf
+        run: |
+          python tools/export_rdf.py
+          python tools/generate_pdf_graph.py
+
+      - name: Check enrichment queue
+        run: python tools/check_enrichment.py --dry-run || true

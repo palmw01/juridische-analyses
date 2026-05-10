@@ -136,9 +136,8 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `export_rdf.py` | Exporteert begrippen naar RDF Turtle (SKOS) | Bij externe koppeling |
 | `fetch_wettenbank.py` | Normaliseert MCP-responses naar `bronnen/` | Via `/wettenbank` skill |
 | `extract_kruisrefs.py` | Extraheert JCI URI-verwijzingen | Via `/wettenbank` skill |
-| `generate_pdf_graph.py` | Genereert PDF-visualisatie | Op aanvraag |
+| `generate_pdf_graph.py` | Genereert PDF-visualisatie | Na export_rdf.py |
 | `query_rdf.py` | SPARQL-query op RDF-model | Bij analyse |
-| `migrate_vault.py` | Vault-herstructurering | Bij schema-wijziging |
 
 ---
 
@@ -165,7 +164,7 @@ Zie [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
 | Dataformaten | JSON (annotaties), YAML (begrippen/regels), JSON Schema (validatie) |
 | Python | 3.10+, PyYAML, jsonschema, networkx |
 | Kennisgraaf | GEXF (Gephi), GraphML, RDF Turtle (SKOS), DOT (Graphviz) |
-| Regelmodellering | RegelSpraak v2.3.0 (zie [`regelspraak/`](./regelspraak/)) |
+| Regelmodellering | RegelSpraak v2.3.0 |
 
 ---
 
