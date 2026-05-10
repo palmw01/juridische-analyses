@@ -53,7 +53,7 @@ lock:
 	@echo "requirements.lock bijgewerkt (geinstalleerd + gefreeze)"
 
 clean:
-	@rm -rf views/
+	@rm -rf views/ webapp/
 	@rm -f kennisgraaf/*.dot kennisgraaf/*.pdf kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"

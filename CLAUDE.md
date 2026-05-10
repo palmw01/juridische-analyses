@@ -121,4 +121,5 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
 
 **CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `make ci`.  
+**Deploy:** Bij elke push naar `main` wordt de webapp automatisch gebouwd en naar GitHub Pages gepubliceerd via `.github/workflows/deploy-webapp.yml`.  
 **Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede vault-bestanden. Installeer met `make install-hooks`.
