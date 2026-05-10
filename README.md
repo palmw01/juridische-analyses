@@ -107,6 +107,8 @@ tools/.venv/bin/python tools/check_enrichment.py
 # 6. Kennismodel exporteren
 /graph                                   # GEXF + GraphML
 tools/.venv/bin/python tools/export_rdf.py  # RDF Turtle
+make pdf-graph                           # PDF-visualisatie uit RDF
+
 ```
 
 Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie van gestagede vault-bestanden).
@@ -126,6 +128,7 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `make views` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
 | `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
+| `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF | Na export_rdf.py |
 | `make lock` | Werkt `requirements.lock` bij | Bij nieuwe dependencies |
 | `validate_note.py` | 3-laags validatie (schema/integriteit/kwaliteit) | Na elke schrijfactie |
 | `generate_views.py` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |

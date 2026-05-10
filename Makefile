@@ -2,7 +2,7 @@ VENV      = tools/.venv/bin/python
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: install-hooks validate views lock ci
+.PHONY: install-hooks validate views pdf-graph lock ci
 
 install-hooks:
 	@echo "Installeer pre-commit hook..."
@@ -16,6 +16,10 @@ validate:
 
 views:
 	@$(VENV) $(TOOLS)/generate_views.py
+
+pdf-graph:
+	@$(VENV) $(TOOLS)/generate_pdf_graph.py
+	@echo "PDF-graaf gegenereerd in kennisgraaf/juridisch_kennismodel.pdf"
 
 lock:
 	@$(VENV) -m pip freeze > requirements.lock
