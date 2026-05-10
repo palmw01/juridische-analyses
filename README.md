@@ -1,222 +1,179 @@
-# Juridische wetsanalyse — Obsidian knowledge graph
+# Juridische wetsanalyse — kennisgraaf voor de invorderingspraktijk
 
 ![License](https://img.shields.io/github/license/palmw01/juridische-analyses)
+![Status](https://img.shields.io/badge/status-in%20ontwikkeling-yellow)
+![Methodiek](https://img.shields.io/badge/methodiek-JAS%20v1.0.10-blue)
+![Domein](https://img.shields.io/badge/domein-invordering%20rijksbelastingen-darkgreen)
 
-Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijksbelastingen**. Doel is wetgeving zo te analyseren dat de resultaten bruikbaar zijn voor de uitvoeringspraktijk: rechtmatig, uitlegbaar en controleerbaar. Claude Code ondersteunt **Activiteit 2** (zichtbaar maken van de juridische structuur) en **Activiteit 3** (vaststellen van de betekenis), aangedreven door een MCP-koppeling met [wetten.overheid.nl](https://wetten.overheid.nl).
+Gestructureerde wetsanalyse op **art. 9 Invorderingswet 1990** (betalingstermijnen).  
+De output is een traceerbare kennisgraaf: van wetstekst → JAS-annotaties → begrippen → afleidingsregels → RDF/GraphML.
 
----
-
-## Methodiek: Wetsanalyse
-
-Wetsanalyse is een multidisciplinaire methode voor het expliciet maken, concretiseren en vastleggen van de betekenis van wet- en regelgeving, zodat de uitvoeringspraktijk rechtmatig, uitlegbaar en controleerbaar is. De activiteiten worden iteratief uitgevoerd — per artikel, per lid, steeds verder verfijnd — vanuit het perspectief van de uitvoeringspraktijk.
-
-| # | Activiteit | Omschrijving | AI |
-|---|-----------|-------------|-----|
-| 1 | Bepalen van het werkgebied | Scope, juridische scenario's, bronnenselectie | — |
-| **2** | **Zichtbaar maken van de juridische structuur** | Markeren, classificeren (JAS), structuurdiagram | **✓** |
-| **3** | **Vaststellen van de betekenis** | Begrippen, afleidingsregels, traceerbaarheid | **✓** |
-| 4 | Valideren van de analyseresultaten | Toetsing met juridische scenario's en voorbeeldreeksen | — |
-| 5 | Signaleren van ontbrekende beleidsregels | Interpretaties en nadere invullingen ter oplevering | — |
-| 6 | Opstellen van een kennismodel | Gegevensmodel, regelmodel, procesmodel | — |
-
-De AI-output (annotatie-JSON's, begrip-YAML's, afleidingsregel-YAML's) is het analysemateriaal dat input vormt voor A4–A6. Die activiteiten vallen buiten de scope van deze werkruimte en worden uitgevoerd in een multidisciplinair team.
+Aangedreven door Claude Code + MCP-koppeling met [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain.
 
 ---
 
-## Activiteit 2: Zichtbaar maken van de juridische structuur
+## Voor wie
 
-Wetgeving bevat een impliciete juridische structuur — rechten, plichten, bevoegdheden, voorwaarden — die blootgelegd moet worden voordat de betekenis vastgesteld kan worden. Activiteit 2 bestaat uit drie samenhangende deelactiviteiten:
+| Rol | Wat biedt dit |
+|-----|---------------|
+| **Jurist (invordering)** | Uitgewerkte analyse van art. 9 IW / §9.1 Leidraad, traceerbaar naar de wettekst |
+| **Wetsanalist / methodiekbureau** | Werkend voorbeeld van de BZK-Wetsanalyse-methodiek met JAS-classificatie |
+| **Kennisengineer / IT-jurist** | Machineleesbare regelmodellen (RDF, SKOS) en afleidingsregels in RegelSpraak-formaat |
+| **Geïnteresseerde** | Proof-of-concept van AI-ondersteunde wetsanalyse met volledige audittrail |
 
-- **2a — Markeren:** afbakenen van wetsformuleringen die bij elkaar horen
-- **2b — Classificeren:** elke markering voorzien van een klasse uit het Juridisch Analyseschema (JAS)
-- **2c — Structuurdiagram:** grafische weergave van de juridische structuur voor een centrale klasse
+## In een notendop
 
-### JAS als classificatie-instrument
-
-Het **Juridisch Analyseschema v1.0.10** (MinBZK, 2024), gebaseerd op Wesley Newcomb Hohfeld (1913), is het instrument voor deelactiviteit 2b. Het schema kent 13 elementen waarmee de juridische grammatica van een wetsformulering zichtbaar wordt: rechtssubjecten, rechtsobjecten, rechtsfeiten, rechtsbetrekkingen (bevoegdheden, plichten, rechten, vrijstellingen) en de bijbehorende voorwaarden en afleidingsregels.
-
-**Kaders en skill:** [kaders.md](./.claude/skills/annoteer/kaders.md) | [SKILL.md /annoteer](./.claude/skills/annoteer/SKILL.md)
-
-### Vault-producten A2
-
-Een `/annoteer`-run voor een artikel levert op:
-
-- `annotaties/{bwb-id}/art{N}.json` — index-JSON: structuuranker voor het artikel
-- `annotaties/{bwb-id}/art{N}-lid{L}.json` — lid-annotatie-JSON: annotatietabel + structuurdiagram (knopen/kanten)
-- `begrippen/{slug}.yaml` — begrip-stubs met `markeringen[]`-lijst (lege definitie)
-
-Na schrijven worden automatisch Markdown-views gegenereerd in `views/annotaties/` en `views/begrippen/`.
+```
+wetstekst                     kennisgraaf
+    │                             ▲
+    ▼                             │
+┌──────────┐   ┌──────────┐   ┌──────────┐
+│ bronnen/ │ → │ annotaties│ → │ begrippen│ → RDF/GraphML
+│ (JSON)   │   │ (JAS)    │   │ + regels │
+└──────────┘   └──────────┘   └──────────┘
+                    ↑                ↑
+              Claude Code        Python tools
+              (/annoteer)        (validatie, views)
+```
 
 ---
 
-## Activiteit 3: Vaststellen van de betekenis
+## Status
 
-Op basis van de geclassificeerde wetsformuleringen uit Activiteit 2 wordt de inhoudelijke betekenis vastgelegd. Activiteit 3 omvat twee deelactiviteiten:
+| Onderdeel | Status |
+|-----------|--------|
+| Art. 9 lid 1 IW — annotatie | ✅ Gereed |
+| Art. 9 lid 5 IW — annotatie | ✅ Gereed |
+| §9.1 Leidraad Invordering — annotatie | ✅ Gereed |
+| Begrippen (A3a) — 28 stuks | ✅ Gereed |
+| Afleidingsregels (A3b) — 10 stuks | ✅ Gereed |
+| RDF/SKOS-export | ✅ Gereed |
+| Validatie (L1–L3) — 41 bestanden, 0 fouten | ✅ Gereed |
+| Enrichment-detectie | ✅ Gereed |
+| Graph-export (GEXF/GraphML/PDF) | ✅ Gereed |
+| **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
+| Uitbreiding naar andere artikelen | 🔜 Volgende fase |
 
-- **3a — Begrippen:** voor elke markering een begrip met begripsnaam, definitie, voorbeelden als stellingen (waar/niet waar), kenmerken en relaties met andere begrippen
-- **3b — Afleidingsregels:** berekeningen, beslissingen, specialisaties en beperkingen die bepalen hoe rechtsgevolgen intreden op basis van feiten en omstandigheden
-
-### Traceerbaarheid als rode draad
-
-Rechtmatigheid vereist dat beslissingen in de uitvoeringspraktijk traceerbaar zijn op wet- en regelgeving. In de vault is dit geïmplementeerd via `markeringen[].bron-annotatie-id` in elke begrip-YAML en `annotatie-id` in elke regel-YAML. Elk analyseresultaat is direct herleidbaar naar de primaire juridische bron.
-
-**Kaders en skills:** [begrippenkader](./.claude/skills/begrip/kaders.md) | [regelkader](./.claude/skills/begrip/kaders-regels.md) | [SKILL.md /begrip](./.claude/skills/begrip/SKILL.md)
-
-### Vault-producten A3
-
-- `begrippen/{slug}.yaml` — begrip: definitie, soort, herkomst, relaties, markeringen (A3a)
-- `begrippen/{slug}.extra.json` — voorbeelden als stellingen + kenmerken (A3a)
-- `regels/AR-{bwb-id}-art{N}-lid{L}-{nr}.yaml` — afleidingsregel: als-dan patroon, voorbeeldreeksen (A3b)
+📊 Grafische weergave van het kennismodel: [`kennisgraaf/juridisch_kennismodel.pdf`](./kennisgraaf/juridisch_kennismodel.pdf)
 
 ---
 
 ## Vault-structuur
 
 ```
-annotaties/             ← A2-producten: markering + classificatie + structuurdiagram
-  {bwb-id}/
-    art{N}.json         ← index-JSON (structuuranker artikel)
-    art{N}-lid{L}.json  ← lid-annotatie-JSON: annotatietabel + knopen/kanten
-begrippen/              ← A3a-producten: begrip-YAML + extra-JSON
-  {slug}.yaml           ← begrip: definitie, soort, relaties, markeringen
-  {slug}.extra.json     ← voorbeelden + kenmerken
-regels/                 ← A3b-producten: afleidingsregel-YAML
-  AR-{bwb-id}-art{N}-lid{L}-{nr}.yaml
-bronnen/                ← genormaliseerde MCP-responses (wetstekst per artikel)
-  {bwb-id}/
-    art{N}.json
-schemas/                ← JSON Schema (draft-07) voor validatie
-  annotatie-index.schema.json
-  annotatie-lid.schema.json
-  begrip.schema.json
-  regel.schema.json
-ontologie/              ← JAS-ontologie + SKOS-mapping + soort-systeem
-  jas-ontologie.yaml
-  skos-mapping.yaml
-  soort-systeem.yaml
-views/                  ← gegenereerde Obsidian-views (nooit handmatig editen)
-  index.md              ← dashboard (Dataview)
-  begrippen/            ← views per begrip
-  annotaties/           ← views per annotatie
-  regels/               ← views per afleidingsregel
-kennisgraaf/                  ← graph-export
-  graph.gexf            ← Gephi/Cytoscape-formaat
-  graph.graphml         ← GraphML-formaat
-  begrippen.ttl         ← RDF Turtle (SKOS-compatibel)
-rapporten/              ← tools-output
-  enrichment-queue.json ← begrippen die aanvullende analyse vereisen
-  validatie-rapport.md
-tools/                  ← Python-toolchain
-.claude/skills/         ← skill-documentatie en kaders voor Claude Code
+annotaties/{bwb-id}/   A2 — JAS-annotaties (markering + classificatie + diagram)
+  art{N}.json          structuuranker per artikel
+  art{N}-lid{L}.json   annotatie per lid: 7 JAS-klassen, kruisreferenties, knopen/kanten
+begrippen/             A3a — begrippen (YAML)
+  {slug}.yaml          definitie, soort, markeringen met brontraceerbaarheid
+regels/                A3b — afleidingsregels (YAML)
+  AR-{bwb-id}-*.yaml   als-dan regels: beslissings-, reken-, specialisatie-, beperkingsregels
+bronnen/{bwb-id}/      primaire wetstekst (genormaliseerde MCP-responses)
+schemas/               JSON Schema draft-07 (validatie)
+ontologie/             JAS-ontologie + SKOS-mapping + soort-systeem
+views/                 gegenereerde Obsidian-views (niet handmatig bewerken)
+kennisgraaf/           graph-export: GEXF / GraphML / RDF Turtle / PDF
+tools/                 Python-toolchain (9 scripts)
+.claude/skills/        Claude Code skills + JAS-kaders
 ```
-
-| Map | Wetsanalyse-product | Activiteit |
-|-----|---------------------|-----------|
-| `annotaties/` | Markering + classificatie + structuurdiagram | A2 (2a/2b/2c) |
-| `begrippen/` | Begrippen + kenmerken + relaties | A3 (3a) |
-| `regels/` | Afleidingsregels | A3 (3b) |
-| `bronnen/` | Primaire juridische bronnen (genormaliseerd) | Input A2 |
-| `views/` | Obsidian-weergave (gegenereerd) | Navigatie |
-| `kennisgraaf/` | Graph-export | A6 (partieel) |
 
 ---
 
-## AI-workflow
+## Workflow
 
-De workflow volgt de iteratieve structuur van Wetsanalyse: per artikel eerst A2, dan A3.
-
-```
-/annoteer art. [A] [W]         →  Flow A: index-JSON aanmaken (structuuranker)
-/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-JSON + begrip-stubs (A2)
-/begrip-alles art. [A] [W]     →  A3: definitie + extra-JSON + regel-YAML (A3a/3b)
-```
-
-Voor bronnen zonder leden (Leidraad Invordering, beleid):
-```
-/annoteer sectie [ref] [W]     →  Flow C: index-JSON + directe annotatie-JSON
-```
-
-Voorbeeld — artikel 9 IW 1990 volledig doorlopen:
-```
+```bash
+# 1. Structuur ophalen en annoteren
 /annoteer art. 9 IW 1990
 /annoteer art. 9 lid 1 IW 1990
 /annoteer art. 9 lid 5 IW 1990
+
+# 2. Betekenis vastleggen
 /begrip-alles art. 9 IW 1990
-```
 
-### Enrichment-workflow
+# 3. Valideren
+tools/.venv/bin/python tools/validate_note.py --file annotaties/BWBR0004770/art9-lid1.json
 
-Begrippen die in meerdere annotaties voorkomen of conflicterende markeringen hebben, worden automatisch gedetecteerd:
+# 4. Views genereren
+tools/.venv/bin/python tools/generate_views.py
 
-```
+# 5. Enrichment-controleren (bij meerdere bronnen per begrip)
 tools/.venv/bin/python tools/check_enrichment.py
-```
 
-Zie `rapporten/enrichment-queue.json` voor de actuele lijst. Begrippen met een openstaande enrichment-beslissing worden geblokkeerd door `/begrip` totdat de beslissing is genomen.
-
-### Graph-export (Gephi / Cytoscape)
-
-```
-/graph            →  exporteer naar kennisgraaf/graph.gexf + kennisgraaf/graph.graphml
-/graph model      →  hergenereeer graph-model.json + exporteer
-```
-
-RDF Turtle (SKOS):
-```
-tools/.venv/bin/python tools/export_rdf.py
+# 6. Kennismodel exporteren
+/graph                                   # GEXF + GraphML
+tools/.venv/bin/python tools/export_rdf.py  # RDF Turtle
 ```
 
 ---
 
 ## Python-toolchain
 
-| Tool | Commando | Wanneer uitvoeren |
-|------|---------|------------------|
-| `generate_views.py` | `tools/.venv/bin/python tools/generate_views.py` | Na elke `/annoteer` of `/begrip` run |
-| `validate_note.py` | `tools/.venv/bin/python tools/validate_note.py --file [pad]` | Na elk schrijfcommando (automatisch door skills) |
-| `check_enrichment.py` | `tools/.venv/bin/python tools/check_enrichment.py` | Na toevoegen van nieuwe markeringen |
-| `export_rdf.py` | `tools/.venv/bin/python tools/export_rdf.py` | Bij RDF/SKOS-export voor externe systemen |
+```bash
+cd tools && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx
+```
 
-Installeer de venv eenmalig:
-```
-cd tools/ && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx
-```
+| Script | Functie | Wanneer |
+|--------|---------|---------|
+| `validate_note.py` | 3-laags validatie (schema/integriteit/kwaliteit) | Na elke schrijfactie |
+| `generate_views.py` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
+| `check_enrichment.py` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
+| `export_rdf.py` | Exporteert begrippen naar RDF Turtle (SKOS) | Bij externe koppeling |
+| `fetch_wettenbank.py` | Normaliseert MCP-responses naar `bronnen/` | Via `/wettenbank` skill |
+| `extract_kruisrefs.py` | Extraheert JCI URI-verwijzingen | Via `/wettenbank` skill |
+| `generate_pdf_graph.py` | Genereert PDF-visualisatie | Op aanvraag |
+| `query_rdf.py` | SPARQL-query op RDF-model | Bij analyse |
+| `migrate_vault.py` | Vault-herstructurering | Bij schema-wijziging |
 
 ---
 
-## Obsidian Graph View
+## Validatielagen
 
-Alle entiteiten zijn voorzien van geneste tags zodat de graph filterbaar en kleurbaar is:
+| Laag | Wat | Waar |
+|------|-----|------|
+| L1 | Schema-conformiteit (JSON Schema) | `schemas/*.schema.json` |
+| L2 | Integriteit (verwijzingen kloppen) | `validate_note.py` |
+| L3 | Kwaliteit (ontbrekende relaties/grensgevallen) | `validate_note.py` |
 
-| Tag | Inhoud |
-|-----|--------|
-| `#annotatie` | Alle annotatie-views |
-| `#begrip` | Alle begrip-views |
-| `#afleidingsregel` | Alle afleidingsregel-views |
-| `#jas/rechtssubject` | Begrippen met klasse rechtssubject |
-| `#jas/rechtsbetrekking` | Begrippen met klasse rechtsbetrekking |
-| `#jas/afleidingsregel` | Begrippen met klasse afleidingsregel |
-| `#wet/iw1990` | Alles wat de IW 1990 betreft |
-| `#art/9` | Alles dat art. 9 betreft |
-| `#tussenresultaat` | Alleen tussenresultaten |
-
-Kleuren zijn geconfigureerd in `.obsidian/graph.json` conform de JAS-kleurcodering.
-
-> **Let op:** Bewerk bestanden in `views/` nooit handmatig — ze worden overschreven door `generate_views.py`. Bronbestanden zijn de YAML's in `begrippen/` en `regels/` en de JSON's in `annotaties/`.
-
-### Plugin-aanbevelingen
-
-| Plugin | Functie | Status |
-|--------|---------|--------|
-| **Dataview** | Tabellen en lijsten op basis van frontmatter | Geïnstalleerd |
-| **Templater** | Templates met dynamische velden | Geïnstalleerd |
-| **Breadcrumbs** | Hiërarchische relaties via `is-een` en `leidt-tot` | Community Plugins |
-| **Juggl** | Interactieve graph met meer filteropties | Community Plugins |
+Huidig rapport: 41 bestanden ✅, 0 fouten, 13 waarschuwingen (L3).  
+Zie [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
 
 ---
 
-## Installatie
+## Techniek
 
-1. Kloon de `wetten-overheid-tools` repository naast deze repo.
-2. De MCP-server is geconfigureerd in `.claude/settings.json`.
-3. Installeer de Python-toolchain (zie boven).
+| Laag | Technologie |
+|------|-------------|
+| AI-assistent | Claude Code (Anthropic) met MCP |
+| Wettenbrondata | `wetten.overheid.nl` via MCP (`wettenbank`-skill) |
+| Vault | Obsidian (Markdown + YAML frontmatter) |
+| Dataformaten | JSON (annotaties), YAML (begrippen/regels), JSON Schema (validatie) |
+| Python | 3.10+, PyYAML, jsonschema, networkx |
+| Kennisgraaf | GEXF (Gephi), GraphML, RDF Turtle (SKOS), DOT (Graphviz) |
+| Regelmodellering | RegelSpraak v2.3.0 (zie [`regelspraak/`](./regelspraak/)) |
+
+---
+
+## Verantwoording
+
+Deze werkruimte implementeert de **Wetsanalyse-methodiek** (Ministerie van BZK, 2024), gebaseerd op het **Juridisch Analyseschema (JAS) v1.0.10**, geworteld in Wesley Newcomb Hohfeld (1913).  
+Kaders: [JAS-taxonomie](./.claude/skills/annoteer/kaders.md) · [Begrippen](./.claude/skills/begrip/kaders.md) · [Regels](./.claude/skills/begrip/kaders-regels.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+
+Alleen **A2 (structuur zichtbaar maken)** en **A3 (betekenis vaststellen)** worden door AI ondersteund. A4–A6 (valideren, signaleren, kennismodel) worden uitgevoerd in een multidisciplinair team.
+
+---
+
+## Aan de slag
+
+```bash
+git clone git@github.com:palmw01/juridische-analyses.git
+cd juridische-analyses
+
+# Python-toolchain
+cd tools && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx && cd ..
+
+# Controleer of alles klopt
+tools/.venv/bin/python tools/validate_note.py --file annotaties/BWBR0004770/art9-lid1.json
+
+# Open in Obsidian (vault = ./)
+# Of start een analysesessie met Claude Code
+```
