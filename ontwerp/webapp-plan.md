@@ -118,18 +118,18 @@ Kiesopties:
 
 ```
 ┌──────────────────────────────────────┐
-│ 🔍 [zoekveld]                        │
+│ [zoekveld]                              │
 │                                       │
 │ Filters: [Alle] [Begrippen] [Regels] │
 │ JAS-klasse: [▼]                      │
 │                                       │
 │ ─── Resultaten (12) ─────────────────│
 │                                       │
-│ 📄 invorderbaarheid          Begrip  │
+│ invorderbaarheid              Begrip  │
 │    De juridische toestand waarin...   │
 │    Match in: definitie               │
 │                                       │
-│ 📄 vervaldag eerste termijn   Regel  │
+│ vervaldag eerste termijn       Regel  │
 │    **vervaldag-eerste-termijn** moet  │
 │    Match in: formele-regel           │
 └──────────────────────────────────────┘

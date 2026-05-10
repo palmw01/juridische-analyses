@@ -43,7 +43,7 @@ Alle kleuren worden gedefinieerd als CSS custom properties op `:root` en `[data-
 
 - Donkerblauwe balk (#0047A0 light / #002D6E dark), 56px hoog
 - Links: Belastingdienst-logo + "Kennismodel Invordering" (wit, semi-transparant)
-- Rechts: navigatie-links + dark mode toggle (☀/🌙 icoon), actieve pagina heeft witte underline
+- Rechts: navigatie-links + dark mode toggle (SVG icoon zon/maan), actieve pagina heeft witte underline
 
 ---
 
@@ -68,7 +68,7 @@ Alle kleuren worden gedefinieerd als CSS custom properties op `:root` en `[data-
 │ └──────────────┘  └──────────────┘  └──────────────┘   │
 │                                                          │
 │ ┌────────────────────────────────────────────────────┐  │
-│ │ 📄 Laatste wijzigingen                             │  │
+ │ │ Laatste wijzigingen                                │  │
 │ │───────────────────────────────────────────────────│  │
 │ │ • feat: statische webapp in ...   10 min geleden  │  │
 │ │ • fix: VENV auto-detect in M...   2 uur geleden   │  │
@@ -85,19 +85,19 @@ Alle kleuren worden gedefinieerd als CSS custom properties op `:root` en `[data-
 ┌─────────────────────────────────────────────────────────┐
 │ Begrippen (28)                                [+ filter]│
 │                                                          │
-│ [  🔍  Filter begrippen...                     ]        │
+│ [ Zoek Filter begrippen...                      ]        │
 │                                                          │
 │ JAS-klasse: [Alle ▼]  Status: [Alle ▼]                 │
 │                                                          │
 │ ┌─────────────────────────────────────────────────────┐ │
-│ │ ○ invorderbaarheid          rechtsbetrekking  ●●●  │ │
-│ │   ⏱ Herkomst: afgeleid · Status: concept            │ │
+│ │ o invorderbaarheid          rechtsbetrekking          │ │
+│ │   Herkomst: afgeleid · Status: concept                 │ │
 │ ├─────────────────────────────────────────────────────┤ │
-│ │ ○ belastingaanslag          rechtsobject      ●●●  │ │
-│ │   ⏱ Herkomst: direct · Status: concept              │ │
+│ │ o belastingaanslag          rechtsobject              │ │
+│ │   Herkomst: direct · Status: concept                   │ │
 │ ├─────────────────────────────────────────────────────┤ │
-│ │ ○ vervaldag eerste termijn  afleidingsregel   ●●●  │ │
-│ │   ⏱ Herkomst: afgeleid · Status: concept            │ │
+│ │ o vervaldag eerste termijn  afleidingsregel           │ │
+│ │   Herkomst: afgeleid · Status: concept                 │ │
 │ └─────────────────────────────────────────────────────┘ │
 │                                                          │
 │ [items 1-20 van 28]                    < 1 2 >          │
@@ -180,7 +180,7 @@ Rechterkolom: relaties (incl. verwijzingen naar andere begrippen).
 │ └─────────────────────────────────────────────────────┘ │
 │                                                          │
 │ Signaleringen                                            │
-│ ⚠ rechtssubjecten niet expliciet benoemd in lid 1       │
+│ [!] rechtssubjecten niet expliciet benoemd in lid 1       │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -216,11 +216,11 @@ Begrippen zijn klikbare links.
 │ Herleidbaar tot art. 9 lid 5 IW 1990...                 │
 │                                                          │
 │ Voorbeeldreeksen                                         │
-│ ✅ Invoer: dagtekening 15 maart 2026                    │
+│ [+] Invoer: dagtekening 15 maart 2026                    │
 │    Uitvoer: 15 april 2026                               │
-│ ✅ Invoer: dagtekening 1 september 2026                 │
+│ [+] Invoer: dagtekening 1 september 2026                 │
 │    Uitvoer: 1 oktober 2026                              │
-│ ❌ Invoer: dagtekening 31 januari 2026                  │
+│ [-] Invoer: dagtekening 31 januari 2026                  │
 │    Uitvoer: 31 februari 2026 (bestaat niet)            │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -251,7 +251,7 @@ Voorbeeldreeksen: groene border voor juist, rode voor onjuist.
 │       ○────○
 │                                          [  zoom: █░░  ]
 │
-│ 🔍 [hover: node-naam]  [click: → detailpagina]
+│ [ hover: node-naam ]  [ click: detailpagina ]
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -274,24 +274,24 @@ Voorbeeldreeksen: groene border voor juist, rode voor onjuist.
 ┌─────────────────────────────────────────────────────────┐
 │ Zoeken                                                   │
 │                                                          │
-│ [  🔍  Zoek in begrippen, annotaties en regels...   ]   │
+│ [ Zoek in begrippen, annotaties en regels...       ]   │
 │                                                          │
 │ Type: [Alle] [Begrip] [Annotatie] [Regel]               │
 │ JAS-klasse: [Alle ▼]                                    │
 │                                                          │
 │ ─── Resultaten (6) ─────────────────────────────────── │
 │                                                          │
-│ 📄 invorderbaarheid                           Begrip    │
+│ invorderbaarheid                           Begrip    │
 │    De juridische toestand waarin een belastingaanslag    │
 │    verkeert zodra de wettelijke betalingstermijn is      │
 │    verstreken...
 │    Match: definitie                                      │
 │                                                          │
-│ 📄 IW 1990 art. 9, lid 1                     Annotatie  │
+│ IW 1990 art. 9, lid 1                     Annotatie  │
 │    Een belastingaanslag is invorderbaar zes weken na     │
 │    Match: wetstekst                                       │
 │                                                          │
-│ 📄 berekenen vervaldag                       Regel       │
+│ berekenen vervaldag                       Regel       │
 │    vervaldag-eerste-termijn moet berekend worden als     │
 │    Match: formele-regel                                   │
 └─────────────────────────────────────────────────────────┘
