@@ -2,7 +2,14 @@ VENV      = tools/.venv/bin/python
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: install-hooks validate views export-rdf pdf-graph lock ci
+.PHONY: setup install-hooks validate views export-rdf pdf-graph check-enrichment lock clean ci
+
+setup:
+	@echo "Maak virtual environment aan..."
+	@python3 -m venv tools/.venv
+	@tools/.venv/bin/pip install -r requirements.lock
+	@$(MAKE) install-hooks
+	@echo "Setup voltooid: .venv + deps + pre-commit hook"
 
 install-hooks:
 	@echo "Installeer pre-commit hook..."
@@ -24,9 +31,19 @@ pdf-graph: export-rdf
 	@$(VENV) $(TOOLS)/generate_pdf_graph.py
 	@echo "PDF-graaf gegenereerd in kennisgraaf/juridisch_kennismodel.pdf"
 
+check-enrichment:
+	@$(VENV) $(TOOLS)/check_enrichment.py
+
 lock:
-	@$(VENV) -m pip freeze > requirements.lock
-	@echo "requirements.lock bijgewerkt"
+	@tools/.venv/bin/pip install -r requirements.lock
+	@tools/.venv/bin/pip freeze > requirements.lock
+	@echo "requirements.lock bijgewerkt (geinstalleerd + gefreeze)"
+
+clean:
+	@rm -rf views/
+	@rm -f kennisgraaf/*.dot kennisgraaf/*.pdf kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
+	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	@echo "Opschoning voltooid"
 
 ci: validate views
 	@echo "CI-checks passed"

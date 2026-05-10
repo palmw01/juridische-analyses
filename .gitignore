@@ -28,6 +28,9 @@ __pycache__/
 .obsidian/plugins/*/manifest.json
 .obsidian/plugins/*/styles.css
 
-# Gegenereerde PDF-graaf (build artifact)
+# Gegenereerde build artifacts (kennisgraaf)
 kennisgraaf/*.dot
 kennisgraaf/*.pdf
+kennisgraaf/*.ttl
+kennisgraaf/*.gexf
+kennisgraaf/*.graphml

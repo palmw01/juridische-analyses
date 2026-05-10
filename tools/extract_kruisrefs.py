@@ -420,6 +420,11 @@ def parse_args() -> argparse.Namespace:
         metavar="N",
         help="Verwerk alleen dit lid (bijv. 1); default: alle leden",
     )
+    parser.add_argument(
+        "--output", "-o",
+        metavar="FILE",
+        help="Schrijf output naar bestand i.p.v. stdout",
+    )
     return parser.parse_args()
 
 
@@ -459,7 +464,14 @@ def main() -> None:
 
     alle_records = dedupliceer(alle_records)
 
-    print(json.dumps(alle_records, ensure_ascii=False, indent=2))
+    output = json.dumps(alle_records, ensure_ascii=False, indent=2)
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(output, encoding="utf-8")
+        print(f"Kruisreferenties geschreven naar: {out_path}")
+    else:
+        print(output)
 
 
 if __name__ == "__main__":

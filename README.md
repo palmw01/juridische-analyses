@@ -124,12 +124,16 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 
 | Tool / target | Functie | Wanneer |
 |---------------|---------|---------|
+| `make setup` | .venv + deps + pre-commit in 1 commando | Eenmalig na clone |
 | `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
 | `make views` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
+| `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
+| `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
+| `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
-| `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF | Na export_rdf.py |
-| `make lock` | Werkt `requirements.lock` bij | Bij nieuwe dependencies |
+| `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
+| `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |
 | `validate_note.py` | 3-laags validatie (schema/integriteit/kwaliteit) | Na elke schrijfactie |
 | `generate_views.py` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
 | `check_enrichment.py` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
@@ -162,7 +166,8 @@ Zie [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
 | Wettenbrondata | `wetten.overheid.nl` via MCP (`wettenbank`-skill) |
 | Vault | Obsidian (Markdown + YAML frontmatter) |
 | Dataformaten | JSON (annotaties), YAML (begrippen/regels), JSON Schema (validatie) |
-| Python | 3.10+, PyYAML, jsonschema, networkx |
+| Python | 3.10+, PyYAML, jsonschema, networkx, rdflib |
+| Systeem | Graphviz (`dot`) — installeren met `sudo apt install graphviz` |
 | Kennisgraaf | GEXF (Gephi), GraphML, RDF Turtle (SKOS), DOT (Graphviz) |
 | Regelmodellering | RegelSpraak v2.3.0 |
 
@@ -183,11 +188,8 @@ Alleen **A2 (structuur zichtbaar maken)** en **A3 (betekenis vaststellen)** word
 git clone git@github.com:palmw01/juridische-analyses.git
 cd juridische-analyses
 
-# Python-toolchain
-cd tools && python -m venv .venv && .venv/bin/pip install -r ../requirements.lock && cd ..
-
-# Pre-commit hook installeren
-make install-hooks
+# Alles in één keer (venv + deps + pre-commit hook)
+make setup
 
 # Controleer of alles klopt
 make validate

@@ -106,11 +106,16 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 | Commando | Gebruik | Wanneer uitvoeren |
 |----------|---------|-------------------|
+| `make setup` | .venv + deps + pre-commit in 1 commando | Eenmalig na clone |
 | `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
 | `make views` | Genereert Obsidian-views | Na elke schrijfactie |
+| `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
+| `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
+| `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
-| `make install-hooks` | `scripts/pre-commit` → `.git/hooks/pre-commit` | Eenmalig na clone |
-| `make lock` | Werkt `requirements.lock` bij | Bij nieuwe Python-dependencies |
+| `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
+| `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
+| `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |
 | `tools/.venv/bin/python tools/check_enrichment.py [--dry-run]` | Detecteert begrippen met conflicterende of aanvullende markeringen | Na elke batch van `/annoteer`-runs |
 | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
 | `tools/.venv/bin/python tools/generate_views.py [--type begrip\|annotatie\|regel]` | Genereert Obsidian-views in `views/` vanuit JSON/YAML-bronbestanden | Na validatie |
