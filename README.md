@@ -4,6 +4,7 @@
 ![Status](https://img.shields.io/badge/status-in%20ontwikkeling-yellow)
 ![Methodiek](https://img.shields.io/badge/methodiek-JAS%20v1.0.10-blue)
 ![Domein](https://img.shields.io/badge/domein-invordering%20rijksbelastingen-darkgreen)
+![CI](https://img.shields.io/github/actions/workflow/status/palmw01/juridische-analyses/ci.yml?branch=main&label=CI)
 
 Gestructureerde wetsanalyse op **art. 9 Invorderingswet 1990** (betalingstermijnen).  
 De output is een traceerbare kennisgraaf: van wetstekst → JAS-annotaties → begrippen → afleidingsregels → RDF/GraphML.
@@ -74,6 +75,10 @@ ontologie/             JAS-ontologie + SKOS-mapping + soort-systeem
 views/                 gegenereerde Obsidian-views (niet handmatig bewerken)
 kennisgraaf/           graph-export: GEXF / GraphML / RDF Turtle / PDF
 tools/                 Python-toolchain (9 scripts)
+.github/workflows/     CI-workflow (validatie op push/PR)
+Makefile               Targets: validate, views, ci, install-hooks, lock
+requirements.lock      Pinned Python-dependencies
+scripts/               Pre-commit hook (L1/L2-validatie bij commit)
 .claude/skills/        Claude Code skills + JAS-kaders
 ```
 
@@ -90,11 +95,11 @@ tools/                 Python-toolchain (9 scripts)
 # 2. Betekenis vastleggen
 /begrip-alles art. 9 IW 1990
 
-# 3. Valideren
-tools/.venv/bin/python tools/validate_note.py --file annotaties/BWBR0004770/art9-lid1.json
+# 3. Valideren (lokaal)
+make validate
 
 # 4. Views genereren
-tools/.venv/bin/python tools/generate_views.py
+make views
 
 # 5. Enrichment-controleren (bij meerdere bronnen per begrip)
 tools/.venv/bin/python tools/check_enrichment.py
@@ -104,16 +109,24 @@ tools/.venv/bin/python tools/check_enrichment.py
 tools/.venv/bin/python tools/export_rdf.py  # RDF Turtle
 ```
 
+Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie van gestagede vault-bestanden).
+Bij elke push naar `main` draait **GitHub Actions** (volledige vault-validatie + view-generatie).
+
 ---
 
 ## Python-toolchain
 
 ```bash
-cd tools && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx
+cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 ```
 
-| Script | Functie | Wanneer |
-|--------|---------|---------|
+| Tool / target | Functie | Wanneer |
+|---------------|---------|---------|
+| `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
+| `make views` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
+| `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
+| `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
+| `make lock` | Werkt `requirements.lock` bij | Bij nieuwe dependencies |
 | `validate_note.py` | 3-laags validatie (schema/integriteit/kwaliteit) | Na elke schrijfactie |
 | `generate_views.py` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
 | `check_enrichment.py` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
@@ -134,7 +147,7 @@ cd tools && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema netw
 | L2 | Integriteit (verwijzingen kloppen) | `validate_note.py` |
 | L3 | Kwaliteit (ontbrekende relaties/grensgevallen) | `validate_note.py` |
 
-Huidig rapport: 41 bestanden ✅, 0 fouten, 13 waarschuwingen (L3).  
+Huidig rapport: 40 bestanden ✅, 0 blokkeerfouten, 5 waarschuwingen (L3).  
 Zie [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
 
 ---
@@ -169,10 +182,13 @@ git clone git@github.com:palmw01/juridische-analyses.git
 cd juridische-analyses
 
 # Python-toolchain
-cd tools && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx && cd ..
+cd tools && python -m venv .venv && .venv/bin/pip install -r ../requirements.lock && cd ..
+
+# Pre-commit hook installeren
+make install-hooks
 
 # Controleer of alles klopt
-tools/.venv/bin/python tools/validate_note.py --file annotaties/BWBR0004770/art9-lid1.json
+make validate
 
 # Open in Obsidian (vault = ./)
 # Of start een analysesessie met Claude Code

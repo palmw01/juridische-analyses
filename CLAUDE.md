@@ -102,12 +102,18 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
 
-### Python-tools (vault-root/tools/)
+### Makefile en Python-tools
 
-| Script | Gebruik | Wanneer uitvoeren |
-|--------|---------|-------------------|
-| `check_enrichment.py` | `tools/.venv/bin/python tools/check_enrichment.py [--dry-run]` | Na elke batch van `/annoteer`-runs — detecteert begrippen met conflicterende of aanvullende markeringen en meldt deze in `rapporten/enrichment-queue.json` |
-| `validate_note.py` | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | Na elke `/annoteer` of `/begrip` write — L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen |
-| `generate_views.py` | `tools/.venv/bin/python tools/generate_views.py [--type begrip\|annotatie\|regel]` | Na validatie — genereert Obsidian-views in `views/` vanuit JSON/YAML-bronbestanden |
-| `fetch_wettenbank.py` | aangeroepen via `/wettenbank` skill | Normaliseert MCP-response naar `bronnen/{bwb-id}/art{N}.json` |
-| `extract_kruisrefs.py` | aangeroepen via `/wettenbank` skill | Extraheert JCI URI-kruisreferenties naar `bronnen/{bwb-id}/art{N}.kruisrefs.json` |
+| Commando | Gebruik | Wanneer uitvoeren |
+|----------|---------|-------------------|
+| `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
+| `make views` | Genereert Obsidian-views | Na elke schrijfactie |
+| `make ci` | Validatie + views (zelfde als GitHub Actions) | Voor push |
+| `make install-hooks` | `scripts/pre-commit` → `.git/hooks/pre-commit` | Eenmalig na clone |
+| `make lock` | Werkt `requirements.lock` bij | Bij nieuwe Python-dependencies |
+| `tools/.venv/bin/python tools/check_enrichment.py [--dry-run]` | Detecteert begrippen met conflicterende of aanvullende markeringen | Na elke batch van `/annoteer`-runs |
+| `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
+| `tools/.venv/bin/python tools/generate_views.py [--type begrip\|annotatie\|regel]` | Genereert Obsidian-views in `views/` vanuit JSON/YAML-bronbestanden | Na validatie |
+
+**CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `validate_note.py --full` + `generate_views.py`.  
+**Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede vault-bestanden. Installeer met `make install-hooks`.
