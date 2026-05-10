@@ -16,7 +16,7 @@ agent: general-purpose
 **Argument:** `$ARGUMENTS`
 
 De scripts lezen `begrippen/*.yaml`, `regels/*.yaml` en `annotaties/**/*.json` — geen Markdown meer.
-Output gaat naar `graaf/` in de vault-root.
+Output gaat naar `kennisgraaf/` in de vault-root.
 
 ---
 
@@ -69,7 +69,7 @@ Graph-export voltooid.
 
 Nodes:  [N]
 Edges:  [E]
-Output: graaf/graph.gexf, graaf/graph.graphml
+Output: kennisgraaf/graph.gexf, kennisgraaf/graph.graphml
 ```
 
 Voeg bij `/graph model` ook toe:

@@ -219,7 +219,7 @@
       "gexf",
       "graphml"
     ],
-    "output_map": "graaf/",
+    "output_map": "kennisgraaf/",
     "skip_bestanden": [
       "index.md"
     ],

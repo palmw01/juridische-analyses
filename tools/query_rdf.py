@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 query_rdf.py — Bevragen van de RDF-vault met SPARQL.
-Gebruikt rdflib om graaf/begrippen.ttl te laden en queries uit te voeren.
+Gebruikt rdflib om kennisgraaf/begrippen.ttl te laden en queries uit te voeren.
 """
 
 import sys
@@ -25,7 +25,7 @@ def run_query(g, label, sparql):
         print(" | ".join(f"{str(item):<30}" for item in row))
 
 def main():
-    rdf_path = Path("graaf/begrippen.ttl")
+    rdf_path = Path("kennisgraaf/begrippen.ttl")
     if not rdf_path.exists():
         print(f"Fout: {rdf_path} niet gevonden. Voer eerst tools/export_rdf.py uit.")
         sys.exit(1)

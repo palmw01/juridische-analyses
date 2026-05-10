@@ -2,13 +2,13 @@
 """
 export_rdf.py — Exporteer begrippen-vault naar RDF Turtle (SKOS-compatibel).
 
-Leest begrippen/*.yaml en genereert graaf/begrippen.ttl op basis van de
+Leest begrippen/*.yaml en genereert kennisgraaf/begrippen.ttl op basis van de
 SKOS-mapping in ontologie/skos-mapping.yaml. Geen rdflib nodig — Turtle
 wordt als tekst gegenereerd.
 
 Gebruik:
     cd vault-root/
-    tools/.venv/bin/python tools/export_rdf.py [--vault-root .] [--out graaf/begrippen.ttl]
+    tools/.venv/bin/python tools/export_rdf.py [--vault-root .] [--out kennisgraaf/begrippen.ttl]
 """
 
 from __future__ import annotations
@@ -203,8 +203,8 @@ def main() -> int:
     )
     parser.add_argument(
         "--out",
-        default="graaf/begrippen.ttl",
-        help="Uitvoerbestand (default: graaf/begrippen.ttl)",
+        default="kennisgraaf/begrippen.ttl",
+        help="Uitvoerbestand (default: kennisgraaf/begrippen.ttl)",
     )
     args = parser.parse_args()
 

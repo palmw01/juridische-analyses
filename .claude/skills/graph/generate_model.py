@@ -163,7 +163,7 @@ def genereer_model(vault_root: Path) -> dict:
         "statistieken": stats,
         "export": {
             "formaten": ["gexf", "graphml"],
-            "output_map": "graaf/",
+            "output_map": "kennisgraaf/",
             "skip_bestanden": list(SKIP),
             "tijdsdimensie": {
                 "actief": True,

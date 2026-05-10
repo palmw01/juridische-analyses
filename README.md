@@ -104,7 +104,7 @@ views/                  ← gegenereerde Obsidian-views (nooit handmatig editen)
   begrippen/            ← views per begrip
   annotaties/           ← views per annotatie
   regels/               ← views per afleidingsregel
-graaf/                  ← graph-export
+kennisgraaf/                  ← graph-export
   graph.gexf            ← Gephi/Cytoscape-formaat
   graph.graphml         ← GraphML-formaat
   begrippen.ttl         ← RDF Turtle (SKOS-compatibel)
@@ -122,7 +122,7 @@ tools/                  ← Python-toolchain
 | `regels/` | Afleidingsregels | A3 (3b) |
 | `bronnen/` | Primaire juridische bronnen (genormaliseerd) | Input A2 |
 | `views/` | Obsidian-weergave (gegenereerd) | Navigatie |
-| `graaf/` | Graph-export | A6 (partieel) |
+| `kennisgraaf/` | Graph-export | A6 (partieel) |
 
 ---
 
@@ -162,7 +162,7 @@ Zie `rapporten/enrichment-queue.json` voor de actuele lijst. Begrippen met een o
 ### Graph-export (Gephi / Cytoscape)
 
 ```
-/graph            →  exporteer naar graaf/graph.gexf + graaf/graph.graphml
+/graph            →  exporteer naar kennisgraaf/graph.gexf + kennisgraaf/graph.graphml
 /graph model      →  hergenereeer graph-model.json + exporteer
 ```
 

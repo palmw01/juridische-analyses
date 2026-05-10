@@ -24,9 +24,9 @@ JAS_KLEUREN = {
 }
 
 def main():
-    rdf_path = Path("graaf/begrippen.ttl")
-    dot_path = Path("graaf/model_graph.dot")
-    pdf_path = Path("graaf/juridisch_kennismodel.pdf")
+    rdf_path = Path("kennisgraaf/begrippen.ttl")
+    dot_path = Path("kennisgraaf/model_graph.dot")
+    pdf_path = Path("kennisgraaf/juridisch_kennismodel.pdf")
 
     if not rdf_path.exists():
         print(f"Fout: {rdf_path} niet gevonden.")

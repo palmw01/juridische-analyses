@@ -288,7 +288,7 @@ def main():
 
     print(f"Vault: {vault_root}")
 
-    output_dir = vault_root / "graaf"
+    output_dir = vault_root / "kennisgraaf"
     output_dir.mkdir(exist_ok=True)
 
     check_staleness(vault_root, output_dir)
