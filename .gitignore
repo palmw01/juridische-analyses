@@ -12,7 +12,12 @@ settings.json
 
 # Gegenereerde HTML-renders
 analyses/*.html
-presentaties/*.html
+
+# Python bytecache
+__pycache__/
+
+# Nested virtual environments
+.claude/skills/*/.venv/
 
 # Obsidian — per-apparaat state (niet tracken)
 .obsidian/workspace.json
