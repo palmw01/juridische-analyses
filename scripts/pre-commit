@@ -28,4 +28,13 @@ for f in $STAGED; do
     fi
 done
 
+if [ "$HAS_ERRORS" -eq 0 ]; then
+    # Genereer validatierapport na succesvolle per-file checks
+    if ! $VALIDATE --full > /dev/null 2>&1; then
+        echo "[pre-commit] Fout bij volledige vault-validatie"
+        exit 1
+    fi
+    git add rapporten/validatie-rapport.md
+fi
+
 exit $HAS_ERRORS
