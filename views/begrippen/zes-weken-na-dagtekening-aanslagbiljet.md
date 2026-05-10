@@ -11,7 +11,7 @@ tags:
   - jas/voorwaarde
   - wet/iw1990
   - art/9
-afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-1]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 ---
 
 ## Definitie
@@ -44,4 +44,4 @@ De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar w
 
 ## Afleidingsregel
 
-[[views/regels/AR-BWBR0004770-art9-lid1-1]]
+[[views/regels/AR-BWBR0004770-art9-lid1-a]]

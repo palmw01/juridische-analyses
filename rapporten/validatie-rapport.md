@@ -20,7 +20,7 @@ WAARSCHUWINGEN
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
   begrippen/zes-weken.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
-  regels/AR-BWBR0004770-art9-lid1-1.yaml
+  regels/AR-BWBR0004770-art9-lid1-a.yaml
     [L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig
   regels/AR-BWBR0004770-art9-lid5-b.yaml
     [L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig

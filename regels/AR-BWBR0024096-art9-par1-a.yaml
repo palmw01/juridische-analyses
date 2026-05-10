@@ -1,48 +1,50 @@
 regel-id: AR-BWBR0024096-art9-par1-a
-naam: vaststellen vervaldag voorlopige aanslag einde kalenderjaar
-soort: Specialisatieregel
-bwb-id: BWBR0004770
+naam: bepalen of betalingstermijn eindigt voor 31 december
+soort: Beslissingsregel
+bwb-id: BWBR0024096
 artikel: '9'
 lid: par1
 peildatum: '2026-01-01'
 annotatie-id: '[[annotaties/li2008/art9-9-1]]'
 rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
 invoer:
-- BWBR0024096/par9-1/voorlopige-aanslag
-- BWBR0024096/par9-1/dagtekening-in-november-of-eerder
-- BWBR0024096/par9-1/termijn-eindigt-voor-31-december
+- BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
+- BWBR0004770/art9/lid5/resterende-maanden-jaar
 uitvoer:
-- BWBR0024096/par9-1/vervaldag-31-december
+- BWBR0024096/par9-1/termijn-eindigt-voor-31-december
 operators:
-- EN
-formele-regel: 'In afwijking van vaststellen betalingstermijn belastingaanslag:
-
-  [[begrippen/vervaldag-31-december]] is [[begrippen/31-december]]
-
-  indien aan alle volgende voorwaarden is voldaan:
-
-  - [[begrippen/voorlopige-aanslag]] is van toepassing
-
-  - [[begrippen/dagtekening-in-november-of-eerder]] is waar
-
-  - [[begrippen/termijn-eindigt-voor-31-december]] is waar'
-toelichting: Deze regel specificeert dat voor voorlopige aanslagen die gedagtekend
-  zijn in november of eerder, de vervaldag van de laatste termijn naar 31 december
-  wordt verschoven als deze anders eerder zou vallen. Dit is een begunstigende afwijking
-  van de wettelijke termijnregels in art. 9 lid 5 IW 1990.
+- kleiner-dan
+formele-regel: "**termijn-eindigt-voor-31-december is waar**\nindien aan alle volgende\
+  \ voorwaarden is voldaan:\n- het aantal resterende-maanden-jaar bedraagt ten minste\
+  \ 2 (lid 5 is van toepassing)\n- de vervaldag van de laatste betalingstermijn, berekend\
+  \ conform AR-9-5c, valt vóór 31 december van het belastingjaar"
+toelichting: "Herleidbaar tot LI 2008 §9.1 (uitvoeringsbeleid bij art. 9 lid 5 IW\
+  \ 1990).\n\nDe Leidraad Invordering 2008 geeft uitvoering aan de wettelijke termijnenregeling\
+  \ van art. 9 lid 5 door een aanvullende grensregel te stellen: indien de berekende\
+  \ vervaldagen leiden tot een laatste termijn die eindigt vóór 31 december, wordt\
+  \ de vervaldatum van die termijn verschoven naar 31 december. Dit voorkomt dat de\
+  \ belastingschuldige bij een late dagtekening in het belastingjaar effectief minder\
+  \ betalingstijd krijgt dan de wettelijke regeling beoogt.\n\nDit begrip is een tussenresultaat:\
+  \ het wordt uitsluitend berekend als invoer voor de beperkingsregel AR-9-5e (vervaldag-31-december).\
+  \ De regel is gebaseerd op uitvoeringsbeleid, niet op een expliciete wetsbepaling;\
+  \ volledige juridische onderbouwing vereist annotatie van LI 2008 §9 in zijn geheel.\n\
+  \n**A5-signaal:** de wettekst van art. 9 lid 5 IW 1990 zwijgt over de 31 december-cap;\
+  \ deze volgt uitsluitend uit de Leidraad. Bij conflict tussen wet en Leidraad prevaleert\
+  \ de wet."
 voorbeeldreeksen:
-- invoerwaarden: Voorlopige aanslag gedagtekend in november, laatste termijn valt
-    volgens wet op 15 december
-  verwachte-uitkomst: ja
-  juridisch-juist: false
-  toelichting: 15 december
-- invoerwaarden: Voorlopige aanslag gedagtekend in december
-  verwachte-uitkomst: nee
-  juridisch-juist: false
-  toelichting: datum volgens art. 9 lid 5 IW 1990
-- invoerwaarden: Voorlopige aanslag gedagtekend in oktober, laatste termijn valt volgens
-    wet op 31 december
-  verwachte-uitkomst: nee
-  juridisch-juist: false
-  toelichting: 31 december (voldoet niet aan 'eindigt vóór')
-tussenresultaat: false
+- invoerwaarden: 'dagtekening: 1 april 2026; resterende maanden: 8; laatste vervaldag
+    berekend: 1 december 2026'
+  verwachte-uitkomst: 'termijn-eindigt-voor-31-december: ja'
+  juridisch-juist: true
+  toelichting: 1 december valt vóór 31 december — cap is van toepassing
+- invoerwaarden: 'dagtekening: 1 februari 2026; resterende maanden: 10; laatste vervaldag
+    berekend: 1 december 2026'
+  verwachte-uitkomst: 'termijn-eindigt-voor-31-december: ja'
+  juridisch-juist: true
+  toelichting: grensgeval — ook hier eindigt de reeks voor 31 december
+- invoerwaarden: 'dagtekening: 1 januari 2026; resterende maanden: 11; laatste vervaldag
+    berekend: 1 december 2026'
+  verwachte-uitkomst: 'termijn-eindigt-voor-31-december: ja'
+  juridisch-juist: true
+  toelichting: null
+tussenresultaat: true

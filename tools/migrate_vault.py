@@ -58,7 +58,7 @@ BEGRIP_ID_MAPPING = {
 }
 
 REGEL_ID_MAPPING = {
-    "AR-9-1": "AR-BWBR0004770-art9-lid1-1",
+    "AR-9-1": "AR-BWBR0004770-art9-lid1-a",
     "AR-9-5a": "AR-BWBR0004770-art9-lid5-a",
     "AR-9-5b": "AR-BWBR0004770-art9-lid5-b",
     "AR-9-5c": "AR-BWBR0004770-art9-lid5-c",
@@ -495,7 +495,7 @@ def migrate_regel(regel_id_oud: str, fm: dict, body: str) -> dict:
     formele_regel, toelichting, voorbeeldreeksen = parse_regel_body(body)
 
     # Artikel en lid afleiden uit nieuw_id
-    # AR-BWBR0004770-art9-lid1-1 → artikel=9, lid=1
+    # AR-BWBR0004770-art9-lid1-a → artikel=9, lid=1
     # AR-BWBR0004770-art9-lid5-a → artikel=9, lid=5
     # AR-BWBR0024096-art9-par1-a → artikel=9, lid=par1
     art_m = re.search(r'-art(\d+)-', nieuw_id)

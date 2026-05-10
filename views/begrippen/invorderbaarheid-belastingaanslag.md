@@ -11,7 +11,7 @@ tags:
   - jas/afleidingsregel
   - wet/iw1990
   - art/9
-afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-1]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 ---
 
 ## Definitie
@@ -44,4 +44,4 @@ De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoude
 
 ## Afleidingsregel
 
-[[views/regels/AR-BWBR0004770-art9-lid1-1]]
+[[views/regels/AR-BWBR0004770-art9-lid1-a]]

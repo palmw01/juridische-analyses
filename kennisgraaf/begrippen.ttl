@@ -104,7 +104,7 @@ begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
+    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-a" .
 
 begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen
     a skos:Concept ;
@@ -133,7 +133,7 @@ begrip:BWBR0004770_art9_lid1_invorderbaarheid
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:jasKlasse "rechtsbetrekking" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
+    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-a" .
 
 begrip:BWBR0004770_art9_lid5_logische_of
     a skos:Concept ;
@@ -187,7 +187,7 @@ begrip:BWBR0024096_par9_1_termijn_eindigt_voor_31_december
     jas:leidtTot begrip:BWBR0024096_par9_1_vervaldag_31_december ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0024096-par9-1-a" .
+    jas:afleidingsregel "AR-BWBR0024096-art9-par1-a" .
 
 begrip:BWBR0004770_art9_lid5_termijnbedrag
     a skos:Concept ;
@@ -315,7 +315,7 @@ begrip:BWBR0004770_art9_lid1_zes_weken_na_dagtekening_aanslagbiljet
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
-    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
+    jas:afleidingsregel "AR-BWBR0004770-art9-lid1-a" .
 
 begrip:BWBR0004770_art9_lid1_zes_weken
     a skos:Concept ;

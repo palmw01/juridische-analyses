@@ -1,5 +1,5 @@
 ---
-regel-id: AR-BWBR0004770-art9-lid1-1
+regel-id: AR-BWBR0004770-art9-lid1-a
 naam: "bepalen invorderbaarheid belastingaanslag"
 soort: Beslissingsregel
 peildatum: 2026-01-01

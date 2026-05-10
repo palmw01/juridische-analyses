@@ -13,7 +13,7 @@ tags:
   - art/9
 aliases:
   - invorderbaar
-afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-1]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 ---
 
 ## Definitie
@@ -43,4 +43,4 @@ De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke 
 
 ## Afleidingsregel
 
-[[views/regels/AR-BWBR0004770-art9-lid1-1]]
+[[views/regels/AR-BWBR0004770-art9-lid1-a]]

@@ -1,950 +1,913 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-  <key id="d12" for="edge" attr.name="edge_type" attr.type="string" />
-  <key id="d11" for="edge" attr.name="label" attr.type="string" />
-  <key id="d10" for="node" attr.name="wet" attr.type="string" />
-  <key id="d9" for="node" attr.name="artikel" attr.type="string" />
-  <key id="d8" for="node" attr.name="bwb_id" attr.type="string" />
-  <key id="d7" for="node" attr.name="start" attr.type="string" />
-  <key id="d6" for="node" attr.name="color" attr.type="string" />
-  <key id="d5" for="node" attr.name="jas_klasse" attr.type="string" />
-  <key id="d4" for="node" attr.name="status" attr.type="string" />
-  <key id="d3" for="node" attr.name="herkomst" attr.type="string" />
-  <key id="d2" for="node" attr.name="soort" attr.type="string" />
-  <key id="d1" for="node" attr.name="node_type" attr.type="string" />
-  <key id="d0" for="node" attr.name="label" attr.type="string" />
-  <graph edgedefault="directed">
-    <node id="BWBR0024096/par9-1/31-december">
-      <data key="d0">31-december</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/afwijkend-boekjaar">
-      <data key="d0">afwijkend-boekjaar</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/belastingaanslag">
-      <data key="d0">belastingaanslag</data>
-      <data key="d1">begrip</data>
-      <data key="d2">enumeratie</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">rechtsobject</data>
-      <data key="d6">#70AD47</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet">
-      <data key="d0">dagtekening-aanslagbiljet</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/dagtekening-in-november-of-eerder">
-      <data key="d0">dagtekening-in-november-of-eerder</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar">
-      <data key="d0">dagtekening-in-vaststellingsjaar</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/een-maand-na-dagtekening">
-      <data key="d0">een-maand-na-dagtekening</data>
-      <data key="d1">begrip</data>
-      <data key="d2">tijdsduur</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid">
-      <data key="d0">in-afwijking-van-eerste-lid</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag">
-      <data key="d0">invorderbaarheid-belastingaanslag</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen">
-      <data key="d0">invorderbaarheid-in-gelijke-termijnen</data>
-      <data key="d1">begrip</data>
-      <data key="d2">MIGRATIE-ONBEKEND</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/invorderbaarheid">
-      <data key="d0">invorderbaarheid</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">rechtsbetrekking</data>
-      <data key="d6">#FF0000</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/logische-of">
-      <data key="d0">logische-of</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">operator</data>
-      <data key="d6">#808080</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet">
-      <data key="d0">maand-dagtekening-aanslagbiljet</data>
-      <data key="d1">begrip</data>
-      <data key="d2">tijdsduur</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/resterende-maanden-jaar">
-      <data key="d0">resterende-maanden-jaar</data>
-      <data key="d1">begrip</data>
-      <data key="d2">MIGRATIE-ONBEKEND</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">variabele</data>
-      <data key="d6">#92D050</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/telkens-een-maand-later">
-      <data key="d0">telkens-een-maand-later</data>
-      <data key="d1">begrip</data>
-      <data key="d2">tijdsduur</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/termijn-eindigt-voor-31-december">
-      <data key="d0">termijn-eindigt-voor-31-december</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/termijnbedrag">
-      <data key="d0">termijnbedrag</data>
-      <data key="d1">begrip</data>
-      <data key="d2">monetair-bedrag</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden">
-      <data key="d0">termijnenberekening-resterende-maanden</data>
-      <data key="d1">begrip</data>
-      <data key="d2">MIGRATIE-ONBEKEND</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/terugvalregel-lid-1">
-      <data key="d0">terugvalregel-lid-1</data>
-      <data key="d1">begrip</data>
-      <data key="d2">booleaans</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag">
-      <data key="d0">totaalbedrag-belastingaanslag</data>
-      <data key="d1">begrip</data>
-      <data key="d2">monetair-bedrag</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">variabele</data>
-      <data key="d6">#92D050</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/vervaldag-31-december">
-      <data key="d0">vervaldag-31-december</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/vervaldag-eerste-termijn">
-      <data key="d0">vervaldag-eerste-termijn</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/vervaldag-laatste-dag-maand">
-      <data key="d0">vervaldag-laatste-dag-maand</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen">
-      <data key="d0">vervaldag-volgende-termijnen</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1/voorlopige-aanslag">
-      <data key="d0">voorlopige-aanslag</data>
-      <data key="d1">begrip</data>
-      <data key="d2">enumeratie</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">rechtsobject</data>
-      <data key="d6">#70AD47</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib">
-      <data key="d0">voorlopige-conserverende-aanslag-ib</data>
-      <data key="d1">begrip</data>
-      <data key="d2">enumeratie</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">rechtsobject</data>
-      <data key="d6">#70AD47</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet">
-      <data key="d0">zes-weken-na-dagtekening-aanslagbiljet</data>
-      <data key="d1">begrip</data>
-      <data key="d2">datum</data>
-      <data key="d3">afgeleid</data>
-      <data key="d4">concept</data>
-      <data key="d5">voorwaarde</data>
-      <data key="d6">#7030A0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1/zes-weken">
-      <data key="d0">zes-weken</data>
-      <data key="d1">begrip</data>
-      <data key="d2">tijdsduur</data>
-      <data key="d3">direct</data>
-      <data key="d4">concept</data>
-      <data key="d5">tijdsaanduiding</data>
-      <data key="d6">#F4B942</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid1-1">
-      <data key="d0">bepalen invorderbaarheid belastingaanslag</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Beslissingsregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-a">
-      <data key="d0">bepalen invorderbaarheid voorlopige aanslag in gelijke termijnen</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Specialisatieregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-b">
-      <data key="d0">berekenen resterende maanden jaar</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Rekenregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-c">
-      <data key="d0">berekenen vervaldag eerste termijn voorlopige aanslag</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Rekenregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-d">
-      <data key="d0">berekenen vervaldag volgende termijnen voorlopige aanslag</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Rekenregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-e">
-      <data key="d0">bepalen terugval naar lid 1 bij onvoldoende termijnen</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Beslissingsregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0004770-art9-lid5-f">
-      <data key="d0">berekenen termijnbedrag voorlopige aanslag</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Rekenregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0024096-art9-par1-a">
-      <data key="d0">vaststellen vervaldag voorlopige aanslag einde kalenderjaar</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Specialisatieregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0024096-art9-par1-b">
-      <data key="d0">vaststellen vervaldag voorlopige aanslag afwijkend boekjaar</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Specialisatieregel</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="AR-BWBR0024096-par9-1-a">
-      <data key="d0">bepalen of betalingstermijn eindigt voor 31 december</data>
-      <data key="d1">afleidingsregel</data>
-      <data key="d5">afleidingsregel</data>
-      <data key="d2">Beslissingsregel</data>
-      <data key="d8">BWBR0024096</data>
-      <data key="d9">9</data>
-      <data key="d6">#00B0F0</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid1">
-      <data key="d0">Art. 9 lid 1 IW 1990</data>
-      <data key="d1">annotatie</data>
-      <data key="d5">annotatie</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d10">IW 1990</data>
-      <data key="d9">9</data>
-      <data key="d6">#CCCCCC</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0004770/art9/lid5">
-      <data key="d0">Art. 9 lid 5 IW 1990</data>
-      <data key="d1">annotatie</data>
-      <data key="d5">annotatie</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d10">IW 1990</data>
-      <data key="d9">9</data>
-      <data key="d6">#CCCCCC</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="annotaties/BWBR0004770/art9">
-      <data key="d0">Art. 9 IW 1990</data>
-      <data key="d1">annotatie</data>
-      <data key="d5">annotatie</data>
-      <data key="d8">BWBR0004770</data>
-      <data key="d10">IW 1990</data>
-      <data key="d9">9</data>
-      <data key="d6">#CCCCCC</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <node id="BWBR0024096/par9-1">
-      <data key="d0">Art. 9 lid 9.1 LI 2008</data>
-      <data key="d1">annotatie</data>
-      <data key="d5">annotatie</data>
-      <data key="d8">BWBR0024096</data>
-      <data key="d10">LI 2008</data>
-      <data key="d9">9</data>
-      <data key="d6">#CCCCCC</data>
-      <data key="d7">2026-01-01</data>
-    </node>
-    <edge source="BWBR0024096/par9-1/afwijkend-boekjaar" target="AR-BWBR0024096-art9-par1-b" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/belastingaanslag" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/belastingaanslag" target="AR-BWBR0004770-art9-lid1-1" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-1" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid5-c" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" target="AR-BWBR0024096-art9-par1-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="AR-BWBR0004770-art9-lid5-a" id="1">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="AR-BWBR0004770-art9-lid5-c" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="AR-BWBR0004770-art9-lid5-c" id="1">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="AR-BWBR0004770-art9-lid1-1" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">is-een</data>
-      <data key="d12">is-een</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/invorderbaarheid" target="AR-BWBR0004770-art9-lid1-1" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid5-b" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-b" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-e" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-f" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0024096-par9-1-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="AR-BWBR0004770-art9-lid5-d" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="AR-BWBR0004770-art9-lid5-d" id="1">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0024096/par9-1/vervaldag-31-december" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-par9-1-a" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="AR-BWBR0024096-art9-par1-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnbedrag" target="AR-BWBR0004770-art9-lid5-f" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-b" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-e" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="AR-BWBR0004770-art9-lid5-e" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" target="AR-BWBR0004770-art9-lid5-f" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0024096/par9-1/31-december" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/vervaldag-31-december" target="AR-BWBR0024096-art9-par1-a" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="BWBR0004770/art9/lid5/een-maand-na-dagtekening" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="AR-BWBR0004770-art9-lid5-c" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="AR-BWBR0004770-art9-lid5-d" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="AR-BWBR0024096-art9-par1-b" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="BWBR0004770/art9/lid5/telkens-een-maand-later" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="AR-BWBR0004770-art9-lid5-d" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="AR-BWBR0024096-par9-1-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
-      <data key="d11">is-een</data>
-      <data key="d12">is-een</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-b" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
-      <data key="d11">is-een</data>
-      <data key="d12">is-een</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" target="AR-BWBR0004770-art9-lid5-a" id="0">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/zes-weken" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">heeft</data>
-      <data key="d12">heeft</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">causaal</data>
-      <data key="d12">leidt-tot</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-1" id="0">
-      <data key="d11">afgeleid-via</data>
-      <data key="d12">afgeleid-via</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-1" id="1">
-      <data key="d11">invoer-voor</data>
-      <data key="d12">invoer-voor</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid1-1" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid1-1" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-a" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-b" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-c" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-d" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-e" target="BWBR0004770/art9/lid5/terugvalregel-lid-1" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-e" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0004770-art9-lid5-f" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0024096-art9-par1-a" target="BWBR0024096/par9-1/vervaldag-31-december" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0024096-art9-par1-b" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="AR-BWBR0024096-par9-1-a" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="0">
-      <data key="d11">bepaalt</data>
-      <data key="d12">bepaalt</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/zes-weken" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="1">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/logische-of" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/een-maand-na-dagtekening" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/telkens-een-maand-later" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/terugvalregel-lid-1" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnbedrag" id="1">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-31-december" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/31-december" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/afwijkend-boekjaar" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-    <edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="0">
-      <data key="d11">markeert</data>
-      <data key="d12">markeert</data>
-    </edge>
-  </graph>
-</graphml>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d12" for="edge" attr.name="edge_type" attr.type="string"/>
+<key id="d11" for="edge" attr.name="label" attr.type="string"/>
+<key id="d10" for="node" attr.name="wet" attr.type="string"/>
+<key id="d9" for="node" attr.name="artikel" attr.type="string"/>
+<key id="d8" for="node" attr.name="bwb_id" attr.type="string"/>
+<key id="d7" for="node" attr.name="start" attr.type="string"/>
+<key id="d6" for="node" attr.name="color" attr.type="string"/>
+<key id="d5" for="node" attr.name="jas_klasse" attr.type="string"/>
+<key id="d4" for="node" attr.name="status" attr.type="string"/>
+<key id="d3" for="node" attr.name="herkomst" attr.type="string"/>
+<key id="d2" for="node" attr.name="soort" attr.type="string"/>
+<key id="d1" for="node" attr.name="node_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="directed"><node id="BWBR0024096/par9-1/31-december">
+  <data key="d0">31-december</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/afwijkend-boekjaar">
+  <data key="d0">afwijkend-boekjaar</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/belastingaanslag">
+  <data key="d0">belastingaanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">enumeratie</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet">
+  <data key="d0">dagtekening-aanslagbiljet</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/dagtekening-in-november-of-eerder">
+  <data key="d0">dagtekening-in-november-of-eerder</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar">
+  <data key="d0">dagtekening-in-vaststellingsjaar</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/een-maand-na-dagtekening">
+  <data key="d0">een-maand-na-dagtekening</data>
+  <data key="d1">begrip</data>
+  <data key="d2">tijdsduur</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid">
+  <data key="d0">in-afwijking-van-eerste-lid</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag">
+  <data key="d0">invorderbaarheid-belastingaanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen">
+  <data key="d0">invorderbaarheid-in-gelijke-termijnen</data>
+  <data key="d1">begrip</data>
+  <data key="d2">MIGRATIE-ONBEKEND</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/invorderbaarheid">
+  <data key="d0">invorderbaarheid</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">rechtsbetrekking</data>
+  <data key="d6">#FF0000</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/logische-of">
+  <data key="d0">logische-of</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">operator</data>
+  <data key="d6">#808080</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet">
+  <data key="d0">maand-dagtekening-aanslagbiljet</data>
+  <data key="d1">begrip</data>
+  <data key="d2">tijdsduur</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/resterende-maanden-jaar">
+  <data key="d0">resterende-maanden-jaar</data>
+  <data key="d1">begrip</data>
+  <data key="d2">MIGRATIE-ONBEKEND</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">variabele</data>
+  <data key="d6">#92D050</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/telkens-een-maand-later">
+  <data key="d0">telkens-een-maand-later</data>
+  <data key="d1">begrip</data>
+  <data key="d2">tijdsduur</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/termijn-eindigt-voor-31-december">
+  <data key="d0">termijn-eindigt-voor-31-december</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/termijnbedrag">
+  <data key="d0">termijnbedrag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">monetair-bedrag</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden">
+  <data key="d0">termijnenberekening-resterende-maanden</data>
+  <data key="d1">begrip</data>
+  <data key="d2">MIGRATIE-ONBEKEND</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/terugvalregel-lid-1">
+  <data key="d0">terugvalregel-lid-1</data>
+  <data key="d1">begrip</data>
+  <data key="d2">booleaans</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag">
+  <data key="d0">totaalbedrag-belastingaanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">monetair-bedrag</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">variabele</data>
+  <data key="d6">#92D050</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/vervaldag-31-december">
+  <data key="d0">vervaldag-31-december</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/vervaldag-eerste-termijn">
+  <data key="d0">vervaldag-eerste-termijn</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/vervaldag-laatste-dag-maand">
+  <data key="d0">vervaldag-laatste-dag-maand</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen">
+  <data key="d0">vervaldag-volgende-termijnen</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1/voorlopige-aanslag">
+  <data key="d0">voorlopige-aanslag</data>
+  <data key="d1">begrip</data>
+  <data key="d2">enumeratie</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib">
+  <data key="d0">voorlopige-conserverende-aanslag-ib</data>
+  <data key="d1">begrip</data>
+  <data key="d2">enumeratie</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet">
+  <data key="d0">zes-weken-na-dagtekening-aanslagbiljet</data>
+  <data key="d1">begrip</data>
+  <data key="d2">datum</data>
+  <data key="d3">afgeleid</data>
+  <data key="d4">concept</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1/zes-weken">
+  <data key="d0">zes-weken</data>
+  <data key="d1">begrip</data>
+  <data key="d2">tijdsduur</data>
+  <data key="d3">direct</data>
+  <data key="d4">concept</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid1-a">
+  <data key="d0">bepalen invorderbaarheid belastingaanslag</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Beslissingsregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-a">
+  <data key="d0">bepalen invorderbaarheid voorlopige aanslag in gelijke termijnen</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Specialisatieregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-b">
+  <data key="d0">berekenen resterende maanden jaar</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Rekenregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-c">
+  <data key="d0">berekenen vervaldag eerste termijn voorlopige aanslag</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Rekenregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-d">
+  <data key="d0">berekenen vervaldag volgende termijnen voorlopige aanslag</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Rekenregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-e">
+  <data key="d0">bepalen terugval naar lid 1 bij onvoldoende termijnen</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Beslissingsregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0004770-art9-lid5-f">
+  <data key="d0">berekenen termijnbedrag voorlopige aanslag</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Rekenregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0024096-art9-par1-a">
+  <data key="d0">bepalen of betalingstermijn eindigt voor 31 december</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Beslissingsregel</data>
+  <data key="d8">BWBR0024096</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="AR-BWBR0024096-art9-par1-b">
+  <data key="d0">vaststellen vervaldag voorlopige aanslag afwijkend boekjaar</data>
+  <data key="d1">afleidingsregel</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d2">Specialisatieregel</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d9">9</data>
+  <data key="d6">#00B0F0</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid1">
+  <data key="d0">Art. 9 lid 1 IW 1990</data>
+  <data key="d1">annotatie</data>
+  <data key="d5">annotatie</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d10">IW 1990</data>
+  <data key="d9">9</data>
+  <data key="d6">#CCCCCC</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0004770/art9/lid5">
+  <data key="d0">Art. 9 lid 5 IW 1990</data>
+  <data key="d1">annotatie</data>
+  <data key="d5">annotatie</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d10">IW 1990</data>
+  <data key="d9">9</data>
+  <data key="d6">#CCCCCC</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="annotaties/BWBR0004770/art9">
+  <data key="d0">Art. 9 IW 1990</data>
+  <data key="d1">annotatie</data>
+  <data key="d5">annotatie</data>
+  <data key="d8">BWBR0004770</data>
+  <data key="d10">IW 1990</data>
+  <data key="d9">9</data>
+  <data key="d6">#CCCCCC</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<node id="BWBR0024096/par9-1">
+  <data key="d0">Art. 9 lid 9.1 LI 2008</data>
+  <data key="d1">annotatie</data>
+  <data key="d5">annotatie</data>
+  <data key="d8">BWBR0024096</data>
+  <data key="d10">LI 2008</data>
+  <data key="d9">9</data>
+  <data key="d6">#CCCCCC</data>
+  <data key="d7">2026-01-01</data>
+</node>
+<edge source="BWBR0024096/par9-1/afwijkend-boekjaar" target="AR-BWBR0024096-art9-par1-b" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/belastingaanslag" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/belastingaanslag" target="AR-BWBR0004770-art9-lid1-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid5-c" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" target="AR-BWBR0004770-art9-lid5-a" id="1">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="AR-BWBR0004770-art9-lid5-c" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/een-maand-na-dagtekening" target="AR-BWBR0004770-art9-lid5-c" id="1">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" target="AR-BWBR0004770-art9-lid1-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">is-een</data>
+  <data key="d12">is-een</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid5-b" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-b" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-e" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0004770-art9-lid5-f" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/resterende-maanden-jaar" target="AR-BWBR0024096-art9-par1-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="AR-BWBR0004770-art9-lid5-d" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/telkens-een-maand-later" target="AR-BWBR0004770-art9-lid5-d" id="1">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" target="BWBR0024096/par9-1/vervaldag-31-december" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnbedrag" target="AR-BWBR0004770-art9-lid5-f" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-b" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" target="AR-BWBR0004770-art9-lid5-e" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/terugvalregel-lid-1" target="AR-BWBR0004770-art9-lid5-e" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" target="AR-BWBR0004770-art9-lid5-f" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0024096/par9-1/31-december" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0024096/par9-1/vervaldag-31-december" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0024096/par9-1/vervaldag-31-december" target="AR-BWBR0024096-art9-par1-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="BWBR0004770/art9/lid5/een-maand-na-dagtekening" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="AR-BWBR0004770-art9-lid5-c" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" target="AR-BWBR0004770-art9-lid5-d" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" target="AR-BWBR0024096-art9-par1-b" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="BWBR0004770/art9/lid5/telkens-een-maand-later" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="AR-BWBR0004770-art9-lid5-d" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" target="AR-BWBR0024096-art9-par1-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
+  <data key="d11">is-een</data>
+  <data key="d12">is-een</data>
+</edge>
+<edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0024096/par9-1/voorlopige-aanslag" target="AR-BWBR0024096-art9-par1-b" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
+  <data key="d11">is-een</data>
+  <data key="d12">is-een</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" target="AR-BWBR0004770-art9-lid5-a" id="0">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/zes-weken" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">heeft</data>
+  <data key="d12">heeft</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">causaal</data>
+  <data key="d12">leidt-tot</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-a" id="0">
+  <data key="d11">afgeleid-via</data>
+  <data key="d12">afgeleid-via</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" target="AR-BWBR0004770-art9-lid1-a" id="1">
+  <data key="d11">invoer-voor</data>
+  <data key="d12">invoer-voor</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid1-a" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid1-a" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-a" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-b" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-c" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-d" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-e" target="BWBR0004770/art9/lid5/terugvalregel-lid-1" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-e" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0004770-art9-lid5-f" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0024096-art9-par1-a" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="AR-BWBR0024096-art9-par1-b" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="0">
+  <data key="d11">bepaalt</data>
+  <data key="d12">bepaalt</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/belastingaanslag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/zes-weken" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="1">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid1" target="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/logische-of" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid1/invorderbaarheid" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/resterende-maanden-jaar" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/een-maand-na-dagtekening" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/telkens-een-maand-later" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/terugvalregel-lid-1" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnbedrag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/termijnbedrag" id="1">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0004770/art9/lid5" target="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/voorlopige-aanslag" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/dagtekening-in-november-of-eerder" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/termijn-eindigt-voor-31-december" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-31-december" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/31-december" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/afwijkend-boekjaar" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+<edge source="BWBR0024096/par9-1" target="BWBR0024096/par9-1/vervaldag-laatste-dag-maand" id="0">
+  <data key="d11">markeert</data>
+  <data key="d12">markeert</data>
+</edge>
+</graph></graphml>
