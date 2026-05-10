@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# pre-commit hook — valideert vault-bestanden voor commit
+# Installeer met: make install-hooks  (of: ln -sf ../../scripts/pre-commit .git/hooks/pre-commit)
+
+VAULT_ROOT=$(git rev-parse --show-toplevel)
+VALIDATE="$VAULT_ROOT/tools/.venv/bin/python $VAULT_ROOT/tools/validate_note.py"
+
+# Haal staged vault-bestanden op (alleen in bekende paden)
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(annotaties|begrippen|regels|bronnen|schemas|ontologie)/.*\.(json|yaml|yml)$' || true)
+
+if [ -z "$STAGED" ]; then
+    exit 0
+fi
+
+cd "$VAULT_ROOT"
+
+HAS_ERRORS=0
+for f in $STAGED; do
+    if [ ! -f "$f" ]; then
+        continue
+    fi
+    if ! $VALIDATE --file "$f" 2>/dev/null; then
+        echo "[pre-commit] L1/L2-fout in: $f"
+        echo "  Run: tools/.venv/bin/python tools/validate_note.py --file $f"
+        HAS_ERRORS=1
+    fi
+done
+
+exit $HAS_ERRORS

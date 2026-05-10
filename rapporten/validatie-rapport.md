@@ -32,10 +32,10 @@ WAARSCHUWINGEN
     [L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig
   regels/AR-BWBR0004770-art9-lid5-f.yaml
     [L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig
-  regels/AR-BWBR0024096-par9-1-a.yaml
+  regels/AR-BWBR0024096-art9-par1-a.yaml
     [L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig
 
-GESLAAGD: 41 bestanden
+GESLAAGD: 40 bestanden
 BLOKKEERFOUTEN: 0
 WAARSCHUWINGEN: 13
 ```
