@@ -4,6 +4,7 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: tijdsaanduiding
+toelichting-klasse: "De tijdsduur 'zes weken' is specifieker dan een variabele: het betreft een vaste termijn (tijdvak) die voor alle belastingaanslagen onder lid 1 gelijk is. Tijdsaanduiding heeft voorrang boven variabele en parameter (kaders §Meest specifieke klasse). Lid 10 bepaalt dat de Algemene termijnenwet niet van toepassing is, wat de berekening van deze termijn beïnvloedt."
 herkomst: direct
 status: concept
 definitie: Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor

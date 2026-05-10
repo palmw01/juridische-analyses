@@ -4,6 +4,7 @@ aliases: []
 soort: monetair-bedrag
 soort-id: false
 jas-klasse: variabele
+toelichting-klasse: "Afgeleide variabele die de numerieke waarde van één betalingstermijn representeert. De wet stelt de eis dat termijnen 'gelijk' zijn, wat een rekenkundige deling van het totaalbedrag door het aantal termijnen impliceert."
 herkomst: afgeleid
 status: concept
 definitie: Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag

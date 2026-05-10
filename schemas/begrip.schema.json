@@ -92,6 +92,10 @@
       "type": "string",
       "description": "JAS-classificatie (rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, operator, variabele, tijdsaanduiding, parameter, plaatsaanduiding, delegatiebevoegdheid)"
     },
+    "toelichting-klasse": {
+      "type": "string",
+      "description": "Juridische motivering van de JAS-classificatiekeuze"
+    },
     "afleidingsregel-id": { "type": ["string", "null"] },
     "tussenresultaat": { "type": "boolean", "default": false }
   }

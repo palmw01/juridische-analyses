@@ -4,6 +4,7 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
+toelichting-klasse: "Conditie gebaseerd op de uitkomst van de wettelijke termijnberekening."
 herkomst: afgeleid
 status: concept
 definitie: Situatie waarbij de berekende vervaldag van de laatste betalingstermijn

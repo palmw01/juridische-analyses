@@ -4,6 +4,7 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: variabele
+toelichting-klasse: "Variabele die het aantal resterende kalendermaanden in het belastingjaar weergeeft, te tellen na de maand die in de dagtekening van het aanslagbiljet is vermeld. De waarde varieert naar gelang de dagtekening (max. 11 bij januari, min. 0 bij december)."
 herkomst: afgeleid
 status: concept
 definitie: Het aantal kalendermaanden dat in het belastingjaar resteert na de maand

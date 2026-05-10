@@ -4,6 +4,7 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: tijdsaanduiding
+toelichting-klasse: "Tijdsaanduiding die de iteratieve periodiciteit van de vervaldatums na de eerste termijn uitdrukt. 'Telkens' markeert de herhalende toepassing van de één-maand-stap voor elke volgende termijn."
 herkomst: afgeleid
 status: concept
 definitie: De iteratieve tijdstap van één kalendermaand waarmee elke vervaldatum na

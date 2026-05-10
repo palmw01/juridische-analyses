@@ -4,6 +4,7 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: afleidingsregel
+toelichting-klasse: "Rekenregel die de vervaldatums van alle opvolgende termijnen bepaalt. Input: vervaldatum vorige termijn. Output: vervaldatum volgende termijn = vorige vervaldatum + één maand. De regel wordt iteratief toegepast voor elke volgende termijn."
 herkomst: afgeleid
 status: concept
 definitie: De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum

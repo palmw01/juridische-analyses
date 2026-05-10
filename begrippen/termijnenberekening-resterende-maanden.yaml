@@ -4,6 +4,7 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: afleidingsregel
+toelichting-klasse: "Rekenregel die het aantal invorderingstermijnen bepaalt. Input: maand van de dagtekening (tijdsaanduiding) en het resterende aantal kalendermaanden (variabele). Output: het exacte aantal gelijke maandelijkse termijnen. Logica: bij dagtekening in januari zijn er 11 termijnen; bij oktober 2, bij november 1 (terugval naar lid 1 via derde volzin)."
 herkomst: afgeleid
 status: concept
 definitie: De rekenregel die het aantal gelijke invorderingstermijnen bepaalt door

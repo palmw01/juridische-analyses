@@ -4,6 +4,7 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
+toelichting-klasse: "Kwalificatieconditie die het toepassingsbereik van lid 5 afbakent: de dagtekening van het aanslagbiljet moet vallen in het belastingjaar waarover de voorlopige aanslag is vastgesteld. Aanslagen met een dagtekening vóór het belastingjaar vallen onder lid 7."
 herkomst: afgeleid
 status: concept
 definitie: De toepassingsvoorwaarde dat de dagtekening van het aanslagbiljet valt

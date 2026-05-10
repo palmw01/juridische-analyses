@@ -4,6 +4,7 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: afleidingsregel
+toelichting-klasse: "De volledige zin van lid 1 vormt een beslissingsregel (type afleidingsregel): als zes weken zijn verstreken na de dagtekening van het aanslagbiljet, dan is de belastingaanslag invorderbaar (ja/nee). Dit is de hoofdregel; de overige leden (2, 4–9, 11) bevatten specialisatieregels die 'in afwijking van het eerste lid' gelden."
 herkomst: afgeleid
 status: concept
 definitie: De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is,

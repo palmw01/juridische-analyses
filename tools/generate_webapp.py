@@ -328,6 +328,7 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
             "afleidingsregel-id": data.get("afleidingsregel-id"),
             "tussenresultaat": data.get("tussenresultaat", False),
             "jas_klasse": klasse,
+            "toelichting_klasse": data.get("toelichting-klasse") or "",
             "markeringen": data.get("markeringen") or [],
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
         })
@@ -513,6 +514,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
       <tr><td>Tussenresultaat</td><td>{"Ja" if b["tussenresultaat"] else "Nee"}</td></tr>
     </table>
   </div>
+  {f'<div class="card"><div class="card-title">JAS-toelichting</div><p style="font-size:0.85rem;font-style:italic">{b["toelichting_klasse"]}</p></div>' if b["toelichting_klasse"] else ""}
   <div class="card">
     <div class="card-title">Relaties</div>
     {rel_html}

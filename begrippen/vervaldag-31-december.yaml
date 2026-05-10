@@ -4,6 +4,7 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: afleidingsregel
+toelichting-klasse: "Stelt een nieuwe waarde vast voor de vervaldag."
 herkomst: afgeleid
 status: concept
 definitie: Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen

@@ -4,6 +4,7 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: afleidingsregel
+toelichting-klasse: "Specialisatieregel t.o.v. art. 9 lid 1. Als-dan: als de voorlopige aanslag (IB/VPB) of voorlopige conserverende aanslag (IB) is gedagtekend in het belastingjaar, dan is hij invorderbaar in gelijke maandelijkse termijnen. Bevat twee cumulatieve kwalificatievoorwaarden en de rekenregel voor het termijnenaantal."
 herkomst: afgeleid
 status: concept
 definitie: De specialisatieregel die bepaalt dat een voorlopige aanslag IB of VPB,
