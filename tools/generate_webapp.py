@@ -225,14 +225,14 @@ footer{text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.75re
 """
 
 
-def gen_nav(active: str = "") -> str:
+def gen_nav(active: str = "", p: str = "") -> str:
     items = [
-        ("/", "Dashboard"),
-        ("/begrippen.html", "Begrippen"),
-        ("/annotaties.html", "Annotaties"),
-        ("/regels.html", "Regels"),
-        ("/graph.html", "Graaf"),
-        ("/search.html", "Zoeken"),
+        (f"{p}index.html", "Dashboard"),
+        (f"{p}begrippen.html", "Begrippen"),
+        (f"{p}annotaties.html", "Annotaties"),
+        (f"{p}regels.html", "Regels"),
+        (f"{p}graph.html", "Graaf"),
+        (f"{p}search.html", "Zoeken"),
     ]
     links = ""
     for url, label in items:
@@ -249,35 +249,30 @@ def gen_nav(active: str = "") -> str:
 </nav>"""
 
 
-def gen_footer() -> str:
-    return '<footer>Gegenereerd uit de juridische analyses vault &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>'
-
-
-PAGE_HEAD = """<!DOCTYPE html>
+def pagina(title: str, body: str, active: str = "", p: str = "") -> str:
+    return f"""<!DOCTYPE html>
 <html lang="nl" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Belastingdienst</title>
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="{p}css/style.css">
 </head>
 <body>
-"""
-
-PAGE_FOOT = """
-<script src="/js/app.js"></script>
+{gen_nav(active, p)}
+<main><div class="container">
+{body}
+</div></main>
+<footer>Gegenereerd uit de juridische analyses vault &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>
+<script src="{p}js/app.js"></script>
 </body>
 </html>"""
 
 
-def pagina(title: str, body: str, active: str = "") -> str:
-    return PAGE_HEAD.format(title=title) + gen_nav(active) + f"<main><div class=\"container\">\n{body}\n</div></main>" + gen_footer() + PAGE_FOOT
-
-
-def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = ""):
+def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = ""):
     pad = out / rel
     pad.parent.mkdir(parents=True, exist_ok=True)
-    pad.write_text(pagina(title, body, active))
+    pad.write_text(pagina(title, body, active, p))
 
 
 def jas_tag(klasse: str) -> str:
@@ -437,8 +432,8 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
 
 def gen_begrippen(out: Path, begrippen: list):
     items = "".join(
-        f'<li onclick="window.location=\'/begrippen/{b["slug"]}.html\'">'
-        f'<a href="/begrippen/{b["slug"]}.html" class="item-title">{b["naam"]}</a>'
+        f'<li onclick="window.location=\'begrippen/{b["slug"]}.html\'">'
+        f'<a href="begrippen/{b["slug"]}.html" class="item-title">{b["naam"]}</a>'
         f'{jas_tag(b["jas_klasse"])}'
         f'<span class="badge badge-soort">{b["soort"]}</span>'
         f'{status_badge(b["status"])}'
@@ -457,6 +452,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 </script>"""
     schrijf_html(out, "begrippen.html", "Begrippen — Belastingdienst", body, active="begrippen")
 
+    pp = "../"  # prefix voor detail-pagina's in subdirectory
     for b in begrippen:
         rel_html = ""
         for rt, label in [("is-een", "Is een"), ("heeft", "Heeft"), ("leidt-tot", "Leidt tot")]:
@@ -465,7 +461,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 rel_html += f"<p style='margin-top:0.5rem'><strong>{label}</strong></p><ul style='margin-left:1.25rem'>"
                 for t in targets:
                     t_slug = slugify(t.rsplit("/", 1)[-1])
-                    rel_html += f'<li><a href="/begrippen/{t_slug}.html">{t}</a></li>'
+                    rel_html += f'<li><a href="{pp}begrippen/{t_slug}.html">{t}</a></li>'
                 rel_html += "</ul>"
         if not rel_html:
             rel_html = "<p class='item-meta'>Geen relaties</p>"
@@ -491,7 +487,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 </div>"""
         reg_lnk = ""
         if b["afleidingsregel-id"]:
-            reg_lnk = f'<p style="margin-top:0.5rem"><a href="/regels/{b["afleidingsregel-id"]}.html">{b["afleidingsregel-id"]}</a></p>'
+            reg_lnk = f'<p style="margin-top:0.5rem"><a href="{pp}regels/{b["afleidingsregel-id"]}.html">{b["afleidingsregel-id"]}</a></p>'
         body = f"""<h1>{b["naam"]}</h1>
 <p class="subtitle">{jas_tag(b["jas_klasse"])} <span class="badge badge-soort">{b["soort"]}</span> {status_badge(b["status"])}</p>
 <div class="detail-layout">
@@ -522,13 +518,13 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   {f'<div class="card"><div class="card-title">Afleidingsregel</div>{reg_lnk}</div>' if reg_lnk else ""}
 </div>
 </div>"""
-        schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} — Belastingdienst', body, active="begrippen")
+        schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} — Belastingdienst', body, active="begrippen", p="../")
 
 
 def gen_annotaties(out: Path, annotaties: list):
     items = "".join(
-        f'<li onclick="window.location=\'/annotaties/{a["id"].replace("/","-")}.html\'">'
-        f'<a href="/annotaties/{a["id"].replace("/","-")}.html" class="item-title">{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}</a>'
+        f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
+        f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}</a>'
         f'<span class="badge badge-type">{a.get("bwb_id","")}</span>'
         f'<span class="item-meta">{a["structuurpositie"]}</span>'
         f'</li>\n'
@@ -544,7 +540,7 @@ def gen_annotaties(out: Path, annotaties: list):
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slugify(r["begrip_id"].rsplit("/", 1)[-1])
-                bgp_link = f'<a href="/begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
+                bgp_link = f'<a href="../begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
             rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td></tr>\n'
         signaleringen = ""
         for r in a["rijen"]:
@@ -563,13 +559,13 @@ def gen_annotaties(out: Path, annotaties: list):
 </table></div>
 {signaleringen}
 </div>"""
-        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties")
+        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties", p="../")
 
 
 def gen_regels(out: Path, regels: list):
     items = "".join(
-        f'<li onclick="window.location=\'/regels/{r["id"]}.html\'">'
-        f'<a href="/regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
+        f'<li onclick="window.location=\'regels/{r["id"]}.html\'">'
+        f'<a href="regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
         f'<span class="badge badge-definitief">{r["soort"]}</span>'
         f'<span class="item-meta">ID: {r["id"]}</span>'
         f'</li>\n'
@@ -618,7 +614,7 @@ def gen_regels(out: Path, regels: list):
 <div class="card-title">Voorbeeldreeksen</div>
 {vb or "<p class=item-meta>Geen voorbeelden</p>"}
 </div>"""
-        schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} — Belastingdienst', body, active="regels")
+        schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} — Belastingdienst', body, active="regels", p="../")
 
 
 def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
@@ -708,11 +704,11 @@ document.getElementById('klasseFilter').addEventListener('change',function(){{
 def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
     bron_data = []
     for b in begrippen:
-        bron_data.append({"type": "Begrip", "titel": b["naam"], "url": f'/begrippen/{b["slug"]}.html', "tekst": b.get("definitie","") + " " + b["naam"] + " " + " ".join(b["aliases"]), "jas_klasse": b["jas_klasse"]})
+        bron_data.append({"type": "Begrip", "titel": b["naam"], "url": f'begrippen/{b["slug"]}.html', "tekst": b.get("definitie","") + " " + b["naam"] + " " + " ".join(b["aliases"]), "jas_klasse": b["jas_klasse"]})
     for a in annotaties:
-        bron_data.append({"type": "Annotatie", "titel": f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}', "url": f'/annotaties/{a["id"].replace("/","-")}.html', "tekst": a.get("wetstekst",""), "jas_klasse": ""})
+        bron_data.append({"type": "Annotatie", "titel": f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}', "url": f'annotaties/{a["id"].replace("/","-")}.html', "tekst": a.get("wetstekst",""), "jas_klasse": ""})
     for r in regels:
-        bron_data.append({"type": "Regel", "titel": r["naam"], "url": f'/regels/{r["id"]}.html', "tekst": (r.get("formele_regel","") + " " + (r.get("toelichting","") or "")), "jas_klasse": "afleidingsregel"})
+        bron_data.append({"type": "Regel", "titel": r["naam"], "url": f'regels/{r["id"]}.html', "tekst": (r.get("formele_regel","") + " " + (r.get("toelichting","") or "")), "jas_klasse": "afleidingsregel"})
     data_json = json.dumps(bron_data, ensure_ascii=False)
     body = f"""<h1>Zoeken</h1>
 <input type="text" class="search-input" id="searchInput" placeholder="Zoek in begrippen, annotaties en regels..." autofocus>
@@ -763,7 +759,7 @@ def gen_404(out: Path):
     body = """<div class="error-page">
 <h1>404</h1>
 <p>Deze pagina bestaat niet.</p>
-<a href="/" class="filter-chip active">Terug naar dashboard</a>
+<a href="./" class="filter-chip active">Terug naar dashboard</a>
 </div>"""
     schrijf_html(out, "404.html", "Pagina niet gevonden — Belastingdienst", body)
 
