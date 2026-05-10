@@ -34,3 +34,7 @@ kennisgraaf/*.pdf
 kennisgraaf/*.ttl
 kennisgraaf/*.gexf
 kennisgraaf/*.graphml
+
+# Legacy — tools/kennisgraaf (restant van oude graph skill)
+tools/kennisgraaf/*.gexf
+tools/kennisgraaf/*.graphml
