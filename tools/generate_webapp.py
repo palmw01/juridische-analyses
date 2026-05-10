@@ -235,6 +235,8 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
 .signalering{font-size:0.8rem;color:var(--warning);margin-top:0.5rem;padding:0.5rem;background:var(--warning-bg);border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
+.sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:3px;padding:0.1rem 0.3rem;line-height:1.3}
+.sign-ref{font-size:0.7rem;font-weight:600;color:var(--text-muted);margin-right:0.25rem}
 
 /* Voorbeeldreeksen */
 .voorbeeld{padding:0.75rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--success-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success)}
@@ -417,6 +419,7 @@ def laad_annotaties(vault_root: Path) -> list[dict]:
         rijen = []
         for r in data.get("annotatierijen") or []:
             rijen.append({
+                "rij_id": r.get("rij-id", ""),
                 "markering": r.get("markering", ""),
                 "jas_klasse": r.get("jas-klasse", ""),
                 "begrip_id": r.get("begrip-id", ""),
@@ -649,12 +652,20 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 
     for a in annotaties:
         rijen = ""
+        sign_items = ""
         for r in a["rijen"]:
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slugify(r["begrip_id"].rsplit("/", 1)[-1])
                 bgp_link = f'<a href="../begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
-            rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td></tr>\n'
+            sign_badge = ""
+            sign_ref = ""
+            if r.get("signalering"):
+                sign_badge = '<span class="sign-badge">[!]</span>'
+                rid = r.get("rij_id", "")
+                sign_ref = f'<span class="sign-ref">{rid}</span>' if rid else ""
+                sign_items += f'<div class="signalering">{sign_ref}<span>[!]</span> {r["signalering"]}</div>\n'
+            rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td><td style="text-align:center">{sign_badge}</td></tr>\n'
         signaleringen = ""
         for r in a["rijen"]:
             if r.get("signalering"):
@@ -688,10 +699,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 <div class="card-title">Annotatierijen</div>
 <div style="overflow-x:auto">
 <table class="ann-table">
-  <tr><th>Markering</th><th>JAS-klasse</th><th>Begrip</th></tr>
+  <tr><th>Markering</th><th>JAS-klasse</th><th>Begrip</th><th style="text-align:center">Signaal</th></tr>
   {rijen}
 </table></div>
-{signaleringen}
+{sign_items}
 </div>
 {mermaid_src}
 {regel_links}"""
