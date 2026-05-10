@@ -3,6 +3,7 @@ begripsnaam: termijnbedrag
 aliases: []
 soort: monetair-bedrag
 soort-id: false
+jas-klasse: variabele
 herkomst: afgeleid
 status: concept
 definitie: Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag

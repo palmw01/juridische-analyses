@@ -3,6 +3,7 @@ begripsnaam: dagtekening-in-november-of-eerder
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: voorwaarde
 herkomst: direct
 status: concept
 definitie: Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de

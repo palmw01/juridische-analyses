@@ -3,6 +3,7 @@ begripsnaam: dagtekening-in-vaststellingsjaar
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: voorwaarde
 herkomst: afgeleid
 status: concept
 definitie: De toepassingsvoorwaarde dat de dagtekening van het aanslagbiljet valt

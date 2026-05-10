@@ -3,6 +3,7 @@ begripsnaam: vervaldag-eerste-termijn
 aliases: []
 soort: datum
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn

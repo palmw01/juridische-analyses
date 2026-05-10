@@ -3,6 +3,7 @@ begripsnaam: voorlopige-conserverende-aanslag-ib
 aliases: []
 soort: enumeratie
 soort-id: false
+jas-klasse: rechtsobject
 herkomst: direct
 status: concept
 definitie: Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende

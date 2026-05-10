@@ -3,6 +3,7 @@ begripsnaam: totaalbedrag-belastingaanslag
 aliases: []
 soort: monetair-bedrag
 soort-id: false
+jas-klasse: variabele
 herkomst: direct
 status: concept
 definitie: Het totale bedrag van de belastingaanslag dat bij aanvang van de invordering

@@ -3,6 +3,7 @@ begripsnaam: vervaldag-volgende-termijnen
 aliases: []
 soort: datum
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum

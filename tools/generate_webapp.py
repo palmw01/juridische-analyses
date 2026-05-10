@@ -174,9 +174,10 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .signalering{font-size:0.8rem;color:var(--warning);margin-top:0.5rem;padding:0.5rem;background:var(--warning-bg);border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
 
 /* Voorbeeldreeksen */
-.voorbeeld{padding:0.75rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--card-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success)}
-.voorbeeld.ongeldig{border-left-color:var(--error);background:var(--error-bg)}
-.voorbeeld-label{font-weight:600;color:var(--text-secondary)}
+.voorbeeld{padding:0.75rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--success-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success)}
+.voorbeeld.ongeldig{border-left-color:var(--error);background:var(--error-bg);border-left:3px solid var(--error)}
+.voorbeeld-label{font-weight:700;color:var(--success)}
+.voorbeeld.ongeldig .voorbeeld-label{color:var(--error)}
 
 /* Detail pagina layout */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1rem}
@@ -294,21 +295,22 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
         relaties: dict = data.get("relaties") or {}
         def extract_rel(key):
             return [r if isinstance(r, str) else r.get("begrip-id", "") for r in (relaties.get(key) or [])]
-        klasse = "onbekend"
-        for m in data.get("markeringen") or []:
-            if m.get("bijdrage") == "primair":
-                jc = m.get("jas-klasse") or ""
-                if jc:
-                    klasse = jc
-                break
-        else:
-            soort = data.get("soort", "")
-            if soort in ("datum", "tijdsduur"):
-                klasse = "tijdsaanduiding"
-            elif soort == "monetair-bedrag":
-                klasse = "variabele"
-            elif soort == "enumeratie":
-                klasse = "rechtsobject"
+        klasse = data.get("jas-klasse") or "onbekend"
+        if klasse == "onbekend":
+            for m in data.get("markeringen") or []:
+                if m.get("bijdrage") == "primair":
+                    jc = m.get("jas-klasse") or ""
+                    if jc:
+                        klasse = jc
+                    break
+            else:
+                soort = data.get("soort", "")
+                if soort in ("datum", "tijdsduur"):
+                    klasse = "tijdsaanduiding"
+                elif soort == "monetair-bedrag":
+                    klasse = "variabele"
+                elif soort == "enumeratie":
+                    klasse = "rechtsobject"
         begrippen.append({
             "id": data.get("begrip-id", f.stem),
             "naam": data.get("begripsnaam", f.stem),

@@ -4,6 +4,7 @@ aliases:
 - invorderbaar
 soort: booleaans
 soort-id: false
+jas-klasse: rechtsbetrekking
 herkomst: afgeleid
 status: concept
 definitie: De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke

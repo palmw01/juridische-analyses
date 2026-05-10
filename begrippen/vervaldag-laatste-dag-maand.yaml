@@ -3,6 +3,7 @@ begripsnaam: vervaldag-laatste-dag-maand
 aliases: []
 soort: datum
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen

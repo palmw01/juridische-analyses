@@ -3,6 +3,7 @@ begripsnaam: terugvalregel-lid-1
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De beslissingsregel die bepaalt dat art. 9 lid 1 IW 1990 herneemt als de

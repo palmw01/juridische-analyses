@@ -3,6 +3,7 @@ begripsnaam: in-afwijking-van-eerste-lid
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: voorwaarde
 herkomst: afgeleid
 status: concept
 definitie: De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie

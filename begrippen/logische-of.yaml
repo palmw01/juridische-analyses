@@ -3,6 +3,7 @@ begripsnaam: logische-of
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: operator
 herkomst: direct
 status: concept
 definitie: De logische operator die twee of meer alternatieven verbindt, zodanig dat

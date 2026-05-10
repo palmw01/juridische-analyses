@@ -3,6 +3,7 @@ begripsnaam: termijnenberekening-resterende-maanden
 aliases: []
 soort: tijdsduur
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De rekenregel die het aantal gelijke invorderingstermijnen bepaalt door

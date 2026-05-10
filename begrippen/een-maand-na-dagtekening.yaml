@@ -3,6 +3,7 @@ begripsnaam: een-maand-na-dagtekening
 aliases: []
 soort: tijdsduur
 soort-id: false
+jas-klasse: tijdsaanduiding
 herkomst: afgeleid
 status: concept
 definitie: Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het

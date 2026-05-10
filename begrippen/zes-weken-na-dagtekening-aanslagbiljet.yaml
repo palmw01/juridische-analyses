@@ -3,6 +3,7 @@ begripsnaam: zes-weken-na-dagtekening-aanslagbiljet
 aliases: []
 soort: datum
 soort-id: false
+jas-klasse: voorwaarde
 herkomst: afgeleid
 status: concept
 definitie: 'De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar

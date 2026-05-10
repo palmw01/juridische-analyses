@@ -3,6 +3,7 @@ begripsnaam: termijn-eindigt-voor-31-december
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: voorwaarde
 herkomst: afgeleid
 status: concept
 definitie: Situatie waarbij de berekende vervaldag van de laatste betalingstermijn

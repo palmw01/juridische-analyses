@@ -3,6 +3,7 @@ begripsnaam: invorderbaarheid-belastingaanslag
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is,

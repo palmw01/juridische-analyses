@@ -3,6 +3,7 @@ begripsnaam: telkens-een-maand-later
 aliases: []
 soort: tijdsduur
 soort-id: false
+jas-klasse: tijdsaanduiding
 herkomst: afgeleid
 status: concept
 definitie: De iteratieve tijdstap van één kalendermaand waarmee elke vervaldatum na

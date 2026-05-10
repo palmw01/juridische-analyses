@@ -3,6 +3,7 @@ begripsnaam: invorderbaarheid-in-gelijke-termijnen
 aliases: []
 soort: booleaans
 soort-id: false
+jas-klasse: afleidingsregel
 herkomst: afgeleid
 status: concept
 definitie: De specialisatieregel die bepaalt dat een voorlopige aanslag IB of VPB,

@@ -88,6 +88,10 @@
       }
     },
     "identificatiebegrip": { "type": "boolean" },
+    "jas-klasse": {
+      "type": "string",
+      "description": "JAS-classificatie (rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, operator, variabele, tijdsaanduiding, parameter, plaatsaanduiding, delegatiebevoegdheid)"
+    },
     "afleidingsregel-id": { "type": ["string", "null"] },
     "tussenresultaat": { "type": "boolean", "default": false }
   }
