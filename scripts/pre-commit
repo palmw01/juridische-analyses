@@ -21,9 +21,9 @@ for f in $STAGED; do
     if [ ! -f "$f" ]; then
         continue
     fi
-    if ! $VALIDATE --file "$f" 2>/dev/null; then
+    if ! errs=$($VALIDATE --file "$f" 2>&1); then
         echo "[pre-commit] L1/L2-fout in: $f"
-        echo "  Run: tools/.venv/bin/python tools/validate_note.py --file $f"
+        echo "$errs" | head -20
         HAS_ERRORS=1
     fi
 done

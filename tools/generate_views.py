@@ -30,11 +30,10 @@ import yaml
 
 BWB_NAAR_WET: dict[str, str] = {
     "BWBR0004770": "iw1990",
-    "BWBR0002226": "awr",
+    "BWBR0002320": "awr",
     "BWBR0005537": "awb",
     "BWBR0024096": "li2008",
     "BWBR0003738": "ubib1990",
-    "BWBR0024096": "li2008",  # alternatief BWB-id LI 2008
 }
 
 JAS_NAAR_CSS: dict[str, str] = {
@@ -762,7 +761,7 @@ def main() -> int:
             print(f"Fout: bestand niet gevonden: {enkel_bestand}", file=sys.stderr)
             return 1
 
-    begrippen_count = annotaties_count = regels_count = 0
+    begrippen_count = annotaties_count = regels_count = wetsteksten_count = 0
 
     if args.type in (None, "begrip"):
         eb = enkel_bestand if (enkel_bestand and enkel_bestand.suffix == ".yaml"

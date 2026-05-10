@@ -229,14 +229,13 @@ def scan_begrippen(
         begrip_id = fm.get("begrip-id") or yaml_file.stem
         begripsnaam = fm.get("begripsnaam", yaml_file.stem)
 
-        # Since-filter op geldigheid-van
+        # Since-filter op bestandswijzigingsdatum
         if since:
-            geldigheid = fm.get("geldigheid-van")
             try:
-                gd = date.fromisoformat(str(geldigheid)) if geldigheid else None
-                if gd and gd < since:
+                mtime = date.fromtimestamp(yaml_file.stat().st_mtime)
+                if mtime < since:
                     continue
-            except ValueError:
+            except (OSError, ValueError):
                 pass
 
         triggers = detecteer_triggers(fm)
