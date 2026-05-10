@@ -185,6 +185,8 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .subtitle{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem}
 
 /* Badges / Tags */
+.card ul li, .card ol li { word-break: break-all; overflow-wrap: break-word; }
+.card a { word-break: break-all; overflow-wrap: break-word; }
 .tag{display:inline-block;padding:0.15rem 0.45rem;border-radius:4px;font-size:0.7rem;font-weight:600;color:#fff;margin:0.1rem;white-space:nowrap;line-height:1.4}
 .badge{display:inline-block;font-size:0.7rem;padding:0.15rem 0.45rem;border-radius:4px;font-weight:600;white-space:nowrap;line-height:1.4}
 .badge-concept{background:var(--warning-bg);color:var(--warning)}
