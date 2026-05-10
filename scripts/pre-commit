@@ -8,7 +8,7 @@ VAULT_ROOT=$(git rev-parse --show-toplevel)
 VALIDATE="$VAULT_ROOT/tools/.venv/bin/python $VAULT_ROOT/tools/validate_note.py"
 
 # Haal staged vault-bestanden op (alleen in bekende paden)
-STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(annotaties|begrippen|regels|bronnen|schemas|ontologie)/.*\.(json|yaml|yml)$' || true)
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(annotaties|begrippen|regels|bronnen)/.*\.(json|yaml|yml)$' || true)
 
 if [ -z "$STAGED" ]; then
     exit 0

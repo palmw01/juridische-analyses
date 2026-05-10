@@ -12,7 +12,7 @@
     "aliases": { "type": "array", "items": { "type": "string" }, "default": [] },
     "soort": {
       "type": "string",
-      "enum": ["monetair-bedrag", "percentage", "tijdsduur", "datum", "booleaans", "tekst", "enumeratie", "entiteit", "MIGRATIE-ONBEKEND"]
+      "enum": ["monetair-bedrag", "percentage", "tijdsduur", "datum", "booleaans", "tekst", "enumeratie", "entiteit"]
     },
     "soort-id": {
       "type": "boolean",

@@ -91,15 +91,18 @@ Kies één waarde:
 
 | Soort | Toelichting | Invorderingsvoorbeelden |
 |-------|-------------|------------------------|
-| `getal` | Numerieke waarde incl. bedrag, percentage, aantal | Verschuldigd belastingbedrag, invorderingsrente |
+| `monetair-bedrag` | Geldbedrag in euro's | Verschuldigd belastingbedrag, invorderingsrente |
+| `percentage` | Getal uitgedrukt als rate (bijv. 4.0 voor 4%) | Invorderingsrentevoet, wettelijk rentepercentage |
+| `tijdsduur` | Periode in weken, maanden of jaren | Zes-weken, betalingstermijn-belastingaanslag |
 | `datum` | Kalenderdatum of tijdstip | Dagtekening aanslagbiljet, invorderbaarheidsdatum |
-| `waar-niet-waar` | Booleaanse waarde (ja/nee) | Invorderbaarheid, recht op uitstel |
+| `booleaans` | Booleaanse waarde (ja/nee) | Invorderbaarheid, recht op uitstel |
 | `tekst` | Vrije tekstwaarde | Naam belastingschuldige, adres |
-| `enumeratiewaarde` | Limitatieve keuze uit vaste set waarden | Soort belastingaanslag (voorlopig/definitief/navorderings-/…) |
+| `enumeratie` | Limitatieve keuze uit vaste waardeset | Soort belastingaanslag (voorlopig/definitief/navorderings-/…) |
+| `entiteit` | Rechtssubject of rechtsobject als instantie | Belastingschuldige als persoon, ontvanger |
 
 Voeg `[id]` toe als het begrip dient als unieke sleutel — zie §Identificatiebegrippen.
 
-> **Noot rechtssubjecten:** Personen en entiteiten (JAS-klasse: Rechtssubject) passen niet altijd in de bovenstaande datatypes. Gebruik `tekst` voor de naam of aanduiding van een rechtssubject. Leg het identificatieveld (bijv. BSN, RSIN) vast als een separaat Variabele-begrip met `soort: [datatype] [id]` (bijv. `getal [id]` voor BSN). Verwijs vanuit het rechtssubject-begrip naar dat identificatiebegrip via `heeft`.
+> **Noot rechtssubjecten:** Personen en entiteiten (JAS-klasse: Rechtssubject) hebben `soort: entiteit`. Leg het identificatieveld (bijv. BSN, RSIN) vast als een separaat Variabele-begrip met `soort-id: true` (bijv. `soort: getal, soort-id: true` voor BSN). Verwijs vanuit het rechtssubject-begrip naar dat identificatiebegrip via `heeft`.
 
 ### Herkomst — VERPLICHT voor gegevensmodel
 
@@ -161,12 +164,13 @@ Markeer in het `soort`-veld aanvullend met `[id]` als een begrip dient als uniek
 sleutel voor een rechtssubject of rechtsobject:
 
 ```yaml
-soort: "enumeratiewaarde [id]"   # bijv. voor aanslagnummer
+soort: enumeratie
+soort-id: true       # bijv. voor aanslagnummer
 ```
 
 Voorbeelden in invorderingscontext:
-- `sofinummer / BSN [id]` — unieke identificatie belastingschuldige
-- `aanslagnummer [id]` — unieke identificatie belastingaanslag
+- `sofinummer / BSN` — `soort: getal, soort-id: true`
+- `aanslagnummer` — `soort: enumeratie, soort-id: true`
 
 Dit veld is input voor het gegevensmodel (A6d: "identificaties die nodig zijn om een gegeven uniek te maken").
 
@@ -202,16 +206,16 @@ Referentietabel voor de meest voorkomende begrippen in de invorderingssfeer:
 
 | Begrip | Soort | Herkomst | Identificatie |
 |--------|-------|----------|---------------|
-| belastingschuldige | enumeratiewaarde | direct | BSN [id] |
-| ontvanger | tekst | direct | — |
-| belastingaanslag | enumeratiewaarde | direct | aanslagnummer [id] |
-| aanslagbiljet | enumeratiewaarde | direct | — |
+| belastingschuldige | entiteit | direct | BSN (soort-id: true) |
+| ontvanger | entiteit | direct | — |
+| belastingaanslag | enumeratie | direct | aanslagnummer (soort-id: true) |
+| aanslagbiljet | enumeratie | direct | — |
 | dagtekening aanslagbiljet | datum | direct | — |
-| betalingstermijn belastingaanslag | getal | afgeleid | — |
-| invorderbaarheid | waar-niet-waar | afgeleid | — |
-| invorderingsrente | getal | afgeleid | — |
-| verschuldigd belastingbedrag | getal | direct | — |
-| recht op uitstel van betaling | waar-niet-waar | afgeleid | — |
+| betalingstermijn belastingaanslag | tijdsduur | afgeleid | — |
+| invorderbaarheid | booleaans | afgeleid | — |
+| invorderingsrente | monetair-bedrag | afgeleid | — |
+| verschuldigd belastingbedrag | monetair-bedrag | direct | — |
+| recht op uitstel van betaling | booleaans | afgeleid | — |
 
 ---
 
