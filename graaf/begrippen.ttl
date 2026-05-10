@@ -15,6 +15,7 @@ begrip:BWBR0004770_art9_lid5_31_december
     skos:definition "De eenendertigste dag van de twaalfde maand van een kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_afwijkend_boekjaar
@@ -23,6 +24,7 @@ begrip:BWBR0004770_art9_lid5_afwijkend_boekjaar
     skos:definition "Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0008003/par9-1" ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid1_belastingaanslag
@@ -32,6 +34,7 @@ begrip:BWBR0004770_art9_lid1_belastingaanslag
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
+    jas:jasKlasse "rechtsobject" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet
@@ -40,7 +43,9 @@ begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet
     skos:definition "De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel is gedagtekend en die dient als het vaste referentiepunt voor de berekening van de invorderingstermijn"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_zes_weken_na_dagtekening_aanslagbiljet ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_dagtekening_in_november_of_eerder
@@ -50,6 +55,7 @@ begrip:BWBR0004770_art9_lid5_dagtekening_in_november_of_eerder
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0008003/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_dagtekening_in_vaststellingsjaar
@@ -57,8 +63,10 @@ begrip:BWBR0004770_art9_lid5_dagtekening_in_vaststellingsjaar
     skos:prefLabel "dagtekening-in-vaststellingsjaar"@nl ;
     skos:definition "De toepassingsvoorwaarde dat de dagtekening van het aanslagbiljet valt binnen het kalenderjaar waarover de voorlopige aanslag of de voorlopige conserverende aanslag is vastgesteld, als afbakeningscriterium voor de termijnenregeling van art. 9 lid 5 IW 1990"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-a" .
 
@@ -67,8 +75,10 @@ begrip:BWBR0004770_art9_lid5_een_maand_na_dagtekening
     skos:prefLabel "een-maand-na-dagtekening"@nl ;
     skos:definition "Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op grond van art. 9 lid 5 IW 1990"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-c" .
 
@@ -77,7 +87,9 @@ begrip:BWBR0004770_art9_lid5_in_afwijking_van_eerste_lid
     skos:prefLabel "in-afwijking-van-eerste-lid"@nl ;
     skos:definition "De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie heeft ten opzichte van de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn van lid 1 voor de genoemde voorlopige aanslagen wordt verdrongen door de gelijke-termijnenregeling van lid 5"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-a" .
 
@@ -86,9 +98,11 @@ begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag
     skos:prefLabel "invorderbaarheid-belastingaanslag"@nl ;
     skos:definition "De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken na de dagtekening van het aanslagbiljet"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_belastingaanslag ;
     jas:heeft begrip:BWBR0004770_art9_lid1_zes_weken_na_dagtekening_aanslagbiljet ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
 
@@ -97,6 +111,7 @@ begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen
     skos:prefLabel "invorderbaarheid-in-gelijke-termijnen"@nl ;
     skos:definition "De specialisatieregel die bepaalt dat een voorlopige aanslag IB of VPB, dan wel een voorlopige conserverende aanslag IB, waarvan het aanslagbiljet is gedagtekend in het belastingjaar, invorderbaar is in een aantal gelijke maandelijkse termijnen dat gelijk is aan het aantal kalendermaanden dat na de dagtekening maand nog in dat jaar resteert"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     skos:broader begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
     jas:heeft begrip:BWBR0004770_art9_lid5_voorlopige_aanslag ;
     jas:heeft begrip:BWBR0004770_art9_lid5_voorlopige_conserverende_aanslag_ib ;
@@ -104,6 +119,7 @@ begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen
     jas:heeft begrip:BWBR0004770_art9_lid5_termijnenberekening_resterende_maanden ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_volgende_termijnen ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-a" .
 
@@ -113,6 +129,9 @@ begrip:BWBR0004770_art9_lid1_invorderbaarheid
     skos:altLabel "invorderbaar"@nl ;
     skos:definition "De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke betalingstermijn is verstreken, op grond waarvan de ontvanger bevoegd is invorderingsmaatregelen te treffen jegens de belastingschuldige"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
+    jas:jasKlasse "rechtsbetrekking" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
 
@@ -122,6 +141,7 @@ begrip:BWBR0004770_art9_lid5_logische_of
     skos:definition "De logische operator die twee of meer alternatieven verbindt, zodanig dat de samengestelde voorwaarde is vervuld als ten minste één van de verbonden elementen waar is"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
+    jas:jasKlasse "operator" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_maand_dagtekening_aanslagbiljet
@@ -131,6 +151,7 @@ begrip:BWBR0004770_art9_lid5_maand_dagtekening_aanslagbiljet
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_resterende_maanden_jaar ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_resterende_maanden_jaar
@@ -138,8 +159,10 @@ begrip:BWBR0004770_art9_lid5_resterende_maanden_jaar
     skos:prefLabel "resterende-maanden-jaar"@nl ;
     skos:definition "Het aantal kalendermaanden dat in het belastingjaar resteert na de maand die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van art. 9 lid 5 IW 1990"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_maand_dagtekening_aanslagbiljet ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_termijnenberekening_resterende_maanden ;
+    jas:jasKlasse "variabele" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-b" .
 
@@ -148,7 +171,9 @@ begrip:BWBR0004770_art9_lid5_telkens_een_maand_later
     skos:prefLabel "telkens-een-maand-later"@nl ;
     skos:definition "De iteratieve tijdstap van één kalendermaand waarmee elke vervaldatum na de eerste termijn wordt bepaald, door steeds één maand op te tellen bij de vorige vervaldatum"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_volgende_termijnen ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-d" .
 
@@ -157,8 +182,10 @@ begrip:BWBR0004770_art9_lid5_termijn_eindigt_voor_31_december
     skos:prefLabel "termijn-eindigt-voor-31-december"@nl ;
     skos:definition "Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet valt op een datum vóór 31 december van het betreffende jaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_vervaldag_31_december ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0008003-par9-1-a" .
 
@@ -167,6 +194,8 @@ begrip:BWBR0004770_art9_lid5_termijnbedrag
     skos:prefLabel "termijnbedrag"@nl ;
     skos:definition "Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de belastingaanslag te delen door het aantal termijnen"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-f" .
 
@@ -175,9 +204,11 @@ begrip:BWBR0004770_art9_lid5_termijnenberekening_resterende_maanden
     skos:prefLabel "termijnenberekening-resterende-maanden"@nl ;
     skos:definition "De rekenregel die het aantal gelijke invorderingstermijnen bepaalt door het aantal kalendermaanden te tellen dat in het belastingjaar resteert na de maand die in de dagtekening van het aanslagbiljet is vermeld"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_maand_dagtekening_aanslagbiljet ;
     jas:heeft begrip:BWBR0004770_art9_lid5_resterende_maanden_jaar ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_invorderbaarheid_in_gelijke_termijnen ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-b" .
 
@@ -186,9 +217,11 @@ begrip:BWBR0004770_art9_lid5_terugvalregel_lid_1
     skos:prefLabel "terugvalregel-lid-1"@nl ;
     skos:definition "De beslissingsregel die bepaalt dat art. 9 lid 1 IW 1990 herneemt als de termijnenberekening van art. 9 lid 5 eerste volzin niet leidt tot meer dan één termijn, zodat de zes-wekentermijn van lid 1 in de plaats treedt van de gelijke-termijnenregeling"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_termijnenberekening_resterende_maanden ;
     jas:heeft begrip:BWBR0004770_art9_lid5_resterende_maanden_jaar ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid_belastingaanslag ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-e" .
 
@@ -199,6 +232,7 @@ begrip:BWBR0004770_art9_lid5_totaalbedrag_belastingaanslag
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid5_termijnbedrag ;
+    jas:jasKlasse "variabele" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_vervaldag_31_december
@@ -206,8 +240,10 @@ begrip:BWBR0004770_art9_lid5_vervaldag_31_december
     skos:prefLabel "vervaldag-31-december"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_31_december ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0008003-art9-par1-a" .
 
@@ -216,8 +252,10 @@ begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn
     skos:prefLabel "vervaldag-eerste-termijn"@nl ;
     skos:definition "De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn vaststelt als het tijdstip gelegen één kalendermaand na de dagtekening van het aanslagbiljet"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
     jas:heeft begrip:BWBR0004770_art9_lid5_een_maand_na_dagtekening ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-c" .
 
@@ -226,7 +264,9 @@ begrip:BWBR0004770_art9_lid5_vervaldag_laatste_dag_maand
     skos:prefLabel "vervaldag-laatste-dag-maand"@nl ;
     skos:definition "Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0008003-art9-par1-b" .
 
@@ -235,8 +275,10 @@ begrip:BWBR0004770_art9_lid5_vervaldag_volgende_termijnen
     skos:prefLabel "vervaldag-volgende-termijnen"@nl ;
     skos:definition "De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand op te tellen"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     jas:heeft begrip:BWBR0004770_art9_lid5_vervaldag_eerste_termijn ;
     jas:heeft begrip:BWBR0004770_art9_lid5_telkens_een_maand_later ;
+    jas:jasKlasse "afleidingsregel" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid5-d" .
 
@@ -247,7 +289,9 @@ begrip:BWBR0004770_art9_lid5_voorlopige_aanslag
     skos:definition "Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
+    prov:wasDerivedFrom "BWBR0008003/par9-1" ;
     skos:broader begrip:BWBR0004770_art9_lid1_belastingaanslag ;
+    jas:jasKlasse "rechtsobject" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid5_voorlopige_conserverende_aanslag_ib
@@ -257,6 +301,7 @@ begrip:BWBR0004770_art9_lid5_voorlopige_conserverende_aanslag_ib
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
     skos:broader begrip:BWBR0004770_art9_lid1_belastingaanslag ;
+    jas:jasKlasse "rechtsobject" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid1_zes_weken_na_dagtekening_aanslagbiljet
@@ -264,9 +309,11 @@ begrip:BWBR0004770_art9_lid1_zes_weken_na_dagtekening_aanslagbiljet
     skos:prefLabel "zes-weken-na-dagtekening-aanslagbiljet"@nl ;
     skos:definition "De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
     jas:heeft begrip:BWBR0004770_art9_lid1_zes_weken ;
     jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening_aanslagbiljet ;
     jas:leidtTot begrip:BWBR0004770_art9_lid1_invorderbaarheid ;
+    jas:jasKlasse "voorwaarde" ;
     jas:status "concept" ;
     jas:afleidingsregel "AR-BWBR0004770-art9-lid1-1" .
 
@@ -276,5 +323,6 @@ begrip:BWBR0004770_art9_lid1_zes_weken
     skos:definition "Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor de berekening van het moment van invorderbaarheid van een belastingaanslag en die zonder verlenging voor weekenden of feestdagen wordt berekend"@nl ;
     dct:valid "2026-01-01"^^xsd:date ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;
+    jas:jasKlasse "tijdsaanduiding" ;
     jas:status "concept" .
 

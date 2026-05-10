@@ -16,8 +16,8 @@ TABLE
   soort AS "Soort",
   herkomst AS "Herkomst",
   status AS "Status"
-FROM "begrippen"
-WHERE type = "begrip"
+FROM "views/begrippen"
+WHERE type = "begrip" OR tags contains "begrip"
 SORT begripsnaam ASC
 ```
 
@@ -28,8 +28,8 @@ TABLE
   naam AS "Naam",
   soort AS "Regeltype",
   file.link AS "Bestand"
-FROM "regels"
-WHERE type = "afleidingsregel"
+FROM "views/regels"
+WHERE tags contains "afleidingsregel"
 SORT naam ASC
 ```
 
@@ -51,8 +51,8 @@ SORT artikel ASC
 TABLE
   begripsnaam AS "Begrip",
   status AS "Status"
-FROM "begrippen"
-WHERE type = "begrip" AND definitie = ""
+FROM "views/begrippen"
+WHERE (tags contains "begrip") AND (definitie = "" OR !definitie)
 SORT begripsnaam ASC
 ```
 
@@ -64,8 +64,8 @@ Zie `rapporten/enrichment-queue.json` voor de actuele lijst van begrippen die aa
 TABLE
   begripsnaam AS "Begrip",
   status AS "Status"
-FROM "begrippen"
-WHERE type = "begrip" AND status = "te-verrijken"
+FROM "views/begrippen"
+WHERE (tags contains "begrip") AND status = "te-verrijken"
 SORT begripsnaam ASC
 ```
 

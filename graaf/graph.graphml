@@ -18,8 +18,8 @@
   <data key="d2">datum</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/afwijkend-boekjaar">
@@ -28,8 +28,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/belastingaanslag">
@@ -38,8 +38,8 @@
   <data key="d2">enumeratie</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet">
@@ -48,8 +48,8 @@
   <data key="d2">datum</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder">
@@ -58,8 +58,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar">
@@ -68,8 +68,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/een-maand-na-dagtekening">
@@ -78,8 +78,8 @@
   <data key="d2">tijdsduur</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid">
@@ -88,8 +88,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag">
@@ -98,8 +98,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen">
@@ -108,8 +108,8 @@
   <data key="d2">MIGRATIE-ONBEKEND</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/invorderbaarheid">
@@ -118,8 +118,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">rechtsbetrekking</data>
+  <data key="d6">#FF0000</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/logische-of">
@@ -128,8 +128,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">operator</data>
+  <data key="d6">#808080</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet">
@@ -138,8 +138,8 @@
   <data key="d2">tijdsduur</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/resterende-maanden-jaar">
@@ -148,8 +148,8 @@
   <data key="d2">MIGRATIE-ONBEKEND</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">variabele</data>
+  <data key="d6">#92D050</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/telkens-een-maand-later">
@@ -158,8 +158,8 @@
   <data key="d2">tijdsduur</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december">
@@ -168,8 +168,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/termijnbedrag">
@@ -178,8 +178,8 @@
   <data key="d2">monetair-bedrag</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden">
@@ -188,8 +188,8 @@
   <data key="d2">MIGRATIE-ONBEKEND</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/terugvalregel-lid-1">
@@ -198,8 +198,8 @@
   <data key="d2">booleaans</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag">
@@ -208,8 +208,8 @@
   <data key="d2">monetair-bedrag</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">variabele</data>
+  <data key="d6">#92D050</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/vervaldag-31-december">
@@ -218,8 +218,8 @@
   <data key="d2">datum</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/vervaldag-eerste-termijn">
@@ -228,8 +228,8 @@
   <data key="d2">datum</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand">
@@ -238,8 +238,8 @@
   <data key="d2">datum</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen">
@@ -248,8 +248,8 @@
   <data key="d2">datum</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">afleidingsregel</data>
+  <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/voorlopige-aanslag">
@@ -258,8 +258,8 @@
   <data key="d2">enumeratie</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib">
@@ -268,8 +268,8 @@
   <data key="d2">enumeratie</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">rechtsobject</data>
+  <data key="d6">#70AD47</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet">
@@ -278,8 +278,8 @@
   <data key="d2">datum</data>
   <data key="d3">afgeleid</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">voorwaarde</data>
+  <data key="d6">#7030A0</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="BWBR0004770/art9/lid1/zes-weken">
@@ -288,8 +288,8 @@
   <data key="d2">tijdsduur</data>
   <data key="d3">direct</data>
   <data key="d4">concept</data>
-  <data key="d5"></data>
-  <data key="d6">#CCCCCC</data>
+  <data key="d5">tijdsaanduiding</data>
+  <data key="d6">#F4B942</data>
   <data key="d7">2026-01-01</data>
 </node>
 <node id="AR-BWBR0004770-art9-lid1-1">
@@ -391,15 +391,6 @@
   <data key="d9">9</data>
   <data key="d6">#00B0F0</data>
   <data key="d7">2026-01-01</data>
-</node>
-<node id="annotaties/.claude/settings.local">
-  <data key="d0">Art. ?</data>
-  <data key="d1">annotatie</data>
-  <data key="d5">annotatie</data>
-  <data key="d8"></data>
-  <data key="d10"></data>
-  <data key="d9">?</data>
-  <data key="d6">#CCCCCC</data>
 </node>
 <node id="BWBR0004770/art9/lid1">
   <data key="d0">Art. 9 lid 1 IW 1990</data>

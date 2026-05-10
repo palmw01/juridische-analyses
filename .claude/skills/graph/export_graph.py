@@ -19,6 +19,36 @@ import networkx as nx
 FALLBACK_KLEUR = "#CCCCCC"
 
 
+def is_verborgen_pad(fp: Path, root: Path) -> bool:
+    """True als een van de path-componenten (relatief t.o.v. root) begint met '.'."""
+    try:
+        return any(part.startswith(".") for part in fp.relative_to(root).parts)
+    except ValueError:
+        return False
+
+
+def bouw_jas_index(vault_root: Path) -> dict[str, str]:
+    """Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen."""
+    index: dict[str, str] = {}
+    annotaties_dir = vault_root / "annotaties"
+    if not annotaties_dir.exists():
+        return index
+    for json_file in sorted(annotaties_dir.glob("**/*.json")):
+        if is_verborgen_pad(json_file, annotaties_dir):
+            continue
+        with json_file.open(encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                continue
+        for rij in data.get("annotatierijen") or []:
+            bid = rij.get("begrip-id")
+            jas = rij.get("jas-klasse")
+            if bid and jas and bid not in index:
+                index[bid] = jas
+    return index
+
+
 def check_staleness(vault_root: Path, output_dir: Path) -> None:
     """Waarschuw als vault-bestanden nieuwer zijn dan de laatste GEXF-export."""
     gexf = output_dir / "graph.gexf"
@@ -30,7 +60,7 @@ def check_staleness(vault_root: Path, output_dir: Path) -> None:
 
     for patroon in ["begrippen/*.yaml", "regels/*.yaml", "annotaties/**/*.json"]:
         for f in vault_root.glob(patroon):
-            if f.name.startswith("."):
+            if is_verborgen_pad(f, vault_root):
                 continue
             if f.stat().st_mtime > export_mtime:
                 nieuwere.append(f.relative_to(vault_root))
@@ -68,6 +98,7 @@ def lees_kleuren(vault_root: Path) -> dict[str, str]:
 
 def build_graph(vault_root: Path) -> nx.MultiDiGraph:
     kleur_map = lees_kleuren(vault_root)
+    jas_index = bouw_jas_index(vault_root)
     G = nx.MultiDiGraph()
 
     # --- Begrip-nodes ---
@@ -81,11 +112,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
 
             node_id = fm.get("begrip-id") or yaml_file.stem
             label = fm.get("begripsnaam") or node_id
-            jas_klasse = ""
-            for markering in fm.get("markeringen", []):
-                if markering.get("bijdrage") == "primair":
-                    jas_klasse = markering.get("jas-klasse", "")
-                    break
+            jas_klasse = jas_index.get(node_id, "")
 
             attrs: dict = {
                 "label": str(label),
@@ -134,7 +161,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
     annotaties_dir = vault_root / "annotaties"
     if annotaties_dir.exists():
         for json_file in sorted(annotaties_dir.glob("**/*.json")):
-            if json_file.name.startswith("."):
+            if is_verborgen_pad(json_file, annotaties_dir):
                 continue
             with json_file.open(encoding="utf-8") as f:
                 try:
@@ -202,7 +229,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
     # --- Typed edges: annotatie → begrip (via annotatierijen) ---
     if annotaties_dir.exists():
         for json_file in sorted(annotaties_dir.glob("**/*.json")):
-            if json_file.name.startswith("."):
+            if is_verborgen_pad(json_file, annotaties_dir):
                 continue
             with json_file.open(encoding="utf-8") as f:
                 try:

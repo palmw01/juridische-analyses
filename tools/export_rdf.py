@@ -14,6 +14,7 @@ Gebruik:
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -27,13 +28,6 @@ import yaml
 def turtle_literal(waarde: str, lang: str = "nl") -> str:
     escaped = waarde.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
     return f'"{escaped}"@{lang}'
-
-
-def turtle_uri(uri: str, base: str = "") -> str:
-    if uri.startswith("http://") or uri.startswith("https://"):
-        return f"<{uri}>"
-    # Behandel als lokale naam (begrip-id als URI-fragment)
-    return f"<{base}{uri}>"
 
 
 def slug_van_id(begrip_id: str) -> str:
@@ -52,14 +46,38 @@ PREFIXES = """@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix begrip: <urn:jas:begrip:> .
 """
 
-BEGRIP_BASE = "urn:jas:begrip:"
+
+# ---------------------------------------------------------------------------
+# JAS-index (begrip-id → jas-klasse via annotatie-JSONs)
+# ---------------------------------------------------------------------------
+
+def bouw_jas_index(vault_root: Path) -> dict[str, str]:
+    index: dict[str, str] = {}
+    annotaties_dir = vault_root / "annotaties"
+    if not annotaties_dir.exists():
+        return index
+    for json_file in sorted(annotaties_dir.glob("**/*.json")):
+        rel_parts = json_file.relative_to(annotaties_dir).parts
+        if any(part.startswith(".") for part in rel_parts):
+            continue
+        with json_file.open(encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                continue
+        for rij in data.get("annotatierijen") or []:
+            bid = rij.get("begrip-id")
+            jas = rij.get("jas-klasse")
+            if bid and jas and bid not in index:
+                index[bid] = jas
+    return index
 
 
 # ---------------------------------------------------------------------------
 # Begrip → Turtle-blok
 # ---------------------------------------------------------------------------
 
-def begrip_naar_turtle(fm: dict, mapping: dict) -> str:
+def begrip_naar_turtle(fm: dict, mapping: dict, jas_index: dict[str, str]) -> str:
     begrip_id = fm.get("begrip-id", "")
     if not begrip_id:
         return ""
@@ -75,6 +93,7 @@ def begrip_naar_turtle(fm: dict, mapping: dict) -> str:
     herkomst = fm.get("herkomst") or ""
     aliases: list[str] = fm.get("aliases") or []
     relaties: dict = fm.get("relaties") or {}
+    markeringen: list[dict] = fm.get("markeringen") or []
 
     if begripsnaam:
         lines.append(f"    skos:prefLabel {turtle_literal(begripsnaam)} ;")
@@ -89,14 +108,14 @@ def begrip_naar_turtle(fm: dict, mapping: dict) -> str:
     if geldigheid_van:
         lines.append(f'    dct:valid "{geldigheid_van}"^^xsd:date ;')
 
-    if herkomst == "direct":
-        # Markeringen als herkomst-bron
-        for m in (fm.get("markeringen") or []):
-            bron = m.get("bron-annotatie-id", "")
-            if bron:
-                bron_escaped = bron.replace('"', '\\"')
-                lines.append(f'    prov:wasDerivedFrom "{bron_escaped}" ;')
-                break  # één provenance-triple volstaat
+    # Alle markeringen als provenance-bron
+    bronnen_gezien: set[str] = set()
+    for m in markeringen:
+        bron = m.get("bron-annotatie-id", "")
+        if bron and bron not in bronnen_gezien:
+            bronnen_gezien.add(bron)
+            bron_escaped = bron.replace('"', '\\"')
+            lines.append(f'    prov:wasDerivedFrom "{bron_escaped}" ;')
 
     # Relaties
     is_een: list = relaties.get("is-een") or []
@@ -118,7 +137,7 @@ def begrip_naar_turtle(fm: dict, mapping: dict) -> str:
             lines.append(f"    jas:leidtTot begrip:{slug_van_id(str(bid))} ;")
 
     # Notities
-    jas_klasse = fm.get("jas-klasse") or ""
+    jas_klasse = jas_index.get(begrip_id, "")
     status = fm.get("status") or ""
     if jas_klasse:
         lines.append(f'    jas:jasKlasse "{jas_klasse}" ;')
@@ -143,7 +162,7 @@ def begrip_naar_turtle(fm: dict, mapping: dict) -> str:
 # Hoofd-export
 # ---------------------------------------------------------------------------
 
-def exporteer_begrippen(vault_root: Path, mapping: dict) -> list[str]:
+def exporteer_begrippen(vault_root: Path, mapping: dict, jas_index: dict[str, str]) -> list[str]:
     begrippen_dir = vault_root / "begrippen"
     blokken: list[str] = []
 
@@ -152,7 +171,7 @@ def exporteer_begrippen(vault_root: Path, mapping: dict) -> list[str]:
             fm = yaml.safe_load(f)
         if not fm or not isinstance(fm, dict):
             continue
-        blok = begrip_naar_turtle(fm, mapping)
+        blok = begrip_naar_turtle(fm, mapping, jas_index)
         if blok:
             blokken.append(blok)
 
@@ -203,7 +222,8 @@ def main() -> int:
         print(f"Fout: begrippen-map niet gevonden: {begrippen_dir}", file=sys.stderr)
         return 1
 
-    blokken = exporteer_begrippen(vault_root, mapping)
+    jas_index = bouw_jas_index(vault_root)
+    blokken = exporteer_begrippen(vault_root, mapping, jas_index)
     schrijf_turtle(output_pad, blokken)
 
     print(f"RDF Turtle gegenereerd: {output_pad}")

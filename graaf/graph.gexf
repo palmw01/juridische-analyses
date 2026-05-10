@@ -26,8 +26,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/afwijkend-boekjaar" label="afwijkend-boekjaar" start="2026-01-01">
@@ -36,8 +36,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/belastingaanslag" label="belastingaanslag" start="2026-01-01">
@@ -46,8 +46,8 @@
           <attvalue for="1" value="enumeratie" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="rechtsobject" />
+          <attvalue for="5" value="#70AD47" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/dagtekening-aanslagbiljet" label="dagtekening-aanslagbiljet" start="2026-01-01">
@@ -56,8 +56,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/dagtekening-in-november-of-eerder" label="dagtekening-in-november-of-eerder" start="2026-01-01">
@@ -66,8 +66,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar" label="dagtekening-in-vaststellingsjaar" start="2026-01-01">
@@ -76,8 +76,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/een-maand-na-dagtekening" label="een-maand-na-dagtekening" start="2026-01-01">
@@ -86,8 +86,8 @@
           <attvalue for="1" value="tijdsduur" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid" label="in-afwijking-van-eerste-lid" start="2026-01-01">
@@ -96,8 +96,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag" label="invorderbaarheid-belastingaanslag" start="2026-01-01">
@@ -106,8 +106,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen" label="invorderbaarheid-in-gelijke-termijnen" start="2026-01-01">
@@ -116,8 +116,8 @@
           <attvalue for="1" value="MIGRATIE-ONBEKEND" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/invorderbaarheid" label="invorderbaarheid" start="2026-01-01">
@@ -126,8 +126,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="rechtsbetrekking" />
+          <attvalue for="5" value="#FF0000" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/logische-of" label="logische-of" start="2026-01-01">
@@ -136,8 +136,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="operator" />
+          <attvalue for="5" value="#808080" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet" label="maand-dagtekening-aanslagbiljet" start="2026-01-01">
@@ -146,8 +146,8 @@
           <attvalue for="1" value="tijdsduur" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/resterende-maanden-jaar" label="resterende-maanden-jaar" start="2026-01-01">
@@ -156,8 +156,8 @@
           <attvalue for="1" value="MIGRATIE-ONBEKEND" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="variabele" />
+          <attvalue for="5" value="#92D050" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/telkens-een-maand-later" label="telkens-een-maand-later" start="2026-01-01">
@@ -166,8 +166,8 @@
           <attvalue for="1" value="tijdsduur" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/termijn-eindigt-voor-31-december" label="termijn-eindigt-voor-31-december" start="2026-01-01">
@@ -176,8 +176,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/termijnbedrag" label="termijnbedrag" start="2026-01-01">
@@ -186,8 +186,8 @@
           <attvalue for="1" value="monetair-bedrag" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden" label="termijnenberekening-resterende-maanden" start="2026-01-01">
@@ -196,8 +196,8 @@
           <attvalue for="1" value="MIGRATIE-ONBEKEND" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/terugvalregel-lid-1" label="terugvalregel-lid-1" start="2026-01-01">
@@ -206,8 +206,8 @@
           <attvalue for="1" value="booleaans" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag" label="totaalbedrag-belastingaanslag" start="2026-01-01">
@@ -216,8 +216,8 @@
           <attvalue for="1" value="monetair-bedrag" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="variabele" />
+          <attvalue for="5" value="#92D050" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/vervaldag-31-december" label="vervaldag-31-december" start="2026-01-01">
@@ -226,8 +226,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/vervaldag-eerste-termijn" label="vervaldag-eerste-termijn" start="2026-01-01">
@@ -236,8 +236,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand" label="vervaldag-laatste-dag-maand" start="2026-01-01">
@@ -246,8 +246,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/vervaldag-volgende-termijnen" label="vervaldag-volgende-termijnen" start="2026-01-01">
@@ -256,8 +256,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="afleidingsregel" />
+          <attvalue for="5" value="#00B0F0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/voorlopige-aanslag" label="voorlopige-aanslag" start="2026-01-01">
@@ -266,8 +266,8 @@
           <attvalue for="1" value="enumeratie" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="rechtsobject" />
+          <attvalue for="5" value="#70AD47" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib" label="voorlopige-conserverende-aanslag-ib" start="2026-01-01">
@@ -276,8 +276,8 @@
           <attvalue for="1" value="enumeratie" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="rechtsobject" />
+          <attvalue for="5" value="#70AD47" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet" label="zes-weken-na-dagtekening-aanslagbiljet" start="2026-01-01">
@@ -286,8 +286,8 @@
           <attvalue for="1" value="datum" />
           <attvalue for="2" value="afgeleid" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="voorwaarde" />
+          <attvalue for="5" value="#7030A0" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1/zes-weken" label="zes-weken" start="2026-01-01">
@@ -296,8 +296,8 @@
           <attvalue for="1" value="tijdsduur" />
           <attvalue for="2" value="direct" />
           <attvalue for="3" value="concept" />
-          <attvalue for="4" value="" />
-          <attvalue for="5" value="#CCCCCC" />
+          <attvalue for="4" value="tijdsaanduiding" />
+          <attvalue for="5" value="#F4B942" />
         </attvalues>
       </node>
       <node id="AR-BWBR0004770-art9-lid1-1" label="bepalen invorderbaarheid belastingaanslag" start="2026-01-01">
@@ -398,16 +398,6 @@
           <attvalue for="6" value="BWBR0008003" />
           <attvalue for="7" value="9" />
           <attvalue for="5" value="#00B0F0" />
-        </attvalues>
-      </node>
-      <node id="annotaties/.claude/settings.local" label="Art. ?">
-        <attvalues>
-          <attvalue for="0" value="annotatie" />
-          <attvalue for="4" value="annotatie" />
-          <attvalue for="6" value="" />
-          <attvalue for="8" value="" />
-          <attvalue for="7" value="?" />
-          <attvalue for="5" value="#CCCCCC" />
         </attvalues>
       </node>
       <node id="BWBR0004770/art9/lid1" label="Art. 9 lid 1 IW 1990" start="2026-01-01">
