@@ -53,3 +53,4 @@ De rekenregel produceert een tussenresultaat (`resterende-maanden-jaar`) dat als
 | maand-dagtekening: oktober (10) | resterende-maanden-jaar: 2 | ja |  |
 | maand-dagtekening: november (11) | resterende-maanden-jaar: 1 | ja |  |
 | maand-dagtekening: december (12) | resterende-maanden-jaar: 0 | ja |  |
+| maand-dagtekening: november (11) | resterende-maanden-jaar: 2 (tellen nov en dec) | nee | Grensgeval: november geeft 1 resterende maand (dec), niet 2. "Na de maand die in de dagtekening is vermeld" — de dagtekening-maand telt niet mee. |

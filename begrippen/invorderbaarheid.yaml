@@ -32,7 +32,11 @@ geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
-  heeft: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/belastingaanslag
+    kardinaliteit: '1:1'
+  - begrip-id: BWBR0024096/par9-1/voorlopige-aanslag
+    kardinaliteit: '1:1'
   leidt-tot: []
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid1-a

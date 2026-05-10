@@ -40,4 +40,10 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'termijnbedrag: € 250'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'totaalbedrag: € 100; resterende maanden: 3 (dagtekening september)'
+  verwachte-uitkomst: 'termijnbedrag: € 33,33 (zonder restant)'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: € 100 / 3 = € 33,333… Afronding noodzaakt restant-verrekening.
+    De wettekst zwijgt over afronding (A5-signaal). Zonder restant-verrekening sommen
+    de termijnen niet op tot € 100.'
 tussenresultaat: false

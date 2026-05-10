@@ -59,4 +59,12 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'invorderbaar: nee (o.g.v. lid 1)'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'Belastingaanslag (aanslag IB); dagtekening aanslagbiljet: 1 januari
+    2026; beoordelingstijdstip: 12 februari 2026 00:00 (= exact 6 weken)'
+  verwachte-uitkomst: 'invorderbaar: nee (na betekent na, niet op of na)'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: art. 9 lid 10 IW sluit Algemene termijnenwet uit; termijn
+    is kalenderstrikt. "Na" betekent na verstrijken van de zesde week — niet op de
+    laatste dag. Maar gangbare uitleg is dat de aanslag op dagtekening+6wk om 00:00
+    invorderbaar is (peildatum valt samen met einde termijn).'
 tussenresultaat: false

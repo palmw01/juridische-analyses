@@ -39,7 +39,10 @@ De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke 
 
 ## Relaties
 
-| — | — | — |
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| heeft | 1:1 | [[views/begrippen/belastingaanslag]] |
+| heeft | 1:1 | [[views/begrippen/voorlopige-aanslag]] |
 
 ## Afleidingsregel
 

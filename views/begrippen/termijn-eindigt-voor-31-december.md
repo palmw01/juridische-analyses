@@ -10,7 +10,7 @@ tags:
   - begrip
   - jas/voorwaarde
   - wet/li2008
-afleidingsregel: "[[views/regels/AR-BWBR0024096-par9-1-a]]"
+afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 ---
 
 ## Definitie
@@ -44,4 +44,4 @@ Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens 
 
 ## Afleidingsregel
 
-[[views/regels/AR-BWBR0024096-par9-1-a]]
+[[views/regels/AR-BWBR0024096-art9-par1-a]]

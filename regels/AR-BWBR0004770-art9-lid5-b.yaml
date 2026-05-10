@@ -51,4 +51,9 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'resterende-maanden-jaar: 0'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'maand-dagtekening: november (11)'
+  verwachte-uitkomst: 'resterende-maanden-jaar: 2 (tellen nov en dec)'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: november geeft 1 resterende maand (dec), niet 2. "Na de
+    maand die in de dagtekening is vermeld" — de dagtekening-maand telt niet mee.'
 tussenresultaat: false

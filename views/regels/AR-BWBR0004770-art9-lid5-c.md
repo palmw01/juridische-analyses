@@ -50,3 +50,4 @@ Grammaticale interpretatie: de vervaldatum van de eerste termijn is het resultaa
 | dagtekening: 15 maart 2026 | vervaldag eerste termijn: 15 april 2026 | ja |  |
 | dagtekening: 1 september 2026 | vervaldag eerste termijn: 1 oktober 2026 | ja |  |
 | dagtekening: 31 januari 2026 | vervaldag eerste termijn: 28 februari 2026 (of 29 bij schrikkeljaar) | ja |  |
+| dagtekening: 31 januari 2026 | vervaldag eerste termijn: 31 februari 2026 | nee | Grensgeval: 31 februari bestaat niet; vervaldag wordt laatste dag van de maand (28/29 feb). Art. 9 lid 10 IW sluit Algemene termijnenwet uit — kalenderstrikt. |

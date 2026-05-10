@@ -47,4 +47,11 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'vervaldagen: 15 nov, 15 dec 2026'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'vervaldag eerste termijn: 1 december 2026 (dagtekening 1 november);
+    resterende-maanden-jaar: 1'
+  verwachte-uitkomst: 'vervaldagen: 1 dec, 1 jan 2027'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: bij 1 resterende maand treedt terugvalregel (AR-9-5e)
+    in werking; er is geen volgende termijn in 2027. Lid 5 ziet alleen op termijnen
+    "van het jaar".'
 tussenresultaat: false

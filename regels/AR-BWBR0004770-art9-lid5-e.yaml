@@ -56,4 +56,11 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'lid 1 van toepassing: nee; lid 5 specialisatieregel geldt'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'aanslagtype: voorlopige IB; dagtekening: 15 november 2026; resterende-maanden-jaar:
+    1'
+  verwachte-uitkomst: 'lid 5 van toepassing: 1 resterende maand = 1 termijn'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: "niet leidt tot meer dan één termijn" — 1 resterende
+    maand leidt tot 1 termijn (de eerste), dus de terugval naar lid 1 is van toepassing,
+    niet lid 5.'
 tussenresultaat: false

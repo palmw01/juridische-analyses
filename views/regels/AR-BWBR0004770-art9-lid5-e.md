@@ -57,3 +57,4 @@ De terugvalregel veronderstelt dat aan de kwalificatievoorwaarden van de eerste 
 | aanslagtype: voorlopige IB; dagtekening: 15 november 2026; resterende-maanden-jaar: 1 | lid 1 van toepassing: ja; invorderbaarheid zes weken na dagtekening | ja |  |
 | aanslagtype: voorlopige IB; dagtekening: 15 december 2026; resterende-maanden-jaar: 0 | lid 1 van toepassing: ja; invorderbaarheid zes weken na dagtekening | ja |  |
 | aanslagtype: voorlopige IB; dagtekening: 15 oktober 2026; resterende-maanden-jaar: 2 | lid 1 van toepassing: nee; lid 5 specialisatieregel geldt | ja |  |
+| aanslagtype: voorlopige IB; dagtekening: 15 november 2026; resterende-maanden-jaar: 1 | lid 5 van toepassing: 1 resterende maand = 1 termijn | nee | Grensgeval: "niet leidt tot meer dan één termijn" — 1 resterende maand leidt tot 1 termijn (de eerste), dus de terugval naar lid 1 is van toepassing, niet lid 5. |

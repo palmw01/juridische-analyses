@@ -52,3 +52,4 @@ Systematische interpretatie: De wettelijke eis dat termijnen "gelijke" zijn, noo
 | totaalbedrag: € 1.200; resterende maanden: 8 (dagtekening april) | termijnbedrag: € 150 | ja |  |
 | totaalbedrag: € 1.000; resterende maanden: 11 (dagtekening januari) | termijnbedrag: € 90,90 (met restant € 0,10) | ja |  |
 | totaalbedrag: € 500; resterende maanden: 2 (dagtekening oktober) | termijnbedrag: € 250 | ja |  |
+| totaalbedrag: € 100; resterende maanden: 3 (dagtekening september) | termijnbedrag: € 33,33 (zonder restant) | nee | Grensgeval: € 100 / 3 = € 33,333… Afronding noodzaakt restant-verrekening. De wettekst zwijgt over afronding (A5-signaal). Zonder restant-verrekening sommen de termijnen niet op tot € 100. |

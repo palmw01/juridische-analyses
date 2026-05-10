@@ -52,3 +52,4 @@ Grammaticale interpretatie: de vervaldatum van elke termijn na de eerste wordt b
 | vervaldag eerste termijn: 15 april 2026 (dagtekening 15 maart); resterende-maanden-jaar: 9 | vervaldagen: 15 april, 15 mei, 15 juni, 15 juli, 15 aug, 15 sept, 15 okt, 15 nov, 15 dec 2026 | ja |  |
 | vervaldag eerste termijn: 1 oktober 2026 (dagtekening 1 september); resterende-maanden-jaar: 3 | vervaldagen: 1 okt, 1 nov, 1 dec 2026 | ja |  |
 | vervaldag eerste termijn: 15 november 2026 (dagtekening 15 oktober); resterende-maanden-jaar: 2 | vervaldagen: 15 nov, 15 dec 2026 | ja |  |
+| vervaldag eerste termijn: 1 december 2026 (dagtekening 1 november); resterende-maanden-jaar: 1 | vervaldagen: 1 dec, 1 jan 2027 | nee | Grensgeval: bij 1 resterende maand treedt terugvalregel (AR-9-5e) in werking; er is geen volgende termijn in 2027. Lid 5 ziet alleen op termijnen "van het jaar". |

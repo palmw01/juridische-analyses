@@ -38,4 +38,10 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'vervaldag eerste termijn: 28 februari 2026 (of 29 bij schrikkeljaar)'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'dagtekening: 31 januari 2026'
+  verwachte-uitkomst: 'vervaldag eerste termijn: 31 februari 2026'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: 31 februari bestaat niet; vervaldag wordt laatste dag
+    van de maand (28/29 feb). Art. 9 lid 10 IW sluit Algemene termijnenwet uit —
+    kalenderstrikt.'
 tussenresultaat: false

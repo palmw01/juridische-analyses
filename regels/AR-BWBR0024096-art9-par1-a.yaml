@@ -47,4 +47,12 @@ voorbeeldreeksen:
   verwachte-uitkomst: 'termijn-eindigt-voor-31-december: ja'
   juridisch-juist: true
   toelichting: null
+- invoerwaarden: 'dagtekening: 1 maart 2026; resterende maanden: 9; laatste vervaldag
+    berekend: 1 december 2026'
+  verwachte-uitkomst: 'termijn-eindigt-voor-31-december: nee (dec = 31 dec)'
+  juridisch-juist: false
+  toelichting: 'Grensgeval: "eindigt voor 31 december" — 1 december eindigt vóór
+    31 december, dus de cap is van toepassing. Alleen als de laatste vervaldag exact
+    31 december is, eindigt deze niet "voor" 31 december en treedt de cap niet in
+    werking.'
 tussenresultaat: true
