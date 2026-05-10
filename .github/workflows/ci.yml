@@ -30,3 +30,9 @@ jobs:
 
       - name: Genereer PDF-kennisgraaf
         run: python tools/generate_pdf_graph.py
+
+      - name: Upload PDF-kennisgraaf als artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: juridisch-kennismodel
+          path: kennisgraaf/juridisch_kennismodel.pdf
