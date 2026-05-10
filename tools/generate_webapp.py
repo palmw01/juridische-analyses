@@ -234,8 +234,12 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .ann-table td{padding:0.5rem;border-bottom:1px solid var(--border);vertical-align:middle}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
-.signalering{font-size:0.8rem;color:var(--warning);margin-top:0.5rem;padding:0.5rem;background:var(--warning-bg);border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
-.sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:3px;padding:0.1rem 0.3rem;line-height:1.3}
+.has-sign{cursor:pointer}
+.has-sign:hover{background:var(--primary-light)!important}
+.sign-detail td{padding:0.5rem 0.5rem 0.5rem 1.5rem}
+.sign-content{font-size:0.8rem;color:var(--warning);background:var(--warning-bg);padding:0.5rem;border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
+.sign-content::before{content:"[!]";font-weight:700;flex-shrink:0}
+.sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:3px;padding:0.1rem 0.3rem;line-height:1.3;cursor:pointer}
 .sign-ref{font-size:0.7rem;font-weight:600;color:var(--text-muted);margin-right:0.25rem}
 
 /* Voorbeeldreeksen */
@@ -652,24 +656,22 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 
     for a in annotaties:
         rijen = ""
-        sign_items = ""
         for r in a["rijen"]:
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slugify(r["begrip_id"].rsplit("/", 1)[-1])
                 bgp_link = f'<a href="../begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
-            sign_badge = ""
-            sign_ref = ""
-            if r.get("signalering"):
-                sign_badge = '<span class="sign-badge">[!]</span>'
+            sign = r.get("signalering")
+            if sign:
+                # Expandable row met signalering
                 rid = r.get("rij_id", "")
-                sign_ref = f'<span class="sign-ref">{rid}</span>' if rid else ""
-                sign_items += f'<div class="signalering">{sign_ref}<span>[!]</span> {r["signalering"]}</div>\n'
-            rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td><td style="text-align:center">{sign_badge}</td></tr>\n'
-        signaleringen = ""
-        for r in a["rijen"]:
-            if r.get("signalering"):
-                signaleringen += f'<div class="signalering"><span>[!]</span> {r["signalering"]}</div>\n'
+                label = f'<span class="sign-ref">{rid}</span>' if rid else ""
+                rijen += f'<tr class="has-sign" onclick="var d=this.nextElementSibling;d.style.display=d.style.display===\'none\'?\'table-row\':\'none\'">'
+                rijen += f'<td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td>'
+                rijen += f'<td style="text-align:center"><span class="sign-badge">[!]</span></td></tr>\n'
+                rijen += f'<tr class="sign-detail" style="display:none"><td colspan="4"><div class="sign-content">{label}{sign}</div></td></tr>\n'
+            else:
+                rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
         lid = f', lid {a["lid"]}' if a.get("lid") else ""
         mermaid_src = ""
         extra_scripts = ""
@@ -702,7 +704,6 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   <tr><th>Markering</th><th>JAS-klasse</th><th>Begrip</th><th style="text-align:center">Signaal</th></tr>
   {rijen}
 </table></div>
-{sign_items}
 </div>
 {mermaid_src}
 {regel_links}"""
