@@ -21,6 +21,47 @@ def slugify(s: str) -> str:
     return re.sub(r'[^a-z0-9-]', '', s.lower().replace('/', '-').replace('_', '-'))
 
 
+JAS_KLASSE_TO_ABBR: dict[str, str] = {
+    "rechtssubject": "rs", "rechtsobject": "ro", "rechtsbetrekking": "rb",
+    "rechtsfeit": "rf", "voorwaarde": "vw", "afleidingsregel": "ar",
+    "variabele": "va", "parameter": "pa", "tijdsaanduiding": "ta",
+    "plaatsaanduiding": "pl", "delegatiebevoegdheid": "db", "brondefinitie": "bd", "operator": "op",
+}
+
+
+def _text_color_for_bg(hex_color: str) -> str:
+    r, g, b = int(hex_color[1:3], 16), int(hex_color[3:5], 16), int(hex_color[5:7], 16)
+    lum = 0.299 * r + 0.587 * g + 0.114 * b
+    return ",color:#fff" if lum < 140 else ""
+
+
+def diagram_to_mermaid(diagram: dict) -> str:
+    if not diagram or not diagram.get("knopen"):
+        return ""
+    lines = ["graph LR"]
+    classes_used: set[str] = set()
+    for knoop in diagram["knopen"]:
+        nid = knoop["id"]
+        jk = knoop["jas-klasse"]
+        abbr = JAS_KLASSE_TO_ABBR.get(jk, "xx")
+        classes_used.add(jk)
+        label = knoop.get("label", jk)
+        parts = label.split(" ", 1)
+        display = f"{parts[0]}<br/>{parts[1]}" if len(parts) == 2 else label
+        display = display.replace('"', '&quot;')
+        lines.append(f'    {nid}["{display}"]:::{abbr}')
+    for kant in diagram.get("kanten") or []:
+        van, naar = kant["van"], kant["naar"]
+        lbl = kant.get("label")
+        lines.append(f'    {van} -->|{lbl}| {naar}' if lbl else f'    {van} --- {naar}')
+    lines.append("")
+    for jk in sorted(classes_used):
+        abbr = JAS_KLASSE_TO_ABBR.get(jk, "xx")
+        c = JAS_KLEUREN.get(jk, "#888")
+        lines.append(f'    classDef {abbr} fill:{c}{_text_color_for_bg(c)}')
+    return "\n".join(lines)
+
+
 JAS_KLEUREN: dict[str, str] = {
     "rechtssubject": "#4472C4",
     "rechtsobject": "#70AD47",
@@ -76,6 +117,16 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --success-bg: #064E3B;
   --error-bg: #7F1D1D;
   --warning-bg: #78350F;
+}
+.mermaid {
+  min-height: 120px;
+  background: var(--card-bg);
+  padding: 0.5rem 0;
+  overflow-x: auto;
+}
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:100%;-webkit-text-size-adjust:100%}
@@ -250,7 +301,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
 </nav>"""
 
 
-def pagina(title: str, body: str, active: str = "", p: str = "") -> str:
+def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: str = "") -> str:
     return f"""<!DOCTYPE html>
 <html lang="nl" data-theme="light">
 <head>
@@ -272,14 +323,15 @@ def pagina(title: str, body: str, active: str = "", p: str = "") -> str:
 </div></main>
 <footer>Gegenereerd uit de juridische analyses vault &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>
 <script src="{p}js/app.js"></script>
+{extra_scripts}
 </body>
 </html>"""
 
 
-def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = ""):
+def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = "", extra_scripts: str = ""):
     pad = out / rel
     pad.parent.mkdir(parents=True, exist_ok=True)
-    pad.write_text(pagina(title, body, active, p))
+    pad.write_text(pagina(title, body, active, p, extra_scripts))
 
 
 def jas_tag(klasse: str) -> str:
@@ -367,6 +419,7 @@ def laad_annotaties(vault_root: Path) -> list[dict]:
             "structuurpositie": data.get("structuurpositie", ""),
             "wetstekst": wetstekst,
             "rijen": rijen,
+            "diagram": data.get("diagram"),
         })
     return annotaties
 
@@ -439,7 +492,16 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
     schrijf_html(out, "index.html", "Dashboard — Belastingdienst", body, active="dashboard")
 
 
-def gen_begrippen(out: Path, begrippen: list):
+def gen_begrippen(out: Path, begrippen: list, annotaties: list):
+    # Build index: begrip_id → annotatie-links
+    ann_by_begrip: dict[str, list[dict]] = {}
+    for a in annotaties:
+        ann_title = f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}'
+        ann_url = f'annotaties/{a["id"].replace("/","-")}.html'
+        for r in a["rijen"]:
+            bid = r.get("begrip_id")
+            if bid:
+                ann_by_begrip.setdefault(bid, []).append({"titel": ann_title, "url": ann_url})
     items = "".join(
         f'<li onclick="window.location=\'begrippen/{b["slug"]}.html\'">'
         f'<a href="begrippen/{b["slug"]}.html" class="item-title">{b["naam"]}</a>'
@@ -497,6 +559,16 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         reg_lnk = ""
         if b["afleidingsregel-id"]:
             reg_lnk = f'<p style="margin-top:0.5rem"><a href="{pp}regels/{b["afleidingsregel-id"]}.html">{b["afleidingsregel-id"]}</a></p>'
+        ann_links = ""
+        ann_refs = ann_by_begrip.get(b["id"], [])
+        if ann_refs:
+            seen: set[str] = set()
+            items = ""
+            for ref in ann_refs:
+                if ref["url"] not in seen:
+                    seen.add(ref["url"])
+                    items += f'<li><a href="../{ref["url"]}">{ref["titel"]}</a></li>\n'
+            ann_links = f'<div class="card"><div class="card-title">Annotaties</div><ul style="margin-left:1.25rem">{items}</ul></div>'
         body = f"""<h1>{b["naam"]}</h1>
 <p class="subtitle">{jas_tag(b["jas_klasse"])} <span class="badge badge-soort">{b["soort"]}</span> {status_badge(b["status"])}</p>
 <div class="detail-layout">
@@ -525,13 +597,22 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
     <div class="card-title">Relaties</div>
     {rel_html}
   </div>
+  {ann_links}
   {f'<div class="card"><div class="card-title">Afleidingsregel</div>{reg_lnk}</div>' if reg_lnk else ""}
 </div>
 </div>"""
         schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} — Belastingdienst', body, active="begrippen", p="../")
 
 
-def gen_annotaties(out: Path, annotaties: list):
+def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
+    # Build index: begrip_id → regels die erin/eruit gebruiken
+    regel_by_bid: dict[str, list[dict]] = {}
+    for reg in regels:
+        ref = {"id": reg["id"], "naam": reg["naam"]}
+        for inv in reg["invoer"]:
+            regel_by_bid.setdefault(inv, []).append(ref)
+        for uitv in reg["uitvoer"]:
+            regel_by_bid.setdefault(uitv, []).append(ref)
     items = "".join(
         f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
         f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}</a>'
@@ -557,6 +638,27 @@ def gen_annotaties(out: Path, annotaties: list):
             if r.get("signalering"):
                 signaleringen += f'<div class="signalering"><span>[!]</span> {r["signalering"]}</div>\n'
         lid = f', lid {a["lid"]}' if a.get("lid") else ""
+        mermaid_src = ""
+        extra_scripts = ""
+        mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
+        if mermaid_code:
+            mermaid_src = f"""<div class="card"><div class="card-title">Structuurdiagram</div>
+<div class="mermaid">
+{mermaid_code}
+</div></div>"""
+            extra_scripts = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>\n<script>mermaid.initialize({startOnLoad:true,theme:"neutral",fontFamily:"system-ui,sans-serif"})</script>'
+        regel_links = ""
+        seen_regels: set[str] = set()
+        regel_items = ""
+        for r in a["rijen"]:
+            bid = r.get("begrip_id")
+            if bid:
+                for reg_ref in regel_by_bid.get(bid, []):
+                    if reg_ref["id"] not in seen_regels:
+                        seen_regels.add(reg_ref["id"])
+                        regel_items += f'<li><a href="../regels/{reg_ref["id"]}.html">{reg_ref["naam"]}</a></li>\n'
+        if regel_items:
+            regel_links = f'<div class="card"><div class="card-title">Afleidingsregels</div><ul style="margin-left:1.25rem">{regel_items}</ul></div>'
         body = f"""<h1>{a["wet"]} art. {a["artikel"]}{lid}</h1>
 <p class="subtitle">{a["structuurpositie"]} &bull; {a["bwb_id"]}</p>
 <div class="wetstekst">"{a["wetstekst"]}"</div>
@@ -568,11 +670,17 @@ def gen_annotaties(out: Path, annotaties: list):
   {rijen}
 </table></div>
 {signaleringen}
-</div>"""
-        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties", p="../")
+</div>
+{mermaid_src}
+{regel_links}"""
+        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties", p="../", extra_scripts=extra_scripts)
 
 
-def gen_regels(out: Path, regels: list):
+def gen_regels(out: Path, regels: list, begrippen: list):
+    slug_by_bid = {b["id"]: b["slug"] for b in begrippen}
+    def _link(ref: str) -> str:
+        slug = slug_by_bid.get(ref)
+        return f'<a href="../begrippen/{slug}.html">{ref}</a>' if slug else ref
     items = "".join(
         f'<li onclick="window.location=\'regels/{r["id"]}.html\'">'
         f'<a href="regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
@@ -606,11 +714,11 @@ def gen_regels(out: Path, regels: list):
 <div class="dash-grid">
   <div class="card">
     <div class="card-title">Invoer</div>
-    <ul style="margin-left:1.25rem;">{"".join(f'<li>{i}</li>' for i in r["invoer"]) or "<li class=item-meta>Geen</li>"}</ul>
+    <ul style="margin-left:1.25rem;">{"".join(f'<li>{_link(i)}</li>' for i in r["invoer"]) or "<li class=item-meta>Geen</li>"}</ul>
   </div>
   <div class="card">
     <div class="card-title">Uitvoer</div>
-    <ul style="margin-left:1.25rem;">{"".join(f'<li>{o}</li>' for o in r["uitvoer"]) or "<li class=item-meta>Geen</li>"}</ul>
+    <ul style="margin-left:1.25rem;">{"".join(f'<li>{_link(o)}</li>' for o in r["uitvoer"]) or "<li class=item-meta>Geen</li>"}</ul>
   </div>
   <div class="card">
     <div class="card-title">Details</div>
@@ -669,11 +777,17 @@ var colorMap = {kleuren_json};
 var width = document.getElementById('graphContainer').clientWidth;
 var height = Math.max(400, Math.min(window.innerHeight * 0.6, 700));
 var svg = d3.select("#graphContainer").append("svg").attr("width", width).attr("height", height);
+var g = svg.append("g");
+// Zoom + pan
+var zoom = d3.zoom().scaleExtent([0.1, 8]).on("zoom", function(e){{ g.attr("transform", e.transform); }});
+svg.call(zoom).on("dblclick.zoom", null);
+// Background rect voor pan
+g.append("rect").attr("x", -width*5).attr("y", -height*5).attr("width", width*10).attr("height", height*10).attr("fill", "none").attr("pointer-events", "all");
 svg.append("defs").append("marker").attr("id","arrow").attr("viewBox","0 -5 10 10").attr("refX",20).attr("refY",0).attr("markerWidth",6).attr("markerHeight",6).attr("orient","auto")
   .append("path").attr("d","M0,-5L10,0L0,5").attr("fill","#94a3b8");
-var link = svg.append("g").selectAll("line").data(data.links).join("line")
+var link = g.append("g").selectAll("line").data(data.links).join("line")
   .attr("stroke","#94a3b8").attr("stroke-width",1).attr("stroke-opacity",0.5).attr("marker-end","url(#arrow)");
-var node = svg.append("g").selectAll("g").data(data.nodes).join("g").call(
+var node = g.append("g").selectAll("g").data(data.nodes).join("g").call(
   d3.drag().on("start",function(e,d){{if(!e.active)simulation.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y}})
   .on("drag",function(e,d){{d.fx=e.x;d.fy=e.y}})
   .on("end",function(e,d){{if(!e.active)simulation.alphaTarget(0);d.fx=null;d.fy=null}}));
@@ -693,6 +807,13 @@ simulation.on("tick",function(){{
   link.attr("x1",function(d){{return d.source.x}}).attr("y1",function(d){{return d.source.y}}).attr("x2",function(d){{return d.target.x}}).attr("y2",function(d){{return d.target.y}});
   node.attr("transform",function(d){{return"translate("+d.x+","+d.y+")"}});
 }});
+// Auto-center na stabilisatie
+simulation.on("end",function(){{
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(width/2,height/2).scale(0.8).translate(-width/2,-height/2));
+}});
+function resetView(){{
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(width/2,height/2).scale(0.8).translate(-width/2,-height/2));
+}}
 // Legend
 var legend = d3.select("#graphLegend");
 legend.append("div").style("font-weight","600").style("margin-bottom","0.3rem").text("Legenda");
@@ -828,9 +949,9 @@ def main():
     print("Pagina's genereren...", file=sys.stderr)
     gen_index(out, begrippen, annotaties, regels)
     gen_404(out)
-    gen_begrippen(out, begrippen)
-    gen_annotaties(out, annotaties)
-    gen_regels(out, regels)
+    gen_begrippen(out, begrippen, annotaties)
+    gen_annotaties(out, annotaties, regels, begrippen)
+    gen_regels(out, regels, begrippen)
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
 

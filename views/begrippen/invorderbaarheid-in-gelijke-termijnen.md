@@ -2,7 +2,7 @@
 begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
 begripsnaam: invorderbaarheid-in-gelijke-termijnen
 jas-klasse: afleidingsregel
-soort: MIGRATIE-ONBEKEND
+soort: booleaans
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01

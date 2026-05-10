@@ -2,7 +2,7 @@
 begrip-id: BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
 begripsnaam: termijnenberekening-resterende-maanden
 jas-klasse: afleidingsregel
-soort: MIGRATIE-ONBEKEND
+soort: tijdsduur
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01

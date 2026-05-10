@@ -2,7 +2,7 @@
 begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
 begripsnaam: resterende-maanden-jaar
 jas-klasse: variabele
-soort: MIGRATIE-ONBEKEND
+soort: tijdsduur
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01
