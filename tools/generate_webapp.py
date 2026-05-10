@@ -118,6 +118,16 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --error-bg: #7F1D1D;
   --warning-bg: #78350F;
 }
+[data-theme="dark"] .mermaid svg text {
+  fill: #e2e8f0 !important;
+}
+[data-theme="dark"] .mermaid svg .edgeLabel {
+  fill: #cbd5e1 !important;
+  stroke: none !important;
+}
+[data-theme="dark"] .mermaid svg #arrow {
+  fill: #64748b !important;
+}
 .mermaid {
   min-height: 120px;
   background: var(--card-bg);
@@ -442,6 +452,9 @@ def laad_regels(vault_root: Path) -> list[dict]:
             "operators": data.get("operators") or [],
             "voorbeeldreeksen": data.get("voorbeeldreeksen") or [],
             "tussenresultaat": data.get("tussenresultaat", False),
+            "bwb_id": data.get("bwb-id", ""),
+            "artikel": str(data.get("artikel", "") or ""),
+            "lid": str(data.get("lid", "") or ""),
         })
     return regels
 
@@ -624,7 +637,14 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
         for a in annotaties
     )
     body = f"""<h1>Annotaties ({len(annotaties)})</h1>
-<div class="item-list">{items}</div>"""
+<input type="text" class="search-input" id="filterInput" placeholder="Filter op wet of artikel..." autofocus>
+<div class="item-list" id="itemList">{items}</div>
+<script>
+document.getElementById('filterInput')?.addEventListener('input',function(){{
+  var q=this.value.toLowerCase(),list=document.getElementById('itemList'),li=list.getElementsByTagName('li');
+  for(var i=0;i<li.length;i++){{li[i].style.display=li[i].textContent.toLowerCase().indexOf(q)>-1?'':'none'}}
+}});
+</script>"""
     schrijf_html(out, "annotaties.html", "Annotaties — Belastingdienst", body, active="annotaties")
 
     for a in annotaties:
@@ -678,11 +698,15 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
         schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties", p="../", extra_scripts=extra_scripts)
 
 
-def gen_regels(out: Path, regels: list, begrippen: list):
+def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
     slug_by_bid = {b["id"]: b["slug"] for b in begrippen}
     def _link(ref: str) -> str:
         slug = slug_by_bid.get(ref)
         return f'<a href="../begrippen/{slug}.html">{ref}</a>' if slug else ref
+    # Build annotation lookup: (bwb_id, artikel, lid) → annotatie data
+    ann_by_key: dict[tuple[str, str, str], dict] = {}
+    for a in annotaties:
+        ann_by_key[(a["bwb_id"], a["artikel"], a.get("lid", ""))] = a
     items = "".join(
         f'<li onclick="window.location=\'regels/{r["id"]}.html\'">'
         f'<a href="regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
@@ -692,7 +716,14 @@ def gen_regels(out: Path, regels: list, begrippen: list):
         for r in regels
     )
     body = f"""<h1>Afleidingsregels ({len(regels)})</h1>
-<div class="item-list">{items}</div>"""
+<input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of ID..." autofocus>
+<div class="item-list" id="itemList">{items}</div>
+<script>
+document.getElementById('filterInput')?.addEventListener('input',function(){{
+  var q=this.value.toLowerCase(),list=document.getElementById('itemList'),li=list.getElementsByTagName('li');
+  for(var i=0;i<li.length;i++){{li[i].style.display=li[i].textContent.toLowerCase().indexOf(q)>-1?'':'none'}}
+}});
+</script>"""
     schrijf_html(out, "regels.html", "Regels — Belastingdienst", body, active="regels")
 
     for r in regels:
@@ -703,6 +734,13 @@ def gen_regels(out: Path, regels: list, begrippen: list):
             label = "[+]" if juist else "[-]"
             vb += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> <strong>Invoer:</strong> {v.get("invoerwaarden","")}<br><strong>Uitvoer:</strong> {v.get("verwachte-uitkomst","")}</div>'
         ops = ", ".join(r.get("operators") or [])
+        ann_link = ""
+        if r["bwb_id"] and r["artikel"]:
+            match = ann_by_key.get((r["bwb_id"], r["artikel"], r["lid"]))
+            if match:
+                ann_url = f'../annotaties/{match["id"].replace("/","-")}.html'
+                ann_title = f'{match["wet"]} art. {match["artikel"]}{", lid " + match["lid"] if match.get("lid") else ""}'
+                ann_link = f'<div class="card"><div class="card-title">Annotatie</div><p><a href="{ann_url}">{ann_title}</a></p></div>'
         body = f"""<h1>{r["naam"]}</h1>
 <p class="subtitle"><span class="badge badge-definitief">{r["soort"]}</span> {r["id"]}</p>
 <div class="card">
@@ -713,6 +751,7 @@ def gen_regels(out: Path, regels: list, begrippen: list):
   <div class="card-title">Toelichting</div>
   <p>{r["toelichting"] or "<em>Geen toelichting</em>"}</p>
 </div>
+{ann_link}
 <div class="dash-grid">
   <div class="card">
     <div class="card-title">Invoer</div>
@@ -741,22 +780,25 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
     nodes: list[dict] = []
     node_ids: set[str] = set()
     links: list[dict] = []
-    def add_node(nid: str, label: str, groep: str, node_type: str = "begrip"):
+    def add_node(nid: str, label: str, groep: str, node_type: str = "begrip", page: str | None = None):
         if nid not in node_ids:
-            nodes.append({"id": nid, "label": label, "groep": groep, "type": node_type})
+            nd: dict[str, Any] = {"id": nid, "label": label, "groep": groep, "type": node_type}
+            if page:
+                nd["page"] = page
+            nodes.append(nd)
             node_ids.add(nid)
     for b in begrippen:
-        add_node(b["id"], b["naam"], b["jas_klasse"], "begrip")
+        add_node(b["id"], b["naam"], b["jas_klasse"], "begrip", f'begrippen/{b["slug"]}.html')
         for rt in ("is-een", "heeft", "leidt-tot"):
             for target in b["relaties"][rt]:
                 if target not in node_ids:
-                    add_node(target, target.rsplit("/", 1)[-1], "onbekend", "begrip")
+                    add_node(target, target.rsplit("/", 1)[-1], "onbekend", "begrip", None)
                 links.append({"source": b["id"], "target": target, "relatie": rt})
     for r in regels:
-        add_node(r["id"], r["naam"], "afleidingsregel", "regel")
+        add_node(r["id"], r["naam"], "afleidingsregel", "regel", f'regels/{r["id"]}.html')
         for inv in r.get("invoer") or []:
             if inv not in node_ids:
-                add_node(inv, inv.rsplit("/", 1)[-1], "onbekend", "begrip")
+                add_node(inv, inv.rsplit("/", 1)[-1], "onbekend", "begrip", None)
             links.append({"source": r["id"], "target": inv, "relatie": "invoer"})
     gr_data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
     kleuren_json = json.dumps(JAS_KLEUREN, ensure_ascii=False)
@@ -768,6 +810,7 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
     <option value="all">Alle</option>
     {"".join(f'<option value="{k}">{k}</option>' for k in sorted(JAS_KLEUREN.keys()))}
   </select>
+  <button onclick="resetView()" style="margin-left:0.5rem;padding:0.4rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.85rem;background:var(--card-bg);color:var(--text);cursor:pointer">Reset weergave</button>
 </div>
 <div class="graph-container" id="graphContainer">
   <div class="graph-legend" id="graphLegend"></div>
@@ -801,6 +844,9 @@ node.append("circle").attr("r",7).attr("fill",function(d){{return colorMap[d.gro
   .attr("opacity",function(d){{return d.type==='begrip'?1:0}});
 node.append("text").attr("dx",12).attr("dy",4).attr("font-size","11px").attr("fill",function(){{var root=document.documentElement;return root.getAttribute('data-theme')==='dark'?'#e2e8f0':'#334155'}})
   .text(function(d){{return d.label.length>25?d.label.slice(0,22)+'...':d.label}});
+// Click-to-navigate
+node.on("click",function(e,d){{if(d.page)window.location.href=d.page;}});
+node.style("cursor",function(d){{return d.page?'pointer':'default'}});
 var simulation = d3.forceSimulation(data.nodes)
   .force("link",d3.forceLink(data.links).id(function(d){{return d.id}}).distance(100))
   .force("charge",d3.forceManyBody().strength(-150))
@@ -953,7 +999,7 @@ def main():
     gen_404(out)
     gen_begrippen(out, begrippen, annotaties)
     gen_annotaties(out, annotaties, regels, begrippen)
-    gen_regels(out, regels, begrippen)
+    gen_regels(out, regels, begrippen, annotaties)
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
 
