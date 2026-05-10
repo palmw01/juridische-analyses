@@ -3,7 +3,7 @@ TOOLS     = tools
 SCRIPTS   = scripts
 
 .PHONY: setup install-hooks validate views export-rdf export-graph pdf-graph
-.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci
+.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -30,6 +30,9 @@ export-rdf:
 
 export-graph:
 	@$(VENV) $(TOOLS)/export_graph.py
+
+webapp:
+	@$(VENV) $(TOOLS)/generate_webapp.py
 
 pdf-graph: export-rdf
 	@$(VENV) $(TOOLS)/generate_pdf_graph.py

@@ -115,6 +115,10 @@ make pdf-graph                           # RDF Turtle + PDF-visualisatie
 make query-rdf                           # Alle ingebouwde queries
 make query-rdf ARGS="--list"             # Toon beschikbare queries
 make query-rdf 'ARGS=-q "SELECT * { ?s ?p ?o } LIMIT 10"'  # Eigen query
+
+# 8. Webapp genereren (Belastingdienst-stijl)
+make webapp                              # Statische site in webapp/
+open webapp/index.html                   # Open in browser
 ```
 
 Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie + validatierapport wordt ververst).
@@ -136,11 +140,12 @@ cd tools && python -m venv .venv && .venv/bin/pip install -r requirements.lock
 | `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
 | `make export-graph` | Exporteert GEXF + GraphML (Gephi) | Na wijziging begrippen |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
+| `make webapp` | Genereert statische webapp (Belastingdienst-stijl) | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make ci` | Validatie + views + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
-| `make clean` | Verwijdert gegenereerde bestanden (views, grafen) | Opruimen |
+| `make clean` | Verwijdert gegenereerde bestanden (views, grafen, webapp) | Opruimen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
 | `fetch_wettenbank.py` | Normaliseert MCP-responses naar `bronnen/` | Via `/wettenbank` skill |
 | `extract_kruisrefs.py` | Extraheert JCI URI-verwijzingen | Via `/wettenbank` skill |

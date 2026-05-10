@@ -38,3 +38,6 @@ kennisgraaf/*.graphml
 # Legacy — tools/kennisgraaf (restant van oude graph skill)
 tools/kennisgraaf/*.gexf
 tools/kennisgraaf/*.graphml
+
+# Gegenereerde statische webapp
+webapp/
