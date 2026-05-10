@@ -44,7 +44,7 @@ def main():
         '  rankdir=LR;',
         '  node [fontname="Arial", shape=box, style="filled,rounded", color="#333333", fontcolor=white];',
         '  edge [fontname="Arial", fontsize=10, color="#666666"];',
-        '  label="Juridisch Kennismodel — Inning & Invordering\\nGegenereerd door Gemini CLI";',
+        '  label="Juridisch Kennismodel — Inning & Invordering\\nGegenereerd door PDF graph";',
         '  labelloc="t";',
         '  fontsize=20;',
         ''
