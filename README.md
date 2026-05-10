@@ -1,11 +1,6 @@
 # Juridische wetsanalyse — Obsidian knowledge graph
 
-[![Live Documentation](https://img.shields.io/badge/Live-Documentation-green)](https://palmw01.github.io/juridische-analyses/)
-![Deployment Status](https://github.com/palmw01/juridische-analyses/actions/workflows/deploy-quartz.yml/badge.svg)
 ![License](https://img.shields.io/github/license/palmw01/juridische-analyses)
-
-🌐 **Bekijk de live knowledge graph en documentatie:**  
-https://palmw01.github.io/juridische-analyses/
 
 Werkruimte voor gestructureerde wetsanalyse op het domein **invordering van rijksbelastingen**. Doel is wetgeving zo te analyseren dat de resultaten bruikbaar zijn voor de uitvoeringspraktijk: rechtmatig, uitlegbaar en controleerbaar. Claude Code ondersteunt **Activiteit 2** (zichtbaar maken van de juridische structuur) en **Activiteit 3** (vaststellen van de betekenis), aangedreven door een MCP-koppeling met [wetten.overheid.nl](https://wetten.overheid.nl).
 
