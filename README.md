@@ -27,10 +27,10 @@ Aangedreven door Claude Code + MCP-koppeling met [wetten.overheid.nl](https://we
 wetstekst                     kennisgraaf
     │                             ▲
     ▼                             │
-┌──────────┐   ┌──────────┐   ┌──────────┐
+┌──────────┐   ┌───────────┐   ┌──────────┐
 │ bronnen/ │ → │ annotaties│ → │ begrippen│ → RDF/GraphML
-│ (JSON)   │   │ (JAS)    │   │ + regels │
-└──────────┘   └──────────┘   └──────────┘
+│ (JSON)   │   │ (JAS)     │   │ + regels │
+└──────────┘   └───────────┘   └──────────┘
                     ↑                ↑
               Claude Code        Python tools
               (/annoteer)        (validatie, views)
