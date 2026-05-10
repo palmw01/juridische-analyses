@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: voorlopige-aanslag
+begrip-id: BWBR0004770/art9/lid5/voorlopige-aanslag
 begripsnaam: voorlopige-aanslag
 jas-klasse: rechtsobject
-soort: enumeratiewaarde [id]
+soort: enumeratie
 herkomst: direct
 status: concept
 geldigheid-van: 2026-01-01
@@ -12,36 +11,35 @@ tags:
   - jas/rechtsobject
   - wet/iw1990
   - art/9
+aliases:
+  - voorlopige belastingaanslag
 ---
 
 ## Definitie
 
-*"voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)"*
-*(§ 9.1 LI 2008, peildatum 2026-01-01)*
+*"een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
 Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | § 9.1 LI 2008 | voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet) | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid5 | een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting | primair | grammaticaal | ja |
+| m-002 | BWBR0008003/par9-1 | voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet) | context | systematisch | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| voorlopige-aanslag: Een aanslag inkomstenbelasting over het lopende jaar 2008 opgelegd aan Jan de Groot | ja | Betreft een aanslag die vooruitloopt op de definitieve vaststelling. |
-| voorlopige-aanslag: Een definitieve aanslag vennootschapsbelasting over 2007 | nee | Dit is een definitieve vaststelling, geen voorlopige. |
-| voorlopige-aanslag: Een navorderingsaanslag | nee | Een navorderingsaanslag komt na de definitieve aanslag. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- Wordt opgelegd op basis van geschatte gegevens.
-- Verrekenbaar met de definitieve aanslag.
+*(Kenmerken nog niet ingevuld)*
+
+> **Kenmerken:** identificatiebegrip
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| is een | — | [[begrippen/belastingaanslag]] |
+| is-een | — | [[views/begrippen/belastingaanslag]] |

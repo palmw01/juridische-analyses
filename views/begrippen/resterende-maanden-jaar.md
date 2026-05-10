@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: resterende-maanden-jaar
+begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
 begripsnaam: resterende-maanden-jaar
 jas-klasse: variabele
-soort: getal
+soort: MIGRATIE-ONBEKEND
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01
@@ -12,41 +11,38 @@ tags:
   - jas/variabele
   - wet/iw1990
   - art/9
-  - tussenresultaat
-afleidingsregels:
-  - "[[views/regels/AR-9-5b]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-b]]"
 ---
 
 ## Definitie
 
-*"nog maanden van het jaar overblijven"*
-*(Art. 9 lid 5 IW 1990, peildatum 2026-01-01)*
+*"nog maanden van het jaar overblijven"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
 Het aantal kalendermaanden dat in het belastingjaar resteert na de maand die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van art. 9 lid 5 IW 1990
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | Art. 9 lid 5 IW 1990 | nog maanden van het jaar overblijven | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid5 | nog maanden van het jaar overblijven | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| Een aanslagbiljet gedagtekend in maart 2026 levert een resterende-maanden-jaar van 9. | ja | Na maart resteren in 2026 negen maanden (april t/m december); de voorlopige aanslag is invorderbaar in negen gelijke termijnen. |
-| Een aanslagbiljet gedagtekend in november 2026 levert een resterende-maanden-jaar van 1. | ja | Grensgeval: na november resteert slechts één maand (december). De derde volzin van lid 5 bepaalt dat bij niet méér dan één termijn lid 1 herneemt; lid 5 leidt dan niet tot termijneninvordering. |
-| Een aanslagbiljet gedagtekend in januari 2026 levert een resterende-maanden-jaar van 11. | ja | Na januari resteren elf maanden (februari t/m december); de aanslag is invorderbaar in elf gelijke termijnen. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- De variabele is een tussenresultaat: zij wordt berekend als invoer voor de hoofdregel van lid 5 (het aantal termijnen).
-- Bereik: 0 (december) t/m 11 (januari); bij 0 of 1 treedt de terugvalregel van de derde volzin in werking.
-- De waarde is afhankelijk van de maand van dagtekening en wordt bepaald door de rekenregel `AR-9-5b`.
+*(Kenmerken nog niet ingevuld)*
+
+> **Kenmerken:** tussenresultaat
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/maand-dagtekening-aanslagbiljet]] |
-| leidt tot | — | [[begrippen/termijnenberekening-resterende-maanden]] |
+| heeft | 1:1 | [[views/begrippen/maand-dagtekening-aanslagbiljet]] |
+| causaal | — | [[views/begrippen/termijnenberekening-resterende-maanden]] |
+
+## Afleidingsregel
+
+[[views/regels/AR-BWBR0004770-art9-lid5-b]]

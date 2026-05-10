@@ -1,45 +1,38 @@
 ---
-type: begrip
-begrip-id: afwijkend-boekjaar
+begrip-id: BWBR0004770/art9/lid5/afwijkend-boekjaar
 begripsnaam: afwijkend-boekjaar
 jas-klasse: voorwaarde
-soort: waar-niet-waar
+soort: booleaans
 herkomst: direct
 status: concept
 geldigheid-van: 2026-01-01
 tags:
   - begrip
   - jas/voorwaarde
-  - wet/li2008
+  - wet/iw1990
   - art/9
 ---
 
 ## Definitie
 
-*"Bij afwijkende boekjaren"*
-*(§ 9.1 LI 2008, peildatum 2026-01-01)*
+*"Bij afwijkende boekjaren"* *(BWBR0008003/par9-1, grammaticaal)*
 
 Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | § 9.1 LI 2008 | Bij afwijkende boekjaren | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0008003/par9-1 | Bij afwijkende boekjaren | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| afwijkend-boekjaar: Een BV heeft een boekjaar van 1 april tot en met 31 maart | ja | Het boekjaar wijkt af van het kalenderjaar. |
-| afwijkend-boekjaar: Een natuurlijk persoon met een boekjaar van 1 januari tot 31 december | nee | Dit is een regulier kalenderjaar. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- Vaak voorkomend bij rechtspersonen.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
-| Type | Kardinaliteit | Begrip |
-|------|---------------|--------|
 | — | — | — |

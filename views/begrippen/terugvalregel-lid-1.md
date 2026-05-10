@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: terugvalregel-lid-1
+begrip-id: BWBR0004770/art9/lid5/terugvalregel-lid-1
 begripsnaam: terugvalregel-lid-1
 jas-klasse: afleidingsregel
-soort: waar-niet-waar
+soort: booleaans
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01
@@ -12,41 +11,37 @@ tags:
   - jas/afleidingsregel
   - wet/iw1990
   - art/9
-afleidingsregels:
-  - "[[views/regels/AR-9-5e]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-e]]"
 ---
 
 ## Definitie
 
-*"Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing."*
-*(Art. 9 lid 5 IW 1990, peildatum 2026-01-01)*
+*"Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing."* *(BWBR0004770/art9/lid5, systematisch)*
 
 De beslissingsregel die bepaalt dat art. 9 lid 1 IW 1990 herneemt als de termijnenberekening van art. 9 lid 5 eerste volzin niet leidt tot meer dan één termijn, zodat de zes-wekentermijn van lid 1 in de plaats treedt van de gelijke-termijnenregeling
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | Art. 9 lid 5 IW 1990 | Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing. | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid5 | Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing. | primair | systematisch | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| Een voorlopige aanslag IB 2026 gedagtekend 15 november 2026 is op grond van de terugvalregel invorderbaar zes weken na de dagtekening. | ja | Na november resteert slechts één maand (december), zodat de eerste volzin leidt tot precies één termijn (≤ 1); de terugvalregel activeert lid 1. |
-| Een voorlopige aanslag IB 2026 gedagtekend 15 december 2026 is op grond van de terugvalregel invorderbaar zes weken na de dagtekening. | ja | Grensgeval: na december resteren nul maanden, zodat de eerste volzin leidt tot nul termijnen (< 1 ≤ 1); de terugvalregel activeert lid 1. |
-| Een voorlopige aanslag IB 2026 gedagtekend 15 oktober 2026 valt onder de terugvalregel. | nee | Na oktober resteren twee maanden (november en december), zodat de eerste volzin leidt tot twee termijnen; het termijnenaantal is groter dan één en de terugvalregel is niet van toepassing. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- De terugvalregel is een grenswaardebeslissing: zij activeert lid 1 uitsluitend als het termijnenaantal ≤ 1 is (nul of één termijn).
-- De drempelwaarde 'meer dan één termijn' is wettelijk vastgelegd; een uitkomst van precies één termijn activeert de terugvalregel.
-- Systematisch effect: bij een dagtekening in november of december van het belastingjaar is de zes-wekentermijn van lid 1 van toepassing; de gelijke-termijnenregeling van lid 5 first volzin is dan niet van toepassing.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/termijnenberekening-resterende-maanden]] |
-| heeft | 1:1 | [[begrippen/resterende-maanden-jaar]] |
-| leidt tot | — | [[begrippen/invorderbaarheid-belastingaanslag]] |
+| heeft | 1:1 | [[views/begrippen/termijnenberekening-resterende-maanden]] |
+| heeft | 1:1 | [[views/begrippen/resterende-maanden-jaar]] |
+| causaal | — | [[views/begrippen/invorderbaarheid-belastingaanslag]] |
+
+## Afleidingsregel
+
+[[views/regels/AR-BWBR0004770-art9-lid5-e]]

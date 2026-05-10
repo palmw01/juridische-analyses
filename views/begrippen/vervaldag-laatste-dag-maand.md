@@ -1,6 +1,5 @@
 ---
-type: begrip
-begrip-id: vervaldag-laatste-dag-maand
+begrip-id: BWBR0004770/art9/lid5/vervaldag-laatste-dag-maand
 begripsnaam: vervaldag-laatste-dag-maand
 jas-klasse: afleidingsregel
 soort: datum
@@ -10,38 +9,37 @@ geldigheid-van: 2026-01-01
 tags:
   - begrip
   - jas/afleidingsregel
-  - wet/li2008
+  - wet/iw1990
   - art/9
-afleidingsregels:
-  - "[[views/regels/AR-LI-9-1b]]"
+afleidingsregel: "[[views/regels/AR-BWBR0008003-art9-par1-b]]"
 ---
 
 ## Definitie
 
-*"wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld"*
-*(§ 9.1 LI 2008, peildatum 2026-01-01)*
+*"wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld"* *(BWBR0008003/par9-1, grammaticaal)*
 
 Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | § 9.1 LI 2008 | wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0008003/par9-1 | wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| vervaldag-laatste-dag-maand: Een vervaldag van 15 maart wordt verschoven naar 31 maart | ja | 31 maart is de laatste dag van de maand. |
-| vervaldag-laatste-dag-maand: Een vervaldag van 28 februari wordt 29 februari in een schrikkeljaar | ja | Dit is de laatste dag van die maand. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- Specifieke regel voor afwijkende boekjaren.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| leidt tot | — | [[begrippen/invorderbaarheid]] |
+| causaal | — | [[views/begrippen/invorderbaarheid]] |
+
+## Afleidingsregel
+
+[[views/regels/AR-BWBR0008003-art9-par1-b]]

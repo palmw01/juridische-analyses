@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: totaalbedrag-belastingaanslag
+begrip-id: BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag
 begripsnaam: totaalbedrag-belastingaanslag
 jas-klasse: variabele
-soort: getal
+soort: monetair-bedrag
 herkomst: direct
 status: concept
 geldigheid-van: 2026-01-01
@@ -16,31 +15,26 @@ tags:
 
 ## Definitie
 
-*"een belastingaanslag"*
-*(Art. 9 lid 1 IW 1990, peildatum 2026-01-01)*
+*"een belastingaanslag"* *(BWBR0004770/art9/lid1, systematisch)*
 
 Het totale bedrag van de belastingaanslag dat bij aanvang van de invordering verschuldigd is
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | Art. 9 lid 1 IW 1990 | een belastingaanslag | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid1 | een belastingaanslag | primair | systematisch | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| Bij een voorlopige aanslag IB van € 1.200 is het totaalbedrag-belastingaanslag gelijk aan 1200. | ja | De numerieke waarde van de aanslag dient als invoer voor de termijnenberekening. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- Numerieke waarde (getal).
-- Direct herleidbaar uit het aanslagbiljet.
-- Vormt de basis (`teller`) voor de berekening van het termijnbedrag in artikel 9 lid 5 IW 1990.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| leidt tot | — | [[begrippen/termijnbedrag]] |
+| causaal | — | [[views/begrippen/termijnbedrag]] |

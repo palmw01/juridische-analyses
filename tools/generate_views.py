@@ -1,38 +1,43 @@
 #!/usr/bin/env python3
 """
 generate_views.py — Genereer Obsidian-compatibele Markdown-views vanuit bronbestanden.
-Bronnen: begrippen/ (MD met frontmatter), annotaties/ (MD met frontmatter), regels/ (MD met frontmatter)
-Output: views/begrippen/, views/annotaties/, views/regels/
+
+Bronnen (nieuwe schema-architectuur):
+  begrippen/*.yaml        → views/begrippen/{slug}.md
+  begrippen/*.extra.json  → worden meegegeven voor voorbeelden/kenmerken
+  annotaties/**/*.json    → views/annotaties/{bwb-id}/{bestand}.md
+  regels/*.yaml           → views/regels/{regel-id}.md
+
+Gebruik:
+    cd vault-root/
+    tools/.venv/bin/python tools/generate_views.py [--vault-root .] [--type begrip|annotatie|regel] [--file PAD]
 """
+
+from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
-import frontmatter
 import yaml
 
-
 # ---------------------------------------------------------------------------
-# BWB → wet-afkorting mapping
+# Constanten
 # ---------------------------------------------------------------------------
 
-BWB_NAAR_WET = {
+BWB_NAAR_WET: dict[str, str] = {
     "BWBR0004770": "iw1990",
     "BWBR0002226": "awr",
     "BWBR0005537": "awb",
     "BWBR0008003": "li2008",
     "BWBR0003738": "ubib1990",
+    "BWBR0024096": "li2008",  # alternatief BWB-id LI 2008
 }
 
-# ---------------------------------------------------------------------------
-# JAS-klasse → CSS-class mapping
-# ---------------------------------------------------------------------------
-
-JAS_NAAR_CSS = {
+JAS_NAAR_CSS: dict[str, str] = {
     "rechtsbetrekking": "rb",
     "rechtssubject": "rs",
     "rechtsobject": "ro",
@@ -52,665 +57,670 @@ JAS_NAAR_CSS = {
 }
 
 
-def jas_klasse_naar_css(jas_klasse: str) -> str:
+# ---------------------------------------------------------------------------
+# Hulpfuncties
+# ---------------------------------------------------------------------------
+
+def jas_naar_css(jas_klasse: str) -> str:
     return JAS_NAAR_CSS.get(jas_klasse, jas_klasse[:2] if jas_klasse else "xx")
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-def load_md_frontmatter(filepath: Path) -> tuple[dict, str]:
-    """Laad YAML frontmatter en de body van een Markdown-bestand."""
-    post = frontmatter.load(str(filepath))
-    return dict(post), post.content
+def wet_van_bwb(bwb_id: str) -> str:
+    return BWB_NAAR_WET.get(bwb_id, "")
 
 
-def load_yaml(filepath: Path) -> dict:
-    with filepath.open() as f:
-        return yaml.safe_load(f)
+def begrip_slug_van_id(begrip_id: str) -> str:
+    """Extraheert de slug (laatste segment) uit een begrip-id URI."""
+    return begrip_id.split("/")[-1] if begrip_id else ""
 
 
-def load_ontologie_kleuren(vault_root: Path) -> dict[str, str]:
-    """Laad classDef-kleuren uit ontologie/jas-ontologie.yaml."""
-    ontologie_path = vault_root / "ontologie" / "jas-ontologie.yaml"
-    if not ontologie_path.exists():
-        return {}
-    with ontologie_path.open() as f:
-        data = yaml.safe_load(f)
-    return data.get("classDef-kleuren", {})
+def art_tag_van_id(begrip_id_of_annotatie_id: str) -> str | None:
+    """Extraheert 'art/9' uit een ID als 'BWBR0004770/art9/lid1/invorderbaarheid'."""
+    for segment in begrip_id_of_annotatie_id.split("/"):
+        m = re.match(r"art(\d+[a-z]?)$", segment)
+        if m:
+            return f"art/{m.group(1)}"
+    return None
 
 
-def begrip_id_from_path(bwb_id: str, artikel: str, lid: str, begripsnaam: str) -> str:
-    """Bouw een begrip-id op in het formaat BWBR.../artN/lidL/naam."""
-    art_num = re.sub(r"[^0-9a-z]", "", artikel.lower().replace("art", "").replace(".", "").strip())
-    lid_num = re.sub(r"[^0-9]", "", str(lid))
-    return f"{bwb_id}/art{art_num}/lid{lid_num}/{begripsnaam}"
-
-
-def slugify(tekst: str) -> str:
-    """Maak een slug van tekst (lowercase, koppeltekens)."""
-    t = tekst.lower().strip()
-    t = re.sub(r"[^a-z0-9\-]", "-", t)
-    t = re.sub(r"-+", "-", t)
-    return t.strip("-")
-
-
-def extract_slug_from_obsidian_link(link: str) -> str:
-    """
-    Extraheer de bestandsnaam-slug uit een Obsidian wiki-link.
-    [[begrippen/invorderbaarheid]] → invorderbaarheid
-    [[begrippen/invorderbaarheid|Invorderbaarheid]] → invorderbaarheid
-    """
-    m = re.match(r'\[\[([^\]|]+?)(?:\|[^\]]+)?\]\]', str(link).strip())
-    if m:
-        return Path(m.group(1)).stem
-    return Path(str(link).strip()).stem
-
-
-def tags_uit_begrip_id(begrip_id: str, jas_klasse: str = "") -> list[str]:
-    """
-    Genereer tags op basis van begrip-id en jas-klasse.
-    begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
-    → [begrip, jas/rechtsbetrekking, wet/iw1990, art/9]
-    """
+def tags_van_begrip(fm: dict, jas_klasse: str = "") -> list[str]:
     tags = ["begrip"]
     if jas_klasse:
         tags.append(f"jas/{jas_klasse}")
-
-    parts = begrip_id.split("/")
-    # bwb-id
-    if parts:
-        bwb = parts[0]
-        wet = BWB_NAAR_WET.get(bwb)
-        if wet:
-            tags.append(f"wet/{wet}")
-    # art-nummer
-    for part in parts[1:]:
-        m = re.match(r'art(\d+[a-z]?)$', part)
-        if m:
-            tags.append(f"art/{m.group(1)}")
-            break
-
+    bwb = fm.get("begrip-id", "").split("/")[0] if fm.get("begrip-id") else ""
+    wet = wet_van_bwb(bwb)
+    if wet:
+        tags.append(f"wet/{wet}")
+    art = art_tag_van_id(fm.get("begrip-id", ""))
+    if art:
+        tags.append(art)
     return tags
 
 
-def tags_uit_frontmatter(data: dict, fallback_bwb: str = "") -> list[str]:
-    """Gebruik bestaande tags uit frontmatter als ze al juist zijn."""
-    existing = data.get("tags", [])
-    if existing and isinstance(existing, list):
-        return existing
-    # Genereer op basis van bwb-id en jas-klasse
-    bwb_id = data.get("bwb-id", fallback_bwb)
-    jas_klasse = data.get("jas-klasse", "")
-    begrip_id = data.get("begrip-id", "")
-    if begrip_id:
-        return tags_uit_begrip_id(begrip_id, jas_klasse)
-    return ["begrip"]
+def tags_van_annotatie(data: dict) -> list[str]:
+    tags = ["annotatie"]
+    wet = wet_van_bwb(data.get("bwb-id", ""))
+    if wet:
+        tags.append(f"wet/{wet}")
+    art = art_tag_van_id(data.get("annotatie-id", ""))
+    if art:
+        tags.append(art)
+    return tags
 
 
-def obsidian_link_begrip(slug: str) -> str:
+def tags_van_regel(fm: dict) -> list[str]:
+    tags = ["afleidingsregel"]
+    wet = wet_van_bwb(fm.get("bwb-id", ""))
+    if wet:
+        tags.append(f"wet/{wet}")
+    artikel = str(fm.get("artikel", "")).strip()
+    if artikel:
+        m = re.match(r"(\d+[a-z]?)$", artikel)
+        if m:
+            tags.append(f"art/{m.group(1)}")
+    return tags
+
+
+def view_link_begrip(begrip_id: str) -> str:
+    slug = begrip_slug_van_id(begrip_id)
     return f"[[views/begrippen/{slug}]]"
 
 
-def obsidian_link_regel(slug: str) -> str:
-    return f"[[views/regels/{slug}]]"
+def view_link_regel(regel_id: str) -> str:
+    return f"[[views/regels/{regel_id}]]"
+
+
+def laad_jas_kleuren(vault_root: Path) -> dict[str, str]:
+    """Laad classDef-kleuren uit ontologie/jas-ontologie.yaml."""
+    pad = vault_root / "ontologie" / "jas-ontologie.yaml"
+    if not pad.exists():
+        return {}
+    with pad.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    return data.get("classDef-kleuren", {}) if isinstance(data, dict) else {}
+
+
+def bouw_begrip_jas_index(vault_root: Path) -> dict[str, str]:
+    """
+    Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen.
+    Wordt gebruikt om de jas-klasse in begrip-views op te nemen.
+    """
+    index: dict[str, str] = {}
+    annotaties_dir = vault_root / "annotaties"
+    if not annotaties_dir.exists():
+        return index
+    for json_file in annotaties_dir.glob("**/*.json"):
+        if json_file.name.startswith("."):
+            continue
+        with json_file.open(encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                continue
+        for rij in data.get("annotatierijen") or []:
+            bid = rij.get("begrip-id")
+            jas = rij.get("jas-klasse")
+            if bid and jas and bid not in index:
+                index[bid] = jas
+    return index
 
 
 # ---------------------------------------------------------------------------
-# Mermaid-diagram renderer
+# Mermaid-diagram renderer (vanuit JSON diagram-struct)
 # ---------------------------------------------------------------------------
 
 def render_mermaid(diagram: dict, jas_kleuren: dict) -> str:
-    """
-    Render een Mermaid-diagram vanuit de diagram-dict.
-    diagram heeft: centrale-klasse, knopen [{id, jas-klasse, label}], kanten [{van, naar, label}]
-    """
-    lines = ["```mermaid", "graph LR"]
-
+    """Render Mermaid LR-diagram vanuit JSON diagram-dict (knopen + kanten)."""
     knopen = diagram.get("knopen") or []
     kanten = diagram.get("kanten") or []
+    if not knopen:
+        return ""
 
-    for knoop in knopen:
-        css_class = jas_klasse_naar_css(knoop.get("jas-klasse", ""))
-        label = knoop.get("label", knoop.get("id", ""))
-        node_id = knoop.get("id", "")
-        lines.append(f'    {node_id}["{label}"]:::{css_class}')
+    lines = ["```mermaid", "graph LR"]
+    for k in knopen:
+        css = jas_naar_css(k.get("jas-klasse", ""))
+        label = k.get("label", k.get("id", ""))
+        lines.append(f'    {k["id"]}["{label}"]:::{css}')
 
     for kant in kanten:
         van = kant.get("van", "")
         naar = kant.get("naar", "")
         label = kant.get("label")
         if label:
-            lines.append(f'    {van} -->|{label}| {naar}')
+            lines.append(f"    {van} -->|{label}| {naar}")
         else:
-            lines.append(f'    {van} --- {naar}')
+            lines.append(f"    {van} --- {naar}")
 
-    # classDef alleen voor gebruikte klassen
-    gebruikte_css = {jas_klasse_naar_css(k.get("jas-klasse", "")) for k in knopen}
-    for css_class in sorted(gebruikte_css):
-        if css_class in jas_kleuren:
-            lines.append(f"    classDef {css_class} {jas_kleuren[css_class]}")
+    gebruikte_css = {jas_naar_css(k.get("jas-klasse", "")) for k in knopen}
+    for css in sorted(gebruikte_css):
+        if css in jas_kleuren:
+            lines.append(f"    classDef {css} {jas_kleuren[css]}")
 
     lines.append("```")
     return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
-# Begrip-view generatie
+# Begrip-view
 # ---------------------------------------------------------------------------
 
-def genereer_begrip_view(filepath: Path, vault_root: Path, jas_kleuren: dict) -> tuple[str, str]:
-    """
-    Genereer een begrip-view Markdown-bestand.
-    Geeft (bestandsnaam, content) terug.
-    """
-    data, body = load_md_frontmatter(filepath)
-    stem = filepath.stem  # bestandsnaam zonder extensie = slug
+def genereer_begrip_view(
+    yaml_path: Path,
+    vault_root: Path,
+    jas_kleuren: dict,
+    jas_index: dict[str, str],
+) -> str:
+    with yaml_path.open(encoding="utf-8") as f:
+        fm: dict = yaml.safe_load(f) or {}
 
-    # Frontmatter velden
-    begrip_id = data.get("begrip-id", stem)
-    begripsnaam = data.get("begripsnaam", stem)
-    jas_klasse = data.get("jas-klasse", "")
-    soort = data.get("soort", "")
-    herkomst = data.get("herkomst", "")
-    status = data.get("status", "")
-    definitie = data.get("definitie", "")
-    peildatum = str(data.get("peildatum", ""))
-    bron = data.get("bron", "")
-    geldigheid_van = str(data.get("geldigheid-van", ""))
-    afleidingsregels_raw = data.get("afleidingsregels", [])
-    tags = tags_uit_frontmatter(data)
+    stem = yaml_path.stem
+    begrip_id = fm.get("begrip-id") or stem
+    begripsnaam = fm.get("begripsnaam") or stem
+    soort = fm.get("soort") or ""
+    soort_id = fm.get("soort-id", False)
+    herkomst = fm.get("herkomst") or ""
+    status = fm.get("status") or "concept"
+    definitie = fm.get("definitie") or ""
+    geldigheid_van = str(fm.get("geldigheid-van") or "")
+    geldigheid_tot = fm.get("geldigheid-tot")
+    aliases = fm.get("aliases") or []
+    identificatiebegrip = fm.get("identificatiebegrip", False)
+    tussenresultaat = fm.get("tussenresultaat", False)
+    afleidingsregel_id = fm.get("afleidingsregel-id")
+    markeringen: list[dict] = fm.get("markeringen") or []
+    relaties: dict = fm.get("relaties") or {}
 
-    # Afleidingsregel-links omzetten naar views/regels/
-    afleidingsregel_links = []
-    for link in (afleidingsregels_raw or []):
-        slug = extract_slug_from_obsidian_link(str(link))
-        afleidingsregel_links.append(obsidian_link_regel(slug))
+    jas_klasse = jas_index.get(begrip_id, "")
+    tags = tags_van_begrip(fm, jas_klasse)
 
-    # Frontmatter opbouwen
-    fm_lines = [
-        "---",
-        "type: begrip",
-        f"begrip-id: {begrip_id}",
-        f"begripsnaam: {begripsnaam}",
-    ]
+    # Extra-bestand (voorbeelden + kenmerken)
+    extra_pad = vault_root / "begrippen" / f"{stem}.extra.json"
+    extra: dict = {}
+    if extra_pad.exists():
+        with extra_pad.open(encoding="utf-8") as f:
+            try:
+                extra = json.load(f)
+            except json.JSONDecodeError:
+                pass
+    voorbeelden: list[dict] = extra.get("voorbeelden") or []
+    kenmerken: list[str] = extra.get("kenmerken") or []
+
+    lines: list[str] = []
+
+    # --- Frontmatter ---
+    lines += ["---"]
+    lines.append(f"begrip-id: {begrip_id}")
+    lines.append(f"begripsnaam: {begripsnaam}")
     if jas_klasse:
-        fm_lines.append(f"jas-klasse: {jas_klasse}")
+        lines.append(f"jas-klasse: {jas_klasse}")
     if soort:
-        fm_lines.append(f"soort: {soort}")
-    if herkomst:
-        fm_lines.append(f"herkomst: {herkomst}")
-    if status:
-        fm_lines.append(f"status: {status}")
+        lines.append(f"soort: {soort}")
+    lines.append(f"herkomst: {herkomst}")
+    lines.append(f"status: {status}")
     if geldigheid_van:
-        fm_lines.append(f"geldigheid-van: {geldigheid_van}")
-    fm_lines.append("tags:")
-    for tag in tags:
-        fm_lines.append(f"  - {tag}")
-    if afleidingsregel_links:
-        fm_lines.append("afleidingsregels:")
-        for link in afleidingsregel_links:
-            fm_lines.append(f'  - "{link}"')
-    fm_lines.append("---")
+        lines.append(f"geldigheid-van: {geldigheid_van}")
+    if geldigheid_tot:
+        lines.append(f"geldigheid-tot: {geldigheid_tot}")
+    lines.append("tags:")
+    for t in tags:
+        lines.append(f"  - {t}")
+    if aliases:
+        lines.append("aliases:")
+        for a in aliases:
+            lines.append(f"  - {a}")
+    if afleidingsregel_id:
+        lines.append(f'afleidingsregel: "{view_link_regel(afleidingsregel_id)}"')
+    lines += ["---", ""]
 
-    # Body opbouwen
-    content_lines = fm_lines + [""]
-
-    # Definitie-sectie
-    content_lines.append("## Definitie")
-    content_lines.append("")
-    markering = data.get("markering", "")
-    if markering:
-        content_lines.append(f'*"{markering}"*', )
-    if bron or peildatum:
-        bron_str = bron or ""
-        peil_str = f"peildatum {peildatum}" if peildatum else ""
-        meta_parts = [p for p in [bron_str, peil_str] if p]
-        if meta_parts:
-            content_lines.append(f'*({", ".join(meta_parts)})*')
-    content_lines.append("")
+    # --- Definitie ---
+    lines.append("## Definitie")
+    lines.append("")
+    primaire = [m for m in markeringen if m.get("bijdrage") == "primair"]
+    if primaire:
+        for m in primaire:
+            tekst = m.get("tekst", "")
+            bron = m.get("bron-annotatie-id", "")
+            methode = m.get("interpretatiemethode", "")
+            lines.append(f'*"{tekst}"* *({bron}, {methode})*')
+    lines.append("")
     if definitie:
-        content_lines.append(definitie)
-    content_lines.append("")
-
-    # Markeringen — uit de body of uit frontmatter-velden
-    # Zoek eerst in body naar een Markeringen-sectie
-    markeringen_md = _extract_section(body, "Markeringen")
-    content_lines.append("## Markeringen")
-    content_lines.append("")
-    if markeringen_md:
-        content_lines.append(markeringen_md.strip())
+        lines.append(definitie)
     else:
-        # Bouw tabel op basis van frontmatter-velden
-        content_lines.append("| ID | Bron | Tekst | Bijdrage | Bevestigd |")
-        content_lines.append("|----|------|-------|---------|-----------|")
-        if markering:
-            content_lines.append(f"| m-001 | {bron} | {markering} | primair | — |")
-    content_lines.append("")
+        lines.append("*(Definitie nog niet ingevuld — gebruik `/begrip`)*")
+    lines.append("")
 
-    # Voorbeelden
-    voorbeelden_md = _extract_section(body, "Voorbeelden")
-    content_lines.append("## Voorbeelden")
-    content_lines.append("")
-    if voorbeelden_md:
-        content_lines.append(voorbeelden_md.strip())
-    content_lines.append("")
-
-    # Kenmerken
-    kenmerken_md = _extract_section(body, "Kenmerken")
-    content_lines.append("## Kenmerken")
-    content_lines.append("")
-    if kenmerken_md:
-        content_lines.append(kenmerken_md.strip())
-    content_lines.append("")
-
-    # Relaties
-    content_lines.append("## Relaties")
-    content_lines.append("")
-    relaties_md = _extract_section(body, "Relaties")
-    if relaties_md:
-        content_lines.append(relaties_md.strip())
+    # --- Markeringen ---
+    lines.append("## Markeringen")
+    lines.append("")
+    if markeringen:
+        lines.append("| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |")
+        lines.append("|----|---------------|-------|---------|---------|-----------|")
+        for m in markeringen:
+            mid = m.get("markering-id", "")
+            bron = m.get("bron-annotatie-id", "")
+            tekst = m.get("tekst", "").replace("|", "\\|")
+            bijdr = m.get("bijdrage", "")
+            methode = m.get("interpretatiemethode", "")
+            bev = "ja" if m.get("bevestigd") else "nee"
+            lines.append(f"| {mid} | {bron} | {tekst} | {bijdr} | {methode} | {bev} |")
     else:
-        # Bouw tabel op basis van frontmatter
-        content_lines.append("| Type | Kardinaliteit | Begrip |")
-        content_lines.append("|------|---------------|--------|")
-        is_een = data.get("is-een", [])
-        heeft = data.get("heeft", [])
-        leidt_tot = data.get("leidt-tot", [])
-        if not is_een and not heeft and not leidt_tot:
-            content_lines.append("| — | — | — |")
-        for bid in (is_een or []):
-            slug = extract_slug_from_obsidian_link(str(bid))
-            content_lines.append(f"| is-een | — | {obsidian_link_begrip(slug)} |")
-        for item in (heeft or []):
+        lines.append("*Geen markeringen.*")
+    lines.append("")
+
+    # --- Voorbeelden ---
+    lines.append("## Voorbeelden")
+    lines.append("")
+    if voorbeelden:
+        lines.append("| Stelling | Waar? | Toelichting |")
+        lines.append("|----------|-------|-------------|")
+        for vb in voorbeelden:
+            stelling = str(vb.get("stelling", "")).replace("|", "\\|")
+            waar = "ja" if vb.get("waar") else "nee"
+            toel = str(vb.get("toelichting", "")).replace("|", "\\|")
+            lines.append(f"| {stelling} | {waar} | {toel} |")
+    else:
+        lines.append("*(Voorbeelden nog niet ingevuld)*")
+    lines.append("")
+
+    # --- Kenmerken ---
+    lines.append("## Kenmerken")
+    lines.append("")
+    if kenmerken:
+        for k in kenmerken:
+            lines.append(f"- {k}")
+    else:
+        lines.append("*(Kenmerken nog niet ingevuld)*")
+    lines.append("")
+
+    # --- Metavelden ---
+    meta: list[str] = []
+    if identificatiebegrip:
+        meta.append("identificatiebegrip")
+    if soort_id:
+        meta.append("soort-id")
+    if tussenresultaat:
+        meta.append("tussenresultaat")
+    if meta:
+        lines.append(f"> **Kenmerken:** {', '.join(meta)}")
+        lines.append("")
+
+    # --- Relaties ---
+    lines.append("## Relaties")
+    lines.append("")
+    is_een: list[str] = relaties.get("is-een") or []
+    heeft: list[dict] = relaties.get("heeft") or []
+    leidt_tot: list[dict] = relaties.get("leidt-tot") or []
+
+    if is_een or heeft or leidt_tot:
+        lines.append("| Type | Kardinaliteit | Begrip |")
+        lines.append("|------|---------------|--------|")
+        for bid in is_een:
+            lines.append(f"| is-een | — | {view_link_begrip(bid)} |")
+        for item in heeft:
             if isinstance(item, dict):
                 bid = item.get("begrip-id", "")
                 kard = item.get("kardinaliteit", "—")
             else:
                 bid = str(item)
                 kard = "—"
-            slug = extract_slug_from_obsidian_link(bid)
-            content_lines.append(f"| heeft | {kard} | {obsidian_link_begrip(slug)} |")
-        for item in (leidt_tot or []):
+            lines.append(f"| heeft | {kard} | {view_link_begrip(bid)} |")
+        for item in leidt_tot:
             if isinstance(item, dict):
                 bid = item.get("begrip-id", "")
                 kard = item.get("kardinaliteit") or "—"
+                rsoort = item.get("relatie-soort", "leidt-tot")
             else:
                 bid = str(item)
                 kard = "—"
-            slug = extract_slug_from_obsidian_link(bid)
-            content_lines.append(f"| leidt-tot | {kard} | {obsidian_link_begrip(slug)} |")
-    content_lines.append("")
+                rsoort = "leidt-tot"
+            lines.append(f"| {rsoort} | {kard} | {view_link_begrip(bid)} |")
+    else:
+        lines.append("| — | — | — |")
+    lines.append("")
 
-    bestandsnaam = f"{stem}.md"
-    return bestandsnaam, "\n".join(content_lines)
+    # --- Afleidingsregel-link ---
+    if afleidingsregel_id:
+        lines.append("## Afleidingsregel")
+        lines.append("")
+        lines.append(view_link_regel(afleidingsregel_id))
+        lines.append("")
 
-
-def _extract_section(body: str, heading: str) -> str:
-    """Extraheer de inhoud van een Markdown-sectie (## Heading)."""
-    pattern = rf"##\s+{re.escape(heading)}\s*\n(.*?)(?=\n##\s|\Z)"
-    m = re.search(pattern, body, re.DOTALL)
-    if m:
-        return m.group(1)
-    return ""
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
-# Annotatie-lid-view generatie
+# Annotatie-view
 # ---------------------------------------------------------------------------
 
-def genereer_annotatie_view(filepath: Path, vault_root: Path, jas_kleuren: dict) -> tuple[str, str]:
+def genereer_annotatie_view(json_path: Path, vault_root: Path, jas_kleuren: dict) -> tuple[str, str]:
     """
-    Genereer een annotatie-lid-view Markdown-bestand.
-    Geeft (relatief pad binnen views/annotaties/, content) terug.
+    Geeft (relatief uitvoerpad binnen views/annotaties/, Markdown-content).
     """
-    data, body = load_md_frontmatter(filepath)
+    with json_path.open(encoding="utf-8") as f:
+        data: dict = json.load(f)
 
+    annotatie_id = data.get("annotatie-id") or json_path.stem
     bwb_id = data.get("bwb-id", "")
-    artikel_str = data.get("artikel", "")  # bijv. "Art. 9 lid 1 IW 1990"
-    peildatum = str(data.get("peildatum", ""))
-    structuurpositie = data.get("structuurpositie", "")
-    tags_raw = data.get("tags", [])
-    begrippen_raw = data.get("begrippen", [])
-
-    # Wet-afkorting bepalen
-    wet_afkorting = BWB_NAAR_WET.get(bwb_id, "")
-    if not wet_afkorting and tags_raw:
-        for t in tags_raw:
-            m = re.match(r'wet/(.+)', str(t))
-            if m:
-                wet_afkorting = m.group(1)
-                break
-
-    # Tags
-    tags = ["annotatie"]
-    if wet_afkorting:
-        tags.append(f"wet/{wet_afkorting}")
-    # art-tag uit bestandsnaam of artikel-string
-    art_m = re.search(r'[Aa]rt(?:ikel)?\.?\s*(\d+[a-z]?)', filepath.stem)
-    if not art_m and artikel_str:
-        art_m = re.search(r'[Aa]rt(?:ikel)?\.?\s*(\d+[a-z]?)', artikel_str)
-    if art_m:
-        tags.append(f"art/{art_m.group(1)}")
-
-    # Begrip-links omzetten
-    begrip_links = []
-    for link in (begrippen_raw or []):
-        slug = extract_slug_from_obsidian_link(str(link))
-        begrip_links.append(obsidian_link_begrip(slug))
-
-    # Bestandsnaam bepalen (relatief pad binnen views/annotaties/)
-    # annotaties/iw1990/art9-1.md → BWBR0004770/art9-lid1.md
-    # We gebruiken de bwb-id en de bestandsnaam
-    stem = filepath.stem  # bijv. art9-1
-    # Probeer lid-nummer te extraheren
-    lid_m = re.match(r'(art\d+[a-z]?)-(\d+)$', stem)
-    if lid_m:
-        art_part = lid_m.group(1)
-        lid_num = lid_m.group(2)
-        output_naam = f"{art_part}-lid{lid_num}.md"
-        subdir = bwb_id or filepath.parent.name
-    else:
-        output_naam = f"{stem}.md"
-        subdir = bwb_id or filepath.parent.name
-
-    rel_output_path = f"{subdir}/{output_naam}"
-
-    # Frontmatter opbouwen
-    fm_lines = [
-        "---",
-        "type: annotatie",
-    ]
-    # annotatie-id
-    annotatie_id = data.get("annotatie-id", "")
-    if not annotatie_id and bwb_id:
-        # Afleiden uit bestandsnaam
-        if lid_m:
-            annotatie_id = f"{bwb_id}/{art_part}/lid{lid_num}"
-        else:
-            annotatie_id = f"{bwb_id}/{stem}"
-    if annotatie_id:
-        fm_lines.append(f"annotatie-id: {annotatie_id}")
-
-    fm_lines.append(f'artikel: "{artikel_str}"')
-    if peildatum:
-        fm_lines.append(f"peildatum: {peildatum}")
-    fm_lines.append("tags:")
-    for tag in tags:
-        fm_lines.append(f"  - {tag}")
-    if begrip_links:
-        fm_lines.append("begrippen:")
-        for link in begrip_links:
-            fm_lines.append(f'  - "{link}"')
-    fm_lines.append("---")
-
-    content_lines = fm_lines + [""]
-
-    # Wetstekst
-    wetstekst_md = _extract_section(body, r"Wetstekst\s+lid\s+\d+\s+\(letterlijk\)")
-    if not wetstekst_md:
-        wetstekst_md = _extract_section(body, "Wetstekst")
-    content_lines.append("## Wetstekst lid (letterlijk)")
-    content_lines.append("")
-    if wetstekst_md:
-        content_lines.append(wetstekst_md.strip())
-    content_lines.append("")
-
-    # Annotatietabel
-    content_lines.append("## Annotatietabel")
-    content_lines.append("")
-    anno_md = _extract_section(body, "Annotatietabel")
-    if anno_md:
-        content_lines.append(anno_md.strip())
-    else:
-        content_lines.append("| Nr | Markering | JAS-klasse | Interpretatiemethode | Begrip | Signalering |")
-        content_lines.append("|----|-----------|-----------|---------------------|--------|-------------|")
-    content_lines.append("")
-
-    # Diagram — vanuit body of vanuit diagram-data (JSON-formaat)
-    content_lines.append("## Diagram")
-    content_lines.append("")
-    diagram_data = data.get("diagram")
-    diagram_body = _extract_section(body, "Diagram")
-    if diagram_data and isinstance(diagram_data, dict):
-        content_lines.append(render_mermaid(diagram_data, jas_kleuren))
-    elif diagram_body:
-        content_lines.append(diagram_body.strip())
-    content_lines.append("")
-
-    # Delegatiestructuur
-    content_lines.append("## Delegatiestructuur")
-    content_lines.append("")
-    delegatie_raw = data.get("delegatiestructuur", [])
-    delegatie_body = _extract_section(body, "Delegatiestructuur")
-    if delegatie_body:
-        content_lines.append(delegatie_body.strip())
-    elif delegatie_raw:
-        for d in delegatie_raw:
-            if isinstance(d, dict):
-                content_lines.append(f"- {d.get('omschrijving', '')}")
-    else:
-        content_lines.append("Geen delegatiebevoegdheden.")
-    content_lines.append("")
-
-    return rel_output_path, "\n".join(content_lines)
-
-
-# ---------------------------------------------------------------------------
-# Regel-view generatie
-# ---------------------------------------------------------------------------
-
-def genereer_regel_view(filepath: Path, vault_root: Path, jas_kleuren: dict) -> tuple[str, str]:
-    """
-    Genereer een regel-view Markdown-bestand.
-    Geeft (bestandsnaam, content) terug.
-    """
-    data, body = load_md_frontmatter(filepath)
-    stem = filepath.stem
-
-    regel_id = data.get("regel-id", stem)
-    naam = data.get("naam", "")
-    soort = data.get("soort", "")
-    bwb_id = data.get("bwb-id", "")
+    wet = data.get("wet", "")
     artikel = data.get("artikel", "")
-    peildatum = str(data.get("peildatum", ""))
+    lid = data.get("lid", "")
+    peildatum = str(data.get("peildatum") or "")
+    structuurpositie = data.get("structuurpositie", "")
+    wetstekst = data.get("wetstekst", "")
+    annotatierijen: list[dict] = data.get("annotatierijen") or []
+    diagram: dict = data.get("diagram") or {}
+    kruisrefs: list = data.get("kruisreferenties") or []
+    delegatiestructuur: list = data.get("delegatiestructuur") or []
 
-    # Tags
-    tags = ["afleidingsregel"]
-    wet = BWB_NAAR_WET.get(bwb_id, "")
-    if not wet:
-        # Probeer uit tags
-        for t in (data.get("tags") or []):
-            m = re.match(r'wet/(.+)', str(t))
-            if m:
-                wet = m.group(1)
-                break
-    if wet:
-        tags.append(f"wet/{wet}")
-    if artikel:
-        art_m = re.match(r'\d+[a-z]?', str(artikel).strip())
-        if art_m:
-            tags.append(f"art/{art_m.group(0)}")
+    tags = tags_van_annotatie(data)
+
+    # Uitvoerpad bepalen
+    stem = json_path.stem  # bijv. art9-lid1
+    subdir = bwb_id or json_path.parent.name
+    rel_pad = f"{subdir}/{stem}.md"
+
+    # Begrip-links vanuit annotatierijen (deduplicated)
+    begrip_ids_gezien: set[str] = set()
+    begrip_links: list[str] = []
+    for rij in annotatierijen:
+        bid = rij.get("begrip-id", "")
+        if bid and bid not in begrip_ids_gezien:
+            begrip_ids_gezien.add(bid)
+            begrip_links.append(view_link_begrip(bid))
+
+    # Artikel-label
+    if lid:
+        artikel_label = f"Art. {artikel} lid {lid} {wet}"
     else:
-        for t in (data.get("tags") or []):
-            m = re.match(r'art/(.+)', str(t))
-            if m:
-                tags.append(f"art/{m.group(1)}")
-                break
+        artikel_label = f"Art. {artikel} {wet}".strip()
 
-    # bepaalt / rechtsfeit / invoer / uitvoer links
-    bepaalt_raw = data.get("bepaalt", "")
-    rechtsfeit_raw = data.get("rechtsfeit", "")
-    invoer_raw = data.get("invoer", [])
-    uitvoer_raw = data.get("uitvoer", [])
+    lines: list[str] = []
 
-    def to_view_link(raw_link: str, prefix: str = "begrippen") -> str:
-        slug = extract_slug_from_obsidian_link(str(raw_link))
-        return f"[[views/{prefix}/{slug}]]"
-
-    bepaalt_link = to_view_link(bepaalt_raw) if bepaalt_raw else ""
-    rechtsfeit_link = to_view_link(rechtsfeit_raw) if rechtsfeit_raw else ""
-    invoer_links = [to_view_link(b) for b in (invoer_raw or [])]
-    uitvoer_links = [to_view_link(b) for b in (uitvoer_raw or [])]
-
-    # Frontmatter
-    fm_lines = [
-        "---",
-        "type: afleidingsregel",
-        f"regel-id: {regel_id}",
-        f'naam: "{naam}"',
-        f"soort: {soort}",
-    ]
+    # --- Frontmatter ---
+    lines += ["---", "type: annotatie"]
+    lines.append(f"annotatie-id: {annotatie_id}")
+    lines.append(f'artikel: "{artikel_label}"')
+    if bwb_id:
+        lines.append(f"bwb-id: {bwb_id}")
     if peildatum:
-        fm_lines.append(f"peildatum: {peildatum}")
-    fm_lines.append("tags:")
-    for tag in tags:
-        fm_lines.append(f"  - {tag}")
-    if bepaalt_link:
-        fm_lines.append(f'bepaalt: "{bepaalt_link}"')
-    if rechtsfeit_link:
-        fm_lines.append(f'rechtsfeit: "{rechtsfeit_link}"')
-    if invoer_links:
-        fm_lines.append("invoer:")
-        for link in invoer_links:
-            fm_lines.append(f'  - "{link}"')
-    if uitvoer_links:
-        fm_lines.append("uitvoer:")
-        for link in uitvoer_links:
-            fm_lines.append(f'  - "{link}"')
-    fm_lines.append("---")
+        lines.append(f"peildatum: {peildatum}")
+    lines.append("tags:")
+    for t in tags:
+        lines.append(f"  - {t}")
+    if begrip_links:
+        lines.append("begrippen:")
+        for link in begrip_links:
+            lines.append(f'  - "{link}"')
+    lines += ["---", ""]
 
-    content_lines = fm_lines + [""]
+    # --- Wetstekst ---
+    lines.append(f"## Wetstekst{' lid ' + lid if lid else ''} (letterlijk)")
+    lines.append("")
+    if wetstekst:
+        lines.append(f"> **{lid or artikel}** {wetstekst}")
+    if structuurpositie:
+        lines.append(f"")
+        lines.append(f"*{structuurpositie}*")
+    lines.append("")
 
-    # Formele regel
-    content_lines.append("## Formele regel")
-    content_lines.append("")
-    formele_md = _extract_section(body, "Formele regel")
-    if formele_md:
-        content_lines.append(formele_md.strip())
-    content_lines.append("")
-
-    # Toelichting
-    content_lines.append("## Toelichting")
-    content_lines.append("")
-    toelichting_md = _extract_section(body, "Toelichting")
-    if toelichting_md:
-        content_lines.append(toelichting_md.strip())
-    content_lines.append("")
-
-    # Voorbeeldreeksen
-    content_lines.append("## Voorbeeldreeksen")
-    content_lines.append("")
-    voorbeelden_md = _extract_section(body, "Voorbeeldreeksen")
-    if voorbeelden_md:
-        content_lines.append(voorbeelden_md.strip())
+    # --- Annotatietabel ---
+    lines.append("## Annotatietabel")
+    lines.append("")
+    if annotatierijen:
+        lines.append("| Nr | Markering | JAS-klasse | Methode | Begrip | Signalering |")
+        lines.append("|----|-----------|-----------|---------|--------|-------------|")
+        for rij in annotatierijen:
+            nr = rij.get("rij-id", "")
+            markering = rij.get("markering", "").replace("|", "\\|")
+            jas = rij.get("jas-klasse", "")
+            methode = rij.get("interpretatiemethode", "")
+            bid = rij.get("begrip-id", "")
+            begrip_link = view_link_begrip(bid) if bid else "—"
+            sig = rij.get("signalering") or "—"
+            sig = str(sig).replace("|", "\\|")
+            lines.append(f"| {nr} | {markering} | **{jas}** | {methode} | {begrip_link} | {sig} |")
     else:
-        content_lines.append("| Invoerwaarden | Verwachte uitkomst | Juridisch juist? |")
-        content_lines.append("|--------------|-------------------|-----------------|")
-        for vb in (data.get("voorbeeldreeksen") or []):
+        lines.append("*(Geen annotatierijen)*")
+    lines.append("")
+
+    # --- Diagram ---
+    lines.append("## Diagram")
+    lines.append("")
+    if diagram.get("knopen"):
+        mermaid = render_mermaid(diagram, jas_kleuren)
+        if mermaid:
+            lines.append(mermaid)
+        else:
+            lines.append("*(Diagram niet beschikbaar)*")
+    else:
+        lines.append("*(Geen diagram)*")
+    lines.append("")
+
+    # --- Kruisreferenties ---
+    if kruisrefs:
+        lines.append("## Kruisreferenties")
+        lines.append("")
+        for ref in kruisrefs:
+            if isinstance(ref, dict):
+                doel = ref.get("doel-artikel") or ref.get("doel-bwb-id", "")
+                richting = ref.get("richting", "")
+                lines.append(f"- {doel} ({richting})")
+            else:
+                lines.append(f"- {ref}")
+        lines.append("")
+
+    # --- Delegatiestructuur ---
+    lines.append("## Delegatiestructuur")
+    lines.append("")
+    if delegatiestructuur:
+        lines.append("| Bevoegdheid | Vindplaats | Type | Invulling |")
+        lines.append("|------------|------------|------|-----------|")
+        for d in delegatiestructuur:
+            if isinstance(d, dict):
+                omschr = d.get("omschrijving", "")
+                vindpl = d.get("vindplaats", "")
+                dtype = d.get("type", "")
+                invull = d.get("invulling") or "—"
+                lines.append(f"| {omschr} | {vindpl} | {dtype} | {invull} |")
+    else:
+        lines.append("Geen delegatiebevoegdheden.")
+    lines.append("")
+
+    return rel_pad, "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Regel-view
+# ---------------------------------------------------------------------------
+
+def genereer_regel_view(yaml_path: Path, vault_root: Path, jas_kleuren: dict) -> str:
+    with yaml_path.open(encoding="utf-8") as f:
+        fm: dict = yaml.safe_load(f) or {}
+
+    stem = yaml_path.stem
+    regel_id = fm.get("regel-id") or stem
+    naam = fm.get("naam") or ""
+    soort = fm.get("soort") or ""
+    bwb_id = fm.get("bwb-id") or ""
+    artikel = str(fm.get("artikel") or "")
+    lid = str(fm.get("lid") or "")
+    peildatum = str(fm.get("peildatum") or "")
+    annotatie_id = fm.get("annotatie-id") or ""
+    rechtsfeit_id = fm.get("rechtsfeit-id") or ""
+    invoer: list[str] = fm.get("invoer") or []
+    uitvoer: list[str] = fm.get("uitvoer") or []
+    operators: list[str] = fm.get("operators") or []
+    formele_regel = fm.get("formele-regel") or ""
+    toelichting = fm.get("toelichting") or ""
+    voorbeeldreeksen: list[dict] = fm.get("voorbeeldreeksen") or []
+    tussenresultaat = fm.get("tussenresultaat", False)
+
+    tags = tags_van_regel(fm)
+    if tussenresultaat:
+        tags.append("tussenresultaat")
+
+    lines: list[str] = []
+
+    # --- Frontmatter ---
+    lines += ["---"]
+    lines.append(f"regel-id: {regel_id}")
+    lines.append(f'naam: "{naam}"')
+    lines.append(f"soort: {soort}")
+    if peildatum:
+        lines.append(f"peildatum: {peildatum}")
+    lines.append("tags:")
+    for t in tags:
+        lines.append(f"  - {t}")
+    if annotatie_id:
+        lines.append(f"annotatie-id: {annotatie_id}")
+    if uitvoer:
+        lines.append("uitvoer:")
+        for bid in uitvoer:
+            lines.append(f'  - "{view_link_begrip(bid)}"')
+    if invoer:
+        lines.append("invoer:")
+        for bid in invoer:
+            lines.append(f'  - "{view_link_begrip(bid)}"')
+    lines += ["---", ""]
+
+    # --- Koptekst ---
+    lines.append(f"# {naam or regel_id}")
+    lines.append("")
+    meta_parts = [soort]
+    if artikel:
+        meta_parts.append(f"art. {artikel}" + (f" lid {lid}" if lid else ""))
+    if bwb_id:
+        wet = wet_van_bwb(bwb_id)
+        if wet:
+            meta_parts.append(wet.upper())
+    lines.append(f"*{' · '.join(meta_parts)}*")
+    lines.append("")
+
+    # --- Invoer / Uitvoer ---
+    if invoer or uitvoer:
+        lines.append("## Invoer en uitvoer")
+        lines.append("")
+        if rechtsfeit_id:
+            lines.append(f"**Rechtsfeit:** {view_link_begrip(rechtsfeit_id)}")
+            lines.append("")
+        if invoer:
+            lines.append("**Invoer:**")
+            for bid in invoer:
+                lines.append(f"- {view_link_begrip(bid)}")
+            lines.append("")
+        if uitvoer:
+            lines.append("**Uitvoer:**")
+            for bid in uitvoer:
+                lines.append(f"- {view_link_begrip(bid)}")
+            lines.append("")
+        if operators:
+            lines.append(f"**Operators:** {', '.join(operators)}")
+            lines.append("")
+
+    # --- Formele regel ---
+    lines.append("## Formele regel")
+    lines.append("")
+    if formele_regel:
+        lines.append(formele_regel)
+    else:
+        lines.append("*(Formele regel nog niet ingevuld)*")
+    lines.append("")
+
+    # --- Toelichting ---
+    lines.append("## Toelichting")
+    lines.append("")
+    if toelichting:
+        lines.append(toelichting)
+    else:
+        lines.append("*(Toelichting nog niet ingevuld)*")
+    lines.append("")
+
+    # --- Voorbeeldreeksen ---
+    lines.append("## Voorbeeldreeksen")
+    lines.append("")
+    if voorbeeldreeksen:
+        lines.append("| Invoerwaarden | Verwachte uitkomst | Juist? | Toelichting |")
+        lines.append("|--------------|-------------------|--------|-------------|")
+        for vb in voorbeeldreeksen:
             if isinstance(vb, dict):
-                inv = vb.get("invoerwaarden", "")
-                uit = vb.get("verwachte-uitkomst", "")
-                jj = "ja" if vb.get("juridisch-juist") else "nee"
-                content_lines.append(f"| {inv} | {uit} | {jj} |")
-    content_lines.append("")
+                inv = str(vb.get("invoerwaarden") or "").replace("|", "\\|")
+                uit = str(vb.get("verwachte-uitkomst") or "").replace("|", "\\|")
+                juist = "ja" if vb.get("juridisch-juist") else "nee"
+                toel = str(vb.get("toelichting") or "").replace("|", "\\|")
+                lines.append(f"| {inv} | {uit} | {juist} | {toel} |")
+    else:
+        lines.append("*(Nog geen voorbeeldreeksen)*")
+    lines.append("")
 
-    bestandsnaam = f"{stem}.md"
-    return bestandsnaam, "\n".join(content_lines)
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
-# Hoofd-generatiefuncties
+# Batch-generatie per type
 # ---------------------------------------------------------------------------
 
-def genereer_begrip_views(vault_root: Path, jas_kleuren: dict) -> int:
-    """Genereer alle begrip-views. Geeft aantal gegenereerde views terug."""
+def genereer_begrip_views(vault_root: Path, jas_kleuren: dict, jas_index: dict, enkel_bestand: Path | None) -> int:
     begrippen_dir = vault_root / "begrippen"
     output_dir = vault_root / "views" / "begrippen"
     output_dir.mkdir(parents=True, exist_ok=True)
-
     count = 0
-    if not begrippen_dir.exists():
-        return 0
 
-    for fp in sorted(begrippen_dir.glob("*.md")):
-        if fp.name == "index.md":
+    bronnen = [enkel_bestand] if enkel_bestand else sorted(begrippen_dir.glob("*.yaml"))
+    for fp in bronnen:
+        if not fp.suffix == ".yaml":
             continue
         try:
-            bestandsnaam, content = genereer_begrip_view(fp, vault_root, jas_kleuren)
-            (output_dir / bestandsnaam).write_text(content)
+            content = genereer_begrip_view(fp, vault_root, jas_kleuren, jas_index)
+            (output_dir / f"{fp.stem}.md").write_text(content, encoding="utf-8")
             count += 1
         except Exception as e:
-            print(f"  WAARSCHUWING: {fp.name} overgeslagen ({e})", file=sys.stderr)
-
-    for fp in sorted(begrippen_dir.glob("*.yaml")):
-        try:
-            bestandsnaam, content = genereer_begrip_view(fp, vault_root, jas_kleuren)
-            (output_dir / bestandsnaam).write_text(content)
-            count += 1
-        except Exception as e:
-            print(f"  WAARSCHUWING: {fp.name} overgeslagen ({e})", file=sys.stderr)
+            print(f"  WAARSCHUWING begrip {fp.name}: {e}", file=sys.stderr)
 
     return count
 
 
-def genereer_annotatie_views(vault_root: Path, jas_kleuren: dict) -> int:
-    """Genereer alle annotatie-views. Geeft aantal gegenereerde views terug."""
+def genereer_annotatie_views(vault_root: Path, jas_kleuren: dict, enkel_bestand: Path | None) -> int:
     annotaties_dir = vault_root / "annotaties"
     output_base = vault_root / "views" / "annotaties"
     output_base.mkdir(parents=True, exist_ok=True)
-
     count = 0
-    if not annotaties_dir.exists():
-        return 0
 
-    for fp in sorted(annotaties_dir.rglob("*.md")):
-        if fp.name in ("index.md",):
-            continue
-        stem = fp.stem
-        # Alleen lid-annotaties genereren als view (index-noten worden overgeslagen)
-        if not re.match(r'art\d+[a-z]?-\d+', stem):
+    if enkel_bestand:
+        bronnen = [enkel_bestand]
+    else:
+        bronnen = sorted(annotaties_dir.glob("**/*.json"))
+
+    for fp in bronnen:
+        if fp.name.startswith(".") or fp.suffix != ".json":
             continue
         try:
-            rel_path, content = genereer_annotatie_view(fp, vault_root, jas_kleuren)
-            output_path = output_base / rel_path
+            rel_pad, content = genereer_annotatie_view(fp, vault_root, jas_kleuren)
+            output_path = output_base / rel_pad
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(content)
+            output_path.write_text(content, encoding="utf-8")
             count += 1
         except Exception as e:
-            print(f"  WAARSCHUWING: {fp.name} overgeslagen ({e})", file=sys.stderr)
+            print(f"  WAARSCHUWING annotatie {fp.name}: {e}", file=sys.stderr)
 
     return count
 
 
-def genereer_regel_views(vault_root: Path, jas_kleuren: dict) -> int:
-    """Genereer alle regel-views. Geeft aantal gegenereerde views terug."""
+def genereer_regel_views(vault_root: Path, jas_kleuren: dict, enkel_bestand: Path | None) -> int:
     regels_dir = vault_root / "regels"
     output_dir = vault_root / "views" / "regels"
     output_dir.mkdir(parents=True, exist_ok=True)
-
     count = 0
-    if not regels_dir.exists():
-        return 0
 
-    for fp in sorted(regels_dir.glob("*.md")):
-        if fp.name == "index.md":
+    bronnen = [enkel_bestand] if enkel_bestand else sorted(regels_dir.glob("*.yaml"))
+    for fp in bronnen:
+        if not fp.suffix == ".yaml":
             continue
         try:
-            bestandsnaam, content = genereer_regel_view(fp, vault_root, jas_kleuren)
-            (output_dir / bestandsnaam).write_text(content)
+            content = genereer_regel_view(fp, vault_root, jas_kleuren)
+            (output_dir / f"{fp.stem}.md").write_text(content, encoding="utf-8")
             count += 1
         except Exception as e:
-            print(f"  WAARSCHUWING: {fp.name} overgeslagen ({e})", file=sys.stderr)
-
-    for fp in sorted(regels_dir.glob("*.yaml")):
-        try:
-            bestandsnaam, content = genereer_regel_view(fp, vault_root, jas_kleuren)
-            (output_dir / bestandsnaam).write_text(content)
-            count += 1
-        except Exception as e:
-            print(f"  WAARSCHUWING: {fp.name} overgeslagen ({e})", file=sys.stderr)
+            print(f"  WAARSCHUWING regel {fp.name}: {e}", file=sys.stderr)
 
     return count
 
@@ -719,39 +729,57 @@ def genereer_regel_views(vault_root: Path, jas_kleuren: dict) -> int:
 # CLI
 # ---------------------------------------------------------------------------
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Genereer Obsidian-compatibele Markdown-views vanuit bronbestanden"
-    )
-    parser.add_argument("--vault-root", default=".", help="Pad naar vault-root")
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Genereer Obsidian-views vanuit vault-bronbestanden")
+    parser.add_argument("--vault-root", default=".", help="Pad naar de vault-root (default: .)")
     parser.add_argument(
         "--type",
         choices=["begrip", "annotatie", "regel"],
         help="Alleen dit type views genereren",
     )
+    parser.add_argument(
+        "--file",
+        metavar="PAD",
+        help="Verwerk alleen dit bestand (relatief of absoluut pad)",
+    )
     args = parser.parse_args()
 
     vault_root = Path(args.vault_root).resolve()
-    jas_kleuren = load_ontologie_kleuren(vault_root)
+    jas_kleuren = laad_jas_kleuren(vault_root)
+    jas_index = bouw_begrip_jas_index(vault_root)
 
-    begrippen_count = 0
-    annotaties_count = 0
-    regels_count = 0
+    enkel_bestand: Path | None = None
+    if args.file:
+        enkel_bestand = Path(args.file).resolve()
+        if not enkel_bestand.exists():
+            print(f"Fout: bestand niet gevonden: {enkel_bestand}", file=sys.stderr)
+            return 1
 
-    if args.type is None or args.type == "begrip":
-        begrippen_count = genereer_begrip_views(vault_root, jas_kleuren)
+    begrippen_count = annotaties_count = regels_count = 0
 
-    if args.type is None or args.type == "annotatie":
-        annotaties_count = genereer_annotatie_views(vault_root, jas_kleuren)
+    if args.type in (None, "begrip"):
+        eb = enkel_bestand if (enkel_bestand and enkel_bestand.suffix == ".yaml"
+                               and "begrippen" in str(enkel_bestand)) else None
+        begrippen_count = genereer_begrip_views(vault_root, jas_kleuren, jas_index,
+                                                eb if not args.type else enkel_bestand)
 
-    if args.type is None or args.type == "regel":
-        regels_count = genereer_regel_views(vault_root, jas_kleuren)
+    if args.type in (None, "annotatie"):
+        eb = enkel_bestand if (enkel_bestand and enkel_bestand.suffix == ".json") else None
+        annotaties_count = genereer_annotatie_views(vault_root, jas_kleuren,
+                                                    eb if not args.type else enkel_bestand)
+
+    if args.type in (None, "regel"):
+        eb = enkel_bestand if (enkel_bestand and enkel_bestand.suffix == ".yaml"
+                               and "regels" in str(enkel_bestand)) else None
+        regels_count = genereer_regel_views(vault_root, jas_kleuren,
+                                            eb if not args.type else enkel_bestand)
 
     print(
         f"Views gegenereerd: {begrippen_count} begrippen, "
         f"{annotaties_count} annotaties, {regels_count} regels"
     )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

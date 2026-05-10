@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: vervaldag-volgende-termijnen
+begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
 begripsnaam: vervaldag-volgende-termijnen
 jas-klasse: afleidingsregel
-soort: datum (reeks)
+soort: datum
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01
@@ -12,40 +11,36 @@ tags:
   - jas/afleidingsregel
   - wet/iw1990
   - art/9
-afleidingsregels:
-  - "[[views/regels/AR-9-5d]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-d]]"
 ---
 
 ## Definitie
 
-*"elk van de volgende termijnen telkens een maand later"*
-*(Art. 9 lid 5 IW 1990, peildatum 2026-01-01)*
+*"elk van de volgende termijnen telkens een maand later"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
 De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand op te tellen
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | Art. 9 lid 5 IW 1990 | elk van de volgende termijnen telkens een maand later | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid5 | elk van de volgende termijnen telkens een maand later | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| Een aanslagbiljet gedagtekend 15 maart 2026 heeft als tweede vervaldatum 15 mei 2026 en als derde vervaldatum 15 juni 2026. | ja | Eerste termijn: 15 april 2026; tweede termijn: 15 mei 2026 (= eerste + één maand); derde termijn: 15 juni 2026 (= tweede + één maand); enzovoorts. |
-| Een aanslagbiljet gedagtekend 15 september 2026 heeft drie termijnen; de derde vervaldatum is 15 december 2026. | ja | Grensgeval: eerste termijn 15 oktober 2026; tweede termijn 15 november 2026; derde termijn 15 december 2026 — precies het einde van het belastingjaar. |
-| De rekenregel wordt slechts eenmaal toegepast voor alle volgende termijnen. | nee | De regel wordt iteratief toegepast: voor elke volgende termijn afzonderlijk wordt één maand opgeteld bij de vorige vervaldatum. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- De regel wordt iteratief toegepast voor elke termijn na de eerste, totdat alle termijnen zijn vastgesteld.
-- De invoer voor elke stap is de vervaldatum van de vorige termijn (te beginnen bij de uitkomst van `vervaldag-eerste-termijn`).
-- Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit; de maandtermijnen lopen kalenderstrikt.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/vervaldag-eerste-termijn]] |
-| heeft | 1:1 | [[begrippen/telkens-een-maand-later]] |
+| heeft | 1:1 | [[views/begrippen/vervaldag-eerste-termijn]] |
+| heeft | 1:1 | [[views/begrippen/telkens-een-maand-later]] |
+
+## Afleidingsregel
+
+[[views/regels/AR-BWBR0004770-art9-lid5-d]]

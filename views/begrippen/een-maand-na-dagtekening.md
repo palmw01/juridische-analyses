@@ -1,9 +1,8 @@
 ---
-type: begrip
-begrip-id: een-maand-na-dagtekening
+begrip-id: BWBR0004770/art9/lid5/een-maand-na-dagtekening
 begripsnaam: een-maand-na-dagtekening
 jas-klasse: tijdsaanduiding
-soort: datum
+soort: tijdsduur
 herkomst: afgeleid
 status: concept
 geldigheid-van: 2026-01-01
@@ -12,39 +11,36 @@ tags:
   - jas/tijdsaanduiding
   - wet/iw1990
   - art/9
-afleidingsregels:
-  - "[[views/regels/AR-9-5c]]"
+afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-c]]"
 ---
 
 ## Definitie
 
-*"één maand na de dagtekening van het aanslagbiljet"*
-*(Art. 9 lid 5 IW 1990, peildatum 2026-01-01)*
+*"één maand na de dagtekening van het aanslagbiljet"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
 Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op grond van art. 9 lid 5 IW 1990
 
 ## Markeringen
 
-| ID | Bron | Tekst | Bijdrage | Bevestigd |
-|----|------|-------|---------|-----------|
-| m-001 | Art. 9 lid 5 IW 1990 | één maand na de dagtekening van het aanslagbiljet | primair | — |
+| ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
+|----|---------------|-------|---------|---------|-----------|
+| m-001 | BWBR0004770/art9/lid5 | één maand na de dagtekening van het aanslagbiljet | primair | grammaticaal | ja |
 
 ## Voorbeelden
 
-| Stelling | Waar? | Toelichting |
-|----------|-------|-------------|
-| Een aanslagbiljet gedagtekend 15 maart 2026 heeft als eerste vervaldatum 15 april 2026. | ja | Één kalendermaand na 15 maart 2026 is 15 april 2026; dit is de vervaldatum van de eerste termijn. |
-| Een aanslagbiljet gedagtekend 31 januari 2026 heeft als eerste vervaldatum 31 februari 2026. | nee | Grensgeval: februari telt maximaal 28 of 29 dagen; bij maandberekening geldt in de praktijk de laatste dag van de doelmaand (28 februari 2026); de Algemene termijnenwet is uitgesloten (lid 10) maar de maandberekeningssystematiek voor korte maanden is niet nader geregeld in lid 5 zelf. |
+*(Voorbeelden nog niet ingevuld)*
 
 ## Kenmerken
 
-- De tijdsaanduiding is relatief: zij wordt berekend door één kalendermaand op te tellen bij de dagtekening van het aanslagbiljet.
-- Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit, zodat de maandtermijn kalenderstrikt loopt.
-- De tijdsaanduiding geldt uitsluitend voor de eerste termijn; de volgende termijnen worden berekend via `telkens-een-maand-later`.
+*(Kenmerken nog niet ingevuld)*
 
 ## Relaties
 
 | Type | Kardinaliteit | Begrip |
 |------|---------------|--------|
-| heeft | 1:1 | [[begrippen/dagtekening-aanslagbiljet]] |
-| leidt tot | — | [[begrippen/vervaldag-eerste-termijn]] |
+| heeft | 1:1 | [[views/begrippen/dagtekening-aanslagbiljet]] |
+| causaal | — | [[views/begrippen/vervaldag-eerste-termijn]] |
+
+## Afleidingsregel
+
+[[views/regels/AR-BWBR0004770-art9-lid5-c]]
