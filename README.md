@@ -24,7 +24,7 @@ Wetsanalyse is een multidisciplinaire methode voor het expliciet maken, concreti
 | 5 | Signaleren van ontbrekende beleidsregels | Interpretaties en nadere invullingen ter oplevering | — |
 | 6 | Opstellen van een kennismodel | Gegevensmodel, regelmodel, procesmodel | — |
 
-De AI-output (annotatie-noten, begrip-noten, afleidingsregel-noten) is het analysemateriaal dat input vormt voor A4–A6. Die activiteiten vallen buiten de scope van deze werkruimte en worden uitgevoerd in een multidisciplinair team.
+De AI-output (annotatie-JSON's, begrip-YAML's, afleidingsregel-YAML's) is het analysemateriaal dat input vormt voor A4–A6. Die activiteiten vallen buiten de scope van deze werkruimte en worden uitgevoerd in een multidisciplinair team.
 
 ---
 
@@ -40,67 +40,88 @@ Wetgeving bevat een impliciete juridische structuur — rechten, plichten, bevoe
 
 Het **Juridisch Analyseschema v1.0.10** (MinBZK, 2024), gebaseerd op Wesley Newcomb Hohfeld (1913), is het instrument voor deelactiviteit 2b. Het schema kent 13 elementen waarmee de juridische grammatica van een wetsformulering zichtbaar wordt: rechtssubjecten, rechtsobjecten, rechtsfeiten, rechtsbetrekkingen (bevoegdheden, plichten, rechten, vrijstellingen) en de bijbehorende voorwaarden en afleidingsregels.
 
-Door klassen toe te kennen worden de relaties tussen wetsformuleringen zichtbaar en ontstaat de basis voor de begrippen en afleidingsregels in Activiteit 3.
+**Kaders en skill:** [kaders.md](./.claude/skills/annoteer/kaders.md) | [SKILL.md /annoteer](./.claude/skills/annoteer/SKILL.md)
 
-**Kaders en skill:** [kaders.md](./.claude/skills/annoteer/kaders.md) — 13 JAS-elementen, 4 interpretatiemethoden, diagramregels, kleurcodering | [SKILL.md /annoteer](./.claude/skills/annoteer/SKILL.md)
+### Vault-producten A2
 
-### Vault-product
+Een `/annoteer`-run voor een artikel levert op:
 
-Een `/annoteer`-run voor een artikel levert twee noten op:
+- `annotaties/{bwb-id}/art{N}.json` — index-JSON: structuuranker voor het artikel
+- `annotaties/{bwb-id}/art{N}-lid{L}.json` — lid-annotatie-JSON: annotatietabel + structuurdiagram (knopen/kanten)
+- `begrippen/{slug}.yaml` — begrip-stubs met `markeringen[]`-lijst (lege definitie)
 
-- `annotaties/[wet]/art[N].md` — index-noot: structuuranker voor het artikel
-- `annotaties/[wet]/art[N]-[L].md` — lid-annotatie: annotatietabel + Mermaid-structuurdiagram (2c)
+Na schrijven worden automatisch Markdown-views gegenereerd in `views/annotaties/` en `views/begrippen/`.
 
 ---
 
 ## Activiteit 3: Vaststellen van de betekenis
 
-Op basis van de geclassificeerde wetsformuleringen uit Activiteit 2 wordt de inhoudelijke betekenis vastgelegd. Activiteit 3 omvat drie deelactiviteiten:
+Op basis van de geclassificeerde wetsformuleringen uit Activiteit 2 wordt de inhoudelijke betekenis vastgelegd. Activiteit 3 omvat twee deelactiviteiten:
 
 - **3a — Begrippen:** voor elke markering een begrip met begripsnaam, definitie, voorbeelden als stellingen (waar/niet waar), kenmerken en relaties met andere begrippen
 - **3b — Afleidingsregels:** berekeningen, beslissingen, specialisaties en beperkingen die bepalen hoe rechtsgevolgen intreden op basis van feiten en omstandigheden
-- **3d — Traceerbaarheid:** elk begrip en elke afleidingsregel is direct herleidbaar naar de primaire juridische bron
 
 ### Traceerbaarheid als rode draad
 
-Rechtmatigheid vereist dat beslissingen in de uitvoeringspraktijk traceerbaar zijn op wet- en regelgeving. In de vault is dit geïmplementeerd via de wikilink-keten:
-
-```
-begrip-noot  →  annotatie-noot  →  wetstekst-noot
-```
-
-Een begrip verwijst altijd naar de annotatie waaruit het is afgeleid. De annotatie verwijst naar de wetstekst-noot met de letterlijke wettekst. Zo is elk analyseresultaat direct herleidbaar naar de primaire juridische bron.
+Rechtmatigheid vereist dat beslissingen in de uitvoeringspraktijk traceerbaar zijn op wet- en regelgeving. In de vault is dit geïmplementeerd via `markeringen[].bron-annotatie-id` in elke begrip-YAML en `annotatie-id` in elke regel-YAML. Elk analyseresultaat is direct herleidbaar naar de primaire juridische bron.
 
 **Kaders en skills:** [begrippenkader](./.claude/skills/begrip/kaders.md) | [regelkader](./.claude/skills/begrip/kaders-regels.md) | [SKILL.md /begrip](./.claude/skills/begrip/SKILL.md)
 
-### Vault-producten
+### Vault-producten A3
 
-- `begrippen/[slug].md` — begrip-noot: definitie, voorbeelden, kenmerken, relaties (A3a)
-- `regels/[slug].md` — afleidingsregel-noot: als-dan patroon, voorbeeldreeksen (A3b)
+- `begrippen/{slug}.yaml` — begrip: definitie, soort, herkomst, relaties, markeringen (A3a)
+- `begrippen/{slug}.extra.json` — voorbeelden als stellingen + kenmerken (A3a)
+- `regels/AR-{bwb-id}-art{N}-lid{L}-{nr}.yaml` — afleidingsregel: als-dan patroon, voorbeeldreeksen (A3b)
 
 ---
 
 ## Vault-structuur
 
 ```
-wetteksten/       ← letterlijke wetstekst per bron (objectief, MCP-afkomstig)
-  iw1990/         ← per wet een submap
-annotaties/       ← A2-producten: markering + klasse + structuurdiagram
-  iw1990/         ← per wet een submap
-    art9.md       ← index-noot (structuuranker artikel)
-    art9-1.md     ← lid-annotatie: annotatietabel + Mermaid-diagram
-begrippen/        ← A3a-producten: begrippen met definitie, kenmerken, relaties
-regels/           ← A3b-producten: afleidingsregel-noten
-graaf/            ← graph-export: graph.gexf + graph.graphml (partieel kennismodel A6)
-.claude/skills/   ← skill-documentatie en kaders voor Claude Code
+annotaties/             ← A2-producten: markering + classificatie + structuurdiagram
+  {bwb-id}/
+    art{N}.json         ← index-JSON (structuuranker artikel)
+    art{N}-lid{L}.json  ← lid-annotatie-JSON: annotatietabel + knopen/kanten
+begrippen/              ← A3a-producten: begrip-YAML + extra-JSON
+  {slug}.yaml           ← begrip: definitie, soort, relaties, markeringen
+  {slug}.extra.json     ← voorbeelden + kenmerken
+regels/                 ← A3b-producten: afleidingsregel-YAML
+  AR-{bwb-id}-art{N}-lid{L}-{nr}.yaml
+bronnen/                ← genormaliseerde MCP-responses (wetstekst per artikel)
+  {bwb-id}/
+    art{N}.json
+schemas/                ← JSON Schema (draft-07) voor validatie
+  annotatie-index.schema.json
+  annotatie-lid.schema.json
+  begrip.schema.json
+  regel.schema.json
+ontologie/              ← JAS-ontologie + SKOS-mapping + soort-systeem
+  jas-ontologie.yaml
+  skos-mapping.yaml
+  soort-systeem.yaml
+views/                  ← gegenereerde Obsidian-views (nooit handmatig editen)
+  index.md              ← dashboard (Dataview)
+  begrippen/            ← views per begrip
+  annotaties/           ← views per annotatie
+  regels/               ← views per afleidingsregel
+graaf/                  ← graph-export
+  graph.gexf            ← Gephi/Cytoscape-formaat
+  graph.graphml         ← GraphML-formaat
+  begrippen.ttl         ← RDF Turtle (SKOS-compatibel)
+rapporten/              ← tools-output
+  enrichment-queue.json ← begrippen die aanvullende analyse vereisen
+  validatie-rapport.md
+tools/                  ← Python-toolchain
+.claude/skills/         ← skill-documentatie en kaders voor Claude Code
 ```
 
 | Map | Wetsanalyse-product | Activiteit |
 |-----|---------------------|-----------|
-| `wetteksten/` | Primaire juridische bronnen | Input A2 |
-| `annotaties/` | Markering + klasse + structuurdiagram | A2 (2a/2b/2c) |
+| `annotaties/` | Markering + classificatie + structuurdiagram | A2 (2a/2b/2c) |
 | `begrippen/` | Begrippen + kenmerken + relaties | A3 (3a) |
 | `regels/` | Afleidingsregels | A3 (3b) |
+| `bronnen/` | Primaire juridische bronnen (genormaliseerd) | Input A2 |
+| `views/` | Obsidian-weergave (gegenereerd) | Navigatie |
 | `graaf/` | Graph-export | A6 (partieel) |
 
 ---
@@ -110,14 +131,14 @@ graaf/            ← graph-export: graph.gexf + graph.graphml (partieel kennism
 De workflow volgt de iteratieve structuur van Wetsanalyse: per artikel eerst A2, dan A3.
 
 ```
-/annoteer art. [A] [W]         →  Flow A: wetstekst-noot + index-noot (2a)
-/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie + diagram (2b/2c)
-/begrip-alles art. [A] [W]     →  A3: begrippen + afleidingsregels per lid
+/annoteer art. [A] [W]         →  Flow A: index-JSON aanmaken (structuuranker)
+/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-JSON + begrip-stubs (A2)
+/begrip-alles art. [A] [W]     →  A3: definitie + extra-JSON + regel-YAML (A3a/3b)
 ```
 
 Voor bronnen zonder leden (Leidraad Invordering, beleid):
 ```
-/annoteer sectie [ref] [W]     →  Flow C: wetstekst-noot + directe annotatie-noot
+/annoteer sectie [ref] [W]     →  Flow C: index-JSON + directe annotatie-JSON
 ```
 
 Voorbeeld — artikel 9 IW 1990 volledig doorlopen:
@@ -128,6 +149,16 @@ Voorbeeld — artikel 9 IW 1990 volledig doorlopen:
 /begrip-alles art. 9 IW 1990
 ```
 
+### Enrichment-workflow
+
+Begrippen die in meerdere annotaties voorkomen of conflicterende markeringen hebben, worden automatisch gedetecteerd:
+
+```
+tools/.venv/bin/python tools/check_enrichment.py
+```
+
+Zie `rapporten/enrichment-queue.json` voor de actuele lijst. Begrippen met een openstaande enrichment-beslissing worden geblokkeerd door `/begrip` totdat de beslissing is genomen.
+
 ### Graph-export (Gephi / Cytoscape)
 
 ```
@@ -135,10 +166,26 @@ Voorbeeld — artikel 9 IW 1990 volledig doorlopen:
 /graph model      →  hergenereeer graph-model.json + exporteer
 ```
 
-### Installatie
+RDF Turtle (SKOS):
+```
+tools/.venv/bin/python tools/export_rdf.py
+```
 
-1. Kloon de `wetten-overheid-tools` repository naast deze repo.
-2. De MCP-server is geconfigureerd in `.claude/settings.json`.
+---
+
+## Python-toolchain
+
+| Tool | Commando | Wanneer uitvoeren |
+|------|---------|------------------|
+| `generate_views.py` | `tools/.venv/bin/python tools/generate_views.py` | Na elke `/annoteer` of `/begrip` run |
+| `validate_note.py` | `tools/.venv/bin/python tools/validate_note.py --file [pad]` | Na elk schrijfcommando (automatisch door skills) |
+| `check_enrichment.py` | `tools/.venv/bin/python tools/check_enrichment.py` | Na toevoegen van nieuwe markeringen |
+| `export_rdf.py` | `tools/.venv/bin/python tools/export_rdf.py` | Bij RDF/SKOS-export voor externe systemen |
+
+Installeer de venv eenmalig:
+```
+cd tools/ && python -m venv .venv && .venv/bin/pip install pyyaml jsonschema networkx
+```
 
 ---
 
@@ -148,32 +195,19 @@ Alle entiteiten zijn voorzien van geneste tags zodat de graph filterbaar en kleu
 
 | Tag | Inhoud |
 |-----|--------|
-| `#wetstekst` | Alle wetstekst-noten |
-| `#annotatie` | Alle annotatie-noten (index + lid) |
-| `#begrip` | Alle begrip-noten |
-| `#afleidingsregel` | Alle regel-noten |
+| `#annotatie` | Alle annotatie-views |
+| `#begrip` | Alle begrip-views |
+| `#afleidingsregel` | Alle afleidingsregel-views |
 | `#jas/rechtssubject` | Begrippen met klasse rechtssubject |
 | `#jas/rechtsbetrekking` | Begrippen met klasse rechtsbetrekking |
+| `#jas/afleidingsregel` | Begrippen met klasse afleidingsregel |
 | `#wet/iw1990` | Alles wat de IW 1990 betreft |
 | `#art/9` | Alles dat art. 9 betreft |
+| `#tussenresultaat` | Alleen tussenresultaten |
 
-Kleuren zijn geconfigureerd in `.obsidian/graph.json` conform de JAS-kleurcodering — geen handmatige instelling nodig.
+Kleuren zijn geconfigureerd in `.obsidian/graph.json` conform de JAS-kleurcodering.
 
-### Local Graph
-
-- **Openen:** Command Palette (`Ctrl+P`) → "Open local graph"
-- **Aanbevolen depth:** `2` voor begrip-netwerk, `3` voor artikel-overzicht
-- **Relatierichting:** Wiki-links in begrip-noten zijn altijd uitgaand (forward-only); Obsidian genereert backlinks automatisch
-
-### Filterpatronen (Global Graph)
-
-| Filter | Resultaat |
-|--------|-----------|
-| `tag:#jas/rechtsbetrekking` | Alleen rechtsbetrekkingen |
-| `tag:#jas/afleidingsregel` | Alleen afleidingsregels |
-| `tag:#tussenresultaat` | Alleen tussenresultaten |
-| `tag:#wet/iw1990` | Alles m.b.t. IW 1990 |
-| `path:begrippen/` | Alleen begrip-noten |
+> **Let op:** Bewerk bestanden in `views/` nooit handmatig — ze worden overschreven door `generate_views.py`. Bronbestanden zijn de YAML's in `begrippen/` en `regels/` en de JSON's in `annotaties/`.
 
 ### Plugin-aanbevelingen
 
@@ -183,3 +217,11 @@ Kleuren zijn geconfigureerd in `.obsidian/graph.json` conform de JAS-kleurcoderi
 | **Templater** | Templates met dynamische velden | Geïnstalleerd |
 | **Breadcrumbs** | Hiërarchische relaties via `is-een` en `leidt-tot` | Community Plugins |
 | **Juggl** | Interactieve graph met meer filteropties | Community Plugins |
+
+---
+
+## Installatie
+
+1. Kloon de `wetten-overheid-tools` repository naast deze repo.
+2. De MCP-server is geconfigureerd in `.claude/settings.json`.
+3. Installeer de Python-toolchain (zie boven).

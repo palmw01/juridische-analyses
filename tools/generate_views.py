@@ -150,7 +150,8 @@ def bouw_begrip_jas_index(vault_root: Path) -> dict[str, str]:
     if not annotaties_dir.exists():
         return index
     for json_file in annotaties_dir.glob("**/*.json"):
-        if json_file.name.startswith("."):
+        rel_parts = json_file.relative_to(annotaties_dir).parts
+        if any(part.startswith(".") for part in rel_parts):
             continue
         with json_file.open(encoding="utf-8") as f:
             try:
@@ -691,8 +692,14 @@ def genereer_annotatie_views(vault_root: Path, jas_kleuren: dict, enkel_bestand:
         bronnen = sorted(annotaties_dir.glob("**/*.json"))
 
     for fp in bronnen:
-        if fp.name.startswith(".") or fp.suffix != ".json":
+        if fp.suffix != ".json":
             continue
+        try:
+            rel_parts = fp.relative_to(annotaties_dir).parts
+            if any(part.startswith(".") for part in rel_parts):
+                continue
+        except ValueError:
+            pass
         try:
             rel_pad, content = genereer_annotatie_view(fp, vault_root, jas_kleuren)
             output_path = output_base / rel_pad
