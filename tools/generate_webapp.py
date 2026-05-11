@@ -180,36 +180,33 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
 .nav-logo{color:#fff;font-weight:700;font-size:clamp(0.9rem,2.5vw,1.1rem);white-space:nowrap;display:flex;align-items:center;gap:0.5rem}
 .nav-logo span{opacity:0.75;font-weight:400;display:none}
 @media(min-width:480px){.nav-logo span{display:inline}}
-.nav-links{display:flex;gap:0.25rem;margin-left:auto;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links{display:flex;gap:0.25rem;margin-left:auto;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2}
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{color:rgba(255,255,255,0.85);font-size:clamp(0.75rem,2vw,0.875rem);padding:0.35rem 0.5rem;border-radius:4px;white-space:nowrap;transition:background 0.15s,color 0.15s}
 .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:#fff;text-decoration:none}
 .nav-links a.active{font-weight:600}
 
-/* Dark mode toggle — desktop: naadloos in nav-balk */
-.dark-toggle{background:none;border:none;color:rgba(255,255,255,0.85);border-radius:4px;padding:0.35rem 0.5rem;cursor:pointer;font-size:clamp(0.75rem,2vw,0.875rem);transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap;line-height:inherit}
+/* Dark mode toggle — naadloos in nav-balk */
+.dark-toggle{background:none;border:none;color:rgba(255,255,255,0.85);border-radius:4px;padding:0.35rem 0.5rem;cursor:pointer;font-size:clamp(0.75rem,2vw,0.875rem);transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap;line-height:inherit;order:3}
 .dark-toggle:hover{background:rgba(255,255,255,0.15);color:#fff}
-.dt-label{display:none}
 
 /* Hamburger — gestapelde lijnen met X-animatie */
-.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;padding:0}
+.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;padding:0;order:4}
 .hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.25s,opacity 0.15s;flex-shrink:0}
 .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
 @media (max-width: 767px){
-  .hamburger{display:flex}
+  .hamburger{display:flex;order:3;margin-left:0}
+  .dark-toggle{order:2;margin-left:auto}
   .nav{height:auto;min-height:var(--nav-height)}
   .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0;gap:0}
-  .nav-links{display:none;width:100%;flex-direction:column;overflow:hidden;margin-left:0;align-items:stretch;padding:0}
+  .nav-links{display:none;order:4;width:100%;flex-direction:column;overflow:hidden;margin-left:0;align-items:stretch;padding:0}
   .nav-links.open{display:flex}
   .nav-links a{display:block;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);text-align:left;line-height:1.5;border-radius:0;margin:0}
   .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.1);color:#fff;text-decoration:none}
   .nav-links a.active{font-weight:600}
-  .nav-links .dark-toggle{display:flex;align-items:center;gap:0.5rem;width:100%;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);border-radius:0;margin:0;line-height:1.5;background:none;white-space:nowrap;justify-content:flex-start}
-  .nav-links .dark-toggle:hover{background:rgba(255,255,255,0.1);color:#fff}
-  .nav-links .dt-label{display:inline}
 }
 
 /* Main content */
@@ -389,15 +386,14 @@ def gen_nav(active: str = "", p: str = "") -> str:
     return f"""<nav class="nav">
 <div class="container">
   <div class="nav-logo">Belastingdienst<span> | Kennismodel Invordering</span></div>
+  <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
+    <span class="dt-icon">A</span>
+  </button>
   <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links">
     {links}
-    <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
-      <span class="dt-icon">A</span>
-      <span class="dt-label">Donker thema</span>
-    </button>
   </div>
 </div>
 </nav>"""
@@ -1070,9 +1066,8 @@ def gen_css_js(out: Path):
   function setTheme(t){
     root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
     if(toggle){
-      var ic=toggle.querySelector('.dt-icon'),lb=toggle.querySelector('.dt-label');
+      var ic=toggle.querySelector('.dt-icon');
       if(ic)ic.textContent=t==='dark'?'\u25D0':'A';
-      if(lb)lb.textContent=t==='dark'?'Licht thema':'Donker thema';
     }
   }
   var stored=localStorage.getItem('theme');
