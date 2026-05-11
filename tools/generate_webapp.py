@@ -1053,8 +1053,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 
 
 def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
-    # Lookup: begrip_id → slug (gebaseerd op naam, niet op ID-deel)
+    # Lookup: begrip_id → slug en naam
     slug_by_bid: dict[str, str] = {b["id"]: b["slug"] for b in begrippen}
+    naam_by_bid: dict[str, str] = {b["id"]: b["naam"] for b in begrippen}
     # Build index: begrip_id → regels die erin/eruit gebruiken
     regel_by_bid: dict[str, list[dict]] = {}
     for reg in regels:
@@ -1089,7 +1090,8 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slug_by_bid.get(r["begrip_id"]) or slugify(r["begrip_id"].rsplit("/", 1)[-1])
-                bgp_link = f'<a href="../begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
+                naam = naam_by_bid.get(r["begrip_id"]) or r["begrip_id"].rsplit("/", 1)[-1]
+                bgp_link = f'<a href="../begrippen/{slug}.html">{naam}</a>'
             sign = r.get("signalering")
             if sign:
                 # Expandable row met signalering
@@ -1101,7 +1103,6 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 rijen += f'<tr class="sign-detail" style="display:none"><td colspan="4"><div class="sign-content">{label}{sign}</div></td></tr>\n'
             else:
                 rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
-        lid = f', lid {a["lid"]}' if a.get("lid") else ""
         mermaid_src = ""
         extra_scripts = ""
         mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
