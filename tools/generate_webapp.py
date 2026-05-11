@@ -1291,12 +1291,18 @@ function applyFilter(v){{
 }}
 document.getElementById('klasseFilter').addEventListener('change',function(){{applyFilter(this.value)}});
 
+// Fullscreen staat — vroeg declareren zodat resizeGraph er gebruik van kan maken
+var cssFsActive=false;
+
 // Resize-handler: past SVG-afmetingen aan bij vensterformaat-wijziging én fullscreen
 function resizeGraph(){{
   var container=document.getElementById('graphContainer');
   var newW=container.clientWidth;
-  var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
-  var newH=fs?window.screen.height:Math.max(400,Math.min(window.innerHeight*0.6,700));
+  var nativeFsOn=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+  var fsOn=nativeFsOn||cssFsActive;
+  var newH=fsOn?window.innerHeight:Math.max(400,Math.min(window.innerHeight*0.6,700));
+  if(fsOn)container.style.height=newH+'px';
+  else container.style.height='';
   svg.attr('width',newW).attr('height',newH);
   simulation.force('center',d3.forceCenter(newW/2,newH/2)).alpha(0.3).restart();
   defaultTransform=d3.zoomIdentity.translate(newW/2,newH/2).scale(0.85).translate(-newW/2,-newH/2);
@@ -1308,7 +1314,6 @@ var fsBtn=document.getElementById('fullscreenBtn');
 var closeBtn=document.getElementById('graphCloseBtn');
 var container=document.getElementById('graphContainer');
 var nativeFs=!!(container.requestFullscreen||container.webkitRequestFullscreen);
-var cssFsActive=false;
 
 function setFsUi(fs){{
   container.classList.toggle('graph-fullscreen',fs);
