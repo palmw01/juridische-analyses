@@ -5,6 +5,7 @@
 ![Methodiek](https://img.shields.io/badge/methodiek-JAS%20v1.0.10-blue)
 ![Domein](https://img.shields.io/badge/domein-invordering%20rijksbelastingen-darkgreen)
 ![CI](https://img.shields.io/github/actions/workflow/status/palmw01/juridische-analyses/ci.yml?branch=main&label=CI)
+[![GitHub Pages](https://img.shields.io/badge/webapp-online-blue?logo=github)](https://palmw01.github.io/juridische-analyses)
 
 ---
 
