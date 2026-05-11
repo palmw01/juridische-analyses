@@ -485,8 +485,8 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 .filter-chip:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 
 /* ── Zoekresultaten ── */
-.search-result{padding:0.875rem 0.5rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;border-radius:var(--radius);margin:0 -0.5rem}
-.search-result:hover{background:var(--primary-light)}
+.search-result{display:block;padding:0.875rem 0.5rem;border-bottom:1px solid var(--border);transition:background 0.15s;border-radius:var(--radius);margin:0 -0.5rem;color:inherit;text-decoration:none}
+.search-result:hover{background:var(--primary-light);text-decoration:none;color:inherit}
 .search-result:last-child{border-bottom:none}
 .search-result-title{font-weight:600;color:var(--text)}
 .search-result-excerpt{font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;line-height:1.45}
@@ -1361,11 +1361,11 @@ function doSearch(){{
   var html='';
   hits.slice(0,50).forEach(function(d){{
     var rawExcerpt = d.tekst.length > 150 ? d.tekst.substring(0,150)+'...' : d.tekst;
-    html += '<div class="search-result" onclick="window.location=\''+d.url+'\'">'+
+    html += '<a class="search-result" href="'+escHtml(d.url)+'">'+
       '<div class="search-result-title">'+escHtml(d.titel)+'</div>'+
       '<div class="search-result-excerpt">'+escHtml(rawExcerpt)+'</div>'+
       '<div class="search-result-meta"><span>Type: '+escHtml(d.type)+'</span>'+
-      (d.jas_klasse?'<span>JAS: '+escHtml(d.jas_klasse)+'</span>':'')+'</div></div>';
+      (d.jas_klasse?'<span>JAS: '+escHtml(d.jas_klasse)+'</span>':'')+'</div></a>';
   }});
   out.innerHTML += html;
 }}
