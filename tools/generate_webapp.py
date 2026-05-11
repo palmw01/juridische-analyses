@@ -80,6 +80,7 @@ JAS_KLEUREN: dict[str, str] = {
     "parameter": "#FFD966",
     "plaatsaanduiding": "#9DC3E6",
     "delegatiebevoegdheid": "#C9C9C9",
+    "brondefinitie": "#B4C7E7",
 }
 
 CSS = """/* Belastingdienst kennismodel — Rijkshuisstijl v2 */
@@ -536,6 +537,27 @@ footer{
   margin-top:auto;line-height:1.6;
 }
 
+/* ── Graaf fullscreen ── */
+.graph-fullscreen{
+  position:fixed!important;top:0;left:0;
+  width:100vw!important;height:100vh!important;
+  z-index:9999;border-radius:0!important;border:none!important;
+  background:var(--card-bg)!important;
+}
+.graph-close-btn{
+  display:none;
+  position:absolute;top:0.75rem;right:0.75rem;z-index:10001;
+  width:36px;height:36px;
+  align-items:center;justify-content:center;
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text-secondary);
+  font-size:1rem;cursor:pointer;line-height:1;
+  box-shadow:var(--shadow);
+  transition:background 0.15s,color 0.15s;
+}
+.graph-close-btn:hover{background:var(--primary-light);color:var(--primary)}
+.graph-close-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
 /* ── 404 ── */
 .error-page{text-align:center;padding:4rem 1rem}
 .error-page h1{font-size:5rem;color:var(--primary);margin-bottom:0.5rem;font-weight:300;letter-spacing:-0.03em}
@@ -801,6 +823,8 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
 
 
 def gen_begrippen(out: Path, begrippen: list, annotaties: list):
+    # Lookup: begrip_id → slug (gebaseerd op naam, niet op ID-deel)
+    slug_by_bid: dict[str, str] = {b["id"]: b["slug"] for b in begrippen}
     # Build index: begrip_id → annotatie-links
     ann_by_begrip: dict[str, list[dict]] = {}
     for a in annotaties:
@@ -838,7 +862,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             if targets:
                 rel_html += f"<p style='margin-top:0.5rem'><strong>{label}</strong></p><ul style='margin-left:1.25rem'>"
                 for t in targets:
-                    t_slug = slugify(t.rsplit("/", 1)[-1])
+                    t_slug = slug_by_bid.get(t) or slugify(t.rsplit("/", 1)[-1])
                     rel_html += f'<li><a href="{pp}begrippen/{t_slug}.html">{t}</a></li>'
                 rel_html += "</ul>"
         if not rel_html:
@@ -914,6 +938,8 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 
 
 def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
+    # Lookup: begrip_id → slug (gebaseerd op naam, niet op ID-deel)
+    slug_by_bid: dict[str, str] = {b["id"]: b["slug"] for b in begrippen}
     # Build index: begrip_id → regels die erin/eruit gebruiken
     regel_by_bid: dict[str, list[dict]] = {}
     for reg in regels:
@@ -947,7 +973,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         for r in a["rijen"]:
             bgp_link = ""
             if r.get("begrip_id"):
-                slug = slugify(r["begrip_id"].rsplit("/", 1)[-1])
+                slug = slug_by_bid.get(r["begrip_id"]) or slugify(r["begrip_id"].rsplit("/", 1)[-1])
                 bgp_link = f'<a href="../begrippen/{slug}.html" style="word-break:break-all;font-size:0.8rem">{r["begrip_id"]}</a>'
             sign = r.get("signalering")
             if sign:
@@ -1109,6 +1135,10 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
             if inv not in node_ids:
                 add_node(inv, inv.rsplit("/", 1)[-1], "onbekend", "begrip", None)
             links.append({"source": r["id"], "target": inv, "relatie": "invoer"})
+        for uitv in r.get("uitvoer") or []:
+            if uitv not in node_ids:
+                add_node(uitv, uitv.rsplit("/", 1)[-1], "onbekend", "begrip", None)
+            links.append({"source": r["id"], "target": uitv, "relatie": "uitvoer"})
     gr_data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
     kleuren_json = json.dumps(JAS_KLEUREN, ensure_ascii=False)
     # Alleen klassen die ook daadwerkelijk in de data voorkomen
@@ -1124,8 +1154,10 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
   </select>
   <span class="graph-count" id="nodeCount"></span>
   <button class="btn-secondary" id="resetBtn" type="button">Reset weergave</button>
+  <button class="btn-secondary" id="fullscreenBtn" type="button" aria-label="Volledig scherm" title="Volledig scherm">&#x26F6; Volledig scherm</button>
 </div>
 <div class="graph-container" id="graphContainer">
+  <button class="graph-close-btn" id="graphCloseBtn" type="button" aria-label="Volledig scherm sluiten" title="Sluiten">&#x2715;</button>
   <div class="graph-legend" id="graphLegend"></div>
 </div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -1237,6 +1269,49 @@ function applyFilter(v){{
   updateCount(matchedIds);
 }}
 document.getElementById('klasseFilter').addEventListener('change',function(){{applyFilter(this.value)}});
+
+// Resize-handler: past SVG-afmetingen aan bij vensterformaat-wijziging én fullscreen
+function resizeGraph(){{
+  var container=document.getElementById('graphContainer');
+  var newW=container.clientWidth;
+  var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+  var newH=fs?window.screen.height:Math.max(400,Math.min(window.innerHeight*0.6,700));
+  svg.attr('width',newW).attr('height',newH);
+  simulation.force('center',d3.forceCenter(newW/2,newH/2)).alpha(0.3).restart();
+  defaultTransform=d3.zoomIdentity.translate(newW/2,newH/2).scale(0.85).translate(-newW/2,-newH/2);
+}}
+window.addEventListener('resize',resizeGraph);
+
+// Fullscreen
+var fsBtn=document.getElementById('fullscreenBtn');
+var closeBtn=document.getElementById('graphCloseBtn');
+var container=document.getElementById('graphContainer');
+function enterFullscreen(){{
+  if(container.requestFullscreen){{container.requestFullscreen();}}
+  else if(container.webkitRequestFullscreen){{container.webkitRequestFullscreen();}}
+}}
+function exitFullscreen(){{
+  if(document.exitFullscreen){{document.exitFullscreen();}}
+  else if(document.webkitExitFullscreen){{document.webkitExitFullscreen();}}
+}}
+function onFullscreenChange(){{
+  var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+  container.classList.toggle('graph-fullscreen',fs);
+  closeBtn.style.display=fs?'flex':'none';
+  fsBtn.innerHTML=fs?'&#x2B1C; Normaal':'&#x26F6; Volledig scherm';
+  fsBtn.title=fs?'Volledig scherm afsluiten':'Volledig scherm';
+  setTimeout(resizeGraph,50);
+}}
+document.addEventListener('fullscreenchange',onFullscreenChange);
+document.addEventListener('webkitfullscreenchange',onFullscreenChange);
+if(fsBtn)fsBtn.addEventListener('click',function(){{
+  var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+  fs?exitFullscreen():enterFullscreen();
+}});
+if(closeBtn)closeBtn.addEventListener('click',exitFullscreen);
+document.addEventListener('keydown',function(e){{
+  if(e.key==='Escape'&&(document.fullscreenElement===container||document.webkitFullscreenElement===container))exitFullscreen();
+}});
 </script>"""
     schrijf_html(out, "graph.html", "Kennisgraaf | Belastingdienst", body, active="graaf")
 
@@ -1262,6 +1337,7 @@ def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
 <div id="searchResults"></div>
 <script>
 var data = {data_json};
+function escHtml(s){{return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}
 var currentFilter = 'all';
 document.querySelectorAll('.filter-chip').forEach(function(chip){{
   chip.addEventListener('click',function(){{
@@ -1275,21 +1351,23 @@ function doSearch(){{
   var q = document.getElementById('searchInput').value.toLowerCase();
   var out = document.getElementById('searchResults');
   out.innerHTML = '';
-  if(q.length < 2){{out.innerHTML='<div class="item-list"><li class="item-meta" style="list-style:none;padding:1rem 0">Typ minimaal 2 tekens om te zoeken</li></div>';return}}
+  if(q.length < 2){{out.innerHTML='<p class="item-meta" style="padding:1rem 0">Typ minimaal 2 tekens om te zoeken</p>';return}}
   var hits = data.filter(function(d){{
     if(currentFilter !== 'all' && d.type !== currentFilter) return false;
     return d.titel.toLowerCase().indexOf(q) > -1 || d.tekst.toLowerCase().indexOf(q) > -1;
   }});
-  if(hits.length === 0){{out.innerHTML='<div class="no-results">Geen resultaten voor "'+q+'"</div>';return}}
+  if(hits.length === 0){{out.innerHTML='<div class="no-results">Geen resultaten voor "'+escHtml(q)+'"</div>';return}}
   out.innerHTML = '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem">'+hits.length+' resultaten</div>';
+  var html='';
   hits.slice(0,50).forEach(function(d){{
-    var excerpt = d.tekst.length > 150 ? d.tekst.substring(0,150)+'...' : d.tekst;
-    out.innerHTML += '<div class="search-result" onclick="window.location=\\''+d.url+'\\'">'+
-      '<div class="search-result-title">'+d.titel+'</div>'+
-      '<div class="search-result-excerpt">'+excerpt+'</div>'+
-      '<div class="search-result-meta"><span>Type: '+d.type+'</span>'+
-      (d.jas_klasse?'<span>JAS: '+d.jas_klasse+'</span>':'')+'</div></div>';
+    var rawExcerpt = d.tekst.length > 150 ? d.tekst.substring(0,150)+'...' : d.tekst;
+    html += '<div class="search-result" onclick="window.location=\''+d.url+'\'">'+
+      '<div class="search-result-title">'+escHtml(d.titel)+'</div>'+
+      '<div class="search-result-excerpt">'+escHtml(rawExcerpt)+'</div>'+
+      '<div class="search-result-meta"><span>Type: '+escHtml(d.type)+'</span>'+
+      (d.jas_klasse?'<span>JAS: '+escHtml(d.jas_klasse)+'</span>':'')+'</div></div>';
   }});
+  out.innerHTML += html;
 }}
 var _st;document.getElementById('searchInput').addEventListener('input',function(){{clearTimeout(_st);_st=setTimeout(doSearch,200)}});
 </script>"""
