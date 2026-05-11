@@ -167,13 +167,13 @@ a:hover{text-decoration:underline}
 /* Hamburger */
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;margin-left:auto;flex-shrink:0}
 .hamburger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px;transition:transform 0.2s,opacity 0.2s}
-.hamburger.open span:nth-child(1){transform:translateY(6px)rotate(45deg)}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-6px)rotate(-45deg)}
-@media(max-width:767px){
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media (max-width: 767px){
   .hamburger{display:block}
   .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0.5rem}
-  .nav-links{display:none;width:100%;flex-direction:column;gap:0;padding-top:0.5rem;overflow-x:visible}
+  .nav-links{display:none;width:100%;flex-direction:column;gap:0;padding-top:0.5rem;overflow-x:visible;margin-left:0;align-items:stretch}
   .nav-links.open{display:flex}
   .nav-links a{padding:0.7rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.12);font-size:0.95rem}
   .nav-links a:last-of-type{border-bottom:none}

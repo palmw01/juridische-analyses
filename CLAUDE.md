@@ -31,13 +31,9 @@ Voor bronnen zonder leden (Leidraad, beleid):
 
 ### Annotatie → begrip: strikte volgorde
 
-De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in de begrip-frontmatter zijn de enige bron voor de definitie.
+De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in het begrip-YAML zijn de enige bron voor de definitie.
 
-Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de frontmatter zowel het primaire `bron`-veld als een `bronnen`-lijst met alle artikelreferenties. De definitie is dan een synthese van alle markeringen.
-
-### Type vs. JAS-klasse — valkuil
-
-Het `type`-veld in begrip-noten is **altijd** `begrip`, ook als de `jas-klasse` `afleidingsregel` is. De `jas-klasse` beschrijft de juridische functie; `type` beschrijft het vault-entiteitstype. Tags bij `jas-klasse: afleidingsregel`: `[begrip, jas/afleidingsregel, wet/..., art/...]` — nooit `[afleidingsregel, ...]` (dat patroon is voor noten in `regels/`).
+Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de `markeringen`-array meerdere entries met verschillende `bron-annotatie-id`-waarden; de bijdrage per markering is `primair`, `aanvullend` of `context`. De definitie is een synthese van alle primaire en aanvullende markeringen.
 
 ---
 
@@ -64,7 +60,7 @@ Het `type`-veld in begrip-noten is **altijd** `begrip`, ook als de `jas-klasse` 
 
 - Lees altijd de werkelijke wetstekst voordat je claims maakt over structuur (lidnummers, artikelnummers, volgorde, inhoud).
 - Zoeksnippets (fragmenten uit `zoekterm`-resultaten) vertellen alleen *dát* iets voorkomt — gebruik ze nooit als basis voor structuurclaims of inhoudelijke uitleg.
-- Controleer vóór `/annoteer` of al een annotatie-noot bestaat in `annotaties/` via `find annotaties/ -name "[wet]-art[nr].md"`. Start geen nieuwe MCP-aanroepen als de wetstekst al beschikbaar is.
+- Controleer vóór `/annoteer` of al een annotatie-noot bestaat in `annotaties/` via `find annotaties/ -name "art[nr]*.json"`. Start geen nieuwe MCP-aanroepen als de wetstekst al beschikbaar is.
 
 ---
 
