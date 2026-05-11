@@ -186,26 +186,31 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
 .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:#fff;text-decoration:none}
 .nav-links a.active{font-weight:600}
 
-/* Dark mode toggle */
-.dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.3rem 0.45rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.15s;margin-left:0.25rem;flex-shrink:0}
+/* Dark mode toggle — desktop (compact) */
+.dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.3rem 0.45rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap}
 .dark-toggle:hover{background:rgba(255,255,255,0.15)}
+.dt-label{display:none}
 
-/* Hamburger */
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;margin-left:auto;flex-shrink:0}
-.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:1px;transition:transform 0.25s ease,opacity 0.15s ease}
+/* Hamburger menu — alleen op mobiel */
+.hamburger{display:none;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;align-items:center;justify-content:center;padding:0}
+.hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.9);border-radius:2px;transition:transform 0.2s,opacity 0.15s}
 .hamburger span+span{margin-top:6px}
 .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
 @media (max-width: 767px){
-  .nav{height:auto}
-  .hamburger{display:block}
-  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0.5rem}
-  .nav-links{display:none;width:100%;flex-direction:column;gap:0;padding-top:0.5rem;overflow-x:visible;margin-left:0;align-items:stretch}
+  .hamburger{display:flex}
+  .nav{height:auto;min-height:var(--nav-height)}
+  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0;gap:0}
+  .nav-links{display:none;width:100%;flex-direction:column;overflow:hidden;margin-left:0;align-items:stretch;padding:0}
   .nav-links.open{display:flex}
-  .nav-links a{padding:0.7rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.12);font-size:0.95rem}
-  .nav-links a:last-of-type{border-bottom:none}
-  .nav-links .dark-toggle{margin-left:0;margin-top:0.5rem;align-self:flex-start}
+  .nav-links a{display:block;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);text-align:left;line-height:1.5;border-radius:0;margin:0}
+  .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.1);color:#fff;text-decoration:none}
+  .nav-links a.active{font-weight:600}
+  .nav-links .dark-toggle{display:flex;align-items:center;gap:0.5rem;width:100%;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);border-radius:0;margin:0;line-height:1.5;background:none;white-space:nowrap;justify-content:flex-start}
+  .nav-links .dark-toggle:hover{background:rgba(255,255,255,0.1);color:#fff}
+  .nav-links .dt-label{display:inline}
 }
 
 /* Main content */
@@ -385,12 +390,15 @@ def gen_nav(active: str = "", p: str = "") -> str:
     return f"""<nav class="nav">
 <div class="container">
   <div class="nav-logo">Belastingdienst<span> | Kennismodel Invordering</span></div>
-  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links">
     {links}
-    <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus">A</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
+      <span class="dt-icon">A</span>
+      <span class="dt-label">Donker thema</span>
+    </button>
   </div>
 </div>
 </nav>"""
@@ -1059,23 +1067,34 @@ def gen_css_js(out: Path):
     (out / "css").mkdir(parents=True, exist_ok=True)
     (out / "css/style.css").write_text(CSS)
     js = """document.addEventListener('DOMContentLoaded',function(){
-  var toggle=document.getElementById('darkToggle');
-  var root=document.documentElement;
-  function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
-    if(toggle)toggle.textContent=t==='dark'?'\u25D0':'A';}
+  var toggle=document.getElementById('darkToggle'),root=document.documentElement;
+  function setTheme(t){
+    root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+    if(toggle){
+      var ic=toggle.querySelector('.dt-icon'),lb=toggle.querySelector('.dt-label');
+      if(ic)ic.textContent=t==='dark'?'\u2600':'\u263E';
+      if(lb)lb.textContent=t==='dark'?'Licht thema':'Donker thema';
+    }
+  }
   var stored=localStorage.getItem('theme');
   if(stored){setTheme(stored)}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){setTheme('dark')}else{setTheme('light')}
   if(toggle)toggle.addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')});
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light')});
   var hamburger=document.getElementById('hamburger'),navLinks=document.querySelector('.nav-links');
-  function closeMenu(){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}
-  function openMenu(){hamburger.setAttribute('aria-expanded','true');hamburger.classList.add('open');navLinks.classList.add('open')}
-  function toggleMenu(){hamburger.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()}
   if(hamburger&&navLinks){
-    hamburger.addEventListener('click',toggleMenu);
-    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',closeMenu)});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navLinks.classList.contains('open')){closeMenu();hamburger.focus()}});
-    document.addEventListener('click',function(e){if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&e.target!==hamburger&&!hamburger.contains(e.target))closeMenu()});
+    hamburger.addEventListener('click',function(){
+      var o=hamburger.getAttribute('aria-expanded')==='true';
+      hamburger.setAttribute('aria-expanded',String(!o));
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){
+      hamburger.setAttribute('aria-expanded','false');
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    })});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navLinks.classList.contains('open')){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open');hamburger.focus()}});
+    document.addEventListener('click',function(e){if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&!hamburger.contains(e.target)){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}});
   }
 });"""
     (out / "js").mkdir(parents=True, exist_ok=True)

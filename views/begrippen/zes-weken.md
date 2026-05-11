@@ -35,4 +35,6 @@ Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor de ber
 
 ## Relaties
 
-| — | — | — |
+| Type | Kardinaliteit | Begrip |
+|------|---------------|--------|
+| causaal | 1:1 | [[views/begrippen/invorderbaarheid]] |
