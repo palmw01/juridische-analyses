@@ -895,6 +895,12 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 </script>"""
     schrijf_html(out, "begrippen.html", "Begrippen | Belastingdienst", body, active="begrippen")
 
+    # Lookup: annotatie-id → leesbare titel (bijv. "IW 1990 art. 9 lid 5")
+    ann_titel_by_id: dict[str, str] = {
+        a["id"]: f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}'
+        for a in annotaties
+    }
+
     pp = "../"  # prefix voor detail-pagina's in subdirectory
     for b in begrippen:
         rel_html = ""
@@ -910,6 +916,8 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             rel_html = "<p class='item-meta'>Geen relaties</p>"
         def ann_url(bron_annotatie_id: str) -> str:
             return f'../annotaties/{bron_annotatie_id.replace("/", "-")}.html'
+        def ann_label(bron_annotatie_id: str) -> str:
+            return ann_titel_by_id.get(bron_annotatie_id, bron_annotatie_id)
 
         def_bron = ""
         if b.get("definitie"):
@@ -921,7 +929,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                         mid = m.get("markering-id", "")
                         baid = m.get("bron-annotatie-id", "")
                         if baid:
-                            links.append(f'<a href="{ann_url(baid)}">{mid}</a>')
+                            links.append(f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>')
                         else:
                             links.append(mid)
                 def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Kern gebaseerd op: {", ".join(links)}</div>'
@@ -943,7 +951,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             if mid:
                 ref_parts.append(mid)
             if bron:
-                ref_parts.append(f'<a href="{ann_url(bron)}">{bron}</a>')
+                ref_parts.append(f'<a href="{ann_url(bron)}">{ann_label(bron)}</a>')
             ref_str = " · ".join(ref_parts)
             toel_html = f'<div class="def-context-toelichting">{ctx_toel}</div>' if ctx_toel else ""
             ctx_html += (
@@ -962,7 +970,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             jc = b["jas_klasse"] or ""
             mid = m.get("markering-id", "")
             baid = m.get("bron-annotatie-id", "")
-            mid_cell = f'<a href="{ann_url(baid)}">{mid}</a>' if baid else mid
+            mid_cell = f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>' if baid else mid
             mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td></tr>\n'
         mp = ""
         if mark_tbl:
