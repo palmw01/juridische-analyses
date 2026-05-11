@@ -549,6 +549,11 @@ footer{
   z-index:9999;border-radius:0!important;border:none!important;
   background:var(--card-bg)!important;
 }
+/* Legenda linksonder → linksboven in fullscreen (iOS home-indicator vermijden) */
+.graph-fullscreen #graphLegend{
+  bottom:auto!important;right:auto!important;
+  top:0.75rem!important;left:0.75rem!important;
+}
 .graph-close-btn{
   display:none;
   position:absolute;top:0.75rem;right:0.75rem;z-index:10001;
