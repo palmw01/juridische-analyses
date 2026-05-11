@@ -82,144 +82,234 @@ JAS_KLEUREN: dict[str, str] = {
     "delegatiebevoegdheid": "#C9C9C9",
 }
 
-CSS = """/* Belastingdienst kennismodel — gegenereerd */
+CSS = """/* Belastingdienst kennismodel — Rijkshuisstijl v2 */
+
+/* RO Sans vereist licentie; Source Sans 3 is de dichtstbijzijnde open-source variant */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+/* ── Design tokens — Rijkshuisstijl officieel ── */
 :root {
-  --primary: #0047A0;
-  --primary-hover: #003277;
-  --primary-light: #E8F0FE;
-  --accent: #E17000;
-  --bg: #F4F5F7;
+  --primary: #154273;           /* Lintblauw — officieel Rijkshuisstijl */
+  --primary-hover: #0D2B4D;
+  --primary-light: #DAE6F0;
+  --link: #01689B;              /* Officiële rijksoverheid linkkleur */
+  --link-hover: #01568A;
+  --accent: #C0392B;            /* Regel-box accent */
+  --bg: #F3F6F9;
   --card-bg: #FFFFFF;
   --text: #1A1A1A;
-  --text-secondary: #4B5563;
-  --text-muted: #6B7280;
-  --border: #E5E7EB;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
-  --success: #1E7E34;
-  --success-bg: #E6F4EA;
-  --error: #D32F2F;
-  --error-bg: #FDECEA;
-  --warning: #E65100;
-  --warning-bg: #FFF3E0;
-  --radius: 8px;
-  --nav-height: 56px;
+  --text-secondary: #3A4A5C;
+  --text-muted: #5C6C7C;
+  --border: #C8D4DF;
+  --shadow: 0 1px 2px rgba(21,66,115,0.07), 0 1px 4px rgba(21,66,115,0.04);
+  --shadow-hover: 0 3px 10px rgba(21,66,115,0.13);
+  --success: #1B6B2E;
+  --success-bg: #E2F0E6;
+  --error: #B52316;
+  --error-bg: #FAE9E7;
+  --warning: #7A3D00;
+  --warning-bg: #FEF3E2;
+  --radius: 4px;                /* Rijkshuisstijl: strakke hoeken */
+  --radius-btn: 5px;            /* ~10% van 48px knophoogte */
+  --radius-input: 3px;          /* ~5% van 48px veldenhoogte */
+  --nav-height: 64px;           /* Vergroot voor WCAG 2.5.5 touch targets */
   --max-width: 1200px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --focus-ring: 0 0 0 3px rgba(0,71,160,0.25);
-  --font-mono: "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", Menlo, monospace;
-  --font-serif: Georgia, "Times New Roman", serif;
+  --font: "RO Sans", "Source Sans 3", "Source Sans Pro", "Segoe UI", Arial, sans-serif;
+  --font-serif: "RO Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  --focus-ring: 0 0 0 3px rgba(21,66,115,0.30);
 }
+
+/* ── Dark mode — gedempte marine-blauwtinten, geen startup-neon ── */
 [data-theme="dark"] {
-  --primary: #3B82F6;
-  --primary-hover: #60A5FA;
-  --primary-light: #1E3A5F;
-  --bg: #0F172A;
-  --card-bg: #1E293B;
-  --text: #F1F5F9;
-  --text-secondary: #CBD5E1;
-  --text-muted: #94A3B8;
-  --border: #334155;
-  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
-  --success-bg: #064E3B;
-  --error-bg: #7F1D1D;
-  --warning-bg: #78350F;
-  --focus-ring: 0 0 0 3px rgba(59,130,246,0.35);
+  --primary: #4A8EC0;
+  --primary-hover: #5BA3D8;
+  --primary-light: #192C3E;
+  --link: #6AAEDD;
+  --link-hover: #82C2EF;
+  --bg: #0E1720;
+  --card-bg: #162030;
+  --text: #E6EEF5;
+  --text-secondary: #B5C9DB;
+  --text-muted: #849DB5;
+  --border: #243547;
+  --shadow: 0 1px 3px rgba(0,0,0,0.35);
+  --shadow-hover: 0 4px 14px rgba(0,0,0,0.45);
+  --success-bg: #0B2E14;
+  --error-bg: #350A07;
+  --warning-bg: #332000;
+  --focus-ring: 0 0 0 3px rgba(74,142,192,0.40);
 }
-[data-theme="dark"] .mermaid svg text {
-  fill: #e2e8f0 !important;
-}
-[data-theme="dark"] .mermaid svg .edgeLabel {
-  fill: #cbd5e1 !important;
-  stroke: none !important;
-}
-[data-theme="dark"] .mermaid svg #arrow {
-  fill: #64748b !important;
-}
+
+/* ── Mermaid dark mode ── */
+[data-theme="dark"] .mermaid svg text{fill:#dce8f0!important}
+[data-theme="dark"] .mermaid svg .edgeLabel{fill:#b5c9db!important;stroke:none!important}
+[data-theme="dark"] .mermaid svg #arrow{fill:#4a6880!important}
 [data-theme="dark"] .mermaid{background:var(--card-bg)}
 [data-theme="dark"] .mermaid svg .cluster-label text,
 [data-theme="dark"] .mermaid svg .label text,
-[data-theme="dark"] .mermaid svg .nodeLabel{fill:#e2e8f0!important}
-[data-theme="dark"] .mermaid svg .edgePath .path{stroke:#64748b!important}
-[data-theme="dark"] .mermaid svg .edge-pattern{stroke:#64748b!important}
-[data-theme="dark"] .mermaid svg .cluster{fill:#1e293b!important;stroke:#334155!important}
-[data-theme="dark"] .mermaid svg .cluster-label span{color:#cbd5e1!important}
-.mermaid {
-  min-height: 120px;
-  background: var(--card-bg);
-  padding: 0.5rem 0;
-  overflow-x: auto;
-}
-.mermaid svg {
-  max-width: 100%;
-  height: auto;
-}
+[data-theme="dark"] .mermaid svg .nodeLabel{fill:#dce8f0!important}
+[data-theme="dark"] .mermaid svg .edgePath .path{stroke:#4a6880!important}
+[data-theme="dark"] .mermaid svg .edge-pattern{stroke:#4a6880!important}
+[data-theme="dark"] .mermaid svg .cluster{fill:#162030!important;stroke:#243547!important}
+[data-theme="dark"] .mermaid svg .cluster-label span{color:#b5c9db!important}
+.mermaid{min-height:120px;background:var(--card-bg);padding:0.5rem 0;overflow-x:auto}
+.mermaid svg{max-width:100%;height:auto}
+
+/* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
 img,svg{display:block;max-width:100%}
-a{color:var(--primary);text-decoration:none}
-a:hover{text-decoration:underline}
-a:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:2px}
+
+/* Standaard linkkleur volgt officiële rijksoverheid linkkleur, niet de primaire lintkleur */
+a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+a:hover{color:var(--link-hover);text-decoration:underline}
+a:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:2px}
 ::selection{background:var(--primary);color:#fff}
 
-/* Skip naar inhoud — WCAG 2.4.1 */
-.skip-link{position:absolute;top:-100%;left:0;z-index:1000;padding:0.75rem 1.5rem;background:var(--primary);color:#fff;font-weight:600;font-size:0.9rem;white-space:nowrap}
-.skip-link:focus{top:0;outline:none;text-decoration:none}
+/* ── Skip naar inhoud — WCAG 2.4.1 ── */
+.skip-link{position:absolute;top:-100%;left:0;z-index:1000;padding:0.75rem 1.5rem;background:var(--primary);color:#fff;font-weight:600;font-size:0.9rem;white-space:nowrap;text-decoration:none}
+.skip-link:focus{top:0;outline:none}
 
-/* Focus rings — WCAG 2.4.7, 2.4.13 */
-button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus-visible,.dark-toggle:focus-visible,.hamburger:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+/* ── Focus rings — WCAG 2.4.7, 2.4.13 ── */
+button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus-visible,.dark-toggle:focus-visible,.hamburger:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--radius)}
 .dark-toggle:focus-visible,.hamburger:focus-visible{outline-color:#fff;outline-offset:3px}
+
+/* ── Layout ── */
 .container{width:100%;max-width:var(--max-width);margin:0 auto;padding:0 1rem}
 @media(min-width:768px){.container{padding:0 1.5rem}}
 
-/* Header */
-.nav{background:var(--primary);position:sticky;top:0;z-index:100;height:var(--nav-height)}
-.nav .container{display:flex;align-items:center;height:100%;gap:0.5rem}
-.nav-logo{color:#fff;font-weight:700;font-size:clamp(0.9rem,2.5vw,1.1rem);white-space:nowrap;display:flex;align-items:center}
-.nav-logo a{color:inherit;text-decoration:none}
-.nav-logo a:hover{text-decoration:none}
-.nav-links{display:flex;gap:0.25rem;margin-left:auto;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2}
+/* ── Navigatie — Rijkshuisstijl lintblauw ── */
+.nav{
+  background:var(--primary);
+  position:sticky;top:0;z-index:100;
+  height:var(--nav-height);
+  border-top:4px solid rgba(255,255,255,0.15);
+}
+/* container erft height:100% + align-items:center van desktop → items altijd verticaal gecentreerd */
+.nav .container{display:flex;align-items:center;height:100%;gap:0.25rem;position:relative}
+
+/* Logo */
+.nav-logo{
+  color:#fff;font-weight:700;
+  font-size:clamp(0.95rem,2.5vw,1.1rem);
+  white-space:nowrap;
+  display:flex;align-items:center;
+  padding-right:1.25rem;
+  border-right:1px solid rgba(255,255,255,0.25);
+  margin-right:0.5rem;
+  letter-spacing:0.01em;
+  align-self:stretch; /* vul volledige nav-hoogte zodat link-klikgebied groot is */
+}
+.nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center}
+.nav-logo a:hover{text-decoration:none;opacity:0.9}
+
+/* Nav-links — desktop */
+.nav-links{display:flex;gap:0.1rem;margin-left:auto;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2}
 .nav-links::-webkit-scrollbar{display:none}
-.nav-links a{color:rgba(255,255,255,0.85);font-size:clamp(0.75rem,2vw,0.875rem);padding:0.35rem 0.5rem;border-radius:4px;white-space:nowrap;transition:background 0.15s,color 0.15s}
+.nav-links a{
+  color:rgba(255,255,255,0.85);
+  font-size:0.875rem;
+  padding:0 0.75rem;
+  height:44px;
+  display:flex;align-items:center;
+  border-radius:var(--radius);
+  white-space:nowrap;
+  text-decoration:none;
+  transition:background 0.15s,color 0.15s;
+}
 .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:#fff;text-decoration:none}
 .nav-links a.active{font-weight:600}
 
-/* Dark mode toggle — naadloos in nav-balk */
-.dark-toggle{background:none;border:none;color:rgba(255,255,255,0.85);border-radius:4px;padding:0.35rem 0.5rem;cursor:pointer;font-size:clamp(0.75rem,2vw,0.875rem);transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap;line-height:inherit;order:3}
+/* Dark mode toggle */
+.dark-toggle{
+  background:none;border:none;color:rgba(255,255,255,0.85);
+  border-radius:var(--radius);
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;line-height:1;
+  transition:background 0.15s;
+  flex-shrink:0;order:3;
+}
 .dark-toggle:hover{background:rgba(255,255,255,0.15);color:#fff}
+.dt-icon{display:flex;align-items:center;justify-content:center;line-height:1}
 
-/* Hamburger — gestapelde lijnen met X-animatie */
-.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;padding:0;order:4}
-.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.25s,opacity 0.15s;flex-shrink:0}
-.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+/* Hamburger — verborgen op desktop */
+.hamburger{
+  display:none;
+  flex-direction:row;align-items:center;gap:8px;
+  background:none;border:none;cursor:pointer;
+  height:44px;padding:0 0.75rem;
+  order:4;flex-shrink:0;
+}
+.hamburger-lines{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px}
+.hamburger-lines span{display:block;width:18px;height:2px;background:#fff;border-radius:1px;transition:transform 0.22s,opacity 0.15s}
+.hamburger-label{font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#fff;line-height:1}
+.hamburger.open .hamburger-lines span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open .hamburger-lines span:nth-child(2){opacity:0}
+.hamburger.open .hamburger-lines span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-@media (max-width: 767px){
+/* ── Mobiel menu ── */
+@media(max-width:767px){
   .hamburger{display:flex;order:3;margin-left:0}
   .dark-toggle{order:2;margin-left:auto}
-  .nav{height:auto;min-height:var(--nav-height)}
-  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0;gap:0;position:relative}
-  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;margin:0;padding:0;z-index:99;background:var(--primary);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+  /* Logo zonder scheidingslijn op mobiel */
+  .nav-logo{border-right:none;padding-right:0;margin-right:0}
+
+  /* Dropdown — wit paneel onder de nav-balk */
+  .nav-links{
+    display:none;
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;
+    margin:0;padding:0;z-index:99;
+    background:var(--card-bg);
+    border-top:3px solid var(--primary);
+    box-shadow:0 8px 24px rgba(21,66,115,0.18);
+  }
   .nav-links.open{display:flex}
-  .nav-links a{display:block;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);text-align:left;line-height:1.5;border-radius:0;margin:0}
-  .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.1);color:#fff;text-decoration:none}
-  .nav-links a.active{font-weight:600}
+  .nav-links a{
+    display:flex;align-items:center;
+    height:52px;padding:0 1.25rem 0 1rem;
+    font-size:1rem;font-weight:400;color:var(--primary);
+    border-bottom:1px solid var(--border);
+    border-left:4px solid transparent;
+    border-radius:0;text-decoration:none;
+    transition:background 0.12s,border-color 0.12s;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{background:var(--primary-light);border-left-color:var(--primary);text-decoration:none}
+  .nav-links a.active{background:var(--primary-light);border-left-color:var(--primary);font-weight:700}
+  .nav-links a:last-child{border-bottom:none}
 }
 
-/* Main content */
+/* ── Main content ── */
 main{flex:1;padding:1.5rem 0}
 @media(min-width:768px){main{padding:2rem 0}}
 
-/* Cards — Belastingdienst-stijl: rustig, overzichtelijk */
-.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;margin-bottom:1rem;overflow-wrap:break-word}
+/* ── Cards — Belastingdienst-stijl: wit, strak, overzichtelijk ── */
+.card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  padding:1.25rem;
+  margin-bottom:1rem;
+  overflow-wrap:break-word;
+  transition:box-shadow 0.15s;
+}
 @media(min-width:480px){.card{padding:1.5rem}}
-.card-title{font-size:0.85rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.card-title{
+  font-size:0.8rem;font-weight:700;
+  color:var(--text-secondary);
+  margin-bottom:0.875rem;
+  padding-bottom:0.5rem;
+  border-bottom:1px solid var(--border);
+  text-transform:uppercase;letter-spacing:0.06em;
+}
 .card h2{font-size:1.1rem;color:var(--primary);margin-bottom:0.75rem}
 
-/* Grids */
+/* ── Grids ── */
 .stat-grid{display:grid;grid-template-columns:1fr;gap:0.75rem;margin-bottom:1.5rem}
 @media(min-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:768px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
@@ -228,143 +318,245 @@ main{flex:1;padding:1.5rem 0}
 .card-grid{display:grid;grid-template-columns:1fr;gap:0.75rem}
 @media(min-width:768px){.card-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}}
 
-/* Stat cards */
-.stat-card{text-align:center;padding:1.25rem}
-.stat-nr{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;color:var(--primary);line-height:1.2}
-.stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem}
+/* ── Stat cards — professioneel, niet te groot ── */
+.stat-card{text-align:center;padding:1.5rem 1.25rem}
+.stat-nr{
+  font-size:clamp(2rem,5vw,2.75rem);font-weight:700;
+  color:var(--primary);line-height:1.1;
+  letter-spacing:-0.02em;
+}
+.stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.375rem;text-transform:uppercase;letter-spacing:0.05em}
 
-/* Headings */
-h1{font-size:clamp(1.3rem,4vw,1.8rem);font-weight:700;color:var(--text);margin-bottom:0.5rem}
-h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
-.subtitle{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem}
+/* ── Typografie ── */
+h1{font-size:clamp(1.3rem,4vw,1.75rem);font-weight:700;color:var(--text);margin-bottom:0.375rem;line-height:1.25}
+h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem;font-weight:600}
+.subtitle{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.5}
 
-/* Breadcrumb navigatie */
-.breadcrumb{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;padding:0;display:flex;flex-wrap:wrap;gap:0.25rem;list-style:none;align-items:center}
+/* ── Breadcrumb ── */
+.breadcrumb{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.875rem;padding:0;display:flex;flex-wrap:wrap;gap:0.25rem;list-style:none;align-items:center}
 .breadcrumb li{display:inline;padding:0;margin:0}
-.breadcrumb li+li::before{content:"›";margin:0 0.25rem;color:var(--text-muted)}
-.breadcrumb a{color:var(--primary)}
+.breadcrumb li+li::before{content:"›";margin:0 0.3rem;color:var(--text-muted)}
+.breadcrumb a{color:var(--link);text-decoration:none}
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb [aria-current="page"]{color:var(--text);font-weight:500}
 
-/* Badges / Tags */
-.card ul li, .card ol li { word-break: break-all; overflow-wrap: break-word; }
-.card a { word-break: break-all; overflow-wrap: break-word; }
-.tag{display:inline-block;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:600;color:#fff;margin:0.1rem;white-space:nowrap;line-height:1.5;vertical-align:middle}
-.badge{display:inline-block;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;font-weight:600;white-space:nowrap;line-height:1.5;vertical-align:middle}
-.badge-concept{background:var(--warning-bg);color:var(--warning)}
+/* ── Badges / Tags ── */
+.card ul li,.card ol li{word-break:break-all;overflow-wrap:break-word}
+.card a{word-break:break-all;overflow-wrap:break-word}
+.tag{display:inline-block;padding:0.2rem 0.5rem;border-radius:3px;font-size:0.73rem;font-weight:600;color:#fff;margin:0.1rem;white-space:nowrap;line-height:1.5;vertical-align:middle}
+.badge{display:inline-block;font-size:0.73rem;padding:0.2rem 0.5rem;border-radius:3px;font-weight:600;white-space:nowrap;line-height:1.5;vertical-align:middle}
+/* concept: gedempte neutrale stijl — niet als waarschuwing, want dit is de normale werkstatus */
+.badge-concept{background:#E8EDF2;color:#3A4A5C;border:1px solid #C8D4DF}
 .badge-definitief{background:var(--success-bg);color:var(--success)}
 .badge-vervallen{background:var(--border);color:var(--text-muted)}
 .badge-type{background:var(--primary-light);color:var(--primary)}
-.badge-soort{background:var(--border);color:var(--text-secondary)}
+.badge-soort{background:#EFF2F5;color:var(--text-secondary);border:1px solid var(--border)}
 .badge-status{background:var(--warning-bg);color:var(--warning)}
 
-/* Lists */
+/* ── Lijsten ── */
 .item-list{list-style:none}
-.item-list li{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;padding:0.75rem 0.5rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
+.item-list li{
+  display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;
+  padding:0.75rem 0.5rem;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:background 0.12s;
+}
 .item-list li:hover{background:var(--primary-light)}
 .item-list li:focus-within{background:var(--primary-light)}
 .item-list li:last-child{border-bottom:none}
 .item-list .item-title{flex:1;min-width:150px;font-weight:500;color:var(--text);text-decoration:none}
-.item-list a.item-title{color:var(--primary)}
+.item-list a.item-title{color:var(--link);text-decoration:none}
 .item-list a.item-title:hover{text-decoration:underline}
-.item-list .item-meta{font-size:0.8rem;color:var(--text-muted)}
+.item-list .item-meta{font-size:0.78rem;color:var(--text-muted)}
 
-/* Table */
+/* ── Eigenschappentabel ── */
 .prop-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.9rem}
-.prop-table td{padding:0.4rem 0;border-bottom:1px solid var(--border);vertical-align:top;overflow-wrap:break-word;word-break:break-word}
-.prop-table td:first-child{color:var(--text-muted);width:35%;padding-right:1rem}
+.prop-table td{padding:0.45rem 0;border-bottom:1px solid var(--border);vertical-align:top;overflow-wrap:break-word;word-break:break-word}
+.prop-table td:first-child{color:var(--text-muted);width:35%;padding-right:1rem;font-size:0.85rem}
 .prop-table tr:last-child td{border-bottom:none}
 
-/* Definitions */
-.def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word;font-family:var(--font-serif)}
+/* ── Definitie-blok — duidelijk juridisch citaat ── */
+.def-block{
+  background:var(--primary-light);
+  border-left:4px solid var(--primary);
+  padding:1rem 1.25rem;
+  border-radius:0 var(--radius) var(--radius) 0;
+  margin-bottom:1rem;
+  font-size:0.95rem;line-height:1.75;
+  overflow-wrap:break-word;word-break:break-word;
+  font-family:var(--font-serif);
+  color:var(--text-secondary);
+}
 
-/* Wetstekst */
-.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.8;color:var(--text-secondary);overflow-wrap:break-word;font-family:var(--font-serif)}
+/* ── Wetstekst ── */
+.wetstekst{
+  background:var(--card-bg);
+  border:1px solid var(--border);border-left:4px solid var(--primary);
+  padding:1rem 1.25rem;
+  border-radius:0 var(--radius) var(--radius) 0;
+  margin-bottom:1rem;font-style:italic;
+  font-size:0.95rem;line-height:1.8;
+  color:var(--text-secondary);
+  overflow-wrap:break-word;
+  font-family:var(--font-serif);
+}
 
-/* Annotatie rijen */
+/* ── Annotatietabel ── */
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:0.25rem}
 .ann-table{width:100%;min-width:580px;table-layout:auto;border-collapse:collapse;font-size:0.85rem}
-.ann-table th{text-align:left;padding:0.5rem;color:var(--text-muted);font-weight:600;border-bottom:2px solid var(--border);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap}
-.ann-table td{padding:0.5rem;border-bottom:1px solid var(--border);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+.ann-table th{
+  text-align:left;padding:0.5rem 0.625rem;
+  color:var(--text-muted);font-weight:700;
+  border-bottom:2px solid var(--border);
+  font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;
+  white-space:nowrap;background:var(--bg);
+}
+.ann-table td{padding:0.5rem 0.625rem;border-bottom:1px solid var(--border);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
 .has-sign{cursor:pointer}
 .has-sign:hover,.has-sign:focus{background:var(--primary-light)!important}
 .has-sign td:last-child{min-width:2.75rem;text-align:center}
 .sign-detail td{padding:0.5rem 1rem 0.5rem 1.5rem}
-.sign-content{font-size:0.8rem;color:var(--warning);background:var(--warning-bg);padding:0.5rem;border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
-.sign-content::before{content:"[!]";font-weight:700;flex-shrink:0}
-.sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:3px;padding:0.1rem 0.3rem;line-height:1.3;cursor:pointer}
+.sign-content{font-size:0.8rem;color:var(--warning);background:var(--warning-bg);padding:0.5rem 0.75rem;border-radius:var(--radius);display:flex;align-items:flex-start;gap:0.4rem;border-left:3px solid currentColor}
+.sign-content::before{content:"!";font-weight:700;flex-shrink:0;width:1rem;text-align:center}
+.sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:2px;padding:0.1rem 0.3rem;line-height:1.3;cursor:pointer}
 .sign-ref{font-size:0.7rem;font-weight:600;color:var(--text-muted);margin-right:0.25rem}
 
-/* Voorbeeldreeksen */
-.voorbeeld{padding:0.75rem 1rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--success-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success);line-height:1.6}
-.voorbeeld.ongeldig{border-left-color:var(--error);background:var(--error-bg);border-left:3px solid var(--error)}
+/* ── Voorbeeldreeksen ── */
+.voorbeeld{
+  padding:0.75rem 1rem;margin:0.5rem 0;
+  border-left:4px solid var(--success);background:var(--success-bg);
+  border-radius:0 var(--radius) var(--radius) 0;
+  font-size:0.85rem;line-height:1.6;
+}
+.voorbeeld.ongeldig{border-left-color:var(--error);background:var(--error-bg)}
 .voorbeeld-label{font-weight:700;color:var(--success)}
 .voorbeeld.ongeldig .voorbeeld-label{color:var(--error)}
 
-/* Detail pagina layout */
+/* ── Detail pagina layout ── */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1rem}
-.detail-layout > * { min-width: 0; }
+.detail-layout > *{min-width:0}
 @media(min-width:768px){.detail-layout{grid-template-columns:1fr 300px}}
 
-/* Formele regel box */
-.regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:var(--font-serif);font-size:0.95rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
+/* ── Formele regelbox — RS-notatie ── */
+.regel-box{
+  background:var(--card-bg);
+  border:1px solid var(--border);border-left:4px solid var(--accent);
+  padding:1rem 1.25rem;
+  border-radius:0 var(--radius) var(--radius) 0;
+  margin-bottom:1rem;
+  font-family:var(--font-serif);font-size:0.95rem;line-height:1.75;
+  white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;
+}
 
-/* Zoekpagina */
-.search-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card-bg);color:var(--text);transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:1rem;-webkit-appearance:none}
+/* ── Zoekveld — WCAG-conform, min 48px hoogte ── */
+.search-input{
+  width:100%;
+  padding:0 1rem;min-height:48px;
+  border:2px solid var(--border);border-radius:var(--radius-input);
+  font-size:1rem;font-family:var(--font);
+  background:var(--card-bg);color:var(--text);
+  transition:border-color 0.2s,box-shadow 0.2s;
+  margin-bottom:1rem;-webkit-appearance:none;
+}
 .search-input:focus{outline:none;border-color:var(--primary);box-shadow:var(--focus-ring)}
+.search-input::placeholder{color:var(--text-muted)}
+
+/* ── Filter chips — pilbuttonvorm toegestaan voor tags (rijkshuisstijl §knoppen) ── */
 .search-filters{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem}
-.filter-chip{padding:0.3rem 0.75rem;border-radius:20px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-secondary);font-size:0.8rem;cursor:pointer;transition:all 0.15s}
+.filter-chip{
+  padding:0.3rem 0.875rem;border-radius:20px;
+  border:1px solid var(--border);background:var(--card-bg);
+  color:var(--text-secondary);font-size:0.8rem;
+  cursor:pointer;transition:all 0.15s;
+  font-family:var(--font);
+}
 .filter-chip.active,.filter-chip:hover{border-color:var(--primary);background:var(--primary-light);color:var(--primary)}
-.search-result{padding:0.75rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;border-radius:4px;margin:0 -0.5rem;padding:0.75rem 0.5rem}
+.filter-chip:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* ── Zoekresultaten ── */
+.search-result{padding:0.875rem 0.5rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;border-radius:var(--radius);margin:0 -0.5rem}
 .search-result:hover{background:var(--primary-light)}
 .search-result:last-child{border-bottom:none}
 .search-result-title{font-weight:600;color:var(--text)}
-.search-result-excerpt{font-size:0.85rem;color:var(--text-muted);margin-top:0.2rem;line-height:1.4}
-.search-result-meta{font-size:0.75rem;color:var(--text-muted);margin-top:0.15rem}
+.search-result-excerpt{font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;line-height:1.45}
+.search-result-meta{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem}
 .search-result-meta span{margin-right:0.75rem}
-.no-results{color:var(--text-muted);text-align:center;padding:2rem;font-size:0.9rem}
+.no-results{color:var(--text-muted);text-align:center;padding:2.5rem;font-size:0.9rem}
 
-/* Graaf */
+/* ── Kennisgraaf ── */
 .graph-container{width:100%;height:clamp(400px,60vh,700px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;background:var(--card-bg)}
 .graph-container svg{display:block}
-.graph-legend{position:absolute;bottom:1rem;right:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem;font-size:0.75rem;z-index:10;box-shadow:var(--shadow);max-width:160px}
-.graph-legend-item{display:flex;align-items:center;gap:0.4rem;margin:0.15rem 0}
-.graph-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.graph-filter{margin-bottom:0.75rem}
-.graph-filter select{padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.85rem;background:var(--card-bg);color:var(--text);cursor:pointer}
+.graph-legend{position:absolute;bottom:1rem;right:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem 0.875rem;font-size:0.75rem;z-index:10;box-shadow:var(--shadow);max-width:180px}
+.graph-legend-title{font-weight:700;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin-bottom:0.5rem}
+.graph-legend-item{display:flex;align-items:center;gap:0.5rem;margin:0.3rem 0;font-size:0.75rem;color:var(--text-secondary)}
+.graph-legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.graph-legend-diamond{width:9px;height:9px;flex-shrink:0;transform:rotate(45deg);border-radius:1px}
 
-/* Footer */
-footer{text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.75rem;border-top:1px solid var(--border);margin-top:auto}
+/* Graph toolbar — filter + reset op één lijn */
+.graph-toolbar{
+  display:flex;align-items:center;gap:0.75rem;
+  margin-bottom:0.75rem;flex-wrap:wrap;
+}
+.graph-toolbar label{font-size:0.875rem;color:var(--text-secondary);font-weight:500;white-space:nowrap}
+.graph-toolbar select{
+  height:36px;padding:0 0.75rem;
+  border:1px solid var(--border);border-radius:var(--radius-input);
+  font-size:0.875rem;font-family:var(--font);
+  background:var(--card-bg);color:var(--text);cursor:pointer;
+}
+.graph-toolbar select:focus{outline:none;border-color:var(--primary);box-shadow:var(--focus-ring)}
+.graph-count{font-size:0.8rem;color:var(--text-muted);margin-left:auto}
+.btn-secondary{
+  height:36px;padding:0 0.875rem;
+  border:1px solid var(--border);border-radius:var(--radius-btn);
+  font-size:0.875rem;font-family:var(--font);
+  background:var(--card-bg);color:var(--text-secondary);
+  cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;
+  white-space:nowrap;
+}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
+.btn-secondary:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 
-/* 404 */
+/* ── Footer — meer ruimte, professionele afstand ── */
+footer{
+  text-align:center;
+  padding:2rem 1.5rem;
+  color:var(--text-muted);font-size:0.8rem;
+  border-top:1px solid var(--border);
+  margin-top:auto;line-height:1.6;
+}
+
+/* ── 404 ── */
 .error-page{text-align:center;padding:4rem 1rem}
-.error-page h1{font-size:5rem;color:var(--primary);margin-bottom:0.5rem}
+.error-page h1{font-size:5rem;color:var(--primary);margin-bottom:0.5rem;font-weight:300;letter-spacing:-0.03em}
 .error-page p{color:var(--text-muted);margin-bottom:1.5rem}
 
-/* Screenreader-only — WCAG 1.1.1 */
+/* ── Screenreader-only — WCAG 1.1.1 ── */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Responsive helpers */
+/* ── Responsive helpers ── */
 @media(min-width:480px){.hide-xs{display:inline!important}}
 @media(max-width:479px){.hide-xs{display:none!important}}
 @media(min-width:768px){.hide-md{display:none!important}}
 @media(max-width:767px){.show-md{display:none!important}}
 
-/* Print-stijl — WCAG PDF-vriendelijk */
+/* ── Print — WCAG PDF-vriendelijk ── */
 @media print {
   .nav,.skip-link,.hamburger,.dark-toggle,.graph-container,.graph-filter,.graph-legend,.search-input,.search-filters{display:none!important}
   body{font-size:11pt;line-height:1.5;color:#000;background:#fff;min-height:auto}
-  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
-  .card-title{border-bottom-color:#ccc}
+  a{color:#000;text-decoration:underline}
+  .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;page-break-inside:avoid}
+  .card-title{border-bottom-color:#bbb}
   .detail-layout{display:block}
   .detail-layout > div{width:100%!important}
   .mermaid svg{max-width:100%;overflow:visible}
   .ann-table{min-width:auto;font-size:8pt}
   a[href]:after{content:" (" attr(href) ")";font-size:0.75rem;color:#555}
   .breadcrumb a[href]:after{content:none}
-  .regel-box{white-space:normal;border-color:#ccc}
+  .regel-box{white-space:normal;border-color:#bbb}
   footer{display:none}
 }
 """
@@ -387,10 +579,11 @@ def gen_nav(active: str = "", p: str = "") -> str:
 <div class="container">
   <div class="nav-logo"><a href="{p}index.html" aria-label="Home">Inningsmodel</a></div>
   <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
-    <span class="dt-icon">A</span>
+    <span class="dt-icon">&#x2600;</span>
   </button>
-  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
-    <span></span><span></span><span></span>
+  <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false" type="button">
+    <span class="hamburger-label" aria-hidden="true">Menu</span>
+    <span class="hamburger-lines"><span></span><span></span><span></span></span>
   </button>
   <div class="nav-links">
     {links}
@@ -405,13 +598,13 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — Inningsmodel</title>
+<title>{title} | Inningsmodel</title>
 <link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="{p}icons/apple-touch-icon.png">
 <link rel="manifest" href="{p}manifest.json">
-<meta name="theme-color" content="#0047A0">
+<meta name="theme-color" content="#154273">
 <link rel="stylesheet" href="{p}css/style.css">
 </head>
 <body>
@@ -597,7 +790,7 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
     <p><a href="search.html">Zoeken</a></p>
   </div>
 </div>"""
-    schrijf_html(out, "index.html", "Dashboard — Belastingdienst", body, active="dashboard")
+    schrijf_html(out, "index.html", "Dashboard | Belastingdienst", body, active="dashboard")
 
 
 def gen_begrippen(out: Path, begrippen: list, annotaties: list):
@@ -630,7 +823,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   for(var i=0;i<li.length;i++){{li[i].style.display=li[i].textContent.toLowerCase().indexOf(q)>-1?'':'none'}}
 }});
 </script>"""
-    schrijf_html(out, "begrippen.html", "Begrippen — Belastingdienst", body, active="begrippen")
+    schrijf_html(out, "begrippen.html", "Begrippen | Belastingdienst", body, active="begrippen")
 
     pp = "../"  # prefix voor detail-pagina's in subdirectory
     for b in begrippen:
@@ -712,7 +905,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   {f'<div class="card"><div class="card-title">Afleidingsregel</div>{reg_lnk}</div>' if reg_lnk else ""}
 </div>
 </div>"""
-        schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} — Belastingdienst', body, active="begrippen", p="../")
+        schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} | Belastingdienst', body, active="begrippen", p="../")
 
 
 def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
@@ -742,7 +935,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   for(var i=0;i<li.length;i++){{li[i].style.display=li[i].textContent.toLowerCase().indexOf(q)>-1?'':'none'}}
 }});
 </script>"""
-    schrijf_html(out, "annotaties.html", "Annotaties — Belastingdienst", body, active="annotaties")
+    schrijf_html(out, "annotaties.html", "Annotaties | Belastingdienst", body, active="annotaties")
 
     for a in annotaties:
         rijen = ""
@@ -800,7 +993,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 </div>
 {mermaid_src}
 {regel_links}"""
-        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} — Belastingdienst', body, active="annotaties", p="../", extra_scripts=extra_scripts)
+        schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} | Belastingdienst', body, active="annotaties", p="../", extra_scripts=extra_scripts)
 
 
 def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
@@ -830,7 +1023,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   for(var i=0;i<li.length;i++){{li[i].style.display=li[i].textContent.toLowerCase().indexOf(q)>-1?'':'none'}}
 }});
 </script>"""
-    schrijf_html(out, "regels.html", "Regels — Belastingdienst", body, active="regels")
+    schrijf_html(out, "regels.html", "Regels | Belastingdienst", body, active="regels")
 
     for r in regels:
         vb = ""
@@ -881,7 +1074,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 <div class="card-title">Voorbeeldreeksen</div>
 {vb or "<p class=item-meta>Geen voorbeelden</p>"}
 </div>"""
-        schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} — Belastingdienst', body, active="regels", p="../")
+        schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} | Belastingdienst', body, active="regels", p="../")
 
 
 def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
@@ -913,15 +1106,19 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
             links.append({"source": r["id"], "target": inv, "relatie": "invoer"})
     gr_data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
     kleuren_json = json.dumps(JAS_KLEUREN, ensure_ascii=False)
+    # Alleen klassen die ook daadwerkelijk in de data voorkomen
+    aanwezige_klassen = sorted({n["groep"] for n in nodes if n["groep"] != "onbekend"})
+    klasse_opties = "".join(f'<option value="{k}">{k}</option>' for k in aanwezige_klassen)
     body = f"""<h1>Kennisgraaf</h1>
 <p class="subtitle">Interactieve graaf van begrippen (cirkels) en afleidingsregels (ruiten). Sleep nodes om te herschikken.</p>
-<div class="graph-filter">
-  <label for="klasseFilter">JAS-klasse filter: </label>
+<div class="graph-toolbar">
+  <label for="klasseFilter">JAS-klasse:</label>
   <select id="klasseFilter" aria-label="Filter op JAS-klasse">
-    <option value="all">Alle</option>
-    {"".join(f'<option value="{k}">{k}</option>' for k in sorted(JAS_KLEUREN.keys()))}
+    <option value="all">Alle klassen</option>
+    {klasse_opties}
   </select>
-  <button onclick="resetView()" style="margin-left:0.5rem;padding:0.4rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.85rem;background:var(--card-bg);color:var(--text);cursor:pointer">Reset weergave</button>
+  <span class="graph-count" id="nodeCount"></span>
+  <button class="btn-secondary" id="resetBtn" type="button">Reset weergave</button>
 </div>
 <div class="graph-container" id="graphContainer">
   <div class="graph-legend" id="graphLegend"></div>
@@ -934,11 +1131,9 @@ var width = document.getElementById('graphContainer').clientWidth;
 var height = Math.max(400, Math.min(window.innerHeight * 0.6, 700));
 var svg = d3.select("#graphContainer").append("svg").attr("width", width).attr("height", height);
 var g = svg.append("g");
-// Zoom + pan
 var zoom = d3.zoom().scaleExtent([0.1, 8]).on("zoom", function(e){{ g.attr("transform", e.transform); }});
 svg.call(zoom).on("dblclick.zoom", null);
-// Background rect voor pan
-g.append("rect").attr("x", -width*5).attr("y", -height*5).attr("width", width*10).attr("height", height*10).attr("fill", "none").attr("pointer-events", "all");
+g.append("rect").attr("x",-width*5).attr("y",-height*5).attr("width",width*10).attr("height",height*10).attr("fill","none").attr("pointer-events","all");
 svg.append("defs").append("marker").attr("id","arrow").attr("viewBox","0 -5 10 10").attr("refX",20).attr("refY",0).attr("markerWidth",6).attr("markerHeight",6).attr("orient","auto")
   .append("path").attr("d","M0,-5L10,0L0,5").attr("fill","#94a3b8");
 var link = g.append("g").selectAll("line").data(data.links).join("line")
@@ -948,50 +1143,97 @@ var node = g.append("g").selectAll("g").data(data.nodes).join("g").call(
   .on("drag",function(e,d){{d.fx=e.x;d.fy=e.y}})
   .on("end",function(e,d){{if(!e.active)simulation.alphaTarget(0);d.fx=null;d.fy=null}}));
 node.append("title").text(function(d){{return d.label}});
-node.append("path").attr("d",function(d){{var s=7;return d.type==='regel'?d3.symbol().type(d3.symbolDiamond).size(200)():null}})
+node.append("path")
+  .attr("d",function(d){{return d.type==='regel'?d3.symbol().type(d3.symbolDiamond).size(220)():null}})
   .attr("fill",function(d){{return colorMap[d.groep]||'#94a3b8'}}).attr("stroke","#fff").attr("stroke-width",1.5)
   .attr("opacity",function(d){{return d.type==='regel'?1:0}});
-node.append("circle").attr("r",7).attr("fill",function(d){{return colorMap[d.groep]||'#94a3b8'}}).attr("stroke","#fff").attr("stroke-width",1.5)
+node.append("circle").attr("r",7)
+  .attr("fill",function(d){{return colorMap[d.groep]||'#94a3b8'}}).attr("stroke","#fff").attr("stroke-width",1.5)
   .attr("opacity",function(d){{return d.type==='begrip'?1:0}});
-var nodeText=node.append("text").attr("dx",12).attr("dy",4).attr("font-size","11px")
-  .text(function(d){{return d.label.length>25?d.label.slice(0,22)+'...':d.label}});
-function updateTextColor(){{nodeText.attr("fill",document.documentElement.getAttribute('data-theme')==='dark'?'#e2e8f0':'#334155')}}
+var nodeText = node.append("text").attr("dx",12).attr("dy",4).attr("font-size","11px")
+  .text(function(d){{return d.label.length>28?d.label.slice(0,25)+'…':d.label}});
+function updateTextColor(){{
+  nodeText.attr("fill",document.documentElement.getAttribute('data-theme')==='dark'?'#dce8f0':'#2d3f52');
+}}
 updateTextColor();
 new MutationObserver(updateTextColor).observe(document.documentElement,{{attributes:true,attributeFilter:['data-theme']}});
-// Click-to-navigate
 node.on("click",function(e,d){{if(d.page)window.location.href=d.page;}});
 node.style("cursor",function(d){{return d.page?'pointer':'default'}});
 var simulation = d3.forceSimulation(data.nodes)
   .force("link",d3.forceLink(data.links).id(function(d){{return d.id}}).distance(100))
-  .force("charge",d3.forceManyBody().strength(-150))
-  .force("center",d3.forceCenter(width/2,height/2)).force("collision",d3.forceCollide(15));
+  .force("charge",d3.forceManyBody().strength(-180))
+  .force("center",d3.forceCenter(width/2,height/2))
+  .force("collision",d3.forceCollide(18));
 simulation.on("tick",function(){{
-  link.attr("x1",function(d){{return d.source.x}}).attr("y1",function(d){{return d.source.y}}).attr("x2",function(d){{return d.target.x}}).attr("y2",function(d){{return d.target.y}});
+  link.attr("x1",function(d){{return d.source.x}}).attr("y1",function(d){{return d.source.y}})
+      .attr("x2",function(d){{return d.target.x}}).attr("y2",function(d){{return d.target.y}});
   node.attr("transform",function(d){{return"translate("+d.x+","+d.y+")"}});
 }});
-// Auto-center na stabilisatie
+var defaultTransform = d3.zoomIdentity.translate(width/2,height/2).scale(0.85).translate(-width/2,-height/2);
 simulation.on("end",function(){{
-  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(width/2,height/2).scale(0.8).translate(-width/2,-height/2));
+  svg.transition().duration(600).call(zoom.transform, defaultTransform);
 }});
 function resetView(){{
-  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(width/2,height/2).scale(0.8).translate(-width/2,-height/2));
+  document.getElementById('klasseFilter').value='all';
+  applyFilter('all');
+  svg.transition().duration(500).call(zoom.transform, defaultTransform);
 }}
-// Legend
+document.getElementById('resetBtn').addEventListener('click', resetView);
+
+// Legenda — alleen klassen die in de data voorkomen
+var aanwezigeKlassen = Array.from(new Set(data.nodes.map(function(d){{return d.groep}}))).filter(function(k){{return k!=='onbekend'&&colorMap[k]}});
 var legend = d3.select("#graphLegend");
-legend.append("div").style("font-weight","600").style("margin-bottom","0.3rem").text("Legenda");
-Object.entries(colorMap).forEach(function(entry){{
+legend.append("div").attr("class","graph-legend-title").text("Legenda");
+// begrippen (cirkel)
+var bRow = legend.append("div").attr("class","graph-legend-item");
+bRow.append("div").attr("class","graph-legend-dot").style("background","#94a3b8");
+bRow.append("span").text("begrip");
+// regels (ruit)
+var rRow = legend.append("div").attr("class","graph-legend-item");
+rRow.append("div").attr("class","graph-legend-diamond").style("background","#94a3b8");
+rRow.append("span").text("afleidingsregel (ruit)");
+legend.append("div").style("border-top","1px solid var(--border)").style("margin","0.4rem 0");
+// kleurlegende
+aanwezigeKlassen.sort().forEach(function(k){{
   var row = legend.append("div").attr("class","graph-legend-item");
-  row.append("div").attr("class","graph-legend-dot").style("background",entry[1]);
-  row.append("span").text(entry[0]);
+  row.append("div").attr("class","graph-legend-dot").style("background",colorMap[k]);
+  row.append("span").text(k);
 }});
-// Filter
-document.getElementById('klasseFilter').addEventListener('change',function(){{
-  var v=this.value;
-  node.attr("opacity",function(d){{return v==='all'||d.groep===v?1:0.1}});
-  link.attr("opacity",function(d){{return v==='all'||d.source.groep===v||d.target.groep===v?0.5:0.05}});
-}});
+
+// Filter — toont gefilterde nodes volledig, directe buren gedimd, rest verborgen
+function updateCount(matchedIds){{
+  var el = document.getElementById('nodeCount');
+  if(!el) return;
+  el.textContent = matchedIds ? matchedIds.size + ' nodes' : '';
+}}
+function applyFilter(v){{
+  if(v==='all'){{
+    node.attr("opacity",1);
+    link.attr("stroke-opacity",0.5);
+    updateCount(null);
+    return;
+  }}
+  var matchedIds = new Set(data.nodes.filter(function(d){{return d.groep===v}}).map(function(d){{return d.id}}));
+  var neighborIds = new Set();
+  data.links.forEach(function(l){{
+    var sid=l.source.id||l.source, tid=l.target.id||l.target;
+    if(matchedIds.has(sid)) neighborIds.add(tid);
+    if(matchedIds.has(tid)) neighborIds.add(sid);
+  }});
+  node.attr("opacity",function(d){{
+    return matchedIds.has(d.id)?1:neighborIds.has(d.id)?0.35:0.06;
+  }});
+  link.attr("stroke-opacity",function(d){{
+    var sid=d.source.id||d.source, tid=d.target.id||d.target;
+    if(matchedIds.has(sid)&&matchedIds.has(tid)) return 0.7;
+    if(matchedIds.has(sid)||matchedIds.has(tid)) return 0.3;
+    return 0.04;
+  }});
+  updateCount(matchedIds);
+}}
+document.getElementById('klasseFilter').addEventListener('change',function(){{applyFilter(this.value)}});
 </script>"""
-    schrijf_html(out, "graph.html", "Kennisgraaf — Belastingdienst", body, active="graaf")
+    schrijf_html(out, "graph.html", "Kennisgraaf | Belastingdienst", body, active="graaf")
 
 
 def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
@@ -1046,7 +1288,7 @@ function doSearch(){{
 }}
 var _st;document.getElementById('searchInput').addEventListener('input',function(){{clearTimeout(_st);_st=setTimeout(doSearch,200)}});
 </script>"""
-    schrijf_html(out, "search.html", "Zoeken — Belastingdienst", body, active="zoeken")
+    schrijf_html(out, "search.html", "Zoeken | Belastingdienst", body, active="zoeken")
 
 
 def gen_404(out: Path):
@@ -1055,7 +1297,7 @@ def gen_404(out: Path):
 <p>Deze pagina bestaat niet.</p>
 <a href="./" class="filter-chip active">Terug naar dashboard</a>
 </div>"""
-    schrijf_html(out, "404.html", "Pagina niet gevonden — Belastingdienst", body)
+    schrijf_html(out, "404.html", "Pagina niet gevonden | Belastingdienst", body)
 
 
 def gen_css_js(out: Path):
@@ -1067,7 +1309,7 @@ def gen_css_js(out: Path):
     root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
     if(toggle){
       var ic=toggle.querySelector('.dt-icon');
-      if(ic)ic.textContent=t==='dark'?'\u25D0':'A';
+      if(ic)ic.textContent=t==='dark'?'\u263D':'\u2600';
     }
   }
   var stored=localStorage.getItem('theme');
@@ -1076,19 +1318,20 @@ def gen_css_js(out: Path):
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light')});
   var hamburger=document.getElementById('hamburger'),navLinks=document.querySelector('.nav-links');
   if(hamburger&&navLinks){
+    function setMenu(open){
+      hamburger.setAttribute('aria-expanded',String(open));
+      hamburger.setAttribute('aria-label',open?'Menu sluiten':'Menu openen');
+      hamburger.classList.toggle('open',open);
+      navLinks.classList.toggle('open',open);
+      var lbl=hamburger.querySelector('.hamburger-label');
+      if(lbl)lbl.textContent=open?'Sluit':'Menu';
+    }
     hamburger.addEventListener('click',function(){
-      var o=hamburger.getAttribute('aria-expanded')==='true';
-      hamburger.setAttribute('aria-expanded',String(!o));
-      hamburger.classList.toggle('open');
-      navLinks.classList.toggle('open');
+      setMenu(hamburger.getAttribute('aria-expanded')!=='true');
     });
-    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){
-      hamburger.setAttribute('aria-expanded','false');
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-    })});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navLinks.classList.contains('open')){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open');hamburger.focus()}});
-    document.addEventListener('click',function(e){if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&!hamburger.contains(e.target)){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}});
+    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){setMenu(false)})});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navLinks.classList.contains('open')){setMenu(false);hamburger.focus()}});
+    document.addEventListener('click',function(e){if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&!hamburger.contains(e.target)){setMenu(false)}});
   }
 });"""
     (out / "js").mkdir(parents=True, exist_ok=True)
@@ -1105,7 +1348,7 @@ def gen_icons(vault: Path, out: Path):
                 shutil.copy2(f, dst / f.name)
     manifest = out / "manifest.json"
     if not manifest.exists():
-        manifest.write_text("""{"name":"Belastingdienst — Kennismodel Invordering","short_name":"Kennismodel","start_url":".","display":"standalone","background_color":"#0047A0","theme_color":"#0047A0","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""")
+        manifest.write_text("""{"name":"Belastingdienst — Kennismodel Invordering","short_name":"Kennismodel","start_url":".","display":"standalone","background_color":"#154273","theme_color":"#154273","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""")
 
 
 def main():
