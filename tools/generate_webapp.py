@@ -30,7 +30,12 @@ JAS_KLASSE_TO_ABBR: dict[str, str] = {
 
 
 def _text_color_for_bg(hex_color: str) -> str:
-    r, g, b = int(hex_color[1:3], 16), int(hex_color[3:5], 16), int(hex_color[5:7], 16)
+    h = hex_color.lstrip("#")
+    if len(h) == 3:
+        h = h[0]*2 + h[1]*2 + h[2]*2
+    if len(h) != 6:
+        return ""
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
     lum = 0.299 * r + 0.587 * g + 0.114 * b
     return ",color:#fff" if lum < 140 else ""
 
@@ -167,10 +172,11 @@ a:hover{text-decoration:underline}
 /* Hamburger */
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;margin-left:auto;flex-shrink:0}
 .hamburger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px;transition:transform 0.2s,opacity 0.2s}
-.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(1){transform:translateY(10px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hamburger.open span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
 @media (max-width: 767px){
+  .nav{height:auto}
   .hamburger{display:block}
   .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0.5rem}
   .nav-links{display:none;width:100%;flex-direction:column;gap:0;padding-top:0.5rem;overflow-x:visible;margin-left:0;align-items:stretch}
@@ -877,8 +883,11 @@ node.append("path").attr("d",function(d){{var s=7;return d.type==='regel'?d3.sym
   .attr("opacity",function(d){{return d.type==='regel'?1:0}});
 node.append("circle").attr("r",7).attr("fill",function(d){{return colorMap[d.groep]||'#94a3b8'}}).attr("stroke","#fff").attr("stroke-width",1.5)
   .attr("opacity",function(d){{return d.type==='begrip'?1:0}});
-node.append("text").attr("dx",12).attr("dy",4).attr("font-size","11px").attr("fill",function(){{var root=document.documentElement;return root.getAttribute('data-theme')==='dark'?'#e2e8f0':'#334155'}})
+var nodeText=node.append("text").attr("dx",12).attr("dy",4).attr("font-size","11px")
   .text(function(d){{return d.label.length>25?d.label.slice(0,22)+'...':d.label}});
+function updateTextColor(){{nodeText.attr("fill",document.documentElement.getAttribute('data-theme')==='dark'?'#e2e8f0':'#334155')}}
+updateTextColor();
+new MutationObserver(updateTextColor).observe(document.documentElement,{{attributes:true,attributeFilter:['data-theme']}});
 // Click-to-navigate
 node.on("click",function(e,d){{if(d.page)window.location.href=d.page;}});
 node.style("cursor",function(d){{return d.page?'pointer':'default'}});
@@ -964,7 +973,7 @@ function doSearch(){{
       (d.jas_klasse?'<span>JAS: '+d.jas_klasse+'</span>':'')+'</div></div>';
   }});
 }}
-document.getElementById('searchInput').addEventListener('input',function(){{var t=this;setTimeout(function(){{if(t.value===document.getElementById('searchInput').value)doSearch()}},200)}});
+var _st;document.getElementById('searchInput').addEventListener('input',function(){{clearTimeout(_st);_st=setTimeout(doSearch,200)}});
 </script>"""
     schrijf_html(out, "search.html", "Zoeken — Belastingdienst", body, active="zoeken")
 
@@ -991,9 +1000,11 @@ def gen_css_js(out: Path):
   if(toggle)toggle.addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')});
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light')});
   var hamburger=document.getElementById('hamburger'),navLinks=document.querySelector('.nav-links');
+  function closeMenu(){if(hamburger&&navLinks){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}}
   if(hamburger&&navLinks){
-    hamburger.addEventListener('click',function(){var e=this.getAttribute('aria-expanded')==='true'?'false':'true';this.setAttribute('aria-expanded',e);this.classList.toggle('open');navLinks.classList.toggle('open')});
-    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')})});
+    hamburger.addEventListener('click',function(e){e.stopPropagation();var open=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',open?'false':'true');this.classList.toggle('open');navLinks.classList.toggle('open')});
+    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',closeMenu)});
+    document.addEventListener('click',function(e){if(!hamburger.contains(e.target)&&!navLinks.contains(e.target))closeMenu()});
   }
 });"""
     (out / "js").mkdir(parents=True, exist_ok=True)
