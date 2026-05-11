@@ -187,7 +187,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
 .nav-links a.active{font-weight:600}
 
 /* Dark mode toggle — desktop (compact) */
-.dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.3rem 0.45rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap}
+.dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.35rem 0.6rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap}
 .dark-toggle:hover{background:rgba(255,255,255,0.15)}
 .dt-label{display:none}
 
@@ -1072,7 +1072,7 @@ def gen_css_js(out: Path):
     root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
     if(toggle){
       var ic=toggle.querySelector('.dt-icon'),lb=toggle.querySelector('.dt-label');
-      if(ic)ic.textContent=t==='dark'?'\u2600':'\u263E';
+      if(ic)ic.textContent=t==='dark'?'\u25D0':'A';
       if(lb)lb.textContent=t==='dark'?'Licht thema':'Donker thema';
     }
   }
