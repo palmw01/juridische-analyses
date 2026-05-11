@@ -497,8 +497,13 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 /* ── Kennisgraaf ── */
 .graph-container{width:100%;height:clamp(400px,60vh,700px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;background:var(--card-bg)}
 .graph-container svg{display:block}
-.graph-legend{position:absolute;bottom:1rem;right:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem 0.875rem;font-size:0.75rem;z-index:10;box-shadow:var(--shadow);max-width:180px}
-.graph-legend-title{font-weight:700;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin-bottom:0.5rem}
+.graph-legend{position:absolute;bottom:1rem;right:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.5rem 0.75rem;font-size:0.75rem;z-index:10;box-shadow:var(--shadow);max-width:180px}
+.graph-legend-header{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;cursor:pointer;user-select:none;padding:0.1rem 0}
+.graph-legend-title{font-weight:700;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin:0}
+.graph-legend-chevron{font-size:0.65rem;color:var(--text-muted);transition:transform 0.2s;line-height:1}
+.graph-legend.collapsed .graph-legend-chevron{transform:rotate(-90deg)}
+.graph-legend-body{margin-top:0.4rem}
+.graph-legend.collapsed .graph-legend-body{display:none}
 .graph-legend-item{display:flex;align-items:center;gap:0.5rem;margin:0.3rem 0;font-size:0.75rem;color:var(--text-secondary)}
 .graph-legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .graph-legend-diamond{width:9px;height:9px;flex-shrink:0;transform:rotate(45deg);border-radius:1px}
@@ -1219,23 +1224,38 @@ document.getElementById('resetBtn').addEventListener('click', resetView);
 
 // Legenda — alleen klassen die in de data voorkomen
 var aanwezigeKlassen = Array.from(new Set(data.nodes.map(function(d){{return d.groep}}))).filter(function(k){{return k!=='onbekend'&&colorMap[k]}});
-var legend = d3.select("#graphLegend");
-legend.append("div").attr("class","graph-legend-title").text("Legenda");
+var legendEl = document.getElementById('graphLegend');
+var legend = d3.select(legendEl);
+// Header met toggle
+var hdr = legend.append("div").attr("class","graph-legend-header").attr("role","button").attr("tabindex","0").attr("aria-expanded","true").attr("aria-label","Legenda in-/uitklappen");
+hdr.append("div").attr("class","graph-legend-title").text("Legenda");
+hdr.append("span").attr("class","graph-legend-chevron").text("▾");
+// Body
+var body = legend.append("div").attr("class","graph-legend-body");
 // begrippen (cirkel)
-var bRow = legend.append("div").attr("class","graph-legend-item");
+var bRow = body.append("div").attr("class","graph-legend-item");
 bRow.append("div").attr("class","graph-legend-dot").style("background","#94a3b8");
 bRow.append("span").text("begrip");
 // regels (ruit)
-var rRow = legend.append("div").attr("class","graph-legend-item");
+var rRow = body.append("div").attr("class","graph-legend-item");
 rRow.append("div").attr("class","graph-legend-diamond").style("background","#94a3b8");
-rRow.append("span").text("afleidingsregel (ruit)");
-legend.append("div").style("border-top","1px solid var(--border)").style("margin","0.4rem 0");
+rRow.append("span").text("regel (ruit)");
+body.append("div").style("border-top","1px solid var(--border)").style("margin","0.4rem 0");
 // kleurlegende
 aanwezigeKlassen.sort().forEach(function(k){{
-  var row = legend.append("div").attr("class","graph-legend-item");
+  var row = body.append("div").attr("class","graph-legend-item");
   row.append("div").attr("class","graph-legend-dot").style("background",colorMap[k]);
   row.append("span").text(k);
 }});
+// Toggle gedrag
+function toggleLegend(){{
+  var collapsed=legendEl.classList.toggle('collapsed');
+  hdr.attr("aria-expanded",String(!collapsed));
+}}
+hdr.on("click",toggleLegend);
+hdr.on("keydown",function(e){{if(e.key==='Enter'||e.key===' '){{e.preventDefault();toggleLegend();}}}});
+// Standaard ingeklapt op mobiel
+if(window.innerWidth < 768) legendEl.classList.add('collapsed');
 
 // Filter — toont gefilterde nodes volledig, directe buren gedimd, rest verborgen
 function updateCount(matchedIds){{
