@@ -799,8 +799,11 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
                 nd["page"] = page
             nodes.append(nd)
             node_ids.add(nid)
+    # First pass: alle bekende begrippen (zodat JAS-klasse niet overschreven wordt)
     for b in begrippen:
         add_node(b["id"], b["naam"], b["jas_klasse"], "begrip", f'begrippen/{b["slug"]}.html')
+    # Second pass: relaties (onbekende nodes alleen als ze niet in de vault zitten)
+    for b in begrippen:
         for rt in ("is-een", "heeft", "leidt-tot"):
             for target in b["relaties"][rt]:
                 if target not in node_ids:
