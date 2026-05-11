@@ -54,23 +54,45 @@ voorbeeldreeksen:
     maanden
   verwachte-uitkomst: ja — aanslagtype correct, dagtekening in belastingjaar, termijnen
     > 1
-  juridisch-juist: false
-  toelichting: n.v.t.
+  juridisch-juist: true
+  toelichting: >-
+    Aanslagtype (voorlopige aanslag IB) voldoet. Dagtekening april 2026 ligt in het
+    belastingjaar 2026. Resterende maanden = 12 − 4 = 8; meer dan één termijn.
+    De specialisatieregel is van toepassing; invorderbaar in 8 gelijke maandelijkse termijnen.
 - invoerwaarden: Voorlopige aanslag VPB 2026; dagtekening 1 februari 2026; 10 resterende
     maanden
   verwachte-uitkomst: ja — VPB valt ook onder de specialisatieregel; aan alle voorwaarden
     voldaan
-  juridisch-juist: false
-  toelichting: n.v.t.
+  juridisch-juist: true
+  toelichting: >-
+    Aanslagtype (voorlopige aanslag VPB) voldoet; lid 5 noemt expliciet vennootschapsbelasting.
+    Dagtekening februari 2026 ligt in het belastingjaar 2026.
+    Resterende maanden = 12 − 2 = 10; meer dan één termijn.
+    Invorderbaar in 10 gelijke maandelijkse termijnen.
 - invoerwaarden: Voorlopige aanslag IB 2026; dagtekening 15 december 2026; 0 resterende
     maanden *(grensgeval)*
   verwachte-uitkomst: 'nee — terugvalregel art. 9 lid 5 derde volzin: termijnenberekening
     leidt tot ≤ 1 termijn'
-  juridisch-juist: false
-  toelichting: invorderbaar zes weken na dagtekening aanslagbiljet
+  juridisch-juist: true
+  toelichting: >-
+    Aanslagtype en dagtekening voldoen, maar resterende maanden = 12 − 12 = 0.
+    De derde volzin van lid 5 bepaalt dat bij ≤ 1 termijn de hoofdregel van lid 1 herneemt.
+    Invorderbaar zes weken na dagtekening aanslagbiljet.
 - invoerwaarden: Definitieve aanslag IB 2026; dagtekening 15 april 2026 *(randgeval)*
   verwachte-uitkomst: nee — aanslagtype voldoet niet; definitieve aanslag valt niet
     onder lid 5
+  juridisch-juist: true
+  toelichting: >-
+    Lid 5 geldt uitsluitend voor voorlopige aanslagen IB/VPB en voorlopige conserverende
+    aanslagen IB. Een definitieve aanslag valt niet onder deze opsomming; de specialisatieregel
+    is niet van toepassing. Invorderbaar zes weken na dagtekening aanslagbiljet (lid 1).
+- invoerwaarden: Voorlopige aanslag IB 2026; dagtekening 15 december 2026 *(negatief
+    testgeval — onjuiste negering terugvalregel)*
+  verwachte-uitkomst: ja — invorderbaar in gelijke termijnen (onjuist; terugvalregel
+    genegeerd)
   juridisch-juist: false
-  toelichting: invorderbaar zes weken na dagtekening aanslagbiljet
+  toelichting: >-
+    Onjuiste toepassing. Wanneer de terugvalregel van de derde volzin van lid 5 wordt
+    genegeerd, zou de specialisatieregel ten onrechte van toepassing worden geacht.
+    Correct is nee: 12 − 12 = 0 resterende maanden, dus ≤ 1 termijn; lid 1 herneemt.
 tussenresultaat: false

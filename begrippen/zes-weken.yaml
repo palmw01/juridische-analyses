@@ -27,7 +27,10 @@ vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
+    relatie-soort: causaal
+    kardinaliteit: '1:1'
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

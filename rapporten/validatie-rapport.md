@@ -16,10 +16,8 @@ WAARSCHUWINGEN
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
   begrippen/termijnbedrag.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
-  begrippen/zes-weken.yaml
-    [L3] alle relaties leeg (is-een, heeft, leidt-tot)
 
 GESLAAGD: 40 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 5
+WAARSCHUWINGEN: 4
 ```

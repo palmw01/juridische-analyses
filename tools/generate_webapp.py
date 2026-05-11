@@ -164,6 +164,22 @@ a:hover{text-decoration:underline}
 .dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.3rem 0.45rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.15s;margin-left:0.25rem;flex-shrink:0}
 .dark-toggle:hover{background:rgba(255,255,255,0.15)}
 
+/* Hamburger */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;margin-left:auto;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px;transition:transform 0.2s,opacity 0.2s}
+.hamburger.open span:nth-child(1){transform:translateY(6px)rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px)rotate(-45deg)}
+@media(max-width:767px){
+  .hamburger{display:block}
+  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0.5rem}
+  .nav-links{display:none;width:100%;flex-direction:column;gap:0;padding-top:0.5rem;overflow-x:visible}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:0.7rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.12);font-size:0.95rem}
+  .nav-links a:last-of-type{border-bottom:none}
+  .nav-links .dark-toggle{margin-left:0;margin-top:0.5rem;align-self:flex-start}
+}
+
 /* Main content */
 main{flex:1;padding:1.5rem 0}
 @media(min-width:768px){main{padding:2rem 0}}
@@ -212,26 +228,26 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .item-list li:hover{background:var(--primary-light)}
 .item-list li:last-child{border-bottom:none}
 .item-list .item-title{flex:1;min-width:150px;font-weight:500;color:var(--text)}
-.item-list .item-meta{font-size:0.8rem;color:var(--text-muted);width:100}
+.item-list .item-meta{font-size:0.8rem;color:var(--text-muted);width:100%}
 @media(min-width:480px){.item-list .item-meta{width:auto}}
 .item-list a.item-title{color:var(--primary)}
 
 /* Table */
-.prop-table{width:100%;border-collapse:collapse;font-size:0.9rem}
-.prop-table td{padding:0.4rem 0;border-bottom:1px solid var(--border);vertical-align:top}
+.prop-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.9rem}
+.prop-table td{padding:0.4rem 0;border-bottom:1px solid var(--border);vertical-align:top;overflow-wrap:break-word;word-break:break-word}
 .prop-table td:first-child{color:var(--text-muted);width:35%;padding-right:1rem}
 .prop-table tr:last-child td{border-bottom:none}
 
 /* Definitions */
-.def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7}
+.def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word}
 
 /* Wetstekst */
 .wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--text-secondary);overflow-wrap:break-word}
 
 /* Annotatie rijen */
-.ann-table{width:100%;border-collapse:collapse;font-size:0.85rem}
-.ann-table th{text-align:left;padding:0.5rem;color:var(--text-muted);font-weight:600;border-bottom:2px solid var(--border);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em}
-.ann-table td{padding:0.5rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.ann-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.85rem}
+.ann-table th{text-align:left;padding:0.5rem;color:var(--text-muted);font-weight:600;border-bottom:2px solid var(--border);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;overflow-wrap:break-word;word-break:break-word}
+.ann-table td{padding:0.5rem;border-bottom:1px solid var(--border);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
 .has-sign{cursor:pointer}
@@ -254,7 +270,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 @media(min-width:768px){.detail-layout{grid-template-columns:1fr 300px}}
 
 /* Formele regel box */
-.regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:Georgia,"Times New Roman",serif;font-size:0.95rem;line-height:1.7;white-space:pre-wrap}
+.regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:Georgia,"Times New Roman",serif;font-size:0.95rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
 
 /* Zoekpagina */
 .search-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card-bg);color:var(--text);transition:border-color 0.2s;margin-bottom:1rem}
@@ -312,6 +328,9 @@ def gen_nav(active: str = "", p: str = "") -> str:
     return f"""<nav class="nav">
 <div class="container">
   <div class="nav-logo">Belastingdienst<span> | Kennismodel Invordering</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-links">
     {links}
     <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus">A</button>
@@ -971,6 +990,11 @@ def gen_css_js(out: Path):
   if(stored){setTheme(stored)}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){setTheme('dark')}else{setTheme('light')}
   if(toggle)toggle.addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')});
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light')});
+  var hamburger=document.getElementById('hamburger'),navLinks=document.querySelector('.nav-links');
+  if(hamburger&&navLinks){
+    hamburger.addEventListener('click',function(){var e=this.getAttribute('aria-expanded')==='true'?'false':'true';this.setAttribute('aria-expanded',e);this.classList.toggle('open');navLinks.classList.toggle('open')});
+    navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')})});
+  }
 });"""
     (out / "js").mkdir(parents=True, exist_ok=True)
     (out / "js/app.js").write_text(js)
