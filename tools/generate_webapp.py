@@ -177,9 +177,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
 /* Header */
 .nav{background:var(--primary);position:sticky;top:0;z-index:100;height:var(--nav-height)}
 .nav .container{display:flex;align-items:center;height:100%;gap:0.5rem}
-.nav-logo{color:#fff;font-weight:700;font-size:clamp(0.9rem,2.5vw,1.1rem);white-space:nowrap;display:flex;align-items:center;gap:0.5rem}
-.nav-logo span{opacity:0.75;font-weight:400;display:none}
-@media(min-width:480px){.nav-logo span{display:inline}}
+.nav-logo{color:#fff;font-weight:700;font-size:clamp(0.9rem,2.5vw,1.1rem);white-space:nowrap;display:flex;align-items:center}
+.nav-logo a{color:inherit;text-decoration:none}
+.nav-logo a:hover{text-decoration:none}
 .nav-links{display:flex;gap:0.25rem;margin-left:auto;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2}
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{color:rgba(255,255,255,0.85);font-size:clamp(0.75rem,2vw,0.875rem);padding:0.35rem 0.5rem;border-radius:4px;white-space:nowrap;transition:background 0.15s,color 0.15s}
@@ -385,7 +385,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
         links += f'<a href="{url}"{cls}>{label}</a>\n'
     return f"""<nav class="nav">
 <div class="container">
-  <div class="nav-logo">Belastingdienst<span> | Kennismodel Invordering</span></div>
+  <div class="nav-logo"><a href="{p}index.html" aria-label="Home">Inningsmodel</a></div>
   <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
     <span class="dt-icon">A</span>
   </button>
