@@ -606,7 +606,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
         links += f'<a href="{url}"{cls}>{label}</a>\n'
     return f"""<nav class="nav">
 <div class="container">
-  <div class="nav-logo"><a href="{p}index.html" aria-label="Home">Inningsmodel</a></div>
+  <div class="nav-logo"><a href="{p}index.html" aria-label="Home">Rechtsgraaf</a></div>
   <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
     <span class="dt-icon">&#x2600;</span>
   </button>
@@ -627,7 +627,7 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} | Inningsmodel</title>
+<title>{title} | Rechtsgraaf</title>
 <link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
@@ -789,7 +789,7 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
         k = b["jas_klasse"]
         by_klasse[k] = by_klasse.get(k, 0) + 1
     klasse_rows = "".join(f'<tr><td>{jas_tag(k)}</td><td style="text-align:right">{c}</td></tr>' for k, c in sorted(by_klasse.items(), key=lambda x: -x[1]))
-    body = f"""<h1>Kennismodel Invordering</h1>
+    body = f"""<h1>Rechtsgraaf</h1>
 <p class="subtitle">Artikel 9 Invorderingswet 1990 — Gestructureerde wetsanalyse volgens JAS v1.0.10</p>
 <div class="stat-grid">
   <div class="card stat-card"><div class="stat-nr">{n_beg}</div><div class="stat-label">Begrippen</div></div>
@@ -1431,7 +1431,7 @@ def gen_icons(vault: Path, out: Path):
                 shutil.copy2(f, dst / f.name)
     manifest = out / "manifest.json"
     if not manifest.exists():
-        manifest.write_text("""{"name":"Belastingdienst — Kennismodel Invordering","short_name":"Kennismodel","start_url":".","display":"standalone","background_color":"#154273","theme_color":"#154273","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""")
+        manifest.write_text("""{"name":"Rechtsgraaf — Kennismodel Invordering","short_name":"Rechtsgraaf","start_url":".","display":"standalone","background_color":"#154273","theme_color":"#154273","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""")
 
 
 def main():
