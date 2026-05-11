@@ -279,13 +279,13 @@ Test altijd:
 
 ---
 
-## RegelSpraaak-oriëntatie (Belastingdienst ALEF)
+## RegelSpraak-oriëntatie (Belastingdienst ALEF)
 
-De taalpatronen in dit kader zijn intentioneel dicht bij de **RegelSpraaak-syntax** gehouden (Leidraad p. 8–9: "bij voorkeur één op de Nederlandse taal gebaseerde specificatieomgeving zoals ALEF").
+De taalpatronen in dit kader zijn intentioneel dicht bij de **RegelSpraak-syntax** gehouden (Leidraad p. 8–9: "bij voorkeur één op de Nederlandse taal gebaseerde specificatieomgeving zoals ALEF").
 
 Correspondentietabel:
 
-| Kader-taalpatroon | RegelSpraaak-equivalent |
+| Kader-taalpatroon | RegelSpraak-equivalent |
 |-------------------|------------------------|
 | `indien aan alle volgende voorwaarden is voldaan` | `Geldig als … Daarvoor geldt:` |
 | `[uitvoerbegrip] moet berekend worden als` | `[uitvoerbegrip] is gelijk aan` |
@@ -299,7 +299,7 @@ Correspondentietabel:
 | `groter dan of gelijk aan [waarde]` | `groter dan of gelijk aan [waarde]` (identiek) |
 | `niet gelijk aan [waarde]` | `ongelijk aan [waarde]` |
 
-**Rolverdeling**: De jurist legt het taalpatroon vast in de regel-noot; de regelanalist (Leidraad, disciplinetabel) zet dit om naar RegelSpraaak. Dit kader beschrijft de **juridische laag** — de regelanalist vertaalt naar de IT-laag.
+**Rolverdeling**: De jurist legt het taalpatroon vast in de regel-noot; de regelanalist (Leidraad, disciplinetabel) zet dit om naar RegelSpraak. Dit kader beschrijft de **juridische laag** — de regelanalist vertaalt naar de IT-laag.
 
 ---
 
@@ -346,4 +346,4 @@ Referentietabel voor de meest voorkomende afleidingsregels in de invorderingssfe
 - **Handleiding Wetsanalyse in de praktijk** (v1.0, 9 feb 2023), §3.5.2b, §3.6, p. 6–7, 50–51, 63–64
 - **Leidraad voor Wetsanalyse op maat** (v1.0, 7 mrt 2023), producten #15, #19–20, §3.8, p. 8–9
 - **JAS v1.0.10:** https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10
-- **RegelSpraaak / ALEF:** Belastingdienst interne documentatie
+- **RegelSpraak / ALEF:** Belastingdienst interne documentatie

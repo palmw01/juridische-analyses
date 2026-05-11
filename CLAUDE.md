@@ -94,7 +94,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 |---------|--------|
 | `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 interpretatiemethoden, 4 typen afleidingsregels, diagram-centrum-prioritering, knooplabel-truncatieregels, delegatietype-beslisregel, kleurcodering |
 | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
-| `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraaak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
+| `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
 
