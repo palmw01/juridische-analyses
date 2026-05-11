@@ -602,7 +602,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
         (f"{p}begrippen.html", "Begrippen"),
         (f"{p}annotaties.html", "Annotaties"),
         (f"{p}regels.html", "Regels"),
-        (f"{p}graph.html", "Graaf"),
+        (f"{p}graph.html", "Kennisgraaf"),
         (f"{p}search.html", "Zoeken"),
     ]
     links = ""
