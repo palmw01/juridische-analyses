@@ -171,10 +171,11 @@ a:hover{text-decoration:underline}
 
 /* Hamburger */
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;margin-left:auto;flex-shrink:0}
-.hamburger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px;transition:transform 0.2s,opacity 0.2s}
-.hamburger.open span:nth-child(1){transform:translateY(10px) rotate(45deg)}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:1px;transition:transform 0.25s ease,opacity 0.15s ease}
+.hamburger span+span{margin-top:6px}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 @media (max-width: 767px){
   .nav{height:auto}
   .hamburger{display:block}
@@ -251,8 +252,9 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--text-secondary);overflow-wrap:break-word}
 
 /* Annotatie rijen */
-.ann-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.85rem}
-.ann-table th{text-align:left;padding:0.5rem;color:var(--text-muted);font-weight:600;border-bottom:2px solid var(--border);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;overflow-wrap:break-word;word-break:break-word}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:0.25rem}
+.ann-table{width:100%;min-width:580px;table-layout:auto;border-collapse:collapse;font-size:0.85rem}
+.ann-table th{text-align:left;padding:0.5rem;color:var(--text-muted);font-weight:600;border-bottom:2px solid var(--border);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap}
 .ann-table td{padding:0.5rem;border-bottom:1px solid var(--border);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
@@ -598,7 +600,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         if mark_tbl:
             mp = f"""<div class="card">
   <div class="card-title">Markeringen</div>
-  <div style="overflow-x:auto">
+  <div class="table-scroll">
   <table class="ann-table">
     <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th></tr>
     {mark_tbl}
@@ -725,7 +727,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 <div class="wetstekst">"{a["wetstekst"]}"</div>
 <div class="card">
 <div class="card-title">Annotatierijen</div>
-<div style="overflow-x:auto">
+<div class="table-scroll">
 <table class="ann-table">
   <tr><th>Markering</th><th>JAS-klasse</th><th>Begrip</th><th style="text-align:center">Signaal</th></tr>
   {rijen}
