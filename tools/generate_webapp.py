@@ -368,7 +368,14 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 .item-list .item-title{flex:1;min-width:150px;font-weight:500;color:var(--text);text-decoration:none}
 .item-list a.item-title{color:var(--link);text-decoration:none}
 .item-list a.item-title:hover{text-decoration:underline}
+.item-list .item-badges{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center}
 .item-list .item-meta{font-size:0.78rem;color:var(--text-muted)}
+@media(max-width:767px){
+  .item-list li{flex-direction:column;align-items:flex-start;gap:0.3rem}
+  .item-list .item-title{min-width:0;width:100%}
+  .item-list .item-badges{width:100%}
+  .item-list .item-meta{width:100%}
+}
 
 /* ── Eigenschappentabel ── */
 .prop-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.9rem}
@@ -806,9 +813,7 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list):
     items = "".join(
         f'<li onclick="window.location=\'begrippen/{b["slug"]}.html\'">'
         f'<a href="begrippen/{b["slug"]}.html" class="item-title">{b["naam"]}</a>'
-        f'{jas_tag(b["jas_klasse"])}'
-        f'<span class="badge badge-soort">{b["soort"]}</span>'
-        f'{status_badge(b["status"])}'
+        f'<div class="item-badges">{jas_tag(b["jas_klasse"])}<span class="badge badge-soort">{b["soort"]}</span>{status_badge(b["status"])}</div>'
         f'<span class="item-meta">ID: {b["id"]}</span>'
         f'</li>\n'
         for b in begrippen
@@ -920,7 +925,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
     items = "".join(
         f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
         f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}</a>'
-        f'<span class="badge badge-type">{a.get("bwb_id","")}</span>'
+        f'<div class="item-badges"><span class="badge badge-type">{a.get("bwb_id","")}</span></div>'
         f'<span class="item-meta">{a["structuurpositie"]}</span>'
         f'</li>\n'
         for a in annotaties
@@ -1008,7 +1013,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
     items = "".join(
         f'<li onclick="window.location=\'regels/{r["id"]}.html\'">'
         f'<a href="regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
-        f'<span class="badge badge-definitief">{r["soort"]}</span>'
+        f'<div class="item-badges"><span class="badge badge-definitief">{r["soort"]}</span></div>'
         f'<span class="item-meta">ID: {r["id"]}</span>'
         f'</li>\n'
         for r in regels
