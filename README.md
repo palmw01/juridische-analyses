@@ -106,7 +106,7 @@ wetstekst (art. 9 lid 1 IW)
   └─► bronbestand          bronnen/BWBR0004770/art9.json
         └─► annotatie-noot  annotaties/BWBR0004770/art9-1.json
               └─► markering  markering-id: m-001
-                    └─► begrip  begrippen/invorderbaarheid-belastingaanslag.yaml
+                    └─► begrip  begrippen/invorderbaarheid-belastingaanslag.yaml  (kern + contexten)
                           └─► regel  regels/AR-BWBR0004770-art9-lid1-a.yaml
 ```
 
@@ -140,7 +140,12 @@ definitie:
       tekst: >-
         In de context van art. 9 lid 5 treedt invorderbaarheid niet eenmalig in
         maar telkens opnieuw per betalingstermijn — de bevoegdheid herleeft N maal.
-      toelichting: Lid 5 is een lex-specialis van lid 1.
+      toelichting: >-
+        De markering "is invorderbaar" is chirurgisch — twee woorden uit de wetstekst,
+        identiek in lid 1 en lid 5. De verfijning vloeit niet voort uit een andere
+        formulering, maar uit de iteratieve structuur van lid 5 als lex-specialis van
+        lid 1: dezelfde term draagt in een andere wetssystematische context een
+        kwalitatief andere juridische lading.
 
 markeringen:
   - markering-id: m-001
@@ -244,6 +249,8 @@ begrip:BWBR0004770_art9_lid1_dagtekening-aanslagbiljet
 ```
 
 Het predikaat `prov:wasDerivedFrom` legt de herkomst vast (W3C PROV-standaard). `skos:definition` bevat altijd de **kern** — de universele betekenis. Artikel-specifieke inkleringen staan als `jas:definitieContext`-blank-nodes met `bijdrage`, `markering` en `skos:note`. De JAS-relaties (`jas:heeft`, `jas:leidtTot`) zijn gedefinieerd in de JAS-ontologie op `regels.overheid.nl`.
+
+> **Noot over de `jas:`-namespace:** De prefix `jas: <http://regels.overheid.nl/jas/ontology#>` is een *voorgestelde* namespace die aansluit bij de JAS-standaard van regels.overheid.nl. Er bestaat nog geen gepubliceerde ontologie op dit URI; de namespace fungeert voorlopig als stabiel anker voor eigen termen (`jasKlasse`, `definitieContext`, `bijdrage`, e.d.) totdat een formele JAS-ontologie beschikbaar komt.
 
 ---
 
