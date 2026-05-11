@@ -92,7 +92,7 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --card-bg: #FFFFFF;
   --text: #1A1A1A;
   --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
+  --text-muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
   --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
@@ -106,6 +106,8 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --nav-height: 56px;
   --max-width: 1200px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --focus-ring: 0 0 0 3px rgba(0,71,160,0.25);
+  --font-mono: "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", Menlo, monospace;
 }
 [data-theme="dark"] {
   --primary: #3B82F6;
@@ -115,13 +117,14 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --card-bg: #1E293B;
   --text: #F1F5F9;
   --text-secondary: #CBD5E1;
-  --text-muted: #64748B;
+  --text-muted: #94A3B8;
   --border: #334155;
   --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
   --shadow-hover: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
   --success-bg: #064E3B;
   --error-bg: #7F1D1D;
   --warning-bg: #78350F;
+  --focus-ring: 0 0 0 3px rgba(59,130,246,0.35);
 }
 [data-theme="dark"] .mermaid svg text {
   fill: #e2e8f0 !important;
@@ -144,12 +147,21 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   height: auto;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:100%;-webkit-text-size-adjust:100%}
+html{font-size:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
 img,svg{display:block;max-width:100%}
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
+a:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:2px}
 ::selection{background:var(--primary);color:#fff}
+
+/* Skip naar inhoud — WCAG 2.4.1 */
+.skip-link{position:absolute;top:-100%;left:0;z-index:1000;padding:0.75rem 1.5rem;background:var(--primary);color:#fff;font-weight:600;font-size:0.9rem;white-space:nowrap}
+.skip-link:focus{top:0;outline:none;text-decoration:none}
+
+/* Focus rings — WCAG 2.4.7, 2.4.13 */
+button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus-visible,.dark-toggle:focus-visible,.hamburger:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+.dark-toggle:focus-visible,.hamburger:focus-visible{outline-color:#fff;outline-offset:3px}
 .container{width:100%;max-width:var(--max-width);margin:0 auto;padding:0 1rem}
 @media(min-width:768px){.container{padding:0 1.5rem}}
 
@@ -191,11 +203,10 @@ a:hover{text-decoration:underline}
 main{flex:1;padding:1.5rem 0}
 @media(min-width:768px){main{padding:2rem 0}}
 
-/* Cards */
-.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;margin-bottom:1rem;transition:box-shadow 0.2s;overflow-wrap:break-word}
+/* Cards — Belastingdienst-stijl: rustig, overzichtelijk */
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;margin-bottom:1rem;overflow-wrap:break-word}
 @media(min-width:480px){.card{padding:1.5rem}}
-.card:hover{box-shadow:var(--shadow-hover)}
-.card-title{font-size:0.875rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.card-title{font-size:0.85rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
 .card h2{font-size:1.1rem;color:var(--primary);margin-bottom:0.75rem}
 
 /* Grids */
@@ -220,8 +231,8 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 /* Badges / Tags */
 .card ul li, .card ol li { word-break: break-all; overflow-wrap: break-word; }
 .card a { word-break: break-all; overflow-wrap: break-word; }
-.tag{display:inline-block;padding:0.15rem 0.45rem;border-radius:4px;font-size:0.7rem;font-weight:600;color:#fff;margin:0.1rem;white-space:nowrap;line-height:1.4}
-.badge{display:inline-block;font-size:0.7rem;padding:0.15rem 0.45rem;border-radius:4px;font-weight:600;white-space:nowrap;line-height:1.4}
+.tag{display:inline-block;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:600;color:#fff;margin:0.1rem;white-space:nowrap;line-height:1.5;vertical-align:middle}
+.badge{display:inline-block;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:4px;font-weight:600;white-space:nowrap;line-height:1.5;vertical-align:middle}
 .badge-concept{background:var(--warning-bg);color:var(--warning)}
 .badge-definitief{background:var(--success-bg);color:var(--success)}
 .badge-vervallen{background:var(--border);color:var(--text-muted)}
@@ -231,13 +242,14 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 
 /* Lists */
 .item-list{list-style:none}
-.item-list li{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;border-radius:4px;margin:0 -0.5rem;padding:0.75rem 0.5rem}
+.item-list li{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;padding:0.75rem 0.5rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
 .item-list li:hover{background:var(--primary-light)}
+.item-list li:focus-within{background:var(--primary-light)}
 .item-list li:last-child{border-bottom:none}
-.item-list .item-title{flex:1;min-width:150px;font-weight:500;color:var(--text)}
-.item-list .item-meta{font-size:0.8rem;color:var(--text-muted);width:100%}
-@media(min-width:480px){.item-list .item-meta{width:auto}}
+.item-list .item-title{flex:1;min-width:150px;font-weight:500;color:var(--text);text-decoration:none}
 .item-list a.item-title{color:var(--primary)}
+.item-list a.item-title:hover{text-decoration:underline}
+.item-list .item-meta{font-size:0.8rem;color:var(--text-muted)}
 
 /* Table */
 .prop-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.9rem}
@@ -249,7 +261,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word}
 
 /* Wetstekst */
-.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--text-secondary);overflow-wrap:break-word}
+.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.8;color:var(--text-secondary);overflow-wrap:break-word}
 
 /* Annotatie rijen */
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:0.25rem}
@@ -259,15 +271,16 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .ann-table tr:hover{background:var(--primary-light)}
 .ann-table .mark-text{font-weight:500}
 .has-sign{cursor:pointer}
-.has-sign:hover{background:var(--primary-light)!important}
-.sign-detail td{padding:0.5rem 0.5rem 0.5rem 1.5rem}
+.has-sign:hover,.has-sign:focus{background:var(--primary-light)!important}
+.has-sign td:last-child{min-width:2.75rem;text-align:center}
+.sign-detail td{padding:0.5rem 1rem 0.5rem 1.5rem}
 .sign-content{font-size:0.8rem;color:var(--warning);background:var(--warning-bg);padding:0.5rem;border-radius:4px;display:flex;align-items:flex-start;gap:0.4rem}
 .sign-content::before{content:"[!]";font-weight:700;flex-shrink:0}
 .sign-badge{display:inline-block;font-size:0.65rem;font-weight:700;color:var(--warning);background:var(--warning-bg);border-radius:3px;padding:0.1rem 0.3rem;line-height:1.3;cursor:pointer}
 .sign-ref{font-size:0.7rem;font-weight:600;color:var(--text-muted);margin-right:0.25rem}
 
 /* Voorbeeldreeksen */
-.voorbeeld{padding:0.75rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--success-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success)}
+.voorbeeld{padding:0.75rem 1rem;margin:0.5rem 0;border-left:3px solid var(--success);background:var(--success-bg);border-radius:0 var(--radius) var(--radius) 0;font-size:0.85rem;border:1px solid var(--border);border-left:3px solid var(--success);line-height:1.6}
 .voorbeeld.ongeldig{border-left-color:var(--error);background:var(--error-bg);border-left:3px solid var(--error)}
 .voorbeeld-label{font-weight:700;color:var(--success)}
 .voorbeeld.ongeldig .voorbeeld-label{color:var(--error)}
@@ -281,8 +294,8 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:Georgia,"Times New Roman",serif;font-size:0.95rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
 
 /* Zoekpagina */
-.search-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card-bg);color:var(--text);transition:border-color 0.2s;margin-bottom:1rem}
-.search-input:focus{outline:none;border-color:var(--primary)}
+.search-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card-bg);color:var(--text);transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:1rem;-webkit-appearance:none}
+.search-input:focus{outline:none;border-color:var(--primary);box-shadow:var(--focus-ring)}
 .search-filters{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem}
 .filter-chip{padding:0.3rem 0.75rem;border-radius:20px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-secondary);font-size:0.8rem;cursor:pointer;transition:all 0.15s}
 .filter-chip.active,.filter-chip:hover{border-color:var(--primary);background:var(--primary-light);color:var(--primary)}
@@ -302,7 +315,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .graph-legend-item{display:flex;align-items:center;gap:0.4rem;margin:0.15rem 0}
 .graph-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .graph-filter{margin-bottom:0.75rem}
-.graph-filter select{padding:0.4rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.85rem;background:var(--card-bg);color:var(--text)}
+.graph-filter select{padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.85rem;background:var(--card-bg);color:var(--text);cursor:pointer}
 
 /* Footer */
 footer{text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.75rem;border-top:1px solid var(--border);margin-top:auto}
@@ -311,6 +324,9 @@ footer{text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.75re
 .error-page{text-align:center;padding:4rem 1rem}
 .error-page h1{font-size:5rem;color:var(--primary);margin-bottom:0.5rem}
 .error-page p{color:var(--text-muted);margin-bottom:1.5rem}
+
+/* Screenreader-only — WCAG 1.1.1 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* Responsive helpers */
 @media(min-width:480px){.hide-xs{display:inline!important}}
@@ -331,7 +347,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
     ]
     links = ""
     for url, label in items:
-        cls = ' class="active"' if label.lower() == active.lower() else ""
+        cls = ' class="active" aria-current="page"' if label.lower() == active.lower() else ""
         links += f'<a href="{url}"{cls}>{label}</a>\n'
     return f"""<nav class="nav">
 <div class="container">
@@ -363,8 +379,9 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <link rel="stylesheet" href="{p}css/style.css">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Direct naar inhoud</a>
 {gen_nav(active, p)}
-<main><div class="container">
+<main id="main-content"><div class="container">
 {body}
 </div></main>
 <footer>Gegenereerd uit de juridische analyses vault &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>
@@ -563,6 +580,7 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list):
         for b in begrippen
     )
     body = f"""<h1>Begrippen ({len(begrippen)})</h1>
+<label for="filterInput" class="sr-only">Filter op naam</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op naam..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
 <script>
@@ -672,6 +690,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
         for a in annotaties
     )
     body = f"""<h1>Annotaties ({len(annotaties)})</h1>
+<label for="filterInput" class="sr-only">Filter op wet of artikel</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op wet of artikel..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
 <script>
@@ -756,6 +775,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
         for r in regels
     )
     body = f"""<h1>Afleidingsregels ({len(regels)})</h1>
+<label for="filterInput" class="sr-only">Filter op naam of ID</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of ID..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
 <script>
@@ -849,7 +869,7 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
 <p class="subtitle">Interactieve graaf van begrippen (cirkels) en afleidingsregels (ruiten). Sleep nodes om te herschikken.</p>
 <div class="graph-filter">
   <label for="klasseFilter">JAS-klasse filter: </label>
-  <select id="klasseFilter">
+  <select id="klasseFilter" aria-label="Filter op JAS-klasse">
     <option value="all">Alle</option>
     {"".join(f'<option value="{k}">{k}</option>' for k in sorted(JAS_KLEUREN.keys()))}
   </select>
@@ -936,6 +956,7 @@ def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
         bron_data.append({"type": "Regel", "titel": r["naam"], "url": f'regels/{r["id"]}.html', "tekst": (r.get("formele_regel","") + " " + (r.get("toelichting","") or "")), "jas_klasse": "afleidingsregel"})
     data_json = json.dumps(bron_data, ensure_ascii=False)
     body = f"""<h1>Zoeken</h1>
+<label for="searchInput" class="sr-only">Zoekterm</label>
 <input type="text" class="search-input" id="searchInput" placeholder="Zoek in begrippen, annotaties en regels..." autofocus>
 <div class="search-filters" id="searchFilters">
   <span class="filter-chip active" data-type="all">Alle</span>
@@ -1002,11 +1023,14 @@ def gen_css_js(out: Path):
   if(toggle)toggle.addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')});
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light')});
   var hamburger=document.getElementById('hamburger'),navLinks=document.querySelector('.nav-links');
-  function closeMenu(){if(hamburger&&navLinks){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}}
+  function closeMenu(){hamburger.setAttribute('aria-expanded','false');hamburger.classList.remove('open');navLinks.classList.remove('open')}
+  function openMenu(){hamburger.setAttribute('aria-expanded','true');hamburger.classList.add('open');navLinks.classList.add('open')}
+  function toggleMenu(){hamburger.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()}
   if(hamburger&&navLinks){
-    hamburger.addEventListener('click',function(e){e.stopPropagation();var open=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',open?'false':'true');this.classList.toggle('open');navLinks.classList.toggle('open')});
+    hamburger.addEventListener('click',toggleMenu);
     navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',closeMenu)});
-    document.addEventListener('click',function(e){if(!hamburger.contains(e.target)&&!navLinks.contains(e.target))closeMenu()});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navLinks.classList.contains('open')){closeMenu();hamburger.focus()}});
+    document.addEventListener('click',function(e){if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&e.target!==hamburger&&!hamburger.contains(e.target))closeMenu()});
   }
 });"""
     (out / "js").mkdir(parents=True, exist_ok=True)
