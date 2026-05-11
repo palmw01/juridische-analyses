@@ -4,12 +4,19 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "De temporele zinsnede 'zes weken na de dagtekening van het aanslagbiljet' functioneert als de conditie waaraan voldaan moet zijn voor invorderbaarheid. De aanslag is pas invorderbaar nadat dit tijdvak is verstreken. De formulering bevat twee tijdsaanduidingen: de termijn ('zes weken') en het referentiepunt ('de dagtekening')."
+toelichting-klasse: >-
+  De temporele zinsnede 'zes weken na de dagtekening van het aanslagbiljet' functioneert als de conditie
+  waaraan voldaan moet zijn voor invorderbaarheid. De aanslag is pas invorderbaar nadat dit tijdvak is
+  verstreken. De formulering bevat twee tijdsaanduidingen: de termijn ('zes weken') en het referentiepunt
+  ('de dagtekening').
 herkomst: afgeleid
 status: concept
-definitie: 'De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar
-  wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat
-  resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet'
+definitie:
+  kern: >-
+    De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip
+    van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken
+    bij de dagtekening van het aanslagbiljet
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

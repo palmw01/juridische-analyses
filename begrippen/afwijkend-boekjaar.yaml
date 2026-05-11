@@ -4,11 +4,13 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "Contextuele conditie voor de specialisatieregel."
+toelichting-klasse: Contextuele conditie voor de specialisatieregel.
 herkomst: direct
 status: concept
-definitie: Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt
-  met het kalenderjaar
+definitie:
+  kern: >-
+    Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

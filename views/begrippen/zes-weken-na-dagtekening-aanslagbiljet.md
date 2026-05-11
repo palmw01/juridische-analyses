@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 
 *"zes weken na de dagtekening van het aanslagbiljet"* *(BWBR0004770/art9/lid1, grammaticaal)*
 
-De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet
+**Kern:** De tijdsconditie die vervuld moet zijn opdat een belastingaanslag invorderbaar wordt: het tijdstip van beoordeling moet zijn gelegen op of na het tijdstip dat resulteert uit het optellen van zes weken bij de dagtekening van het aanslagbiljet
+
 
 ## Markeringen
 

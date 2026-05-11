@@ -4,12 +4,17 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: operator
-toelichting-klasse: "Het voegwoord 'of' fungeert als logische OR-operator in de opsomming van aanslagtypen (IB of VPB) in lid 5. De voorwaarde is vervuld als sprake is van ofwel een voorlopige IB-aanslag ofwel een voorlopige VPB-aanslag."
+toelichting-klasse: >-
+  Het voegwoord 'of' fungeert als logische OR-operator in de opsomming van aanslagtypen (IB of VPB) in
+  lid 5. De voorwaarde is vervuld als sprake is van ofwel een voorlopige IB-aanslag ofwel een voorlopige
+  VPB-aanslag.
 herkomst: direct
 status: concept
-definitie: De logische operator die twee of meer alternatieven verbindt, zodanig dat
-  de samengestelde voorwaarde is vervuld als ten minste één van de verbonden elementen
-  waar is
+definitie:
+  kern: >-
+    De logische operator die twee of meer alternatieven verbindt, zodanig dat de samengestelde voorwaarde
+    is vervuld als ten minste één van de verbonden elementen waar is
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

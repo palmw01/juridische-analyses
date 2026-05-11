@@ -16,6 +16,11 @@ from typing import Any
 
 import yaml
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).parent))
+from jas_index_lib import haal_kern, haal_contexten
+
 
 def slugify(s: str) -> str:
     return re.sub(r'[^a-z0-9-]', '', s.lower().replace('/', '-').replace('_', '-'))
@@ -390,12 +395,36 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
   border-left:4px solid var(--primary);
   padding:1rem 1.25rem;
   border-radius:0 var(--radius) var(--radius) 0;
-  margin-bottom:1rem;
+  margin-bottom:0.5rem;
   font-size:0.95rem;line-height:1.75;
   overflow-wrap:break-word;word-break:break-word;
   font-family:var(--font-serif);
   color:var(--text-secondary);
 }
+.def-kern-label{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem}
+
+/* ── Contextuele definitie-lagen ── */
+.def-contexten{margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem}
+.def-context{
+  border-radius:var(--radius);
+  padding:0.65rem 1rem;
+  font-size:0.88rem;line-height:1.65;
+  border-left:3px solid;
+  overflow-wrap:break-word;
+}
+.def-context-verfijning{background:#EEF4FB;border-left-color:#3178C6;color:#1A3558}
+.def-context-uitbreiding{background:#E8F5E9;border-left-color:#2E7D32;color:#1B3D1E}
+.def-context-uitzondering{background:#FFF3E0;border-left-color:#E65100;color:#3E1C00}
+[data-theme="dark"] .def-context-verfijning{background:#172035;border-left-color:#4A8EC0;color:#B5C9DB}
+[data-theme="dark"] .def-context-uitbreiding{background:#0E2415;border-left-color:#4CAF50;color:#A5D6A7}
+[data-theme="dark"] .def-context-uitzondering{background:#2A1400;border-left-color:#FF8C00;color:#FFD180}
+.def-context-header{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.3rem}
+.ctx-badge{font-size:0.68rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:0.15rem 0.45rem;border-radius:2px;white-space:nowrap}
+.ctx-badge-verfijning{background:#3178C6;color:#fff}
+.ctx-badge-uitbreiding{background:#2E7D32;color:#fff}
+.ctx-badge-uitzondering{background:#E65100;color:#fff}
+.ctx-ref{font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono)}
+.def-context-toelichting{margin-top:0.25rem;font-size:0.8rem;font-style:italic;color:var(--text-muted)}
 
 /* ── Wetstekst ── */
 .wetstekst{
@@ -705,11 +734,13 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
                     klasse = "variabele"
                 elif soort == "enumeratie":
                     klasse = "rechtsobject"
+        definitie_obj = data.get("definitie") or {}
         begrippen.append({
             "id": data.get("begrip-id", f.stem),
             "naam": data.get("begripsnaam", f.stem),
             "slug": slugify(data.get("begripsnaam", f.stem)),
-            "definitie": data.get("definitie", "") or "",
+            "definitie": haal_kern(definitie_obj),
+            "definitie_contexten": haal_contexten(definitie_obj),
             "soort": data.get("soort", "") or "",
             "herkomst": data.get("herkomst", "") or "",
             "status": data.get("status", "concept") or "concept",
@@ -882,7 +913,35 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             bronnen = b.get("markeringen", [])
             if bronnen:
                 m_ids = ", ".join(m.get("markering-id", "") for m in bronnen if m.get("bijdrage") == "primair")
-                def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Gebaseerd op: {m_ids}</div>'
+                def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Kern gebaseerd op: {m_ids}</div>'
+
+        # Contextuele lagen renderen
+        mid_to_bron = {
+            m.get("markering-id", ""): m.get("bron-annotatie-id", "")
+            for m in b.get("markeringen", [])
+        }
+        ctx_html = ""
+        for ctx in b.get("definitie_contexten", []):
+            bijdrage = ctx.get("bijdrage", "")
+            ctx_tekst = ctx.get("tekst", "")
+            ctx_toel = ctx.get("toelichting", "")
+            mid = ctx.get("markering-id", "")
+            bron = mid_to_bron.get(mid, "")
+            badge_label = bijdrage.capitalize()
+            ref_parts = [p for p in [mid, bron] if p]
+            ref_str = " · ".join(ref_parts)
+            toel_html = f'<div class="def-context-toelichting">{ctx_toel}</div>' if ctx_toel else ""
+            ctx_html += (
+                f'<div class="def-context def-context-{bijdrage}">'
+                f'<div class="def-context-header">'
+                f'<span class="ctx-badge ctx-badge-{bijdrage}">{badge_label}</span>'
+                f'<span class="ctx-ref">{ref_str}</span>'
+                f'</div>'
+                f'<div>{ctx_tekst}</div>'
+                f'{toel_html}'
+                f'</div>\n'
+            )
+        ctx_block = f'<div class="def-contexten">{ctx_html}</div>' if ctx_html else ""
         mark_tbl = ""
         for m in b.get("markeringen", []):
             jc = b["jas_klasse"] or ""
@@ -918,8 +977,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 <div>
   <div class="card">
     <div class="card-title">Definitie</div>
+    <div class="def-kern-label">Kern</div>
     <div class="def-block">{b["definitie"] or "<em>Geen definitie</em>"}</div>
     {def_bron}
+    {ctx_block}
   </div>
   {mp}
 </div>
@@ -1377,7 +1438,8 @@ document.addEventListener('keydown',function(e){{
 def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
     bron_data = []
     for b in begrippen:
-        bron_data.append({"type": "Begrip", "titel": b["naam"], "url": f'begrippen/{b["slug"]}.html', "tekst": b.get("definitie","") + " " + b["naam"] + " " + " ".join(b["aliases"]), "jas_klasse": b["jas_klasse"]})
+        ctx_teksten = " ".join(c.get("tekst", "") for c in b.get("definitie_contexten", []))
+        bron_data.append({"type": "Begrip", "titel": b["naam"], "url": f'begrippen/{b["slug"]}.html', "tekst": b.get("definitie","") + " " + ctx_teksten + " " + b["naam"] + " " + " ".join(b["aliases"]), "jas_klasse": b["jas_klasse"]})
     for a in annotaties:
         bron_data.append({"type": "Annotatie", "titel": f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}', "url": f'annotaties/{a["id"].replace("/","-")}.html', "tekst": a.get("wetstekst",""), "jas_klasse": ""})
     for r in regels:

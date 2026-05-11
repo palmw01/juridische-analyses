@@ -17,7 +17,8 @@ tags:
 
 *"of"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-De logische operator die twee of meer alternatieven verbindt, zodanig dat de samengestelde voorwaarde is vervuld als ten minste één van de verbonden elementen waar is
+**Kern:** De logische operator die twee of meer alternatieven verbindt, zodanig dat de samengestelde voorwaarde is vervuld als ten minste één van de verbonden elementen waar is
+
 
 ## Markeringen
 

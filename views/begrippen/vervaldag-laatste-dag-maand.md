@@ -17,7 +17,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-b]]"
 
 *"wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld"* *(BWBR0024096/par9-1, grammaticaal)*
 
-Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen
+**Kern:** Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen
+
 
 ## Markeringen
 

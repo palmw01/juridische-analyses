@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-f]]"
 
 *"gelijke termijnen"* *(BWBR0004770/art9/lid5, systematisch)*
 
-Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de belastingaanslag te delen door het aantal termijnen
+**Kern:** Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de belastingaanslag te delen door het aantal termijnen
+
 
 ## Markeringen
 

@@ -17,7 +17,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 
 *"toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december"* *(BWBR0024096/par9-1, systematisch)*
 
-Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet valt op een datum vóór 31 december van het betreffende jaar
+**Kern:** Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet valt op een datum vóór 31 december van het betreffende jaar
+
 
 ## Markeringen
 

@@ -4,13 +4,18 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "Specialisatiebepaling die lid 5 aanmerkt als lex specialis t.o.v. art. 9 lid 1. De zinsnede heeft geen zelfstandige materiële inhoud maar markeert de hiërarchische relatie: de hoofdregel van lid 1 (zes weken) wordt voor de genoemde aanslagtypen verdrongen door de termijnenregeling van lid 5."
+toelichting-klasse: >-
+  Specialisatiebepaling die lid 5 aanmerkt als lex specialis t.o.v. art. 9 lid 1. De zinsnede heeft geen
+  zelfstandige materiële inhoud maar markeert de hiërarchische relatie: de hoofdregel van lid 1 (zes weken)
+  wordt voor de genoemde aanslagtypen verdrongen door de termijnenregeling van lid 5.
 herkomst: afgeleid
 status: concept
-definitie: De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie
-  heeft ten opzichte van de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn
-  van lid 1 voor de genoemde voorlopige aanslagen wordt verdrongen door de gelijke-termijnenregeling
-  van lid 5
+definitie:
+  kern: >-
+    De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie heeft ten opzichte van
+    de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn van lid 1 voor de genoemde voorlopige
+    aanslagen wordt verdrongen door de gelijke-termijnenregeling van lid 5
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

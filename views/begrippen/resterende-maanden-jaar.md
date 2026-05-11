@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-b]]"
 
 *"nog maanden van het jaar overblijven"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-Het aantal kalendermaanden dat in het belastingjaar resteert na de maand die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van art. 9 lid 5 IW 1990
+**Kern:** Het aantal kalendermaanden dat in het belastingjaar resteert na de maand die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van art. 9 lid 5 IW 1990
+
 
 ## Markeringen
 

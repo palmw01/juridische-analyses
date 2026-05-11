@@ -18,7 +18,8 @@ aliases:
 
 *"een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd
+**Kern:** Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd
+
 
 ## Markeringen
 

@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-c]]"
 
 *"De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn vaststelt als het tijdstip gelegen één kalendermaand na de dagtekening van het aanslagbiljet
+**Kern:** De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn vaststelt als het tijdstip gelegen één kalendermaand na de dagtekening van het aanslagbiljet
+
 
 ## Markeringen
 

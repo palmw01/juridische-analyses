@@ -4,13 +4,18 @@ aliases: []
 soort: enumeratie
 soort-id: false
 jas-klasse: rechtsobject
-toelichting-klasse: "Naast de reguliere voorlopige aanslag IB/VPB benoemt lid 5 afzonderlijk de voorlopige conserverende aanslag IB als tweede aanslagtype waarvoor de termijnenregeling geldt. Het is een conserverende aanslag die belastinguitstel bij emigratie of vergelijkbare situaties beoogt te verzekeren."
+toelichting-klasse: >-
+  Naast de reguliere voorlopige aanslag IB/VPB benoemt lid 5 afzonderlijk de voorlopige conserverende
+  aanslag IB als tweede aanslagtype waarvoor de termijnenregeling geldt. Het is een conserverende aanslag
+  die belastinguitstel bij emigratie of vergelijkbare situaties beoogt te verzekeren.
 herkomst: direct
 status: concept
-definitie: Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende
-  aard, die — mits het aanslagbiljet is gedagtekend in het belastingjaar waarover
-  hij is vastgesteld — invorderbaar is in gelijke maandelijkse termijnen overeenkomstig
-  art. 9 lid 5 IW 1990
+definitie:
+  kern: >-
+    Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende aard, die — mits het
+    aanslagbiljet is gedagtekend in het belastingjaar waarover hij is vastgesteld — invorderbaar is in
+    gelijke maandelijkse termijnen overeenkomstig art. 9 lid 5 IW 1990
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

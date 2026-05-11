@@ -4,11 +4,16 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: afleidingsregel
-toelichting-klasse: "Rekenregel die de vervaldatum van de eerste maandelijkse termijn bepaalt. Input: dagtekening aanslagbiljet. Output: vervaldatum = dagtekening + één maand."
+toelichting-klasse: >-
+  Rekenregel die de vervaldatum van de eerste maandelijkse termijn bepaalt. Input: dagtekening aanslagbiljet.
+  Output: vervaldatum = dagtekening + één maand.
 herkomst: afgeleid
 status: concept
-definitie: De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn
-  vaststelt als het tijdstip gelegen één kalendermaand na de dagtekening van het aanslagbiljet
+definitie:
+  kern: >-
+    De rekenregel die de vervaldatum van de eerste gelijke invorderingstermijn vaststelt als het tijdstip
+    gelegen één kalendermaand na de dagtekening van het aanslagbiljet
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

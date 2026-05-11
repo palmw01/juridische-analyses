@@ -243,18 +243,20 @@ Maak per annotatierij een begrip-YAML aan in `begrippen/[slug].yaml`. **Vul uits
 
 **Begripsnaam-vuistregels:** zie `/begrip` §Begripsnaam-vuistregels — dat is de canonieke bron. Enige regel die al tijdens `/annoteer` geldt: **hergebruik** een bestaande begripsnaam als de unieke betekenis identiek is.
 
- YAML-formaat per begrip-stub:
- ```yaml
- begrip-id: [B]/art[A]/lid[L]/[slug]
- begripsnaam: [slug]
- aliases: []
- soort: ""
- soort-id: false
- jas-klasse: [klasse]      # JAS-classificatie uit annotatierij; bepaalt kleur codering in kennisgraaf
- toelichting-klasse: ""    # juridische motivering van JAS-klassekeuze
- herkomst: direct          # afgeleid bij JAS-klasse: afleidingsregel
- status: concept
-definitie: ""
+YAML-formaat per begrip-stub:
+```yaml
+begrip-id: [B]/art[A]/lid[L]/[slug]
+begripsnaam: [slug]
+aliases: []
+soort: ""
+soort-id: false
+jas-klasse: [klasse]      # JAS-classificatie uit annotatierij; bepaalt kleur codering in kennisgraaf
+toelichting-klasse: ""    # juridische motivering van JAS-klassekeuze
+herkomst: direct          # afgeleid bij JAS-klasse: afleidingsregel
+status: concept
+definitie:
+  kern: ""
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
@@ -327,7 +329,7 @@ cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/generate_views.py --typ
 - Wetstekst altijd volledig en letterlijk citeren — nooit parafraseren.
 - Peildatum altijd uit het bronbestand (`versiedatum`), nooit de datum van vandaag.
 - Structuurpositie altijd letterlijk uit het `pad`-veld in het bronbestand.
-- Begrip-stubs bevatten na `/annoteer` een lege `definitie: ""`; A3-inhoud is taak van `/begrip`.
+- Begrip-stubs bevatten na `/annoteer` een lege kern (`definitie: {kern: "", contexten: []}`); A3-inhoud is taak van `/begrip`.
 - `markering.tekst` bevat altijd het letterlijke citaat inclusief lidwoord.
 - `begrip-id` URI is deterministisch: `{bwb-id}/art{N}/lid{L}/{slug}`.
 - Index-JSON is uitsluitend structuurdrager — nooit annotatierijen of diagrammen.

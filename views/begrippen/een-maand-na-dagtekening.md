@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-c]]"
 
 *"één maand na de dagtekening van het aanslagbiljet"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op grond van art. 9 lid 5 IW 1990
+**Kern:** Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op grond van art. 9 lid 5 IW 1990
+
 
 ## Markeringen
 

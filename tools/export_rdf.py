@@ -16,7 +16,7 @@ from pathlib import Path
 
 import yaml
 
-from jas_index_lib import bouw_jas_index
+from jas_index_lib import bouw_jas_index, haal_kern, haal_contexten
 
 
 # ---------------------------------------------------------------------------
@@ -62,7 +62,9 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
 
     # Velden op basis van mapping
     begripsnaam = fm.get("begripsnaam") or ""
-    definitie = fm.get("definitie") or ""
+    definitie_obj = fm.get("definitie") or {}
+    kern = haal_kern(definitie_obj)
+    contexten = haal_contexten(definitie_obj)
     geldigheid_van = str(fm.get("geldigheid-van") or "")
     herkomst = fm.get("herkomst") or ""
     aliases: list[str] = fm.get("aliases") or []
@@ -76,8 +78,30 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
         if alias:
             lines.append(f"    skos:altLabel {turtle_literal(str(alias))} ;")
 
-    if definitie:
-        lines.append(f"    skos:definition {turtle_literal(definitie)} ;")
+    # Kern als skos:definition (universele, wets-overstijgende betekenis)
+    if kern:
+        lines.append(f"    skos:definition {turtle_literal(kern)} ;")
+
+    # Contextuele lagen als jas:definitieContext blank nodes
+    mid_to_bron: dict[str, str] = {
+        m.get("markering-id", ""): m.get("bron-annotatie-id", "")
+        for m in markeringen
+    }
+    for ctx in contexten:
+        bijdrage = ctx.get("bijdrage", "")
+        ctx_tekst = ctx.get("tekst", "")
+        mid = ctx.get("markering-id", "")
+        bron = mid_to_bron.get(mid, "")
+        if not ctx_tekst:
+            continue
+        lines.append(f"    jas:definitieContext [")
+        lines.append(f'        jas:bijdrage "{bijdrage}" ;')
+        if mid:
+            lines.append(f'        jas:markering "{mid}" ;')
+        if bron:
+            lines.append(f'        jas:bron "{bron}" ;')
+        lines.append(f"        skos:note {turtle_literal(ctx_tekst)}")
+        lines.append(f"    ] ;")
 
     if geldigheid_van:
         lines.append(f'    dct:valid "{geldigheid_van}"^^xsd:date ;')

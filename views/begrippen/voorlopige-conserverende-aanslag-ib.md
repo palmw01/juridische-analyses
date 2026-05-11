@@ -17,7 +17,8 @@ tags:
 
 *"een voorlopige conserverende aanslag in de inkomstenbelasting"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende aard, die — mits het aanslagbiljet is gedagtekend in het belastingjaar waarover hij is vastgesteld — invorderbaar is in gelijke maandelijkse termijnen overeenkomstig art. 9 lid 5 IW 1990
+**Kern:** Een belastingaanslag in de inkomstenbelasting van voorlopige en conserverende aard, die — mits het aanslagbiljet is gedagtekend in het belastingjaar waarover hij is vastgesteld — invorderbaar is in gelijke maandelijkse termijnen overeenkomstig art. 9 lid 5 IW 1990
+
 
 ## Markeringen
 

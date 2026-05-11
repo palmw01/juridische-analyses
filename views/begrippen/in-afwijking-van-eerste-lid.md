@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-a]]"
 
 *"In afwijking van het eerste lid"* *(BWBR0004770/art9/lid5, systematisch)*
 
-De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie heeft ten opzichte van de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn van lid 1 voor de genoemde voorlopige aanslagen wordt verdrongen door de gelijke-termijnenregeling van lid 5
+**Kern:** De aanduiding dat de termijnenregeling van lid 5 een lex-specialis-relatie heeft ten opzichte van de hoofdregel van art. 9 lid 1 IW 1990, zodat de zes-wekentermijn van lid 1 voor de genoemde voorlopige aanslagen wordt verdrongen door de gelijke-termijnenregeling van lid 5
+
 
 ## Markeringen
 

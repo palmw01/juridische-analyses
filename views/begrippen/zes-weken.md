@@ -17,7 +17,8 @@ tags:
 
 *"zes weken"* *(BWBR0004770/art9/lid1, grammaticaal)*
 
-Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor de berekening van het moment van invorderbaarheid van een belastingaanslag en die zonder verlenging voor weekenden of feestdagen wordt berekend
+**Kern:** Een vaste termijn van zes aaneengesloten weken die als tijdvak geldt voor de berekening van het moment van invorderbaarheid van een belastingaanslag en die zonder verlenging voor weekenden of feestdagen wordt berekend
+
 
 ## Markeringen
 

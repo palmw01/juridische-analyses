@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-d]]"
 
 *"elk van de volgende termijnen telkens een maand later"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand op te tellen
+**Kern:** De rekenregel die voor elke invorderingstermijn na de eerste de vervaldatum vaststelt door bij de vervaldatum van de vorige termijn steeds één kalendermaand op te tellen
+
 
 ## Markeringen
 

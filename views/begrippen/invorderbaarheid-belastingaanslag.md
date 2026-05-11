@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 
 *"Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet."* *(BWBR0004770/art9/lid1, systematisch)*
 
-De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken na de dagtekening van het aanslagbiljet
+**Kern:** De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is, inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken na de dagtekening van het aanslagbiljet
+
 
 ## Markeringen
 

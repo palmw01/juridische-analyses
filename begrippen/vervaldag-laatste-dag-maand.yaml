@@ -4,11 +4,14 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: afleidingsregel
-toelichting-klasse: "Stelt een waarde vast voor de vervaldag bij afwijkende boekjaren."
+toelichting-klasse: Stelt een waarde vast voor de vervaldag bij afwijkende boekjaren.
 herkomst: afgeleid
 status: concept
-definitie: Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen
-  op de laatste kalenderdag van de maand waarin de termijn oorspronkelijk zou vervallen
+definitie:
+  kern: >-
+    Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op de laatste kalenderdag
+    van de maand waarin de termijn oorspronkelijk zou vervallen
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

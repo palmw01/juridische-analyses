@@ -4,11 +4,17 @@ aliases: []
 soort: monetair-bedrag
 soort-id: false
 jas-klasse: variabele
-toelichting-klasse: "Afgeleide variabele die de numerieke waarde van één betalingstermijn representeert. De wet stelt de eis dat termijnen 'gelijk' zijn, wat een rekenkundige deling van het totaalbedrag door het aantal termijnen impliceert."
+toelichting-klasse: >-
+  Afgeleide variabele die de numerieke waarde van één betalingstermijn representeert. De wet stelt de
+  eis dat termijnen 'gelijk' zijn, wat een rekenkundige deling van het totaalbedrag door het aantal termijnen
+  impliceert.
 herkomst: afgeleid
 status: concept
-definitie: Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag
-  van de belastingaanslag te delen door het aantal termijnen
+definitie:
+  kern: >-
+    Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de belastingaanslag te
+    delen door het aantal termijnen
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

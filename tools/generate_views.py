@@ -21,7 +21,7 @@ from pathlib import Path
 
 import yaml
 
-from jas_index_lib import bouw_jas_index
+from jas_index_lib import bouw_jas_index, haal_kern, haal_contexten
 
 # ---------------------------------------------------------------------------
 # Constanten
@@ -196,7 +196,9 @@ def genereer_begrip_view(
     soort_id = fm.get("soort-id", False)
     herkomst = fm.get("herkomst") or ""
     status = fm.get("status") or "concept"
-    definitie = fm.get("definitie") or ""
+    definitie_obj = fm.get("definitie") or {}
+    definitie_kern = haal_kern(definitie_obj)
+    definitie_contexten = haal_contexten(definitie_obj)
     geldigheid_van = str(fm.get("geldigheid-van") or "")
     geldigheid_tot = fm.get("geldigheid-tot")
     aliases = fm.get("aliases") or []
@@ -251,6 +253,8 @@ def genereer_begrip_view(
     # --- Definitie ---
     lines.append("## Definitie")
     lines.append("")
+
+    # Primaire markering(en) als bronvermelding
     primaire = [m for m in markeringen if m.get("bijdrage") == "primair"]
     if primaire:
         for m in primaire:
@@ -258,12 +262,42 @@ def genereer_begrip_view(
             bron = m.get("bron-annotatie-id", "")
             methode = m.get("interpretatiemethode", "")
             lines.append(f'*"{tekst}"* *({bron}, {methode})*')
-    lines.append("")
-    if definitie:
-        lines.append(definitie)
+        lines.append("")
+
+    # Kern
+    if definitie_kern:
+        lines.append(f"**Kern:** {definitie_kern}")
     else:
-        lines.append("*(Definitie nog niet ingevuld — gebruik `/begrip`)*")
+        lines.append("*(Definitie.kern nog niet ingevuld — gebruik `/begrip`)*")
     lines.append("")
+
+    # Contextuele lagen
+    if definitie_contexten:
+        # Bouw lookup markering-id → bron-annotatie-id voor bronvermelding
+        mid_to_bron: dict[str, str] = {
+            m.get("markering-id", ""): m.get("bron-annotatie-id", "")
+            for m in markeringen
+        }
+        BIJDRAGE_LABELS = {
+            "verfijning": "Verfijning",
+            "uitbreiding": "Uitbreiding",
+            "uitzondering": "Uitzondering",
+        }
+        for ctx in definitie_contexten:
+            mid = ctx.get("markering-id", "")
+            bijdrage = ctx.get("bijdrage", "")
+            ctx_tekst = ctx.get("tekst", "")
+            ctx_toel = ctx.get("toelichting", "")
+            bron = mid_to_bron.get(mid, "")
+            label = BIJDRAGE_LABELS.get(bijdrage, bijdrage.capitalize())
+            bron_str = f" · {bron}" if bron else ""
+            lines.append(f"> **{label}** · {mid}{bron_str}")
+            lines.append(f"> {ctx_tekst}")
+            if ctx_toel:
+                lines.append(f"> *{ctx_toel}*")
+            lines.append("")
+    else:
+        lines.append("")
 
     # --- Markeringen ---
     lines.append("## Markeringen")

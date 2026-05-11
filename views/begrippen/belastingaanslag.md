@@ -17,7 +17,8 @@ tags:
 
 *"Een belastingaanslag"* *(BWBR0004770/art9/lid1, grammaticaal)*
 
-Een door de Belastingdienst opgelegd en geformaliseerd besluit tot vaststelling van een belastingschuld, dat als voorwerp van invordering dient en waarop de invorderingsrechtsbetrekking zich richt
+**Kern:** Een door de Belastingdienst opgelegd en geformaliseerd besluit tot vaststelling van een belastingschuld, dat als voorwerp van invordering dient en waarop de invorderingsrechtsbetrekking zich richt
+
 
 ## Markeringen
 

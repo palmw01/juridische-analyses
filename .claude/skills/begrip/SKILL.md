@@ -50,16 +50,56 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-YAML's waarvan een markering 
 
 ---
 
-## Definitie opstellen (A3a)
+## Definitie opstellen (A3a) — gelaagd model
 
-- Sluit zo nauw mogelijk aan bij de **letterlijke tekst** in `markeringen[0].tekst` (de primaire markering).
+Het `definitie`-veld is een **object** met twee onderdelen:
+
+```yaml
+definitie:
+  kern: "De universele betekenis — geldig voor alle bronartikelen"
+  contexten:
+    - markering-id: m-002
+      bijdrage: verfijning          # verfijning | uitbreiding | uitzondering
+      tekst: "Artikel-specifieke toevoeging..."
+      toelichting: "Optionele juridische motivering"   # optioneel
+```
+
+### Kern
+
+- Sluit zo nauw mogelijk aan bij de **letterlijke tekst** in de primaire markering (`bijdrage: primair`).
+- De kern is de **wets-overstijgende** betekenis: geldig voor **alle** bronartikelen van dit begrip.
 - Benoem interpretatie- en preciseringskeuzes expliciet.
 - Onderbouw **altijd** de klassekeuze — ook als die overeenkomt met de letterlijke formulering.
 - Geen parafrase van de wetstekst — gebruik de markering als startpunt.
-- Definitie bevat **geen punt** aan het einde.
-- Test altijd of de definitietekst het begrip kan vervangen in een zin zonder betekenisverlies (substitutietest).
+- Kern bevat **geen punt** aan het einde.
+- Test altijd of de kerntekst het begrip kan vervangen in een zin zonder betekenisverlies (substitutietest).
+- `definitie-gebaseerd-op` bevat **uitsluitend** de markering-id's die de kern staven (primaire markeringen).
 
-**Bij meerdere markeringen (multi-annotatie):** de definitie is een synthese van alle markeringen. De primaire markering (`bijdrage: primair`) is leidend; aanvullende (`aanvullend`) en context-markeringen (`context`) verfijnen de definitie.
+### Contexten (contextlagen)
+
+Elk item in `contexten[]` documenteert een **artikel-specifieke inkleuring** van de kern:
+
+| Bijdrage-type | Wanneer | Voorbeeld |
+|---|---|---|
+| `verfijning` | De kern blijft intact; het artikel specificeert de kern voor één context | Art. 9 lid 5 bepaalt dat de aanslag invorderbaar is in gelijke termijnen — de kern (invorderbaarheid zodra termijn verstreken) wijzigt niet |
+| `uitbreiding` | Het artikel voegt een betekenisdimensie toe die buiten de kern valt | Een aanvullend artikel definieert een extra toepassingsscenario dat de kern-tekst niet dekt |
+| `uitzondering` | Het artikel beperkt of sluit de kern in een specifieke context uit | Een derogatiebepaling die de hoofdregel terzijde stelt |
+
+**Lege contexten (`contexten: []`) zijn de norm** voor begrippen die slechts uit één artikel stammen of waarbij de kern voor alle bronnen volstaat.
+
+### Verrijkingsprotocol — nieuw artikel markeert een bestaand begrip
+
+Wanneer een `/annoteer`-run een nieuwe markering toevoegt aan een begrip dat al een kern heeft:
+
+1. **Analyseer** de nieuwe markering ten opzichte van `definitie.kern`.
+2. **Besluit**:
+   - Identieke tekst, zelfde betekenis → voeg alleen toe aan `markeringen[]`, `bijdrage: context`; geen nieuw contextitem; `contexten` blijft leeg
+   - Specificeert de kern voor één wetscontext → voeg toe aan `contexten[]` met `bijdrage: verfijning`
+   - Voegt nieuwe betekenisdimensie toe → voeg toe aan `contexten[]` met `bijdrage: uitbreiding`; overweeg of de kern moet worden bijgesteld
+   - Beperkt of sluit de kern uit → `bijdrage: uitzondering`
+   - Onverenigbaar met de kern → **signaleer homoniem-conflict** en stel splitsing voor; maak géén context-item aan
+3. **Kern-update**: pas `definitie.kern` uitsluitend aan als de nieuwe bron een fundamenteler inzicht biedt dat voor **alle** bronnen geldt. Verhoog `definitie-versie` bij kernwijziging.
+4. **definitie-gebaseerd-op**: bevat uitsluitend markering-ids die de kern staven — verwijder ids van markeringen die nu in `contexten` zijn opgenomen.
 
 ---
 
@@ -199,9 +239,11 @@ Werk na het opstellen van definitie en relaties de begrip-YAML bij:
 soort: [kies uit 8 typen]
 soort-id: false           # true als identificatiebegrip
 herkomst: direct          # of afgeleid
-definitie: "[definitietekst zonder punt aan het einde]"
-definitie-versie: 1       # verhoog bij herziening
-definitie-gebaseerd-op:   # lijst van markering-id's die de definitie staven
+definitie:
+  kern: "[definitietekst zonder punt aan het einde]"
+  contexten: []           # of array van {markering-id, bijdrage, tekst, toelichting?}
+definitie-versie: 1       # verhoog bij kernwijziging
+definitie-gebaseerd-op:   # markering-id's die uitsluitend de KERN staven
 - m-001
 aliases:
 - "[bekend juridisch synoniem]"
@@ -212,6 +254,24 @@ relaties:
   is-een: [...]
   heeft: [...]
   leidt-tot: [...]
+```
+
+**Voorbeeld met contextlaag:**
+```yaml
+definitie:
+  kern: >-
+    De juridische toestand waarin een belastingaanslag verkeert zodra de wettelijke
+    betalingstermijn is verstreken
+  contexten:
+    - markering-id: m-002
+      bijdrage: verfijning
+      tekst: >-
+        In de context van lid 5 treedt invorderbaarheid telkens per termijn in —
+        niet eenmalig, maar op N achtereenvolgende data
+      toelichting: Lid 5 is een lex-specialis ten opzichte van lid 1
+definitie-versie: 2
+definitie-gebaseerd-op:
+- m-001
 ```
 
 Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
@@ -258,7 +318,10 @@ cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file
 Kennismodel-checklist — [begripsnaam]
 ✅/⬜ soort ingevuld
 ✅/⬜ herkomst ingevuld
-✅/⬜ definitie ingevuld (substitueerbaar, geen punt)
+✅/⬜ definitie.kern ingevuld (substitueerbaar, geen punt)
+✅/⬜ definitie.contexten[] ingevuld (of expliciet leeg — lege array is correct)
+✅/⬜ definitie-gebaseerd-op bevat uitsluitend kern-markeringen
+✅/⬜ verrijkingsprotocol doorlopen (bij meerdere markeringen)
 ✅/⬜ relaties ingevuld (of expliciet leeg)
 ✅/⬜ soort-id ingevuld
 ✅/⬜ identificatiebegrip ingevuld

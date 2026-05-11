@@ -17,7 +17,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 
 *"dan wordt de vervaldag van deze termijn op 31 december gesteld"* *(BWBR0024096/par9-1, grammaticaal)*
 
-Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar
+**Kern:** Besluit om de uiterste betaaldatum van de laatste termijn vast te stellen op 31 december van het kalenderjaar
+
 
 ## Markeringen
 

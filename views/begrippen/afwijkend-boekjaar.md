@@ -16,7 +16,8 @@ tags:
 
 *"Bij afwijkende boekjaren"* *(BWBR0024096/par9-1, grammaticaal)*
 
-Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar
+**Kern:** Situatie waarbij het boekjaar van een belastingplichtige niet samenvalt met het kalenderjaar
+
 
 ## Markeringen
 

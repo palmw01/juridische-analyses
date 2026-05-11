@@ -18,7 +18,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-d]]"
 
 *"telkens een maand later"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-De iteratieve tijdstap van één kalendermaand waarmee elke vervaldatum na de eerste termijn wordt bepaald, door steeds één maand op te tellen bij de vorige vervaldatum
+**Kern:** De iteratieve tijdstap van één kalendermaand waarmee elke vervaldatum na de eerste termijn wordt bepaald, door steeds één maand op te tellen bij de vorige vervaldatum
+
 
 ## Markeringen
 

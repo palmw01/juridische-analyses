@@ -4,20 +4,27 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: afleidingsregel
-toelichting-klasse: "Beslissingsregel (terugvalregel) die de toepassingsgrens van de lid-5-termijnenregeling bepaalt. Als het berekende termijnenaantal ≤ 1 is, herneemt art. 9 lid 1 toepassing. Dit doet zich voor bij een dagtekening in december (0 resterende maanden na december)."
+toelichting-klasse: >-
+  Beslissingsregel (terugvalregel) die de toepassingsgrens van de lid-5-termijnenregeling bepaalt. Als
+  het berekende termijnenaantal ≤ 1 is, herneemt art. 9 lid 1 toepassing. Dit doet zich voor bij een dagtekening
+  in december (0 resterende maanden na december).
 herkomst: afgeleid
 status: concept
-definitie: De beslissingsregel die bepaalt dat art. 9 lid 1 IW 1990 herneemt als de
-  termijnenberekening van art. 9 lid 5 eerste volzin niet leidt tot meer dan één termijn,
-  zodat de zes-wekentermijn van lid 1 in de plaats treedt van de gelijke-termijnenregeling
+definitie:
+  kern: >-
+    De beslissingsregel die bepaalt dat art. 9 lid 1 IW 1990 herneemt als de termijnenberekening van art.
+    9 lid 5 eerste volzin niet leidt tot meer dan één termijn, zodat de zes-wekentermijn van lid 1 in
+    de plaats treedt van de gelijke-termijnenregeling
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art9/lid5
-  tekst: Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn,
-    vindt het eerste lid toepassing.
+  tekst: >-
+    Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid
+    toepassing.
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: true

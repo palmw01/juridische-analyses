@@ -17,7 +17,8 @@ tags:
 
 *"een belastingaanslag"* *(BWBR0004770/art9/lid1, systematisch)*
 
-Het totale bedrag van de belastingaanslag dat bij aanvang van de invordering verschuldigd is
+**Kern:** Het totale bedrag van de belastingaanslag dat bij aanvang van de invordering verschuldigd is
+
 
 ## Markeringen
 

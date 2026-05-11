@@ -18,7 +18,8 @@ aliases:
 
 *"31 december"* *(BWBR0024096/par9-1, grammaticaal)*
 
-De eenendertigste dag van de twaalfde maand van een kalenderjaar
+**Kern:** De eenendertigste dag van de twaalfde maand van een kalenderjaar
+
 
 ## Markeringen
 

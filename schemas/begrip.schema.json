@@ -20,11 +20,53 @@
     },
     "herkomst": { "type": "string", "enum": ["direct", "afgeleid"] },
     "status": { "type": "string", "enum": ["concept", "ter-review", "gevalideerd", "vervallen", "te-verrijken"] },
-    "definitie": { "type": "string" },
+    "definitie": {
+      "type": "object",
+      "description": "Gelaagde begripsdefiniëring: een universele kern plus optionele contextuele aanvullingen per wetsartikel.",
+      "required": ["kern", "contexten"],
+      "additionalProperties": false,
+      "properties": {
+        "kern": {
+          "type": "string",
+          "description": "De universele, wets-overstijgende betekenis — geldig voor alle bronartikelen. Leeg in stubs; ingevuld na /begrip."
+        },
+        "contexten": {
+          "type": "array",
+          "description": "Artikel-specifieke aanvullingen op de kern. Leeg als de kern voor alle bronnen volstaat.",
+          "items": {
+            "type": "object",
+            "required": ["markering-id", "bijdrage", "tekst"],
+            "additionalProperties": false,
+            "properties": {
+              "markering-id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Verwijst naar markeringen[].markering-id in dit begrip-bestand."
+              },
+              "bijdrage": {
+                "type": "string",
+                "enum": ["verfijning", "uitbreiding", "uitzondering"],
+                "description": "verfijning: specificeert de kern voor één wetscontext; uitbreiding: voegt nieuwe betekenisdimensie toe; uitzondering: beperkt of sluit de kern in een specifieke context uit."
+              },
+              "tekst": {
+                "type": "string",
+                "minLength": 1,
+                "description": "De contextuele toevoeging in gewone juridische taal."
+              },
+              "toelichting": {
+                "type": "string",
+                "description": "Optionele juridische motivering van de keuze voor dit bijdrage-type."
+              }
+            }
+          }
+        }
+      }
+    },
     "definitie-versie": { "type": "integer", "minimum": 1 },
     "definitie-gebaseerd-op": {
       "type": "array",
-      "items": { "type": "string", "description": "markering-id's" },
+      "description": "markering-id's die uitsluitend de kern staven (niet de contextlagen).",
+      "items": { "type": "string" },
       "minItems": 1
     },
     "markeringen": {

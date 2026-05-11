@@ -18,6 +18,9 @@ import frontmatter
 import jsonschema
 import yaml
 
+sys.path.insert(0, str(Path(__file__).parent))
+from jas_index_lib import haal_kern, haal_contexten
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -197,6 +200,29 @@ def validate_schema(data: dict, schema: dict, filepath: Path) -> list[str]:
 def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, vault_root: Path) -> list[str]:
     """Laag 2: Integriteitsvalidatie voor begrip-bestanden."""
     errors = []
+
+    # Definitie-contexten: markering-id's moeten bestaan in markeringen[]
+    markeringen: list[dict] = data.get("markeringen") or []
+    markering_ids = {m.get("markering-id") for m in markeringen if m.get("markering-id")}
+    definitie_obj = data.get("definitie") or {}
+    contexten = haal_contexten(definitie_obj)
+    for i, ctx in enumerate(contexten):
+        ctx_mid = ctx.get("markering-id", "")
+        if ctx_mid and ctx_mid not in markering_ids:
+            errors.append(
+                f"[L2] definitie.contexten[{i}].markering-id '{ctx_mid}' "
+                f"verwijst naar een niet-bestaande markering in markeringen[]"
+            )
+
+    # definitie-gebaseerd-op: markering-id's moeten bestaan in markeringen[]
+    def_gebaseerd_op: list[str] = data.get("definitie-gebaseerd-op") or []
+    for mid in def_gebaseerd_op:
+        if mid and mid not in markering_ids:
+            errors.append(
+                f"[L2] definitie-gebaseerd-op: markering-id '{mid}' "
+                f"niet gevonden in markeringen[]"
+            )
+
     relaties = data.get("relaties", {}) or {}
 
     # is-een
@@ -294,9 +320,39 @@ def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
     warnings = []
 
     begripsnaam = data.get("begripsnaam", "")
-    definitie = data.get("definitie", "")
-    if begripsnaam and definitie and begripsnaam.lower() in definitie.lower():
-        warnings.append(f"[L3] definitie bevat de begripsnaam zelf — mogelijk schending substitutiebaarheidsregel")
+    definitie_obj = data.get("definitie") or {}
+    kern = haal_kern(definitie_obj)
+    contexten = haal_contexten(definitie_obj)
+
+    # Kern bevat de begripsnaam zelf (substitutietest)
+    if begripsnaam and kern and begripsnaam.lower() in kern.lower():
+        warnings.append("[L3] definitie.kern bevat de begripsnaam zelf — mogelijk schending substitutiebaarheidsregel")
+
+    # Kern eindigt op een punt (conventies-check)
+    if kern and kern.rstrip().endswith("."):
+        warnings.append("[L3] definitie.kern eindigt op een punt — conventie: geen punt aan het einde")
+
+    # Kern leeg (stub — nog niet door /begrip ingevuld)
+    if not kern:
+        warnings.append("[L3] definitie.kern is leeg — gebruik /begrip om de kern in te vullen")
+
+    # Kern ontbreekt maar contexten zijn aanwezig
+    if not kern and contexten:
+        warnings.append("[L3] definitie.kern is leeg maar definitie.contexten[] bevat items — kern invullen vóór contexten")
+
+    # Aanvullende markeringen zonder context-documentatie
+    markeringen: list[dict] = data.get("markeringen") or []
+    context_mids = {ctx.get("markering-id") for ctx in contexten}
+    aanvullende_mids = {
+        m.get("markering-id") for m in markeringen
+        if m.get("bijdrage") == "aanvullend" and m.get("markering-id")
+    }
+    ongedocumenteerd = aanvullende_mids - context_mids
+    if ongedocumenteerd:
+        warnings.append(
+            f"[L3] markering(en) met bijdrage 'aanvullend' hebben geen context-entry in definitie.contexten: "
+            f"{', '.join(sorted(ongedocumenteerd))} — overweeg een uitbreiding- of verfijning-context toe te voegen"
+        )
 
     status = data.get("status")
     if status == "te-verrijken":

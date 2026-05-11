@@ -4,12 +4,16 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: tijdsaanduiding
-toelichting-klasse: "Tijdsaanduiding voor de vervaldatum van de eerste termijn in de lid-5-regeling. De termijn van één maand is een vaste verwijzingsdatum relatief aan de dagtekening."
+toelichting-klasse: >-
+  Tijdsaanduiding voor de vervaldatum van de eerste termijn in de lid-5-regeling. De termijn van één maand
+  is een vaste verwijzingsdatum relatief aan de dagtekening.
 herkomst: afgeleid
 status: concept
-definitie: Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het
-  aanslagbiljet en dat dient als vervaldatum van de eerste invorderingstermijn op
-  grond van art. 9 lid 5 IW 1990
+definitie:
+  kern: >-
+    Het tijdstip dat is gelegen één kalendermaand na de dagtekening van het aanslagbiljet en dat dient
+    als vervaldatum van de eerste invorderingstermijn op grond van art. 9 lid 5 IW 1990
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

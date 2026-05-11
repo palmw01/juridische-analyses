@@ -4,26 +4,31 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: afleidingsregel
-toelichting-klasse: "Specialisatieregel t.o.v. art. 9 lid 1. Als-dan: als de voorlopige aanslag (IB/VPB) of voorlopige conserverende aanslag (IB) is gedagtekend in het belastingjaar, dan is hij invorderbaar in gelijke maandelijkse termijnen. Bevat twee cumulatieve kwalificatievoorwaarden en de rekenregel voor het termijnenaantal."
+toelichting-klasse: >-
+  Specialisatieregel t.o.v. art. 9 lid 1. Als-dan: als de voorlopige aanslag (IB/VPB) of voorlopige conserverende
+  aanslag (IB) is gedagtekend in het belastingjaar, dan is hij invorderbaar in gelijke maandelijkse termijnen.
+  Bevat twee cumulatieve kwalificatievoorwaarden en de rekenregel voor het termijnenaantal.
 herkomst: afgeleid
 status: concept
-definitie: De specialisatieregel die bepaalt dat een voorlopige aanslag IB of VPB,
-  dan wel een voorlopige conserverende aanslag IB, waarvan het aanslagbiljet is gedagtekend
-  in het belastingjaar, invorderbaar is in een aantal gelijke maandelijkse termijnen
-  dat gelijk is aan het aantal kalendermaanden dat na de dagtekening maand nog in
-  dat jaar resteert
+definitie:
+  kern: >-
+    De specialisatieregel die bepaalt dat een voorlopige aanslag IB of VPB, dan wel een voorlopige conserverende
+    aanslag IB, waarvan het aanslagbiljet is gedagtekend in het belastingjaar, invorderbaar is in een
+    aantal gelijke maandelijkse termijnen dat gelijk is aan het aantal kalendermaanden dat na de dagtekening
+    maand nog in dat jaar resteert
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art9/lid5
-  tekst: In afwijking van het eerste lid is een voorlopige aanslag in de inkomstenbelasting
-    of in de vennootschapsbelasting en een voorlopige conserverende aanslag in de
-    inkomstenbelasting, waarvan het aanslagbiljet een dagtekening heeft die ligt in
-    het jaar waarover deze is vastgesteld, invorderbaar in zoveel gelijke termijnen
-    als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog
-    maanden van het jaar overblijven.
+  tekst: >-
+    In afwijking van het eerste lid is een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting
+    en een voorlopige conserverende aanslag in de inkomstenbelasting, waarvan het aanslagbiljet een dagtekening
+    heeft die ligt in het jaar waarover deze is vastgesteld, invorderbaar in zoveel gelijke termijnen
+    als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar
+    overblijven.
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: true

@@ -1,8 +1,30 @@
-"""Gedeelde functie: bouw jas-index uit annotatie-JSONs (A2 → begrip-id → JAS-klasse)."""
+"""Gedeelde functies voor de juridische kennisgraaf-tools."""
 
 import json
 from pathlib import Path
 
+
+# ---------------------------------------------------------------------------
+# Definitie-helpers — gelaagde definitie (kern + contexten)
+# ---------------------------------------------------------------------------
+
+def haal_kern(definitie_obj) -> str:
+    """Extraheer de kerntekst uit een definitie-object of legacy-string."""
+    if isinstance(definitie_obj, dict):
+        return str(definitie_obj.get("kern") or "").strip()
+    return str(definitie_obj or "").strip()
+
+
+def haal_contexten(definitie_obj) -> list[dict]:
+    """Retourneer de contextarray uit een definitie-object (lege lijst bij legacy-string)."""
+    if isinstance(definitie_obj, dict):
+        return list(definitie_obj.get("contexten") or [])
+    return []
+
+
+# ---------------------------------------------------------------------------
+# JAS-index
+# ---------------------------------------------------------------------------
 
 def bouw_jas_index(vault_root: Path) -> dict[str, str]:
     """Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen."""

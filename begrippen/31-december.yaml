@@ -5,10 +5,12 @@ aliases:
 soort: datum
 soort-id: false
 jas-klasse: tijdsaanduiding
-toelichting-klasse: "Specifieke datum in de kalender."
+toelichting-klasse: Specifieke datum in de kalender.
 herkomst: direct
 status: concept
-definitie: De eenendertigste dag van de twaalfde maand van een kalenderjaar
+definitie:
+  kern: De eenendertigste dag van de twaalfde maand van een kalenderjaar
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

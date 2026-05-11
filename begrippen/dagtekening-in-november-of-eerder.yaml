@@ -4,11 +4,14 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "Beschrijft een conditie waaraan de voorlopige aanslag moet voldoen."
+toelichting-klasse: Beschrijft een conditie waaraan de voorlopige aanslag moet voldoen.
 herkomst: direct
 status: concept
-definitie: Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de
-  periode van 1 januari tot en met 30 november van het kalenderjaar
+definitie:
+  kern: >-
+    Situatie waarbij de datum die op het aanslagbiljet is vermeld valt in de periode van 1 januari tot
+    en met 30 november van het kalenderjaar
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

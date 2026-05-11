@@ -4,21 +4,26 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "Kwalificatieconditie die het toepassingsbereik van lid 5 afbakent: de dagtekening van het aanslagbiljet moet vallen in het belastingjaar waarover de voorlopige aanslag is vastgesteld. Aanslagen met een dagtekening vóór het belastingjaar vallen onder lid 7."
+toelichting-klasse: >-
+  Kwalificatieconditie die het toepassingsbereik van lid 5 afbakent: de dagtekening van het aanslagbiljet
+  moet vallen in het belastingjaar waarover de voorlopige aanslag is vastgesteld. Aanslagen met een dagtekening
+  vóór het belastingjaar vallen onder lid 7.
 herkomst: afgeleid
 status: concept
-definitie: De toepassingsvoorwaarde dat de dagtekening van het aanslagbiljet valt
-  binnen het kalenderjaar waarover de voorlopige aanslag of de voorlopige conserverende
-  aanslag is vastgesteld, als afbakeningscriterium voor de termijnenregeling van art.
-  9 lid 5 IW 1990
+definitie:
+  kern: >-
+    De toepassingsvoorwaarde dat de dagtekening van het aanslagbiljet valt binnen het kalenderjaar waarover
+    de voorlopige aanslag of de voorlopige conserverende aanslag is vastgesteld, als afbakeningscriterium
+    voor de termijnenregeling van art. 9 lid 5 IW 1990
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art9/lid5
-  tekst: waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover
-    deze is vastgesteld
+  tekst: >-
+    waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
   bevestigd: true

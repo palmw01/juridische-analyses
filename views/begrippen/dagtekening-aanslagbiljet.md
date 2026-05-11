@@ -17,7 +17,11 @@ tags:
 
 *"de dagtekening van het aanslagbiljet"* *(BWBR0004770/art9/lid1, systematisch)*
 
-De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel is gedagtekend en die dient als het vaste referentiepunt voor de berekening van de invorderingstermijn
+**Kern:** De op het aanslagbiljet vermelde datum waarop de belastingaanslag formeel is gedagtekend en die dient als het vaste referentiepunt voor de berekening van de invorderingstermijn
+
+> **Verfijning** · m-002 · BWBR0004770/art9/lid5
+> In de context van art. 9 lid 5 IW 1990 fungeert de dagtekening als het rekenkundige startpunt voor de berekening van N achtereenvolgende termijnvervaldagen — één maand na de dagtekening valt de eerste termijn, daarna telkens een maand later; de dagtekening is daarmee niet slechts het aanvangsmoment van een eenmalige termijn maar de generator van een reeks vervaldatums
+> *In lid 1 bepaalt de dagtekening één moment (aanvang 6-weken-termijn); in lid 5 bepaalt diezelfde dagtekening via art. 9 lid 5 sub a de volledige termijnenreeks — een kwalitatief andere juridische rol van hetzelfde gegeven*
 
 ## Markeringen
 

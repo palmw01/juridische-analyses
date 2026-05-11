@@ -4,12 +4,18 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: tijdsaanduiding
-toelichting-klasse: "Tijdsaanduiding die de maandcomponent uit de dagtekening van het aanslagbiljet extraheert. Dit is het ankerpunt voor de termijnenberekening in lid 5: het aantal resterende maanden van het jaar wordt geteld na de vermelde maand."
+toelichting-klasse: >-
+  Tijdsaanduiding die de maandcomponent uit de dagtekening van het aanslagbiljet extraheert. Dit is het
+  ankerpunt voor de termijnenberekening in lid 5: het aantal resterende maanden van het jaar wordt geteld
+  na de vermelde maand.
 herkomst: direct
 status: concept
-definitie: De kalendermaand die is vermeld in de dagtekening van het aanslagbiljet
-  en die als referentiepunt dient voor de berekening van het aantal resterende maanden
-  van het belastingjaar in de termijnenregeling van art. 9 lid 5 IW 1990
+definitie:
+  kern: >-
+    De kalendermaand die is vermeld in de dagtekening van het aanslagbiljet en die als referentiepunt
+    dient voor de berekening van het aantal resterende maanden van het belastingjaar in de termijnenregeling
+    van art. 9 lid 5 IW 1990
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

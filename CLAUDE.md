@@ -33,7 +33,7 @@ Voor bronnen zonder leden (Leidraad, beleid):
 
 De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in het begrip-YAML zijn de enige bron voor de definitie.
 
-Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de `markeringen`-array meerdere entries met verschillende `bron-annotatie-id`-waarden; de bijdrage per markering is `primair`, `aanvullend` of `context`. De definitie is een synthese van alle primaire en aanvullende markeringen.
+Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de `markeringen`-array meerdere entries met verschillende `bron-annotatie-id`-waarden; de bijdrage per markering is `primair`, `aanvullend` of `context`. De definitie bestaat uit een **kern** (gebaseerd op de primaire markeringen, geldig voor alle bronartikelen) en optionele **contexten** (artikel-specifieke verfijningen, uitbreidingen of uitzonderingen op de kern). Zie `kaders.md` §Gelaagd model voor de beslisboom.
 
 ---
 

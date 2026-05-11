@@ -29,6 +29,11 @@ from typing import Any
 
 import yaml
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from jas_index_lib import haal_kern, haal_contexten
+
 
 # ---------------------------------------------------------------------------
 # Trigger-detectie
@@ -40,16 +45,27 @@ class Trigger:
     STATUS_TE_VERRIJKEN = "status-te-verrijken"
     ONBEVESTIGD = "onbevestigde-markering"
     DEFINITIE_BASIS_VERLOPEN = "definitie-basis-verlopen"
+    CONTEXT_ONGEDOCUMENTEERD = "aanvullende-markering-zonder-context"
 
 
 def detecteer_triggers(fm: dict) -> list[str]:
     triggers = []
     markeringen = fm.get("markeringen") or []
     status = fm.get("status", "")
-    definitie = fm.get("definitie", "")
+    definitie_obj = fm.get("definitie") or {}
+    kern = haal_kern(definitie_obj)
+    contexten = haal_contexten(definitie_obj)
     definitie_gebaseerd_op = set(fm.get("definitie-gebaseerd-op") or [])
 
-    if len(markeringen) >= 2:
+    # Markeringen met gedocumenteerde context-laag gelden als afgehandeld
+    context_mids = {ctx.get("markering-id") for ctx in contexten}
+    niet_primaire = [m for m in markeringen if m.get("bijdrage") not in ("primair", "kandidaat")]
+    ongedocumenteerde = [
+        m for m in niet_primaire
+        if m.get("markering-id") not in context_mids
+    ]
+
+    if len(markeringen) >= 2 and ongedocumenteerde:
         triggers.append(Trigger.MEERDERE_MARKERINGEN)
 
     primaire = [m for m in markeringen if m.get("bijdrage") == "primair"]
@@ -63,7 +79,15 @@ def detecteer_triggers(fm: dict) -> list[str]:
     if any(not m.get("bevestigd", True) for m in markeringen):
         triggers.append(Trigger.ONBEVESTIGD)
 
-    if definitie and definitie_gebaseerd_op:
+    # aanvullende markeringen zonder context-entry (potentiële uitbreiding/verfijning)
+    aanvullende = [
+        m for m in markeringen
+        if m.get("bijdrage") == "aanvullend" and m.get("markering-id") not in context_mids
+    ]
+    if aanvullende:
+        triggers.append(Trigger.CONTEXT_ONGEDOCUMENTEERD)
+
+    if kern and definitie_gebaseerd_op:
         markering_ids = {m.get("markering-id") for m in markeringen}
         if not definitie_gebaseerd_op.issubset(markering_ids):
             verlopen = definitie_gebaseerd_op - markering_ids
@@ -134,13 +158,28 @@ def genereer_delta_analyse(fm: dict, triggers: list[str]) -> str:
             "Juridische verificatie vereist vóór definitieve invulling."
         )
 
+    if Trigger.CONTEXT_ONGEDOCUMENTEERD in triggers:
+        definitie_obj = fm.get("definitie") or {}
+        context_mids = {ctx.get("markering-id") for ctx in haal_contexten(definitie_obj)}
+        aanvullende = [
+            m for m in markeringen
+            if m.get("bijdrage") == "aanvullend" and m.get("markering-id") not in context_mids
+        ]
+        aav_bronnen = [m.get("bron-annotatie-id", "?") for m in aanvullende]
+        aav_mids = [m.get("markering-id", "?") for m in aanvullende]
+        onderdelen.append(
+            f"Aanvullende markering(en) {', '.join(aav_mids)} (uit {', '.join(aav_bronnen)}) "
+            f"hebben geen corresponderende entry in definitie.contexten. "
+            f"Voeg een verfijning-, uitbreiding- of uitzondering-context toe, of markeer als 'context' als de definitie.kern ongewijzigd blijft."
+        )
+
     if Trigger.DEFINITIE_BASIS_VERLOPEN in triggers:
         gebaseerd_op = set(fm.get("definitie-gebaseerd-op") or [])
         markering_ids = {m.get("markering-id") for m in markeringen}
         verlopen = gebaseerd_op - markering_ids
         onderdelen.append(
-            f"Definitie-basis verwijst naar niet-bestaande markering-id(s): {', '.join(sorted(verlopen))}. "
-            "definitie-gebaseerd-op bijwerken."
+            f"definitie-gebaseerd-op verwijst naar niet-bestaande markering-id(s): {', '.join(sorted(verlopen))}. "
+            "definitie-gebaseerd-op bijwerken zodat alleen kern-markeringen worden gerefereerd."
         )
 
     return " ".join(onderdelen) if onderdelen else "Automatisch gedetecteerd als enrichment-kandidaat."
@@ -148,22 +187,27 @@ def genereer_delta_analyse(fm: dict, triggers: list[str]) -> str:
 
 def genereer_advies(fm: dict, triggers: list[str]) -> str:
     if Trigger.CONFLICTERENDE_PRIMAIR in triggers:
-        return "conflicterend — afsplitsen overwegen of definitie herschrijven"
+        return "conflicterend — afsplitsen overwegen of definitie.kern herschrijven (homoniem-check)"
     if Trigger.STATUS_TE_VERRIJKEN in triggers:
-        return "herziening vereist — definitie invullen of bijstellen"
+        return "herziening vereist — definitie.kern invullen of bijstellen"
     if Trigger.DEFINITIE_BASIS_VERLOPEN in triggers:
-        return "definitie-gebaseerd-op bijwerken na markering-wijziging"
+        return "definitie-gebaseerd-op bijwerken — verwijst naar verwijderde markering-id's"
     if Trigger.ONBEVESTIGD in triggers:
         return "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+    if Trigger.CONTEXT_ONGEDOCUMENTEERD in triggers:
+        return "context documenteren — voeg verfijning/uitbreiding/uitzondering toe in definitie.contexten"
 
     markeringen = fm.get("markeringen") or []
-    primaire = [m for m in markeringen if m.get("bijdrage") == "primair"]
+    definitie_obj = fm.get("definitie") or {}
+    contexten = haal_contexten(definitie_obj)
     alle_teksten = {m.get("tekst","").strip().lower() for m in markeringen}
     if len(alle_teksten) == 1:
-        return "context — definitie ongewijzigd"
-    if all(m.get("bijdrage") in ("context", "aanvullend") for m in markeringen[1:]):
-        return "context — definitie mogelijk uitbreiden"
-    return "beoordelen — definitie controleren op volledigheid"
+        return "identieke markering — definitie.kern ongewijzigd"
+    if contexten:
+        return "context gedocumenteerd — kern + contextlagen aanwezig"
+    if all(m.get("bijdrage") in ("context",) for m in markeringen[1:]):
+        return "context — markering(en) hebben bijdrage 'context', definitie.kern ongewijzigd"
+    return "beoordelen — definitie controleren op volledigheid en contextlagen"
 
 
 # ---------------------------------------------------------------------------

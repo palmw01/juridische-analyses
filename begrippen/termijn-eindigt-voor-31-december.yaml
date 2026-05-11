@@ -4,20 +4,22 @@ aliases: []
 soort: booleaans
 soort-id: false
 jas-klasse: voorwaarde
-toelichting-klasse: "Conditie gebaseerd op de uitkomst van de wettelijke termijnberekening."
+toelichting-klasse: Conditie gebaseerd op de uitkomst van de wettelijke termijnberekening.
 herkomst: afgeleid
 status: concept
-definitie: Situatie waarbij de berekende vervaldag van de laatste betalingstermijn
-  volgens de regels van de wet valt op een datum vóór 31 december van het betreffende
-  jaar
+definitie:
+  kern: >-
+    Situatie waarbij de berekende vervaldag van de laatste betalingstermijn volgens de regels van de wet
+    valt op een datum vóór 31 december van het betreffende jaar
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0024096/par9-1
-  tekst: toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn
-    eindigt voor 31 december
+  tekst: >-
+    toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: true

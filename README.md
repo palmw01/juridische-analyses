@@ -129,19 +129,30 @@ soort: booleaans          # uitkomst is ja/nee
 jas-klasse: afleidingsregel
 herkomst: afgeleid        # niet letterlijk in de wet, maar afgeleid via JAS-annotatie
 
-definitie: >
-  De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is,
-  inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken
-  na de dagtekening van het aanslagbiljet.
+definitie:
+  kern: >-
+    De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is,
+    inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken
+    na de dagtekening van het aanslagbiljet.
+  contexten:
+    - markering-id: m-002
+      bijdrage: verfijning        # verfijning | uitbreiding | uitzondering
+      tekst: >-
+        In de context van art. 9 lid 5 treedt invorderbaarheid niet eenmalig in
+        maar telkens opnieuw per betalingstermijn — de bevoegdheid herleeft N maal.
+      toelichting: Lid 5 is een lex-specialis van lid 1.
 
 markeringen:
   - markering-id: m-001
     bron-annotatie-id: BWBR0004770/art9/lid1     # ← traceerbaar naar annotatie
-    tekst: >
-      Een belastingaanslag is invorderbaar zes weken na de dagtekening
-      van het aanslagbiljet.
-    interpretatiemethode: systematisch
+    tekst: is invorderbaar
+    interpretatiemethode: grammaticaal
     bijdrage: primair
+  - markering-id: m-002
+    bron-annotatie-id: BWBR0004770/art9/lid5
+    tekst: is invorderbaar
+    interpretatiemethode: grammaticaal
+    bijdrage: context             # aanvullende bron; verfijning gedocumenteerd in contexten[]
 
 relaties:
   heeft:
@@ -156,6 +167,8 @@ status: concept
 ```
 
 Het veld `soort` bepaalt het datatype van de uitkomst (`booleaans`, `datum`, `tijdsduur`, `monetair-bedrag`, `tekst`, `entiteit`). Het veld `herkomst` maakt onderscheid tussen begrippen die letterlijk in de wet staan (`direct`) en begrippen die via JAS-redenering worden afgeleid (`afgeleid`). De `markeringen`-array is de enige basis voor de definitie — begrippen worden nooit rechtstreeks uit de wetstekst geformuleerd, maar altijd vanuit een annotatie.
+
+Het veld `definitie` is een **gelaagd object**: de `kern` bevat de universele, wets-overstijgende betekenis die voor alle bronartikelen geldt; `contexten` bevat optionele artikel-specifieke inkleringen (`verfijning`, `uitbreiding` of `uitzondering`). Begrippen met slechts één bron hebben een lege `contexten: []`.
 
 ### Afleidingsregel (YAML)
 
@@ -204,14 +217,20 @@ Hetzelfde begrip, uitgedrukt als linked data in `kennisgraaf/begrippen.ttl`:
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix begrip: <urn:jas:begrip:> .
 
-begrip:BWBR0004770_art9_lid1_belastingaanslag
+begrip:BWBR0004770_art9_lid1_invorderbaarheid
     a skos:Concept ;
-    skos:prefLabel "belastingaanslag"@nl ;
-    skos:definition "Een door de Belastingdienst opgelegd besluit tot vaststelling
-                     van een belastingschuld, dat als voorwerp van invordering dient"@nl ;
+    skos:prefLabel "invorderbaarheid"@nl ;
+    skos:definition "De juridische toestand waarin een belastingaanslag verkeert zodra
+                     de wettelijke betalingstermijn is verstreken"@nl ;  # ← kern
+    jas:definitieContext [                     # ← contextuele verfijning voor lid 5
+        jas:bijdrage "verfijning" ;
+        jas:markering "m-002" ;
+        jas:bron "BWBR0004770/art9/lid5" ;
+        skos:note "In de context van lid 5 treedt invorderbaarheid telkens per termijn in"@nl
+    ] ;
     prov:wasDerivedFrom "BWBR0004770/art9/lid1" ;    # ← bronreferentie naar annotatie
-    jas:heeft begrip:BWBR0004770_art9_lid1_dagtekening-aanslagbiljet ;
-    jas:jasKlasse "rechtsobject" ;
+    prov:wasDerivedFrom "BWBR0004770/art9/lid5" ;
+    jas:jasKlasse "rechtsbetrekking" ;
     jas:status "concept" .
 
 begrip:BWBR0004770_art9_lid1_dagtekening-aanslagbiljet
@@ -224,7 +243,7 @@ begrip:BWBR0004770_art9_lid1_dagtekening-aanslagbiljet
     jas:jasKlasse "tijdsaanduiding" .
 ```
 
-Het predikaat `prov:wasDerivedFrom` legt de herkomst vast (W3C PROV-standaard). De JAS-relaties (`jas:heeft`, `jas:leidtTot`) zijn gedefinieerd in de JAS-ontologie op `regels.overheid.nl`.
+Het predikaat `prov:wasDerivedFrom` legt de herkomst vast (W3C PROV-standaard). `skos:definition` bevat altijd de **kern** — de universele betekenis. Artikel-specifieke inkleringen staan als `jas:definitieContext`-blank-nodes met `bijdrage`, `markering` en `skos:note`. De JAS-relaties (`jas:heeft`, `jas:leidtTot`) zijn gedefinieerd in de JAS-ontologie op `regels.overheid.nl`.
 
 ---
 
@@ -277,7 +296,8 @@ begrippen/zes-weken.yaml
 |---|---|
 | `alle relaties leeg` | begrip heeft geen enkele relatie (`is-een`, `heeft`, `leidt-tot`) — mogelijk een geïsoleerd begrip of een ontbrekende modellering |
 | `geen grensgevallen` | een afleidingsregel heeft alleen positieve testgevallen; negatieve gevallen of grensgevallen ontbreken |
-| `status: concept zonder bevestigingsdatum` | begrip is nog niet bevestigd door een jurist (A4) |
+| `definitie.kern leeg` | begrip is een nog niet ingevulde stub — gebruik `/begrip` om de kern te schrijven |
+| `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 
 **Huidig rapport:** 40 bestanden ✅ · 0 blokkeerfouten · 4 L3-waarschuwingen (begrippen zonder relaties: `31-december`, `afwijkend-boekjaar`, `logische-of`, `termijnbedrag`).
 

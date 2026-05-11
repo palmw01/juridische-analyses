@@ -17,7 +17,8 @@ tags:
 
 *"de maand, die in de dagtekening van het aanslagbiljet is vermeld"* *(BWBR0004770/art9/lid5, grammaticaal)*
 
-De kalendermaand die is vermeld in de dagtekening van het aanslagbiljet en die als referentiepunt dient voor de berekening van het aantal resterende maanden van het belastingjaar in de termijnenregeling van art. 9 lid 5 IW 1990
+**Kern:** De kalendermaand die is vermeld in de dagtekening van het aanslagbiljet en die als referentiepunt dient voor de berekening van het aantal resterende maanden van het belastingjaar in de termijnenregeling van art. 9 lid 5 IW 1990
+
 
 ## Markeringen
 

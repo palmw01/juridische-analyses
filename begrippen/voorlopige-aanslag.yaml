@@ -5,11 +5,13 @@ aliases:
 soort: enumeratie
 soort-id: false
 jas-klasse: rechtsobject
-toelichting-klasse: "Rechtsobject dat het voorwerp is van de invorderingsregels in art. 9 IW 1990."
+toelichting-klasse: Rechtsobject dat het voorwerp is van de invorderingsregels in art. 9 IW 1990.
 herkomst: direct
 status: concept
-definitie: Belastingaanslag die voorafgaand aan de definitieve vaststelling van de
-  belastingschuld wordt opgelegd
+definitie:
+  kern: >-
+    Belastingaanslag die voorafgaand aan de definitieve vaststelling van de belastingschuld wordt opgelegd
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001

@@ -58,16 +58,49 @@ Begrippen worden **nooit** rechtstreeks uit de wetstekst afgeleid. De `markering
 
 ---
 
-## Begripsdefinitie
+## Begripsdefinitie — gelaagd model (kern + contexten)
 
-- Definitie moet het begrip kunnen **vervangen in een zin** (substitueerbaar) — test dit altijd
-- Geen punt aan het einde van de definitie
+Het `definitie`-veld is een object met twee onderdelen:
+
+```yaml
+definitie:
+  kern: "Universele, wets-overstijgende betekenis"
+  contexten:              # [] als de kern voor alle bronnen volstaat
+    - markering-id: m-002
+      bijdrage: verfijning   # verfijning | uitbreiding | uitzondering
+      tekst: "Artikel-specifieke toevoeging"
+      toelichting: "Optionele motivering"
+```
+
+### Kern (verplicht)
+
+- Geldig voor **alle** bronartikelen — de kern mag niet afhankelijk zijn van één specifiek artikel
+- Sluit zo nauw mogelijk aan bij de literaire tekst in de primaire markering
+- Moet het begrip substitueerbaar kunnen vervangen in een zin (substitutietest)
+- Geen punt aan het einde
 - Beschrijf essentiële kenmerken (**WAT**) én doel (**WAARVOOR**)
 - Geen afleidingen, berekeningen of redeneringen — die horen in afleidingsregels
-- Gebruik **niet** de begripsnaam zelf in de definitie
-- Gebruik wél al eerder gedefinieerde begrippen in de definitie
+- Gebruik **niet** de begripsnaam zelf in de kern
+- Gebruik wél al eerder gedefinieerde begrippen in de kern
 - Benoem interpretatie- en preciseringskeuzes expliciet
 - Benoem in `toelichting-klasse` als de betekenis afwijkt van de letterlijke formulering
+
+### Contextuele lagen (optioneel)
+
+Wanneer een begrip in meerdere artikelen voorkomt, kan elk artikel de kern op een specifieke manier inkleuren. Dit legt vast zonder de kern te veranderen.
+
+| Bijdrage-type | Juridische grondslag | Invorderingsvoorbeeld |
+|---|---|---|
+| `verfijning` | Lex specialis: het artikel specificeert de kern voor één toepassingscontext; de kern zelf blijft intact | Art. 9 lid 5 IW 1990: invorderbaarheid treedt *telkens* in per termijn i.p.v. eenmalig (kern: zodra betalingstermijn verstreken) |
+| `uitbreiding` | Het artikel voegt een juridische dimensie toe die de kern-tekst niet dekt | Een aanvullend artikel breidt het toepassingsbereik van een begrip uit tot een nieuwe categorie belastingplichtigen |
+| `uitzondering` | Derogatie: het artikel beperkt of sluit de hoofdregel uit in een specifieke situatie | Een hardheidsclausule die de standaard betalingstermijn terzijde stelt |
+
+**Wanneer géén context-item:**
+- De kern is voor alle bronnen volledig van toepassing
+- Een markering heeft `bijdrage: context` en verandert de betekenis niet — voeg dan alleen de markering toe, geen contextitem
+- Identieke tekst in meerdere artikelen met dezelfde juridische betekenis
+
+**Audit-trail:** elk contextitem bevat `markering-id` waarmee de inkleuring direct herleidbaar is naar de specifieke wetstekstmarkering uit de annotatie.
 
 ---
 

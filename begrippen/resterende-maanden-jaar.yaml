@@ -4,13 +4,18 @@ aliases: []
 soort: tijdsduur
 soort-id: false
 jas-klasse: variabele
-toelichting-klasse: "Variabele die het aantal resterende kalendermaanden in het belastingjaar weergeeft, te tellen na de maand die in de dagtekening van het aanslagbiljet is vermeld. De waarde varieert naar gelang de dagtekening (max. 11 bij januari, min. 0 bij december)."
+toelichting-klasse: >-
+  Variabele die het aantal resterende kalendermaanden in het belastingjaar weergeeft, te tellen na de
+  maand die in de dagtekening van het aanslagbiljet is vermeld. De waarde varieert naar gelang de dagtekening
+  (max. 11 bij januari, min. 0 bij december).
 herkomst: afgeleid
 status: concept
-definitie: Het aantal kalendermaanden dat in het belastingjaar resteert na de maand
-  die in de dagtekening van het aanslagbiljet is vermeld, en dat gelijk is aan het
-  aantal gelijke termijnen waarin de voorlopige aanslag invorderbaar is op grond van
-  art. 9 lid 5 IW 1990
+definitie:
+  kern: >-
+    Het aantal kalendermaanden dat in het belastingjaar resteert na de maand die in de dagtekening van
+    het aanslagbiljet is vermeld, en dat gelijk is aan het aantal gelijke termijnen waarin de voorlopige
+    aanslag invorderbaar is op grond van art. 9 lid 5 IW 1990
+  contexten: []
 definitie-versie: 1
 definitie-gebaseerd-op:
 - m-001
