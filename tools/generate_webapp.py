@@ -108,6 +108,7 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --focus-ring: 0 0 0 3px rgba(0,71,160,0.25);
   --font-mono: "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-serif: Georgia, "Times New Roman", serif;
 }
 [data-theme="dark"] {
   --primary: #3B82F6;
@@ -136,6 +137,14 @@ CSS = """/* Belastingdienst kennismodel — gegenereerd */
 [data-theme="dark"] .mermaid svg #arrow {
   fill: #64748b !important;
 }
+[data-theme="dark"] .mermaid{background:var(--card-bg)}
+[data-theme="dark"] .mermaid svg .cluster-label text,
+[data-theme="dark"] .mermaid svg .label text,
+[data-theme="dark"] .mermaid svg .nodeLabel{fill:#e2e8f0!important}
+[data-theme="dark"] .mermaid svg .edgePath .path{stroke:#64748b!important}
+[data-theme="dark"] .mermaid svg .edge-pattern{stroke:#64748b!important}
+[data-theme="dark"] .mermaid svg .cluster{fill:#1e293b!important;stroke:#334155!important}
+[data-theme="dark"] .mermaid svg .cluster-label span{color:#cbd5e1!important}
 .mermaid {
   min-height: 120px;
   background: var(--card-bg);
@@ -228,6 +237,14 @@ h1{font-size:clamp(1.3rem,4vw,1.8rem);font-weight:700;color:var(--text);margin-b
 h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .subtitle{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem}
 
+/* Breadcrumb navigatie */
+.breadcrumb{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;padding:0;display:flex;flex-wrap:wrap;gap:0.25rem;list-style:none;align-items:center}
+.breadcrumb li{display:inline;padding:0;margin:0}
+.breadcrumb li+li::before{content:"›";margin:0 0.25rem;color:var(--text-muted)}
+.breadcrumb a{color:var(--primary)}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb [aria-current="page"]{color:var(--text);font-weight:500}
+
 /* Badges / Tags */
 .card ul li, .card ol li { word-break: break-all; overflow-wrap: break-word; }
 .card a { word-break: break-all; overflow-wrap: break-word; }
@@ -258,10 +275,10 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .prop-table tr:last-child td{border-bottom:none}
 
 /* Definitions */
-.def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word}
+.def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word;font-family:var(--font-serif)}
 
 /* Wetstekst */
-.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.8;color:var(--text-secondary);overflow-wrap:break-word}
+.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.8;color:var(--text-secondary);overflow-wrap:break-word;font-family:var(--font-serif)}
 
 /* Annotatie rijen */
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:0.25rem}
@@ -291,7 +308,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 @media(min-width:768px){.detail-layout{grid-template-columns:1fr 300px}}
 
 /* Formele regel box */
-.regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:Georgia,"Times New Roman",serif;font-size:0.95rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
+.regel-box{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-family:var(--font-serif);font-size:0.95rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
 
 /* Zoekpagina */
 .search-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card-bg);color:var(--text);transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:1rem;-webkit-appearance:none}
@@ -333,6 +350,22 @@ footer{text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.75re
 @media(max-width:479px){.hide-xs{display:none!important}}
 @media(min-width:768px){.hide-md{display:none!important}}
 @media(max-width:767px){.show-md{display:none!important}}
+
+/* Print-stijl — WCAG PDF-vriendelijk */
+@media print {
+  .nav,.skip-link,.hamburger,.dark-toggle,.graph-container,.graph-filter,.graph-legend,.search-input,.search-filters{display:none!important}
+  body{font-size:11pt;line-height:1.5;color:#000;background:#fff;min-height:auto}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
+  .card-title{border-bottom-color:#ccc}
+  .detail-layout{display:block}
+  .detail-layout > div{width:100%!important}
+  .mermaid svg{max-width:100%;overflow:visible}
+  .ann-table{min-width:auto;font-size:8pt}
+  a[href]:after{content:" (" attr(href) ")";font-size:0.75rem;color:#555}
+  .breadcrumb a[href]:after{content:none}
+  .regel-box{white-space:normal;border-color:#ccc}
+  footer{display:none}
+}
 """
 
 
@@ -395,6 +428,11 @@ def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p
     pad = out / rel
     pad.parent.mkdir(parents=True, exist_ok=True)
     pad.write_text(pagina(title, body, active, p, extra_scripts))
+
+
+def breadcrumb(p: str, active: str, crumbs: list[tuple[str, str]]) -> str:
+    items = "".join(f'<li><a href="{url}">{label}</a></li>' for url, label in crumbs)
+    return f'<nav aria-label="U bevindt zich hier"><ol class="breadcrumb">{items}<li aria-current="page">{active}</li></ol></nav>'
 
 
 def jas_tag(klasse: str) -> str:
@@ -637,7 +675,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                     seen.add(ref["url"])
                     items += f'<li><a href="../{ref["url"]}">{ref["titel"]}</a></li>\n'
             ann_links = f'<div class="card"><div class="card-title">Annotaties</div><ul style="margin-left:1.25rem">{items}</ul></div>'
-        body = f"""<h1>{b["naam"]}</h1>
+        b_br = breadcrumb(pp, b["naam"], [(f"{pp}index.html", "Home"), (f"{pp}begrippen.html", "Begrippen")])
+        body = f"""{b_br}
+<h1>{b["naam"]}</h1>
 <p class="subtitle">{jas_tag(b["jas_klasse"])} <span class="badge badge-soort">{b["soort"]}</span> {status_badge(b["status"])}</p>
 <div class="detail-layout">
 <div>
@@ -741,7 +781,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                         regel_items += f'<li><a href="../regels/{reg_ref["id"]}.html">{reg_ref["naam"]}</a></li>\n'
         if regel_items:
             regel_links = f'<div class="card"><div class="card-title">Afleidingsregels</div><ul style="margin-left:1.25rem">{regel_items}</ul></div>'
-        body = f"""<h1>{a["wet"]} art. {a["artikel"]}{lid}</h1>
+        ann_title = f'{a["wet"]} art. {a["artikel"]}{lid}'
+        ann_br = breadcrumb("../", ann_title, [("../index.html", "Home"), ("../annotaties.html", "Annotaties")])
+        body = f"""{ann_br}
+<h1>{ann_title}</h1>
 <p class="subtitle">{a["structuurpositie"]} &bull; {a["bwb_id"]}</p>
 <div class="wetstekst">"{a["wetstekst"]}"</div>
 <div class="card">
@@ -801,7 +844,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 ann_url = f'../annotaties/{match["id"].replace("/","-")}.html'
                 ann_title = f'{match["wet"]} art. {match["artikel"]}{", lid " + match["lid"] if match.get("lid") else ""}'
                 ann_link = f'<div class="card"><div class="card-title">Annotatie</div><p><a href="{ann_url}">{ann_title}</a></p></div>'
-        body = f"""<h1>{r["naam"]}</h1>
+        r_br = breadcrumb("../", r["naam"], [("../index.html", "Home"), ("../regels.html", "Regels")])
+        body = f"""{r_br}
+<h1>{r["naam"]}</h1>
 <p class="subtitle"><span class="badge badge-definitief">{r["soort"]}</span> {r["id"]}</p>
 <div class="card">
   <div class="card-title">Formele regel</div>
