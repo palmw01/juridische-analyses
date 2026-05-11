@@ -16,7 +16,7 @@ De centrale vraag die dit PoC beantwoordt: *kun je de kwaliteitsstandaarden van 
 
 **Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening — om de methodiek serieus te testen.
 
-**Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde vault-bestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraaak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde vault-bestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages.
 
@@ -28,7 +28,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 |-----|---------------|
 | **Jurist (invordering)** | Uitgewerkte analyse van art. 9 IW / §9.1 Leidraad Invordering; elke definitie en regel is traceerbaar naar de wetstekst en van een juridische toelichting voorzien |
 | **Gegevensspecialist** | Machineleesbare begrippenstelsels (RDF/SKOS), formele datamodellen (JSON Schema), meerdere exportformaten (Turtle, GEXF, GraphML) en een gedocumenteerde validatielaag met drie niveaus |
-| **Regelanalist** | Afleidingsregels in RegelSpraaak-oriëntatie met invoer- en uitvoerbegrippen, positieve én negatieve testgevallen, en een directe koppeling aan de annotaties waaruit ze zijn afgeleid |
+| **Regelanalist** | Afleidingsregels in RegelSpraak-oriëntatie met invoer- en uitvoerbegrippen, positieve én negatieve testgevallen, en een directe koppeling aan de annotaties waaruit ze zijn afgeleid |
 | **Wetsanalist / methodiekbureau** | Werkend voorbeeld van de BZK-Wetsanalyse-methodiek met volledige JAS-classificatie, inclusief AI-audit trail |
 
 ---
@@ -87,7 +87,7 @@ Verwerkt de wetstekst naar een JAS-annotatie: elk zinsdeel wordt geclassificeerd
 
 **Stap 3 — Begrippen en regels vastleggen** (`/begrip-alles art. [A] [W]`)
 
-Leidt uit de annotaties begrippen af: per gemarkeerd element ontstaat een YAML-bestand in `begrippen/` met definitie, soort (booleaans, datum, tijdsduur, monetair-bedrag, etc.), herkomst (direct uit wet of afgeleid), relaties naar andere begrippen en traceerbaarheid terug naar de markering. Complexere elementen leiden tot een afleidingsregel in `regels/`, uitgedrukt in RegelSpraaak-oriëntatie.
+Leidt uit de annotaties begrippen af: per gemarkeerd element ontstaat een YAML-bestand in `begrippen/` met definitie, soort (booleaans, datum, tijdsduur, monetair-bedrag, etc.), herkomst (direct uit wet of afgeleid), relaties naar andere begrippen en traceerbaarheid terug naar de markering. Complexere elementen leiden tot een afleidingsregel in `regels/`, uitgedrukt in RegelSpraak-oriëntatie.
 
 **Stap 4 — Valideren** (`make validate`)
 
@@ -323,7 +323,7 @@ Het hart van het kennismodel. 28 begrippen, elk met definitie, datatype, JAS-kla
 | **Specialisatieregel** | Verfijnt of overschrijft een andere regel voor een deelgeval | *Lid 5: voor voorlopige aanslagen gelden andere termijnen* |
 | **Beperkingsregel** | Beperkt de toepassingsruimte van een andere regel | *Terugvalregel lid 1 bij ontbreken Leidraad-grondslag* |
 
-Elk bestand bevat invoer- en uitvoerbegrippen (als `begrip-id`), een formele-regel in RegelSpraaak-oriëntatie, voorbeeldreeksen en een juridische toelichting herleidbaar naar de wettekst.
+Elk bestand bevat invoer- en uitvoerbegrippen (als `begrip-id`), een formele-regel in RegelSpraak-oriëntatie, voorbeeldreeksen en een juridische toelichting herleidbaar naar de wettekst.
 
 ### RDF Turtle / SKOS (`kennisgraaf/begrippen.ttl`)
 
@@ -447,9 +447,9 @@ Overheidssystemen als de [Stelselcatalogus](https://www.stelselcatalogus.nl) en 
 
 De W3C-basisstandaard voor het semantisch web. Alle informatie wordt uitgedrukt als **drietallen** (triples): `subject – predikaat – object`. Elk element heeft een unieke URI. Drietallen vormen samen een kennisgraaf die machineleesbaar is en over systeemgrenzen heen verbonden kan worden (linked data). In dit project wordt RDF gebruikt als exportformaat voor het begrippenstelsel en de afleidingsregels, bevraagbaar via SPARQL.
 
-### RegelSpraaak
+### RegelSpraak
 
-De Nederlandse standaard voor het formeel specificeren van uitvoeringsregels in een leesbare maar machineparseerbare vorm. Ontwikkeld binnen de overheid voor regelimplementatie, onder meer gebruikt door de Belastingdienst. RegelSpraaak-regels beschrijven als-dan-redenering in gestructureerde Nederlandse zinnen, waardoor juristen en IT-specialisten dezelfde specificatie kunnen lezen.
+De Nederlandse standaard voor het formeel specificeren van uitvoeringsregels in een leesbare maar machineparseerbare vorm. Ontwikkeld binnen de overheid voor regelimplementatie, onder meer gebruikt door de Belastingdienst. RegelSpraak-regels beschrijven als-dan-redenering in gestructureerde Nederlandse zinnen, waardoor juristen en IT-specialisten dezelfde specificatie kunnen lezen.
 
 Voorbeeld van een `formele-regel` uit dit project (Beslissingsregel, art. 9 lid 1 IW):
 
@@ -461,7 +461,7 @@ indien aan alle volgende voorwaarden is voldaan:
   de dagtekening van het aanslagbiljet plus zes weken
 ```
 
-In dit project worden afleidingsregels in RegelSpraaak-oriëntatie opgeslagen in het `formele-regel`-veld van `regels/AR-*.yaml`. Versie: RegelSpraaak v2.3.0.
+In dit project worden afleidingsregels in RegelSpraak-oriëntatie opgeslagen in het `formele-regel`-veld van `regels/AR-*.yaml`. Versie: RegelSpraak v2.3.0.
 
 ---
 
@@ -535,7 +535,7 @@ Graphviz is een systeemafhankelijkheid (niet via pip): `sudo apt install graphvi
 | Python | 3.10+, PyYAML, jsonschema, networkx, rdflib |
 | Graafvisualisatie | Graphviz (`dot`) — `sudo apt install graphviz` |
 | Kennisgraaf-export | GEXF (Gephi), GraphML, RDF Turtle (SKOS), DOT (Graphviz) |
-| Regelmodellering | RegelSpraaak v2.3.0 |
+| Regelmodellering | RegelSpraak v2.3.0 |
 | CI/CD | GitHub Actions — validatie op push/PR, deploy webapp op push naar main |
 
 ---
