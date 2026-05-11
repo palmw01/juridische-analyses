@@ -1282,35 +1282,62 @@ function resizeGraph(){{
 }}
 window.addEventListener('resize',resizeGraph);
 
-// Fullscreen
+// Fullscreen — native API waar beschikbaar, CSS-fallback voor iOS Safari
 var fsBtn=document.getElementById('fullscreenBtn');
 var closeBtn=document.getElementById('graphCloseBtn');
 var container=document.getElementById('graphContainer');
-function enterFullscreen(){{
-  if(container.requestFullscreen){{container.requestFullscreen();}}
-  else if(container.webkitRequestFullscreen){{container.webkitRequestFullscreen();}}
-}}
-function exitFullscreen(){{
-  if(document.exitFullscreen){{document.exitFullscreen();}}
-  else if(document.webkitExitFullscreen){{document.webkitExitFullscreen();}}
-}}
-function onFullscreenChange(){{
-  var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+var nativeFs=!!(container.requestFullscreen||container.webkitRequestFullscreen);
+var cssFsActive=false;
+
+function setFsUi(fs){{
   container.classList.toggle('graph-fullscreen',fs);
   closeBtn.style.display=fs?'flex':'none';
   fsBtn.innerHTML=fs?'&#x2B1C; Normaal':'&#x26F6; Volledig scherm';
   fsBtn.title=fs?'Volledig scherm afsluiten':'Volledig scherm';
   setTimeout(resizeGraph,50);
 }}
-document.addEventListener('fullscreenchange',onFullscreenChange);
-document.addEventListener('webkitfullscreenchange',onFullscreenChange);
-if(fsBtn)fsBtn.addEventListener('click',function(){{
+function enterCssFallback(){{
+  cssFsActive=true;
+  document.body.style.overflow='hidden';
+  setFsUi(true);
+}}
+function exitCssFallback(){{
+  cssFsActive=false;
+  document.body.style.overflow='';
+  setFsUi(false);
+}}
+function enterFullscreen(){{
+  if(nativeFs){{
+    if(container.requestFullscreen)container.requestFullscreen();
+    else if(container.webkitRequestFullscreen)container.webkitRequestFullscreen();
+  }} else {{
+    enterCssFallback();
+  }}
+}}
+function exitFullscreen(){{
+  if(nativeFs){{
+    if(document.exitFullscreen)document.exitFullscreen();
+    else if(document.webkitExitFullscreen)document.webkitExitFullscreen();
+  }} else {{
+    exitCssFallback();
+  }}
+}}
+function onNativeFsChange(){{
   var fs=document.fullscreenElement===container||document.webkitFullscreenElement===container;
+  setFsUi(fs);
+}}
+document.addEventListener('fullscreenchange',onNativeFsChange);
+document.addEventListener('webkitfullscreenchange',onNativeFsChange);
+if(fsBtn)fsBtn.addEventListener('click',function(){{
+  var fs=nativeFs?(document.fullscreenElement===container||document.webkitFullscreenElement===container):cssFsActive;
   fs?exitFullscreen():enterFullscreen();
 }});
 if(closeBtn)closeBtn.addEventListener('click',exitFullscreen);
 document.addEventListener('keydown',function(e){{
-  if(e.key==='Escape'&&(document.fullscreenElement===container||document.webkitFullscreenElement===container))exitFullscreen();
+  if(e.key==='Escape'){{
+    if(nativeFs&&(document.fullscreenElement===container||document.webkitFullscreenElement===container))exitFullscreen();
+    else if(!nativeFs&&cssFsActive)exitCssFallback();
+  }}
 }});
 </script>"""
     schrijf_html(out, "graph.html", "Kennisgraaf | Belastingdienst", body, active="graaf")
