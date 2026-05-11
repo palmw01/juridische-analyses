@@ -498,9 +498,9 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 .graph-container{width:100%;height:clamp(400px,60vh,700px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;background:var(--card-bg)}
 .graph-container svg{display:block}
 .graph-legend{position:absolute;bottom:1rem;right:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.5rem 0.75rem;font-size:0.75rem;z-index:10;box-shadow:var(--shadow);max-width:180px}
-.graph-legend-header{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;cursor:pointer;user-select:none;padding:0.1rem 0}
-.graph-legend-title{font-weight:700;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin:0}
-.graph-legend-chevron{font-size:0.65rem;color:var(--text-muted);transition:transform 0.2s;line-height:1}
+.graph-legend-header{display:flex;align-items:center;gap:0.35rem;cursor:pointer;user-select:none;padding:0.1rem 0;white-space:nowrap}
+.graph-legend-title{font-weight:700;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin:0;flex-shrink:0}
+.graph-legend-chevron{font-size:0.6rem;color:var(--text-muted);transition:transform 0.2s;line-height:1;flex-shrink:0;display:inline-block}
 .graph-legend.collapsed .graph-legend-chevron{transform:rotate(-90deg)}
 .graph-legend-body{margin-top:0.4rem}
 .graph-legend.collapsed .graph-legend-body{display:none}
@@ -1247,13 +1247,14 @@ aanwezigeKlassen.sort().forEach(function(k){{
   row.append("div").attr("class","graph-legend-dot").style("background",colorMap[k]);
   row.append("span").text(k);
 }});
-// Toggle gedrag
+// Toggle gedrag — native DOM events (betrouwbaar op iOS Safari)
+var hdrEl=hdr.node();
 function toggleLegend(){{
   var collapsed=legendEl.classList.toggle('collapsed');
-  hdr.attr("aria-expanded",String(!collapsed));
+  hdrEl.setAttribute('aria-expanded',String(!collapsed));
 }}
-hdr.on("click",toggleLegend);
-hdr.on("keydown",function(e){{if(e.key==='Enter'||e.key===' '){{e.preventDefault();toggleLegend();}}}});
+hdrEl.addEventListener('click',toggleLegend);
+hdrEl.addEventListener('keydown',function(e){{if(e.key==='Enter'||e.key===' '){{e.preventDefault();toggleLegend();}}}});
 // Standaard ingeklapt op mobiel
 if(window.innerWidth < 768) legendEl.classList.add('collapsed');
 
