@@ -908,12 +908,23 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 rel_html += "</ul>"
         if not rel_html:
             rel_html = "<p class='item-meta'>Geen relaties</p>"
+        def ann_url(bron_annotatie_id: str) -> str:
+            return f'../annotaties/{bron_annotatie_id.replace("/", "-")}.html'
+
         def_bron = ""
         if b.get("definitie"):
             bronnen = b.get("markeringen", [])
             if bronnen:
-                m_ids = ", ".join(m.get("markering-id", "") for m in bronnen if m.get("bijdrage") == "primair")
-                def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Kern gebaseerd op: {m_ids}</div>'
+                links = []
+                for m in bronnen:
+                    if m.get("bijdrage") == "primair":
+                        mid = m.get("markering-id", "")
+                        baid = m.get("bron-annotatie-id", "")
+                        if baid:
+                            links.append(f'<a href="{ann_url(baid)}">{mid}</a>')
+                        else:
+                            links.append(mid)
+                def_bron = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Kern gebaseerd op: {", ".join(links)}</div>'
 
         # Contextuele lagen renderen
         mid_to_bron = {
@@ -928,7 +939,11 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             mid = ctx.get("markering-id", "")
             bron = mid_to_bron.get(mid, "")
             badge_label = bijdrage.capitalize()
-            ref_parts = [p for p in [mid, bron] if p]
+            ref_parts = []
+            if mid:
+                ref_parts.append(mid)
+            if bron:
+                ref_parts.append(f'<a href="{ann_url(bron)}">{bron}</a>')
             ref_str = " · ".join(ref_parts)
             toel_html = f'<div class="def-context-toelichting">{ctx_toel}</div>' if ctx_toel else ""
             ctx_html += (
@@ -945,7 +960,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         mark_tbl = ""
         for m in b.get("markeringen", []):
             jc = b["jas_klasse"] or ""
-            mark_tbl += f'<tr><td>{m.get("markering-id","")}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td></tr>\n'
+            mid = m.get("markering-id", "")
+            baid = m.get("bron-annotatie-id", "")
+            mid_cell = f'<a href="{ann_url(baid)}">{mid}</a>' if baid else mid
+            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td></tr>\n'
         mp = ""
         if mark_tbl:
             mp = f"""<div class="card">
