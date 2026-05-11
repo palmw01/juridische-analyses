@@ -201,8 +201,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
   .hamburger{display:flex;order:3;margin-left:0}
   .dark-toggle{order:2;margin-left:auto}
   .nav{height:auto;min-height:var(--nav-height)}
-  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0;gap:0}
-  .nav-links{display:none;order:4;width:100%;flex-direction:column;overflow:hidden;margin-left:0;align-items:stretch;padding:0}
+  .nav .container{flex-wrap:wrap;height:auto;min-height:var(--nav-height);padding-top:0.5rem;padding-bottom:0;gap:0;position:relative}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;margin:0;padding:0;z-index:99}
   .nav-links.open{display:flex}
   .nav-links a{display:block;padding:0.75rem 1rem;font-size:0.95rem;color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.1);text-align:left;line-height:1.5;border-radius:0;margin:0}
   .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.1);color:#fff;text-decoration:none}
@@ -405,7 +405,7 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — Belastingdienst</title>
+<title>{title} — Inningsmodel</title>
 <link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
