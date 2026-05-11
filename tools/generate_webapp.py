@@ -642,7 +642,7 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <main id="main-content"><div class="container">
 {body}
 </div></main>
-<footer>Gegenereerd uit de juridische analyses vault &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>
+<footer>Rechtsgraaf &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990</footer>
 <script src="{p}js/app.js"></script>
 {extra_scripts}
 </body>
