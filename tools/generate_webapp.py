@@ -169,7 +169,7 @@ main{flex:1;padding:1.5rem 0}
 @media(min-width:768px){main{padding:2rem 0}}
 
 /* Cards */
-.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;margin-bottom:1rem;transition:box-shadow 0.2s}
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;margin-bottom:1rem;transition:box-shadow 0.2s;overflow-wrap:break-word}
 @media(min-width:480px){.card{padding:1.5rem}}
 .card:hover{box-shadow:var(--shadow-hover)}
 .card-title{font-size:0.875rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
@@ -226,7 +226,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 .def-block{background:var(--primary-light);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:0.95rem;line-height:1.7}
 
 /* Wetstekst */
-.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--text-secondary)}
+.wetstekst{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--primary);padding:1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--text-secondary);overflow-wrap:break-word}
 
 /* Annotatie rijen */
 .ann-table{width:100%;border-collapse:collapse;font-size:0.85rem}
@@ -250,6 +250,7 @@ h2{font-size:clamp(1.1rem,3vw,1.3rem);color:var(--text);margin-bottom:0.75rem}
 
 /* Detail pagina layout */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1rem}
+.detail-layout > * { min-width: 0; }
 @media(min-width:768px){.detail-layout{grid-template-columns:1fr 300px}}
 
 /* Formele regel box */
