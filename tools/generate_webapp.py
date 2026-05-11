@@ -186,15 +186,14 @@ button:focus-visible,input:focus-visible,select:focus-visible,.filter-chip:focus
 .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:#fff;text-decoration:none}
 .nav-links a.active{font-weight:600}
 
-/* Dark mode toggle — desktop (compact) */
-.dark-toggle{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:4px;padding:0.35rem 0.6rem;cursor:pointer;font-size:0.85rem;line-height:1;transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap}
-.dark-toggle:hover{background:rgba(255,255,255,0.15)}
+/* Dark mode toggle — desktop: naadloos in nav-balk */
+.dark-toggle{background:none;border:none;color:rgba(255,255,255,0.85);border-radius:4px;padding:0.35rem 0.5rem;cursor:pointer;font-size:clamp(0.75rem,2vw,0.875rem);transition:background 0.1s;margin-left:0.2rem;flex-shrink:0;white-space:nowrap;line-height:inherit}
+.dark-toggle:hover{background:rgba(255,255,255,0.15);color:#fff}
 .dt-label{display:none}
 
-/* Hamburger menu — alleen op mobiel */
-.hamburger{display:none;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;align-items:center;justify-content:center;padding:0}
-.hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.9);border-radius:2px;transition:transform 0.2s,opacity 0.15s}
-.hamburger span+span{margin-top:6px}
+/* Hamburger — gestapelde lijnen met X-animatie */
+.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:none;border:none;cursor:pointer;margin-left:auto;flex-shrink:0;width:2.75rem;height:2.75rem;padding:0}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.25s,opacity 0.15s;flex-shrink:0}
 .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
