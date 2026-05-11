@@ -708,6 +708,16 @@ def status_badge(status: str) -> str:
     return f'<span class="badge badge-{status or "concept"}">{status or "onbekend"}</span>'
 
 
+def format_ann_title(a: dict) -> str:
+    wet = a.get("wet", "")
+    artikel = a.get("artikel", "")
+    lid = a.get("lid", "")
+    # Leidraad Invordering gebruikt paragrafen (§), geen artikelen
+    if wet.startswith("LI "):
+        return f'{wet} § {lid}' if lid else f'{wet} § {artikel}'
+    return f'{wet} art. {artikel}{", lid " + lid if lid else ""}'
+
+
 # ── Data laden ────────────────────────────────────────────
 
 def laad_begrippen(vault_root: Path) -> list[dict]:
@@ -869,7 +879,7 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list):
     # Build index: begrip_id → annotatie-links
     ann_by_begrip: dict[str, list[dict]] = {}
     for a in annotaties:
-        ann_title = f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}'
+        ann_title = format_ann_title(a)
         ann_url = f'annotaties/{a["id"].replace("/","-")}.html'
         for r in a["rijen"]:
             bid = r.get("begrip_id")
@@ -897,7 +907,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 
     # Lookup: annotatie-id → leesbare titel (bijv. "IW 1990 art. 9 lid 5")
     ann_titel_by_id: dict[str, str] = {
-        a["id"]: f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}'
+        a["id"]: format_ann_title(a)
         for a in annotaties
     }
 
@@ -1047,7 +1057,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
             regel_by_bid.setdefault(uitv, []).append(ref)
     items = "".join(
         f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
-        f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}</a>'
+        f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{format_ann_title(a)}</a>'
         f'<div class="item-badges"><span class="badge badge-type">{a.get("bwb_id","")}</span></div>'
         f'<span class="item-meta">{a["structuurpositie"]}</span>'
         f'</li>\n'
@@ -1105,7 +1115,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                         regel_items += f'<li><a href="../regels/{reg_ref["id"]}.html">{reg_ref["naam"]}</a></li>\n'
         if regel_items:
             regel_links = f'<div class="card"><div class="card-title">Afleidingsregels</div><ul style="margin-left:1.25rem">{regel_items}</ul></div>'
-        ann_title = f'{a["wet"]} art. {a["artikel"]}{lid}'
+        ann_title = format_ann_title(a)
         ann_br = breadcrumb("../", ann_title, [("../index.html", "Home"), ("../annotaties.html", "Annotaties")])
         body = f"""{ann_br}
 <h1>{ann_title}</h1>
@@ -1166,7 +1176,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             match = ann_by_key.get((r["bwb_id"], r["artikel"], r["lid"]))
             if match:
                 ann_url = f'../annotaties/{match["id"].replace("/","-")}.html'
-                ann_title = f'{match["wet"]} art. {match["artikel"]}{", lid " + match["lid"] if match.get("lid") else ""}'
+                ann_title = format_ann_title(match)
                 ann_link = f'<div class="card"><div class="card-title">Annotatie</div><p><a href="{ann_url}">{ann_title}</a></p></div>'
         r_br = breadcrumb("../", r["naam"], [("../index.html", "Home"), ("../regels.html", "Regels")])
         body = f"""{r_br}
@@ -1467,7 +1477,7 @@ def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
         ctx_teksten = " ".join(c.get("tekst", "") for c in b.get("definitie_contexten", []))
         bron_data.append({"type": "Begrip", "titel": b["naam"], "url": f'begrippen/{b["slug"]}.html', "tekst": b.get("definitie","") + " " + ctx_teksten + " " + b["naam"] + " " + " ".join(b["aliases"]), "jas_klasse": b["jas_klasse"]})
     for a in annotaties:
-        bron_data.append({"type": "Annotatie", "titel": f'{a["wet"]} art. {a["artikel"]}{", lid " + a["lid"] if a.get("lid") else ""}', "url": f'annotaties/{a["id"].replace("/","-")}.html', "tekst": a.get("wetstekst",""), "jas_klasse": ""})
+        bron_data.append({"type": "Annotatie", "titel": format_ann_title(a), "url": f'annotaties/{a["id"].replace("/","-")}.html', "tekst": a.get("wetstekst",""), "jas_klasse": ""})
     for r in regels:
         bron_data.append({"type": "Regel", "titel": r["naam"], "url": f'regels/{r["id"]}.html', "tekst": (r.get("formele_regel","") + " " + (r.get("toelichting","") or "")), "jas_klasse": "afleidingsregel"})
     data_json = json.dumps(bron_data, ensure_ascii=False)
