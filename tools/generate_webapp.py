@@ -718,6 +718,14 @@ def format_ann_title(a: dict) -> str:
     return f'{wet} art. {artikel}{", lid " + lid if lid else ""}'
 
 
+def format_structuurpositie(a: dict) -> str:
+    pos = a.get("structuurpositie", "")
+    # MCP gebruikt altijd "Lid X" — voor de Leidraad is dat "§ X"
+    if a.get("wet", "").startswith("LI ") and pos:
+        pos = pos.replace("Lid ", "§ ")
+    return pos
+
+
 # ── Data laden ────────────────────────────────────────────
 
 def laad_begrippen(vault_root: Path) -> list[dict]:
@@ -1059,7 +1067,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
         f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
         f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{format_ann_title(a)}</a>'
         f'<div class="item-badges"><span class="badge badge-type">{a.get("bwb_id","")}</span></div>'
-        f'<span class="item-meta">{a["structuurpositie"]}</span>'
+        f'<span class="item-meta">{format_structuurpositie(a)}</span>'
         f'</li>\n'
         for a in annotaties
     )
@@ -1119,7 +1127,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         ann_br = breadcrumb("../", ann_title, [("../index.html", "Home"), ("../annotaties.html", "Annotaties")])
         body = f"""{ann_br}
 <h1>{ann_title}</h1>
-<p class="subtitle">{a["structuurpositie"]} &bull; {a["bwb_id"]}</p>
+<p class="subtitle">{format_structuurpositie(a)} &bull; {a["bwb_id"]}</p>
 <div class="wetstekst">"{a["wetstekst"]}"</div>
 <div class="card">
 <div class="card-title">Annotatierijen</div>
