@@ -2,7 +2,9 @@
   "mcpServers": {
     "wettenbank": {
       "command": "node",
-      "args": ["/home/willardp/Documenten/Projecten/wetten-overheid-tools/wettenbank-mcp/dist/index.js"]
+      "args": [
+        "/home/willardp/Documenten/Projecten/wetten-overheid-tools/wettenbank-mcp/dist/index.js"
+      ]
     }
   },
   "skills": [
@@ -21,5 +23,8 @@
       "description": "Haal wetstekst op via de wettenbank MCP en extraheer kruisreferenties. Gebruik: /wettenbank art. 25 IW 1990",
       "path": ".claude/skills/wettenbank/SKILL.md"
     }
-  ]
+  ],
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
 }
