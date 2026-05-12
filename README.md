@@ -1,7 +1,7 @@
 # Juridische wetsanalyse — kennisgraaf voor de invorderingspraktijk
 
 ![License](https://img.shields.io/github/license/palmw01/juridische-analyses)
-![Status](https://img.shields.io/badge/status-in%20ontwikkeling-yellow)
+![Status](https://img.shields.io/badge/status-proof--of--concept-blue)
 ![Methodiek](https://img.shields.io/badge/methodiek-JAS%20v1.0.10-blue)
 ![Domein](https://img.shields.io/badge/domein-invordering%20rijksbelastingen-darkgreen)
 ![CI](https://img.shields.io/github/actions/workflow/status/palmw01/juridische-analyses/ci.yml?branch=main&label=CI)
@@ -13,13 +13,13 @@
 
 Dit project is een **proof-of-concept voor AI-ondersteunde wetsanalyse** binnen het domein van de invordering van rijksbelastingen. Het laat zien hoe een groot taalmodel (Claude Code) de meest arbeidsintensieve stappen van de Wetsanalyse-methodiek kan uitvoeren: het systematisch annoteren van wettekst en het afleiden van formele begrippen en regels.
 
-De centrale vraag die dit PoC beantwoordt: *kun je de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek handhaven wanneer een AI de uitvoering overneemt, en is het resultaat traceerbaar en valideerbaar genoeg om als input voor digitale regelimplementatie te dienen?*
+Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek haalbaar zijn wanneer een AI de uitvoering overneemt, en dat het resultaat traceerbaar en valideerbaar genoeg is om als input voor digitale regelimplementatie te dienen.
 
 **Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening — om de methodiek serieus te testen.
 
 **Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde vault-bestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
-Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages.
+Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
 ---
 
@@ -49,7 +49,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Graph-export (GEXF/GraphML/PDF) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
 | **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
-| Uitbreiding naar andere artikelen | 🔜 Volgende fase |
+| Doorontwikkeling van het PoC | 🔜 Volgende fase |
 
 ---
 
@@ -73,7 +73,8 @@ A4  Valideren                   (handmatig: multidisciplinair team, concrete sce
      ▼
 A5  Signaleren                  (handmatig: lacunes, open normen, uitvoeringsbeleid)
      ▼
-A6  Kennismodel opstellen       (handmatig: gegevensmodel, regelmodel, procesmodel)
+A6  Kennismodel opstellen       (handmatig: modelleringsbeslissingen en governance;
+     de exports van A3 — RDF/SKOS, GEXF, RegelSpraak — zijn de invoer)
 ```
 
 ### Stap voor stap
