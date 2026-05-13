@@ -46,7 +46,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | RDF/SKOS-export | ✅ Gereed |
 | Validatie (L1–L3) — 40 bestanden, 0 blokkeerfouten | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
-| Graph-export (GEXF/GraphML/PDF) | ✅ Gereed |
+| Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
 | **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
 | Doorontwikkeling van het PoC | 🔜 Volgende fase |
@@ -387,10 +387,6 @@ Het kennismodel als netwerkgraaf. Knopen zijn begrippen en annotaties; kanten zi
 
 Knoopattributen bevatten JAS-klasse, soort en status; kanten zijn gekleurd op JAS-klasse.
 
-### PDF-kennisgraaf (`kennisgraaf/juridisch_kennismodel.pdf`)
-
-Statische visualisatie van het volledige kennismodel via Graphviz. Genereer of ververs met `make pdf-graph`.
-
 ### Statische webapp (`webapp/index.html`)
 
 Interactieve website in Belastingdienst-huisstijl, automatisch gepubliceerd naar GitHub Pages bij elke push naar `main`. Bevat doorzoekbare begrippenlijst (MiniSearch), interactieve D3-kennisgraaf, Mermaid-structuurdiagrammen per annotatie, signaleringsoverzicht (L3-waarschuwingen) en dark-mode.
@@ -432,9 +428,8 @@ make validate
 
 # Stap 5 — Exporteren
 make export-graph                   # GEXF + GraphML
-make pdf-graph                      # RDF Turtle + PDF
 
-# Stap 7 — Webapp genereren
+# Stap 6 — Webapp genereren
 make webapp
 open webapp/index.html
 
@@ -514,12 +509,10 @@ kennisgraaf/           exportartifacts
   begrippen.ttl        RDF Turtle / SKOS-begrippenstelsel
   graph.gexf           graaf voor Gephi
   graph.graphml        graaf voor yEd / Cytoscape
-  juridisch_kennismodel.pdf  statische PDF-visualisatie
-  model_graph.dot      Graphviz-bronbestand
 
 rapporten/             validatierapport (gegenereerd)
 scripts/               pre-commit hook (L1/L2-validatie bij commit)
-tools/                 Python-toolchain (11 scripts)
+tools/                 Python-toolchain (10 scripts)
 .github/workflows/     CI (validatie) + deploy (GitHub Pages)
 Makefile               alle build-targets
 requirements.lock      pinned Python-dependencies
@@ -536,7 +529,6 @@ requirements.lock      pinned Python-dependencies
 | `make validate` | L1 + L2 + L3 validatie, rapport in `rapporten/` | Na elke schrijfactie |
 | `make export-rdf` | YAML → RDF Turtle (SKOS) | Na wijziging begrippen/regels |
 | `make export-graph` | YAML/JSON → GEXF + GraphML | Na wijziging begrippen |
-| `make pdf-graph` | RDF → PDF via Graphviz (doet export-rdf eerst) | Na wijziging begrippen |
 | `make webapp` | Genereert statische webapp in `webapp/` | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
@@ -545,7 +537,6 @@ requirements.lock      pinned Python-dependencies
 | `make lock` | Installeert + pinned dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden | Opruimen |
 
-Graphviz is een systeemafhankelijkheid (niet via pip): `sudo apt install graphviz`
 
 ---
 

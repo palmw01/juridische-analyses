@@ -2,7 +2,7 @@ VENV     := $(shell [ -f tools/.venv/bin/python ] && echo "tools/.venv/bin/pytho
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: setup install-hooks validate export-rdf export-graph pdf-graph
+.PHONY: setup install-hooks validate export-rdf export-graph
 .PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp
 
 setup:
@@ -31,10 +31,6 @@ export-graph:
 webapp:
 	@$(VENV) $(TOOLS)/generate_webapp.py
 
-pdf-graph: export-rdf
-	@$(VENV) $(TOOLS)/generate_pdf_graph.py
-	@echo "PDF-graaf gegenereerd in kennisgraaf/juridisch_kennismodel.pdf"
-
 check-enrichment:
 	@$(VENV) $(TOOLS)/check_enrichment.py || true
 
@@ -51,7 +47,7 @@ lock:
 
 clean:
 	@rm -rf webapp/
-	@rm -f kennisgraaf/*.dot kennisgraaf/*.pdf kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
+	@rm -f kennisgraaf/*.dot kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"
 

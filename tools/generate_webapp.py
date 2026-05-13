@@ -610,23 +610,6 @@ footer{
 @media(max-width:479px){.hide-xs{display:none!important}}
 @media(min-width:768px){.hide-md{display:none!important}}
 @media(max-width:767px){.show-md{display:none!important}}
-
-/* ── Print — WCAG PDF-vriendelijk ── */
-@media print {
-  .nav,.skip-link,.hamburger,.dark-toggle,.graph-container,.graph-filter,.graph-legend,.search-input,.search-filters{display:none!important}
-  body{font-size:11pt;line-height:1.5;color:#000;background:#fff;min-height:auto}
-  a{color:#000;text-decoration:underline}
-  .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;page-break-inside:avoid}
-  .card-title{border-bottom-color:#bbb}
-  .detail-layout{display:block}
-  .detail-layout > div{width:100%!important}
-  .mermaid svg{max-width:100%;overflow:visible}
-  .ann-table{min-width:auto;font-size:8pt}
-  a[href]:after{content:" (" attr(href) ")";font-size:0.75rem;color:#555}
-  .breadcrumb a[href]:after{content:none}
-  .regel-box{white-space:normal;border-color:#bbb}
-  footer{display:none}
-}
 """
 
 

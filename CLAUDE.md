@@ -105,14 +105,13 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `make setup` | .venv + deps + pre-commit in 1 commando | Eenmalig na clone |
 | `make validate` | Volledige projectvalidatie (L1+L2+L3) | Na elke wijziging |
 | `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
-| `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make webapp` | Genereert statische webapp (Belastingdienst-stijl) | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
 | `make ci` | Validatie + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
-| `make clean` | Verwijdert gegenereerde bestanden (views, grafen, webapp) | Opruimen |
+| `make clean` | Verwijdert gegenereerde bestanden (grafen, webapp) | Opruimen |
 | `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
 
 **CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `make ci`.  

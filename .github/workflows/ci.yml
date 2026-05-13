@@ -23,19 +23,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.lock
 
-      - name: Installeer dependencies + graphviz
-        run: |
-          pip install -r requirements.lock
-          sudo apt-get update && sudo apt-get install -y graphviz
+      - name: Installeer dependencies
+        run: pip install -r requirements.lock
 
-      - name: Full CI (validate + views + export-rdf + export-graph + check-enrichment)
+      - name: Full CI (validate + export-rdf + export-graph + check-enrichment)
         run: make ci
-
-      - name: Genereer PDF-kennisgraaf
-        run: python tools/generate_pdf_graph.py
-
-      - name: Upload PDF-kennisgraaf als artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: juridisch-kennismodel
-          path: kennisgraaf/juridisch_kennismodel.pdf
