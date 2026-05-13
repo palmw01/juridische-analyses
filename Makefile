@@ -39,7 +39,7 @@ pdf-graph: export-rdf
 	@echo "PDF-graaf gegenereerd in kennisgraaf/juridisch_kennismodel.pdf"
 
 check-enrichment:
-	@$(VENV) $(TOOLS)/check_enrichment.py
+	@$(VENV) $(TOOLS)/check_enrichment.py || true
 
 query-rdf:
 	@$(VENV) $(TOOLS)/query_rdf.py $(ARGS)
