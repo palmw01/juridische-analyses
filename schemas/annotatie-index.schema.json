@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "annotatie-index",
   "title": "Annotatie-index",
-  "description": "Structuuranker voor een wetsartikel",
+  "description": "Structuuranker voor een wetsartikel; verwijst naar lid-annotaties",
   "type": "object",
   "required": ["artikel-id", "bwb-id", "wet", "artikel", "peildatum", "structuurpositie", "leden-annotaties", "kruisreferenties"],
   "additionalProperties": false,
@@ -19,12 +19,27 @@
     "structuurpositie": { "type": "string" },
     "leden-annotaties": {
       "type": "array",
-      "items": { "type": "string", "description": "annotatie-id van lid-annotaties" }
+      "description": "Obsidian-links naar de lid-annotaties van dit artikel, bijv. [[annotaties/BWBR0004770/art9-lid1]]",
+      "items": { "type": "string" }
     },
     "kruisreferenties": {
       "type": "array",
-      "items": { "type": "string", "description": "Art. X W strings" }
+      "description": "Hoog-niveau tekstverwijzingen op artikelniveau, bijv. 'Art. 2 IW 1990'. Verschilt van annotatie-lid kruisreferenties die gestructureerde objecten bevatten.",
+      "items": { "type": "string" }
     },
-    "delegatiestructuur": { "type": "array", "items": { "type": "object" } }
+    "delegatiestructuur": {
+      "type": "array",
+      "description": "Delegatiebevoegdheden op artikelniveau (zelfde formaat als annotatie-lid)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "omschrijving": { "type": "string" },
+          "vindplaats": { "type": "string" },
+          "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
+          "invulling": { "type": ["string", "null"] },
+          "vindplaats-invulling": { "type": ["string", "null"] }
+        }
+      }
+    }
   }
 }

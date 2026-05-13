@@ -24,7 +24,7 @@ tags:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | een voorlopige conserverende aanslag in de inkomstenbelasting | primair | grammaticaal | ja |
+| m-001 | BWBR0004770/art9/lid5 | een voorlopige conserverende aanslag in de inkomstenbelasting | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

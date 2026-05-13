@@ -14,7 +14,7 @@
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/voorlopige-aanslag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De voorlopige aanslag IB/VPB is het aanslagtype waarop lid 5 van toepassing is: het bepaalt het toepassingsbereik van de specialisatieregel. Gekozen als rechtsobject: de aanslag is het voorwerp van de invorderbaarheidsregel (niet de belastingschuldige als rechtssubject).",
       "signalering": null
     },
     {
@@ -23,7 +23,7 @@
       "jas-klasse": "operator",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/logische-of",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "Het voegwoord 'of' fungeert als logische OR-operator in de opsomming van aanslagtypen (IB of VPB): de kwalificatievoorwaarde is vervuld als sprake is van ofwel een voorlopige IB-aanslag ofwel een voorlopige VPB-aanslag. Grammaticale interpretatie.",
       "signalering": "⚠ logische OR; verbindt IB en VPB als alternatieve belastingsoorten voor het toepassingsbereik van lid 5"
     },
     {
@@ -32,7 +32,7 @@
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De voorlopige conserverende aanslag IB is een juridisch onderscheiden aanslagtype dat lid 5 naast de voorlopige aanslag IB/VPB afzonderlijk benoemt. Aparte markering ten opzichte van r-001 omdat de wetgever dit type expliciet heeft toegevoegd met eigen kenmerken.",
       "signalering": null
     },
     {
@@ -41,7 +41,7 @@
       "jas-klasse": "rechtsbetrekking",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De kwalificatie 'invorderbaar' beschrijft de rechtsstatus van de aanslag in de bijzondere regeling van lid 5 en daarmee de rechtsverhouding Ontvanger–belastingschuldige. De puntjes weerspiegelen de niet-aaneengesloten tekst; de rechtsbetrekking is dezelfde als in lid 1.",
       "signalering": "⚠ hergebruik begrip-noot; rechtssubjecten niet expliciet in lid 5; impliciet via art. 3 IW 1990. Soort-consistentiecheck: `invorderbaarheid` heeft `soort: waar-niet-waar` (binair); in lid-5-context is invorderbaarheid per termijn — soort incompatibel. A5-signaal: de wet bepaalt wanneer termijnen vervallen maar articuleert niet hoe de status per termijn op een peildatum wordt vastgesteld; dit vereist uitvoeringsbeleid of een implementatielaag."
     },
     {
@@ -50,7 +50,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De zinsnede 'In afwijking van het eerste lid' stelt als conditie dat lid 5 uitsluitend geldt als lex specialis ten opzichte van de hoofdregel van lid 1. Gekozen als voorwaarde: het is een juridische toepassingsconditie, niet een tijdstip of tijdsduur.",
       "signalering": "⚠ specialisatiebepaling; markeert lid 5 als lex specialis t.o.v. art. 9 lid 1 voor de genoemde voorlopige aanslagen"
     },
     {
@@ -59,7 +59,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De dagtekeningseis ('het jaar waarover deze is vastgesteld') is de tweede cumulatieve kwalificatievoorwaarde van lid 5. Gekozen als voorwaarde (niet tijdsaanduiding): de zinsnede beschrijft een conditie ('heeft die ligt in het jaar'), geen tijdstip als datawaarde.",
       "signalering": "⚠ kwalificatieconditie: beperkt lid 5 tot aanslagen met een dagtekening in het belastingjaar; aanslagen vóór het jaar vallen onder lid 7"
     },
     {
@@ -68,7 +68,7 @@
       "jas-klasse": "rechtsfeit",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De dagtekening van het aanslagbiljet is het rechtsfeit dat in lid 5 twee functies vervult: toetsing van de kwalificatievoorwaarde (ligt in het vaststellingsjaar?) en het referentiepunt voor de termijnenberekening. Als rechtsfeit: concrete datum waaraan lid 5 zijn rechtsgevolgen verbindt.",
       "signalering": "⚠ hergebruik begrip-noot; hier als ankerpunt voor de termijnenberekening in lid 5"
     },
     {
@@ -77,7 +77,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De maandcomponent van de dagtekening is het referentiepunt voor het berekenen van de resterende maanden van het jaar. Gekozen als tijdsaanduiding (niet rechtsfeit): het gaat om de tijdsduur-component als rekenkundige inputwaarde, niet om de triggerfunctie van de dagtekening.",
       "signalering": null
     },
     {
@@ -86,7 +86,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De formule 'in zoveel gelijke termijnen als er na de maand ... nog maanden overblijven' is de rekenregel die het aantal termijnen bepaalt. Afleidingsregel (rekenregel): de uitvoerwaarde (aantal termijnen) wordt berekend op basis van de dagtekeningmaand als invoervariabele.",
       "signalering": null
     },
     {
@@ -95,7 +95,7 @@
       "jas-klasse": "variabele",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "Het aantal resterende maanden is een berekende numerieke variabele die per aanslag verschilt afhankelijk van de dagtekeningmaand. Gekozen als variabele (niet parameter): de waarde is individueel bepaald, niet een vaste drempel voor alle gevallen.",
       "signalering": null
     },
     {
@@ -104,7 +104,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De eerste volzin van lid 5 als geheel formuleert de overkoepelende specialisatieregel die lid 1 opzijzet. Grammaticale én systematische interpretatie: de 'In afwijking van'-constructie is het wetgevingstechnische patroon voor lex specialis; de volzin bevat alle kwalificatievoorwaarden en de uitkomstenregel.",
       "signalering": "⚠ specialisatieregel t.o.v. art. 9 lid 1; als-dan: als aan beide kwalificatievoorwaarden is voldaan (aanslagtype én dagtekening in jaar), dan invorderbaar in gelijke maandelijkse termijnen"
     },
     {
@@ -113,7 +113,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/vervaldag-eerste-termijn",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De tweede volzin bevat een afleidingsregel voor de vervaldag van de eerste termijn: uitvoerbegrip is 'vervaldag-eerste-termijn'. Systematische interpretatie: de volzin staat naast de termijnenberekening van de eerste volzin en regelt een aanvullend aspect van de invorderbaarheid.",
       "signalering": "⚠ reeks-statustoets: deze rekenregel produceert één vervaldatum; samen met markering 14 vormt het een reeks van N datums. De status van elke datum t.o.v. een peildatum is niet in de wettekst gearticuleerd — A5-signaal: ontbrekend uitvoeringsbeleid."
     },
     {
@@ -122,7 +122,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/een-maand-na-dagtekening",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De tijdsduur 'één maand na de dagtekening van het aanslagbiljet' is het specifieke tijdstip waarop de eerste termijn vervalt. Tijdsaanduiding (niet voorwaarde): het beschrijft een concreet tijdstip als uitvoerwaarde van de vervaldag-regel, geen conditie voor een rechtsgevolg.",
       "signalering": null
     },
     {
@@ -131,7 +131,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/vervaldag-volgende-termijnen",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De derde volzin formuleert de rekenregel voor de vervaldagen van de volgende termijnen: iteratief 'telkens een maand later' ten opzichte van de vorige vervaldag. Afleidingsregel (rekenregel): produceert de vervaldagen van termijn 2 tot en met n.",
       "signalering": "⚠ reeks-statustoets: deze rekenregel produceert een reeks van N−1 vervaldatums (iteratief). Zie ook markering 12."
     },
     {
@@ -140,7 +140,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid5/telkens-een-maand-later",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "Het interval 'telkens een maand later' is een vaste wettelijke tijdsduur die het iteratieve vervaldagenschema bepaalt. Tijdsaanduiding (niet parameter): de JAS-ontologie kent tijdsaanduiding als subtype met prioriteit boven parameter.",
       "signalering": null
     },
     {
@@ -149,7 +149,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/terugvalregel-lid-1",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De vierde volzin ('Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn') bevat de terugvalregel: als de specialisatieregel geen praktisch effect heeft, herneemt lid 1. Afleidingsregel (beperkingsregel): beperkt de toepassingsomvang van de eerste volzin.",
       "signalering": "⚠ beslissingsregel (terugvalregel); art. 9 lid 1 herneemt toepassing als het termijnenantal ≤ 1 is (bij dagtekening in december)"
     },
     {
@@ -158,7 +158,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "Het adjectief 'gelijke' is een constitutief kenmerk van de termijnenregel: de termijnen zijn niet alleen in aantal bepaald maar ook gelijk in hoogte. Afleidingsregel: het kenmerk 'gelijk' maakt onderdeel uit van de definitie van het uitvoerbegrip 'invorderbaarheid-in-gelijke-termijnen'.",
       "signalering": "⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen"
     },
     {
@@ -167,7 +167,7 @@
       "jas-klasse": "variabele",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De 'gelijke termijnen' zijn het uitvoerbegrip van de termijnenberekening: het resultaat is het aantal gelijke betalingstermijnen als numerieke en kwalitatieve variabele. Variabele (niet afleidingsregel): dit is het resultaatbegrip, niet de berekeningsregel zelf.",
       "signalering": "⚠ de variabele die de uitkomst van AR-9-5f representeert"
     },
     {
@@ -176,7 +176,7 @@
       "jas-klasse": "variabele",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "In de context van de terugvalregel (vierde volzin) verschijnt 'een belastingaanslag' als inputvariabele van de terugvalregel: het object waarop lid 1 van toepassing wordt als de specialisatieregel geen effect heeft. Variabele (niet rechtsobject): het gaat om de invoerrol in de terugvalbepaling.",
       "signalering": "⚠ hergebruik markering uit lid 1; het totaalbedrag is noodzakelijk voor de berekening van het termijnbedrag (invoer voor AR-9-5f)"
     }
   ],

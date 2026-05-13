@@ -17,7 +17,11 @@
     "artikel": { "type": "string" },
     "lid": { "type": "string" },
     "peildatum": { "type": "string", "format": "date" },
-    "annotatie-id": { "type": "string", "description": "bronannotatie-id" },
+    "annotatie-id": {
+      "type": "string",
+      "description": "bronannotatie-id in pad-notatie, bijv. BWBR0004770/art9/lid1",
+      "pattern": "^[A-Z0-9]"
+    },
     "rechtsfeit-id": { "type": ["string", "null"], "description": "begrip-id van triggerende rechtsfeit; null bij tussenresultaat" },
     "invoer": {
       "type": "array",

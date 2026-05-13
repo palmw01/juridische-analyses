@@ -27,8 +27,8 @@ tags:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid1 | de dagtekening van het aanslagbiljet | primair | systematisch | ja |
-| m-002 | BWBR0004770/art9/lid5 | de dagtekening van het aanslagbiljet | context | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid1 | de dagtekening van het aanslagbiljet | primair | systematisch | nee |
+| m-002 | BWBR0004770/art9/lid5 | de dagtekening van het aanslagbiljet | context | systematisch | nee |
 
 ## Voorbeelden
 

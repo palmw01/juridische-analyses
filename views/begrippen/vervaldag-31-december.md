@@ -24,7 +24,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0024096/par9-1 | dan wordt de vervaldag van deze termijn op 31 december gesteld | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | dan wordt de vervaldag van deze termijn op 31 december gesteld | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

@@ -4,7 +4,6 @@ generate_views.py — Genereer Obsidian-compatibele Markdown-views vanuit bronbe
 
 Bronnen (nieuwe schema-architectuur):
   begrippen/*.yaml        → views/begrippen/{slug}.md
-  begrippen/*.extra.json  → worden meegegeven voor voorbeelden/kenmerken
   annotaties/**/*.json    → views/annotaties/{bwb-id}/{bestand}.md
   regels/*.yaml           → views/regels/{regel-id}.md
 
@@ -211,17 +210,8 @@ def genereer_begrip_view(
     jas_klasse = jas_index.get(begrip_id, "")
     tags = tags_van_begrip(fm, jas_klasse)
 
-    # Extra-bestand (voorbeelden + kenmerken)
-    extra_pad = vault_root / "begrippen" / f"{stem}.extra.json"
-    extra: dict = {}
-    if extra_pad.exists():
-        with extra_pad.open(encoding="utf-8") as f:
-            try:
-                extra = json.load(f)
-            except json.JSONDecodeError:
-                pass
-    voorbeelden: list[dict] = extra.get("voorbeelden") or []
-    kenmerken: list[str] = extra.get("kenmerken") or []
+    voorbeelden: list[dict] = fm.get("voorbeelden") or []
+    kenmerken: list[str] = fm.get("kenmerken") or []
 
     lines: list[str] = []
 

@@ -25,7 +25,7 @@ aliases:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0024096/par9-1 | 31 december | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | 31 december | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

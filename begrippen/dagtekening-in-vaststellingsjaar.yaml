@@ -26,7 +26,7 @@ markeringen:
     waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

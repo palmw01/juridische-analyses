@@ -21,7 +21,7 @@ markeringen:
   tekst: wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

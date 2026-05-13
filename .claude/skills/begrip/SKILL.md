@@ -157,26 +157,28 @@ Bij `herkomst: afgeleid` is minimaal één `leidt-tot`-relatie verplicht (of een
 
 ---
 
-## Extra-bestand: voorbeelden en kenmerken
+## Voorbeelden en kenmerken (optioneel, in begrip-YAML)
 
-Schrijf voorbeelden en kenmerken naar `begrippen/[slug].extra.json`:
-```json
-{
-  "begrip-id": "[B]/art[A]/lid[L]/[slug]",
-  "voorbeelden": [
-    { "stelling": "[concrete stelling]", "waar": true, "toelichting": "[waarom?]" },
-    { "stelling": "[grensgeval]", "waar": false, "toelichting": "[waarom niet?]" }
-  ],
-  "kenmerken": [
-    "[eigenschap 1]",
-    "[eigenschap 2]"
-  ]
-}
+Voeg voorbeelden en kenmerken direct toe aan `begrippen/[slug].yaml`:
+
+```yaml
+voorbeelden:
+  - stelling: "[concrete stelling]"
+    waar: true
+    toelichting: "[waarom?]"
+  - stelling: "[grensgeval]"
+    waar: false
+    toelichting: "[waarom niet?]"
+
+kenmerken:
+  - "[eigenschap 1]"
+  - "[eigenschap 2]"
 ```
 
 - Minimaal **2 stellingen** (waar/niet-waar) die de grenzen van het begrip toetsen.
 - Minimaal **1 grensgeval**.
 - Alle stellingen zijn concreet en toetsbaar.
+- Velden zijn optioneel — laat weg als nog niet ingevuld.
 
 ---
 
@@ -326,7 +328,7 @@ Kennismodel-checklist — [begripsnaam]
 ✅/⬜ soort-id ingevuld
 ✅/⬜ identificatiebegrip ingevuld
 ✅/⬜ aliases aanwezig (leeg is toegestaan indien geen synoniemen)
-✅/⬜ extra-JSON aangemaakt met voorbeelden + kenmerken
+✅/⬜ voorbeelden + kenmerken ingevuld in begrip-YAML (optioneel)
 ✅/⬜ wiki-link afleidingsregel (n.v.t. indien herkomst: direct)
 ✅/⬜ enrichment-queue gecheckt
 ✅/⬜ validatie geslaagd (validate_note.py)

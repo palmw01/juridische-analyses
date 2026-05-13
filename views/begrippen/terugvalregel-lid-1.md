@@ -25,7 +25,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-e]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing. | primair | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid5 | Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing. | primair | systematisch | nee |
 
 ## Voorbeelden
 

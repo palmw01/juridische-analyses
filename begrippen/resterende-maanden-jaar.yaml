@@ -25,7 +25,7 @@ markeringen:
   tekst: nog maanden van het jaar overblijven
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

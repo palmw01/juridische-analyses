@@ -16,6 +16,7 @@
     "wet": { "type": "string" },
     "artikel": { "type": "string" },
     "lid": { "type": "string" },
+    "sectie": { "type": "string", "description": "Paragraaf- of sectiereferentie voor bronnen zonder lidnummering (bijv. Leidraad Invordering), bijv. '9.1'" },
     "peildatum": { "type": "string", "format": "date" },
     "structuurpositie": { "type": "string" },
     "wetstekst": { "type": "string", "minLength": 1 },
@@ -37,7 +38,7 @@
             "enum": ["grammaticaal", "systematisch", "teleologisch", "wetshistorisch"]
           },
           "begrip-id": { "type": "string" },
-          "toelichting-klasse": { "type": "string" },
+          "toelichting-klasse": { "type": "string", "minLength": 1 },
           "signalering": { "type": ["string", "null"] }
         }
       }

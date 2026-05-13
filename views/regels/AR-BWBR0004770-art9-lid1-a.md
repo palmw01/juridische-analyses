@@ -7,10 +7,9 @@ tags:
   - afleidingsregel
   - wet/iw1990
   - art/9
-annotatie-id: [[annotaties/iw1990/art9-1]]
+annotatie-id: BWBR0004770/art9/lid1
 uitvoer:
   - "[[views/begrippen/invorderbaarheid-belastingaanslag]]"
-  - "[[views/begrippen/invorderbaarheid]]"
 invoer:
   - "[[views/begrippen/belastingaanslag]]"
   - "[[views/begrippen/dagtekening-aanslagbiljet]]"
@@ -32,7 +31,6 @@ invoer:
 
 **Uitvoer:**
 - [[views/begrippen/invorderbaarheid-belastingaanslag]]
-- [[views/begrippen/invorderbaarheid]]
 
 **Operators:** plus, groter-dan-of-gelijk-aan
 

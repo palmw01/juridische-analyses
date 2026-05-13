@@ -7,7 +7,7 @@ tags:
   - afleidingsregel
   - wet/iw1990
   - art/9
-annotatie-id: [[annotaties/li2008/art9-9-1]]
+annotatie-id: BWBR0024096/par9-1
 uitvoer:
   - "[[views/begrippen/vervaldag-laatste-dag-maand]]"
 invoer:

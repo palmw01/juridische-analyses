@@ -1,7 +1,7 @@
 begrip-id: BWBR0004770/art9/lid5/logische-of
 begripsnaam: logische-of
 aliases: []
-soort: booleaans
+soort: tekst
 soort-id: false
 jas-klasse: operator
 toelichting-klasse: >-
@@ -24,7 +24,7 @@ markeringen:
   tekst: of
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

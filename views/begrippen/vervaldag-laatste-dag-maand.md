@@ -24,7 +24,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-b]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0024096/par9-1 | wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

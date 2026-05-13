@@ -774,6 +774,8 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
             "toelichting_klasse": data.get("toelichting-klasse") or "",
             "markeringen": data.get("markeringen") or [],
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
+            "voorbeelden": data.get("voorbeelden") or [],
+            "kenmerken": data.get("kenmerken") or [],
         })
     return begrippen
 
@@ -879,6 +881,29 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
   </div>
 </div>"""
     schrijf_html(out, "index.html", "Dashboard | Belastingdienst", body, active="dashboard")
+
+
+def _render_begrip_voorbeelden(voorbeelden: list) -> str:
+    if not voorbeelden:
+        return ""
+    rows = ""
+    for v in voorbeelden:
+        label = "✓" if v.get("waar") else "✗"
+        cls = "voorbeeld-juist" if v.get("waar") else "voorbeeld-onjuist"
+        toel = v.get("toelichting") or ""
+        stelling = v.get("stelling", "")
+        rows += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> {stelling}'
+        if toel:
+            rows += f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">{toel}</div>'
+        rows += "</div>\n"
+    return f'<div class="card"><div class="card-title">Voorbeelden</div>{rows}</div>'
+
+
+def _render_begrip_kenmerken(kenmerken: list) -> str:
+    if not kenmerken:
+        return ""
+    items = "".join(f"<li>{k}</li>" for k in kenmerken)
+    return f'<div class="card"><div class="card-title">Kenmerken</div><ul style="margin-left:1.25rem">{items}</ul></div>'
 
 
 def gen_begrippen(out: Path, begrippen: list, annotaties: list):
@@ -1048,7 +1073,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   {ann_links}
   {f'<div class="card"><div class="card-title">Afleidingsregel</div>{reg_lnk}</div>' if reg_lnk else ""}
 </div>
-</div>"""
+</div>
+{_render_begrip_voorbeelden(b["voorbeelden"])}
+{_render_begrip_kenmerken(b["kenmerken"])}"""
         schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} | Belastingdienst', body, active="begrippen", p="../")
 
 

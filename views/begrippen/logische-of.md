@@ -2,7 +2,7 @@
 begrip-id: BWBR0004770/art9/lid5/logische-of
 begripsnaam: logische-of
 jas-klasse: operator
-soort: booleaans
+soort: tekst
 herkomst: direct
 status: concept
 geldigheid-van: 2026-01-01
@@ -24,7 +24,7 @@ tags:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | of | primair | grammaticaal | ja |
+| m-001 | BWBR0004770/art9/lid5 | of | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

@@ -25,7 +25,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-f]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | gelijke termijnen | primair | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid5 | gelijke termijnen | primair | systematisch | nee |
 
 ## Voorbeelden
 

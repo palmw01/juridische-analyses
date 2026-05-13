@@ -25,7 +25,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-b]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven | primair | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid5 | in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven | primair | systematisch | nee |
 
 ## Voorbeelden
 

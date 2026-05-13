@@ -23,7 +23,7 @@ tags:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0024096/par9-1 | Bij afwijkende boekjaren | primair | grammaticaal | ja |
+| m-001 | BWBR0024096/par9-1 | Bij afwijkende boekjaren | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

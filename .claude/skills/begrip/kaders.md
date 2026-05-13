@@ -180,6 +180,8 @@ Het `jas-klasse`-veld bevat de JAS-classificatie van het begrip, overgenomen uit
 | `plaatsaanduiding` | Geografische aanduiding | — |
 | `delegatiebevoegdheid` | Bevoegdheid tot delegatie | — |
 
+> **Noot operators:** Begrippen met `jas-klasse: operator` krijgen altijd `soort: tekst` — de JAS-klasse beschrijft de functie, het soort het datatype (conform `jas-ontologie.yaml soort-restrictie: [tekst]`).
+
 ### Uitleg klasse
 
 Het `toelichting-klasse`-veld bevat:

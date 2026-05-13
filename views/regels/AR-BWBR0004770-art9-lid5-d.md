@@ -7,7 +7,7 @@ tags:
   - afleidingsregel
   - wet/iw1990
   - art/9
-annotatie-id: [[annotaties/iw1990/art9-5]]
+annotatie-id: BWBR0004770/art9/lid5
 uitvoer:
   - "[[views/begrippen/vervaldag-volgende-termijnen]]"
 invoer:

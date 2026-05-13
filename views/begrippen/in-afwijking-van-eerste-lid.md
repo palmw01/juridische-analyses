@@ -25,7 +25,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-a]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | In afwijking van het eerste lid | primair | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid5 | In afwijking van het eerste lid | primair | systematisch | nee |
 
 ## Voorbeelden
 

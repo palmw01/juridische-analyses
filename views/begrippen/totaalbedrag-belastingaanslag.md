@@ -24,7 +24,7 @@ tags:
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid1 | een belastingaanslag | primair | systematisch | ja |
+| m-001 | BWBR0004770/art9/lid1 | een belastingaanslag | primair | systematisch | nee |
 
 ## Voorbeelden
 

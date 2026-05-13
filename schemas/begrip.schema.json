@@ -4,7 +4,7 @@
   "title": "Begrip",
   "description": "SKOS-compatibel begrip, afgeleid van JAS-annotatie",
   "type": "object",
-  "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip"],
+  "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip", "jas-klasse"],
   "additionalProperties": false,
   "properties": {
     "begrip-id": { "type": "string", "minLength": 1 },
@@ -86,7 +86,8 @@
           },
           "bijdrage": {
             "type": "string",
-            "enum": ["primair", "aanvullend", "context", "conflicterend", "kandidaat"]
+            "enum": ["primair", "aanvullend", "context"],
+            "description": "primair: staving van de kern; aanvullend: verrijkt de kern vanuit meerdere bronartikelen; context: markeert aanwezigheid zonder betekenisbijdrage"
           },
           "bevestigd": { "type": "boolean" },
           "bevestigd-op": { "type": ["string", "null"], "format": "date" }
@@ -94,7 +95,13 @@
       }
     },
     "geldigheid-van": { "type": "string", "format": "date" },
-    "geldigheid-tot": { "type": ["string", "null"] },
+    "geldigheid-tot": {
+      "oneOf": [
+        { "type": "string", "format": "date" },
+        { "type": "null" }
+      ],
+      "description": "Einddatum geldigheid (inclusief); null als nog geldig"
+    },
     "vervangen-door": { "type": ["string", "null"], "description": "begrip-id van opvolger" },
     "relaties": {
       "type": "object",
@@ -132,13 +139,38 @@
     "identificatiebegrip": { "type": "boolean" },
     "jas-klasse": {
       "type": "string",
-      "description": "JAS-classificatie (rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, afleidingsregel, operator, variabele, tijdsaanduiding, parameter, plaatsaanduiding, delegatiebevoegdheid)"
+      "description": "JAS-classificatie overgenomen uit de primaire annotatierij (A2). Wordt tijdens A3 niet gewijzigd.",
+      "enum": [
+        "rechtssubject", "rechtsobject", "rechtsbetrekking", "rechtsfeit",
+        "voorwaarde", "afleidingsregel", "variabele", "variabelewaarde",
+        "parameter", "parameterwaarde", "operator", "tijdsaanduiding",
+        "plaatsaanduiding", "delegatiebevoegdheid", "delegatie-invulling", "brondefinitie"
+      ]
     },
     "toelichting-klasse": {
       "type": "string",
       "description": "Juridische motivering van de JAS-classificatiekeuze"
     },
     "afleidingsregel-id": { "type": ["string", "null"] },
-    "tussenresultaat": { "type": "boolean", "default": false }
+    "tussenresultaat": { "type": "boolean", "default": false },
+    "voorbeelden": {
+      "type": "array",
+      "description": "Concrete stellingen die de grenzen van het begrip toetsen (minimaal 2, waarvan minstens 1 grensgeval)",
+      "items": {
+        "type": "object",
+        "required": ["stelling", "waar"],
+        "additionalProperties": false,
+        "properties": {
+          "stelling": { "type": "string", "minLength": 1 },
+          "waar": { "type": "boolean" },
+          "toelichting": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "kenmerken": {
+      "type": "array",
+      "description": "Juridische kenmerken of eigenschappen van het begrip",
+      "items": { "type": "string", "minLength": 1 }
+    }
   }
 }

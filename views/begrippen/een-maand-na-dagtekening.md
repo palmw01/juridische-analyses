@@ -25,7 +25,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid5-c]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid5 | één maand na de dagtekening van het aanslagbiljet | primair | grammaticaal | ja |
+| m-001 | BWBR0004770/art9/lid5 | één maand na de dagtekening van het aanslagbiljet | primair | grammaticaal | nee |
 
 ## Voorbeelden
 

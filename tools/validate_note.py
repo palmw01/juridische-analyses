@@ -279,6 +279,23 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
     return errors
 
 
+def build_annotatie_index(vault_root: Path) -> set[str]:
+    """Bouw een set van bekende annotatie-id's uit de annotaties/-map."""
+    ids: set[str] = set()
+    annotaties_dir = vault_root / "annotaties"
+    if not annotaties_dir.exists():
+        return ids
+    for fp in annotaties_dir.rglob("*.json"):
+        try:
+            data = load_json(fp)
+            aid = data.get("annotatie-id")
+            if aid:
+                ids.add(str(aid))
+        except Exception:
+            pass
+    return ids
+
+
 def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, vault_root: Path) -> list[str]:
     """Laag 2: Integriteitsvalidatie voor regel-bestanden."""
     errors = []
@@ -300,6 +317,22 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, vau
     rf_id = data.get("rechtsfeit-id")
     if rf_id:
         check_begrip(rf_id, "rechtsfeit-id")
+
+    # annotatie-id: mag geen Obsidian-link zijn en moet verwijzen naar bestaande annotatie
+    ann_id = data.get("annotatie-id")
+    if ann_id:
+        ann_id_str = str(ann_id)
+        if ann_id_str.startswith("[["):
+            errors.append(
+                f"[L2] annotatie-id: gebruik geen Obsidian-link-format — "
+                f"verwacht bijv. 'BWBR0004770/art9/lid1', niet '[[annotaties/...]]'"
+            )
+        else:
+            annotatie_index = build_annotatie_index(vault_root)
+            if annotatie_index and ann_id_str not in annotatie_index:
+                errors.append(
+                    f"[L2] annotatie-id: '{ann_id_str}' niet gevonden in annotaties/"
+                )
 
     return errors
 

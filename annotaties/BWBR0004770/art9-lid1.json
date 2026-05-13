@@ -14,7 +14,7 @@
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De belastingaanslag is het voorwerp waarop de rechtsregel betrekking heeft. Grammaticale interpretatie: het lidwoord 'een' met zelfstandig naamwoord 'belastingaanslag' introduceert het object waarvoor de invorderbaarheidsregel geldt.",
       "signalering": null
     },
     {
@@ -23,7 +23,7 @@
       "jas-klasse": "rechtsbetrekking",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De kwalificatie 'invorderbaar' beschrijft de juridische status van de aanslag en daarmee de rechtsverhouding tussen Ontvanger (bevoegd tot invordering) en belastingschuldige (gehouden tot betaling). Grammaticale interpretatie: koppelwerkwoord met predicaat.",
       "signalering": "⚠ rechtssubjecten (belastingschuldige, ontvanger) niet expliciet benoemd in lid 1; impliciet via art. 2 en 3 IW 1990"
     },
     {
@@ -32,7 +32,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De tijdsgebonden conditie 'zes weken na de dagtekening' beschrijft wanneer de invorderbaarheid intreedt. Gekozen als voorwaarde (niet tijdsaanduiding): de zinsnede formuleert een conditie voor het rechtsgevolg, niet een tijdstip als losse datawaarde.",
       "signalering": null
     },
     {
@@ -41,7 +41,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/zes-weken",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De periode 'zes weken' is een vaste wettelijke tijdsduur die de wachttermijn bepaalt. Gekozen als tijdsaanduiding (niet parameter): de JAS-ontologie kent tijdsaanduiding als subtype met prioriteit boven variabele en parameter.",
       "signalering": null
     },
     {
@@ -50,7 +50,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De dagtekening fungeert in de voorwaarde 'zes weken na de dagtekening' als het referentiepunt van de tijdsduur. Gekozen als tijdsaanduiding (niet rechtsfeit) voor déze markering: het gaat om het tijdstip als referentiewaarde, niet om de triggerfunctie (die is vastgelegd in r-006).",
       "signalering": "⚠ dubbelclassificatie: ook rechtsfeit (nr. 6); dagtekening markeert zowel het aanvangstijdstip van de invorderingstermijn als het rechtsscheppende moment dat de termijn doet ingaan"
     },
     {
@@ -59,7 +59,7 @@
       "jas-klasse": "rechtsfeit",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De dagtekening van het aanslagbiljet is het rechtsfeit dat de termijn doet aanvangen: een concrete handeling/datum waaraan de wet het rechtsgevolg 'aanvang zes-wekentermijn' verbindt. Dubbele markering naast r-005 is gerechtvaardigd: dezelfde tekst vervult zowel de rol van tijdsreferentiepunt (r-005) als triggerfunctie (r-006).",
       "signalering": "⚠ hergebruik begrip-noot (zie nr. 5); als rechtsfeit: de dagtekening is de handeling waaraan het rechtsgevolg (aanvang invorderingstermijn) is verbonden"
     },
     {
@@ -68,7 +68,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De volzin als geheel articuleert een beslissingsregel: gegeven het aanslagtype (rechtsobject) en het verstrijken van zes weken na de dagtekening (voorwaarde), volgt de rechtsstatus 'invorderbaar' (uitvoer). Grammaticale interpretatie: de als-dan-structuur is geëxpliciteerd in 'is invorderbaar ... na'.",
       "signalering": null
     }
   ],

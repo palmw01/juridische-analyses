@@ -24,7 +24,7 @@ markeringen:
   tekst: elk van de volgende termijnen telkens een maand later
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

@@ -24,7 +24,7 @@ afleidingsregel: "[[views/regels/AR-BWBR0024096-art9-par1-a]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0024096/par9-1 | toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december | primair | systematisch | ja |
+| m-001 | BWBR0024096/par9-1 | toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december | primair | systematisch | nee |
 
 ## Voorbeelden
 

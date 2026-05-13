@@ -25,7 +25,7 @@ markeringen:
   tekst: de maand, die in de dagtekening van het aanslagbiljet is vermeld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: true
+  bevestigd: false
   bevestigd-op: '2026-01-01'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null

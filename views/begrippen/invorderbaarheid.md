@@ -30,8 +30,8 @@ afleidingsregel: "[[views/regels/AR-BWBR0004770-art9-lid1-a]]"
 
 | ID | Bron-annotatie | Tekst | Bijdrage | Methode | Bevestigd |
 |----|---------------|-------|---------|---------|-----------|
-| m-001 | BWBR0004770/art9/lid1 | is invorderbaar | primair | grammaticaal | ja |
-| m-002 | BWBR0004770/art9/lid5 | is invorderbaar | context | grammaticaal | ja |
+| m-001 | BWBR0004770/art9/lid1 | is invorderbaar | primair | grammaticaal | nee |
+| m-002 | BWBR0004770/art9/lid5 | is invorderbaar | context | grammaticaal | nee |
 
 ## Voorbeelden
 
