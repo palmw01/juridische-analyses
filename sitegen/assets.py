@@ -2,6 +2,7 @@ import json
 import shutil
 from pathlib import Path
 
+from sitegen.config import slugify
 from sitegen.html import format_ann_title
 
 
@@ -65,7 +66,7 @@ def gen_data_files(out: Path, begrippen: list, annotaties: list, regels: list, i
         a_data.append({
             "id": idx["id"],
             "titel": f'{wet_label} — artikeloverzicht',
-            "url": f'annotaties/{idx["id"].replace("/","-")}.html',
+            "url": f'annotaties/{slugify(idx["id"])}.html',
             "type": "Annotatie",
             "wetstekst": "",
             "tekst": f'{idx.get("structuurpositie","")} {idx.get("bwb_id","")}',

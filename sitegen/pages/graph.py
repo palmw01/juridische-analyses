@@ -37,8 +37,12 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
                 add_node(uitv, uitv.rsplit("/", 1)[-1], "onbekend", "begrip", None)
             links.append({"source": r["id"], "target": uitv, "relatie": "uitvoer"})
 
-    gr_data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
-    kleuren_json = json.dumps(JAS_KLEUREN, ensure_ascii=False)
+    # graph.json schrijven
+    data_dir = out / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    graph_data = {"nodes": nodes, "links": links, "colorMap": JAS_KLEUREN}
+    (data_dir / "graph.json").write_text(json.dumps(graph_data, ensure_ascii=False))
+
     aanwezige_klassen = sorted({n["groep"] for n in nodes if n["groep"] != "onbekend"})
     klasse_opties = "".join(f'<option value="{k}">{k}</option>' for k in aanwezige_klassen)
 
@@ -60,8 +64,9 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
 </div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
-var data = {gr_data};
-var colorMap = {kleuren_json};
+fetch('data/graph.json').then(function(r){{return r.json()}}).then(function(graphData){{
+var data = graphData;
+var colorMap = graphData.colorMap;
 var width = document.getElementById('graphContainer').clientWidth;
 var height = Math.max(400, Math.min(window.innerHeight * 0.6, 700));
 var svg = d3.select("#graphContainer").append("svg").attr("width", width).attr("height", height);
@@ -245,6 +250,7 @@ document.addEventListener('keydown',function(e){{
     if(nativeFs&&(document.fullscreenElement===container||document.webkitFullscreenElement===container))exitFullscreen();
     else if(!nativeFs&&cssFsActive)exitCssFallback();
   }}
+}});
 }});
 </script>"""
     schrijf_html(out, "graph.html", "Kennisgraaf | Belastingdienst", body, active="graaf")
