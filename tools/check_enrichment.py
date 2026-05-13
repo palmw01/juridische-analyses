@@ -1,5 +1,5 @@
 """
-Detecteert enrichment-kandidaten in de begrippen-vault en werkt rapporten/enrichment-queue.json bij.
+Detecteert enrichment-kandidaten in het kennismodel en werkt rapporten/enrichment-queue.json bij.
 
 Een begrip is een enrichment-kandidaat als:
   1. Het 2+ markeringen heeft (hergebruik vanuit meerdere annotaties)
@@ -10,11 +10,11 @@ Een begrip is een enrichment-kandidaat als:
 Het script voegt alleen nieuw ontdekte kandidaten toe — bestaande queue-items worden nooit overschreven.
 
 Gebruik:
-    cd vault-root/
+    cd project-root/
     tools/.venv/bin/python tools/check_enrichment.py [opties]
 
 Opties:
-    --vault-root PATH   Pad naar de vault-root (default: huidige map)
+    --project-dir PATH   Pad naar de project-root (default: huidige map)
     --dry-run           Toon kandidaten zonder de queue bij te werken
     --since YYYY-MM-DD  Verwerk alleen begrippen bijgewerkt na deze datum (op basis van geldigheid-van)
     --verbose           Toon ook begrippen die al in de queue zitten
@@ -244,7 +244,7 @@ def is_gesloten(begrip_id: str, queue: list[dict]) -> bool:
 # ---------------------------------------------------------------------------
 
 def scan_begrippen(
-    vault_root: Path,
+    project_root: Path,
     queue: list[dict],
     since: date | None,
     verbose: bool,
@@ -252,7 +252,7 @@ def scan_begrippen(
     """
     Retourneert (nieuwe_kandidaten, overgeslagen_ids, al_gesloten_ids).
     """
-    begrippen_dir = vault_root / "begrippen"
+    begrippen_dir = project_root / "begrippen"
     nieuwe_kandidaten: list[dict] = []
     overgeslagen: list[str] = []
     al_gesloten: list[str] = []
@@ -374,10 +374,10 @@ def druk_rapport(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Detecteer enrichment-kandidaten in de begrippen-vault."
+        description="Detecteer enrichment-kandidaten in het kennismodel."
     )
     parser.add_argument(
-        "--vault-root", default=".", help="Pad naar de vault-root (default: huidige map)"
+        "--project-dir", default=".", help="Pad naar de project-root (default: huidige map)"
     )
     parser.add_argument(
         "--dry-run", action="store_true", help="Toon kandidaten zonder de queue bij te werken"
@@ -392,8 +392,8 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    vault_root = Path(args.vault_root).resolve()
-    queue_pad = vault_root / "rapporten" / "enrichment-queue.json"
+    project_root = Path(args.project_dir).resolve()
+    queue_pad = project_root / "rapporten" / "enrichment-queue.json"
 
     since: date | None = None
     if args.since:
@@ -403,7 +403,7 @@ def main() -> int:
             print(f"Fout: ongeldige datum '{args.since}'. Gebruik YYYY-MM-DD.", file=sys.stderr)
             return 1
 
-    print(f"Vault:  {vault_root}")
+    print(f"Project:  {project_root}")
     print(f"Queue:  {queue_pad}")
     if since:
         print(f"Since:  {since}")
@@ -413,7 +413,7 @@ def main() -> int:
     queue = laad_queue(queue_pad)
     print(f"Queue geladen: {len(queue)} item(s) ({sum(1 for i in queue if i.get('beslissing')) } gesloten)")
 
-    nieuwe, overgeslagen, gesloten = scan_begrippen(vault_root, queue, since, args.verbose)
+    nieuwe, overgeslagen, gesloten = scan_begrippen(project_root, queue, since, args.verbose)
 
     if nieuwe and not args.dry_run:
         bijgewerkte_queue = queue + nieuwe

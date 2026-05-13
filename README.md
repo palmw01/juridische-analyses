@@ -17,7 +17,7 @@ Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek 
 
 **Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening — om de methodiek serieus te testen.
 
-**Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde vault-bestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -93,7 +93,7 @@ Leidt uit de annotaties begrippen af: per gemarkeerd element ontstaat een YAML-b
 
 **Stap 4 — Valideren** (`make validate`)
 
-Drie validatielagen controleren de vault na elke schrijfactie. Zie §[Validatielaag](#validatielaag) voor een gedetailleerde beschrijving.
+Drie validatielagen controleren het project na elke schrijfactie. Zie §[Validatielaag](#validatielaag) voor een gedetailleerde beschrijving.
 
 **Stap 5 — Exporteren** (`make ci` of afzonderlijke targets)
 
@@ -257,7 +257,7 @@ Het predikaat `prov:wasDerivedFrom` legt de herkomst vast (W3C PROV-standaard). 
 
 ## Validatielaag
 
-De vault wordt op drie niveaus gevalideerd. Validatie draait automatisch bij elke commit (pre-commit hook) en bij elke push naar `main` (GitHub Actions). Het volledige rapport staat in [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
+Het project wordt op drie niveaus gevalideerd. Validatie draait automatisch bij elke commit (pre-commit hook) en bij elke push naar `main` (GitHub Actions). Het volledige rapport staat in [`rapporten/validatie-rapport.md`](./rapporten/validatie-rapport.md).
 
 ### L1 — Schema-conformiteit
 
@@ -285,7 +285,7 @@ annotaties/BWBR0004770/art9-1-lid1.json
 
 **Wat:** drie soorten controles, allemaal blokkerend:
 
-1. **Referentiële integriteit** — alle verwijzingen naar andere vault-bestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten)
+1. **Referentiële integriteit** — alle verwijzingen naar andere projectbestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten)
 2. **Status-consistentie** — `status: gevalideerd` vereist een ingevulde `definitie.kern`; `status: vervallen` vereist een niet-null `vervangen-door`
 3. **Diagramintegriteit** — `kanten[].van` en `kanten[].naar` in annotatie-lid-diagrammen moeten verwijzen naar een bestaand `knopen[].id`
 
@@ -493,7 +493,7 @@ In dit project worden afleidingsregels in RegelSpraak-oriëntatie opgeslagen in 
 
 ---
 
-## Vault-structuur
+## Projectstructuur
 
 ```
 bronnen/{bwb-id}/      primaire wetstekst — genormaliseerde MCP-responses (JSON)
@@ -555,7 +555,7 @@ Graphviz is een systeemafhankelijkheid (niet via pip): `sudo apt install graphvi
 |------|-------------|
 | AI-assistent | Claude Code (Anthropic, claude-sonnet-4-6) met MCP |
 | Wettenbrondata | wetten.overheid.nl via MCP-server (`wettenbank`-skill) |
-| Vault | Markdown + YAML (plain-text, geen Obsidian-afhankelijkheid) |
+| Project | Markdown + YAML (plain-text, geen Obsidian-afhankelijkheid) |
 | Dataformaten | JSON (annotaties, bronnen), YAML (begrippen, regels), JSON Schema (validatie) |
 | Python | 3.10+, PyYAML, jsonschema, networkx, rdflib |
 | Graafvisualisatie | Graphviz (`dot`) — `sudo apt install graphviz` |

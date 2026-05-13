@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-generate_webapp.py — Genereer statische webapp (Belastingdienst-stijl) uit vault-data.
+generate_webapp.py — Genereer statische webapp (Belastingdienst-stijl) uit project-data.
 
 Gebruik:
-    tools/.venv/bin/python tools/generate_webapp.py [--vault-root .] [--out webapp]
+    tools/.venv/bin/python tools/generate_webapp.py [--project-dir .] [--out webapp]
 """
 
 import argparse
@@ -728,9 +728,9 @@ def format_structuurpositie(a: dict) -> str:
 
 # ── Data laden ────────────────────────────────────────────
 
-def laad_begrippen(vault_root: Path) -> list[dict]:
+def laad_begrippen(project_root: Path) -> list[dict]:
     begrippen = []
-    pad = vault_root / "begrippen"
+    pad = project_root / "begrippen"
     for f in sorted(pad.glob("*.yaml")):
         data = yaml.safe_load(f.read_text()) or {}
         relaties: dict = data.get("relaties") or {}
@@ -786,9 +786,9 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
     return begrippen
 
 
-def laad_annotaties(vault_root: Path) -> list[dict]:
+def laad_annotaties(project_root: Path) -> list[dict]:
     annotaties = []
-    pad = vault_root / "annotaties"
+    pad = project_root / "annotaties"
     for json_file in sorted(pad.rglob("*.json")):
         data = json.loads(json_file.read_text())
         aid = data.get("annotatie-id") or ""
@@ -833,9 +833,9 @@ def laad_annotaties(vault_root: Path) -> list[dict]:
     return annotaties
 
 
-def laad_regels(vault_root: Path) -> list[dict]:
+def laad_regels(project_root: Path) -> list[dict]:
     regels = []
-    pad = vault_root / "regels"
+    pad = project_root / "regels"
     for f in sorted(pad.glob("*.yaml")):
         data = yaml.safe_load(f.read_text()) or {}
         regels.append({
@@ -859,10 +859,10 @@ def laad_regels(vault_root: Path) -> list[dict]:
     return regels
 
 
-def laad_artikel_indices(vault_root: Path) -> list[dict]:
+def laad_artikel_indices(project_root: Path) -> list[dict]:
     """Laad annotatie-index bestanden (artikel-niveau, geen wetstekst)."""
     indices = []
-    pad = vault_root / "annotaties"
+    pad = project_root / "annotaties"
     for json_file in sorted(pad.rglob("*.json")):
         data = json.loads(json_file.read_text())
         if "artikel-id" not in data:
@@ -1436,7 +1436,7 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
     # First pass: alle bekende begrippen (zodat JAS-klasse niet overschreven wordt)
     for b in begrippen:
         add_node(b["id"], b["naam"], b["jas_klasse"], "begrip", f'begrippen/{b["slug"]}.html')
-    # Second pass: relaties (onbekende nodes alleen als ze niet in de vault zitten)
+    # Second pass: relaties (onbekende nodes alleen als ze niet in het project zitten)
     for b in begrippen:
         for rt in ("is-een", "heeft", "leidt-tot"):
             for target in b["relaties"][rt]:
@@ -1784,8 +1784,8 @@ def gen_css_js(out: Path):
     (out / "js/app.js").write_text(js)
 
 
-def gen_icons(vault: Path, out: Path):
-    src = vault / "icons"
+def gen_icons(project_dir: Path, out: Path):
+    src = project_dir / "icons"
     dst = out / "icons"
     dst.mkdir(parents=True, exist_ok=True)
     if src.exists():
@@ -1798,26 +1798,26 @@ def gen_icons(vault: Path, out: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Genereer statische webapp uit vault")
-    parser.add_argument("--vault-root", default=".", help="Pad naar vault-root")
+    parser = argparse.ArgumentParser(description="Genereer statische webapp uit project")
+    parser.add_argument("--project-dir", default=".", help="Pad naar project-root")
     parser.add_argument("--out", default="webapp", help="Output directory")
     args = parser.parse_args()
 
-    vault = Path(args.vault_root)
+    project_dir = Path(args.project_dir)
     out = Path(args.out)
     if out.exists():
         shutil.rmtree(out)
 
     print("Data laden...", file=sys.stderr)
-    begrippen = laad_begrippen(vault)
-    annotaties = laad_annotaties(vault)
-    regels = laad_regels(vault)
-    artikel_indices = laad_artikel_indices(vault)
+    begrippen = laad_begrippen(project_dir)
+    annotaties = laad_annotaties(project_dir)
+    regels = laad_regels(project_dir)
+    artikel_indices = laad_artikel_indices(project_dir)
     print(f"  {len(begrippen)} begrippen, {len(annotaties)} annotaties, {len(regels)} regels, {len(artikel_indices)} artikel-indices", file=sys.stderr)
 
     print("CSS, JS en icons genereren...", file=sys.stderr)
     gen_css_js(out)
-    gen_icons(vault, out)
+    gen_icons(project_dir, out)
 
     print("Pagina's genereren...", file=sys.stderr)
     gen_index(out, begrippen, annotaties, regels)

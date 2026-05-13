@@ -4,9 +4,9 @@ fetch_wettenbank.py — Normaliseer een MCP-response van de wettenbank API naar 
 Optioneel: genereer direct kruisreferenties via --kruisrefs.
 
 Gebruik:
-    python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --vault-root .
-    echo '{...}' | python tools/fetch_wettenbank.py --vault-root .
-    python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --vault-root . --kruisrefs
+    python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --project-dir .
+    echo '{...}' | python tools/fetch_wettenbank.py --project-dir .
+    python tools/fetch_wettenbank.py --input /tmp/mcp-response.json --project-dir . --kruisrefs
 """
 
 import argparse
@@ -27,10 +27,10 @@ def parse_args() -> argparse.Namespace:
         help="Pad naar het JSON-invoerbestand (default: stdin)",
     )
     parser.add_argument(
-        "--vault-root",
+        "--project-dir",
         required=True,
         metavar="DIR",
-        help="Pad naar de vault root (bevat bronnen/)",
+        help="Pad naar de project-root (bevat bronnen/)",
     )
     parser.add_argument(
         "--force", "-f",
@@ -91,12 +91,12 @@ def normalize(data: dict) -> dict:
     }
 
 
-def write_output(record: dict, vault_root: Path, force: bool) -> Path:
+def write_output(record: dict, project_root: Path, force: bool) -> Path:
     """Schrijf het record naar bronnen/{bwb-id}/art{artikel}.json."""
     bwb_id = record["bwb-id"]
     artikel = record["artikel"]
 
-    output_dir = vault_root / "bronnen" / bwb_id
+    output_dir = project_root / "bronnen" / bwb_id
     output_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = output_dir / f"art{artikel}.json"
@@ -114,16 +114,16 @@ def write_output(record: dict, vault_root: Path, force: bool) -> Path:
 
 def main() -> None:
     args = parse_args()
-    vault_root = Path(args.vault_root).resolve()
+    project_root = Path(args.project_dir).resolve()
 
-    if not vault_root.is_dir():
-        print(f"Fout: vault-root bestaat niet of is geen directory: {vault_root}", file=sys.stderr)
+    if not project_root.is_dir():
+        print(f"Fout: project-root bestaat niet of is geen directory: {project_root}", file=sys.stderr)
         sys.exit(1)
 
     data = load_input(args.input)
     validate_response(data)
     record = normalize(data)
-    output_path = write_output(record, vault_root, args.force)
+    output_path = write_output(record, project_root, args.force)
     print(str(output_path))
 
     if args.kruisrefs:

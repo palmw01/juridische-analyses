@@ -42,7 +42,7 @@ query-rdf:
 	@$(VENV) $(TOOLS)/query_rdf.py $(ARGS)
 
 fetch-wettenbank:
-	@echo "Gebruik: $(VENV) $(TOOLS)/fetch_wettenbank.py --input <bestand> --vault-root ."
+	@echo "Gebruik: $(VENV) $(TOOLS)/fetch_wettenbank.py --input <bestand> --project-dir ."
 
 lock:
 	@tools/.venv/bin/pip install -r requirements.lock

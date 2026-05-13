@@ -26,10 +26,10 @@ def haal_contexten(definitie_obj) -> list[dict]:
 # JAS-index
 # ---------------------------------------------------------------------------
 
-def bouw_jas_index(vault_root: Path) -> dict[str, str]:
+def bouw_jas_index(project_root: Path) -> dict[str, str]:
     """Bouw een map begrip-id → jas-klasse door alle annotatie-JSONs te scannen."""
     index: dict[str, str] = {}
-    annotaties_dir = vault_root / "annotaties"
+    annotaties_dir = project_root / "annotaties"
     if not annotaties_dir.exists():
         return index
     for json_file in sorted(annotaties_dir.glob("**/*.json")):

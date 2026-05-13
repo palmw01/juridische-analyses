@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# pre-commit hook — valideert vault-bestanden voor commit
+# pre-commit hook — valideert projectbestanden voor commit
 # Installeer met: make install-hooks  (of: ln -sf ../../scripts/pre-commit .git/hooks/pre-commit)
 
-VAULT_ROOT=$(git rev-parse --show-toplevel)
-VALIDATE="$VAULT_ROOT/tools/.venv/bin/python $VAULT_ROOT/tools/validate_note.py"
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+VALIDATE="$PROJECT_ROOT/tools/.venv/bin/python $PROJECT_ROOT/tools/validate_note.py"
 
-# Haal staged vault-bestanden op (alleen in bekende paden)
+# Haal staged projectbestanden op (alleen in bekende paden)
 STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(annotaties|begrippen|regels|bronnen)/.*\.(json|yaml|yml)$' || true)
 
 if [ -z "$STAGED" ]; then
     exit 0
 fi
 
-cd "$VAULT_ROOT"
+cd "$PROJECT_ROOT"
 
 HAS_ERRORS=0
 for f in $STAGED; do
@@ -31,7 +31,7 @@ done
 if [ "$HAS_ERRORS" -eq 0 ]; then
     # Genereer validatierapport na succesvolle per-file checks
     if ! $VALIDATE --full > /dev/null 2>&1; then
-        echo "[pre-commit] Fout bij volledige vault-validatie"
+        echo "[pre-commit] Fout bij volledige projectvalidatie"
         exit 1
     fi
     git add rapporten/validatie-rapport.md

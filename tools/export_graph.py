@@ -1,9 +1,9 @@
 """
-Exporteert vault naar graph.gexf en graph.graphml.
+Exporteert project naar graph.gexf en graph.graphml.
 Leest begrippen/*.yaml, regels/*.yaml, annotaties/**/*.json.
 
 Gebruik:
-    tools/.venv/bin/python tools/export_graph.py [--vault-root .]
+    tools/.venv/bin/python tools/export_graph.py [--project-dir .]
 """
 
 import argparse
@@ -28,8 +28,8 @@ def is_verborgen_pad(fp: Path, root: Path) -> bool:
         return False
 
 
-def check_staleness(vault_root: Path, output_dir: Path) -> None:
-    """Waarschuw als vault-bestanden nieuwer zijn dan de laatste GEXF-export."""
+def check_staleness(project_root: Path, output_dir: Path) -> None:
+    """Waarschuw als projectbestanden nieuwer zijn dan de laatste GEXF-export."""
     gexf = output_dir / "graph.gexf"
     if not gexf.exists():
         return
@@ -38,15 +38,15 @@ def check_staleness(vault_root: Path, output_dir: Path) -> None:
     nieuwere = []
 
     for patroon in ["begrippen/*.yaml", "regels/*.yaml", "annotaties/**/*.json"]:
-        for f in vault_root.glob(patroon):
-            if is_verborgen_pad(f, vault_root):
+        for f in project_root.glob(patroon):
+            if is_verborgen_pad(f, project_root):
                 continue
             if f.stat().st_mtime > export_mtime:
-                nieuwere.append(f.relative_to(vault_root))
+                nieuwere.append(f.relative_to(project_root))
 
     if nieuwere:
         print(
-            f"  waarschuwing: {len(nieuwere)} vault-bestand(en) zijn nieuwer dan de laatste export "
+            f"  waarschuwing: {len(nieuwere)} projectbestand(en) zijn nieuwer dan de laatste export "
             f"({gexf.name}). Voer /graph opnieuw uit om de graaf bij te werken.",
             file=sys.stderr,
         )
@@ -56,9 +56,9 @@ def check_staleness(vault_root: Path, output_dir: Path) -> None:
             print(f"    … en {len(nieuwere) - 5} andere(n)", file=sys.stderr)
 
 
-def lees_kleuren(vault_root: Path) -> dict[str, str]:
+def lees_kleuren(project_root: Path) -> dict[str, str]:
     """Laadt kleur per JAS-klasse uit .obsidian/graph.json."""
-    graph_json = vault_root / ".obsidian" / "graph.json"
+    graph_json = project_root / ".obsidian" / "graph.json"
     if not graph_json.exists():
         return {}
     with graph_json.open() as f:
@@ -75,13 +75,13 @@ def lees_kleuren(vault_root: Path) -> dict[str, str]:
     return kleur_map
 
 
-def build_graph(vault_root: Path) -> nx.MultiDiGraph:
-    kleur_map = lees_kleuren(vault_root)
-    jas_index = bouw_jas_index(vault_root)
+def build_graph(project_root: Path) -> nx.MultiDiGraph:
+    kleur_map = lees_kleuren(project_root)
+    jas_index = bouw_jas_index(project_root)
     G = nx.MultiDiGraph()
 
     # --- Begrip-nodes ---
-    begrippen_dir = vault_root / "begrippen"
+    begrippen_dir = project_root / "begrippen"
     if begrippen_dir.exists():
         for yaml_file in sorted(begrippen_dir.glob("*.yaml")):
             with yaml_file.open(encoding="utf-8") as f:
@@ -110,7 +110,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
             G.add_node(node_id, **attrs)
 
     # --- Regel-nodes ---
-    regels_dir = vault_root / "regels"
+    regels_dir = project_root / "regels"
     if regels_dir.exists():
         for yaml_file in sorted(regels_dir.glob("*.yaml")):
             with yaml_file.open(encoding="utf-8") as f:
@@ -137,7 +137,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
             G.add_node(node_id, **attrs)
 
     # --- Annotatie-nodes ---
-    annotaties_dir = vault_root / "annotaties"
+    annotaties_dir = project_root / "annotaties"
     if annotaties_dir.exists():
         for json_file in sorted(annotaties_dir.glob("**/*.json")):
             if is_verborgen_pad(json_file, annotaties_dir):
@@ -148,7 +148,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
                 except json.JSONDecodeError:
                     continue
 
-            node_id = data.get("annotatie-id") or str(json_file.relative_to(vault_root).with_suffix(""))
+            node_id = data.get("annotatie-id") or str(json_file.relative_to(project_root).with_suffix(""))
             artikel = data.get("artikel", "?")
             lid = data.get("lid", "")
             wet = data.get("wet", "")
@@ -216,7 +216,7 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
                 except json.JSONDecodeError:
                     continue
 
-            annotatie_id = data.get("annotatie-id") or str(json_file.relative_to(vault_root).with_suffix(""))
+            annotatie_id = data.get("annotatie-id") or str(json_file.relative_to(project_root).with_suffix(""))
             if annotatie_id not in G:
                 continue
 
@@ -258,20 +258,20 @@ def build_graph(vault_root: Path) -> nx.MultiDiGraph:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Vault → GraphML/GEXF export")
-    parser.add_argument("--vault-root", default=".", help="Pad naar vault-root (default: .)")
+    parser = argparse.ArgumentParser(description="Project → GraphML/GEXF export")
+    parser.add_argument("--project-dir", default=".", help="Pad naar project-root (default: .)")
     args = parser.parse_args()
 
-    vault_root = Path(args.vault_root).resolve()
+    project_root = Path(args.project_dir).resolve()
 
-    print(f"Vault: {vault_root}")
+    print(f"Project: {project_root}")
 
-    output_dir = vault_root / "kennisgraaf"
+    output_dir = project_root / "kennisgraaf"
     output_dir.mkdir(exist_ok=True)
 
-    check_staleness(vault_root, output_dir)
+    check_staleness(project_root, output_dir)
 
-    G = build_graph(vault_root)
+    G = build_graph(project_root)
 
     print(f"Graaf: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-query_rdf.py — Bevragen van de RDF-vault met SPARQL.
+query_rdf.py — Bevragen van het RDF-model met SPARQL.
 Gebruikt rdflib om kennisgraaf/begrippen.ttl te laden en queries uit te voeren.
 
 Gebruik:
@@ -127,7 +127,7 @@ def laad_graph(rdf_path: Path) -> "Graph":
     return g
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Bevraag de RDF-vault met SPARQL")
+    parser = argparse.ArgumentParser(description="Bevraag het RDF-model met SPARQL")
     parser.add_argument("--query", "-q", help="SPARQL query als tekst of .rq bestand")
     parser.add_argument("--list", "-l", action="store_true", help="Toon beschikbare ingebouwde queries")
     parser.add_argument("--rdf", default="kennisgraaf/begrippen.ttl", help="Pad naar RDF Turtle bestand")

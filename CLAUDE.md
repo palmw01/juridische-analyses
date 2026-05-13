@@ -50,7 +50,7 @@ Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. I
 | A5 — Signaleren | Lacunes, open normen, uitvoeringsbeleid | ✗ niet ondersteund |
 | A6 — Kennismodel opstellen | Gegevensmodel, regelmodel, procesmodel | ✗ niet ondersteund |
 
-**Resultaten van de AI-workflow** zijn de graafmodellen in de vault: annotatie-noten (A2), begrip-noten (A3a) en afleidingsregel-noten (A3b). Deze zijn input voor A4–A6, maar die activiteiten vallen buiten de scope van deze workflow.
+**Resultaten van de AI-workflow** zijn de graafmodellen in het project: annotatie-noten (A2), begrip-noten (A3a) en afleidingsregel-noten (A3b). Deze zijn input voor A4–A6, maar die activiteiten vallen buiten de scope van deze workflow.
 
 **De scope van A2 en A3 wordt niet uitgebreid.** Voorstellen om andere activiteiten (A1, A4, A5, A6) alsnog met AI te ondersteunen worden niet doorgevoerd zonder expliciete beslissing van de gebruiker.
 
@@ -86,7 +86,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
-| `make export-graph` | `tools/export_graph.py` | Graph-export: vault → GEXF/GraphML |
+| `make export-graph` | `tools/export_graph.py` | Graph-export: project → GEXF/GraphML |
 
 ### Kaders en ondersteunende bestanden
 
@@ -103,7 +103,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | Commando | Gebruik | Wanneer uitvoeren |
 |----------|---------|-------------------|
 | `make setup` | .venv + deps + pre-commit in 1 commando | Eenmalig na clone |
-| `make validate` | Volledige vault-validatie (L1+L2+L3) | Na elke wijziging |
+| `make validate` | Volledige projectvalidatie (L1+L2+L3) | Na elke wijziging |
 | `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
 | `make pdf-graph` | Genereert PDF-kennisgraaf uit RDF (doet export-rdf eerst) | Na wijziging begrippen |
 | `make webapp` | Genereert statische webapp (Belastingdienst-stijl) | Na wijzigingen |
@@ -117,4 +117,4 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 **CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `make ci`.  
 **Deploy:** Bij elke push naar `main` wordt de webapp automatisch gebouwd en naar GitHub Pages gepubliceerd via `.github/workflows/deploy-webapp.yml`.  
-**Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede vault-bestanden. Installeer met `make install-hooks`.
+**Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede projectbestanden. Installeer met `make install-hooks`.

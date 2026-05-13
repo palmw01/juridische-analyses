@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-export_rdf.py — Exporteer begrippen-vault naar RDF Turtle (SKOS-compatibel).
+export_rdf.py — Exporteer begrippen naar RDF Turtle (SKOS-compatibel).
 
 Leest begrippen/*.yaml en genereert kennisgraaf/begrippen.ttl. Geen rdflib
 nodig — Turtle wordt als tekst gegenereerd.
 
 Gebruik:
-    cd vault-root/
-    tools/.venv/bin/python tools/export_rdf.py [--vault-root .] [--out kennisgraaf/begrippen.ttl]
+    cd project-root/
+    tools/.venv/bin/python tools/export_rdf.py [--project-dir .] [--out kennisgraaf/begrippen.ttl]
 """
 
 import argparse
@@ -160,8 +160,8 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
 # Hoofd-export
 # ---------------------------------------------------------------------------
 
-def exporteer_begrippen(vault_root: Path, jas_index: dict[str, str]) -> list[str]:
-    begrippen_dir = vault_root / "begrippen"
+def exporteer_begrippen(project_root: Path, jas_index: dict[str, str]) -> list[str]:
+    begrippen_dir = project_root / "begrippen"
     blokken: list[str] = []
 
     for yaml_file in sorted(begrippen_dir.glob("*.yaml")):
@@ -212,8 +212,8 @@ def regel_naar_turtle(fm: dict) -> str:
     return "\n".join(lines)
 
 
-def exporteer_regels(vault_root: Path) -> list[str]:
-    regels_dir = vault_root / "regels"
+def exporteer_regels(project_root: Path) -> list[str]:
+    regels_dir = project_root / "regels"
     blokken: list[str] = []
     if not regels_dir.exists():
         return blokken
@@ -232,7 +232,7 @@ def schrijf_turtle(output_pad: Path, blokken: list[str]) -> None:
     output_pad.parent.mkdir(parents=True, exist_ok=True)
     with output_pad.open("w", encoding="utf-8") as f:
         f.write("# Gegenereerd door tools/export_rdf.py\n")
-        f.write("# SKOS-compatibele export van begrippen-vault\n\n")
+        f.write("# SKOS-compatibele export van begrippen\n\n")
         f.write(PREFIXES)
         f.write("\n")
         for blok in blokken:
@@ -249,7 +249,7 @@ def main() -> int:
         description="Exporteer begrippen + regels naar RDF Turtle (SKOS)."
     )
     parser.add_argument(
-        "--vault-root", default=".", help="Pad naar de vault-root (default: .)"
+        "--project-dir", default=".", help="Pad naar de project-root (default: .)"
     )
     parser.add_argument(
         "--out",
@@ -258,17 +258,17 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    vault_root = Path(args.vault_root).resolve()
-    output_pad = vault_root / args.out
+    project_root = Path(args.project_dir).resolve()
+    output_pad = project_root / args.out
 
-    begrippen_dir = vault_root / "begrippen"
+    begrippen_dir = project_root / "begrippen"
     if not begrippen_dir.exists():
         print(f"Fout: begrippen-map niet gevonden: {begrippen_dir}", file=sys.stderr)
         return 1
 
-    jas_index = bouw_jas_index(vault_root)
-    blokken = exporteer_begrippen(vault_root, jas_index)
-    blokken.extend(exporteer_regels(vault_root))
+    jas_index = bouw_jas_index(project_root)
+    blokken = exporteer_begrippen(project_root, jas_index)
+    blokken.extend(exporteer_regels(project_root))
     schrijf_turtle(output_pad, blokken)
 
     print(f"RDF Turtle gegenereerd: {output_pad}")

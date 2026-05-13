@@ -1,4 +1,4 @@
-name: CI — vault-validatie
+name: CI — project-validatie
 
 on:
   push:

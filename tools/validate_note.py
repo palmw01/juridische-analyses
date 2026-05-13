@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate_note.py — Vault-validatie voor juridisch kennissysteem
+validate_note.py — Projectvalidatie voor juridisch kennissysteem
 Laag 1: JSON Schema-validatie
 Laag 2: Integriteitsvalidatie (--full of --integrity)
 Laag 3: Kwaliteitswaarschuwingen
@@ -70,14 +70,14 @@ def load_file(filepath: Path) -> dict:
 # Begrip-index
 # ---------------------------------------------------------------------------
 
-def build_begrip_index(vault_root: Path) -> dict[str, Path]:
+def build_begrip_index(project_root: Path) -> dict[str, Path]:
     """
     Bouw een index van begrip-id → bestandspad.
     Begrip-bestanden staan in begrippen/ met extensie .md of .yaml.
     De begrip-id staat in de frontmatter; als fallback is de bestandsnaam het laatste segment.
     """
     index: dict[str, Path] = {}
-    begrippen_dir = vault_root / "begrippen"
+    begrippen_dir = project_root / "begrippen"
     if not begrippen_dir.exists():
         return index
 
@@ -126,12 +126,12 @@ def begrip_bestaat(begrip_id: str, index: dict[str, Path]) -> bool:
 # Schema-detectie bij --full
 # ---------------------------------------------------------------------------
 
-def detect_schema(filepath: Path, vault_root: Path) -> Optional[str]:
+def detect_schema(filepath: Path, project_root: Path) -> Optional[str]:
     """
     Bepaal het schema-type op basis van het pad en de bestandsnaam.
     Geeft None terug als het bestand niet gevalideerd hoeft te worden.
     """
-    rel = filepath.relative_to(vault_root)
+    rel = filepath.relative_to(project_root)
     parts = rel.parts
 
     if parts[0] == "begrippen":
@@ -194,7 +194,7 @@ ONVERENIGBARE_JAS_PAREN: set[frozenset] = {
 }
 
 
-def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, vault_root: Path) -> list[str]:
+def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, project_root: Path) -> list[str]:
     """Laag 2: Integriteitsvalidatie voor begrip-bestanden."""
     errors = []
 
@@ -218,7 +218,7 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
             )
 
     # bron-annotatie-id → annotaties/ integriteitscheck via annotatie-id veld
-    annotatie_ids = build_annotatie_index(vault_root)
+    annotatie_ids = build_annotatie_index(project_root)
     for m in markeringen:
         ann_id = str(m.get("bron-annotatie-id") or "")
         if not ann_id or ann_id.startswith("[["):
@@ -295,7 +295,7 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
     # afleidingsregel-id → regels/{id}.yaml of regels/{id}.md bestaat
     if ar_id:
         ar_slug = begrip_id_to_slug(ar_id) if "/" in ar_id else ar_id
-        regels_dir = vault_root / "regels"
+        regels_dir = project_root / "regels"
         found = (
             (regels_dir / f"{ar_slug}.yaml").exists()
             or (regels_dir / f"{ar_slug}.md").exists()
@@ -307,10 +307,10 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
     return errors
 
 
-def build_annotatie_index(vault_root: Path) -> set[str]:
+def build_annotatie_index(project_root: Path) -> set[str]:
     """Bouw een set van bekende annotatie-id's uit de annotaties/-map."""
     ids: set[str] = set()
-    annotaties_dir = vault_root / "annotaties"
+    annotaties_dir = project_root / "annotaties"
     if not annotaties_dir.exists():
         return ids
     for fp in annotaties_dir.rglob("*.json"):
@@ -324,7 +324,7 @@ def build_annotatie_index(vault_root: Path) -> set[str]:
     return ids
 
 
-def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, vault_root: Path) -> list[str]:
+def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, project_root: Path) -> list[str]:
     """Laag 2: Integriteitsvalidatie voor regel-bestanden."""
     errors = []
 
@@ -361,7 +361,7 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, vau
                 f"verwacht bijv. 'BWBR0004770/art9/lid1', niet '[[annotaties/...]]'"
             )
         else:
-            annotatie_index = build_annotatie_index(vault_root)
+            annotatie_index = build_annotatie_index(project_root)
             if annotatie_index and ann_id_str not in annotatie_index:
                 errors.append(
                     f"[L2] annotatie-id: '{ann_id_str}' niet gevonden in annotaties/"
@@ -498,7 +498,7 @@ def validate_file(
     schema_name: str,
     schema: dict,
     begrip_index: dict,
-    vault_root: Path,
+    project_root: Path,
     check_integrity: bool = False,
 ) -> ValidationResult:
     """Valideer één bestand en geef een ValidationResult terug."""
@@ -523,11 +523,11 @@ def validate_file(
     if check_integrity:
         if schema_name == "begrip":
             result.errors.extend(
-                validate_integrity_begrip(data, filepath, begrip_index, vault_root)
+                validate_integrity_begrip(data, filepath, begrip_index, project_root)
             )
         elif schema_name == "regel":
             result.errors.extend(
-                validate_integrity_regel(data, filepath, begrip_index, vault_root)
+                validate_integrity_regel(data, filepath, begrip_index, project_root)
             )
         elif schema_name == "annotatie-lid":
             result.errors.extend(
@@ -551,47 +551,47 @@ def validate_file(
 # Bestandsverzameling
 # ---------------------------------------------------------------------------
 
-def collect_files_for_schema(vault_root: Path, schema_name: str) -> list[Path]:
+def collect_files_for_schema(project_root: Path, schema_name: str) -> list[Path]:
     """Verzamel alle bestanden die bij een schema-type horen."""
     files = []
     if schema_name == "begrip":
-        d = vault_root / "begrippen"
+        d = project_root / "begrippen"
         for ext in ("*.md", "*.yaml", "*.yml"):
             files.extend(d.glob(ext))
         files = [f for f in files if f.name != "index.md"]
     elif schema_name == "regel":
-        d = vault_root / "regels"
+        d = project_root / "regels"
         for ext in ("*.md", "*.yaml", "*.yml"):
             files.extend(d.glob(ext))
         files = [f for f in files if f.name != "index.md"]
     elif schema_name in ("annotatie-lid", "annotatie-index"):
-        d = vault_root / "annotaties"
+        d = project_root / "annotaties"
         for fp in d.rglob("*.md"):
-            detected = detect_schema(fp, vault_root)
+            detected = detect_schema(fp, project_root)
             if detected == schema_name:
                 files.append(fp)
         for fp in d.rglob("*.json"):
-            detected = detect_schema(fp, vault_root)
+            detected = detect_schema(fp, project_root)
             if detected == schema_name:
                 files.append(fp)
     return sorted(files)
 
 
-def collect_all_files(vault_root: Path) -> list[tuple[Path, str]]:
+def collect_all_files(project_root: Path) -> list[tuple[Path, str]]:
     """Verzamel alle te valideren bestanden met hun schema-naam."""
     result = []
     for schema_name in ("begrip", "regel"):
-        for fp in collect_files_for_schema(vault_root, schema_name):
+        for fp in collect_files_for_schema(project_root, schema_name):
             result.append((fp, schema_name))
     # annotaties
-    annotaties_dir = vault_root / "annotaties"
+    annotaties_dir = project_root / "annotaties"
     if annotaties_dir.exists():
         for fp in sorted(annotaties_dir.rglob("*.md")):
-            detected = detect_schema(fp, vault_root)
+            detected = detect_schema(fp, project_root)
             if detected in ("annotatie-lid", "annotatie-index"):
                 result.append((fp, detected))
         for fp in sorted(annotaties_dir.rglob("*.json")):
-            detected = detect_schema(fp, vault_root)
+            detected = detect_schema(fp, project_root)
             if detected in ("annotatie-lid", "annotatie-index"):
                 result.append((fp, detected))
     return result
@@ -603,7 +603,7 @@ def collect_all_files(vault_root: Path) -> list[tuple[Path, str]]:
 
 def format_rapport_text(
     results: list[ValidationResult],
-    vault_root: Path,
+    project_root: Path,
     today: str,
 ) -> str:
     """Formateer tekstueel validatierapport."""
@@ -623,7 +623,7 @@ def format_rapport_text(
         lines.append("BLOKKEERFOUTEN (moeten 0 zijn voor productie)")
         for r, errs in errors_by_file:
             try:
-                rel = r.filepath.relative_to(vault_root)
+                rel = r.filepath.relative_to(project_root)
             except ValueError:
                 rel = r.filepath
             lines.append(f"  {rel}")
@@ -639,7 +639,7 @@ def format_rapport_text(
         lines.append("WAARSCHUWINGEN")
         for r, warns in warnings_by_file:
             try:
-                rel = r.filepath.relative_to(vault_root)
+                rel = r.filepath.relative_to(project_root)
             except ValueError:
                 rel = r.filepath
             lines.append(f"  {rel}")
@@ -657,7 +657,7 @@ def format_rapport_text(
     return "\n".join(lines)
 
 
-def format_rapport_json(results: list[ValidationResult], vault_root: Path) -> dict:
+def format_rapport_json(results: list[ValidationResult], project_root: Path) -> dict:
     """Formateer JSON-validatierapport."""
     fouten = []
     waarschuwingen = []
@@ -665,7 +665,7 @@ def format_rapport_json(results: list[ValidationResult], vault_root: Path) -> di
 
     for r in results:
         try:
-            rel = str(r.filepath.relative_to(vault_root))
+            rel = str(r.filepath.relative_to(project_root))
         except ValueError:
             rel = str(r.filepath)
         for e in r.errors:
@@ -678,9 +678,9 @@ def format_rapport_json(results: list[ValidationResult], vault_root: Path) -> di
     return {"fouten": fouten, "waarschuwingen": waarschuwingen, "geslaagd": geslaagd}
 
 
-def schrijf_md_rapport(rapport_tekst: str, vault_root: Path):
+def schrijf_md_rapport(rapport_tekst: str, project_root: Path):
     """Schrijf validatierapport naar rapporten/validatie-rapport.md."""
-    rapporten_dir = vault_root / "rapporten"
+    rapporten_dir = project_root / "rapporten"
     rapporten_dir.mkdir(exist_ok=True)
     rapport_path = rapporten_dir / "validatie-rapport.md"
     rapport_path.write_text(f"# Validatierapport\n\n```\n{rapport_tekst}\n```\n")
@@ -692,40 +692,40 @@ def schrijf_md_rapport(rapport_tekst: str, vault_root: Path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Valideer vault-bestanden tegen JSON Schemas"
+        description="Valideer projectbestanden tegen JSON Schemas"
     )
-    parser.add_argument("--vault-root", default=".", help="Pad naar vault-root")
+    parser.add_argument("--project-dir", default=".", help="Pad naar project-root")
     parser.add_argument("--file", help="Valideer één bestand")
     parser.add_argument("--dir", help="Valideer alle bestanden in een directory")
     parser.add_argument("--schema", help="Schema-naam (begrip, annotatie-lid, annotatie-index, regel)")
-    parser.add_argument("--full", action="store_true", help="Volledige vault-validatie")
+    parser.add_argument("--full", action="store_true", help="Volledige projectvalidatie")
     parser.add_argument("--integrity", action="store_true", help="Voeg integriteitsvalidatie toe")
     parser.add_argument("--json", action="store_true", dest="json_output", help="JSON-output")
     args = parser.parse_args()
 
-    vault_root = Path(args.vault_root).resolve()
-    schema_dir = vault_root / "schemas"
+    project_root = Path(args.project_dir).resolve()
+    schema_dir = project_root / "schemas"
     today = date.today().isoformat()
     check_integrity = args.full or args.integrity
 
     # Bouw begrip-index
-    begrip_index = build_begrip_index(vault_root)
+    begrip_index = build_begrip_index(project_root)
 
     # Verzamel te valideren bestanden
     to_validate: list[tuple[Path, str]] = []
 
     if args.full:
-        to_validate = collect_all_files(vault_root)
+        to_validate = collect_all_files(project_root)
     elif args.file:
         fp = Path(args.file)
         if not fp.is_absolute():
-            fp = vault_root / fp
+            fp = project_root / fp
         if not fp.exists():
             print(f"FOUT: bestand niet gevonden: {fp}", file=sys.stderr)
             sys.exit(1)
         schema_name = args.schema
         if not schema_name:
-            schema_name = detect_schema(fp, vault_root)
+            schema_name = detect_schema(fp, project_root)
         if not schema_name:
             print(f"FOUT: kan schema niet detecteren voor {fp}. Geef --schema op.", file=sys.stderr)
             sys.exit(1)
@@ -733,11 +733,11 @@ def main():
     elif args.dir:
         dp = Path(args.dir)
         if not dp.is_absolute():
-            dp = vault_root / dp
+            dp = project_root / dp
         for fp in sorted(dp.rglob("*.md")) + sorted(dp.rglob("*.yaml")) + sorted(dp.rglob("*.json")):
             if fp.name == "index.md":
                 continue
-            schema_detected = args.schema or detect_schema(fp, vault_root)
+            schema_detected = args.schema or detect_schema(fp, project_root)
             if schema_detected:
                 to_validate.append((fp, schema_detected))
     else:
@@ -765,19 +765,19 @@ def main():
             schema_name=schema_name,
             schema=schema,
             begrip_index=begrip_index,
-            vault_root=vault_root,
+            project_root=project_root,
             check_integrity=check_integrity,
         )
         results.append(result)
 
     # Output
     if args.json_output:
-        print(json.dumps(format_rapport_json(results, vault_root), ensure_ascii=False, indent=2))
+        print(json.dumps(format_rapport_json(results, project_root), ensure_ascii=False, indent=2))
     else:
-        rapport_tekst = format_rapport_text(results, vault_root, today)
+        rapport_tekst = format_rapport_text(results, project_root, today)
         print(rapport_tekst)
         if args.full:
-            schrijf_md_rapport(rapport_tekst, vault_root)
+            schrijf_md_rapport(rapport_tekst, project_root)
             print(f"\nRapport geschreven naar: rapporten/validatie-rapport.md")
 
     # Exit code

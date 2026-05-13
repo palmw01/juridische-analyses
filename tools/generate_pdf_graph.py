@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-generate_pdf_graph.py — Genereer een visuele PDF-graaf van de begrippen-vault.
+generate_pdf_graph.py — Genereer een visuele PDF-graaf van het kennismodel.
 Gebruikt rdflib voor data en Graphviz (dot) voor de PDF-generatie.
 Kleuren worden geladen uit ontologie/jas-ontologie.yaml.
 """
@@ -50,8 +50,8 @@ def laad_jas_kleuren(ontologie_pad: Path) -> dict[str, str]:
 
 def main():
     script_dir = Path(__file__).resolve().parent
-    vault_root = script_dir.parent
-    ontologie_pad = vault_root / "ontologie" / "jas-ontologie.yaml"
+    project_root = script_dir.parent
+    ontologie_pad = project_root / "ontologie" / "jas-ontologie.yaml"
     jas_kleuren = laad_jas_kleuren(ontologie_pad)
 
     rdf_path = Path("kennisgraaf/begrippen.ttl")
