@@ -317,11 +317,6 @@ cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file
 
 Bij blokkerende fouten (L1/L2): herstel en hervalideer vóór je verdergaat. L3-waarschuwingen rapporteren aan de gebruiker maar blokkeren niet.
 
-Daarna views genereren voor Obsidian:
-```
-cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/generate_views.py --type annotatie --file annotaties/[B]/art[A]-lid[L].json
-```
-
 ---
 
 ## Kwaliteitseisen (niet-onderhandelbaar)
@@ -360,9 +355,8 @@ Lid-annotatie-checklist — Art. [A] lid [L] [W]
 ✅/⬜ alle 13 JAS-elementen intern afgevinkt
 ✅/⬜ diagram aangemaakt (centrale-klasse + knopen + kanten)
 ✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
-✅/⬜ leden-annotaties bijgewerkt in index-JSON
+✅/⬜ leden-annotaties bijgewerkt in index-JSON (pad-notatie: "BWBR0004770/art9/lid1")
 ✅/⬜ validatie geslaagd (validate_note.py)
-✅/⬜ views gegenereerd (generate_views.py)
 ```
 
 **Flow C:**

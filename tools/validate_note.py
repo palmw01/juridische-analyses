@@ -86,14 +86,9 @@ def build_begrip_index(vault_root: Path) -> dict[str, Path]:
             continue
         try:
             data = load_md_frontmatter(fp)
-            stem = fp.stem  # bijv. invorderbaarheid
-            # Sla op onder de bestandsnaam (slug)
-            index[stem] = fp
-            # Sla ook op onder het volledige begrip-id als dat aanwezig is
-            # Begrip-id's in relaties zijn strings als "BWBR0004770/art9/lid1/invorderbaarheid"
-            # het laatste segment is de slug; sla ook volledig id op als aanwezig
-        except Exception:
             index[fp.stem] = fp
+        except Exception as e:
+            print(f"[W] begrip overgeslagen (parse-fout): {fp.name}: {e}", file=sys.stderr)
 
     for fp in begrippen_dir.glob("*.yaml"):
         try:
@@ -102,27 +97,20 @@ def build_begrip_index(vault_root: Path) -> dict[str, Path]:
             index[stem] = fp
             bid = data.get("begrip-id")
             if bid:
-                # laatste segment
                 slug = bid.rstrip("/").split("/")[-1]
                 index[slug] = fp
                 index[bid] = fp
-        except Exception:
-            index[fp.stem] = fp
+        except Exception as e:
+            print(f"[W] begrip overgeslagen (parse-fout): {fp.name}: {e}", file=sys.stderr)
 
     return index
 
 
 def begrip_id_to_slug(begrip_id: str) -> str:
-    """Extraheer het laatste segment van een begrip-id als slug."""
-    # begrip-id kan zijn: "BWBR0004770/art9/lid1/invorderbaarheid"
-    # of een Obsidian-link: "[[begrippen/invorderbaarheid]]"
-    # of gewoon een slug: "invorderbaarheid"
+    """Extraheer het laatste segment van een begrip-id als slug. Wikilinks zijn niet toegestaan."""
     bid = begrip_id.strip()
-    # Obsidian wiki-link
-    m = re.match(r'\[\[(?:begrippen/)?([^\]|]+?)(?:\|[^\]]+)?\]\]', bid)
-    if m:
-        return Path(m.group(1)).stem
-    # Pad-stijl
+    if bid.startswith("[["):
+        return ""
     if "/" in bid:
         return bid.rstrip("/").split("/")[-1]
     return bid
@@ -197,12 +185,51 @@ def validate_schema(data: dict, schema: dict, filepath: Path) -> list[str]:
     return errors
 
 
+ONVERENIGBARE_JAS_PAREN: set[frozenset] = {
+    frozenset({"rechtsfeit", "tijdsaanduiding"}),
+    frozenset({"rechtsfeit", "parameter"}),
+    frozenset({"rechtsbetrekking", "variabele"}),
+    frozenset({"afleidingsregel", "brondefinitie"}),
+    frozenset({"delegatiebevoegdheid", "variabele"}),
+}
+
+
 def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, vault_root: Path) -> list[str]:
     """Laag 2: Integriteitsvalidatie voor begrip-bestanden."""
     errors = []
 
-    # Definitie-contexten: markering-id's moeten bestaan in markeringen[]
+    # Wikilink-detectie: markeringen mogen geen wikilink-formaat gebruiken
     markeringen: list[dict] = data.get("markeringen") or []
+    for m in markeringen:
+        ann_id = str(m.get("bron-annotatie-id") or "")
+        if ann_id.startswith("[["):
+            errors.append(
+                f"[L2] markeringen[].bron-annotatie-id: gebruik geen wikilink-formaat — "
+                f"verwacht pad-notatie bijv. 'BWBR0004770/art9/lid1'"
+            )
+
+    # Homoniem-detectie: onverenigbare JAS-klassen in dezelfde begrip-definitie
+    jas_klassen = {m.get("jas-klasse") for m in markeringen if m.get("jas-klasse")}
+    for paar in ONVERENIGBARE_JAS_PAREN:
+        if paar.issubset(jas_klassen):
+            errors.append(
+                f"[L2] homoniem-conflict: markeringen bevatten onverenigbare JAS-klassen "
+                f"{sorted(paar)} — mogelijk zijn dit twee verschillende begrippen"
+            )
+
+    # bron-annotatie-id → annotaties/ integriteitscheck via annotatie-id veld
+    annotatie_ids = build_annotatie_index(vault_root)
+    for m in markeringen:
+        ann_id = str(m.get("bron-annotatie-id") or "")
+        if not ann_id or ann_id.startswith("[["):
+            continue
+        if annotatie_ids and ann_id not in annotatie_ids:
+            errors.append(
+                f"[L2] markeringen[].bron-annotatie-id: '{ann_id}' niet gevonden "
+                f"als annotatie-id in annotaties/"
+            )
+
+    # Definitie-contexten: markering-id's moeten bestaan in markeringen[]
     markering_ids = {m.get("markering-id") for m in markeringen if m.get("markering-id")}
     definitie_obj = data.get("definitie") or {}
     contexten = haal_contexten(definitie_obj)
@@ -277,19 +304,6 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
         if not found:
             errors.append(f"[L2] afleidingsregel-id: regel '{ar_slug}' niet gevonden in regels/")
 
-    # Obsidian-links in afleidingsregels (MD-frontmatter formaat)
-    for link in (data.get("afleidingsregels") or []):
-        m = re.match(r'\[\[regels/([^\]|]+?)(?:\|[^\]]+)?\]\]', str(link))
-        if m:
-            ar_name = m.group(1)
-            regels_dir = vault_root / "regels"
-            found = (
-                (regels_dir / f"{ar_name}.yaml").exists()
-                or (regels_dir / f"{ar_name}.md").exists()
-            )
-            if not found:
-                errors.append(f"[L2] afleidingsregels: regel '{ar_name}' niet gevonden in regels/")
-
     return errors
 
 
@@ -317,11 +331,16 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, vau
     def check_begrip(bid: str, veld: str):
         if not bid:
             return
+        if bid.startswith("[["):
+            errors.append(
+                f"[L2] {veld}: gebruik geen wikilink-formaat — "
+                f"verwacht pad-notatie bijv. 'BWBR0004770/art9/lid1/begrip'"
+            )
+            return
         if not begrip_bestaat(bid, begrip_index):
             slug = begrip_id_to_slug(bid)
             errors.append(f"[L2] {veld}: begrip '{slug}' niet gevonden in begrippen/")
 
-    # invoer en uitvoer — kunnen Obsidian-links zijn
     for bid in (data.get("invoer") or []):
         check_begrip(str(bid), "invoer")
     for bid in (data.get("uitvoer") or []):
@@ -497,8 +516,6 @@ def validate_file(
         return result
 
     # Laag 1: Schema-validatie
-    # Voor MD-bestanden met Obsidian-links proberen we schema-validatie te doen
-    # maar slaan we fouten over die puur door het MD-formaat komen
     schema_errors = validate_schema(data, schema, filepath)
     result.errors.extend(schema_errors)
 

@@ -19,8 +19,11 @@
     "structuurpositie": { "type": "string" },
     "leden-annotaties": {
       "type": "array",
-      "description": "Obsidian-links naar de lid-annotaties van dit artikel, bijv. [[annotaties/BWBR0004770/art9-lid1]]",
-      "items": { "type": "string" }
+      "description": "Pad-notatie verwijzingen naar de lid-annotaties van dit artikel, bijv. 'BWBR0004770/art9/lid1'",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z0-9]+/art[0-9]+[a-z]?/lid[0-9]+$"
+      }
     },
     "kruisreferenties": {
       "type": "array",

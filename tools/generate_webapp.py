@@ -861,31 +861,14 @@ def laad_regels(vault_root: Path) -> list[dict]:
 
 def laad_artikel_indices(vault_root: Path) -> list[dict]:
     """Laad annotatie-index bestanden (artikel-niveau, geen wetstekst)."""
-    # Bouw lookup: bestandspad-stem → annotatie-id (voor Obsidian-link resolutie)
-    stem_to_aid: dict[str, str] = {}
-    for jf in (vault_root / "annotaties").rglob("*.json"):
-        try:
-            d = json.loads(jf.read_text())
-            if "annotatie-id" in d and "wetstekst" in d:
-                # Sleutel: "bwb-id/stem" bijv. "BWBR0004770/art9-lid1"
-                stem_to_aid[f'{jf.parent.name}/{jf.stem}'] = d["annotatie-id"]
-        except Exception:
-            pass
-
     indices = []
     pad = vault_root / "annotaties"
     for json_file in sorted(pad.rglob("*.json")):
         data = json.loads(json_file.read_text())
         if "artikel-id" not in data:
             continue
-        # Parseer Obsidian-links [[annotaties/X/Y]] naar echte annotatie-ids
-        leden = []
-        for link in data.get("leden-annotaties") or []:
-            m = re.search(r'\[\[annotaties/([^\]]+)\]\]', link)
-            if m:
-                pad_key = m.group(1)  # bijv. "BWBR0004770/art9-lid1"
-                aid = stem_to_aid.get(pad_key, pad_key)
-                leden.append(aid)
+        # leden-annotaties zijn pad-notatie strings: "BWBR0004770/art9/lid1"
+        leden = [str(link).strip() for link in (data.get("leden-annotaties") or []) if link]
         indices.append({
             "id": data["artikel-id"],
             "bwb_id": data.get("bwb-id", ""),

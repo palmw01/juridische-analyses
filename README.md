@@ -327,7 +327,6 @@ git push → main
   └─► GitHub Actions: ci.yml
         └─► make ci
               ├─► make validate   (L1 + L2 + L3, rapport in rapporten/)
-              ├─► make views      (Obsidian-views)
               ├─► make export-rdf (RDF Turtle)
               ├─► make export-graph (GEXF + GraphML)
               └─► make check-enrichment (begrippen met meerdere bronnen)
@@ -410,8 +409,7 @@ make setup
 # Controleer of alles klopt
 make validate
 
-# Open als Obsidian-vault (vault-root = ./)
-# Of start een analysesessie met Claude Code in deze map
+# Start een analysesessie met Claude Code in deze map
 ```
 
 ### Nieuw artikel analyseren
@@ -432,10 +430,7 @@ Vervang `[A]` door het artikelnummer en `[W]` door de wetsaanduiding (bijv. `9` 
 # Stap 4 — Valideren
 make validate
 
-# Stap 5 — Views genereren (Obsidian)
-make views
-
-# Stap 6 — Exporteren
+# Stap 5 — Exporteren
 make export-graph                   # GEXF + GraphML
 make pdf-graph                      # RDF Turtle + PDF
 
@@ -522,8 +517,6 @@ kennisgraaf/           exportartifacts
   juridisch_kennismodel.pdf  statische PDF-visualisatie
   model_graph.dot      Graphviz-bronbestand
 
-views/                 gegenereerde Obsidian-views — niet handmatig bewerken
-ontologie/             JAS-ontologie, SKOS-mapping, soort-systeem
 rapporten/             validatierapport (gegenereerd)
 scripts/               pre-commit hook (L1/L2-validatie bij commit)
 tools/                 Python-toolchain (11 scripts)
@@ -541,14 +534,13 @@ requirements.lock      pinned Python-dependencies
 |-------------|---------|---------|
 | `make setup` | venv + deps + pre-commit in één stap | Eenmalig na clone |
 | `make validate` | L1 + L2 + L3 validatie, rapport in `rapporten/` | Na elke schrijfactie |
-| `make views` | Genereert Obsidian-views uit YAML/JSON | Na `/annoteer` of `/begrip` |
 | `make export-rdf` | YAML → RDF Turtle (SKOS) | Na wijziging begrippen/regels |
 | `make export-graph` | YAML/JSON → GEXF + GraphML | Na wijziging begrippen |
 | `make pdf-graph` | RDF → PDF via Graphviz (doet export-rdf eerst) | Na wijziging begrippen |
 | `make webapp` | Genereert statische webapp in `webapp/` | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
-| `make ci` | validate + views + export-rdf + export-graph + check-enrichment | Voor push |
+| `make ci` | validate + export-rdf + export-graph + check-enrichment | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + pinned dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden | Opruimen |
@@ -563,7 +555,7 @@ Graphviz is een systeemafhankelijkheid (niet via pip): `sudo apt install graphvi
 |------|-------------|
 | AI-assistent | Claude Code (Anthropic, claude-sonnet-4-6) met MCP |
 | Wettenbrondata | wetten.overheid.nl via MCP-server (`wettenbank`-skill) |
-| Vault | Obsidian (Markdown + YAML frontmatter) |
+| Vault | Markdown + YAML (plain-text, geen Obsidian-afhankelijkheid) |
 | Dataformaten | JSON (annotaties, bronnen), YAML (begrippen, regels), JSON Schema (validatie) |
 | Python | 3.10+, PyYAML, jsonschema, networkx, rdflib |
 | Graafvisualisatie | Graphviz (`dot`) — `sudo apt install graphviz` |

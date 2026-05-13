@@ -292,11 +292,6 @@ cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file
 
 Bij blokkerende fouten (L1/L2): herstel en hervalideer vóór je verdergaat.
 
-Daarna views genereren:
-```
-cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/generate_views.py --type begrip --file begrippen/[slug].yaml
-```
-
 Bij aanmaken van een regel-YAML: valideer ook de regel:
 ```
 cd "$CLAUDE_PROJECT_DIR" && tools/.venv/bin/python tools/validate_note.py --file regels/AR-[...].yaml
@@ -329,10 +324,9 @@ Kennismodel-checklist — [begripsnaam]
 ✅/⬜ identificatiebegrip ingevuld
 ✅/⬜ aliases aanwezig (leeg is toegestaan indien geen synoniemen)
 ✅/⬜ voorbeelden + kenmerken ingevuld in begrip-YAML (optioneel)
-✅/⬜ wiki-link afleidingsregel (n.v.t. indien herkomst: direct)
+✅/⬜ afleidingsregel-id ingevuld (n.v.t. indien herkomst: direct)
 ✅/⬜ enrichment-queue gecheckt
 ✅/⬜ validatie geslaagd (validate_note.py)
-✅/⬜ views gegenereerd (generate_views.py)
 ```
 
 Bij `/begrip-alles`: print de checklist per begrip afzonderlijk, direct nadat dat begrip is opgeslagen.

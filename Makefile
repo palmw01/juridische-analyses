@@ -2,7 +2,7 @@ VENV     := $(shell [ -f tools/.venv/bin/python ] && echo "tools/.venv/bin/pytho
 TOOLS     = tools
 SCRIPTS   = scripts
 
-.PHONY: setup install-hooks validate views export-rdf export-graph pdf-graph
+.PHONY: setup install-hooks validate export-rdf export-graph pdf-graph
 .PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp
 
 setup:
@@ -21,9 +21,6 @@ install-hooks:
 validate:
 	@$(VENV) $(TOOLS)/validate_note.py --full
 	@echo "Exit code: $$?"
-
-views:
-	@$(VENV) $(TOOLS)/generate_views.py
 
 export-rdf:
 	@$(VENV) $(TOOLS)/export_rdf.py
@@ -53,10 +50,10 @@ lock:
 	@echo "requirements.lock bijgewerkt (geinstalleerd + gefreeze)"
 
 clean:
-	@rm -rf views/ webapp/
+	@rm -rf webapp/
 	@rm -f kennisgraaf/*.dot kennisgraaf/*.pdf kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"
 
-ci: validate views export-rdf export-graph check-enrichment
+ci: validate export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"
