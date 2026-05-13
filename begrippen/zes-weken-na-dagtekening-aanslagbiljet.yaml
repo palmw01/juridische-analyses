@@ -9,7 +9,7 @@ toelichting-klasse: >-
   waaraan voldaan moet zijn voor invorderbaarheid. De aanslag is pas invorderbaar nadat dit tijdvak is
   verstreken. De formulering bevat twee tijdsaanduidingen: de termijn ('zes weken') en het referentiepunt
   ('de dagtekening').
-herkomst: afgeleid
+herkomst: direct
 status: concept
 definitie:
   kern: >-
@@ -27,7 +27,7 @@ markeringen:
   interpretatiemethode: grammaticaal
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -42,5 +42,5 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0004770-art9-lid1-a
+afleidingsregel-id: null
 tussenresultaat: false

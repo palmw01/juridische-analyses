@@ -5,9 +5,9 @@ soort: monetair-bedrag
 soort-id: false
 jas-klasse: variabele
 toelichting-klasse: >-
-  Afgeleide variabele die de numerieke waarde van één betalingstermijn representeert. De wet stelt de
-  eis dat termijnen 'gelijk' zijn, wat een rekenkundige deling van het totaalbedrag door het aantal termijnen
-  impliceert.
+  Het adjectief 'gelijke' in de wetstekst is de gelijkheidseis die het termijnbedrag als afgeleide variabele
+  fundeert: alle termijnen zijn gelijk in hoogte, zodat termijnbedrag = totaalbedrag ÷ aantal termijnen.
+  Variabele (niet afleidingsregel): dit is het uitvoerbegrip van AR-9-5f, niet de berekeningsregel zelf.
 herkomst: afgeleid
 status: concept
 definitie:
@@ -21,18 +21,22 @@ definitie-gebaseerd-op:
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art9/lid5
-  tekst: gelijke termijnen
+  tekst: gelijke
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
-  heeft: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag
+    kardinaliteit: '1:1'
+  - begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
+    kardinaliteit: '1:1'
   leidt-tot: []
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid5-f
-tussenresultaat: false
+tussenresultaat: true

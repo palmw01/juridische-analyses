@@ -79,37 +79,37 @@
         "id": "RF",
         "jas-klasse": "rechtsfeit",
         "label": "rechtsfeit 'dagtekening van het aanslagbiljet'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet"
       },
       {
         "id": "RB",
         "jas-klasse": "rechtsbetrekking",
         "label": "rechtsbetrekking 'invorderbaar'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid"
       },
       {
         "id": "RO",
         "jas-klasse": "rechtsobject",
         "label": "rechtsobject 'belastingaanslag'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag"
       },
       {
         "id": "VW",
         "jas-klasse": "voorwaarde",
         "label": "voorwaarde 'zes weken na de dagtekening…'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet"
       },
       {
         "id": "TA",
         "jas-klasse": "tijdsaanduiding",
         "label": "tijdsaanduiding 'zes weken'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/zes-weken"
       },
       {
         "id": "AR",
         "jas-klasse": "afleidingsregel",
         "label": "afleidingsregel 'belastingaanslag invorderbaar zes…'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag"
       }
     ],
     "kanten": [

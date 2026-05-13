@@ -32,15 +32,14 @@ markeringen:
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
-  is-een:
-  - BWBR0004770/art9/lid1/invorderbaarheid
+  is-een: []
   heeft:
-  - begrip-id: BWBR0024096/par9-1/voorlopige-aanslag
+  - begrip-id: BWBR0004770/art9/lid5/voorlopige-aanslag
     kardinaliteit: '1:1'
   - begrip-id: BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib
     kardinaliteit: '1:1'

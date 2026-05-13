@@ -13,7 +13,7 @@
       "markering": "een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting",
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "grammaticaal",
-      "begrip-id": "BWBR0024096/par9-1/voorlopige-aanslag",
+      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
       "toelichting-klasse": "De voorlopige aanslag IB/VPB is het aanslagtype waarop lid 5 van toepassing is: het bepaalt het toepassingsbereik van de specialisatieregel. Gekozen als rechtsobject: de aanslag is het voorwerp van de invorderbaarheidsregel (niet de belastingschuldige als rechtssubject).",
       "signalering": null
     },
@@ -149,7 +149,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/terugvalregel-lid-1",
-      "toelichting-klasse": "De vierde volzin ('Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn') bevat de terugvalregel: als de specialisatieregel geen praktisch effect heeft, herneemt lid 1. Afleidingsregel (beperkingsregel): beperkt de toepassingsomvang van de eerste volzin.",
+      "toelichting-klasse": "De vierde volzin ('Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn') bevat de terugvalregel: als de specialisatieregel geen praktisch effect heeft, herneemt lid 1. Afleidingsregel (beslissingsregel): de uitkomst is ja/nee — is lid 1 van toepassing? — conform de beslisboom in kaders-regels.md §Beslissingsregel.",
       "signalering": "⚠ beslissingsregel (terugvalregel); art. 9 lid 1 herneemt toepassing als het termijnenantal ≤ 1 is (bij dagtekening in december)"
     },
     {
@@ -163,21 +163,21 @@
     },
     {
       "rij-id": "r-018",
-      "markering": "gelijke termijnen",
+      "markering": "gelijke",
       "jas-klasse": "variabele",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
-      "toelichting-klasse": "De 'gelijke termijnen' zijn het uitvoerbegrip van de termijnenberekening: het resultaat is het aantal gelijke betalingstermijnen als numerieke en kwalitatieve variabele. Variabele (niet afleidingsregel): dit is het resultaatbegrip, niet de berekeningsregel zelf.",
-      "signalering": "⚠ de variabele die de uitkomst van AR-9-5f representeert"
+      "toelichting-klasse": "Het adjectief 'gelijke' is de wettelijke gelijkheidseis die de rekenkundige afleidbaarheid van het termijnbedrag fundeert: termijnen zijn gelijk in hoogte → termijnbedrag = totaalbedrag ÷ aantal termijnen. Variabele (niet afleidingsregel): dit is het uitvoerbegrip van AR-9-5f, niet de berekeningsregel zelf. Dubbele classificatie naast r-017 (afleidingsregel) is toegestaan.",
+      "signalering": "⚠ dubbele classificatie 'gelijke': r-017 → afleidingsregel (de gelijkheidsregel), r-018 → variabele (het afgeleide termijnbedrag)"
     },
     {
       "rij-id": "r-019",
       "markering": "een belastingaanslag",
-      "jas-klasse": "variabele",
-      "interpretatiemethode": "systematisch",
-      "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag",
-      "toelichting-klasse": "In de context van de terugvalregel (vierde volzin) verschijnt 'een belastingaanslag' als inputvariabele van de terugvalregel: het object waarop lid 1 van toepassing wordt als de specialisatieregel geen effect heeft. Variabele (niet rechtsobject): het gaat om de invoerrol in de terugvalbepaling.",
-      "signalering": "⚠ hergebruik markering uit lid 1; het totaalbedrag is noodzakelijk voor de berekening van het termijnbedrag (invoer voor AR-9-5f)"
+      "jas-klasse": "rechtsobject",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
+      "toelichting-klasse": "Hergebruik van het rechtsobject uit lid 1: in de terugvalregel (vierde volzin) keert de toepassing terug op het generieke rechtsobject 'een belastingaanslag'. Rechtsobject (niet variabele): het gaat om het object waarop lid 1 van toepassing wordt, niet om een numerieke inputwaarde. Het totaalbedrag is een impliciet attribuut van dit rechtsobject, verankerd via belastingaanslag.yaml.",
+      "signalering": "⚠ hergebruik begrip uit lid 1; totaalbedrag-belastingaanslag is een impliciet attribuut van dit rechtsobject (input voor AR-9-5f), niet afzonderlijk in lid 5 verankerd"
     }
   ],
   "diagram": {
@@ -187,91 +187,91 @@
         "id": "RF",
         "jas-klasse": "rechtsfeit",
         "label": "rechtsfeit 'dagtekening van het aanslagbiljet'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/dagtekening-aanslagbiljet"
       },
       {
         "id": "RB",
         "jas-klasse": "rechtsbetrekking",
         "label": "rechtsbetrekking 'invorderbaar'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid"
       },
       {
         "id": "RO1",
         "jas-klasse": "rechtsobject",
         "label": "rechtsobject 'voorlopige aanslag (IB/VPB)'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag"
       },
       {
         "id": "RO2",
         "jas-klasse": "rechtsobject",
         "label": "rechtsobject 'voorlopige conserverende…'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib"
+      },
+      {
+        "id": "OP",
+        "jas-klasse": "operator",
+        "label": "operator 'of'",
+        "begrip-id": "BWBR0004770/art9/lid5/logische-of"
       },
       {
         "id": "VW1",
         "jas-klasse": "voorwaarde",
         "label": "voorwaarde 'In afwijking van het eerste lid'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid"
       },
       {
         "id": "VW2",
         "jas-klasse": "voorwaarde",
         "label": "voorwaarde 'dagtekening in vaststellingsjaar'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar"
       },
       {
         "id": "AR1",
         "jas-klasse": "afleidingsregel",
         "label": "afleidingsregel 'in zoveel gelijke termijnen…'",
-        "begrip-id": null
-      },
-      {
-        "id": "AR1f",
-        "jas-klasse": "afleidingsregel",
-        "label": "afleidingsregel 'berekenen termijnbedrag'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen"
       },
       {
         "id": "AR2",
         "jas-klasse": "afleidingsregel",
         "label": "afleidingsregel 'eerste termijn vervalt één maand…'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/vervaldag-eerste-termijn"
       },
       {
         "id": "AR3",
         "jas-klasse": "afleidingsregel",
         "label": "afleidingsregel 'volgende termijnen een maand later'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/vervaldag-volgende-termijnen"
       },
       {
         "id": "AR4",
         "jas-klasse": "afleidingsregel",
         "label": "afleidingsregel 'terugval lid 1 bij ≤ 1 termijn'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/terugvalregel-lid-1"
       },
       {
         "id": "VA",
         "jas-klasse": "variabele",
         "label": "variabele 'maanden van het jaar overblijven'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar"
       },
       {
         "id": "VA2",
         "jas-klasse": "variabele",
         "label": "variabele 'totaalbedrag belastingaanslag'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag"
       },
       {
         "id": "VA3",
         "jas-klasse": "variabele",
         "label": "variabele 'termijnbedrag'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag"
       },
       {
         "id": "TA",
         "jas-klasse": "tijdsaanduiding",
         "label": "tijdsaanduiding 'maand dagtekening aanslagbiljet'",
-        "begrip-id": null
+        "begrip-id": "BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet"
       }
     ],
     "kanten": [
@@ -282,13 +282,18 @@
       },
       {
         "van": "RB",
-        "naar": "RO1",
+        "naar": "OP",
         "label": "voorwerp"
       },
       {
-        "van": "RB",
+        "van": "OP",
+        "naar": "RO1",
+        "label": null
+      },
+      {
+        "van": "OP",
         "naar": "RO2",
-        "label": "voorwerp"
+        "label": null
       },
       {
         "van": "RB",
@@ -303,11 +308,6 @@
       {
         "van": "RB",
         "naar": "AR1",
-        "label": "nader uitgewerkt in"
-      },
-      {
-        "van": "RB",
-        "naar": "AR1f",
         "label": "nader uitgewerkt in"
       },
       {
@@ -336,17 +336,12 @@
         "label": "gebruikt"
       },
       {
-        "van": "AR1f",
+        "van": "AR1",
         "naar": "VA2",
         "label": "gebruikt"
       },
       {
-        "van": "AR1f",
-        "naar": "VA",
-        "label": "gebruikt"
-      },
-      {
-        "van": "AR1f",
+        "van": "AR1",
         "naar": "VA3",
         "label": "gebruikt"
       }

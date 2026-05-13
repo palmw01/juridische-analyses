@@ -26,13 +26,14 @@ markeringen:
   interpretatiemethode: grammaticaal
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een:
   - BWBR0004770/art9/lid1/belastingaanslag
+  - BWBR0004770/art9/lid5/voorlopige-aanslag
   heeft: []
   leidt-tot: []
 identificatiebegrip: false

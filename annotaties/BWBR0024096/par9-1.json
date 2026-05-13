@@ -3,7 +3,7 @@
   "bwb-id": "BWBR0024096",
   "wet": "LI 2008",
   "artikel": "9",
-  "lid": "9.1",
+  "lid": "",
   "peildatum": "2026-01-01",
   "structuurpositie": "Artikel 1 Inleiding en toepassingsgebied > Artikel 9 Betalingstermijnen > Lid 9.1",
   "wetstekst": "**[9.1]** In de gevallen waarin voor voorlopige aanslagen (bedoeld in [artikel 9, vijfde lid, van de wet](jci1.3:c:BWBR0004770&artikel=9)) die zijn gedagtekend in november of eerder, toepassing van de [wet](jci1.3:c:BWBR0004770) er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december, dan wordt de vervaldag van deze termijn op 31 december gesteld. Bij afwijkende boekjaren wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld.",
@@ -13,8 +13,8 @@
       "markering": "voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)",
       "jas-klasse": "rechtsobject",
       "interpretatiemethode": "systematisch",
-      "begrip-id": "BWBR0024096/par9-1/voorlopige-aanslag",
-      "toelichting-klasse": "",
+      "begrip-id": "BWBR0004770/art9/lid5/voorlopige-aanslag",
+      "toelichting-klasse": "De term benoemt het object waarop de betalingstermijnregel van toepassing is; de verwijzing naar art. 9 lid 5 IW 1990 verankert de juridische identiteit via systematische interpretatie.",
       "signalering": null
     },
     {
@@ -23,7 +23,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/dagtekening-in-november-of-eerder",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De bijzin formuleert een tijdgebonden toepassingscriterium dat de werkingssfeer van de regel beperkt tot aanslagen met een dagtekening uiterlijk in november.",
       "signalering": null
     },
     {
@@ -32,7 +32,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0024096/par9-1/termijn-eindigt-voor-31-december",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De zinsnede 'zou leiden' beschrijft een hypothetische uitkomst van toepassing van de hoofdregel (IW 1990) als drempelcriterium; systematisch omdat het resultaat van de wettelijke hoofdregel bepalend is voor toepasselijkheid van deze specialisatieregel.",
       "signalering": null
     },
     {
@@ -41,7 +41,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/vervaldag-31-december",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De 'dan'-constructie koppelt het rechtsgevolg aan de voorafgaande voorwaarden; 'wordt gesteld' bevat een expliciete normstelling die een concrete vervaldatum bepaalt, kenmerkend voor een afleidingsregel.",
       "signalering": "**type**: Specialisatieregel (in afwijking van de hoofdregel in art. 9 lid 5 IW 1990)"
     },
     {
@@ -50,7 +50,7 @@
       "jas-klasse": "tijdsaanduiding",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/31-december",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "Concrete kalenderdag als tijdsanker voor de vervaldagbepaling; afzonderlijk opgenomen als tijdsaanduiding vanwege zelfstandige begripswaarde (het ijkpunt verschijnt ook in VW2 en is relevant voor het diagram).",
       "signalering": null
     },
     {
@@ -59,7 +59,7 @@
       "jas-klasse": "voorwaarde",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/afwijkend-boekjaar",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "De voorzetselconstructie 'bij' introduceert een organisatiegebonden omstandigheid (niet-kalenderjaar) als toepassingscriterium voor de tweede specialisatieregel.",
       "signalering": null
     },
     {
@@ -68,7 +68,7 @@
       "jas-klasse": "afleidingsregel",
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0024096/par9-1/vervaldag-laatste-dag-maand",
-      "toelichting-klasse": "",
+      "toelichting-klasse": "'Steeds' benadrukt de imperatieve strekking; 'wordt gesteld' formuleert een rechtsgevolg dat de algemene vervaldagbepaling specificeert voor belastingplichtigen met een afwijkend boekjaar.",
       "signalering": "**type**: Specialisatieregel"
     }
   ],
@@ -78,45 +78,41 @@
       {
         "id": "AR1",
         "jas-klasse": "afleidingsregel",
-        "label": "afleidingsregel 'vervaldag op 31 december gesteld'",
-        "begrip-id": null
+        "label": "afleidingsregel 'vervaldag gesteld'",
+        "begrip-id": "BWBR0024096/par9-1/vervaldag-31-december"
+      },
+      {
+        "id": "AR2",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervaldag laatste dag van de maand'",
+        "begrip-id": "BWBR0024096/par9-1/vervaldag-laatste-dag-maand"
       },
       {
         "id": "VW1",
         "jas-klasse": "voorwaarde",
         "label": "voorwaarde 'gedagtekend in november of eerder'",
-        "begrip-id": null
+        "begrip-id": "BWBR0024096/par9-1/dagtekening-in-november-of-eerder"
       },
       {
         "id": "VW2",
         "jas-klasse": "voorwaarde",
         "label": "voorwaarde 'termijn eindigt voor 31 december'",
-        "begrip-id": null
+        "begrip-id": "BWBR0024096/par9-1/termijn-eindigt-voor-31-december"
       },
       {
-        "id": "RO",
-        "jas-klasse": "rechtsobject",
-        "label": "rechtsobject 'voorlopige aanslagen'",
-        "begrip-id": null
+        "id": "VW3",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'afwijkend boekjaar'",
+        "begrip-id": "BWBR0024096/par9-1/afwijkend-boekjaar"
       },
       {
         "id": "TA",
         "jas-klasse": "tijdsaanduiding",
         "label": "tijdsaanduiding '31 december'",
-        "begrip-id": null
+        "begrip-id": "BWBR0024096/par9-1/31-december"
       }
     ],
     "kanten": [
-      {
-        "van": "VW1",
-        "naar": "RO",
-        "label": null
-      },
-      {
-        "van": "VW2",
-        "naar": "RO",
-        "label": null
-      },
       {
         "van": "AR1",
         "naar": "VW1",
@@ -131,6 +127,11 @@
         "van": "AR1",
         "naar": "TA",
         "label": "gebruikt"
+      },
+      {
+        "van": "AR2",
+        "naar": "VW3",
+        "label": "geldig indien"
       }
     ]
   },

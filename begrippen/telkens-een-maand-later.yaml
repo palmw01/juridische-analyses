@@ -7,7 +7,7 @@ jas-klasse: tijdsaanduiding
 toelichting-klasse: >-
   Tijdsaanduiding die de iteratieve periodiciteit van de vervaldatums na de eerste termijn uitdrukt. 'Telkens'
   markeert de herhalende toepassing van de één-maand-stap voor elke volgende termijn.
-herkomst: afgeleid
+herkomst: direct
 status: concept
 definitie:
   kern: >-
@@ -24,7 +24,7 @@ markeringen:
   interpretatiemethode: grammaticaal
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -35,5 +35,5 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0004770-art9-lid5-d
+afleidingsregel-id: null
 tussenresultaat: false

@@ -5,8 +5,10 @@ soort: monetair-bedrag
 soort-id: false
 jas-klasse: variabele
 toelichting-klasse: >-
-  Kenmerk van het rechtsobject belastingaanslag. Het totaalbedrag is de numerieke waarde van de vastgestelde
-  belastingschuld die de basis vormt voor de invordering en de berekening van termijnen.
+  Impliciet attribuut van het rechtsobject 'een belastingaanslag' (art. 9 lid 1 IW 1990): de wetstekst
+  vermeldt het totaalbedrag niet expliciet, maar elke belastingaanslag heeft een vastgesteld bedrag dat
+  de invorderingsbasis vormt. Variabele (niet rechtsobject): het totaalbedrag is de numerieke waarde van
+  de aanslag als invoer voor de termijnbedragberekening (AR-9-5f).
 herkomst: direct
 status: concept
 definitie:
@@ -23,7 +25,7 @@ markeringen:
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null

@@ -12,12 +12,12 @@ WAARSCHUWINGEN
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
   begrippen/afwijkend-boekjaar.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
+  begrippen/invorderbaarheid.yaml
+    [L3] alle relaties leeg (is-een, heeft, leidt-tot)
   begrippen/logische-of.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
-  begrippen/termijnbedrag.yaml
-    [L3] alle relaties leeg (is-een, heeft, leidt-tot)
 
-GESLAAGD: 40 bestanden
+GESLAAGD: 41 bestanden
 BLOKKEERFOUTEN: 0
 WAARSCHUWINGEN: 4
 ```

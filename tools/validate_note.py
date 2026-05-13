@@ -152,6 +152,8 @@ def detect_schema(filepath: Path, project_root: Path) -> Optional[str]:
                 return "annotatie-lid"
             if re.search(r'art\d+$', name_no_ext):
                 return "annotatie-index"
+            if re.search(r'par\d+-\d+', name_no_ext):
+                return "annotatie-lid"
         # MD-bestanden: art9.md = index, art9-1.md = lid
         if filepath.suffix == ".md":
             if re.match(r'art\d+[a-z]?$', name):

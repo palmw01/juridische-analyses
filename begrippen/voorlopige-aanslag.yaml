@@ -1,4 +1,4 @@
-begrip-id: BWBR0024096/par9-1/voorlopige-aanslag
+begrip-id: BWBR0004770/art9/lid5/voorlopige-aanslag
 begripsnaam: voorlopige-aanslag
 aliases:
 - voorlopige belastingaanslag
@@ -22,14 +22,14 @@ markeringen:
   interpretatiemethode: grammaticaal
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 - markering-id: m-002
   bron-annotatie-id: BWBR0024096/par9-1
   tekst: voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid, van de wet)
   interpretatiemethode: systematisch
   bijdrage: context
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -38,6 +38,6 @@ relaties:
   - BWBR0004770/art9/lid1/belastingaanslag
   heeft: []
   leidt-tot: []
-identificatiebegrip: true
+identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

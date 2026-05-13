@@ -8,7 +8,7 @@ toelichting-klasse: >-
   Specialisatiebepaling die lid 5 aanmerkt als lex specialis t.o.v. art. 9 lid 1. De zinsnede heeft geen
   zelfstandige materiële inhoud maar markeert de hiërarchische relatie: de hoofdregel van lid 1 (zes weken)
   wordt voor de genoemde aanslagtypen verdrongen door de termijnenregeling van lid 5.
-herkomst: afgeleid
+herkomst: direct
 status: concept
 definitie:
   kern: >-
@@ -26,7 +26,7 @@ markeringen:
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -37,5 +37,5 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0004770-art9-lid5-a
+afleidingsregel-id: null
 tussenresultaat: false

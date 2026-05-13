@@ -38,14 +38,14 @@ markeringen:
   interpretatiemethode: systematisch
   bijdrage: primair
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 - markering-id: m-002
   bron-annotatie-id: BWBR0004770/art9/lid5
   tekst: de dagtekening van het aanslagbiljet
   interpretatiemethode: systematisch
   bijdrage: context
   bevestigd: false
-  bevestigd-op: '2026-01-01'
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
