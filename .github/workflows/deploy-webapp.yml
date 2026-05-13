@@ -31,7 +31,7 @@ jobs:
         run: pip install -r requirements.lock
 
       - name: Genereer webapp
-        run: python tools/generate_webapp.py --out webapp
+        run: python -m sitegen --out webapp
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

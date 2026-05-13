@@ -29,7 +29,7 @@ export-graph:
 	@$(VENV) $(TOOLS)/export_graph.py
 
 webapp:
-	@$(VENV) $(TOOLS)/generate_webapp.py
+	@$(VENV) -m sitegen
 
 check-enrichment:
 	@$(VENV) $(TOOLS)/check_enrichment.py || true

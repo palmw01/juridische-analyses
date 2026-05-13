@@ -1,0 +1,97 @@
+from pathlib import Path
+
+from sitegen.config import JAS_KLEUREN, slugify
+
+
+def gen_nav(active: str = "", p: str = "") -> str:
+    items = [
+        (f"{p}index.html", "Dashboard"),
+        (f"{p}begrippen.html", "Begrippen"),
+        (f"{p}annotaties.html", "Annotaties"),
+        (f"{p}regels.html", "Regels"),
+        (f"{p}graph.html", "Kennisgraaf"),
+        (f"{p}search.html", "Zoeken"),
+    ]
+    links = ""
+    for url, label in items:
+        cls = ' class="active" aria-current="page"' if label.lower() == active.lower() else ""
+        links += f'<a href="{url}"{cls}>{label}</a>\n'
+    return f"""<nav class="nav">
+<div class="container">
+  <div class="nav-logo"><a href="{p}index.html" aria-label="Home">Rechtsgraaf</a></div>
+  <button class="dark-toggle" id="darkToggle" aria-label="Donker/licht modus wisselen" title="Donker/licht modus" type="button">
+    <span class="dt-icon">&#x2600;</span>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false" type="button">
+    <span class="hamburger-label" aria-hidden="true">Menu</span>
+    <span class="hamburger-lines"><span></span><span></span><span></span></span>
+  </button>
+  <div class="nav-links">
+    {links}
+  </div>
+</div>
+</nav>"""
+
+
+def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: str = "") -> str:
+    return f"""<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title} | Rechtsgraaf</title>
+<link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{p}icons/apple-touch-icon.png">
+<link rel="manifest" href="{p}manifest.json">
+<meta name="theme-color" content="#154273">
+<link rel="stylesheet" href="{p}css/style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Direct naar inhoud</a>
+{gen_nav(active, p)}
+<main id="main-content"><div class="container">
+{body}
+</div></main>
+<footer>Rechtsgraaf &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990 &bull; <a href="https://github.com/palmw01/juridische-analyses" target="_blank" rel="noopener noreferrer">GitHub</a></footer>
+<script src="{p}js/app.js"></script>
+{extra_scripts}
+</body>
+</html>"""
+
+
+def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = "", extra_scripts: str = ""):
+    pad = out / rel
+    pad.parent.mkdir(parents=True, exist_ok=True)
+    pad.write_text(pagina(title, body, active, p, extra_scripts))
+
+
+def breadcrumb(p: str, active: str, crumbs: list[tuple[str, str]]) -> str:
+    items = "".join(f'<li><a href="{url}">{label}</a></li>' for url, label in crumbs)
+    return f'<nav aria-label="U bevindt zich hier"><ol class="breadcrumb">{items}<li aria-current="page">{active}</li></ol></nav>'
+
+
+def jas_tag(klasse: str) -> str:
+    kleur = JAS_KLEUREN.get(klasse, "#888")
+    return f'<span class="tag" style="background:{kleur}">{klasse}</span>'
+
+
+def status_badge(status: str) -> str:
+    return f'<span class="badge badge-{status or "concept"}">{status or "onbekend"}</span>'
+
+
+def format_ann_title(a: dict) -> str:
+    wet = a.get("wet", "")
+    artikel = a.get("artikel", "")
+    lid = a.get("lid", "")
+    if wet.startswith("LI "):
+        return f'{wet} § {lid}' if lid else f'{wet} § {artikel}'
+    return f'{wet} art. {artikel}{", lid " + lid if lid else ""}'
+
+
+def format_structuurpositie(a: dict) -> str:
+    pos = a.get("structuurpositie", "")
+    if a.get("wet", "").startswith("LI ") and pos:
+        pos = pos.replace("Lid ", "§ ")
+    return pos
