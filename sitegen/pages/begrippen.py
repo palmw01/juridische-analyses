@@ -1,3 +1,4 @@
+from html import escape
 from pathlib import Path
 
 from sitegen.config import slugify
@@ -17,8 +18,8 @@ def _render_begrip_voorbeelden(voorbeelden: list) -> str:
     for v in voorbeelden:
         label = "✓" if v.get("waar") else "✗"
         cls = "voorbeeld" if v.get("waar") else "voorbeeld ongeldig"
-        toel = v.get("toelichting") or ""
-        stelling = v.get("stelling", "")
+        toel = escape(v.get("toelichting") or "")
+        stelling = escape(v.get("stelling") or "")
         rows += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> {stelling}'
         if toel:
             rows += f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">{toel}</div>'
@@ -29,7 +30,7 @@ def _render_begrip_voorbeelden(voorbeelden: list) -> str:
 def _render_begrip_kenmerken(kenmerken: list) -> str:
     if not kenmerken:
         return ""
-    items = "".join(f"<li>{k}</li>" for k in kenmerken)
+    items = "".join(f"<li>{escape(k)}</li>" for k in kenmerken)
     return f'<div class="card"><div class="card-title">Kenmerken</div><ul style="margin-left:1.25rem">{items}</ul></div>'
 
 
@@ -45,9 +46,9 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list):
                 ann_by_begrip.setdefault(bid, []).append({"titel": ann_title, "url": ann_url})
     items = "".join(
         f'<li data-id="{b["slug"]}" onclick="window.location=\'begrippen/{b["slug"]}.html\'">'
-        f'<a href="begrippen/{b["slug"]}.html" class="item-title">{b["naam"]}</a>'
-        f'<div class="item-badges">{jas_tag(b["jas_klasse"])}<span class="badge badge-soort">{b["soort"]}</span>{status_badge(b["status"])}</div>'
-        f'<span class="item-meta">ID: {b["id"]}</span>'
+        f'<a href="begrippen/{b["slug"]}.html" class="item-title">{escape(b["naam"])}</a>'
+        f'<div class="item-badges">{jas_tag(b["jas_klasse"])}<span class="badge badge-soort">{escape(b["soort"])}</span>{status_badge(b["status"])}</div>'
+        f'<span class="item-meta">ID: {escape(b["id"])}</span>'
         f'</li>\n'
         for b in begrippen
     )
@@ -55,12 +56,14 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list):
 <label for="filterInput" class="sr-only">Filter op naam</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of definitie..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
-<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
 <script>
 var _dr=false;
+var _inp=document.getElementById('filterInput');
 var _ms=new MiniSearch({{fields:['titel','definitie'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-fetch('data/begrippen.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true}});
-document.getElementById('filterInput')?.addEventListener('input',function(){{
+if(_inp)_inp.placeholder='Zoekindex laden...';
+fetch('data/begrippen.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op naam of definitie...'}});
+_inp?.addEventListener('input',function(){{
   var q=this.value.trim();
   if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
   var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
@@ -74,6 +77,12 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         for a in annotaties
     }
 
+    def ann_url(bron_annotatie_id: str) -> str:
+        return f'../annotaties/{bron_annotatie_id.replace("/", "-")}.html'
+
+    def ann_label(bron_annotatie_id: str) -> str:
+        return ann_titel_by_id.get(bron_annotatie_id, bron_annotatie_id)
+
     pp = "../"
     for b in begrippen:
         rel_html = ""
@@ -83,16 +92,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 rel_html += f"<p style='margin-top:0.5rem'><strong>{label}</strong></p><ul style='margin-left:1.25rem'>"
                 for t in targets:
                     t_slug = slug_by_bid.get(t) or slugify(t.rsplit("/", 1)[-1])
-                    rel_html += f'<li><a href="{pp}begrippen/{t_slug}.html">{t}</a></li>'
+                    rel_html += f'<li><a href="{pp}begrippen/{t_slug}.html">{escape(t)}</a></li>'
                 rel_html += "</ul>"
         if not rel_html:
             rel_html = "<p class='item-meta'>Geen relaties</p>"
-
-        def ann_url(bron_annotatie_id: str) -> str:
-            return f'../annotaties/{bron_annotatie_id.replace("/", "-")}.html'
-
-        def ann_label(bron_annotatie_id: str) -> str:
-            return ann_titel_by_id.get(bron_annotatie_id, bron_annotatie_id)
 
         def_bron = ""
         if b.get("definitie"):
@@ -101,7 +104,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 links = []
                 for m in bronnen:
                     if m.get("bijdrage") == "primair":
-                        mid = m.get("markering-id", "")
+                        mid = escape(m.get("markering-id", ""))
                         baid = m.get("bron-annotatie-id", "")
                         if baid:
                             links.append(f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>')
@@ -116,14 +119,14 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         ctx_html = ""
         for ctx in b.get("definitie_contexten", []):
             bijdrage = ctx.get("bijdrage", "")
-            ctx_tekst = ctx.get("tekst", "")
-            ctx_toel = ctx.get("toelichting", "")
+            ctx_tekst = escape(ctx.get("tekst", ""))
+            ctx_toel = escape(ctx.get("toelichting", ""))
             mid = ctx.get("markering-id", "")
             bron = mid_to_bron.get(mid, "")
-            badge_label = bijdrage.capitalize()
+            badge_label = escape(bijdrage.capitalize())
             ref_parts = []
             if mid:
-                ref_parts.append(mid)
+                ref_parts.append(escape(mid))
             if bron:
                 ref_parts.append(f'<a href="{ann_url(bron)}">{ann_label(bron)}</a>')
             ref_str = " · ".join(ref_parts)
@@ -143,13 +146,13 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         mark_tbl = ""
         for m in b.get("markeringen", []):
             jc = b["jas_klasse"] or ""
-            mid = m.get("markering-id", "")
+            mid = escape(m.get("markering-id", ""))
             baid = m.get("bron-annotatie-id", "")
             mid_cell = f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>' if baid else mid
             bev = m.get("bevestigd", False)
-            bev_op = m.get("bevestigd-op") or ""
+            bev_op = escape(m.get("bevestigd-op") or "")
             bev_label = f'<span title="Gevalideerd{" op " + bev_op if bev_op else ""}" style="color:var(--success,#2e7d32)">&#10003;</span>' if bev else '<span title="AI-output, nog niet gevalideerd" style="color:var(--warning,#e65100)">&#9888;</span>'
-            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td><td style="text-align:center">{bev_label}</td></tr>\n'
+            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">&#8220;{escape(m.get("tekst",""))}&#8221;</td><td>{jas_tag(jc) if jc else ""}</td><td>{escape(m.get("interpretatiemethode",""))}</td><td><span class="badge badge-soort">{escape(m.get("bijdrage",""))}</span></td><td style="text-align:center">{bev_label}</td></tr>\n'
         mp = ""
         if mark_tbl:
             mp = f"""<div class="card">
@@ -167,22 +170,23 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         ann_refs = ann_by_begrip.get(b["id"], [])
         if ann_refs:
             seen: set[str] = set()
-            items = ""
+            ann_items = ""
             for ref in ann_refs:
                 if ref["url"] not in seen:
                     seen.add(ref["url"])
-                    items += f'<li><a href="../{ref["url"]}">{ref["titel"]}</a></li>\n'
-            ann_links = f'<div class="card"><div class="card-title">Annotaties</div><ul style="margin-left:1.25rem">{items}</ul></div>'
+                    ann_items += f'<li><a href="../{ref["url"]}">{ref["titel"]}</a></li>\n'
+            ann_links = f'<div class="card"><div class="card-title">Annotaties</div><ul style="margin-left:1.25rem">{ann_items}</ul></div>'
+        b_naam = escape(b["naam"])
         b_br = breadcrumb(pp, b["naam"], [(f"{pp}index.html", "Home"), (f"{pp}begrippen.html", "Begrippen")])
         body = f"""{b_br}
-<h1>{b["naam"]}</h1>
-<p class="subtitle">{jas_tag(b["jas_klasse"])} <span class="badge badge-soort">{b["soort"]}</span> {status_badge(b["status"])}</p>
+<h1>{b_naam}</h1>
+<p class="subtitle">{jas_tag(b["jas_klasse"])} <span class="badge badge-soort">{escape(b["soort"])}</span> {status_badge(b["status"])}</p>
 <div class="detail-layout">
 <div>
   <div class="card">
     <div class="card-title">Definitie</div>
     <div class="def-kern-label">Kern</div>
-    <div class="def-block">{b["definitie"] or "<em>Geen definitie</em>"}</div>
+    <div class="def-block">{escape(b["definitie"]) if b["definitie"] else "<em>Geen definitie</em>"}</div>
     {def_bron}
     {ctx_block}
   </div>
@@ -192,19 +196,19 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
   <div class="card">
     <div class="card-title">Kenmerken</div>
     <table class="prop-table">
-      <tr><td>ID</td><td style="word-break:break-all;font-size:0.8rem">{b["id"]}</td></tr>
-      <tr><td>Soort</td><td>{b["soort"] or "-"}{"&nbsp;<span class='badge badge-soort'>sleutel-id</span>" if b.get("soort_id") else ""}</td></tr>
-      <tr><td>Herkomst</td><td>{b["herkomst"] or "-"}</td></tr>
-      <tr><td>Aliases</td><td>{", ".join(b["aliases"]) or "-"}</td></tr>
+      <tr><td>ID</td><td style="word-break:break-all;font-size:0.8rem">{escape(b["id"])}</td></tr>
+      <tr><td>Soort</td><td>{escape(b["soort"] or "-")}{"&nbsp;<span class='badge badge-soort'>sleutel-id</span>" if b.get("soort_id") else ""}</td></tr>
+      <tr><td>Herkomst</td><td>{escape(b["herkomst"] or "-")}</td></tr>
+      <tr><td>Aliases</td><td>{", ".join(escape(a) for a in b["aliases"]) or "-"}</td></tr>
       <tr><td>Identificatiebegrip</td><td>{"Ja" if b.get("identificatiebegrip") else "Nee"}</td></tr>
       <tr><td>Tussenresultaat</td><td>{"Ja" if b["tussenresultaat"] else "Nee"}</td></tr>
-      <tr><td>Definitie versie</td><td>{b["definitie_versie"] if b.get("definitie_versie") else "-"}</td></tr>
-      <tr><td>Geldig vanaf</td><td>{b["geldigheid_van"] or "-"}</td></tr>
-      <tr><td>Geldig tot</td><td>{b["geldigheid_tot"] or "&#8212;"}</td></tr>
-      {f'<tr><td>Vervangen door</td><td><a href="{pp}begrippen/{slugify(b["vervangen_door"].rsplit("/",1)[-1])}.html">{b["vervangen_door"]}</a></td></tr>' if b.get("vervangen_door") else ""}
+      <tr><td>Definitie versie</td><td>{escape(str(b["definitie_versie"])) if b.get("definitie_versie") else "-"}</td></tr>
+      <tr><td>Geldig vanaf</td><td>{escape(b["geldigheid_van"] or "-")}</td></tr>
+      <tr><td>Geldig tot</td><td>{escape(b["geldigheid_tot"]) if b["geldigheid_tot"] else "&#8212;"}</td></tr>
+      {f'<tr><td>Vervangen door</td><td><a href="{pp}begrippen/{slugify(b["vervangen_door"].rsplit("/",1)[-1])}.html">{escape(b["vervangen_door"])}</a></td></tr>' if b.get("vervangen_door") else ""}
     </table>
   </div>
-  {f'<div class="card"><div class="card-title">JAS-toelichting</div><p style="font-size:0.85rem;font-style:italic">{b["toelichting_klasse"]}</p></div>' if b["toelichting_klasse"] else ""}
+  {f'<div class="card"><div class="card-title">JAS-toelichting</div><p style="font-size:0.85rem;font-style:italic">{escape(b["toelichting_klasse"])}</p></div>' if b["toelichting_klasse"] else ""}
   <div class="card">
     <div class="card-title">Relaties</div>
     {rel_html}

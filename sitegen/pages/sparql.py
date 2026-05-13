@@ -4,7 +4,7 @@ from pathlib import Path
 from sitegen.html import schrijf_html
 
 LOCAL_BUNDLE = "js/comunica.min.js"
-ESM_CDN = "https://esm.sh/@comunica/actor-init-sparql@1"
+ESM_CDN = "https://esm.sh/@comunica/query-sparql"
 
 BUILTIN_QUERIES: list[tuple[str, str]] = [
     ("Aantal begrippen per JAS-klasse",
@@ -116,6 +116,7 @@ def gen_sparql(out: Path):
 <script>
 var QUERIES = {QUERIES_JS};
 var cancelled = false;
+var engineLoading = false;
 
 document.querySelectorAll('[data-query]').forEach(function(btn){{
   btn.addEventListener('click',function(){{
@@ -149,15 +150,18 @@ async function getEngine() {{
     return new Comunica.QueryEngine();
   }}
   var mod = await import("{ESM_CDN}");
-  var NE = mod.newEngine;
-  try {{ return NE(); }} catch(_) {{ return new NE(); }}
+  return new mod.QueryEngine();
 }}
 
 document.getElementById('stopBtn').addEventListener('click', function() {{
   cancelled = true;
-  document.getElementById('sparqlLoading').style.display = 'none';
-  hideStop();
-  document.getElementById('sparqlStatus').textContent = 'Gestopt';
+  if (engineLoading) {{
+    document.getElementById('sparqlStatus').textContent = 'Stoppen na laden engine...';
+  }} else {{
+    document.getElementById('sparqlLoading').style.display = 'none';
+    hideStop();
+    document.getElementById('sparqlStatus').textContent = 'Gestopt';
+  }}
 }});
 
 document.getElementById('runBtn').addEventListener('click', async function(){{
@@ -178,12 +182,15 @@ document.getElementById('runBtn').addEventListener('click', async function(){{
   loading.style.display = 'block';
   document.getElementById('stopBtn').style.display = 'inline-block';
   document.getElementById('runBtn').style.display = 'none';
-  statusEl.textContent = 'Bezig met laden...';
+  statusEl.textContent = 'Engine laden...';
 
   var engine;
   try {{
+    engineLoading = true;
     engine = await getEngine();
+    engineLoading = false;
   }} catch(e) {{
+    engineLoading = false;
     loading.style.display = 'none';
     hideStop();
     errorDiv.style.display = 'block';
@@ -191,7 +198,7 @@ document.getElementById('runBtn').addEventListener('click', async function(){{
     statusEl.textContent = 'Fout bij laden engine';
     return;
   }}
-  if(cancelled) {{ hideStop(); loading.style.display = 'none'; return; }}
+  if(cancelled) {{ hideStop(); loading.style.display = 'none'; statusEl.textContent = 'Gestopt'; return; }}
 
   var ttlUrl = new URL('data/begrippen.ttl', window.location.href).href;
   statusEl.textContent = 'Query uitvoeren...';

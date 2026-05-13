@@ -1,3 +1,4 @@
+from html import escape
 from pathlib import Path
 
 from sitegen.html import breadcrumb, format_ann_title, schrijf_html
@@ -8,7 +9,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
 
     def _link(ref: str) -> str:
         slug = slug_by_bid.get(ref)
-        return f'<a href="../begrippen/{slug}.html">{ref}</a>' if slug else ref
+        return f'<a href="../begrippen/{slug}.html">{escape(ref)}</a>' if slug else escape(ref)
 
     ann_by_key: dict[tuple[str, str, str], dict] = {}
     for a in annotaties:
@@ -16,9 +17,9 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
 
     items = "".join(
         f'<li data-id="{r["id"]}" onclick="window.location=\'regels/{r["id"]}.html\'">'
-        f'<a href="regels/{r["id"]}.html" class="item-title">{r["naam"]}</a>'
-        f'<div class="item-badges"><span class="badge badge-definitief">{r["soort"]}</span></div>'
-        f'<span class="item-meta">ID: {r["id"]}</span>'
+        f'<a href="regels/{r["id"]}.html" class="item-title">{escape(r["naam"])}</a>'
+        f'<div class="item-badges"><span class="badge badge-definitief">{escape(r["soort"])}</span></div>'
+        f'<span class="item-meta">ID: {escape(r["id"])}</span>'
         f'</li>\n'
         for r in regels
     )
@@ -26,12 +27,14 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
 <label for="filterInput" class="sr-only">Filter op naam of ID</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of ID..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
-<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
 <script>
 var _dr=false;
+var _inp=document.getElementById('filterInput');
 var _ms=new MiniSearch({{fields:['titel','formele_regel','toelichting'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-fetch('data/regels.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true}});
-document.getElementById('filterInput')?.addEventListener('input',function(){{
+if(_inp)_inp.placeholder='Zoekindex laden...';
+fetch('data/regels.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op naam of ID...'}});
+_inp?.addEventListener('input',function(){{
   var q=this.value.trim();
   if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
   var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
@@ -46,10 +49,10 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             juist = v.get("juridisch-juist", True)
             cls = "voorbeeld" if juist else "voorbeeld ongeldig"
             label = "[+]" if juist else "[-]"
-            toel_v = v.get("toelichting") or ""
+            toel_v = escape(v.get("toelichting") or "")
             toel_html = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem">{toel_v}</div>' if toel_v else ""
-            vb += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> <strong>Invoer:</strong> {v.get("invoerwaarden","")}<br><strong>Uitvoer:</strong> {v.get("verwachte-uitkomst","")}{toel_html}</div>'
-        ops = ", ".join(r.get("operators") or [])
+            vb += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> <strong>Invoer:</strong> {escape(str(v.get("invoerwaarden","")))} <strong>Uitvoer:</strong> {escape(str(v.get("verwachte-uitkomst","")))}{toel_html}</div>'
+        ops = escape(", ".join(r.get("operators") or []))
         ann_link = ""
         if r["bwb_id"] and r["artikel"]:
             match = ann_by_key.get((r["bwb_id"], r["artikel"], r["lid"]))
@@ -59,15 +62,15 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 ann_link = f'<div class="card"><div class="card-title">Annotatie</div><p><a href="{ann_url}">{ann_title}</a></p></div>'
         r_br = breadcrumb("../", r["naam"], [("../index.html", "Home"), ("../regels.html", "Regels")])
         body = f"""{r_br}
-<h1>{r["naam"]}</h1>
-<p class="subtitle"><span class="badge badge-definitief">{r["soort"]}</span> {r["id"]}</p>
+<h1>{escape(r["naam"])}</h1>
+<p class="subtitle"><span class="badge badge-definitief">{escape(r["soort"])}</span> {escape(r["id"])}</p>
 <div class="card">
   <div class="card-title">Formele regel</div>
-  <div class="regel-box">{r["formele_regel"]}</div>
+  <div class="regel-box">{escape(r["formele_regel"])}</div>
 </div>
 <div class="card">
   <div class="card-title">Toelichting</div>
-  <p>{r["toelichting"] or "<em>Geen toelichting</em>"}</p>
+  <p>{escape(r["toelichting"]) if r["toelichting"] else "<em>Geen toelichting</em>"}</p>
 </div>
 {ann_link}
 <div class="dash-grid">

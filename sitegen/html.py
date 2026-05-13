@@ -1,3 +1,4 @@
+from html import escape
 from pathlib import Path
 
 from sitegen.config import JAS_KLEUREN, slugify
@@ -40,7 +41,7 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} | Rechtsgraaf</title>
+<title>{escape(title)}</title>
 <link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
@@ -69,24 +70,25 @@ def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p
 
 
 def breadcrumb(p: str, active: str, crumbs: list[tuple[str, str]]) -> str:
-    items = "".join(f'<li><a href="{url}">{label}</a></li>' for url, label in crumbs)
-    return f'<nav aria-label="U bevindt zich hier"><ol class="breadcrumb">{items}<li aria-current="page">{active}</li></ol></nav>'
+    items = "".join(f'<li><a href="{url}">{escape(label)}</a></li>' for url, label in crumbs)
+    return f'<nav aria-label="U bevindt zich hier"><ol class="breadcrumb">{items}<li aria-current="page">{escape(active)}</li></ol></nav>'
 
 
 def jas_tag(klasse: str) -> str:
     kleur = JAS_KLEUREN.get(klasse, "#888")
-    return f'<span class="tag" style="background:{kleur}">{klasse}</span>'
+    return f'<span class="tag" style="background:{kleur}">{escape(klasse)}</span>'
 
 
 def status_badge(status: str) -> str:
-    return f'<span class="badge badge-{status or "concept"}">{status or "onbekend"}</span>'
+    s = status or "concept"
+    return f'<span class="badge badge-{s}">{escape(status or "onbekend")}</span>'
 
 
 def format_ann_title(a: dict) -> str:
-    wet = a.get("wet", "")
-    artikel = a.get("artikel", "")
-    lid = a.get("lid", "")
-    if wet.startswith("LI "):
+    wet = escape(a.get("wet", ""))
+    artikel = escape(str(a.get("artikel", "")))
+    lid = escape(str(a.get("lid", "")))
+    if a.get("wet", "").startswith("LI "):
         return f'{wet} § {lid}' if lid else f'{wet} § {artikel}'
     return f'{wet} art. {artikel}{", lid " + lid if lid else ""}'
 
@@ -95,4 +97,4 @@ def format_structuurpositie(a: dict) -> str:
     pos = a.get("structuurpositie", "")
     if a.get("wet", "").startswith("LI ") and pos:
         pos = pos.replace("Lid ", "§ ")
-    return pos
+    return escape(pos)

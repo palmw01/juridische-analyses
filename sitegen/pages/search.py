@@ -50,7 +50,9 @@ function doSearch(){{
   var results = miniSearch.search(q);
   if(currentFilter !== 'all') results = results.filter(function(r){{return r.type === currentFilter}});
   if(results.length === 0){{out.innerHTML='<div class="no-results">Geen resultaten voor "'+escHtml(q)+'"</div>';return}}
-  out.innerHTML = '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem">'+results.length+' resultaten</div>';
+  var shown=Math.min(results.length,50);
+  var countTxt=results.length>50?shown+' van '+results.length+' resultaten':results.length+' resultaten';
+  out.innerHTML='<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem">'+countTxt+'</div>';
   var html='';
   results.slice(0,50).forEach(function(d){{
     var rawExcerpt = (d.tekst||'').length > 150 ? (d.tekst||'').substring(0,150)+'...' : (d.tekst||'');

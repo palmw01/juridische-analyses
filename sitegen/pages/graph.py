@@ -62,7 +62,7 @@ def gen_graph(out: Path, begrippen: list, regels: list, annotaties: list):
   <button class="graph-close-btn" id="graphCloseBtn" type="button" aria-label="Volledig scherm sluiten" title="Sluiten">&#x2715;</button>
   <div class="graph-legend" id="graphLegend"></div>
 </div>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
 <script>
 fetch('data/graph.json').then(function(r){{return r.json()}}).then(function(graphData){{
 var data = graphData;
@@ -194,7 +194,7 @@ function resizeGraph(){{
   simulation.force('center',d3.forceCenter(newW/2,newH/2)).alpha(0.3).restart();
   defaultTransform=d3.zoomIdentity.translate(newW/2,newH/2).scale(0.85).translate(-newW/2,-newH/2);
 }}
-window.addEventListener('resize',resizeGraph);
+var _rt;window.addEventListener('resize',function(){{clearTimeout(_rt);_rt=setTimeout(resizeGraph,150);}});
 
 var fsBtn=document.getElementById('fullscreenBtn');
 var closeBtn=document.getElementById('graphCloseBtn');

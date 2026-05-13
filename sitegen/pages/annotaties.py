@@ -1,3 +1,4 @@
+from html import escape
 from pathlib import Path
 
 from sitegen.config import slugify
@@ -41,12 +42,14 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
 <label for="filterInput" class="sr-only">Filter op wet of artikel</label>
 <input type="text" class="search-input" id="filterInput" placeholder="Filter op wet of artikel..." autofocus>
 <div class="item-list" id="itemList">{items}</div>
-<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
 <script>
 var _dr=false;
+var _inp=document.getElementById('filterInput');
 var _ms=new MiniSearch({{fields:['titel','wetstekst'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-fetch('data/annotaties.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true}});
-document.getElementById('filterInput')?.addEventListener('input',function(){{
+if(_inp)_inp.placeholder='Zoekindex laden...';
+fetch('data/annotaties.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op wet of artikel...'}});
+_inp?.addEventListener('input',function(){{
   var q=this.value.trim();
   if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
   var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
@@ -66,13 +69,14 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slug_by_bid.get(r["begrip_id"]) or slugify(r["begrip_id"].rsplit("/", 1)[-1])
-                naam = naam_by_bid.get(r["begrip_id"]) or r["begrip_id"].rsplit("/", 1)[-1]
+                naam = escape(naam_by_bid.get(r["begrip_id"]) or r["begrip_id"].rsplit("/", 1)[-1])
                 bgp_link = f'<a href="../begrippen/{slug}.html">{naam}</a>'
-            sign = r.get("signalering")
-            toel_k = r.get("toelichting_klasse", "")
-            rid = r.get("rij_id", "")
-            interp = r.get("interpretatiemethode", "")
-            has_detail = bool(sign or toel_k)
+            sign = escape(r.get("signalering") or "")
+            toel_k = escape(r.get("toelichting_klasse", ""))
+            rid = escape(r.get("rij_id", ""))
+            interp = escape(r.get("interpretatiemethode", ""))
+            markering_txt = escape(r.get("markering", ""))
+            has_detail = bool(r.get("signalering") or r.get("toelichting_klasse"))
             if has_detail:
                 detail_parts = []
                 if rid:
@@ -83,11 +87,11 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                     detail_parts.append(f'<strong>[!]</strong> {sign}')
                 detail_html = " &mdash; ".join(detail_parts)
                 rijen += f'<tr class="has-sign" onclick="var d=this.nextElementSibling;d.style.display=d.style.display===\'none\'?\'table-row\':\'none\'">'
-                rijen += f'<td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td>'
-                rijen += f'<td style="text-align:center"><span class="sign-badge">{"[!]" if sign else "i"}</span></td></tr>\n'
+                rijen += f'<td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td>'
+                rijen += f'<td style="text-align:center"><span class="sign-badge">{"[!]" if r.get("signalering") else "i"}</span></td></tr>\n'
                 rijen += f'<tr class="sign-detail" style="display:none"><td colspan="5"><div class="sign-content">{detail_html}</div></td></tr>\n'
             else:
-                rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
+                rijen += f'<tr><td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
         mermaid_src = ""
         extra_scripts = ""
         mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
@@ -96,7 +100,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 <div class="mermaid">
 {mermaid_code}
 </div></div>"""
-            extra_scripts = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>\n<script>mermaid.initialize({startOnLoad:true,theme:"neutral",fontFamily:"system-ui,sans-serif"})</script>'
+            extra_scripts = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" integrity="sha384-yQ4mmBBT+vhTAwjFH0toJXNYJ6O4usWnt6EPIdWwrRvx2V/n5lXuDZQwQFeSFydF" crossorigin="anonymous"></script>\n<script>mermaid.initialize({startOnLoad:true,theme:"neutral",fontFamily:"system-ui,sans-serif"})</script>'
         regel_links = ""
         seen_regels: set[str] = set()
         regel_items = ""
@@ -115,21 +119,21 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             for k in a["kruisreferenties"]:
                 conf = k.get("confidence")
                 conf_str = f'{int(conf * 100)}%' if conf is not None else ""
-                doel = k.get("doel_artikel") or k.get("doel_bwb_id", "")
+                doel = escape((k.get("doel_artikel") or k.get("doel_bwb_id", "")))
                 if k.get("doel_lid"):
-                    doel += f' lid {k["doel_lid"]}'
-                kr_rows += f'<tr><td>{k.get("ruwe_tekst","")}</td><td>{k.get("richting","")}</td><td>{k.get("doel_bwb_id","")}</td><td>{doel}</td><td style="text-align:right">{conf_str}</td></tr>\n'
+                    doel += f' lid {escape(str(k["doel_lid"]))}'
+                kr_rows += f'<tr><td>{escape(k.get("ruwe_tekst",""))}</td><td>{escape(k.get("richting",""))}</td><td>{escape(k.get("doel_bwb_id",""))}</td><td>{doel}</td><td style="text-align:right">{conf_str}</td></tr>\n'
             kruisref_html = f'<div class="card"><div class="card-title">Kruisreferenties</div><div class="table-scroll"><table class="ann-table"><tr><th>Verwijzing</th><th>Richting</th><th>BWB-id</th><th>Doel</th><th>Conf.</th></tr>{kr_rows}</table></div></div>'
         deleg_html = ""
         if a.get("delegatiestructuur"):
             del_rows = ""
             for d in a["delegatiestructuur"]:
-                inv = d.get("invulling") or "-"
+                inv = escape(d.get("invulling") or "-")
                 vind_inv = d.get("vindplaats-invulling") or ""
-                inv_cell = f'<a href="{vind_inv}">{inv}</a>' if vind_inv and vind_inv.startswith("http") else (f'{inv} <span style="font-size:0.75rem;color:var(--text-muted)">{vind_inv}</span>' if vind_inv else inv)
-                del_rows += f'<tr><td>{d.get("omschrijving","")}</td><td>{d.get("vindplaats","")}</td><td><span class="badge badge-soort">{d.get("type","")}</span></td><td>{inv_cell}</td></tr>\n'
+                inv_cell = f'<a href="{escape(vind_inv, quote=True)}">{inv}</a>' if vind_inv and vind_inv.startswith("http") else (f'{inv} <span style="font-size:0.75rem;color:var(--text-muted)">{escape(vind_inv)}</span>' if vind_inv else inv)
+                del_rows += f'<tr><td>{escape(d.get("omschrijving",""))}</td><td>{escape(d.get("vindplaats",""))}</td><td><span class="badge badge-soort">{escape(d.get("type",""))}</span></td><td>{inv_cell}</td></tr>\n'
             deleg_html = f'<div class="card"><div class="card-title">Delegatiestructuur</div><div class="table-scroll"><table class="ann-table"><tr><th>Omschrijving</th><th>Vindplaats</th><th>Type</th><th>Invulling</th></tr>{del_rows}</table></div></div>'
-        peildatum_str = f' &bull; Peildatum: {a["peildatum"]}' if a.get("peildatum") else ""
+        peildatum_str = f' &bull; Peildatum: {escape(str(a["peildatum"]))}' if a.get("peildatum") else ""
         parent_link = ""
         parent_idx = parent_by_ann_id.get(a["id"])
         if parent_idx:
@@ -140,8 +144,8 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         ann_br = breadcrumb("../", ann_title, [("../index.html", "Home"), ("../annotaties.html", "Annotaties")])
         body = f"""{ann_br}
 <h1>{ann_title}</h1>
-<p class="subtitle">{format_structuurpositie(a)} &bull; {a["bwb_id"]}{peildatum_str}</p>
-<div class="wetstekst">"{a["wetstekst"]}"</div>
+<p class="subtitle">{format_structuurpositie(a)} &bull; {escape(a["bwb_id"])}{peildatum_str}</p>
+<div class="wetstekst">&#8220;{escape(a["wetstekst"])}&#8221;</div>
 <div class="card">
 <div class="card-title">Annotatierijen</div>
 <div class="table-scroll">
