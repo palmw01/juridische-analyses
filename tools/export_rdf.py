@@ -134,13 +134,19 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
         if bid:
             lines.append(f"    jas:leidtTot begrip:{slug_van_id(str(bid))} ;")
 
-    # Notities
+    # Metadata
     jas_klasse = jas_index.get(begrip_id, "")
     status = fm.get("status") or ""
+    soort = fm.get("soort") or ""
+    herkomst = fm.get("herkomst") or ""
     if jas_klasse:
         lines.append(f'    jas:jasKlasse "{jas_klasse}" ;')
     if status:
         lines.append(f'    jas:status "{status}" ;')
+    if soort:
+        lines.append(f'    jas:soort "{soort}" ;')
+    if herkomst:
+        lines.append(f'    jas:herkomst "{herkomst}" ;')
 
     # Afleidingsregel-koppeling
     ar_id = fm.get("afleidingsregel-id")
