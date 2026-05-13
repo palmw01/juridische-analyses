@@ -136,7 +136,10 @@
         }
       }
     },
-    "identificatiebegrip": { "type": "boolean" },
+    "identificatiebegrip": {
+      "type": "boolean",
+      "description": "true als dit begrip een identificerend attribuut is van een entiteit (bijv. BSN voor belastingschuldige, aanslagnummer voor belastingaanslag). Zie ook soort-id, dat hetzelfde semantisch markeert; beide velden worden naast elkaar gebruikt voor backward-compatibiliteit."
+    },
     "jas-klasse": {
       "type": "string",
       "description": "JAS-classificatie overgenomen uit de primaire annotatierij (A2). Wordt tijdens A3 niet gewijzigd.",

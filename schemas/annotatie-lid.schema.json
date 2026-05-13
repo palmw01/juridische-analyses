@@ -22,6 +22,7 @@
     "wetstekst": { "type": "string", "minLength": 1 },
     "annotatierijen": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": ["rij-id", "markering", "jas-klasse", "interpretatiemethode", "begrip-id", "toelichting-klasse"],
@@ -53,10 +54,11 @@
           "items": {
             "type": "object",
             "required": ["id", "jas-klasse", "label"],
+            "additionalProperties": false,
             "properties": {
-              "id": { "type": "string" },
+              "id": { "type": "string", "minLength": 1 },
               "jas-klasse": { "type": "string" },
-              "label": { "type": "string" },
+              "label": { "type": "string", "minLength": 1 },
               "begrip-id": { "type": ["string", "null"] }
             }
           }
@@ -66,9 +68,10 @@
           "items": {
             "type": "object",
             "required": ["van", "naar", "label"],
+            "additionalProperties": false,
             "properties": {
-              "van": { "type": "string" },
-              "naar": { "type": "string" },
+              "van": { "type": "string", "minLength": 1 },
+              "naar": { "type": "string", "minLength": 1 },
               "label": { "type": ["string", "null"] }
             }
           }
@@ -94,9 +97,11 @@
       "type": "array",
       "items": {
         "type": "object",
+        "required": ["omschrijving", "vindplaats", "type"],
+        "additionalProperties": false,
         "properties": {
-          "omschrijving": { "type": "string" },
-          "vindplaats": { "type": "string" },
+          "omschrijving": { "type": "string", "minLength": 1 },
+          "vindplaats": { "type": "string", "minLength": 1 },
           "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
           "invulling": { "type": ["string", "null"] },
           "vindplaats-invulling": { "type": ["string", "null"] }

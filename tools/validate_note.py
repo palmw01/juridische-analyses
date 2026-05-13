@@ -245,6 +245,20 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, va
             slug = begrip_id_to_slug(bid)
             errors.append(f"[L2] relaties.leidt-tot[].begrip-id: begrip '{slug}' niet gevonden")
 
+    # status == "gevalideerd" → definitie.kern niet leeg
+    status = data.get("status")
+    definitie_kern = haal_kern(definitie_obj)
+    if status == "gevalideerd" and not definitie_kern:
+        errors.append(
+            "[L2] status is 'gevalideerd' maar definitie.kern is leeg — vul kern in vóór validatie"
+        )
+
+    # status == "vervallen" → vervangen-door niet null
+    if status == "vervallen" and data.get("vervangen-door") is None:
+        errors.append(
+            "[L2] status is 'vervallen' maar vervangen-door is null — vermeld het opvolger-begrip-id"
+        )
+
     # herkomst == "afgeleid" → afleidingsregel-id niet null
     herkomst = data.get("herkomst")
     ar_id = data.get("afleidingsregel-id")
@@ -345,6 +359,22 @@ def validate_integrity_annotatie_lid(data: dict, filepath: Path, begrip_index: d
         if bid and not begrip_bestaat(bid, begrip_index):
             slug = begrip_id_to_slug(bid)
             errors.append(f"[L2] annotatierijen.begrip-id: begrip '{slug}' niet gevonden")
+
+    # Diagram: kanten.van/naar moeten verwijzen naar bestaande knoop-id's
+    diagram = data.get("diagram") or {}
+    knopen = diagram.get("knopen") or []
+    kanten = diagram.get("kanten") or []
+    knoop_ids = {k.get("id") for k in knopen if isinstance(k, dict) and k.get("id")}
+    for i, kant in enumerate(kanten):
+        if not isinstance(kant, dict):
+            continue
+        for richting in ("van", "naar"):
+            ref = kant.get(richting)
+            if ref and ref not in knoop_ids:
+                errors.append(
+                    f"[L2] diagram.kanten[{i}].{richting}: knoop-id '{ref}' niet gevonden in diagram.knopen"
+                )
+
     return errors
 
 

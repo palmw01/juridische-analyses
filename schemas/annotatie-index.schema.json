@@ -32,9 +32,11 @@
       "description": "Delegatiebevoegdheden op artikelniveau (zelfde formaat als annotatie-lid)",
       "items": {
         "type": "object",
+        "required": ["omschrijving", "vindplaats", "type"],
+        "additionalProperties": false,
         "properties": {
-          "omschrijving": { "type": "string" },
-          "vindplaats": { "type": "string" },
+          "omschrijving": { "type": "string", "minLength": 1 },
+          "vindplaats": { "type": "string", "minLength": 1 },
           "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
           "invulling": { "type": ["string", "null"] },
           "vindplaats-invulling": { "type": ["string", "null"] }
