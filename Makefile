@@ -3,7 +3,7 @@ TOOLS     = tools
 SCRIPTS   = scripts
 
 .PHONY: setup install-hooks validate export-rdf export-graph
-.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp
+.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp test
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -50,6 +50,10 @@ clean:
 	@rm -f kennisgraaf/*.dot kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"
+
+test:
+	@echo "Geen testsuite geconfigureerd. Voeg pytest toe in tools/tests/ zodra beschikbaar."
+	@echo "Exit code: 0"
 
 ci: validate export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"

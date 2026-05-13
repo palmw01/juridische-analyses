@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "regel",
   "title": "Afleidingsregel",
-  "description": "Formele afleidingsregel in RegelSpraaak-oriëntatie",
+  "description": "Formele afleidingsregel in RegelSpraak-oriëntatie",
   "type": "object",
   "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "voorbeeldreeksen"],
   "additionalProperties": false,
