@@ -100,7 +100,7 @@ _inp?.addEventListener('input',function(){{
 <div class="mermaid">
 {mermaid_code}
 </div></div>"""
-            extra_scripts = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" integrity="sha384-yQ4mmBBT+vhTAwjFH0toJXNYJ6O4usWnt6EPIdWwrRvx2V/n5lXuDZQwQFeSFydF" crossorigin="anonymous"></script>\n<script>mermaid.initialize({startOnLoad:true,theme:"neutral",fontFamily:"system-ui,sans-serif"})</script>'
+            extra_scripts = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" integrity="sha384-yQ4mmBBT+vhTAwjFH0toJXNYJ6O4usWnt6EPIdWwrRvx2V/n5lXuDZQwQFeSFydF" crossorigin="anonymous"></script>\n<script>mermaid.initialize({startOnLoad:false,theme:"neutral",fontFamily:"system-ui,sans-serif"});mermaid.run();</script>'
         regel_links = ""
         seen_regels: set[str] = set()
         regel_items = ""
