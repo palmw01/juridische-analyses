@@ -277,14 +277,18 @@ annotaties/BWBR0004770/art9-1-lid1.json
 
 | Bestand | Valideert |
 |---------|-----------|
-| `schemas/annotatie-artikel.schema.json` | Structuurankers in `annotaties/` |
+| `schemas/annotatie-index.schema.json` | Structuurankers in `annotaties/` |
 | `schemas/annotatie-lid.schema.json` | Lid-annotaties in `annotaties/` |
 | `schemas/begrip.schema.json` | Begrippen in `begrippen/` |
-| `schemas/afleidingsregel.schema.json` | Regels in `regels/` |
+| `schemas/regel.schema.json` | Regels in `regels/` |
 
 ### L2 — Integriteitscontrole
 
-**Wat:** alle verwijzingen naar andere vault-bestanden worden gecontroleerd op bestaan. Een begrip dat verwijst naar een annotatie-ID of naar een ander begrip-ID dat niet bestaat, geeft een L2-fout.
+**Wat:** drie soorten controles, allemaal blokkerend:
+
+1. **Referentiële integriteit** — alle verwijzingen naar andere vault-bestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten)
+2. **Status-consistentie** — `status: gevalideerd` vereist een ingevulde `definitie.kern`; `status: vervallen` vereist een niet-null `vervangen-door`
+3. **Diagramintegriteit** — `kanten[].van` en `kanten[].naar` in annotatie-lid-diagrammen moeten verwijzen naar een bestaand `knopen[].id`
 
 **Blokkerend:** ja — L2-fouten blokkeren commit en CI.
 
@@ -293,8 +297,9 @@ annotaties/BWBR0004770/art9-1-lid1.json
 begrippen/invorderbaarheid-belastingaanslag.yaml
   [L2] afleidingsregel-id 'AR-BWBR0004770-art9-lid1-a' bestaat niet in regels/
 begrippen/zes-weken.yaml
-  [L2] bron-annotatie-id 'BWBR0004770/art9/lid1' verwijst naar niet-bestaand
-       annotatie-bestand annotaties/BWBR0004770/art9-1.json
+  [L2] status is 'gevalideerd' maar definitie.kern is leeg — vul kern in vóór validatie
+annotaties/BWBR0004770/art9-lid1.json
+  [L2] diagram.kanten[2].naar: knoop-id 'X' niet gevonden in diagram.knopen
 ```
 
 ### L3 — Kwaliteitswaarschuwingen
@@ -305,7 +310,7 @@ begrippen/zes-weken.yaml
 |---|---|
 | `alle relaties leeg` | begrip heeft geen enkele relatie (`is-een`, `heeft`, `leidt-tot`) — mogelijk een geïsoleerd begrip of een ontbrekende modellering |
 | `geen grensgevallen` | een afleidingsregel heeft alleen positieve testgevallen; negatieve gevallen of grensgevallen ontbreken |
-| `definitie.kern leeg` | begrip is een nog niet ingevulde stub — gebruik `/begrip` om de kern te schrijven |
+| `definitie.kern leeg` | begrip is een nog niet ingevulde stub — gebruik `/begrip` om de kern te schrijven; bij `status: gevalideerd` escaleert dit naar een **L2-fout** |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 
 **Huidig rapport:** 40 bestanden ✅ · 0 blokkeerfouten · 4 L3-waarschuwingen (begrippen zonder relaties: `31-december`, `afwijkend-boekjaar`, `logische-of`, `termijnbedrag`).
