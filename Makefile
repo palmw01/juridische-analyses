@@ -9,8 +9,10 @@ setup:
 	@echo "Maak virtual environment aan..."
 	@python3 -m venv tools/.venv
 	@tools/.venv/bin/pip install -r requirements.lock
+	@echo "Installeer Node.js dependencies voor SPARQL-bundle..."
+	@cd sitegen/scripts && npm install --silent 2>&1 | tail -1
 	@$(MAKE) install-hooks
-	@echo "Setup voltooid: .venv + deps + pre-commit hook"
+	@echo "Setup voltooid: .venv + deps + npm + pre-commit hook"
 
 install-hooks:
 	@echo "Installeer pre-commit hook..."
@@ -28,8 +30,17 @@ export-rdf:
 export-graph:
 	@$(VENV) $(TOOLS)/export_graph.py
 
-webapp:
-	@$(VENV) -m sitegen
+sitegen/static/comunica.min.js: sitegen/scripts/bundle-comunica.js sitegen/scripts/package.json
+	@echo "Bundel Comunica SPARQL-engine voor browser..."
+	@cd sitegen/scripts && npm install --silent 2>&1 | tail -1 && \
+	 npx esbuild --bundle --platform=browser --minify \
+	   --outfile=../static/comunica.min.js \
+	   bundle-comunica.js 2>&1 | grep -v "^npm" || \
+	 (echo "Waarschuwing: kon Comunica niet bundelen (npx/node nodig). SPARQL werkt alleen met CDN." && \
+	   touch ../static/comunica.min.js)
+
+webapp: export-rdf sitegen/static/comunica.min.js
+	@$(VENV) -m sitegen $(if $(OUT),--out $(OUT),)
 
 check-enrichment:
 	@$(VENV) $(TOOLS)/check_enrichment.py || true
@@ -48,6 +59,8 @@ lock:
 clean:
 	@rm -rf webapp/
 	@rm -f kennisgraaf/*.dot kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
+	@rm -f sitegen/static/comunica.min.js
+	@rm -rf sitegen/scripts/node_modules sitegen/scripts/package-lock.json
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@echo "Opschoning voltooid"
 

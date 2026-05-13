@@ -27,11 +27,14 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.lock
 
-      - name: Installeer dependencies
+      - name: Installeer Python dependencies
         run: pip install -r requirements.lock
 
-      - name: Genereer webapp
-        run: python -m sitegen --out webapp
+      - name: Installeer Node.js dependencies
+        run: cd sitegen/scripts && npm install --silent
+
+      - name: Exporteer RDF + Genereer webapp
+        run: make webapp OUT=webapp
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

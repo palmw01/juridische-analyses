@@ -16,7 +16,7 @@ def _render_begrip_voorbeelden(voorbeelden: list) -> str:
     rows = ""
     for v in voorbeelden:
         label = "✓" if v.get("waar") else "✗"
-        cls = "voorbeeld-juist" if v.get("waar") else "voorbeeld-onjuist"
+        cls = "voorbeeld" if v.get("waar") else "voorbeeld ongeldig"
         toel = v.get("toelichting") or ""
         stelling = v.get("stelling", "")
         rows += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> {stelling}'

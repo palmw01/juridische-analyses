@@ -37,3 +37,8 @@ kennisgraaf/*.graphml
 
 # Gegenereerde statische webapp
 webapp/
+
+# SPARQL-engine bundle (gebouwd met esbuild, niet tracken)
+sitegen/static/comunica.min.js
+sitegen/scripts/node_modules/
+sitegen/scripts/package-lock.json
