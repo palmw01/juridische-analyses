@@ -122,7 +122,7 @@ Deze sectie toont hoe de kernbestanden eruitzien, zodat elke rol er direct mee u
 
 ### Begrip (YAML)
 
-Een begrip beschrijft één juridisch concept. Hieronder een verkorte weergave van `begrippen/invorderbaarheid-belastingaanslag.yaml`:
+Een begrip beschrijft één juridisch concept. Hieronder een illustratief voorbeeld (verkorte weergave; niet-getoonde velden zoals `definitie-versie`, `definitie-gebaseerd-op`, `geldigheid-van`, `identificatiebegrip` zijn weggelaten maar wel verplicht):
 
 ```yaml
 begrip-id: BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag
@@ -136,18 +136,12 @@ definitie:
     De beslissingsregel die bepaalt of een belastingaanslag invorderbaar is,
     inhoudende dat invorderbaarheid intreedt zodra zes weken zijn verstreken
     na de dagtekening van het aanslagbiljet.
-  contexten:
+  contexten:               # leeg als de kern voor alle bronnen volstaat
     - markering-id: m-002
       bijdrage: verfijning        # verfijning | uitbreiding | uitzondering
       tekst: >-
         In de context van art. 9 lid 5 treedt invorderbaarheid niet eenmalig in
         maar telkens opnieuw per betalingstermijn — de bevoegdheid herleeft N maal.
-      toelichting: >-
-        De markering "is invorderbaar" is chirurgisch — twee woorden uit de wetstekst,
-        identiek in lid 1 en lid 5. De verfijning vloeit niet voort uit een andere
-        formulering, maar uit de iteratieve structuur van lid 5 als lex-specialis van
-        lid 1: dezelfde term draagt in een andere wetssystematische context een
-        kwalitatief andere juridische lading.
 
 markeringen:
   - markering-id: m-001
@@ -155,16 +149,21 @@ markeringen:
     tekst: is invorderbaar
     interpretatiemethode: grammaticaal
     bijdrage: primair
+    bevestigd: false
   - markering-id: m-002
     bron-annotatie-id: BWBR0004770/art9/lid5
     tekst: is invorderbaar
     interpretatiemethode: grammaticaal
     bijdrage: context             # aanvullende bron; verfijning gedocumenteerd in contexten[]
+    bevestigd: false
 
 relaties:
+  is-een: []
   heeft:
     - begrip-id: BWBR0004770/art9/lid1/belastingaanslag
+      kardinaliteit: '1:1'       # verplicht veld: 1:1 | 1:n | n:m
     - begrip-id: BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet
+      kardinaliteit: '1:1'
   leidt-tot:
     - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
       relatie-soort: causaal
@@ -173,7 +172,7 @@ afleidingsregel-id: AR-BWBR0004770-art9-lid1-a   # ← koppeling naar regel
 status: concept
 ```
 
-Het veld `soort` bepaalt het datatype van de uitkomst (`booleaans`, `datum`, `tijdsduur`, `monetair-bedrag`, `tekst`, `entiteit`). Het veld `herkomst` maakt onderscheid tussen begrippen die letterlijk in de wet staan (`direct`) en begrippen die via JAS-redenering worden afgeleid (`afgeleid`). De `markeringen`-array is de enige basis voor de definitie — begrippen worden nooit rechtstreeks uit de wetstekst geformuleerd, maar altijd vanuit een annotatie.
+Het veld `soort` bepaalt het datatype van de uitkomst (`booleaans`, `datum`, `tijdsduur`, `monetair-bedrag`, `percentage`, `tekst`, `enumeratie`, `entiteit`). Het veld `herkomst` maakt onderscheid tussen begrippen die letterlijk in de wet staan (`direct`) en begrippen die via JAS-redenering worden afgeleid (`afgeleid`). De `markeringen`-array is de enige basis voor de definitie — begrippen worden nooit rechtstreeks uit de wetstekst geformuleerd, maar altijd vanuit een annotatie.
 
 Het veld `definitie` is een **gelaagd object**: de `kern` bevat de universele, wets-overstijgende betekenis die voor alle bronartikelen geldt; `contexten` bevat optionele artikel-specifieke inkleringen (`verfijning`, `uitbreiding` of `uitzondering`). Begrippen met slechts één bron hebben een lege `contexten: []`.
 
