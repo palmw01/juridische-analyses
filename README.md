@@ -389,7 +389,15 @@ Knoopattributen bevatten JAS-klasse, soort en status; kanten zijn gekleurd op JA
 
 ### Statische webapp (`webapp/index.html`)
 
-Interactieve website in Belastingdienst-huisstijl, automatisch gepubliceerd naar GitHub Pages bij elke push naar `main`. Bevat doorzoekbare begrippenlijst (MiniSearch), interactieve D3-kennisgraaf, Mermaid-structuurdiagrammen per annotatie, signaleringsoverzicht (L3-waarschuwingen) en dark-mode.
+Interactieve website in Rijkshuisstijl, automatisch gepubliceerd naar GitHub Pages bij elke push naar `main`. Gegenereerd door `python -m sitegen` vanuit de `sitegen/`-package. Bevat:
+
+- **Begrippenlijst** — doorzoekbaar (MiniSearch) met JAS-klasse-badges, soort en status
+- **Annotatiepagina's** — wetstekst, annoteerderijen, Mermaid-structuurdiagram, kruisreferenties en delegatiestructuur per artikel/lid
+- **Regellijst** — formele RegelSpraak-regels met invoer/uitvoer-begrippen en testgevallen
+- **Kennisgraaf** — interactieve D3.js-graaf met filter op JAS-klasse, drag, zoom en volledigscherm
+- **Zoeken** — globale volledige-tekst-zoekfunctie over alle typen (MiniSearch)
+- **SPARQL** — browsergebaseerde SPARQL-query-editor (Comunica) op de RDF/Turtle-export
+- **Dark-mode** en responsief ontwerp (mobiel + desktop)
 
 ---
 
@@ -512,7 +520,34 @@ kennisgraaf/           exportartifacts
 
 rapporten/             validatierapport (gegenereerd)
 scripts/               pre-commit hook (L1/L2-validatie bij commit)
-tools/                 Python-toolchain (10 scripts)
+
+sitegen/               statische webapp-generator (Python-package, `python -m sitegen`)
+  cli.py               orchestratie: data laden → assets → pagina's
+  html.py              HTML-primitieven (nav, breadcrumb, pagina-skelet)
+  data.py              YAML/JSON-loaders voor begrippen, annotaties en regels
+  mermaid.py           converter: diagram-JSON → Mermaid-flowsyntax
+  assets.py            CSS/JS/icons kopiëren, data-JSON's genereren
+  pages/               paginageneratoren (index, begrippen, annotaties, regels,
+                       graph, search, sparql, artikel_indices)
+  static/              bronassets: style.css (Rijkshuisstijl) + app.js (dark-mode)
+  scripts/             esbuild-bundler voor Comunica SPARQL-engine
+
+.build/                bouw-artefacten (niet ingecheckt)
+  comunica.min.js      gebundelde Comunica SPARQL-engine (1,7 MB)
+
+webapp/                gegenereerde statische site (niet ingecheckt; deploy via CI)
+
+tools/                 Python-toolchain (9 scripts)
+  validate_note.py     L1–L3 validatie per projectbestand
+  export_rdf.py        YAML/JSON → RDF Turtle (SKOS)
+  export_graph.py      begrippen + relaties → GEXF + GraphML
+  check_enrichment.py  detecteert begrippen met meerdere bronartikelen
+  jas_index_lib.py     gedeelde bibliotheek voor index-operaties
+  query_rdf.py         SPARQL-query op gegenereerde TTL
+  fetch_wettenbank.py  hulpscript: wetstekst ophalen via MCP
+  extract_kruisrefs.py JCI URI-extractie uit annotaties
+  queries/             SPARQL-querybestanden
+
 .github/workflows/     CI (validatie) + deploy (GitHub Pages)
 Makefile               alle build-targets
 requirements.lock      pinned Python-dependencies
