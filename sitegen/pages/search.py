@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from sitegen.html import schrijf_html
 
 

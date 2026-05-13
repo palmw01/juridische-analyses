@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from sitegen.config import JAS_KLEUREN
 from sitegen.html import schrijf_html
