@@ -102,5 +102,533 @@
     "beslissing": "gesloten — modellering correct, begrip verwijderd uit actieve queue",
     "besloten-op": "2026-05-10",
     "besloten-door": "senior jurist Belastingdienst domein Invordering"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/31-december",
+    "begripsnaam": "31-december",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "31 december",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/afwijkend-boekjaar",
+    "begripsnaam": "afwijkend-boekjaar",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "Bij afwijkende boekjaren",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
+    "begripsnaam": "belastingaanslag",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "Een belastingaanslag",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/dagtekening-in-november-of-eerder",
+    "begripsnaam": "dagtekening-in-november-of-eerder",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "die zijn gedagtekend in november of eerder",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar",
+    "begripsnaam": "dagtekening-in-vaststellingsjaar",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/een-maand-na-dagtekening",
+    "begripsnaam": "een-maand-na-dagtekening",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "één maand na de dagtekening van het aanslagbiljet",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/in-afwijking-van-eerste-lid",
+    "begripsnaam": "in-afwijking-van-eerste-lid",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "In afwijking van het eerste lid",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag",
+    "begripsnaam": "invorderbaarheid-belastingaanslag",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet.",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen",
+    "begripsnaam": "invorderbaarheid-in-gelijke-termijnen",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "In afwijking van het eerste lid is een voorlopige aanslag in de inkomstenbelasting of in de vennootschapsbelasting en een voorlopige conserverende aanslag in de inkomstenbelasting, waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld, invorderbaar in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven.",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/logische-of",
+    "begripsnaam": "logische-of",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "of",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet",
+    "begripsnaam": "maand-dagtekening-aanslagbiljet",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "de maand, die in de dagtekening van het aanslagbiljet is vermeld",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar",
+    "begripsnaam": "resterende-maanden-jaar",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "nog maanden van het jaar overblijven",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/telkens-een-maand-later",
+    "begripsnaam": "telkens-een-maand-later",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "telkens een maand later",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/termijn-eindigt-voor-31-december",
+    "begripsnaam": "termijn-eindigt-voor-31-december",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden",
+    "begripsnaam": "termijnenberekening-resterende-maanden",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "in zoveel gelijke termijnen als er na de maand, die in de dagtekening van het aanslagbiljet is vermeld, nog maanden van het jaar overblijven",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/terugvalregel-lid-1",
+    "begripsnaam": "terugvalregel-lid-1",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "Indien de toepassing van de eerste volzin niet leidt tot meer dan één termijn, vindt het eerste lid toepassing.",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag",
+    "begripsnaam": "totaalbedrag-belastingaanslag",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "een belastingaanslag",
+        "interpretatiemethode": "systematisch",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/vervaldag-31-december",
+    "begripsnaam": "vervaldag-31-december",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "dan wordt de vervaldag van deze termijn op 31 december gesteld",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/vervaldag-eerste-termijn",
+    "begripsnaam": "vervaldag-eerste-termijn",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-1/vervaldag-laatste-dag-maand",
+    "begripsnaam": "vervaldag-laatste-dag-maand",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-1",
+        "tekst": "wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/vervaldag-volgende-termijnen",
+    "begripsnaam": "vervaldag-volgende-termijnen",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "elk van de volgende termijnen telkens een maand later",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib",
+    "begripsnaam": "voorlopige-conserverende-aanslag-ib",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid5",
+        "tekst": "een voorlopige conserverende aanslag in de inkomstenbelasting",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet",
+    "begripsnaam": "zes-weken-na-dagtekening-aanslagbiljet",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "zes weken na de dagtekening van het aanslagbiljet",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0004770/art9/lid1/zes-weken",
+    "begripsnaam": "zes-weken",
+    "aangemeld-op": "2026-05-13",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1",
+        "tekst": "zes weken",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": "2026-01-01"
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
   }
 ]
