@@ -759,7 +759,10 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
             "slug": slugify(data.get("begripsnaam", f.stem)),
             "definitie": haal_kern(definitie_obj),
             "definitie_contexten": haal_contexten(definitie_obj),
+            "definitie_versie": data.get("definitie-versie"),
+            "definitie_gebaseerd_op": data.get("definitie-gebaseerd-op") or [],
             "soort": data.get("soort", "") or "",
+            "soort_id": data.get("soort-id", False),
             "herkomst": data.get("herkomst", "") or "",
             "status": data.get("status", "concept") or "concept",
             "aliases": data.get("aliases") or [],
@@ -770,10 +773,13 @@ def laad_begrippen(vault_root: Path) -> list[dict]:
             },
             "afleidingsregel-id": data.get("afleidingsregel-id"),
             "tussenresultaat": data.get("tussenresultaat", False),
+            "identificatiebegrip": data.get("identificatiebegrip", False),
             "jas_klasse": klasse,
             "toelichting_klasse": data.get("toelichting-klasse") or "",
             "markeringen": data.get("markeringen") or [],
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
+            "geldigheid_tot": str(data.get("geldigheid-tot") or "") if data.get("geldigheid-tot") else "",
+            "vervangen_door": data.get("vervangen-door") or "",
             "voorbeelden": data.get("voorbeelden") or [],
             "kenmerken": data.get("kenmerken") or [],
         })
@@ -795,8 +801,20 @@ def laad_annotaties(vault_root: Path) -> list[dict]:
                 "rij_id": r.get("rij-id", ""),
                 "markering": r.get("markering", ""),
                 "jas_klasse": r.get("jas-klasse", ""),
+                "interpretatiemethode": r.get("interpretatiemethode", ""),
                 "begrip_id": r.get("begrip-id", ""),
+                "toelichting_klasse": r.get("toelichting-klasse", ""),
                 "signalering": r.get("signalering"),
+            })
+        kruisrefs = []
+        for k in data.get("kruisreferenties") or []:
+            kruisrefs.append({
+                "doel_bwb_id": k.get("doel-bwb-id", ""),
+                "doel_artikel": k.get("doel-artikel") or "",
+                "doel_lid": k.get("doel-lid") or "",
+                "richting": k.get("richting", ""),
+                "confidence": k.get("confidence"),
+                "ruwe_tekst": k.get("ruwe-tekst", ""),
             })
         annotaties.append({
             "id": aid,
@@ -804,10 +822,13 @@ def laad_annotaties(vault_root: Path) -> list[dict]:
             "wet": data.get("wet", ""),
             "artikel": data.get("artikel", ""),
             "lid": data.get("lid") or data.get("sectie", ""),
+            "peildatum": str(data.get("peildatum") or ""),
             "structuurpositie": data.get("structuurpositie", ""),
             "wetstekst": wetstekst,
             "rijen": rijen,
             "diagram": data.get("diagram"),
+            "kruisreferenties": kruisrefs,
+            "delegatiestructuur": data.get("delegatiestructuur") or [],
         })
     return annotaties
 
@@ -831,8 +852,105 @@ def laad_regels(vault_root: Path) -> list[dict]:
             "bwb_id": data.get("bwb-id", ""),
             "artikel": str(data.get("artikel", "") or ""),
             "lid": str(data.get("lid", "") or ""),
+            "peildatum": str(data.get("peildatum") or ""),
+            "rechtsfeit_id": data.get("rechtsfeit-id") or "",
+            "vervangt_regel_id": data.get("vervangt-regel-id") or "",
         })
     return regels
+
+
+def laad_artikel_indices(vault_root: Path) -> list[dict]:
+    """Laad annotatie-index bestanden (artikel-niveau, geen wetstekst)."""
+    # Bouw lookup: bestandspad-stem → annotatie-id (voor Obsidian-link resolutie)
+    stem_to_aid: dict[str, str] = {}
+    for jf in (vault_root / "annotaties").rglob("*.json"):
+        try:
+            d = json.loads(jf.read_text())
+            if "annotatie-id" in d and "wetstekst" in d:
+                # Sleutel: "bwb-id/stem" bijv. "BWBR0004770/art9-lid1"
+                stem_to_aid[f'{jf.parent.name}/{jf.stem}'] = d["annotatie-id"]
+        except Exception:
+            pass
+
+    indices = []
+    pad = vault_root / "annotaties"
+    for json_file in sorted(pad.rglob("*.json")):
+        data = json.loads(json_file.read_text())
+        if "artikel-id" not in data:
+            continue
+        # Parseer Obsidian-links [[annotaties/X/Y]] naar echte annotatie-ids
+        leden = []
+        for link in data.get("leden-annotaties") or []:
+            m = re.search(r'\[\[annotaties/([^\]]+)\]\]', link)
+            if m:
+                pad_key = m.group(1)  # bijv. "BWBR0004770/art9-lid1"
+                aid = stem_to_aid.get(pad_key, pad_key)
+                leden.append(aid)
+        indices.append({
+            "id": data["artikel-id"],
+            "bwb_id": data.get("bwb-id", ""),
+            "wet": data.get("wet", ""),
+            "artikel": data.get("artikel", ""),
+            "peildatum": str(data.get("peildatum") or ""),
+            "structuurpositie": data.get("structuurpositie", ""),
+            "leden_annotaties": leden,
+            "kruisreferenties": data.get("kruisreferenties") or [],
+            "delegatiestructuur": data.get("delegatiestructuur") or [],
+        })
+    return indices
+
+
+def gen_artikel_indices(out: Path, indices: list, annotaties: list):
+    """Genereer een artikeloverzichtpagina per annotatie-index."""
+    ann_by_id: dict[str, dict] = {a["id"]: a for a in annotaties}
+    p = "../"
+    for idx in indices:
+        slug = idx["id"].replace("/", "-")
+        titel = f'{idx["wet"]} art. {idx["artikel"]}' if idx.get("wet") else idx["id"]
+        leden_html = ""
+        for lid_id in idx["leden_annotaties"]:
+            a = ann_by_id.get(lid_id)
+            if a:
+                a_url = f'../annotaties/{a["id"].replace("/","-")}.html'
+                a_titel = format_ann_title(a)
+                leden_html += f'<li><a href="{a_url}">{a_titel}</a></li>\n'
+            else:
+                leden_html += f'<li class="item-meta">{lid_id}</li>\n'
+        if not leden_html:
+            leden_html = '<li class="item-meta">Geen lid-annotaties gevonden</li>'
+        kr_rows = ""
+        for k in idx["kruisreferenties"]:
+            kr_rows += f'<tr><td>{k}</td></tr>\n'
+        kruisref_html = (
+            f'<div class="card"><div class="card-title">Kruisreferenties</div>'
+            f'<div class="table-scroll"><table class="ann-table"><tr><th>Verwijzing</th></tr>{kr_rows}</table></div></div>'
+        ) if kr_rows else ""
+        deleg_html = ""
+        if idx["delegatiestructuur"]:
+            del_rows = ""
+            for d in idx["delegatiestructuur"]:
+                inv = d.get("invulling") or "-"
+                vind_inv = d.get("vindplaats-invulling") or ""
+                inv_cell = f'{inv} <span style="font-size:0.75rem;color:var(--text-muted)">{vind_inv}</span>' if vind_inv else inv
+                del_rows += f'<tr><td>{d.get("omschrijving","")}</td><td>{d.get("vindplaats","")}</td><td><span class="badge badge-soort">{d.get("type","")}</span></td><td>{inv_cell}</td></tr>\n'
+            deleg_html = (
+                f'<div class="card"><div class="card-title">Delegatiestructuur</div>'
+                f'<div class="table-scroll"><table class="ann-table">'
+                f'<tr><th>Omschrijving</th><th>Vindplaats</th><th>Type</th><th>Invulling</th></tr>'
+                f'{del_rows}</table></div></div>'
+            )
+        peildatum_str = f' &bull; Peildatum: {idx["peildatum"]}' if idx.get("peildatum") else ""
+        br = breadcrumb(p, titel, [(f"{p}index.html", "Home"), (f"{p}annotaties.html", "Annotaties")])
+        body = f"""{br}
+<h1>{titel}</h1>
+<p class="subtitle">{idx.get("structuurpositie","")}{peildatum_str}</p>
+<div class="card">
+  <div class="card-title">Lid-annotaties</div>
+  <ul style="margin-left:1.25rem">{leden_html}</ul>
+</div>
+{kruisref_html}
+{deleg_html}"""
+        schrijf_html(out, f'annotaties/{slug}.html', f'{titel} | Belastingdienst', body, active="annotaties", p=p)
 
 
 # ── Pagina generatoren ────────────────────────────────────
@@ -1014,14 +1132,17 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             mid = m.get("markering-id", "")
             baid = m.get("bron-annotatie-id", "")
             mid_cell = f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>' if baid else mid
-            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td></tr>\n'
+            bev = m.get("bevestigd", False)
+            bev_op = m.get("bevestigd-op") or ""
+            bev_label = f'<span title="Gevalideerd{" op " + bev_op if bev_op else ""}" style="color:var(--success,#2e7d32)">&#10003;</span>' if bev else '<span title="AI-output, nog niet gevalideerd" style="color:var(--warning,#e65100)">&#9888;</span>'
+            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">"{m.get("tekst","")}"</td><td>{jas_tag(jc) if jc else ""}</td><td>{m.get("interpretatiemethode","")}</td><td><span class="badge badge-soort">{m.get("bijdrage","")}</span></td><td style="text-align:center">{bev_label}</td></tr>\n'
         mp = ""
         if mark_tbl:
             mp = f"""<div class="card">
   <div class="card-title">Markeringen</div>
   <div class="table-scroll">
   <table class="ann-table">
-    <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th></tr>
+    <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th><th style="text-align:center">Bevestigd</th></tr>
     {mark_tbl}
   </table></div>
 </div>"""
@@ -1058,11 +1179,15 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
     <div class="card-title">Kenmerken</div>
     <table class="prop-table">
       <tr><td>ID</td><td style="word-break:break-all;font-size:0.8rem">{b["id"]}</td></tr>
-      <tr><td>Soort</td><td>{b["soort"] or "-"}</td></tr>
+      <tr><td>Soort</td><td>{b["soort"] or "-"}{"&nbsp;<span class='badge badge-soort'>sleutel-id</span>" if b.get("soort_id") else ""}</td></tr>
       <tr><td>Herkomst</td><td>{b["herkomst"] or "-"}</td></tr>
       <tr><td>Aliases</td><td>{", ".join(b["aliases"]) or "-"}</td></tr>
-      <tr><td>Geldig vanaf</td><td>{b["geldigheid_van"] or "-"}</td></tr>
+      <tr><td>Identificatiebegrip</td><td>{"Ja" if b.get("identificatiebegrip") else "Nee"}</td></tr>
       <tr><td>Tussenresultaat</td><td>{"Ja" if b["tussenresultaat"] else "Nee"}</td></tr>
+      <tr><td>Definitie versie</td><td>{b["definitie_versie"] if b.get("definitie_versie") else "-"}</td></tr>
+      <tr><td>Geldig vanaf</td><td>{b["geldigheid_van"] or "-"}</td></tr>
+      <tr><td>Geldig tot</td><td>{b["geldigheid_tot"] or "&#8212;"}</td></tr>
+      {f'<tr><td>Vervangen door</td><td><a href="{pp}begrippen/{slugify(b["vervangen_door"].rsplit("/",1)[-1])}.html">{b["vervangen_door"]}</a></td></tr>' if b.get("vervangen_door") else ""}
     </table>
   </div>
   {f'<div class="card"><div class="card-title">JAS-toelichting</div><p style="font-size:0.85rem;font-style:italic">{b["toelichting_klasse"]}</p></div>' if b["toelichting_klasse"] else ""}
@@ -1079,7 +1204,7 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
         schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} | Belastingdienst', body, active="begrippen", p="../")
 
 
-def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
+def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, indices: list | None = None):
     # Lookup: begrip_id → slug en naam
     slug_by_bid: dict[str, str] = {b["id"]: b["slug"] for b in begrippen}
     naam_by_bid: dict[str, str] = {b["id"]: b["naam"] for b in begrippen}
@@ -1091,7 +1216,20 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list):
             regel_by_bid.setdefault(inv, []).append(ref)
         for uitv in reg["uitvoer"]:
             regel_by_bid.setdefault(uitv, []).append(ref)
-    items = "".join(
+    # Artikeloverzicht bovenaan
+    artikel_html = ""
+    for idx in (indices or []):
+        slug = idx["id"].replace("/", "-")
+        wet_label = f'{idx["wet"]} art. {idx["artikel"]}' if idx.get("wet") else idx["id"]
+        artikel_html += (
+            f'<li onclick="window.location=\'annotaties/{slug}.html\'">'
+            f'<a href="annotaties/{slug}.html" class="item-title">{wet_label} — artikeloverzicht</a>'
+            f'<div class="item-badges"><span class="badge badge-type">{idx.get("bwb_id","")}</span>'
+            f'<span class="badge badge-soort">index</span></div>'
+            f'<span class="item-meta">{idx.get("structuurpositie","")}</span>'
+            f'</li>\n'
+        )
+    items = artikel_html + "".join(
         f'<li onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
         f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{format_ann_title(a)}</a>'
         f'<div class="item-badges"><span class="badge badge-type">{a.get("bwb_id","")}</span></div>'
@@ -1111,6 +1249,12 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
 </script>"""
     schrijf_html(out, "annotaties.html", "Annotaties | Belastingdienst", body, active="annotaties")
 
+    # Bouw lookup: annotatie-id → parent artikel-index (op basis van leden-annotaties)
+    parent_by_ann_id: dict[str, dict] = {}
+    for idx in (indices or []):
+        for lid_id in idx.get("leden_annotaties") or []:
+            parent_by_ann_id[lid_id] = idx
+
     for a in annotaties:
         rijen = ""
         for r in a["rijen"]:
@@ -1120,16 +1264,25 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                 naam = naam_by_bid.get(r["begrip_id"]) or r["begrip_id"].rsplit("/", 1)[-1]
                 bgp_link = f'<a href="../begrippen/{slug}.html">{naam}</a>'
             sign = r.get("signalering")
-            if sign:
-                # Expandable row met signalering
-                rid = r.get("rij_id", "")
-                label = f'<span class="sign-ref">{rid}</span>' if rid else ""
+            toel_k = r.get("toelichting_klasse", "")
+            rid = r.get("rij_id", "")
+            interp = r.get("interpretatiemethode", "")
+            has_detail = bool(sign or toel_k)
+            if has_detail:
+                detail_parts = []
+                if rid:
+                    detail_parts.append(f'<span class="sign-ref">{rid}</span>')
+                if toel_k:
+                    detail_parts.append(f'<em>{toel_k}</em>')
+                if sign:
+                    detail_parts.append(f'<strong>[!]</strong> {sign}')
+                detail_html = " &mdash; ".join(detail_parts)
                 rijen += f'<tr class="has-sign" onclick="var d=this.nextElementSibling;d.style.display=d.style.display===\'none\'?\'table-row\':\'none\'">'
-                rijen += f'<td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td>'
-                rijen += f'<td style="text-align:center"><span class="sign-badge">[!]</span></td></tr>\n'
-                rijen += f'<tr class="sign-detail" style="display:none"><td colspan="4"><div class="sign-content">{label}{sign}</div></td></tr>\n'
+                rijen += f'<td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td>'
+                rijen += f'<td style="text-align:center"><span class="sign-badge">{"[!]" if sign else "i"}</span></td></tr>\n'
+                rijen += f'<tr class="sign-detail" style="display:none"><td colspan="5"><div class="sign-content">{detail_html}</div></td></tr>\n'
             else:
-                rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
+                rijen += f'<tr><td class="mark-text">"{r["markering"]}"</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
         mermaid_src = ""
         extra_scripts = ""
         mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
@@ -1151,21 +1304,51 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
                         regel_items += f'<li><a href="../regels/{reg_ref["id"]}.html">{reg_ref["naam"]}</a></li>\n'
         if regel_items:
             regel_links = f'<div class="card"><div class="card-title">Afleidingsregels</div><ul style="margin-left:1.25rem">{regel_items}</ul></div>'
+        kruisref_html = ""
+        if a.get("kruisreferenties"):
+            kr_rows = ""
+            for k in a["kruisreferenties"]:
+                conf = k.get("confidence")
+                conf_str = f'{int(conf * 100)}%' if conf is not None else ""
+                doel = k.get("doel_artikel") or k.get("doel_bwb_id", "")
+                if k.get("doel_lid"):
+                    doel += f' lid {k["doel_lid"]}'
+                kr_rows += f'<tr><td>{k.get("ruwe_tekst","")}</td><td>{k.get("richting","")}</td><td>{k.get("doel_bwb_id","")}</td><td>{doel}</td><td style="text-align:right">{conf_str}</td></tr>\n'
+            kruisref_html = f'<div class="card"><div class="card-title">Kruisreferenties</div><div class="table-scroll"><table class="ann-table"><tr><th>Verwijzing</th><th>Richting</th><th>BWB-id</th><th>Doel</th><th>Conf.</th></tr>{kr_rows}</table></div></div>'
+        deleg_html = ""
+        if a.get("delegatiestructuur"):
+            del_rows = ""
+            for d in a["delegatiestructuur"]:
+                inv = d.get("invulling") or "-"
+                vind_inv = d.get("vindplaats-invulling") or ""
+                inv_cell = f'<a href="{vind_inv}">{inv}</a>' if vind_inv and vind_inv.startswith("http") else (f'{inv} <span style="font-size:0.75rem;color:var(--text-muted)">{vind_inv}</span>' if vind_inv else inv)
+                del_rows += f'<tr><td>{d.get("omschrijving","")}</td><td>{d.get("vindplaats","")}</td><td><span class="badge badge-soort">{d.get("type","")}</span></td><td>{inv_cell}</td></tr>\n'
+            deleg_html = f'<div class="card"><div class="card-title">Delegatiestructuur</div><div class="table-scroll"><table class="ann-table"><tr><th>Omschrijving</th><th>Vindplaats</th><th>Type</th><th>Invulling</th></tr>{del_rows}</table></div></div>'
+        peildatum_str = f' &bull; Peildatum: {a["peildatum"]}' if a.get("peildatum") else ""
+        parent_link = ""
+        parent_idx = parent_by_ann_id.get(a["id"])
+        if parent_idx:
+            parent_slug = parent_idx["id"].replace("/", "-")
+            parent_titel = f'{parent_idx["wet"]} art. {parent_idx["artikel"]}' if parent_idx.get("wet") else parent_idx["id"]
+            parent_link = f'<div class="card"><div class="card-title">Deel van artikel</div><p><a href="../annotaties/{parent_slug}.html">{parent_titel} — artikeloverzicht</a></p></div>'
         ann_title = format_ann_title(a)
         ann_br = breadcrumb("../", ann_title, [("../index.html", "Home"), ("../annotaties.html", "Annotaties")])
         body = f"""{ann_br}
 <h1>{ann_title}</h1>
-<p class="subtitle">{format_structuurpositie(a)} &bull; {a["bwb_id"]}</p>
+<p class="subtitle">{format_structuurpositie(a)} &bull; {a["bwb_id"]}{peildatum_str}</p>
 <div class="wetstekst">"{a["wetstekst"]}"</div>
 <div class="card">
 <div class="card-title">Annotatierijen</div>
 <div class="table-scroll">
 <table class="ann-table">
-  <tr><th>Markering</th><th>JAS-klasse</th><th>Begrip</th><th style="text-align:center">Signaal</th></tr>
+  <tr><th>Markering</th><th>JAS-klasse</th><th>Interpretatie</th><th>Begrip</th><th style="text-align:center">Detail</th></tr>
   {rijen}
 </table></div>
 </div>
 {mermaid_src}
+{kruisref_html}
+{deleg_html}
+{parent_link}
 {regel_links}"""
         schrijf_html(out, f'annotaties/{a["id"].replace("/","-")}.html', f'Annotatie art. {a["artikel"]} | Belastingdienst', body, active="annotaties", p="../", extra_scripts=extra_scripts)
 
@@ -1205,7 +1388,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
             juist = v.get("juridisch-juist", True)
             cls = "voorbeeld" if juist else "voorbeeld ongeldig"
             label = "[+]" if juist else "[-]"
-            vb += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> <strong>Invoer:</strong> {v.get("invoerwaarden","")}<br><strong>Uitvoer:</strong> {v.get("verwachte-uitkomst","")}</div>'
+            toel_v = v.get("toelichting") or ""
+            toel_html = f'<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem">{toel_v}</div>' if toel_v else ""
+            vb += f'<div class="{cls}"><span class="voorbeeld-label">{label}</span> <strong>Invoer:</strong> {v.get("invoerwaarden","")}<br><strong>Uitvoer:</strong> {v.get("verwachte-uitkomst","")}{toel_html}</div>'
         ops = ", ".join(r.get("operators") or [])
         ann_link = ""
         if r["bwb_id"] and r["artikel"]:
@@ -1241,6 +1426,9 @@ document.getElementById('filterInput')?.addEventListener('input',function(){{
     <table class="prop-table">
       <tr><td>Operators</td><td>{ops or "-"}</td></tr>
       <tr><td>Tussenresultaat</td><td>{"Ja" if r["tussenresultaat"] else "Nee"}</td></tr>
+      <tr><td>Peildatum</td><td>{r.get("peildatum") or "-"}</td></tr>
+      <tr><td>Rechtsfeit</td><td>{_link(r["rechtsfeit_id"]) if r.get("rechtsfeit_id") else "-"}</td></tr>
+      {f'<tr><td>Vervangt</td><td><a href="{r["vervangt_regel_id"]}.html">{r["vervangt_regel_id"]}</a></td></tr>' if r.get("vervangt_regel_id") else ""}
     </table>
   </div>
 </div>
@@ -1641,7 +1829,8 @@ def main():
     begrippen = laad_begrippen(vault)
     annotaties = laad_annotaties(vault)
     regels = laad_regels(vault)
-    print(f"  {len(begrippen)} begrippen, {len(annotaties)} annotaties, {len(regels)} regels", file=sys.stderr)
+    artikel_indices = laad_artikel_indices(vault)
+    print(f"  {len(begrippen)} begrippen, {len(annotaties)} annotaties, {len(regels)} regels, {len(artikel_indices)} artikel-indices", file=sys.stderr)
 
     print("CSS, JS en icons genereren...", file=sys.stderr)
     gen_css_js(out)
@@ -1651,7 +1840,8 @@ def main():
     gen_index(out, begrippen, annotaties, regels)
     gen_404(out)
     gen_begrippen(out, begrippen, annotaties)
-    gen_annotaties(out, annotaties, regels, begrippen)
+    gen_annotaties(out, annotaties, regels, begrippen, indices=artikel_indices)
+    gen_artikel_indices(out, artikel_indices, annotaties)
     gen_regels(out, regels, begrippen, annotaties)
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
