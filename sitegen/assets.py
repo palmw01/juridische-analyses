@@ -6,7 +6,7 @@ from sitegen.config import slugify
 from sitegen.html import format_ann_title
 
 
-def gen_css_js(out: Path):
+def gen_css_js(out: Path, project_root: Path | None = None):
     static_dir = Path(__file__).resolve().parent / "static"
     (out / "css").mkdir(parents=True, exist_ok=True)
     (out / "js").mkdir(parents=True, exist_ok=True)
@@ -16,7 +16,8 @@ def gen_css_js(out: Path):
         (out / "css/style.css").write_text(css_src.read_text())
     if js_src.exists():
         (out / "js/app.js").write_text(js_src.read_text())
-    comunica_src = static_dir / "comunica.min.js"
+    build_dir = (project_root or Path(".")).resolve() / ".build"
+    comunica_src = build_dir / "comunica.min.js"
     if comunica_src.exists() and comunica_src.stat().st_size > 100:
         (out / "js/comunica.min.js").write_bytes(comunica_src.read_bytes())
 

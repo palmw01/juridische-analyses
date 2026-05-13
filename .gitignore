@@ -39,6 +39,6 @@ kennisgraaf/*.graphml
 webapp/
 
 # SPARQL-engine bundle (gebouwd met esbuild, niet tracken)
-sitegen/static/comunica.min.js
+.build/
 sitegen/scripts/node_modules/
 sitegen/scripts/package-lock.json

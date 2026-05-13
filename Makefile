@@ -30,16 +30,17 @@ export-rdf:
 export-graph:
 	@$(VENV) $(TOOLS)/export_graph.py
 
-sitegen/static/comunica.min.js: sitegen/scripts/bundle-comunica.js sitegen/scripts/package.json
+.build/comunica.min.js: sitegen/scripts/bundle-comunica.js sitegen/scripts/package.json
 	@echo "Bundel Comunica SPARQL-engine voor browser..."
+	@mkdir -p .build
 	@cd sitegen/scripts && npm install --silent 2>&1 | tail -1 && \
 	 npx esbuild --bundle --platform=browser --minify \
-	   --outfile=../static/comunica.min.js \
+	   --outfile=../../.build/comunica.min.js \
 	   bundle-comunica.js 2>&1 | grep -v "^npm" || \
 	 (echo "Waarschuwing: kon Comunica niet bundelen (npx/node nodig). SPARQL werkt alleen met CDN." && \
-	   touch ../static/comunica.min.js)
+	   touch ../../.build/comunica.min.js)
 
-webapp: export-rdf sitegen/static/comunica.min.js
+webapp: export-rdf .build/comunica.min.js
 	@$(VENV) -m sitegen $(if $(OUT),--out $(OUT),)
 
 check-enrichment:
@@ -59,6 +60,7 @@ lock:
 clean:
 	@rm -rf webapp/
 	@rm -f kennisgraaf/*.dot kennisgraaf/*.ttl kennisgraaf/*.gexf kennisgraaf/*.graphml
+	@rm -rf .build/
 	@rm -f sitegen/static/comunica.min.js
 	@rm -rf sitegen/scripts/node_modules sitegen/scripts/package-lock.json
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true

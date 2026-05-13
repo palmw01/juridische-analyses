@@ -74,7 +74,8 @@ def gen_sparql(out: Path):
   <div class="card-title">Query</div>
   <textarea id="queryInput" class="search-input" style="min-height:160px;font-family:var(--font-mono);font-size:0.85rem;padding:0.75rem 1rem;resize:vertical;line-height:1.5" placeholder="SELECT ?s ?p ?o WHERE {{ ?s ?p ?o }} LIMIT 10"></textarea>
   <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
-    <button id="runBtn" class="filter-chip active" type="button" style="border-radius:var(--radius-btn);padding:0.5rem 1.25rem">&#9654; Uitvoeren</button>
+    <button id="runBtn" class="filter-chip active" type="button" style="border-radius:var(--radius-btn)">&#9654; Uitvoeren</button>
+    <button id="stopBtn" class="filter-chip" type="button" style="border-radius:var(--radius-btn);display:none">&#9632; Stop</button>
     <span id="sparqlStatus" style="font-size:0.85rem;color:var(--text-muted)"></span>
   </div>
 </div>
@@ -100,8 +101,7 @@ def gen_sparql(out: Path):
 
 <div id="sparqlLoading" style="display:none">
   <div class="card" style="text-align:center;padding:2rem">
-    <p style="color:var(--text-muted);margin-bottom:0.5rem">SPARQL-engine wordt laden...</p>
-    <p style="font-size:0.8rem;color:var(--text-muted)">Query wordt uitgevoerd...</p>
+    <p style="color:var(--text-muted)">Bezig met laden...</p>
   </div>
 </div>
 
@@ -114,7 +114,8 @@ def gen_sparql(out: Path):
 
 <script src="{LOCAL_BUNDLE}"></script>
 <script>
-const QUERIES = {QUERIES_JS};
+var QUERIES = {QUERIES_JS};
+var cancelled = false;
 
 document.querySelectorAll('[data-query]').forEach(function(btn){{
   btn.addEventListener('click',function(){{
@@ -138,6 +139,11 @@ function formatTerm(term){{
   return escHtml(v);
 }}
 
+function hideStop() {{
+  document.getElementById('stopBtn').style.display = 'none';
+  document.getElementById('runBtn').style.display = 'inline-block';
+}}
+
 async function getEngine() {{
   if (typeof Comunica !== 'undefined' && Comunica.QueryEngine) {{
     return new Comunica.QueryEngine();
@@ -147,10 +153,18 @@ async function getEngine() {{
   try {{ return NE(); }} catch(_) {{ return new NE(); }}
 }}
 
+document.getElementById('stopBtn').addEventListener('click', function() {{
+  cancelled = true;
+  document.getElementById('sparqlLoading').style.display = 'none';
+  hideStop();
+  document.getElementById('sparqlStatus').textContent = 'Gestopt';
+}});
+
 document.getElementById('runBtn').addEventListener('click', async function(){{
   var q = document.getElementById('queryInput').value.trim();
   if(!q) return;
-  var status = document.getElementById('sparqlStatus');
+  cancelled = false;
+  var statusEl = document.getElementById('sparqlStatus');
   var resultsDiv = document.getElementById('sparqlResults');
   var errorDiv = document.getElementById('sparqlError');
   var loading = document.getElementById('sparqlLoading');
@@ -162,33 +176,38 @@ document.getElementById('runBtn').addEventListener('click', async function(){{
   errorDiv.style.display = 'none';
   noRdf.style.display = 'none';
   loading.style.display = 'block';
-  status.textContent = 'Engine initialiseren...';
+  document.getElementById('stopBtn').style.display = 'inline-block';
+  document.getElementById('runBtn').style.display = 'none';
+  statusEl.textContent = 'Bezig met laden...';
 
   var engine;
   try {{
     engine = await getEngine();
   }} catch(e) {{
     loading.style.display = 'none';
+    hideStop();
     errorDiv.style.display = 'block';
     document.getElementById('errorText').textContent = 'Kon SPARQL-engine niet laden.\\n\\n' + (e&&e.message||String(e));
-    status.textContent = 'Fout bij laden engine';
+    statusEl.textContent = 'Fout bij laden engine';
     return;
   }}
+  if(cancelled) {{ hideStop(); loading.style.display = 'none'; return; }}
 
   var ttlUrl = new URL('data/begrippen.ttl', window.location.href).href;
-  status.textContent = 'Query uitvoeren...';
+  statusEl.textContent = 'Query uitvoeren...';
   engine.queryBindings(q, {{
     sources: [ttlUrl]
   }}).then(function(bindingsStream){{
     return bindingsStream.toArray();
   }}).then(function(bindings){{
+    if(cancelled) return;
     loading.style.display = 'none';
     if(bindings.length === 0){{
       headEl.innerHTML = '';
       bodyEl.innerHTML = '';
       countEl.textContent = '(0 resultaten)';
       resultsDiv.style.display = 'block';
-      status.textContent = 'Klaar (0 resultaten)';
+      statusEl.textContent = 'Klaar (0 resultaten)';
       return;
     }}
     var vars = Array.from(bindings[0].keys());
@@ -201,18 +220,27 @@ document.getElementById('runBtn').addEventListener('click', async function(){{
     }}).join('');
     countEl.textContent = '('+bindings.length+' resultaten)';
     resultsDiv.style.display = 'block';
-    status.textContent = 'Klaar ('+bindings.length+' resultaten)';
+    statusEl.textContent = 'Klaar ('+bindings.length+' resultaten)';
   }}, function(err){{
+    if(cancelled) return;
     loading.style.display = 'none';
     if(err && err.message && err.message.indexOf('404') >= 0 &&
         err.message.indexOf('begrippen.ttl') >= 0){{
       noRdf.style.display = 'block';
-      status.textContent = 'RDF niet gevonden';
+      statusEl.textContent = 'RDF niet gevonden';
     }} else {{
       errorDiv.style.display = 'block';
       document.getElementById('errorText').textContent = (err&&err.message)||String(err);
-      status.textContent = 'Fout';
+      statusEl.textContent = 'Fout';
     }}
+  }}).catch(function(err){{
+    if(cancelled) return;
+    loading.style.display = 'none';
+    errorDiv.style.display = 'block';
+    document.getElementById('errorText').textContent = 'Onverwachte fout:\\n\\n' + (err&&err.message||String(err));
+    statusEl.textContent = 'Fout';
+  }}).then(function(){{
+    hideStop();
   }});
 }});
 

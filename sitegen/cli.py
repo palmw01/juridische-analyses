@@ -34,7 +34,7 @@ def main():
     print(f"  {len(begrippen)} begrippen, {len(annotaties)} annotaties, {len(regels)} regels, {len(artikel_indices)} artikel-indices", file=sys.stderr)
 
     print("CSS, JS en icons genereren...", file=sys.stderr)
-    assets.gen_css_js(out)
+    assets.gen_css_js(out, project_dir)
     assets.gen_icons(project_dir, out)
 
     print("Pagina's genereren...", file=sys.stderr)
