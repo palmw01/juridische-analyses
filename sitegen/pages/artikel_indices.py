@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from sitegen.config import slugify
 from sitegen.html import breadcrumb, format_ann_title, schrijf_html
 
 
@@ -7,7 +8,7 @@ def gen_artikel_indices(out: Path, indices: list, annotaties: list):
     ann_by_id: dict[str, dict] = {a["id"]: a for a in annotaties}
     p = "../"
     for idx in indices:
-        slug = idx["id"].replace("/", "-")
+        slug = slugify(idx["id"])
         titel = f'{idx["wet"]} art. {idx["artikel"]}' if idx.get("wet") else idx["id"]
         leden_html = ""
         for lid_id in idx["leden_annotaties"]:
