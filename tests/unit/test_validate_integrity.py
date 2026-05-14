@@ -8,6 +8,7 @@ from validate_note import (
     validate_integrity_begrip,
     validate_integrity_regel,
     build_begrip_index,
+    build_annotatie_index,
 )
 from tests.fixtures.begrippen import maak_begrip
 from tests.fixtures.regels import maak_regel
@@ -136,3 +137,210 @@ def test_regel_vervangt_gevonden_geen_fout(tmp_path):
     idx = build_begrip_index(project)
     errors = validate_integrity_regel(data, DUMMY, idx, project)
     assert not any("vervangt-regel-id" in e for e in errors)
+
+
+def test_regel_wikilink_in_invoer_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    data = maak_regel(invoer=["[[begrippen/belastingschuldige]]"])
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("wikilink" in e.lower() for e in errors)
+
+
+def test_regel_rechtsfeit_id_ontbreekt_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    data = maak_regel(**{"rechtsfeit-id": "BWBR0004770/art9/lid1/ontbrekend-rf"})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("rechtsfeit-id" in e for e in errors)
+
+
+def test_regel_annotatie_id_wikilink_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    data = maak_regel(**{"annotatie-id": "[[annotaties/art9-1]]"})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("annotatie-id" in e for e in errors)
+
+
+def test_regel_annotatie_id_niet_gevonden_geeft_fout(tmp_path):
+    import json
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    from tests.fixtures.annotaties import maak_annotatie
+    (project / "annotaties" / "art9-1.json").write_text(
+        json.dumps(maak_annotatie(**{"annotatie-id": "BWBR0004770/art9/lid1"}))
+    )
+    data = maak_regel(**{"annotatie-id": "BWBR0004770/art9/lid2"})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("annotatie-id" in e for e in errors)
+
+
+def test_regel_annotatie_id_gevonden_geen_fout(tmp_path):
+    import json
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    from tests.fixtures.annotaties import maak_annotatie
+    (project / "annotaties" / "art9-1.json").write_text(
+        json.dumps(maak_annotatie(**{"annotatie-id": "BWBR0004770/art9/lid1"}))
+    )
+    data = maak_regel(**{"annotatie-id": "BWBR0004770/art9/lid1"})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert not any("annotatie-id" in e for e in errors)
+
+
+# ===== validate_integrity_begrip — uitgebreide paden =====
+
+def test_begrip_homoniem_conflict_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+             "jas-klasse": "rechtsfeit", "bevestigd": False},
+            {"markering-id": "m-002", "bijdrage": "aanvullend", "bron-annotatie-id": "y",
+             "jas-klasse": "tijdsaanduiding", "bevestigd": False},
+        ],
+        **{"definitie-gebaseerd-op": []},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("homoniem" in e.lower() for e in errors)
+
+
+def test_begrip_bron_annotatie_id_niet_in_index_geeft_fout(tmp_path):
+    import json
+    project = leeg_project(tmp_path)
+    from tests.fixtures.annotaties import maak_annotatie
+    (project / "annotaties" / "art9-1.json").write_text(
+        json.dumps(maak_annotatie(**{"annotatie-id": "BWBR0004770/art9/lid1"}))
+    )
+    data = maak_begrip(
+        markeringen=[{"markering-id": "m-001", "bijdrage": "primair",
+                      "bron-annotatie-id": "BWBR0004770/art9/lid2",
+                      "tekst": "x", "interpretatiemethode": "grammaticaal", "bevestigd": False}],
+        **{"definitie-gebaseerd-op": ["m-001"]},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("bron-annotatie-id" in e for e in errors)
+
+
+def test_begrip_definitie_context_markering_id_ontbreekt_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        definitie={
+            "kern": "de belastingplichtige",
+            "contexten": [{"markering-id": "m-ontbreekt", "tekst": "extra context"}],
+        },
+        **{"definitie-gebaseerd-op": []},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("contexten" in e and "m-ontbreekt" in e for e in errors)
+
+
+def test_begrip_heeft_relatie_ontbreekt_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        relaties={"is-een": [], "heeft": [{"begrip-id": "BWBR0004770/art9/lid1/ontbrekend"}], "leidt-tot": []},
+        markeringen=[], **{"definitie-gebaseerd-op": []},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("heeft" in e for e in errors)
+
+
+def test_begrip_leidt_tot_ontbreekt_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        relaties={"is-een": [], "heeft": [], "leidt-tot": [{"begrip-id": "BWBR0004770/art9/lid1/ontbrekend"}]},
+        markeringen=[], **{"definitie-gebaseerd-op": []},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("leidt-tot" in e for e in errors)
+
+
+def test_begrip_status_gevalideerd_lege_kern_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        status="gevalideerd",
+        definitie={"kern": "", "contexten": []},
+        markeringen=[], **{"definitie-gebaseerd-op": []},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("gevalideerd" in e and "kern" in e for e in errors)
+
+
+def test_begrip_status_vervallen_zonder_vervangen_door_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        status="vervallen",
+        markeringen=[], **{"definitie-gebaseerd-op": [], "vervangen-door": None},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("vervallen" in e and "vervangen-door" in e for e in errors)
+
+
+def test_begrip_herkomst_afgeleid_afleidingsregel_zonder_id_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        herkomst="afgeleid",
+        **{"jas-klasse": "afleidingsregel", "definitie-gebaseerd-op": []},
+        markeringen=[],
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("afleidingsregel-id" in e for e in errors)
+
+
+def test_begrip_herkomst_afgeleid_zonder_uitvoer_id_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        herkomst="afgeleid",
+        **{"jas-klasse": "variabele", "definitie-gebaseerd-op": []},
+        markeringen=[],
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("uitvoer-van-regel-id" in e for e in errors)
+
+
+def test_begrip_afleidingsregel_id_op_verkeerde_klasse_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        **{"jas-klasse": "variabele", "afleidingsregel-id": "AR-0001", "definitie-gebaseerd-op": []},
+        markeringen=[],
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("afleidingsregel-id" in e and "variabele" in e for e in errors)
+
+
+def test_begrip_afleidingsregel_id_niet_gevonden_in_regels_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    (project / "regels").mkdir()
+    data = maak_begrip(
+        **{"jas-klasse": "afleidingsregel", "afleidingsregel-id": "AR-bestaat-niet",
+           "definitie-gebaseerd-op": []},
+        markeringen=[],
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("afleidingsregel-id" in e and "AR-bestaat-niet" in e for e in errors)
+
+
+def test_begrip_uitvoer_van_regel_id_niet_gevonden_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    (project / "regels").mkdir()
+    data = maak_begrip(
+        herkomst="afgeleid",
+        **{"jas-klasse": "variabele", "uitvoer-van-regel-id": "AR-bestaat-niet",
+           "definitie-gebaseerd-op": []},
+        markeringen=[],
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("uitvoer-van-regel-id" in e for e in errors)
