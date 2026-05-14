@@ -29,6 +29,7 @@ def maak_regel(**overrides) -> dict:
         "artikel": "9",
         "lid": "1",
         "peildatum": "2024-01-01",
+        "geldigheid-van": "2024-01-01",
         "rechtsfeit-id": None,
     }
     base.update(overrides)

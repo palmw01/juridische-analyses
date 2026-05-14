@@ -5,6 +5,7 @@ bwb-id: BWBR0004770
 artikel: '9'
 lid: '5'
 peildatum: '2026-01-01'
+geldigheid-van: '2026-01-01'
 annotatie-id: BWBR0004770/art9/lid5
 rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
 invoer:
@@ -56,4 +57,4 @@ voorbeeldreeksen:
   juridisch-juist: false
   toelichting: 'Grensgeval: november geeft 1 resterende maand (dec), niet 2. "Na de
     maand die in de dagtekening is vermeld" — de dagtekening-maand telt niet mee.'
-tussenresultaat: false
+tussenresultaat: true

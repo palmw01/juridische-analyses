@@ -1,10 +1,12 @@
 regel-id: AR-BWBR0024096-art9-par1-b
 naam: vaststellen vervaldag voorlopige aanslag afwijkend boekjaar
 soort: Specialisatieregel
+prioriteit: null
 bwb-id: BWBR0024096
 artikel: '9'
 lid: par1
 peildatum: '2026-01-01'
+geldigheid-van: '2026-01-01'
 annotatie-id: BWBR0024096/par9-1
 rechtsfeit-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
 invoer:
