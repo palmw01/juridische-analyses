@@ -216,6 +216,21 @@ Sla op als `annotaties/[B]/art[A]-lid[L].json`.
 }
 ```
 
+**kruisreferenties** — per gevonden wetsverwijzing één object:
+```json
+{
+  "doel-bwb-id": "BWBR0002715",
+  "doel-artikel": "4:6",
+  "doel-lid": "1",
+  "richting": "forward",
+  "confidence": 0.9,
+  "ruwe-tekst": "artikel 4:6, eerste lid, Awb"
+}
+```
+`richting`: `forward` = dit lid verwijst naar het doelartikel; `backward` = doelartikel verwijst naar dit lid; `intern` = verwijzing binnen dezelfde wet. `doel-lid`, `ruwe-tekst` zijn optioneel.
+
+**delegatiestructuur** — optioneel: alleen opnemen als het lid een delegatiebevoegdheid bevat. Bij afwezigheid: veld weglaten of `[]`.
+
 **Annotatierijen-regels:**
 - Nummerering `rij-id` begint bij `r-001` per lid-annotatie.
 - Overlappende markeringen (één tekstfragment in meerdere JAS-klassen): één rij per klasse, zelfde markering mag herhalen. Noteer alternatieve klasse in `toelichting-klasse`.
@@ -343,7 +358,7 @@ Artikel-index-checklist — Art. [A] [W]
 ✅/⬜ peildatum uit bronbestand (versiedatum)
 ✅/⬜ structuurpositie letterlijk uit pad-veld
 ✅/⬜ kruisreferenties gevuld vanuit bronnen/[B]/art[A].kruisrefs.json
-✅/⬜ delegatiestructuur uitgewerkt (of [])
+✅/⬜ delegatiestructuur beschreven (optioneel — alleen bij delegatiebevoegdheden)
 ✅/⬜ validatie geslaagd (validate_note.py)
 ```
 
@@ -353,7 +368,7 @@ Lid-annotatie-checklist — Art. [A] lid [L] [W]
 ✅/⬜ lid-JSON aangemaakt in annotaties/[B]/art[A]-lid[L].json
 ✅/⬜ wetstekst lid [L] volledig en letterlijk geciteerd
 ✅/⬜ alle 13 JAS-elementen intern afgevinkt
-✅/⬜ diagram aangemaakt (centrale-klasse + knopen + kanten)
+✅/⬜ diagram aangemaakt (centrale-klasse + knopen + kanten; weglaten alleen als geen van de 4 centrale JAS-klassen aanwezig is)
 ✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
 ✅/⬜ leden-annotaties bijgewerkt in index-JSON (pad-notatie: "BWBR0004770/art9/lid1")
 ✅/⬜ validatie geslaagd (validate_note.py)
@@ -367,7 +382,7 @@ Sectie-annotatie-checklist — [ref] [W]
 ✅/⬜ alle 13 JAS-elementen intern afgevinkt
 ✅/⬜ annotatierijen ingevuld
 ✅/⬜ diagram aangemaakt
-✅/⬜ delegatiestructuur beschreven (of [])
+✅/⬜ delegatiestructuur beschreven (optioneel — alleen bij delegatiebevoegdheden)
 ✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
 ✅/⬜ validatie geslaagd (validate_note.py)
 ✅/⬜ views gegenereerd (generate_views.py)

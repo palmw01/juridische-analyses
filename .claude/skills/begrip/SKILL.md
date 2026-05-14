@@ -226,7 +226,9 @@ tussenresultaat: false
 
 Kies het taalpatroon uit `kaders-regels.md §Taalpatronen` passend bij het regeltype.
 
-Na aanmaken: zet `afleidingsregel-id` in de begrip-YAML op de nieuwe `regel-id`.
+Na aanmaken: koppel het begrip aan de regel via het juiste veld:
+- Begrip met `jas-klasse: afleidingsregel` → zet `afleidingsregel-id: [regel-id]`
+- Begrip met andere jas-klasse én `herkomst: afgeleid` → zet `uitvoer-van-regel-id: [regel-id]`
 
 **Tussenresultaat:** zet `tussenresultaat: true` als het begrip uitsluitend als invoer voor een andere regel dient. In dat geval: `rechtsfeit-id: null` en noteer in `toelichting` welke hoofdregel dit tussenresultaat aanroept.
 
@@ -250,7 +252,8 @@ definitie-gebaseerd-op:   # markering-id's die uitsluitend de KERN staven
 aliases:
 - "[bekend juridisch synoniem]"
 identificatiebegrip: false # true als unieke sleutel
-afleidingsregel-id: null   # of regel-id als herkomst: afgeleid
+afleidingsregel-id: null        # alleen invullen bij jas-klasse: afleidingsregel
+uitvoer-van-regel-id: null      # invullen bij herkomst: afgeleid + jas-klasse ≠ afleidingsregel
 tussenresultaat: false
 relaties:
   is-een: [...]

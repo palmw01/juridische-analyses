@@ -94,6 +94,17 @@ Een regel-noot bevat de volgende elementen:
 | `## Formele regel` | Volledige als-dan structuur conform taalpatroon per type |
 | `## Toelichting` | Tracering naar artikel, lid, zinsdeel + interpretatiemotivering |
 | `## Voorbeeldreeksen` | Minimaal 2 invoer/uitkomst-combinaties incl. ten minste 1 grensgeval |
+| `vervangt-regel-id` | Optioneel — id van de vorige versie van deze regel bij herziening |
+
+### Regelversioning: `vervangt-regel-id`
+
+Wanneer een bestaande regel wordt herzien (nieuwe peildatum, gewijzigde formule), maak dan een nieuwe regelfile aan en verwijs met `vervangt-regel-id` naar de vervangen regel:
+
+```yaml
+vervangt-regel-id: AR-BWBR0004770-art9-lid5-b   # de vorige versie van deze regel
+```
+
+De vervangen regel blijft bestaan voor historische raadpleegbaarheid. Stel daar `geldigheid-tot` in op de dag vóór de ingangsdatum van de nieuwe regel.
 
 ---
 
