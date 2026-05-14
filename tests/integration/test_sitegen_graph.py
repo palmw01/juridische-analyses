@@ -144,6 +144,14 @@ def test_gen_css_js_comunica_niet_aanwezig_geen_fout(tmp_path):
     assert (tmp_path / "js").is_dir()
 
 
+def test_gen_css_js_comunica_aanwezig_wordt_gekopieerd(tmp_path):
+    build_dir = tmp_path / ".build"
+    build_dir.mkdir()
+    (build_dir / "comunica.min.js").write_bytes(b"x" * 200)
+    assets.gen_css_js(tmp_path, project_root=tmp_path)
+    assert (tmp_path / "js" / "comunica.min.js").exists()
+
+
 # ===== gen_icons =====
 
 def test_gen_icons_maakt_manifest_json(tmp_path):
