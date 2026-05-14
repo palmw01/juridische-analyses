@@ -288,13 +288,33 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
             "[L2] status is 'vervallen' maar vervangen-door is null — vermeld het opvolger-begrip-id"
         )
 
-    # herkomst == "afgeleid" → afleidingsregel-id niet null
+    # herkomst + jas-klasse → juist id-veld verplicht
     herkomst = data.get("herkomst")
+    jas_klasse = data.get("jas-klasse")
     ar_id = data.get("afleidingsregel-id")
-    if herkomst == "afgeleid" and not ar_id:
-        errors.append("[L2] herkomst is 'afgeleid' maar afleidingsregel-id is leeg/null")
+    uitvoer_id = data.get("uitvoer-van-regel-id")
 
-    # afleidingsregel-id → regels/{id}.yaml of regels/{id}.md bestaat
+    if herkomst == "afgeleid":
+        if jas_klasse == "afleidingsregel":
+            if not ar_id:
+                errors.append(
+                    "[L2] herkomst=afgeleid + jas-klasse=afleidingsregel vereist afleidingsregel-id"
+                )
+        else:
+            if not uitvoer_id:
+                errors.append(
+                    "[L2] herkomst=afgeleid vereist uitvoer-van-regel-id "
+                    "(afleidingsregel-id is voorbehouden aan jas-klasse: afleidingsregel)"
+                )
+
+    # afleidingsregel-id mag alleen op jas-klasse: afleidingsregel
+    if ar_id and jas_klasse != "afleidingsregel":
+        errors.append(
+            f"[L2] afleidingsregel-id mag alleen bij jas-klasse: afleidingsregel; "
+            f"gebruik uitvoer-van-regel-id voor jas-klasse: {jas_klasse}"
+        )
+
+    # integriteitscheck afleidingsregel-id
     if ar_id:
         ar_slug = begrip_id_to_slug(ar_id) if "/" in ar_id else ar_id
         regels_dir = project_root / "regels"
@@ -305,6 +325,20 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
         )
         if not found:
             errors.append(f"[L2] afleidingsregel-id: regel '{ar_slug}' niet gevonden in regels/")
+
+    # integriteitscheck uitvoer-van-regel-id
+    if uitvoer_id:
+        uitvoer_slug = begrip_id_to_slug(uitvoer_id) if "/" in uitvoer_id else uitvoer_id
+        regels_dir = project_root / "regels"
+        found = (
+            (regels_dir / f"{uitvoer_slug}.yaml").exists()
+            or (regels_dir / f"{uitvoer_slug}.md").exists()
+            or (regels_dir / f"{uitvoer_slug}.json").exists()
+        )
+        if not found:
+            errors.append(
+                f"[L2] uitvoer-van-regel-id: regel '{uitvoer_slug}' niet gevonden in regels/"
+            )
 
     return errors
 

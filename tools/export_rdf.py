@@ -148,10 +148,13 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
     if herkomst:
         lines.append(f'    jas:herkomst "{herkomst}" ;')
 
-    # Afleidingsregel-koppeling
+    # Regelkoppelingen
     ar_id = fm.get("afleidingsregel-id")
     if ar_id:
         lines.append(f'    jas:afleidingsregel "{ar_id}" ;')
+    uitvoer_id = fm.get("uitvoer-van-regel-id")
+    if uitvoer_id:
+        lines.append(f'    jas:uitvoerVanRegel "{uitvoer_id}" ;')
 
     # Afsluiten: vervang laatste ';' door '.'
     if lines[-1].endswith(" ;"):

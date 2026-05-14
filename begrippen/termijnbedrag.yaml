@@ -38,5 +38,6 @@ relaties:
     kardinaliteit: '1:1'
   leidt-tot: []
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0004770-art9-lid5-f
+afleidingsregel-id: null
+uitvoer-van-regel-id: AR-BWBR0004770-art9-lid5-f
 tussenresultaat: true

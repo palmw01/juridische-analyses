@@ -155,6 +155,10 @@
       "description": "Juridische motivering van de JAS-classificatiekeuze"
     },
     "afleidingsregel-id": { "type": ["string", "null"] },
+    "uitvoer-van-regel-id": {
+      "type": ["string", "null"],
+      "description": "Verwijst naar de regel die dit begrip als uitvoer voortbrengt. Uitsluitend voor begrippen met jas-klasse != afleidingsregel en herkomst = afgeleid. Voor jas-klasse: afleidingsregel wordt afleidingsregel-id gebruikt."
+    },
     "tussenresultaat": { "type": "boolean", "default": false },
     "voorbeelden": {
       "type": "array",

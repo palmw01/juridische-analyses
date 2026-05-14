@@ -204,6 +204,9 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
             ar_id = fm.get("afleidingsregel-id")
             if ar_id and ar_id in G:
                 G.add_edge(van_id, ar_id, label="afgeleid-via", edge_type="afgeleid-via")
+            uitvoer_id = fm.get("uitvoer-van-regel-id")
+            if uitvoer_id and uitvoer_id in G:
+                G.add_edge(van_id, uitvoer_id, label="uitvoer-van", edge_type="uitvoer-van")
 
     # --- Typed edges: annotatie → begrip (via annotatierijen) ---
     if annotaties_dir.exists():
