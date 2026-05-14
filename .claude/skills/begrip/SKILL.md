@@ -255,6 +255,7 @@ identificatiebegrip: false # true als unieke sleutel
 afleidingsregel-id: null        # alleen invullen bij jas-klasse: afleidingsregel
 uitvoer-van-regel-id: null      # invullen bij herkomst: afgeleid + jas-klasse ≠ afleidingsregel
 tussenresultaat: false
+vervangen-door: null            # niet aanraken — wordt ingesteld via A4 bij deprecatie
 relaties:
   is-een: [...]
   heeft: [...]
@@ -279,7 +280,9 @@ definitie-gebaseerd-op:
 - m-001
 ```
 
-Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
+Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
+
+> **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
 
 > **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
 
