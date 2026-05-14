@@ -17,7 +17,7 @@ WAARSCHUWINGEN
   begrippen/logische-of.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
 
-GESLAAGD: 41 bestanden
+GESLAAGD: 40 bestanden
 BLOKKEERFOUTEN: 0
 WAARSCHUWINGEN: 4
 ```

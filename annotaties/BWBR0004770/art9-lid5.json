@@ -159,7 +159,7 @@
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen",
       "toelichting-klasse": "Het adjectief 'gelijke' is een constitutief kenmerk van de termijnenregel: de termijnen zijn niet alleen in aantal bepaald maar ook gelijk in hoogte. Afleidingsregel: het kenmerk 'gelijk' maakt onderdeel uit van de definitie van het uitvoerbegrip 'invorderbaarheid-in-gelijke-termijnen'.",
-      "signalering": "⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: totaalbedrag / aantal termijnen"
+      "signalering": "⚠ rekenregel voor termijnbedrag; de eis dat termijnen 'gelijk' zijn, dwingt tot de berekening: bedrag belastingaanslag / aantal termijnen"
     },
     {
       "rij-id": "r-018",
@@ -167,7 +167,7 @@
       "jas-klasse": "variabele",
       "interpretatiemethode": "systematisch",
       "begrip-id": "BWBR0004770/art9/lid5/termijnbedrag",
-      "toelichting-klasse": "Het adjectief 'gelijke' is de wettelijke gelijkheidseis die de rekenkundige afleidbaarheid van het termijnbedrag fundeert: termijnen zijn gelijk in hoogte → termijnbedrag = totaalbedrag ÷ aantal termijnen. Variabele (niet afleidingsregel): dit is het uitvoerbegrip van AR-9-5f, niet de berekeningsregel zelf. Dubbele classificatie naast r-017 (afleidingsregel) is toegestaan.",
+      "toelichting-klasse": "Het adjectief 'gelijke' is de wettelijke gelijkheidseis die de rekenkundige afleidbaarheid van het termijnbedrag fundeert: termijnen zijn gelijk in hoogte → termijnbedrag = bedrag belastingaanslag ÷ aantal termijnen. Het bedrag van de aanslag is een impliciet attribuut van het rechtsobject belastingaanslag (r-019); een apart begrip ontbreekt in de wetstekst. Variabele (niet afleidingsregel): dit is het uitvoerbegrip van AR-9-5f, niet de berekeningsregel zelf. Dubbele classificatie naast r-017 (afleidingsregel) is toegestaan.",
       "signalering": "⚠ dubbele classificatie 'gelijke': r-017 → afleidingsregel (de gelijkheidsregel), r-018 → variabele (het afgeleide termijnbedrag)"
     },
     {
@@ -177,7 +177,7 @@
       "interpretatiemethode": "grammaticaal",
       "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
       "toelichting-klasse": "Hergebruik van het rechtsobject uit lid 1: in de terugvalregel (vierde volzin) keert de toepassing terug op het generieke rechtsobject 'een belastingaanslag'. Rechtsobject (niet variabele): het gaat om het object waarop lid 1 van toepassing wordt, niet om een numerieke inputwaarde. Het totaalbedrag is een impliciet attribuut van dit rechtsobject, verankerd via belastingaanslag.yaml.",
-      "signalering": "⚠ hergebruik begrip uit lid 1; totaalbedrag-belastingaanslag is een impliciet attribuut van dit rechtsobject (input voor AR-9-5f), niet afzonderlijk in lid 5 verankerd"
+      "signalering": "⚠ hergebruik begrip uit lid 1; het bedrag van de aanslag is een impliciet attribuut van dit rechtsobject dat als input dient voor AR-9-5f; een apart begrip hiervoor ontbreekt in de wetstekst van lid 5"
     }
   ],
   "diagram": {
@@ -256,12 +256,6 @@
         "begrip-id": "BWBR0004770/art9/lid5/resterende-maanden-jaar"
       },
       {
-        "id": "VA2",
-        "jas-klasse": "variabele",
-        "label": "variabele 'totaalbedrag belastingaanslag'",
-        "begrip-id": "BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag"
-      },
-      {
         "id": "VA3",
         "jas-klasse": "variabele",
         "label": "variabele 'termijnbedrag'",
@@ -333,11 +327,6 @@
       {
         "van": "AR1",
         "naar": "TA",
-        "label": "gebruikt"
-      },
-      {
-        "van": "AR1",
-        "naar": "VA2",
         "label": "gebruikt"
       },
       {

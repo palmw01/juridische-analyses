@@ -27,11 +27,23 @@ toelichting: Voor belastingplichtigen met een afwijkend boekjaar wordt de laatst
   vervaldag van een voorlopige aanslag altijd gesteld op de laatste dag van de maand
   waarin deze valt.
 voorbeeldreeksen:
+- invoerwaarden: 'BV met boekjaar 1 april – 31 maart; afwijkend-boekjaar: ja; voorlopige
+    aanslag; laatste termijn berekend op 15 november 2025'
+  verwachte-uitkomst: 'ja — vervaldag gesteld op 30 november 2025 (laatste dag van november)'
+  juridisch-juist: true
+  toelichting: >-
+    BV met afwijkend boekjaar (april–maart) voldoet aan de toepassingsvoorwaarden van
+    LI 2008 §9.1 tweede volzin. De termijn van 15 november valt niet op de laatste dag van
+    de maand; de Leidraad stelt de vervaldag op 30 november 2025. Kwalificatievoorwaarden
+    vervuld: (1) voorlopige aanslag, (2) afwijkend boekjaar.
 - invoerwaarden: BV met boekjaar van 1 april tot 31 maart, laatste termijn valt op
     15 maart
   verwachte-uitkomst: ja
   juridisch-juist: false
-  toelichting: 15 maart
+  toelichting: >-
+    Toepassingsgebied onzeker: de termijn op 15 maart valt buiten het kalenderjaar van
+    de dagtekening. Of LI 2008 §9.1 tweede volzin ook van toepassing is op termijnen in
+    het volgende kalenderjaar is niet uitdrukkelijk geregeld — A5-signaal.
 - invoerwaarden: Natuurlijk persoon met regulier kalenderjaar
   verwachte-uitkomst: nee
   juridisch-juist: false

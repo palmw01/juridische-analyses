@@ -32,7 +32,7 @@ vervangen-door: null
 relaties:
   is-een: []
   heeft:
-  - begrip-id: BWBR0004770/art9/lid5/totaalbedrag-belastingaanslag
+  - begrip-id: BWBR0004770/art9/lid1/belastingaanslag
     kardinaliteit: '1:1'
   - begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
     kardinaliteit: '1:1'
