@@ -114,7 +114,7 @@ brondefinitie
 
 | Veld | Inhoud |
 |------|--------|
-| **Definitie** | Regel die nieuwe feiten of waarden creëert op basis van bestaande feiten of waarden. Vier typen: **Beslissingsregel** (ja/nee, recht bestaat of niet), **Rekenregel** (bedrag, duur, hoogte), **Beperkingsregel** (beperkt of maximeert een waarde of recht), **Specialisatieregel** (specificeert een hoofdregel voor een deelgeval via "in afwijking van"-constructie). Zie `kaders-regels.md` voor taalpatronen per type. |
+| **Definitie** | Regel die nieuwe feiten of waarden creëert op basis van bestaande feiten of waarden. Vier typen: **Beslissingsregel** (ja/nee, recht bestaat of niet), **Rekenregel** (bedrag, duur, hoogte), **Beperkingsregel** (beperkt of maximeert een waarde of recht), **Specialisatieregel** (specificeert een hoofdregel voor een deelgeval via "in afwijking van"-constructie). Zie `.claude/skills/begrip/kaders-regels.md` voor taalpatronen per type. |
 | **Herkenningsvraag** | *Hoe wordt* een variabele berekend of afgeleid? *Hoe wordt* een specifiek rechtssubject of rechtsobject bepaald? |
 | **Taalkenmerken** | Is verminderd met, bedraagt vermeerderd met, wordt gesteld op, is het gezamenlijke bedrag van, berekend naar. |
 | **Invorderingscontext** | Berekening invorderingsrente (art. 28 IW 1990), vaststelling openstaand bedrag, belastingschuld na verrekening. |

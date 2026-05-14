@@ -35,6 +35,8 @@ De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden no
 
 Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de `markeringen`-array meerdere entries met verschillende `bron-annotatie-id`-waarden; de bijdrage per markering is `primair`, `aanvullend` of `context`. De definitie bestaat uit een **kern** (gebaseerd op de primaire markeringen, geldig voor alle bronartikelen) en optionele **contexten** (artikel-specifieke verfijningen, uitbreidingen of uitzonderingen op de kern). Zie `kaders.md` §Gelaagd model voor de beslisboom.
 
+Bij `herkomst: afgeleid` geldt: gebruik `afleidingsregel-id` alleen wanneer `jas-klasse: afleidingsregel`; gebruik anders `uitvoer-van-regel-id`. Zie `.claude/skills/begrip/SKILL.md` voor de volledige beslisboom.
+
 ---
 
 ## Reikwijdte van deze workflow
@@ -86,7 +88,6 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
-| `make export-graph` | `tools/export_graph.py` | Graph-export: project → GEXF/GraphML |
 
 ### Kaders en ondersteunende bestanden
 
@@ -108,6 +109,9 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `make webapp` | Genereert statische webapp (Belastingdienst-stijl) | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
+| `make export-graph` | Exporteert project naar GEXF/GraphML | Na wijzigingen begrippen/regels |
+| `make test` | Draait de Python-testsuite | Na codewijzigingen in tools/ |
+| `make fetch-wettenbank` | Haalt wetsteksten op via wettenbank-API | Bij nieuwe wetsartikelen |
 | `make ci` | Validatie + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
