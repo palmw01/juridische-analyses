@@ -396,6 +396,13 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, pro
     if rf_id:
         check_begrip(rf_id, "rechtsfeit-id")
 
+    # vervangt-regel-id: moet verwijzen naar bestaand regel-bestand
+    vervangt = data.get("vervangt-regel-id")
+    if vervangt:
+        regels_dir = project_root / "regels"
+        if not (regels_dir / f"{vervangt}.yaml").exists():
+            errors.append(f"[L2] vervangt-regel-id: regel '{vervangt}' niet gevonden in regels/")
+
     # annotatie-id: mag geen Obsidian-link zijn en moet verwijzen naar bestaande annotatie
     ann_id = data.get("annotatie-id")
     if ann_id:
@@ -536,6 +543,16 @@ def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
     )
     if voorbeeldreeksen and not heeft_grensgeval_false:
         warnings.append("[L3] voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig")
+
+    # prioriteit mag alleen bij Specialisatieregel
+    prioriteit = data.get("prioriteit")
+    soort = data.get("soort", "")
+    if prioriteit is not None and soort != "Specialisatieregel":
+        warnings.append(
+            f"[L3] prioriteit is ingevuld ({prioriteit}) maar soort is '{soort}' — "
+            f"prioriteit is alleen zinvol bij Specialisatieregels"
+        )
+
     return warnings
 
 
