@@ -138,6 +138,9 @@ def laad_regels(project_root: Path) -> list[dict]:
             "peildatum": str(data.get("peildatum") or ""),
             "rechtsfeit_id": data.get("rechtsfeit-id") or "",
             "vervangt_regel_id": data.get("vervangt-regel-id") or "",
+            "geldigheid_van": str(data.get("geldigheid-van") or ""),
+            "geldigheid_tot": str(data.get("geldigheid-tot") or "") if data.get("geldigheid-tot") else "",
+            "prioriteit": data.get("prioriteit"),
         })
     return regels
 

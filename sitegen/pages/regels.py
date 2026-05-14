@@ -88,6 +88,9 @@ _inp?.addEventListener('input',function(){{
       <tr><td>Operators</td><td>{ops or "-"}</td></tr>
       <tr><td>Tussenresultaat</td><td>{"Ja" if r["tussenresultaat"] else "Nee"}</td></tr>
       <tr><td>Peildatum</td><td>{r.get("peildatum") or "-"}</td></tr>
+      <tr><td>Geldig vanaf</td><td>{r.get("geldigheid_van") or "&#8212;"}</td></tr>
+      {f'<tr><td>Geldig tot</td><td>{r["geldigheid_tot"]}</td></tr>' if r.get("geldigheid_tot") else ""}
+      {f'<tr><td>Prioriteit</td><td>{r["prioriteit"]}</td></tr>' if r.get("prioriteit") is not None else ""}
       <tr><td>Rechtsfeit</td><td>{_link(r["rechtsfeit_id"]) if r.get("rechtsfeit_id") else "-"}</td></tr>
       {f'<tr><td>Vervangt</td><td><a href="{r["vervangt_regel_id"]}.html">{r["vervangt_regel_id"]}</a></td></tr>' if r.get("vervangt_regel_id") else ""}
     </table>
