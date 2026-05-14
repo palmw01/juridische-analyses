@@ -17,7 +17,7 @@ Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek 
 
 **Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening — om de methodiek serieus te testen.
 
-**Output:** een traceerbaar kennismodel — 28 begrippen, 9 afleidingsregels, 40 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 27 begrippen, 9 afleidingsregels, 40 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -184,6 +184,9 @@ Een afleidingsregel beschrijft een als-dan-redenering. Hieronder `regels/AR-BWBR
 regel-id: AR-BWBR0004770-art9-lid1-a
 naam: bepalen invorderbaarheid belastingaanslag
 soort: Beslissingsregel    # vier typen: Beslissings-, Reken-, Specialisatie-, Beperkingsregel
+prioriteit: null           # alleen bij Specialisatieregel: volgorde bij meerdere toepasselijke regels
+vervangt-regel-id: null    # id van vorige versie bij herziening
+geldigheid-van: '2026-01-01'
 
 invoer:
   - BWBR0004770/art9/lid1/belastingaanslag
@@ -285,9 +288,10 @@ annotaties/BWBR0004770/art9-1-lid1.json
 
 **Wat:** drie soorten controles, allemaal blokkerend:
 
-1. **Referentiële integriteit** — alle verwijzingen naar andere projectbestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten)
+1. **Referentiële integriteit** — alle verwijzingen naar andere projectbestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten, `vervangt-regel-id`)
 2. **Status-consistentie** — `status: gevalideerd` vereist een ingevulde `definitie.kern`; `status: vervallen` vereist een niet-null `vervangen-door`
 3. **Diagramintegriteit** — `kanten[].van` en `kanten[].naar` in annotatie-lid-diagrammen moeten verwijzen naar een bestaand `knopen[].id`
+4. **Definitie-gebaseerd-op bijdrage** — markering-id's in `definitie-gebaseerd-op` mogen alleen `bijdrage: primair` hebben
 
 **Blokkerend:** ja — L2-fouten blokkeren commit en CI.
 
@@ -310,6 +314,8 @@ annotaties/BWBR0004770/art9-lid1.json
 | `alle relaties leeg` | begrip heeft geen enkele relatie (`is-een`, `heeft`, `leidt-tot`) — mogelijk een geïsoleerd begrip of een ontbrekende modellering |
 | `geen grensgevallen` | een afleidingsregel heeft alleen positieve testgevallen; negatieve gevallen of grensgevallen ontbreken |
 | `definitie.kern leeg` | begrip is een nog niet ingevulde stub — gebruik `/begrip` om de kern te schrijven; bij `status: gevalideerd` escaleert dit naar een **L2-fout** |
+| `alle markeringen onbevestigd` | alle markeringen van een begrip hebben `bevestigd: false` — A4-domeinexpert-validatie nog niet uitgevoerd |
+| `prioriteit bij niet-Specialisatieregel` | `prioriteit` is ingevuld maar `soort` is geen `Specialisatieregel` — dit veld is alleen zinvol bij Specialisatieregels |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 
 **Huidig rapport:** 40 bestanden ✅ · 0 blokkeerfouten · 4 L3-waarschuwingen (begrippen zonder relaties: `31-december`, `afwijkend-boekjaar`, `logische-of`, `termijnbedrag`).
