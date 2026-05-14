@@ -8,13 +8,14 @@ Gebruik:
 
 import argparse
 import json
-import re
 import sys
 from pathlib import Path
 
 import yaml
 import networkx as nx
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from sitegen.config import JAS_KLEUREN
 from jas_index_lib import bouw_jas_index
 
 FALLBACK_KLEUR = "#CCCCCC"
@@ -56,27 +57,8 @@ def check_staleness(project_root: Path, output_dir: Path) -> None:
             print(f"    … en {len(nieuwere) - 5} andere(n)", file=sys.stderr)
 
 
-def lees_kleuren(project_root: Path) -> dict[str, str]:
-    """Laadt kleur per JAS-klasse uit .obsidian/graph.json."""
-    graph_json = project_root / ".obsidian" / "graph.json"
-    if not graph_json.exists():
-        return {}
-    with graph_json.open() as f:
-        data = json.load(f)
-    kleur_map: dict[str, str] = {}
-    for groep in data.get("colorGroups", []):
-        query = groep.get("query", "")
-        rgb_int = groep.get("color", {}).get("rgb")
-        if not rgb_int:
-            continue
-        m = re.search(r"tag:#(?:jas/)?(\S+)", query)
-        if m:
-            kleur_map[m.group(1)] = f"#{rgb_int:06X}"
-    return kleur_map
-
-
 def build_graph(project_root: Path) -> nx.MultiDiGraph:
-    kleur_map = lees_kleuren(project_root)
+    kleur_map = JAS_KLEUREN
     jas_index = bouw_jas_index(project_root)
     G = nx.MultiDiGraph()
 

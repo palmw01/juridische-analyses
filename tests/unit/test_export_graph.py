@@ -11,10 +11,10 @@ import yaml
 from export_graph import (
     is_verborgen_pad,
     check_staleness,
-    lees_kleuren,
     build_graph,
     main,
 )
+from sitegen.config import JAS_KLEUREN
 from tests.fixtures.begrippen import maak_begrip
 from tests.fixtures.regels import maak_regel
 from tests.fixtures.annotaties import maak_annotatie
@@ -149,94 +149,32 @@ def test_check_staleness_negeert_verborgen_bestanden(tmp_path, capsys):
     assert "waarschuwing" not in err.lower()
 
 
-# ===== lees_kleuren =====
+# ===== kleurkaart (JAS_KLEUREN) =====
 
-def test_lees_kleuren_geen_graph_json(tmp_path):
-    result = lees_kleuren(tmp_path)
-    assert result == {}
-
-
-def test_lees_kleuren_leeg_color_groups(tmp_path):
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    (obsidian / "graph.json").write_text(json.dumps({"colorGroups": []}))
-    result = lees_kleuren(tmp_path)
-    assert result == {}
-
-
-def test_lees_kleuren_geen_color_groups_key(tmp_path):
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    (obsidian / "graph.json").write_text(json.dumps({}))
-    result = lees_kleuren(tmp_path)
-    assert result == {}
+def test_build_graph_begrip_node_kleur_uit_jas_kleuren(tmp_path):
+    """Begrip met bekende JAS-klasse krijgt kleur uit JAS_KLEUREN, niet FALLBACK."""
+    (tmp_path / "begrippen").mkdir()
+    (tmp_path / "regels").mkdir()
+    (tmp_path / "annotaties").mkdir()
+    b = maak_begrip(**{"jas-klasse": "rechtssubject"})
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(b, allow_unicode=True))
+    G = build_graph(tmp_path)
+    node = G.nodes.get(b["begrip-id"])
+    assert node is not None
+    assert node["color"] == JAS_KLEUREN["rechtssubject"]
 
 
-def test_lees_kleuren_met_geldige_groep(tmp_path):
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    data = {
-        "colorGroups": [
-            {
-                "query": "tag:#jas/rechtssubject",
-                "color": {"rgb": 0xFF0000},
-            }
-        ]
-    }
-    (obsidian / "graph.json").write_text(json.dumps(data))
-    result = lees_kleuren(tmp_path)
-    assert "rechtssubject" in result
-    assert result["rechtssubject"] == "#FF0000"
-
-
-def test_lees_kleuren_met_jas_prefix(tmp_path):
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    data = {
-        "colorGroups": [
-            {
-                "query": "tag:#jas/begrip",
-                "color": {"rgb": 0x00FF00},
-            }
-        ]
-    }
-    (obsidian / "graph.json").write_text(json.dumps(data))
-    result = lees_kleuren(tmp_path)
-    assert "begrip" in result
-
-
-def test_lees_kleuren_geen_rgb_int(tmp_path):
-    """Groep zonder rgb int wordt genegeerd."""
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    data = {
-        "colorGroups": [
-            {
-                "query": "tag:#jas/rechtssubject",
-                "color": {},
-            }
-        ]
-    }
-    (obsidian / "graph.json").write_text(json.dumps(data))
-    result = lees_kleuren(tmp_path)
-    assert result == {}
-
-
-def test_lees_kleuren_geen_query_match(tmp_path):
-    """Query zonder tag:#jas/... patroon wordt genegeerd."""
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    data = {
-        "colorGroups": [
-            {
-                "query": "path:begrippen",
-                "color": {"rgb": 0xFF0000},
-            }
-        ]
-    }
-    (obsidian / "graph.json").write_text(json.dumps(data))
-    result = lees_kleuren(tmp_path)
-    assert result == {}
+def test_build_graph_begrip_node_onbekende_klasse_geeft_fallback(tmp_path):
+    """Begrip met onbekende JAS-klasse krijgt FALLBACK_KLEUR."""
+    (tmp_path / "begrippen").mkdir()
+    (tmp_path / "regels").mkdir()
+    (tmp_path / "annotaties").mkdir()
+    b = maak_begrip(**{"jas-klasse": "onbekende-klasse-xyz"})
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(b, allow_unicode=True))
+    G = build_graph(tmp_path)
+    node = G.nodes.get(b["begrip-id"])
+    assert node is not None
+    assert node["color"] == "#CCCCCC"
 
 
 # ===== build_graph =====
@@ -285,30 +223,6 @@ def test_build_graph_begrip_niet_dict(tmp_path):
     assert g.number_of_nodes() == 0
 
 
-def test_build_graph_begrip_kleur_uit_map(tmp_path):
-    """Kleur wordt gehaald uit kleurkaart als jas_klasse bekend is."""
-    (tmp_path / "begrippen").mkdir()
-    obsidian = tmp_path / ".obsidian"
-    obsidian.mkdir()
-    data = {"colorGroups": [{"query": "tag:#jas/rechtssubject", "color": {"rgb": 0xABCDEF}}]}
-    (obsidian / "graph.json").write_text(json.dumps(data))
-    fm = maak_begrip()
-    fm["jas-klasse"] = "rechtssubject"
-    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
-    g = build_graph(tmp_path)
-    node_id = "BWBR0004770/art9/lid1/belastingschuldige"
-    assert g.nodes[node_id]["color"] == "#ABCDEF"
-
-
-def test_build_graph_begrip_fallback_kleur(tmp_path):
-    """Als jas_klasse niet in kleurkaart → FALLBACK_KLEUR."""
-    (tmp_path / "begrippen").mkdir()
-    fm = maak_begrip()
-    fm["jas-klasse"] = "onbekend-klasse"
-    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
-    g = build_graph(tmp_path)
-    node_id = "BWBR0004770/art9/lid1/belastingschuldige"
-    assert g.nodes[node_id]["color"] == "#CCCCCC"
 
 
 def test_build_graph_begrip_met_geldigheid(tmp_path):
