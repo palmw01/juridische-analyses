@@ -23,5 +23,8 @@ jobs:
       - name: Installeer dependencies
         run: pip install -r requirements.lock
 
+      - name: Tests
+        run: make test-cov
+
       - name: Full CI (validate + export-rdf + export-graph + check-enrichment)
-        run: make ci
+        run: make validate && make export-rdf && make export-graph && make check-enrichment
