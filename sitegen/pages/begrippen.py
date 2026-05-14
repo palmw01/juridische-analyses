@@ -166,6 +166,9 @@ _inp?.addEventListener('input',function(){{
         reg_lnk = ""
         if b["afleidingsregel-id"]:
             reg_lnk = f'<p style="margin-top:0.5rem"><a href="{pp}regels/{b["afleidingsregel-id"]}.html">{b["afleidingsregel-id"]}</a></p>'
+        uitvoer_lnk = ""
+        if b["uitvoer-van-regel-id"]:
+            uitvoer_lnk = f'<p style="margin-top:0.5rem"><a href="{pp}regels/{b["uitvoer-van-regel-id"]}.html">{b["uitvoer-van-regel-id"]}</a></p>'
         ann_links = ""
         ann_refs = ann_by_begrip.get(b["id"], [])
         if ann_refs:
@@ -215,6 +218,7 @@ _inp?.addEventListener('input',function(){{
   </div>
   {ann_links}
   {f'<div class="card"><div class="card-title">Afleidingsregel</div>{reg_lnk}</div>' if reg_lnk else ""}
+  {f'<div class="card"><div class="card-title">Uitvoer van regel</div>{uitvoer_lnk}</div>' if uitvoer_lnk else ""}
 </div>
 </div>
 {_render_begrip_voorbeelden(b["voorbeelden"])}

@@ -6,7 +6,7 @@ soort-id: false
 jas-klasse: variabele
 toelichting-klasse: >-
   Het adjectief 'gelijke' in de wetstekst is de gelijkheidseis die het termijnbedrag als afgeleide variabele
-  fundeert: alle termijnen zijn gelijk in hoogte, zodat termijnbedrag = totaalbedrag ÷ aantal termijnen.
+  fundeert: alle termijnen zijn gelijk in hoogte, zodat termijnbedrag = bedrag van de aanslag ÷ aantal termijnen.
   Variabele (niet afleidingsregel): dit is het uitvoerbegrip van AR-9-5f, niet de berekeningsregel zelf.
 herkomst: afgeleid
 status: concept

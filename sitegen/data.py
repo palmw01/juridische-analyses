@@ -54,6 +54,7 @@ def laad_begrippen(project_root: Path) -> list[dict]:
                 "leidt-tot": extract_rel("leidt-tot"),
             },
             "afleidingsregel-id": data.get("afleidingsregel-id"),
+            "uitvoer-van-regel-id": data.get("uitvoer-van-regel-id"),
             "tussenresultaat": data.get("tussenresultaat", False),
             "identificatiebegrip": data.get("identificatiebegrip", False),
             "jas_klasse": klasse,
