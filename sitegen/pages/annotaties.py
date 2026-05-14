@@ -23,8 +23,8 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
         for uitv in reg["uitvoer"]:
             regel_by_bid.setdefault(uitv, []).append(ref)
     items = "".join(
-        f'<li data-id="{idx["id"]}" onclick="window.location=\'annotaties/{slugify(idx["id"])}.html\'">'
-        f'<a href="annotaties/{slugify(idx["id"])}.html" class="item-title">{wet_label} — artikeloverzicht</a>'
+        f'<li data-id="{idx["id"]}" onclick="window.location=\'annotaties/{idx["id"].replace("/","-")}.html\'">'
+        f'<a href="annotaties/{idx["id"].replace("/","-")}.html" class="item-title">{wet_label} — artikeloverzicht</a>'
         f'<div class="item-badges"><span class="badge badge-type">{idx.get("bwb_id","")}</span>'
         f'<span class="badge badge-soort">index</span></div>'
         f'<span class="item-meta">{idx.get("structuurpositie","")}</span>'
