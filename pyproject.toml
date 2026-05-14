@@ -1,0 +1,25 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--tb=short -q"
+markers = [
+    "e2e: end-to-end tests (traag, apart uitvoeren)",
+    "snapshot: snapshot-regressietests",
+]
+
+[tool.coverage.run]
+source = ["tools", "sitegen"]
+omit = ["*/__pycache__/*", "tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+# Sprint 4 baseline: 13% (tools + sitegen volledig gemeten, alleen config/jas_index/validate_note/data getest)
+# Verhogen naar 40% zodra sitegen/pages en rdf_export tests krijgen; doel 65% bij volledige dekking
+fail_under = 12
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
