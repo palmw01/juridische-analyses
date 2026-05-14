@@ -136,6 +136,7 @@ def laad_regels(project_root: Path) -> list[dict]:
             "artikel": str(data.get("artikel", "") or ""),
             "lid": str(data.get("lid", "") or ""),
             "peildatum": str(data.get("peildatum") or ""),
+            "annotatie_id": data.get("annotatie-id", ""),
             "rechtsfeit_id": data.get("rechtsfeit-id") or "",
             "vervangt_regel_id": data.get("vervangt-regel-id") or "",
             "geldigheid_van": str(data.get("geldigheid-van") or ""),

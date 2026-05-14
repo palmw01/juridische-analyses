@@ -57,6 +57,8 @@ def test_regel_schema_geldig(regel_schema, tmp_path):
     ("naam", None, "naam"),
     ("soort", "OnbekendType", "soort"),
     ("tussenresultaat", "ja", "tussenresultaat"),
+    ("annotatie-id",    None, "annotatie-id"),
+    ("toelichting",     None, "toelichting"),
 ])
 def test_regel_schema_ongeldig_veld(regel_schema, tmp_path, veld, waarde, verwacht_fragment):
     data = maak_regel(**{veld: waarde})

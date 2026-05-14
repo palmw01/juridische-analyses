@@ -30,6 +30,7 @@ def maak_regel(**overrides) -> dict:
         "lid": "1",
         "peildatum": "2024-01-01",
         "geldigheid-van": "2024-01-01",
+        "annotatie-id": "BWBR0004770/art9/lid1",
         "rechtsfeit-id": None,
     }
     base.update(overrides)

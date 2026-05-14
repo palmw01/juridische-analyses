@@ -4,7 +4,7 @@
   "title": "Afleidingsregel",
   "description": "Formele afleidingsregel in RegelSpraak-oriëntatie",
   "type": "object",
-  "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "geldigheid-van", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "voorbeeldreeksen"],
+  "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "geldigheid-van", "annotatie-id", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "toelichting", "voorbeeldreeksen", "tussenresultaat"],
   "additionalProperties": false,
   "properties": {
     "regel-id": { "type": "string", "pattern": "^AR-" },

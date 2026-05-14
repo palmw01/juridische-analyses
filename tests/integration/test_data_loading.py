@@ -76,6 +76,7 @@ def test_laad_regels_een_bestand(project_root):
     assert r["id"] == "AR-0001"
     assert r["soort"] == "Rekenregel"
     assert r["tussenresultaat"] is False
+    assert r["annotatie_id"] == "BWBR0004770/art9/lid1"
 
 
 def test_laad_regels_prioriteit_null_by_default(project_root):

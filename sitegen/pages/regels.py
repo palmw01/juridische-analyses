@@ -19,7 +19,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
         f'<li data-id="{r["id"]}" onclick="window.location=\'regels/{r["id"]}.html\'">'
         f'<a href="regels/{r["id"]}.html" class="item-title">{escape(r["naam"])}</a>'
         f'<div class="item-badges"><span class="badge badge-definitief">{escape(r["soort"])}</span></div>'
-        f'<span class="item-meta">ID: {escape(r["id"])}</span>'
+        f'<span class="item-meta">ID: {escape(r["id"])} &nbsp; Geldig vanaf: {escape(r.get("geldigheid_van") or "-")}</span>'
         f'</li>\n'
         for r in regels
     )
@@ -93,6 +93,7 @@ _inp?.addEventListener('input',function(){{
       {f'<tr><td>Prioriteit</td><td>{r["prioriteit"]}</td></tr>' if r.get("prioriteit") is not None else ""}
       <tr><td>Rechtsfeit</td><td>{_link(r["rechtsfeit_id"]) if r.get("rechtsfeit_id") else "-"}</td></tr>
       {f'<tr><td>Vervangt</td><td><a href="{r["vervangt_regel_id"]}.html">{r["vervangt_regel_id"]}</a></td></tr>' if r.get("vervangt_regel_id") else ""}
+      {f'<tr><td>Annotatie-id</td><td>{escape(r["annotatie_id"])}</td></tr>' if r.get("annotatie_id") else ""}
     </table>
   </div>
 </div>
