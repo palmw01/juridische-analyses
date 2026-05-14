@@ -18,6 +18,7 @@ __pycache__/
 
 # Nested virtual environments
 .claude/skills/*/.venv/
+tools/.venv/
 
 # Obsidian — per-apparaat state (niet tracken)
 .obsidian/workspace.json
