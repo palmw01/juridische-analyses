@@ -433,3 +433,204 @@ def test_main_ongeldige_datum_exit_1(tmp_path, capsys):
     with patch.object(sys, "argv", ["check_enrichment.py", "--project-dir", str(tmp_path), "--since", "niet-een-datum"]):
         result = main()
     assert result == 1
+
+
+# ===== Aanvullende coverage: lines 134-145, 206-210, 269, 276-281, 290, 409 =====
+
+# Lines 134-145: else branch in genereer_delta_analyse (MEERDERE_MARKERINGEN, geen conflict,
+# len(alle_teksten) != 1, dus context- en/of aanvullend-branch)
+
+def test_delta_analyse_else_context_branch():
+    """lines 134-141: MEERDERE_MARKERINGEN, geen CONFLICTERENDE_PRIMAIR, len(alle_teksten) > 1, context aanwezig."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+             "tekst": "tekst A", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "context", "bron-annotatie-id": "y",
+             "tekst": "tekst B", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": []},
+    )
+    result = genereer_delta_analyse(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "Context-markering" in result or "context" in result.lower()
+    assert "y" in result  # bron-annotatie-id van context-markering
+
+
+def test_delta_analyse_else_aanvullend_branch():
+    """lines 142-149: MEERDERE_MARKERINGEN, geen CONFLICTERENDE_PRIMAIR, len(alle_teksten) > 1, aanvullend aanwezig."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+             "tekst": "tekst A", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "aanvullend", "bron-annotatie-id": "y",
+             "tekst": "tekst B", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": []},
+    )
+    result = genereer_delta_analyse(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "Aanvullende markering" in result or "aanvullend" in result.lower()
+    assert "y" in result
+
+
+def test_delta_analyse_else_context_en_aanvullend():
+    """lines 134-149: zowel context als aanvullend aanwezig."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+             "tekst": "tekst A", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "context", "bron-annotatie-id": "y",
+             "tekst": "tekst B", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-003", "bijdrage": "aanvullend", "bron-annotatie-id": "z",
+             "tekst": "tekst C", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": []},
+    )
+    result = genereer_delta_analyse(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "Context-markering" in result or "context" in result.lower()
+    assert "Aanvullende markering" in result or "aanvullend" in result.lower()
+
+
+# Lines 206-210: genereer_advies fallback branches (niet conflicterend, etc.)
+
+def test_advies_fallback_met_contexten():
+    """line 206-207: niet conflicterend, len(alle_teksten) > 1, contexten aanwezig."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "tekst": "tekst A",
+             "bron-annotatie-id": "x", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "context", "tekst": "tekst B",
+             "bron-annotatie-id": "y", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": [{"markering-id": "m-002", "tekst": "ctx", "bijdrage": "context"}]},
+    )
+    result = genereer_advies(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "context gedocumenteerd" in result or "contextlagen" in result.lower()
+
+
+def test_advies_fallback_alle_context_bijdrage():
+    """line 208-209: niet conflicterend, len > 1, geen contexten, alle [1:] markeringen bijdrage='context'."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "tekst": "tekst A",
+             "bron-annotatie-id": "x", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "context", "tekst": "tekst B",
+             "bron-annotatie-id": "y", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": []},
+    )
+    result = genereer_advies(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "context" in result.lower()
+
+
+def test_advies_fallback_beoordelen():
+    """line 210: niet conflicterend, len > 1, geen contexten, niet alle context-bijdrage → beoordelen."""
+    fm = maak_begrip(
+        markeringen=[
+            {"markering-id": "m-001", "bijdrage": "primair", "tekst": "tekst A",
+             "bron-annotatie-id": "x", "jas-klasse": "rechtssubject", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "aanvullend", "tekst": "tekst B",
+             "bron-annotatie-id": "y", "jas-klasse": "rechtssubject", "bevestigd": True},
+        ],
+        definitie={"kern": "definitie", "contexten": []},
+    )
+    result = genereer_advies(fm, [Trigger.MEERDERE_MARKERINGEN])
+    assert "beoordelen" in result
+
+
+# Line 269: leeg YAML-bestand triggert continue in scan_begrippen
+
+def test_scan_begrippen_leeg_yaml_overgeslagen(tmp_path):
+    """line 269: YAML die None of niet-dict is → continue."""
+    (tmp_path / "begrippen").mkdir()
+    (tmp_path / "begrippen" / "leeg.yaml").write_text("")
+    nieuwe, overgeslagen, gesloten = scan_begrippen(tmp_path, [], None, False)
+    assert nieuwe == []
+    assert overgeslagen == []
+
+
+def test_scan_begrippen_lijst_yaml_overgeslagen(tmp_path):
+    """line 269: YAML met lijst-inhoud → continue."""
+    (tmp_path / "begrippen").mkdir()
+    (tmp_path / "begrippen" / "lijst.yaml").write_text("- item\n- item2\n")
+    nieuwe, _, _ = scan_begrippen(tmp_path, [], None, False)
+    assert nieuwe == []
+
+
+# Lines 276-281: since-filter — toekomstige datum filtert alles uit
+
+def test_scan_begrippen_since_filter_toekomstige_datum(tmp_path):
+    """lines 278-279: since in toekomst → bestand is ouder → continue."""
+    from datetime import date
+    (tmp_path / "begrippen").mkdir()
+    fm = maak_begrip()
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
+    toekomst = date(2099, 1, 1)
+    nieuwe, _, _ = scan_begrippen(tmp_path, [], toekomst, False)
+    assert nieuwe == []
+
+
+def test_scan_begrippen_since_filter_verleden_datum(tmp_path):
+    """since in het verleden → bestand is nieuwer → wordt verwerkt."""
+    from datetime import date
+    (tmp_path / "begrippen").mkdir()
+    fm = maak_begrip()
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
+    verleden = date(2000, 1, 1)
+    nieuwe, _, _ = scan_begrippen(tmp_path, [], verleden, False)
+    assert len(nieuwe) == 1
+
+
+def test_scan_begrippen_since_oserror_silently_caught(tmp_path):
+    """lines 280-281: OSError bij stat() → pass → bestand wordt toch verwerkt."""
+    from datetime import date
+    from unittest.mock import patch
+    (tmp_path / "begrippen").mkdir()
+    fm = maak_begrip()
+    f = tmp_path / "begrippen" / "test.yaml"
+    f.write_text(yaml.dump(fm, allow_unicode=True))
+
+    original_stat = Path.stat
+
+    def patched_stat(self, *args, **kwargs):
+        if str(self).endswith(".yaml"):
+            raise OSError("simulated stat error")
+        return original_stat(self, *args, **kwargs)
+
+    with patch.object(Path, "stat", patched_stat):
+        nieuwe, _, _ = scan_begrippen(tmp_path, [], date(2024, 1, 1), False)
+
+    # OSError → pass → bestand niet gefilterd → wordt verwerkt
+    assert len(nieuwe) == 1
+
+
+# Line 290: verbose=True met gesloten item in queue
+
+def test_scan_begrippen_verbose_gesloten_print(tmp_path, capsys):
+    """line 290: verbose=True + is_gesloten → print gesloten-bericht."""
+    (tmp_path / "begrippen").mkdir()
+    fm = maak_begrip()
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
+    queue = [{"begrip-id": "BWBR0004770/art9/lid1/belastingschuldige", "beslissing": "accepteren"}]
+    _, _, gesloten = scan_begrippen(tmp_path, queue, None, verbose=True)
+    out = capsys.readouterr().out
+    assert "gesloten" in out.lower() or "belastingschuldige" in out
+    assert "BWBR0004770/art9/lid1/belastingschuldige" in gesloten
+
+
+# Line 409: --since argument in main()
+
+def test_main_met_since_argument(tmp_path):
+    """line 409: --since arg wordt verwerkt en since-filter actief."""
+    (tmp_path / "begrippen").mkdir()
+    fm = maak_begrip()
+    (tmp_path / "begrippen" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
+    # Far future date: alles wordt gefilterd
+    with patch.object(sys, "argv", [
+        "check_enrichment.py",
+        "--project-dir", str(tmp_path),
+        "--since", "2099-01-01",
+        "--dry-run",
+    ]):
+        result = main()
+    # Geen kandidaten (alles gefilterd) → exit 0
+    assert result == 0

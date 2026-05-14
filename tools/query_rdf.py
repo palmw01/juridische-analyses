@@ -9,6 +9,8 @@ Gebruik:
     tools/.venv/bin/python tools/query_rdf.py --query tools/queries/voorbeeld.rq
 """
 
+from __future__ import annotations
+
 import argparse
 import sys
 from pathlib import Path

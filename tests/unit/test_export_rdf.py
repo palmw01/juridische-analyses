@@ -320,3 +320,53 @@ def test_main_genereert_turtle_met_begrip_en_regel(tmp_path):
     content = out.read_text()
     assert "skos:Concept" in content
     assert "jas:Afleidingsregel" in content
+
+
+# ===== Aanvullende coverage voor regel-branch (line 233) en else-branches =====
+
+def test_exporteer_regels_niet_dict_yaml_overgeslagen(tmp_path):
+    """YAML met lijst-inhoud (niet dict) in regels-map wordt overgeslagen (line 233)."""
+    (tmp_path / "regels").mkdir()
+    (tmp_path / "regels" / "lijst.yaml").write_text("- item1\n- item2\n")
+    blokken = exporteer_regels(tmp_path)
+    assert blokken == []
+
+
+def test_exporteer_regels_leeg_yaml_overgeslagen(tmp_path):
+    """Leeg YAML-bestand in regels-map wordt overgeslagen."""
+    (tmp_path / "regels").mkdir()
+    (tmp_path / "regels" / "leeg.yaml").write_text("")
+    blokken = exporteer_regels(tmp_path)
+    assert blokken == []
+
+
+def test_begrip_naar_turtle_else_branch_punt(tmp_path):
+    """begrip_naar_turtle: als laatste regel niet op ' ;' eindigt → '    .' appended (line 163).
+
+    Dit gebeurt als de begrip alleen 'a skos:Concept ;' heeft en de 'if lines[-1].endswith(" ;")'
+    check faalt doordat de laatste regel al een '.' heeft. In de praktijk triggert dit
+    wanneer de laatste toegevoegde regel niet met ' ;' eindigt.
+    We testen dit door een begrip te maken zonder enig optioneel veld (alleen de URI + type).
+    """
+    # Minimaal begrip met alleen begrip-id, geen andere velden
+    fm = {
+        "begrip-id": "test/begrip",
+        "begripsnaam": "",     # leeg → geen prefLabel
+        "definitie": {},       # geen kern, geen contexten
+        "geldigheid-van": "",  # leeg
+        "herkomst": "",
+        "aliases": [],
+        "relaties": {},
+        "markeringen": [],
+        "status": "",
+        "soort": "",
+    }
+    result = begrip_naar_turtle(fm, {})
+    assert result.strip().endswith(".")
+
+
+def test_regel_naar_turtle_else_branch_punt():
+    """regel_naar_turtle: minimale regel zonder naam/soort/bwb → '    .' appended (line 220)."""
+    fm = {"regel-id": "test-regel"}  # alleen regel-id, geen andere velden
+    result = regel_naar_turtle(fm)
+    assert result.strip().endswith(".")

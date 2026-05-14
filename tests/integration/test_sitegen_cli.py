@@ -69,3 +69,12 @@ def test_main_print_statistieken(project_root, tmp_path, capsys):
     err = capsys.readouterr().err
     assert "begrippen" in err
     assert "annotaties" in err
+
+
+def test_sitegen_main_als_module(project_root, tmp_path):
+    """Dekt sitegen/__main__.py via runpy.run_module."""
+    import runpy
+    out = tmp_path / "webapp"
+    with patch.object(sys, "argv", ["sitegen", "--project-dir", str(project_root), "--out", str(out)]):
+        runpy.run_module("sitegen", run_name="__main__", alter_sys=False)
+    assert (out / "index.html").exists()
