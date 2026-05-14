@@ -12,7 +12,7 @@ herkomst: afgeleid
 status: concept
 definitie:
   kern: >-
-    Het bedrag van een afzonderlijke termijn, berekend door het totaalbedrag van de belastingaanslag te
+    Het bedrag van een afzonderlijke termijn, berekend door het bedrag van de belastingaanslag te
     delen door het aantal termijnen
   contexten: []
 definitie-versie: 1
