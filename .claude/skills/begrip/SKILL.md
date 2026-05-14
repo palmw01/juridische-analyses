@@ -97,9 +97,21 @@ Wanneer een `/annoteer`-run een nieuwe markering toevoegt aan een begrip dat al 
    - Specificeert de kern voor één wetscontext → voeg toe aan `contexten[]` met `bijdrage: verfijning`
    - Voegt nieuwe betekenisdimensie toe → voeg toe aan `contexten[]` met `bijdrage: uitbreiding`; overweeg of de kern moet worden bijgesteld
    - Beperkt of sluit de kern uit → `bijdrage: uitzondering`
-   - Onverenigbaar met de kern → **signaleer homoniem-conflict** en stel splitsing voor; maak géén context-item aan
+   - Onverenigbaar met de kern → **signaleer homoniem-conflict** en stel splitsing voor; maak géén context-item aan (zie splitsingscriteria hieronder)
 3. **Kern-update**: pas `definitie.kern` uitsluitend aan als de nieuwe bron een fundamenteler inzicht biedt dat voor **alle** bronnen geldt. Verhoog `definitie-versie` bij kernwijziging.
 4. **definitie-gebaseerd-op**: bevat uitsluitend markering-ids die de kern staven — verwijder ids van markeringen die nu in `contexten` zijn opgenomen.
+
+#### Homoniem-splitsingscriteria
+
+Twee markeringen voor dezelfde term zijn **homoniemen** (→ twee aparte begrippen) als aan **ten minste twee** van de volgende criteria is voldaan:
+
+1. De juridische kernbetekenis verschilt per artikel — niet alleen de toepassingscontext
+2. De begrippen triggeren andere rechtsfeiten of leiden tot andere rechtsgevolgen
+3. Een geünificeerde definitie is niet substitueerbaar in beide bronartikelen: een zin die klopt voor bron A klopt niet voor bron B
+
+Ze zijn **polyseem** (→ één verrijkt begrip met contexten) als de kern identiek is en het verschil uitsluitend de toepassingscontext betreft.
+
+**Twijfelgeval — substitutiebaarheidstest**: formuleer een testzin met de veronderstelde kern. Controleer of die zin juridisch juist is in beide bronartikelen. Slaagt de test in beide → polyseem. Faalt in één → homoniemen.
 
 ---
 

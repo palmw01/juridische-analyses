@@ -243,13 +243,22 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
                 f"verwijst naar een niet-bestaande markering in markeringen[]"
             )
 
-    # definitie-gebaseerd-op: markering-id's moeten bestaan in markeringen[]
+    # definitie-gebaseerd-op: markering-id's moeten bestaan én bijdrage 'primair' hebben
+    mark_bijdrage = {m.get("markering-id"): m.get("bijdrage") for m in (data.get("markeringen") or [])}
     def_gebaseerd_op: list[str] = data.get("definitie-gebaseerd-op") or []
     for mid in def_gebaseerd_op:
-        if mid and mid not in markering_ids:
+        if not mid:
+            continue
+        if mid not in markering_ids:
             errors.append(
                 f"[L2] definitie-gebaseerd-op: markering-id '{mid}' "
                 f"niet gevonden in markeringen[]"
+            )
+        elif mark_bijdrage.get(mid) not in ("primair", None):
+            bijdrage_val = mark_bijdrage.get(mid)
+            errors.append(
+                f"[L2] definitie-gebaseerd-op: markering '{mid}' heeft bijdrage '{bijdrage_val}' "
+                f"— alleen bijdrage 'primair' is toegestaan in definitie-gebaseerd-op"
             )
 
     relaties = data.get("relaties", {}) or {}
@@ -483,6 +492,11 @@ def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
     leidt_tot = relaties.get("leidt-tot") or data.get("leidt-tot") or []
     if not is_een and not heeft and not leidt_tot:
         warnings.append("[L3] alle relaties leeg (is-een, heeft, leidt-tot)")
+
+    # Onbevestigde markeringen
+    markeringen = data.get("markeringen") or []
+    if markeringen and all(not m.get("bevestigd", False) for m in markeringen):
+        warnings.append("[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd")
 
     return warnings
 

@@ -55,6 +55,7 @@
     "geldigheid-van": { "type": ["string", "null"], "format": "date" },
     "geldigheid-tot": { "type": ["string", "null"], "format": "date" },
     "tussenresultaat": { "type": "boolean", "default": false },
+    "prioriteit": { "type": ["integer", "null"], "description": "Uitvoeringsvolgorde bij meerdere toepasselijke Specialisatieregels; lager getal = hogere prioriteit; null bij overige regelsoorten" },
     "vervangt-regel-id": { "type": ["string", "null"] }
   }
 }

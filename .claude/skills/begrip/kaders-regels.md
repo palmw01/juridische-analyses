@@ -106,6 +106,21 @@ vervangt-regel-id: AR-BWBR0004770-art9-lid5-b   # de vorige versie van deze rege
 
 De vervangen regel blijft bestaan voor historische raadpleegbaarheid. Stel daar `geldigheid-tot` in op de dag vóór de ingangsdatum van de nieuwe regel.
 
+### Specialisatieregel cascade: `prioriteit`
+
+Wanneer meerdere Specialisatieregels op hetzelfde invoergeval van toepassing kunnen zijn, legt `prioriteit` de uitvoeringsvolgorde vast:
+
+- Lagere waarde = hogere prioriteit (prioriteit 1 gaat vóór prioriteit 2)
+- Bij één Specialisatieregel per situatie of bij niet-Specialisatieregels: `prioriteit: null`
+- Begin bij 1 en verhoog per rang; gaps zijn toegestaan (1, 3, 5 …) zodat later regels kunnen worden ingevoegd
+
+```yaml
+soort: Specialisatieregel
+prioriteit: 1   # gaat vóór andere Specialisatieregels met hogere waarde
+```
+
+Voeg `prioriteit` alleen in als er daadwerkelijk meerdere Specialisatieregels zijn die hetzelfde deelgeval kunnen betreffen — geen speculatieve invulling vooraf.
+
 ---
 
 ## Taalpatronen per type
