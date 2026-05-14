@@ -573,11 +573,16 @@ requirements.lock      pinned Python-dependencies
 | `make webapp` | Genereert statische webapp in `webapp/` | Na wijzigingen |
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
-| `make ci` | validate + export-rdf + export-graph + check-enrichment | Voor push |
+| `make test` | Testsuite uitvoeren (unit + integratie + property-based) | Na codewijzigingen |
+| `make test-cov` | Testsuite met coverage-rapport (100% vereist) | Na codewijzigingen |
+| `make ci` | test + validate + export-rdf + export-graph + check-enrichment | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
 | `make lock` | Installeert + pinned dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden | Opruimen |
 
+### Testsuite
+
+623 tests — unit, integratie en property-based (Hypothesis) — met **100% line coverage** op alle toolchain-code (`tools/` en `sitegen/`). De suite is geschreven door Claude Code. `make test-cov` draait automatisch als eerste stap van CI; de build faalt bij minder dan 100%.
 
 ---
 
