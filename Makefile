@@ -67,16 +67,16 @@ clean:
 	@echo "Opschoning voltooid"
 
 test:
-	@tools/.venv/bin/pytest tests/ -m "not e2e" -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+	@$(VENV) -m pytest tests/ -m "not e2e" -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
 
 test-fast:
-	@tools/.venv/bin/pytest tests/unit/ -q -x; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+	@$(VENV) -m pytest tests/unit/ -q -x; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
 
 test-cov:
-	@tools/.venv/bin/pytest tests/ -m "not e2e" --cov --cov-report=term-missing; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+	@$(VENV) -m pytest tests/ -m "not e2e" --cov --cov-report=term-missing; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
 
 test-e2e:
-	@tools/.venv/bin/pytest tests/e2e/ -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+	@$(VENV) -m pytest tests/e2e/ -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
 
 ci: test validate export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"
