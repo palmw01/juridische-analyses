@@ -554,9 +554,18 @@ tools/                 Python-toolchain (9 scripts)
   extract_kruisrefs.py JCI URI-extractie uit annotaties
   queries/             SPARQL-querybestanden
 
+tests/                 Python-testsuite (623 tests, 100% coverage)
+  unit/                unit-tests per tool (validate_note, export_rdf, ...)
+  integration/         integratie-tests (sitegen-pages, data-loading, pipeline)
+  property/            property-based tests via Hypothesis (slugify, config)
+  e2e/                 end-to-end tests via subprocess (apart uitvoeren)
+  fixtures/            factory-functies voor begrip/regel/annotatie-testdata
+  conftest.py          gedeelde fixtures (project_root, begrip_yaml, regel_yaml)
+
 .github/workflows/     CI (validatie) + deploy (GitHub Pages)
 Makefile               alle build-targets
 requirements.lock      pinned Python-dependencies
+pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 .claude/skills/        Claude Code skills + JAS-kaders
 ```
 
