@@ -144,7 +144,7 @@ Dit veld is vereist voor A6d én A6e. Het onderscheidt observeerbare gegevens va
 | Herkomst | Betekenis | Gevolg voor modellering |
 |----------|-----------|------------------------|
 | `direct` | Observeerbaar uit de werkelijke wereld; komt uit basisregistratie, aangifte of aanvraag | Bron vermelden in het `bron`-veld; input voor gegevensmodel |
-| `afgeleid` | Uitvoer van een afleidingsregel; wordt berekend of beslist | Wiki-link naar de afleidingsregel in `afleidingsregels`-veld is verplicht |
+| `afgeleid` | Uitvoer van een afleidingsregel; wordt berekend of beslist | Verplicht veld afhankelijk van jas-klasse: • `jas-klasse: afleidingsregel` → `afleidingsregel-id: [regel-id]` • alle andere jas-klassen → `uitvoer-van-regel-id: [regel-id]` |
 
 Dit onderscheid is cruciaal: directe begrippen komen uit basisregistraties of aanvragen;
 afgeleide begrippen worden berekend/beslist door een afleidingsregel.
