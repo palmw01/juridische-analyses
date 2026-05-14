@@ -15,9 +15,8 @@ omit = ["*/__pycache__/*", "tests/*"]
 
 [tool.coverage.report]
 show_missing = true
-# Sprint 5 baseline: 30% — validate_note 100%, data 100%, jas_index 100%, config 100%
-# Volgende stap: sitegen/pages + rdf-tools (doel 65%)
-fail_under = 28
+# Sprint 6 baseline: 75% — sitegen 100%, validate_note 100%, export_rdf 98%, check_enrichment 90%
+fail_under = 72
 exclude_lines = [
     "pragma: no cover",
     "if __name__ == .__main__.:",
