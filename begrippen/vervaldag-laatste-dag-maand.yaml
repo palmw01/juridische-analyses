@@ -4,7 +4,13 @@ aliases: []
 soort: datum
 soort-id: false
 jas-klasse: afleidingsregel
-toelichting-klasse: Stelt een waarde vast voor de vervaldag bij afwijkende boekjaren.
+toelichting-klasse: >-
+  Stelt een waarde vast voor de vervaldag bij afwijkende boekjaren op grond van LI 2008 §9.1,
+  tweede volzin. De leidt-tot-relatie naar invorderbaarheid (BWBR0004770/art9/lid1) is een
+  bewuste cross-law verwijzing: de Leidraad (uitvoeringsbeleid) specificeert wanneer de
+  wettelijke invorderbaarheid per IW 1990 art. 9 lid 1 in werking treedt. De Leidraad is
+  subordinaat aan de wet maar vult de open norm van de betalingstermijn in voor belastingplichtigen
+  met een van het kalenderjaar afwijkend boekjaar.
 herkomst: afgeleid
 status: concept
 definitie:
