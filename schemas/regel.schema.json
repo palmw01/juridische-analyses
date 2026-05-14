@@ -52,6 +52,8 @@
         }
       }
     },
+    "geldigheid-van": { "type": ["string", "null"], "format": "date" },
+    "geldigheid-tot": { "type": ["string", "null"], "format": "date" },
     "tussenresultaat": { "type": "boolean", "default": false },
     "vervangt-regel-id": { "type": ["string", "null"] }
   }

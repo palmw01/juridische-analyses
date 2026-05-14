@@ -281,6 +281,8 @@ definitie-gebaseerd-op:
 
 Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`.
 
+> **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
+
 `status` na invullen: laat op `concept` staan — status-wijziging is een A4-taak.
 
 ---
@@ -327,7 +329,8 @@ Kennismodel-checklist — [begripsnaam]
 ✅/⬜ identificatiebegrip ingevuld
 ✅/⬜ aliases aanwezig (leeg is toegestaan indien geen synoniemen)
 ✅/⬜ voorbeelden + kenmerken ingevuld in begrip-YAML (optioneel)
-✅/⬜ afleidingsregel-id ingevuld (n.v.t. indien herkomst: direct)
+✅/⬜ afleidingsregel-id ingevuld (alleen bij jas-klasse: afleidingsregel)
+✅/⬜ uitvoer-van-regel-id ingevuld (bij herkomst: afgeleid + jas-klasse ≠ afleidingsregel)
 ✅/⬜ enrichment-queue gecheckt
 ✅/⬜ validatie geslaagd (validate_note.py)
 ```
