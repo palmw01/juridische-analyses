@@ -284,8 +284,6 @@ Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`,
 
 > **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
 
-> **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
-
 `status` na invullen: laat op `concept` staan — status-wijziging is een A4-taak.
 
 ---
