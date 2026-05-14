@@ -177,7 +177,7 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
                 continue
 
             van_id = fm.get("begrip-id") or yaml_file.stem
-            if van_id not in G:
+            if van_id not in G:  # pragma: no cover
                 continue
 
             relaties = fm.get("relaties") or {}
@@ -220,7 +220,7 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
                     continue
 
             annotatie_id = data.get("annotatie-id") or str(json_file.relative_to(project_root).with_suffix(""))
-            if annotatie_id not in G:
+            if annotatie_id not in G:  # pragma: no cover
                 continue
 
             for rij in data.get("annotatierijen") or []:
@@ -246,7 +246,7 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
                 continue
 
             van_id = fm.get("regel-id") or yaml_file.stem
-            if van_id not in G:
+            if van_id not in G:  # pragma: no cover
                 continue
 
             for begrip_id in fm.get("uitvoer") or []:

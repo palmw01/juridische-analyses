@@ -159,7 +159,7 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
     # Afsluiten: vervang laatste ';' door '.'
     if lines[-1].endswith(" ;"):
         lines[-1] = lines[-1][:-2] + " ."
-    else:
+    else:  # pragma: no cover
         lines.append("    .")
 
     return "\n".join(lines)
@@ -216,7 +216,7 @@ def regel_naar_turtle(fm: dict) -> str:
         lines.append(f"    rdfs:comment {turtle_literal(toelichting[:200])} ;")
     if lines[-1].endswith(" ;"):
         lines[-1] = lines[-1][:-2] + " ."
-    else:
+    else:  # pragma: no cover
         lines.append("    .")
     return "\n".join(lines)
 

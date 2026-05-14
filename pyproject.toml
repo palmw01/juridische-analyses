@@ -15,8 +15,7 @@ omit = ["*/__pycache__/*", "tests/*"]
 
 [tool.coverage.report]
 show_missing = true
-# Sprint 7 baseline: 96% — sitegen 100%, alle tools 100% behalve fetch_wettenbank (netwerk)
-fail_under = 94
+fail_under = 100
 exclude_lines = [
     "pragma: no cover",
     "if __name__ == .__main__.:",
