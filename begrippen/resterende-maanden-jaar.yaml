@@ -39,5 +39,6 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
     relatie-soort: causaal
 identificatiebegrip: false
-afleidingsregel-id: AR-BWBR0004770-art9-lid5-b
+afleidingsregel-id: null
+uitvoer-van-regel-id: AR-BWBR0004770-art9-lid5-b
 tussenresultaat: true
