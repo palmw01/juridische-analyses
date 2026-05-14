@@ -237,7 +237,7 @@ Sla op als `annotaties/[B]/art[A]-lid[L].json`.
 - `signalering`: gebruik `null` als er geen bijzonderheden zijn; gebruik een string bij meerduidigheid, spanning of open normen.
 
 **Diagram-regels:**
-- Construeer diagram als JSON (knopen + kanten) — Mermaid wordt gegenereerd door `generate_views.py`.
+- Construeer diagram als JSON (knopen + kanten) — Mermaid-visualisatie wordt gegenereerd door `make webapp`.
 - Centrale knoop: kies conform `kaders.md §Centrale klasse` (1. Rechtsbetrekking → 2. Rechtsfeit → 3. Afleidingsregel → 4. Voorwaarde).
 - Knoop-id's: korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
 - Label-tekst: `"[jas-klasse] '[markering ingekort tot max. 40 tekens]'"`.
@@ -385,7 +385,7 @@ Sectie-annotatie-checklist — [ref] [W]
 ✅/⬜ delegatiestructuur beschreven (optioneel — alleen bij delegatiebevoegdheden)
 ✅/⬜ begrip-YAML-stubs aangemaakt per annotatierij
 ✅/⬜ validatie geslaagd (validate_note.py)
-✅/⬜ views gegenereerd (generate_views.py)
+✅/⬜ webapp bijgewerkt (make webapp)
 ```
 
 ---
