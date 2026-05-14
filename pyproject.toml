@@ -1,0 +1,23 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--tb=short -q"
+markers = [
+    "e2e: end-to-end tests (traag, apart uitvoeren)",
+    "snapshot: snapshot-regressietests",
+]
+
+[tool.coverage.run]
+source = ["tools", "sitegen"]
+omit = ["*/__pycache__/*", "tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 65
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

@@ -3,7 +3,7 @@ TOOLS     = tools
 SCRIPTS   = scripts
 
 .PHONY: setup install-hooks validate export-rdf export-graph
-.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp test
+.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp test test-fast test-cov test-e2e
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -67,8 +67,16 @@ clean:
 	@echo "Opschoning voltooid"
 
 test:
-	@echo "Geen testsuite geconfigureerd. Voeg pytest toe in tools/tests/ zodra beschikbaar."
-	@echo "Exit code: 0"
+	@tools/.venv/bin/pytest tests/ -m "not e2e" -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
 
-ci: validate export-rdf export-graph check-enrichment
+test-fast:
+	@tools/.venv/bin/pytest tests/unit/ -q -x; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+
+test-cov:
+	@tools/.venv/bin/pytest tests/ -m "not e2e" --cov --cov-report=term-missing; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+
+test-e2e:
+	@tools/.venv/bin/pytest tests/e2e/ -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+
+ci: test validate export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"
