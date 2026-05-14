@@ -16,6 +16,12 @@ analyses/*.html
 # Python bytecache
 __pycache__/
 
+# pytest / coverage artefacten
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
 # Nested virtual environments
 .claude/skills/*/.venv/
 tools/.venv/
