@@ -228,6 +228,20 @@ def test_main_full_schrijft_rapport(project_root):
     assert (project_root / "rapporten" / "validatie-rapport.md").exists()
 
 
+def test_main_full_schrijft_json_rapport(project_root):
+    data = maak_begrip()
+    (project_root / "begrippen" / "test.yaml").write_text(yaml.dump(data, allow_unicode=True))
+    with patch.object(sys, "argv", ["validate_note.py", "--full", "--project-dir", str(project_root)]):
+        with pytest.raises(SystemExit) as exc:
+            main()
+    assert exc.value.code == 0
+    json_pad = project_root / "rapporten" / "validatie-rapport.json"
+    assert json_pad.exists()
+    parsed = json.loads(json_pad.read_text())
+    assert "waarschuwingen" in parsed
+    assert "fouten" in parsed
+
+
 def test_main_integrity_flag(project_root):
     data = maak_begrip()
     pad = project_root / "begrippen" / "test.yaml"

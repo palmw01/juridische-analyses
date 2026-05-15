@@ -24,7 +24,7 @@ def _regel(**overrides) -> dict:
         "annotatie_id": "BWBR0004770/art9/lid1",
         "rechtsfeit_id": "",
         "vervangt_regel_id": "",
-        "gespecialiseert_regel_id": "",
+        "gespecialiseerd_regel_id": "",
         "geldigheid_van": "2026-01-01",
         "geldigheid_tot": "",
         "prioriteit": None,
@@ -102,3 +102,23 @@ def test_gen_regels_detail_tussenresultaat_nee(tmp_path):
     gen_regels(tmp_path, [_regel(tussenresultaat=False)], [], [])
     content = (tmp_path / "regels" / "AR-0001.html").read_text()
     assert "Nee" in content
+
+
+def test_gen_regels_detail_gespecialiseerd_regel_id_toont_link(tmp_path):
+    gen_regels(tmp_path, [_regel(gespecialiseerd_regel_id="AR-HOOFD-001")], [], [])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "AR-HOOFD-001" in content
+
+
+def test_gen_regels_detail_waarschuwingen_kaart_zichtbaar(tmp_path):
+    ws = {"regels/AR-0001.yaml": ["[L3] soort is 'Specialisatieregel' maar gespecialiseerd-regel-id ontbreekt"]}
+    gen_regels(tmp_path, [_regel()], [], [], waarschuwingen=ws)
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Kwaliteitspunten" in content
+    assert "gespecialiseerd-regel-id" in content
+
+
+def test_gen_regels_detail_geen_waarschuwingen_geen_kaart(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], waarschuwingen={})
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Kwaliteitspunten" not in content

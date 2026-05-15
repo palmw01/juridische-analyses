@@ -147,6 +147,29 @@ def laad_regels(project_root: Path) -> list[dict]:
     return regels
 
 
+def laad_waarschuwingen(project_root: Path) -> dict[str, list[str]]:
+    """Laad L3-waarschuwingen uit rapporten/validatie-rapport.json.
+    Retourneert {relatief_pad: [waarschuwing_strings]}.
+    Geeft leeg dict terug als het rapport ontbreekt."""
+    pad = project_root / "rapporten" / "validatie-rapport.json"
+    if not pad.exists():
+        return {}
+    data = json.loads(pad.read_text())
+    result: dict[str, list[str]] = {}
+    for item in data.get("waarschuwingen") or []:
+        bestand = item["bestand"]
+        result.setdefault(bestand, []).append(item["boodschap"])
+    return result
+
+
+def waarschuwingen_voor(slug_of_id: str, index: dict[str, list[str]]) -> list[str]:
+    """Geef waarschuwingen voor een begrip-slug of regel-id."""
+    for pad, ws in index.items():
+        if slug_of_id in pad:
+            return ws
+    return []
+
+
 def laad_artikel_indices(project_root: Path) -> list[dict]:
     indices = []
     pad = project_root / "annotaties"

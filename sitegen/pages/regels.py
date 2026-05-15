@@ -4,13 +4,25 @@ from pathlib import Path
 from sitegen.html import breadcrumb, format_ann_title, schrijf_html
 
 
-def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list):
+def _render_regel_waarschuwingen(index: dict, regel_id: str) -> str:
+    ws = [w for pad, ws in index.items() if regel_id in pad for w in ws]
+    if not ws:
+        return ""
+    items = "".join(
+        f'<li class="waarschuwing-item">{escape(w.removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))}</li>'
+        for w in ws
+    )
+    return f'<div class="card card-waarschuwing"><div class="card-title">Kwaliteitspunten ({len(ws)})</div><ul class="waarschuwing-list">{items}</ul></div>'
+
+
+def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waarschuwingen: dict | None = None):
     slug_by_bid = {b["id"]: b["slug"] for b in begrippen}
 
     def _link(ref: str) -> str:
         slug = slug_by_bid.get(ref)
         return f'<a href="../begrippen/{slug}.html">{escape(ref)}</a>' if slug else escape(ref)
 
+    ws_index = waarschuwingen or {}
     ann_by_key: dict[tuple[str, str, str], dict] = {}
     for a in annotaties:
         ann_by_key[(a["bwb_id"], a["artikel"], a.get("lid", ""))] = a
@@ -93,7 +105,7 @@ _inp?.addEventListener('input',function(){{
       {f'<tr><td>Prioriteit</td><td>{r["prioriteit"]}</td></tr>' if r.get("prioriteit") is not None else ""}
       <tr><td>Rechtsfeit</td><td>{_link(r["rechtsfeit_id"]) if r.get("rechtsfeit_id") else "-"}</td></tr>
       {f'<tr><td>Vervangt</td><td><a href="{r["vervangt_regel_id"]}.html">{r["vervangt_regel_id"]}</a></td></tr>' if r.get("vervangt_regel_id") else ""}
-      {f'<tr><td>Gespecialiseert</td><td><a href="{r["gespecialiseert_regel_id"]}.html">{r["gespecialiseert_regel_id"]}</a></td></tr>' if r.get("gespecialiseert_regel_id") else ""}
+      {f'<tr><td>Gespecialiseert</td><td><a href="{r["gespecialiseerd_regel_id"]}.html">{r["gespecialiseerd_regel_id"]}</a></td></tr>' if r.get("gespecialiseerd_regel_id") else ""}
       {f'<tr><td>Annotatie-id</td><td>{escape(r["annotatie_id"])}</td></tr>' if r.get("annotatie_id") else ""}
     </table>
   </div>
@@ -101,5 +113,6 @@ _inp?.addEventListener('input',function(){{
 <div class="card">
 <div class="card-title">Voorbeeldreeksen</div>
 {vb or "<p class=item-meta>Geen voorbeelden</p>"}
-</div>"""
+</div>
+{_render_regel_waarschuwingen(ws_index, r["id"])}"""
         schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} | Belastingdienst', body, active="regels", p="../")

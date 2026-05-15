@@ -10,6 +10,7 @@ def gen_nav(active: str = "", p: str = "") -> str:
         (f"{p}begrippen.html", "Begrippen"),
         (f"{p}annotaties.html", "Annotaties"),
         (f"{p}regels.html", "Regels"),
+        (f"{p}kwaliteit.html", "Kwaliteit"),
         (f"{p}graph.html", "Kennisgraaf"),
         (f"{p}sparql.html", "SPARQL"),
         (f"{p}search.html", "Zoeken"),

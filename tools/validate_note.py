@@ -876,6 +876,11 @@ def main():
         if args.full:
             schrijf_md_rapport(rapport_tekst, project_root)
             print(f"\nRapport geschreven naar: rapporten/validatie-rapport.md")
+            json_path = project_root / "rapporten" / "validatie-rapport.json"
+            json_path.write_text(
+                json.dumps(format_rapport_json(results, project_root), ensure_ascii=False, indent=2)
+            )
+            print(f"Rapport geschreven naar: rapporten/validatie-rapport.json")
 
     # Exit code
     heeft_fouten = any(r.errors for r in results)

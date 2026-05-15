@@ -3,11 +3,12 @@ from pathlib import Path
 from sitegen.html import jas_tag, schrijf_html
 
 
-def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
+def gen_index(out: Path, begrippen: list, annotaties: list, regels: list, waarschuwingen: dict | None = None):
     n_beg = len(begrippen)
     n_ann = len(annotaties)
     n_reg = len(regels)
     n_klassen = len({b["jas_klasse"] for b in begrippen})
+    n_ws = sum(len(ws) for ws in (waarschuwingen or {}).values())
     n_def = sum(1 for b in begrippen if b.get("definitie"))
     n_concept = sum(1 for b in begrippen if b["status"] == "concept")
     n_definitief = sum(1 for b in begrippen if b["status"] == "definitief")
@@ -23,6 +24,7 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list):
   <div class="card stat-card"><div class="stat-nr">{n_ann}</div><div class="stat-label">Annotaties</div></div>
   <div class="card stat-card"><div class="stat-nr">{n_reg}</div><div class="stat-label">Afleidingsregels</div></div>
   <div class="card stat-card"><div class="stat-nr">{n_klassen}</div><div class="stat-label">JAS-klassen</div></div>
+  <div class="card stat-card"><div class="stat-nr"><a href="kwaliteit.html" style="color:inherit;text-decoration:none">{n_ws}</a></div><div class="stat-label">Kwaliteitspunten</div></div>
 </div>
 <div class="dash-grid">
   <div class="card">

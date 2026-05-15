@@ -477,6 +477,22 @@ def test_gen_begrippen_met_uitvoer_van_regel_id(tmp_path):
     assert "AR-0002" in content
 
 
+def test_gen_begrippen_waarschuwingen_kaart_zichtbaar(tmp_path):
+    b = begrip()
+    ws = {"begrippen/belastingschuldige.yaml": ["[L3] Relaties leeg — overweeg is-een"]}
+    gen_begrippen(tmp_path, [b], [], waarschuwingen=ws)
+    content = (tmp_path / "begrippen" / "belastingschuldige.html").read_text()
+    assert "Kwaliteitspunten" in content
+    assert "Relaties leeg" in content
+
+
+def test_gen_begrippen_geen_waarschuwingen_geen_kaart(tmp_path):
+    b = begrip()
+    gen_begrippen(tmp_path, [b], [], waarschuwingen={})
+    content = (tmp_path / "begrippen" / "belastingschuldige.html").read_text()
+    assert "Kwaliteitspunten" not in content
+
+
 def test_gen_begrippen_definitie_context_met_bron_annotatie(tmp_path):
     b = begrip(
         markeringen=[{
