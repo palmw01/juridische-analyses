@@ -8,7 +8,7 @@ def _waarschuwing_type(boodschap: str) -> str:
     tekst = boodschap
     for prefix in ("[L3] ", "[L2] ", "[L1] "):
         tekst = tekst.removeprefix(prefix)
-    return tekst.split(" — ")[0][:45]
+    return tekst.split(" — ")[0]
 
 
 def _pad_naar_url(bestand: str) -> str:
@@ -69,8 +69,10 @@ def gen_kwaliteit(out: Path, waarschuwingen: dict[str, list[str]], meta: list | 
             f'<li data-id="{item["id"]}">'
             f'<span class="badge badge-soort">{escape(item["type"])}</span> '
             f'{bestand_html}'
+            f'<div class="item-detail">'
             f'<div class="item-meta">{boodschap_kort}</div>'
             f'{oplossing_html}'
+            f'</div>'
             f'</li>\n'
         )
 

@@ -512,6 +512,32 @@ footer{
 .error-page h1{font-size:5rem;color:var(--primary);margin-bottom:0.5rem;font-weight:300;letter-spacing:-0.03em}
 .error-page p{color:var(--text-muted);margin-bottom:1.5rem}
 
+/* ── Oplossingsblok — kwaliteitspunten op kwaliteit.html en detailpagina's ── */
+.item-detail{width:100%;display:flex;flex-direction:column;gap:0.25rem;margin-top:0.15rem}
+.item-detail .item-meta{font-size:0.78rem;color:var(--text-muted)}
+.oplossing-blok{
+  margin-top:0.5rem;
+  background:var(--warning-bg);
+  border-left:3px solid var(--warning);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:0.625rem 0.875rem;
+  font-size:0.82rem;line-height:1.55;
+  display:flex;flex-direction:column;gap:0.35rem;
+}
+.oplossing-titel{font-weight:700;color:var(--warning);font-size:0.8rem;letter-spacing:0.01em}
+.oplossing-uitleg{color:var(--text-secondary);margin:0}
+.oplossing-stappen{margin:0;padding-left:1.25rem;color:var(--text-secondary)}
+.oplossing-stappen li{margin-bottom:0.2rem}
+.oplossing-commando{margin:0;color:var(--text-muted)}
+.oplossing-commando code{font-size:0.78rem;background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:0.1rem 0.35rem}
+/* waarschuwing-list: op detailpagina's (begrippen, regels) */
+.card-waarschuwing{border-left:3px solid var(--warning)!important}
+.waarschuwing-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.5rem}
+.waarschuwing-item{font-size:0.82rem;color:var(--text-secondary);line-height:1.5}
+.waarschuwing-item .oplossing-blok{margin-top:0.4rem}
+/* badge op kwaliteitspagina: volledige tekst zichtbaar, geen harde afkap */
+.badge-soort{max-width:none;white-space:normal;word-break:break-word}
+
 /* ── Screenreader-only — WCAG 1.1.1 ── */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
