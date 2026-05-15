@@ -1,0 +1,61 @@
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid1-a
+afleidingsregel-id: AR-BWBR0004770-art9-lid1-a
+naam: bepalen invorderbaarheid belastingaanslag — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-15'
+kolommen:
+  - label: Happy path — invorderbaar
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: aanslag inkomstenbelasting 2024
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-01-01'
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: '2026-02-12'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: ja
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Beoordelingstijdstip 12 februari 2026 is exact 42 kalenderdagen (6 weken) na
+      dagtekening 1 januari 2026; de tijdsconditie is vervuld (>= dagtekening + 6 weken).
+
+  - label: Grensgeval — één dag te vroeg
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: aanslag inkomstenbelasting 2024
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-01-01'
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: '2026-02-11'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: nee
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Beoordelingstijdstip 11 februari 2026 is slechts 41 kalenderdagen na de dagtekening;
+      de termijn van zes weken (42 dagen) is nog niet volledig verstreken.
+      Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uit: de termijn loopt kalenderstrikt
+      door zonder verlenging bij weekenden of feestdagen.
+
+  - label: Negatief — ruim voor verstrijken termijn
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: aanslag inkomstenbelasting 2024
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-01-01'
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: '2026-01-15'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: nee
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Beoordelingstijdstip 15 januari 2026 is slechts 14 dagen na de dagtekening;
+      de termijn van zes weken is bij lange na niet verstreken.
+
+  - label: Ongeldige invoer — belastingaanslag zonder dagtekening
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: aanslag inkomstenbelasting 2024 (geen dagtekening vermeld)
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: null
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: null
+    is-invoer-juist: nee
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: null
+    is-voorspelling-juist: nvt
+    toelichting: >-
+      De dagtekening van het aanslagbiljet ontbreekt; de termijn van zes weken kan niet
+      worden berekend. Zonder referentiepunt is de tijdsconditie niet toetsbaar en is
+      de invorderbaarheidsregel niet van toepassing.
