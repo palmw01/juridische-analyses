@@ -1,0 +1,87 @@
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid5-a
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-a
+naam: bepalen invorderbaarheid voorlopige aanslag in gelijke termijnen — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-15'
+kolommen:
+  - label: Valt onder specialisatie — voorlopige aanslag IB, dagtekening in belastingjaar, meerdere termijnen
+    invoer:
+      BWBR0004770/art9/lid5/voorlopige-aanslag: voorlopige aanslag IB 2026
+      BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib: nee
+      BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar: ja
+      BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '8'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen: ja
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Voorlopige aanslag IB 2026 met dagtekening april 2026 (in het belastingjaar 2026).
+      Resterende maanden = 12 − 4 = 8; meer dan één termijn. Alle drie de
+      cumulatieve voorwaarden zijn vervuld; de specialisatieregel is van toepassing.
+      Invorderbaar in 8 gelijke maandelijkse termijnen.
+
+  - label: Valt onder specialisatie — voorlopige aanslag VPB, dagtekening in belastingjaar, meerdere termijnen
+    invoer:
+      BWBR0004770/art9/lid5/voorlopige-aanslag: voorlopige aanslag VPB 2026
+      BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib: nee
+      BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar: ja
+      BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '10'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen: ja
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Voorlopige aanslag VPB 2026 met dagtekening februari 2026 (in het belastingjaar 2026).
+      Resterende maanden = 12 − 2 = 10; meer dan één termijn. Art. 9 lid 5 IW 1990 noemt
+      de vennootschapsbelasting expliciet naast de inkomstenbelasting.
+      Invorderbaar in 10 gelijke maandelijkse termijnen.
+
+  - label: Grensgeval — dagtekening december, termijnenberekening leidt tot nul resterende maanden (terugvalregel)
+    invoer:
+      BWBR0004770/art9/lid5/voorlopige-aanslag: voorlopige aanslag IB 2026
+      BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib: nee
+      BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar: ja
+      BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '0'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen: nee
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Dagtekening december 2026 ligt in het belastingjaar; aanslagtype is correct.
+      Resterende maanden = 12 − 12 = 0; de termijnenberekening leidt niet tot meer
+      dan één termijn. De terugvalregel van art. 9 lid 5 derde volzin IW 1990 is van
+      toepassing: de specialisatieregel herneemt niet, lid 1 (hoofdregel) geldt.
+      Dit is een grensgeval: aan twee van de drie cumulatieve voorwaarden is voldaan.
+
+  - label: Valt niet onder specialisatie — aanslagtype voldoet niet (definitieve aanslag IB)
+    invoer:
+      BWBR0004770/art9/lid5/voorlopige-aanslag: definitieve aanslag IB 2026
+      BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib: nee
+      BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar: ja
+      BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '8'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen: nee
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Art. 9 lid 5 IW 1990 geldt uitsluitend voor voorlopige aanslagen IB/VPB en
+      voorlopige conserverende aanslagen IB. Een definitieve aanslag valt niet onder
+      deze limitatieve opsomming. Ondanks geldige dagtekening en voldoende resterende
+      maanden is de specialisatieregel niet van toepassing; lid 1 geldt.
+
+  - label: Valt niet onder specialisatie — dagtekening buiten belastingjaar
+    invoer:
+      BWBR0004770/art9/lid5/voorlopige-aanslag: voorlopige aanslag IB 2025
+      BWBR0004770/art9/lid5/voorlopige-conserverende-aanslag-ib: nee
+      BWBR0004770/art9/lid5/dagtekening-in-vaststellingsjaar: nee
+      BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '8'
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen: nee
+    is-voorspelling-juist: ja
+    toelichting: >-
+      Voorlopige aanslag IB 2025 met dagtekening in 2026 (buiten het belastingjaar
+      waarover de aanslag is vastgesteld). De tweede cumulatieve voorwaarde van lid 5
+      is niet vervuld: het aanslagbiljet heeft geen dagtekening in het vaststellingsjaar.
+      De specialisatieregel is niet van toepassing; lid 1 geldt.
