@@ -15,10 +15,12 @@ setup:
 	@echo "Setup voltooid: .venv + deps + npm + pre-commit hook"
 
 install-hooks:
-	@echo "Installeer pre-commit hook..."
+	@echo "Installeer pre-commit en pre-push hooks..."
 	@ln -sf ../../$(SCRIPTS)/pre-commit .git/hooks/pre-commit
 	@chmod +x .git/hooks/pre-commit
-	@echo "Done. Hook geïnstalleerd in .git/hooks/pre-commit"
+	@ln -sf ../../$(SCRIPTS)/pre-push .git/hooks/pre-push
+	@chmod +x .git/hooks/pre-push
+	@echo "Done. Hooks geïnstalleerd in .git/hooks/"
 
 validate:
 	@$(VENV) $(TOOLS)/validate_note.py --full

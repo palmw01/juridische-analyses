@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# pre-push hook — controleert 100% testdekking voor elke push
+# Installeer met: make install-hooks
+
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+VENV="$PROJECT_ROOT/tools/.venv/bin/python"
+
+if [ ! -f "$VENV" ]; then
+    echo "[pre-push] .venv niet gevonden — voer eerst 'make setup' uit"
+    exit 1
+fi
+
+cd "$PROJECT_ROOT"
+
+echo "[pre-push] Controleer testdekking (100% vereist)..."
+if ! "$VENV" -m pytest tests/ -m "not e2e" --cov --cov-fail-under=100 -q --no-header 2>&1; then
+    echo "[pre-push] GEBLOKKEERD: testdekking is onder 100%"
+    exit 1
+fi
+
+echo "[pre-push] Testdekking OK"
+exit 0
