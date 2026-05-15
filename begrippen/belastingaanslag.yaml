@@ -24,8 +24,8 @@ markeringen:
   tekst: Een belastingaanslag
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -37,6 +37,13 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     kardinaliteit: '1:1'
   leidt-tot: []
+voorbeelden:
+- stelling: "Aanslag inkomstenbelasting 2024 opgelegd aan een particulier is een belastingaanslag?"
+  waar: true
+  toelichting: "De aanslag IB 2024 is een geformaliseerd besluit tot vaststelling van de belastingschuld; de ontvanger is bevoegd invordering in te stellen."
+- stelling: "Een incassobrief van de Belastingdienst voor een achterstallige betaling is een belastingaanslag?"
+  waar: false
+  toelichting: "Grensgeval: een incassobrief is geen besluit tot vaststelling van een belastingschuld in de zin van art. 2 AWR; het is geen geformaliseerde aanslag en daarmee geen voorwerp van invordering in de zin van art. 9 IW 1990."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

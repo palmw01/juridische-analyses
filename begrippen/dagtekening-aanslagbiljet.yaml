@@ -51,8 +51,8 @@ markeringen:
   tekst: de dagtekening van een aanslagbiljet
   interpretatiemethode: systematisch
   bijdrage: context
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -62,6 +62,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet vermeldt als dagtekening '15 maart 2026' — is dagtekening-aanslagbiljet gelijk aan 15 maart 2026?"
+  waar: true
+  toelichting: "De op het biljet vermelde datum is het vaste referentiepunt; de dagtekening is 15 maart 2026 en de invorderingstermijn van zes weken begint op die datum te lopen."
+- stelling: "Belastingplichtige ontvangt het aanslagbiljet op 20 maart 2026; biljet is gedagtekend op 15 maart 2026 — is dagtekening-aanslagbiljet gelijk aan 20 maart 2026 (ontvangstdatum)?"
+  waar: false
+  toelichting: "Grensgeval: de ontvangstdatum is niet de dagtekening; de dagtekening-aanslagbiljet is uitsluitend de op het biljet vermelde datum (15 maart 2026), ongeacht wanneer de belastingplichtige het biljet ontvangt."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

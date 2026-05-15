@@ -23,8 +23,8 @@ markeringen:
   tekst: één maand na de dagtekening van het aanslagbiljet
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -36,6 +36,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/vervaldag-eerste-termijn
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend 15 maart 2026 — is een-maand-na-dagtekening gelijk aan 15 april 2026?"
+  waar: true
+  toelichting: "Één kalendermaand na 15 maart = 15 april 2026; de eerste termijn vervalt op 15 april 2026."
+- stelling: "Aanslagbiljet gedagtekend 31 oktober 2026 — is een-maand-na-dagtekening gelijk aan 31 november 2026?"
+  waar: false
+  toelichting: "Grensgeval: 31 november bestaat niet; de beperkingsregel is van toepassing en stelt de vervaldag op de laatste dag van november = 30 november 2026."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

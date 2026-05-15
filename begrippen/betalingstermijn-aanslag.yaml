@@ -25,15 +25,17 @@ markeringen:
   tekst: "de betalingstermijn van een aanslag"
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+    relatie-soort: causaal
 voorbeelden:
 - stelling: "Betalingstermijn-aanslag: aanslag met dagtekening 15 maart en betalingstermijn van één maand — betalingstermijn-aanslag is één maand?"
   waar: true

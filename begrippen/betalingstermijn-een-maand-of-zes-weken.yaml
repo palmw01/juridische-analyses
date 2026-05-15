@@ -25,15 +25,17 @@ markeringen:
   tekst: "Als de betalingstermijn van een aanslag is gesteld op één maand of is gesteld op zes weken"
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-5/vervaldag-zelfde-dagnummer
+    relatie-soort: causaal
 voorbeelden:
 - stelling: "Betalingstermijn-een-maand-of-zes-weken: aanslag met betalingstermijn van één maand — is voorwaarde vervuld?"
   waar: true

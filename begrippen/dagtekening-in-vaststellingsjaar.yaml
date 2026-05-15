@@ -26,8 +26,8 @@ markeringen:
     waarvan het aanslagbiljet een dagtekening heeft die ligt in het jaar waarover deze is vastgesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -39,6 +39,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026, aanslagbiljet gedagtekend 15 april 2026 — is dagtekening-in-vaststellingsjaar vervuld?"
+  waar: true
+  toelichting: "De dagtekening (april 2026) valt in het belastingjaar 2026 waarover de aanslag is vastgesteld; de toepassingsvoorwaarde is vervuld."
+- stelling: "Voorlopige aanslag IB 2026, aanslagbiljet gedagtekend 15 januari 2027 — is dagtekening-in-vaststellingsjaar vervuld?"
+  waar: false
+  toelichting: "Grensgeval: de dagtekening (januari 2027) valt buiten het belastingjaar 2026; de termijnenregeling van art. 9 lid 5 IW 1990 is niet van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

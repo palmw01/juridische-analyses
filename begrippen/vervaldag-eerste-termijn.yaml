@@ -23,8 +23,8 @@ markeringen:
   tekst: De eerste termijn vervalt één maand na de dagtekening van het aanslagbiljet
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -36,6 +36,13 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/een-maand-na-dagtekening
     kardinaliteit: '1:1'
   leidt-tot: []
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend 15 april 2026 — is vervaldag-eerste-termijn gelijk aan 15 mei 2026?"
+  waar: true
+  toelichting: "Één kalendermaand na 15 april = 15 mei 2026; de eerste gelijke termijn vervalt op 15 mei 2026."
+- stelling: "Aanslagbiljet gedagtekend 31 januari 2026 — is vervaldag-eerste-termijn gelijk aan 31 februari 2026?"
+  waar: false
+  toelichting: "Grensgeval: 31 februari bestaat niet; de beperkingsregel is van toepassing en stelt de vervaldag van de eerste termijn op 28 februari 2026 (in een niet-schrikkeljaar)."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid5-c
 tussenresultaat: false

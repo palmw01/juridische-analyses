@@ -25,15 +25,17 @@ markeringen:
   tekst: "de betalingstermijn van zes weken vervalt op 12 december"
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
+    relatie-soort: causaal
 voorbeelden:
 - stelling: "Vervaldag-kortemaand-zes-weken: dagtekening 31 oktober, betalingstermijn zes weken — vervaldag is 12 december?"
   waar: true

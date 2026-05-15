@@ -38,6 +38,13 @@ relaties:
   - BWBR0004770/art9/lid1/belastingaanslag
   heeft: []
   leidt-tot: []
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026 opgelegd door de Belastingdienst op basis van een geschatte inkomensopgave — is dit een voorlopige-aanslag in de zin van art. 9 lid 5 IW 1990?"
+  waar: true
+  toelichting: "De aanslag is opgelegd voorafgaand aan de definitieve vaststelling van de belastingschuld en betreft de inkomstenbelasting; de aanslag kwalificeert als voorlopige aanslag in de zin van lid 5."
+- stelling: "Definitieve aanslag IB 2026 opgelegd na de definitieve aangifte — is dit een voorlopige-aanslag?"
+  waar: false
+  toelichting: "Grensgeval: de definitieve aanslag is het sluitstuk van de belastingvaststelling en is géén voorlopige aanslag; de termijnenregeling van art. 9 lid 5 IW 1990 is niet van toepassing en de hoofdregel van lid 1 (zes weken) geldt."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

@@ -26,8 +26,8 @@ markeringen:
   tekst: zes weken na de dagtekening van het aanslagbiljet
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -41,6 +41,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend 1 januari 2026, beoordelingstijdstip 12 februari 2026 (42 dagen later) — is zes-weken-na-dagtekening-aanslagbiljet vervuld?"
+  waar: true
+  toelichting: "Zes weken = 42 kalenderdagen; het beoordelingstijdstip (12 februari) ligt op de 42e dag na de dagtekening (1 januari); de tijdsconditie is vervuld."
+- stelling: "Aanslagbiljet gedagtekend 1 januari 2026, beoordelingstijdstip 11 februari 2026 (41 dagen) — is zes-weken-na-dagtekening-aanslagbiljet vervuld?"
+  waar: false
+  toelichting: "Grensgeval: 41 dagen is minder dan 42 (zes weken); de tijdsconditie is nog niet vervuld en de aanslag is nog niet invorderbaar."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

@@ -20,15 +20,24 @@ markeringen:
   tekst: Bij afwijkende boekjaren
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-1/vervaldag-laatste-dag-maand
+    relatie-soort: causaal
+voorbeelden:
+- stelling: "BV met boekjaar 1 april t/m 31 maart — is sprake van een afwijkend-boekjaar?"
+  waar: true
+  toelichting: "Het boekjaar loopt van 1 april tot 31 maart en valt daarmee niet samen met het kalenderjaar (1 januari t/m 31 december); de voorwaarde afwijkend-boekjaar is vervuld."
+- stelling: "BV met boekjaar 1 januari t/m 31 december — is sprake van een afwijkend-boekjaar?"
+  waar: false
+  toelichting: "Grensgeval: het boekjaar valt precies samen met het kalenderjaar; er is geen afwijking en de specialisatieregel van LI 2008 §9.1 is niet van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

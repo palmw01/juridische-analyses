@@ -22,8 +22,8 @@ markeringen:
     toepassing van de wet er toe zou leiden dat de enige of laatste betalingstermijn eindigt voor 31 december
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -35,6 +35,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0024096/par9-1/vervaldag-31-december
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026, laatste termijn berekend op 15 oktober 2026 — is termijn-eindigt-voor-31-december waar?"
+  waar: true
+  toelichting: "15 oktober 2026 valt vóór 31 december 2026; de LI 2008 §9.1-regel is van toepassing en de vervaldag wordt op 31 december gesteld."
+- stelling: "Voorlopige aanslag IB 2026, laatste termijn berekend op 31 december 2026 — is termijn-eindigt-voor-31-december waar?"
+  waar: false
+  toelichting: "Grensgeval: de laatste termijn valt op 31 december zelf, niet vóór 31 december; de voorwaarde 'eindigt voor 31 december' is niet vervuld en de bijzondere vervaldag-regel wordt niet getriggerd."
 identificatiebegrip: false
 afleidingsregel-id: null
 uitvoer-van-regel-id: AR-BWBR0024096-art9-par1-a

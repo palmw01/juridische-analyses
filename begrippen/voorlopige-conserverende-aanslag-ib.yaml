@@ -25,8 +25,8 @@ markeringen:
   tekst: een voorlopige conserverende aanslag in de inkomstenbelasting
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -36,6 +36,13 @@ relaties:
   - BWBR0004770/art9/lid5/voorlopige-aanslag
   heeft: []
   leidt-tot: []
+voorbeelden:
+- stelling: "Conserverende aanslag IB 2026 opgelegd bij emigratie, gedagtekend in april 2026 — is dit een voorlopige-conserverende-aanslag-ib in de zin van art. 9 lid 5 IW 1990?"
+  waar: true
+  toelichting: "De aanslag is een conserverende aanslag IB van voorlopige aard, gedagtekend in het belastingjaar 2026; voldoet aan beide criteria van art. 9 lid 5 IW 1990 en is invorderbaar in gelijke maandelijkse termijnen."
+- stelling: "Conserverende aanslag VPB 2026 opgelegd bij staking van een vennootschap — is dit een voorlopige-conserverende-aanslag-ib?"
+  waar: false
+  toelichting: "Grensgeval: art. 9 lid 5 IW 1990 noemt uitsluitend de voorlopige conserverende aanslag in de inkomstenbelasting; een conserverende aanslag VPB valt niet onder deze omschrijving."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

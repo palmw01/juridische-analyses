@@ -23,8 +23,8 @@ markeringen:
   tekst: telkens een maand later
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -34,6 +34,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Eerste termijn vervalt op 15 mei 2026 — vervalt de tweede termijn op 15 juni 2026 (telkens-een-maand-later)?"
+  waar: true
+  toelichting: "Één kalendermaand na 15 mei = 15 juni 2026; de iteratieve tijdstap van één maand levert de correcte vervaldatum op."
+- stelling: "Eerste termijn vervalt op 31 oktober 2026 — vervalt de tweede termijn op 31 november 2026 (telkens-een-maand-later)?"
+  waar: false
+  toelichting: "Grensgeval: 31 november bestaat niet; de beperkingsregel is van toepassing en stelt de vervaldatum op 30 november 2026."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

@@ -24,22 +24,31 @@ markeringen:
   tekst: of
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 - markering-id: m-002
   bron-annotatie-id: BWBR0024096/par9-5
   tekst: of
   interpretatiemethode: grammaticaal
   bijdrage: context
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+    relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagtype is een voorlopige aanslag IB (waar) OF een voorlopige aanslag VPB (onwaar) — is de disjunctieve voorwaarde vervuld?"
+  waar: true
+  toelichting: "Ten minste één van de verbonden elementen is waar (IB-aanslag is waar); de logische-of-operator levert als uitkomst 'vervuld'."
+- stelling: "Aanslagtype is noch een voorlopige aanslag IB noch een voorlopige aanslag VPB (beide onwaar) — is de disjunctieve voorwaarde vervuld?"
+  waar: false
+  toelichting: "Grensgeval: alle verbonden elementen zijn onwaar; de logische-of-operator levert als uitkomst 'niet vervuld'; de termijnenregeling van lid 5 is niet van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

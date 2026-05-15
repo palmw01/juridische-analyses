@@ -27,8 +27,8 @@ markeringen:
   tekst: wordt de laatste vervaldag steeds op de laatste dag van de maand gesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -38,6 +38,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
+voorbeelden:
+- stelling: "BV met afwijkend boekjaar, laatste termijn berekend op 15 november 2026 — is vervaldag-laatste-dag-maand gelijk aan 30 november 2026?"
+  waar: true
+  toelichting: "De toepassingsvoorwaarden van LI 2008 §9.1 tweede volzin zijn vervuld; de vervaldag wordt gesteld op de laatste dag van november = 30 november 2026."
+- stelling: "BV met normaal kalenderjaar (boekjaar = kalenderjaar), laatste termijn berekend op 15 november 2026 — is vervaldag-laatste-dag-maand van toepassing?"
+  waar: false
+  toelichting: "Grensgeval: de LI 2008 §9.1-regel voor de laatste dag van de maand geldt uitsluitend bij afwijkend boekjaar; bij een normaal kalenderjaar is de regel niet van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0024096-art9-par1-b
 tussenresultaat: false

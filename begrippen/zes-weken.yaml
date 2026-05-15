@@ -26,8 +26,8 @@ markeringen:
   tekst: zes weken
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -38,6 +38,13 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
     kardinaliteit: '1:1'
+voorbeelden:
+- stelling: "Termijn van zes weken eindigt op een zondag — is de belastingaanslag toch op die zondag invorderbaar?"
+  waar: true
+  toelichting: "Art. 9 lid 10 IW 1990 sluit de Algemene termijnenwet uitdrukkelijk uit; de termijn van zes weken loopt kalenderstrikt door zonder verlenging voor weekenden of feestdagen."
+- stelling: "Een betalingstermijn van zeven weken is een zes-weken-termijn in de zin van art. 9 lid 1 IW 1990?"
+  waar: false
+  toelichting: "Grensgeval: de hoofdregel van art. 9 lid 1 kent uitsluitend een termijn van zes weken (42 kalenderdagen); een betalingstermijn van zeven weken is geen zes-weken-termijn."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

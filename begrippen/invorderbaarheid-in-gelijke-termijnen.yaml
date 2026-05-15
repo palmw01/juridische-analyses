@@ -31,8 +31,8 @@ markeringen:
     overblijven.
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -52,6 +52,13 @@ relaties:
     relatie-soort: causaal
   - begrip-id: BWBR0004770/art9/lid5/vervaldag-volgende-termijnen
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026, dagtekening april 2026, 8 resterende maanden — is de aanslag invorderbaar in gelijke termijnen?"
+  waar: true
+  toelichting: "Aanslagtype (voorlopige IB), dagtekening in belastingjaar 2026, en meer dan één termijn (8) zijn vervuld; de aanslag is invorderbaar in 8 gelijke maandelijkse termijnen."
+- stelling: "Definitieve aanslag IB 2026, dagtekening april 2026 — is de aanslag invorderbaar in gelijke termijnen op grond van art. 9 lid 5 IW 1990?"
+  waar: false
+  toelichting: "Grensgeval: een definitieve aanslag valt niet onder de opsomming van lid 5; de termijnenregeling is niet van toepassing en de hoofdregel van lid 1 (zes weken) geldt."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid5-a
 tussenresultaat: false

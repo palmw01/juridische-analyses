@@ -25,15 +25,17 @@ markeringen:
   tekst: "Als de dagtekening 28 februari is"
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari
+    relatie-soort: causaal
 voorbeelden:
 - stelling: "Dagtekening-28-februari: aanslagbiljet gedagtekend op 28 februari 2026 — is de voorwaarde vervuld?"
   waar: true

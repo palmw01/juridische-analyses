@@ -25,8 +25,8 @@ markeringen:
   tekst: de maand, die in de dagtekening van het aanslagbiljet is vermeld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -36,6 +36,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend op 15 april 2026 — is maand-dagtekening-aanslagbiljet gelijk aan april?"
+  waar: true
+  toelichting: "De maand in de dagtekening is april; na april resteren in 2026 nog 8 maanden (mei t/m december)."
+- stelling: "Aanslagbiljet gedagtekend op 31 december 2026 — leidt maand-dagtekening-aanslagbiljet tot een termijnenberekening van meer dan één termijn?"
+  waar: false
+  toelichting: "Grensgeval: de maand in de dagtekening is december; na december resteren 0 maanden; de termijnenberekening leidt niet tot meer dan één termijn en de terugvalregel van art. 9 lid 5 derde volzin is van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

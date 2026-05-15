@@ -21,8 +21,8 @@ markeringen:
   tekst: die zijn gedagtekend in november of eerder
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -32,6 +32,13 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
     kardinaliteit: '1:1'
   leidt-tot: []
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend op 15 mei 2026 — is de voorwaarde dagtekening-in-november-of-eerder vervuld?"
+  waar: true
+  toelichting: "15 mei 2026 valt in de periode 1 januari t/m 30 november; de voorwaarde is vervuld."
+- stelling: "Aanslagbiljet gedagtekend op 1 december 2026 — is de voorwaarde dagtekening-in-november-of-eerder vervuld?"
+  waar: false
+  toelichting: "Grensgeval: 1 december valt na 30 november en buiten de periode 'november of eerder'; de voorwaarde is niet vervuld."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

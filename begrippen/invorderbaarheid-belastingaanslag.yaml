@@ -26,8 +26,8 @@ markeringen:
     Een belastingaanslag is invorderbaar zes weken na de dagtekening van het aanslagbiljet.
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -41,6 +41,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Belastingaanslag IB, dagtekening 1 januari 2026, beoordelingstijdstip 12 februari 2026 (42 dagen later) — is de aanslag invorderbaar?"
+  waar: true
+  toelichting: "Zes weken (42 kalenderdagen) zijn verstreken; de beslissingsregel levert 'invorderbaar: ja' op."
+- stelling: "Belastingaanslag IB, dagtekening 1 januari 2026, beoordelingstijdstip 11 februari 2026 (41 dagen) — is de aanslag invorderbaar?"
+  waar: false
+  toelichting: "Grensgeval: slechts 41 dagen verstreken; de termijn van zes weken is nog niet voltooid; invorderbaar: nee."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid1-a
 tussenresultaat: false

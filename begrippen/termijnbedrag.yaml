@@ -24,8 +24,8 @@ markeringen:
   tekst: gelijke
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -37,6 +37,13 @@ relaties:
   - begrip-id: BWBR0004770/art9/lid5/resterende-maanden-jaar
     kardinaliteit: '1:1'
   leidt-tot: []
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026 bedraagt € 6.000; resterende-maanden-jaar = 6 — is termijnbedrag gelijk aan € 1.000?"
+  waar: true
+  toelichting: "€ 6.000 ÷ 6 termijnen = € 1.000 per termijn; alle termijnen zijn gelijk van hoogte conform de gelijkheidseis van art. 9 lid 5 IW 1990."
+- stelling: "Voorlopige aanslag IB 2026 bedraagt € 6.000; maar de belastingplichtige betaalt de eerste termijn voor de dagtekening — is het termijnbedrag dan lager?"
+  waar: false
+  toelichting: "Grensgeval: het termijnbedrag wordt bepaald door aanslag gedeeld door aantal termijnen; vooruitbetalingen hebben geen invloed op de hoogte van het wettelijke termijnbedrag."
 identificatiebegrip: false
 afleidingsregel-id: null
 uitvoer-van-regel-id: AR-BWBR0004770-art9-lid5-f

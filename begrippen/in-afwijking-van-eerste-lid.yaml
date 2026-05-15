@@ -25,8 +25,8 @@ markeringen:
   tekst: In afwijking van het eerste lid
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -36,6 +36,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026 gedagtekend in april 2026 — verdringt de termijnenregeling van lid 5 de zes-wekenregel van lid 1?"
+  waar: true
+  toelichting: "De toepassingsvoorwaarden van art. 9 lid 5 IW 1990 zijn vervuld; de lex-specialis-bepaling 'in afwijking van het eerste lid' is actief en de aanslag is invorderbaar in gelijke maandelijkse termijnen."
+- stelling: "Definitieve aanslag IB 2026 gedagtekend in april 2026 — verdringt de termijnenregeling van lid 5 de zes-wekenregel van lid 1?"
+  waar: false
+  toelichting: "Grensgeval: een definitieve aanslag valt niet binnen de opsomming van aanslagtypen in art. 9 lid 5 IW 1990; de lex-specialis is niet van toepassing en de hoofdregel van lid 1 (invorderbaar zes weken na dagtekening) geldt."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

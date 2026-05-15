@@ -52,7 +52,16 @@ vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag
+    relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslag IB 2024 met dagtekening 1 januari 2026; zes weken zijn verstreken zonder betaling — is de ontvanger bevoegd invorderingsmaatregelen te treffen?"
+  waar: true
+  toelichting: "De wettelijke betalingstermijn is verstreken; de invorderbaarheid is ingetreden en de ontvanger is bevoegd tot het inzetten van invorderingsmaatregelen zoals het uitvaardigen van een dwangbevel."
+- stelling: "Aanslag IB 2024 met dagtekening 1 januari 2026; uitstel van betaling is verleend voor het volledige aanslaggeredrag — is de ontvanger bevoegd invorderingsmaatregelen te treffen?"
+  waar: false
+  toelichting: "Grensgeval: de aanslag is formeel invorderbaar (termijn verstreken) maar door het verleende uitstel van betaling is de uitoefeningsbevoegdheid van de ontvanger opgeschort; feitelijke inning via invorderingsmaatregelen is tijdens het uitstel niet toegestaan."
 identificatiebegrip: false
 afleidingsregel-id: null
 uitvoer-van-regel-id: AR-BWBR0004770-art9-lid1-a

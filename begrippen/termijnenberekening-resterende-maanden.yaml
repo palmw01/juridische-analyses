@@ -28,8 +28,8 @@ markeringen:
     nog maanden van het jaar overblijven
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -43,6 +43,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/invorderbaarheid-in-gelijke-termijnen
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend in april 2026 — levert termijnenberekening-resterende-maanden 8 termijnen op?"
+  waar: true
+  toelichting: "Na april resteren in 2026 nog 8 maanden (mei t/m december); de aanslag is invorderbaar in 8 gelijke maandelijkse termijnen."
+- stelling: "Aanslagbiljet gedagtekend in december 2026 — levert termijnenberekening-resterende-maanden meer dan één termijn op?"
+  waar: false
+  toelichting: "Grensgeval: na december resteren 0 maanden; de berekening leidt niet tot meer dan één termijn en de terugvalregel van art. 9 lid 5 derde volzin activeert art. 9 lid 1."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid5-b
 tussenresultaat: false

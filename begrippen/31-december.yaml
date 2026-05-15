@@ -20,15 +20,24 @@ markeringen:
   tekst: 31 december
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
   heeft: []
-  leidt-tot: []
+  leidt-tot:
+  - begrip-id: BWBR0024096/par9-1/vervaldag-31-december
+    relatie-soort: causaal
+voorbeelden:
+- stelling: "De datum 31-12-2026 is de 31e dag van de 12e maand van 2026 — is dit 31-december?"
+  waar: true
+  toelichting: "De datum voldoet aan de definitie: 31e dag van de 12e maand (december) van een kalenderjaar."
+- stelling: "De datum 30-12-2026 is 31-december?"
+  waar: false
+  toelichting: "Grensgeval: 30 december is de dertigste, niet de eenendertigste dag van december; de datum is niet 31-december."
 identificatiebegrip: false
 afleidingsregel-id: null
 tussenresultaat: false

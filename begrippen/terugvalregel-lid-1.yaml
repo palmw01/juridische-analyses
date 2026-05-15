@@ -27,8 +27,8 @@ markeringen:
     toepassing.
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -42,6 +42,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026, dagtekening december 2026 (0 resterende maanden) — is de terugvalregel actief?"
+  waar: true
+  toelichting: "Na december resteren 0 maanden; de termijnenberekening levert ≤ 1 termijn op; de terugvalregel is actief en art. 9 lid 1 herneemt: de aanslag is invorderbaar zes weken na dagtekening."
+- stelling: "Voorlopige aanslag IB 2026, dagtekening april 2026 (8 resterende maanden) — is de terugvalregel actief?"
+  waar: false
+  toelichting: "Grensgeval: 8 resterende maanden leveren meer dan één termijn op; de terugvalregel is niet actief en de gelijke-termijnenregeling van lid 5 is van toepassing."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0004770-art9-lid5-e
 tussenresultaat: false

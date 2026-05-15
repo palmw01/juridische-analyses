@@ -25,8 +25,8 @@ markeringen:
   tekst: nog maanden van het jaar overblijven
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -38,6 +38,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Aanslagbiljet gedagtekend in april 2026 — is resterende-maanden-jaar gelijk aan 8?"
+  waar: true
+  toelichting: "Na de dagtekeningmaand april resteren in 2026 nog 8 kalendermaanden: mei, juni, juli, augustus, september, oktober, november en december."
+- stelling: "Aanslagbiljet gedagtekend in november 2026 — is resterende-maanden-jaar gelijk aan 1?"
+  waar: true
+  toelichting: "Na november resteert in 2026 nog 1 maand (december); dit is een grensgeval: met precies 1 resterende maand is de termijnenberekening ≤ 1 en herneemt art. 9 lid 1 via de terugvalregel."
 identificatiebegrip: false
 afleidingsregel-id: null
 uitvoer-van-regel-id: AR-BWBR0004770-art9-lid5-b

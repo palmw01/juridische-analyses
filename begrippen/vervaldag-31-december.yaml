@@ -25,8 +25,8 @@ markeringen:
   tekst: dan wordt de vervaldag van deze termijn op 31 december gesteld
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: '2026-05-15'
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
@@ -38,6 +38,13 @@ relaties:
   leidt-tot:
   - begrip-id: BWBR0004770/art9/lid1/invorderbaarheid
     relatie-soort: causaal
+voorbeelden:
+- stelling: "Voorlopige aanslag IB 2026, laatste termijn berekend op 15 oktober 2026 — wordt de vervaldag-31-december gesteld op 31 december 2026?"
+  waar: true
+  toelichting: "De laatste termijn eindigt vóór 31 december 2026; de LI 2008 §9.1-regel is van toepassing en stelt de vervaldag op 31 december 2026."
+- stelling: "Voorlopige aanslag IB 2026, enige termijn op grond van lid 1 = 12 februari 2027 — wordt de vervaldag-31-december gesteld op 31 december 2027?"
+  waar: false
+  toelichting: "Grensgeval: de LI 2008 §9.1-regel geldt voor aanslagen bedoeld in art. 9 lid 5 IW 1990 (voorlopige aanslagen in termijnen); een lid-1-aanslag met vervaldag in 2027 valt buiten het toepassingsbereik van de Leidraad-regel."
 identificatiebegrip: false
 afleidingsregel-id: AR-BWBR0024096-art9-par1-a
 tussenresultaat: false
