@@ -176,18 +176,21 @@ _inp?.addEventListener('input',function(){{
             jc = b["jas_klasse"] or ""
             mid = escape(m.get("markering-id", ""))
             baid = m.get("bron-annotatie-id", "")
-            mid_cell = f'<a href="{ann_url(baid)}">{mid} ({ann_label(baid)})</a>' if baid else mid
+            if baid:
+                mid_cell = f'<a class="ann-id-badge" href="{ann_url(baid)}">{mid}</a><span class="ann-sub">{ann_label(baid)}</span>'
+            else:
+                mid_cell = f'<span class="ann-id-badge">{mid}</span>'
             bev = m.get("bevestigd", False)
             bev_op = escape(m.get("bevestigd-op") or "")
-            bev_label = f'<span title="Gevalideerd{" op " + bev_op if bev_op else ""}" style="color:var(--success,#2e7d32)">&#10003;</span>' if bev else '<span title="AI-output, nog niet gevalideerd" style="color:var(--warning,#e65100)">&#9888;</span>'
-            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">&#8220;{escape(m.get("tekst",""))}&#8221;</td><td>{jas_tag(jc) if jc else ""}</td><td>{escape(m.get("interpretatiemethode",""))}</td><td><span class="badge badge-soort">{escape(m.get("bijdrage",""))}</span></td><td style="text-align:center">{bev_label}</td></tr>\n'
+            bev_label = f'<span class="ann-bev-ok" title="Gevalideerd{" op " + bev_op if bev_op else ""}">&#10003;</span>' if bev else '<span class="ann-bev-todo" title="AI-output, nog niet gevalideerd">&#9888;</span>'
+            mark_tbl += f'<tr><td>{mid_cell}</td><td class="mark-text">&#8220;{escape(m.get("tekst",""))}&#8221;</td><td>{jas_tag(jc) if jc else ""}</td><td class="ann-interpretatie">{escape(m.get("interpretatiemethode",""))}</td><td><span class="badge badge-soort">{escape(m.get("bijdrage",""))}</span></td><td class="ann-col-center">{bev_label}</td></tr>\n'
         mp = ""
         if mark_tbl:
             mp = f"""<div class="card">
   <div class="card-title">Markeringen</div>
   <div class="table-scroll">
   <table class="ann-table">
-    <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th><th style="text-align:center">Bevestigd</th></tr>
+    <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th><th class="ann-col-center">Bevestigd</th></tr>
     {mark_tbl}
   </table></div>
 </div>"""

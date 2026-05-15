@@ -87,11 +87,13 @@ _inp?.addEventListener('input',function(){{
                     detail_parts.append(f'<strong>[!]</strong> {sign}')
                 detail_html = " &mdash; ".join(detail_parts)
                 rijen += f'<tr class="has-sign" onclick="var d=this.nextElementSibling;d.style.display=d.style.display===\'none\'?\'table-row\':\'none\'">'
-                rijen += f'<td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td>'
-                rijen += f'<td style="text-align:center"><span class="sign-badge">{"[!]" if r.get("signalering") else "i"}</span></td></tr>\n'
+                badge_cls = "sign-badge sign-badge-warn" if r.get("signalering") else "sign-badge sign-badge-info"
+                badge_sym = "!" if r.get("signalering") else "i"
+                rijen += f'<td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td class="ann-interpretatie">{interp}</td><td>{bgp_link}</td>'
+                rijen += f'<td class="ann-col-center"><span class="{badge_cls}">{badge_sym}</span></td></tr>\n'
                 rijen += f'<tr class="sign-detail" style="display:none"><td colspan="5"><div class="sign-content">{detail_html}</div></td></tr>\n'
             else:
-                rijen += f'<tr><td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td style="font-size:0.8rem;color:var(--text-muted)">{interp}</td><td>{bgp_link}</td><td style="text-align:center"></td></tr>\n'
+                rijen += f'<tr><td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td class="ann-interpretatie">{interp}</td><td>{bgp_link}</td><td class="ann-col-center"></td></tr>\n'
         mermaid_src = ""
         extra_scripts = ""
         mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
