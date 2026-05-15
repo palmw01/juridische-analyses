@@ -2,6 +2,7 @@ regel-id: AR-BWBR0024096-art9-par1-b
 naam: vaststellen vervaldag voorlopige aanslag afwijkend boekjaar
 soort: Specialisatieregel
 prioriteit: 1
+gespecialiseerd-regel-id: AR-BWBR0004770-art9-lid5-d
 bwb-id: BWBR0024096
 artikel: '9'
 lid: par1
@@ -27,12 +28,16 @@ formele-regel: 'In afwijking van vaststellen betalingstermijn belastingaanslag:
   - afwijkend-boekjaar is waar'
 toelichting: "Voor belastingplichtigen met een afwijkend boekjaar wordt de laatste
   vervaldag van een voorlopige aanslag altijd gesteld op de laatste dag van de maand
-  waarin deze valt.\n\n[OPEN PUNT — GEBLOKKEERD] gespecialiseerd-regel-id kan nog niet
-  worden ingevuld: de formele-regel verwijst naar 'vaststellen betalingstermijn belastingaanslag',
-  maar die hoofdregel bestaat nog niet in regels/. De te creëren hoofdregel is te
-  herleiden uit IW 1990 art. 9 lid 5 en moet de algemene berekeningswijze van vervaldagen
-  voor voorlopige aanslag-termijnen vastleggen (uitvoer: vervaldag per termijn). Zodra die
-  regel via de A2/A3-workflow is aangemaakt, gespecialiseerd-regel-id hierop instellen."
+  waarin deze valt (LI 2008 §9.1 tweede volzin).\n\nDeze regel specialiseert AR-BWBR0004770-art9-lid5-d
+  ('berekenen vervaldag volgende termijnen voorlopige aanslag'). Lid5-d berekent iteratief
+  de vervaldagen van alle volgende termijnen, inclusief de laatste; par1-b overschrijft
+  die berekening voor het geval afwijkend-boekjaar = true door de laatste vervaldag op
+  de laatste dag van de maand te stellen in plaats van N maanden na de dagtekening.\n\n
+  Semantische beperking: de uitvoertypen zijn niet identiek (vervaldag-laatste-dag-maand
+  vs vervaldag-volgende-termijnen). Par1-b is een Specialisatieregel die één specifieke
+  toepassing van lid5-d — de laatste iteratie — overschrijft. Indien gewenst kan een
+  toekomstige A2/A3-workflow een abstractere 'vaststellen vervaldag voorlopige aanslag
+  (algemeen)'-wrapper aanmaken als directere hoofdregel."
 voorbeeldreeksen:
 - invoerwaarden: 'BV met boekjaar 1 april – 31 maart; afwijkend-boekjaar: ja; voorlopige
     aanslag; laatste termijn berekend op 15 november 2025'
