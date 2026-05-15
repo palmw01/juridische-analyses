@@ -173,7 +173,7 @@ _inp?.addEventListener('input',function(){{
 
         mark_tbl = ""
         for m in b.get("markeringen", []):
-            jc = b["jas_klasse"] or ""
+            jc = m.get("jas-klasse") or b["jas_klasse"] or ""
             mid = escape(m.get("markering-id", ""))
             baid = m.get("bron-annotatie-id", "")
             if baid:

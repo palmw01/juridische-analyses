@@ -2,7 +2,7 @@
 import json
 import yaml
 
-from sitegen.data import laad_begrippen, laad_regels, laad_annotaties, laad_artikel_indices, laad_waarschuwingen, waarschuwingen_voor
+from sitegen.data import laad_begrippen, laad_regels, laad_annotaties, laad_artikel_indices, laad_waarschuwingen, waarschuwingen_voor, _bouw_annotatie_jas_index, _verrijk_markeringen
 from tests.fixtures.annotaties import maak_annotatie
 from tests.fixtures.begrippen import maak_begrip
 from tests.fixtures.regels import maak_regel
@@ -63,6 +63,105 @@ def test_laad_begrippen_optioneel_veld_ontbreekt(project_root):
     assert result[0]["kenmerken"] == []
     assert result[0]["geldigheid_van"] == "2024-01-01"
     assert result[0]["geldigheid_tot"] == ""
+
+
+def test_bouw_annotatie_jas_index_geen_annotaties_map(tmp_path):
+    """Geen annotaties/-map → lege index, geen fout."""
+    (tmp_path / "begrippen").mkdir()
+    index = _bouw_annotatie_jas_index(tmp_path)
+    assert index == {}
+
+
+def test_bouw_annotatie_jas_index_vult_index(project_root):
+    """JSON-bestand in annotaties/ wordt correct geïndexeerd."""
+    ann = {
+        "annotatie-id": "BWBR0004770/art2/lid2",
+        "annotatierijen": [
+            {"rij-id": "r-001", "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
+             "jas-klasse": "brondefinitie"},
+        ],
+    }
+    (project_root / "annotaties" / "art2-lid2.json").write_text(json.dumps(ann))
+    index = _bouw_annotatie_jas_index(project_root)
+    assert index["BWBR0004770/art2/lid2"]["BWBR0004770/art9/lid1/belastingaanslag"] == "brondefinitie"
+
+
+def test_bouw_annotatie_jas_index_json_zonder_annotatie_id_overgeslagen(project_root):
+    """JSON zonder annotatie-id-veld wordt stilzwijgend overgeslagen."""
+    (project_root / "annotaties" / "geen-id.json").write_text(json.dumps({"annotatierijen": []}))
+    index = _bouw_annotatie_jas_index(project_root)
+    assert index == {}
+
+
+def test_bouw_annotatie_jas_index_corrupt_json_overgeslagen(project_root):
+    """Corrupt JSON-bestand in annotaties/ levert geen fout — wordt overgeslagen."""
+    (project_root / "annotaties" / "corrupt.json").write_text("GEEN GELDIG JSON{{")
+    index = _bouw_annotatie_jas_index(project_root)
+    assert index == {}
+
+
+def test_verrijk_markeringen_vult_jas_klasse(project_root):
+    """Markering met bekende bron-annotatie-id krijgt jas-klasse uit index."""
+    jas_index = {"BWBR0004770/art2/lid2": {"begrip-x": "brondefinitie"}}
+    markeringen = [{"markering-id": "m-001", "bron-annotatie-id": "BWBR0004770/art2/lid2",
+                    "bijdrage": "primair"}]
+    result = _verrijk_markeringen(markeringen, "begrip-x", jas_index)
+    assert result[0]["jas-klasse"] == "brondefinitie"
+
+
+def test_verrijk_markeringen_onbekende_bron_geeft_lege_string(project_root):
+    """Markering waarvan bron niet in index staat krijgt lege jas-klasse."""
+    markeringen = [{"markering-id": "m-001", "bron-annotatie-id": "BWBR9999/art1/lid1",
+                    "bijdrage": "primair"}]
+    result = _verrijk_markeringen(markeringen, "begrip-x", {})
+    assert result[0]["jas-klasse"] == ""
+
+
+def test_laad_begrippen_verrijkt_markeringen_met_jas_klasse(project_root):
+    """Markeringen in geladen begrip krijgen jas-klasse uit annotatie-index."""
+    ann_id = "BWBR0004770/art2/lid2"
+    begrip_id = "BWBR0004770/art9/lid1/belastingaanslag"
+    ann = {
+        "annotatie-id": ann_id,
+        "annotatierijen": [
+            {"rij-id": "r-001", "begrip-id": begrip_id, "jas-klasse": "brondefinitie"},
+        ],
+    }
+    (project_root / "annotaties" / "art2-lid2.json").write_text(json.dumps(ann))
+    begrip = maak_begrip(**{
+        "begrip-id": begrip_id,
+        "markeringen": [
+            {"markering-id": "m-001", "bijdrage": "primair",
+             "bron-annotatie-id": ann_id, "bevestigd": False},
+        ],
+    })
+    (project_root / "begrippen" / "test.yaml").write_text(yaml.dump(begrip, allow_unicode=True))
+    result = laad_begrippen(project_root)
+    assert result[0]["markeringen"][0]["jas-klasse"] == "brondefinitie"
+
+
+def test_laad_begrippen_twee_markeringen_verschillende_jas_klassen(project_root):
+    """Begrip met twee markeringen krijgt per markering de juiste jas-klasse."""
+    begrip_id = "BWBR0004770/art9/lid1/belastingaanslag"
+    for ann_id, jas in [("BWBR0004770/art9/lid1", "rechtsobject"),
+                        ("BWBR0004770/art2/lid2", "brondefinitie")]:
+        ann = {"annotatie-id": ann_id,
+               "annotatierijen": [{"rij-id": "r-001", "begrip-id": begrip_id, "jas-klasse": jas}]}
+        (project_root / "annotaties" / f"{ann_id.replace('/', '_')}.json").write_text(json.dumps(ann))
+    begrip = maak_begrip(**{
+        "begrip-id": begrip_id,
+        "markeringen": [
+            {"markering-id": "m-001", "bijdrage": "aanvullend",
+             "bron-annotatie-id": "BWBR0004770/art9/lid1", "bevestigd": True},
+            {"markering-id": "m-002", "bijdrage": "primair",
+             "bron-annotatie-id": "BWBR0004770/art2/lid2", "bevestigd": False},
+        ],
+    })
+    (project_root / "begrippen" / "test.yaml").write_text(yaml.dump(begrip, allow_unicode=True))
+    result = laad_begrippen(project_root)
+    markeringen = {m["markering-id"]: m["jas-klasse"] for m in result[0]["markeringen"]}
+    assert markeringen["m-001"] == "rechtsobject"
+    assert markeringen["m-002"] == "brondefinitie"
 
 
 def test_laad_regels_een_bestand(project_root):

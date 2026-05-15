@@ -10,9 +10,47 @@ from jas_index_lib import haal_kern, haal_contexten
 from sitegen.config import slugify
 
 
+def _bouw_annotatie_jas_index(project_root: Path) -> dict[str, dict[str, str]]:
+    """Bouw index annotatie-id → {begrip-id → jas-klasse} uit annotaties/."""
+    index: dict[str, dict[str, str]] = {}
+    annotaties_dir = project_root / "annotaties"
+    if not annotaties_dir.exists():
+        return index
+    for fp in annotaties_dir.rglob("*.json"):
+        try:
+            data = json.loads(fp.read_text())
+            ann_id = data.get("annotatie-id")
+            if not ann_id:
+                continue
+            rijen = data.get("annotatierijen") or []
+            index[ann_id] = {
+                r["begrip-id"]: r["jas-klasse"]
+                for r in rijen
+                if r.get("begrip-id") and r.get("jas-klasse")
+            }
+        except Exception:
+            pass
+    return index
+
+
+def _verrijk_markeringen(markeringen: list[dict], begrip_id: str, jas_index: dict) -> list[dict]:
+    """Voeg jas-klasse per markering toe vanuit de annotatie-index."""
+    verrijkt = []
+    for m in markeringen:
+        m = dict(m)
+        ann_id = m.get("bron-annotatie-id", "")
+        if ann_id and ann_id in jas_index:
+            m["jas-klasse"] = jas_index[ann_id].get(begrip_id, "")
+        else:
+            m.setdefault("jas-klasse", "")
+        verrijkt.append(m)
+    return verrijkt
+
+
 def laad_begrippen(project_root: Path) -> list[dict]:
     begrippen = []
     pad = project_root / "begrippen"
+    jas_index = _bouw_annotatie_jas_index(project_root)
     for f in sorted(pad.glob("*.yaml")):
         data = yaml.safe_load(f.read_text()) or {}
         relaties: dict = data.get("relaties") or {}
@@ -59,7 +97,11 @@ def laad_begrippen(project_root: Path) -> list[dict]:
             "identificatiebegrip": data.get("identificatiebegrip", False),
             "jas_klasse": klasse,
             "toelichting_klasse": data.get("toelichting-klasse") or "",
-            "markeringen": data.get("markeringen") or [],
+            "markeringen": _verrijk_markeringen(
+                data.get("markeringen") or [],
+                data.get("begrip-id", f.stem),
+                jas_index,
+            ),
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
             "geldigheid_tot": str(data.get("geldigheid-tot") or "") if data.get("geldigheid-tot") else "",
             "vervangen_door": data.get("vervangen-door") or "",
