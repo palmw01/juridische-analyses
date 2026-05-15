@@ -20,9 +20,10 @@ Voert Activiteit 3a en 3b uit. Leest de door `/annoteer` aangemaakte begrip-YAML
 **Bronbestanden zijn `.yaml`-bestanden in `begrippen/` — geen Markdown.**
 **De wetstekst wordt niet opnieuw opgehaald.** De `markeringen[].tekst`-velden in de begrip-YAML zijn de enige bron.
 
-**Lees vóór elke run eerst beide kaderdocumenten volledig in:**
+**Lees vóór elke run eerst de kaderdocumenten en valkuilen volledig in:**
 - `.claude/skills/begrip/kaders.md` — begrippenkader (A3a + A6d)
 - `.claude/skills/begrip/kaders-regels.md` — regelkader (A3b + A6e)
+- `.claude/skills/begrip/valkuilen.md` — geleerde lessen en naamgevingsregels
 
 ---
 

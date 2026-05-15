@@ -122,14 +122,8 @@ WAARSCHUWINGEN
   begrippen/zes-weken.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
     [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
-  regels/AR-BWBR0004770-art9-lid5-a.yaml
-    [L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — stel prioriteit in (lager getal = hogere prioriteit)
-  regels/AR-BWBR0024096-art9-par1-b.yaml
-    [L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — stel prioriteit in (lager getal = hogere prioriteit)
-  annotaties/BWBR0024096/par9-1.json
-    [L3] annotatie-id is een paragraaf-bron maar sectie-veld is leeg — vul sectie in (bijv. '9.1')
 
 GESLAAGD: 56 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 79
+WAARSCHUWINGEN: 76
 ```
