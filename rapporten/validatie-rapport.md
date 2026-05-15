@@ -1,7 +1,7 @@
 # Validatierapport
 
 ```
-Validatierapport — 2026-05-14
+Validatierapport — 2026-05-15
 ══════════════════════════════
 
 BLOKKEERFOUTEN
@@ -11,58 +11,93 @@ WAARSCHUWINGEN
   begrippen/31-december.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/afwijkend-boekjaar.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/belastingaanslag.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
+  begrippen/dagtekening-aanslagbiljet.yaml
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/dagtekening-in-november-of-eerder.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/dagtekening-in-vaststellingsjaar.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/een-maand-na-dagtekening.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/in-afwijking-van-eerste-lid.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/invorderbaarheid-belastingaanslag.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/invorderbaarheid-in-gelijke-termijnen.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/invorderbaarheid.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/logische-of.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/maand-dagtekening-aanslagbiljet.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/resterende-maanden-jaar.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/telkens-een-maand-later.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/termijn-eindigt-voor-31-december.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/termijnbedrag.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/termijnenberekening-resterende-maanden.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/terugvalregel-lid-1.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/vervaldag-31-december.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/vervaldag-eerste-termijn.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/vervaldag-laatste-dag-maand.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/vervaldag-volgende-termijnen.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
+  begrippen/voorlopige-aanslag.yaml
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/voorlopige-conserverende-aanslag-ib.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/zes-weken-na-dagtekening-aanslagbiljet.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
   begrippen/zes-weken.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
+    [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
+  regels/AR-BWBR0004770-art9-lid5-a.yaml
+    [L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — stel prioriteit in (lager getal = hogere prioriteit)
+  regels/AR-BWBR0024096-art9-par1-b.yaml
+    [L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — stel prioriteit in (lager getal = hogere prioriteit)
+  annotaties/BWBR0024096/par9-1.json
+    [L3] annotatie-id is een paragraaf-bron maar sectie-veld is leeg — vul sectie in (bijv. '9.1')
 
 GESLAAGD: 40 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 28
+WAARSCHUWINGEN: 58
 ```

@@ -190,7 +190,7 @@ kenmerken:
 - Minimaal **2 stellingen** (waar/niet-waar) die de grenzen van het begrip toetsen.
 - Minimaal **1 grensgeval**.
 - Alle stellingen zijn concreet en toetsbaar.
-- Velden zijn optioneel — laat weg als nog niet ingevuld.
+- Optioneel in stub-fase; **verplicht** zodra `definitie.kern` is ingevuld (de validator geeft dan een L3-waarschuwing).
 
 ---
 
@@ -292,7 +292,9 @@ definitie-gebaseerd-op:
 - m-001
 ```
 
-Wijzig **niet**: `begrip-id`, `begripsnaam`, `jas-klasse`, `toelichting-klasse`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
+Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
+
+> **`jas-klasse` en `toelichting-klasse`** worden in Voorbereiding stap 3 bijgewerkt vanuit de annotatie-JSON — daarna niet meer wijzigen.
 
 > **markeringen-velden**: `bevestigd: false` (default bij aanmaken — wordt ingesteld op `true` zodra een domeinexpert de markering juridisch heeft gevalideerd); `bevestigd-op` bevat de validatiedatum (ISO-8601). Beide velden worden **niet** door de AI gevuld — ze zijn A4-input.
 

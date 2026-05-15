@@ -4,7 +4,7 @@
   "title": "Begrip",
   "description": "SKOS-compatibel begrip, afgeleid van JAS-annotatie",
   "type": "object",
-  "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip", "jas-klasse"],
+  "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip", "jas-klasse", "toelichting-klasse"],
   "additionalProperties": false,
   "properties": {
     "begrip-id": { "type": "string", "minLength": 1 },

@@ -505,6 +505,13 @@ def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
     if markeringen and all(not m.get("bevestigd", False) for m in markeringen):
         warnings.append("[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd")
 
+    # Kern ingevuld maar voorbeelden ontbreken
+    if kern and not (data.get("voorbeelden") or []):
+        warnings.append(
+            "[L3] definitie.kern is ingevuld maar voorbeelden ontbreken — "
+            "voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)"
+        )
+
     return warnings
 
 
@@ -521,6 +528,15 @@ def validate_quality_annotatie_lid(data: dict, filepath: Path) -> list[str]:
         warnings.append("[L3] diagram ontbreekt of is leeg (geen knopen/kanten)")
     elif knopen and not kanten:
         warnings.append("[L3] diagram heeft knopen maar geen kanten (geen relaties)")
+
+    # Par-based annotatie zonder sectie
+    annotatie_id = data.get("annotatie-id", "")
+    if "/par" in annotatie_id and not (data.get("sectie") or "").strip():
+        warnings.append(
+            "[L3] annotatie-id is een paragraaf-bron maar sectie-veld is leeg — "
+            "vul sectie in (bijv. '9.1')"
+        )
+
     return warnings
 
 
@@ -551,6 +567,13 @@ def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
         warnings.append(
             f"[L3] prioriteit is ingevuld ({prioriteit}) maar soort is '{soort}' — "
             f"prioriteit is alleen zinvol bij Specialisatieregels"
+        )
+
+    # Specialisatieregel vereist prioriteit
+    if soort == "Specialisatieregel" and prioriteit is None:
+        warnings.append(
+            "[L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — "
+            "stel prioriteit in (lager getal = hogere prioriteit)"
         )
 
     return warnings

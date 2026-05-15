@@ -15,6 +15,7 @@ def maak_begrip(**overrides) -> dict:
         "herkomst": "direct",
         "status": "concept",
         "jas-klasse": "rechtssubject",
+        "toelichting-klasse": "Drager van rechten en plichten in de invorderingsrelatie",
         "identificatiebegrip": False,
         "geldigheid-van": "2024-01-01",
         "markeringen": [
