@@ -319,6 +319,27 @@ def test_quality_annotatie_lid_volledig_geen_struct_warnings():
     assert not any("knopen maar geen kanten" in w for w in warnings)
 
 
+def test_quality_annotatie_lid_par_zonder_sectie_geeft_warning():
+    data = {
+        "annotatie-id": "BWBR0024096/par9-1",
+        "annotatierijen": [{"rij-id": "r1"}],
+        "diagram": {"knopen": [{"id": "k1"}, {"id": "k2"}], "kanten": [{"van": "k1", "naar": "k2"}]},
+    }
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert any("paragraaf-bron" in w for w in warnings)
+
+
+def test_quality_annotatie_lid_par_met_sectie_geen_warning():
+    data = {
+        "annotatie-id": "BWBR0024096/par9-1",
+        "sectie": "9.1",
+        "annotatierijen": [{"rij-id": "r1"}],
+        "diagram": {"knopen": [{"id": "k1"}, {"id": "k2"}], "kanten": [{"van": "k1", "naar": "k2"}]},
+    }
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert not any("paragraaf-bron" in w for w in warnings)
+
+
 # ===== validate_quality_annotatie_index =====
 
 def test_quality_annotatie_index_lege_leden_geeft_warning():

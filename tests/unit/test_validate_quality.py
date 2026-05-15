@@ -158,3 +158,30 @@ def test_regel_prioriteit_none_geen_warning():
     data = maak_regel(soort="Afleidingsregel", prioriteit=None)
     warnings = validate_quality_regel(data, DUMMY)
     assert not any("prioriteit" in w for w in warnings)
+
+
+def test_begrip_kern_gevuld_geen_voorbeelden_geeft_warning():
+    data = maak_begrip(voorbeelden=[])
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("voorbeelden ontbreken" in w for w in warnings)
+
+
+def test_begrip_kern_gevuld_met_voorbeelden_geen_warning():
+    data = maak_begrip(voorbeelden=[
+        {"stelling": "test", "waar": True},
+        {"stelling": "grens", "waar": False},
+    ])
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("voorbeelden ontbreken" in w for w in warnings)
+
+
+def test_begrip_kern_leeg_geen_voorbeelden_warning():
+    data = maak_begrip(definitie={"kern": "", "contexten": []}, voorbeelden=[])
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("voorbeelden ontbreken" in w for w in warnings)
+
+
+def test_regel_specialisatie_zonder_prioriteit_geeft_warning():
+    data = maak_regel(soort="Specialisatieregel", prioriteit=None)
+    warnings = validate_quality_regel(data, DUMMY)
+    assert any("Specialisatieregel" in w and "prioriteit" in w for w in warnings)
