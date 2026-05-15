@@ -26,8 +26,8 @@ markeringen:
   tekst: "voor zover deze betrekking hebben op de heffing van rijksbelastingen"
   interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: "2026-05-15"
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null

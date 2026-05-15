@@ -25,16 +25,18 @@ markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art2/lid2
   tekst: "invorderen van rijksbelastingen: het betalen van een terug te geven bedrag aan rijksbelastingen"
-  interpretatiemethode: teleologisch
+  interpretatiemethode: grammaticaal
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: "2026-05-15"
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
-  heeft: []
+  heeft:
+  - begrip-id: BWBR0004770/art2/lid2/rijksbelastingen
+    kardinaliteit: "1:n"
   leidt-tot: []
 voorbeelden:
 - stelling: "De ontvanger betaalt een teruggaaf IB 2024 uit aan een belastingschuldige — valt dit onder invorderen van rijksbelastingen in de zin van art. 2 lid 2 sub e IW 1990?"

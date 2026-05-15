@@ -27,14 +27,16 @@ markeringen:
   tekst: "wettelijke regeling betreffende de heffing van rijksbelastingen: de wettelijke bepalingen, bedoeld in artikel 1:1, eerste en tweede lid, van de Algemene douanewet, voor zover deze betrekking hebben op de heffing van rijksbelastingen"
   interpretatiemethode: systematisch
   bijdrage: primair
-  bevestigd: false
-  bevestigd-op: null
+  bevestigd: true
+  bevestigd-op: "2026-05-15"
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
 relaties:
   is-een: []
-  heeft: []
+  heeft:
+  - begrip-id: BWBR0004770/art2/lid2/rijksbelastingen
+    kardinaliteit: "1:n"
   leidt-tot: []
 voorbeelden:
 - stelling: "De bepalingen van de Algemene douanewet over de berekening van invoerrechten (heffing) vallen onder dit begrip?"

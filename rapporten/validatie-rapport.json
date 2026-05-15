@@ -2,44 +2,12 @@
   "fouten": [],
   "waarschuwingen": [
     {
-      "bestand": "begrippen/aanslagbiljet.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
-    },
-    {
       "bestand": "begrippen/alsmede.yaml",
       "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
     },
     {
-      "bestand": "begrippen/alsmede.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
-    },
-    {
-      "bestand": "begrippen/invorderen-van-rijksbelastingen.yaml",
-      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
-    },
-    {
-      "bestand": "begrippen/invorderen-van-rijksbelastingen.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
-    },
-    {
       "bestand": "begrippen/rijksbelastingen.yaml",
       "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
-    },
-    {
-      "bestand": "begrippen/rijksbelastingen.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
-    },
-    {
-      "bestand": "begrippen/voor-zover-betrekking-heffing-rijksbelastingen.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
-    },
-    {
-      "bestand": "begrippen/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen.yaml",
-      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
-    },
-    {
-      "bestand": "begrippen/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen.yaml",
-      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
     },
     {
       "bestand": "annotaties/BWBR0004770/art2-lid2.json",
