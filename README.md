@@ -45,7 +45,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Art. 2 lid 2 IW — annotatie + begrippen | ✅ Gereed |
 | Begrippen (A3a) — 45 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 15 stuks | ✅ Gereed |
-| Voorbeeldreeksen (A4b) — skill `/valideer` beschikbaar | ✅ Gereed |
+| Voorbeeldreeksen (A4b) — 2 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
 | Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 3 L3-waarschuwingen | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
@@ -117,7 +117,7 @@ Elk begrip en elke regel is herleidbaar via een vaste ID-keten:
 ```
 wetstekst (art. 9 lid 1 IW)
   └─► bronbestand          bronnen/BWBR0004770/art9.json
-        └─► annotatie-noot  annotaties/BWBR0004770/art9-1.json
+        └─► annotatie-noot  annotaties/BWBR0004770/art9-lid1.json
               └─► markering  markering-id: m-001
                     └─► begrip  begrippen/invorderbaarheid-belastingaanslag.yaml  (kern + contexten)
                           └─► regel  regels/AR-BWBR0004770-art9-lid1-a.yaml
@@ -513,7 +513,7 @@ make export-graph                   # GEXF + GraphML
 
 # Stap 7 — Webapp genereren
 make webapp
-open webapp/index.html
+# Of bekijk de live versie: https://palmw01.github.io/juridische-analyses
 
 # Alles in één (zelfde als CI)
 make ci
@@ -654,6 +654,8 @@ pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 | `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
 | `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
 | `make test` | Testsuite uitvoeren (unit + integratie + property-based) | Na codewijzigingen |
+| `make test-fast` | Alleen unit-tests, stopt bij eerste fout (-x) | Snelle check tijdens ontwikkeling |
+| `make test-e2e` | End-to-end tests via subprocess (traag) | Apart uitvoeren; niet in standaard CI |
 | `make test-cov` | Testsuite met coverage-rapport (100% vereist) | Na codewijzigingen |
 | `make ci` | test + validate + export-rdf + export-graph + check-enrichment | Voor push |
 | `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
@@ -670,13 +672,12 @@ pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 
 | Laag | Technologie |
 |------|-------------|
-| AI-assistent | Claude Code (Anthropic, claude-sonnet-4-6) met MCP |
+| AI-assistent | Claude Code (Anthropic) met MCP |
 | Wettenbrondata | wetten.overheid.nl via MCP-server (`wettenbank`-skill) |
 | Project | Markdown + YAML (plain-text, geen Obsidian-afhankelijkheid) |
 | Dataformaten | JSON (annotaties, bronnen), YAML (begrippen, regels), JSON Schema (validatie) |
-| Python | 3.10+, PyYAML, jsonschema, networkx, rdflib |
-| Graafvisualisatie | Graphviz (`dot`) — `sudo apt install graphviz` |
-| Kennisgraaf-export | GEXF (Gephi), GraphML, RDF Turtle (SKOS), DOT (Graphviz) |
+| Python | 3.11, PyYAML, jsonschema, networkx, rdflib |
+| Kennisgraaf-export | GEXF (Gephi), GraphML, RDF Turtle (SKOS) |
 | Regelmodellering | RegelSpraak v2.3.0 |
 | CI/CD | GitHub Actions — validatie op push/PR, deploy webapp op push naar main |
 
