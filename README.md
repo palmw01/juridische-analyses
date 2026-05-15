@@ -17,7 +17,7 @@ Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek 
 
 **Geanalyseerde artikelen:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 en §9.5 Leidraad Invordering 2008, en art. 2 lid 2 IW 1990 (begripsbepalingen). Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn; art. 2 lid 2 IW definieert de kernbegrippen die in de gehele wet worden gebruikt, waaronder de uitgebreide definities van rijksbelastingen, belastingaanslag en invorderen.
 
-**Output:** een traceerbaar kennismodel — 45 begrippen, 15 afleidingsregels, 67 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 45 begrippen, 15 afleidingsregels, 67 gevalideerde projectbestanden, en voorbeeldreeksen (A4b) als testmatrices voor de afleidingsregels — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -29,7 +29,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 |-----|---------------|
 | **Jurist (invordering)** | Uitgewerkte analyse van art. 9 IW / §9.1 Leidraad Invordering; elke definitie en regel is traceerbaar naar de wetstekst en van een juridische toelichting voorzien |
 | **Gegevensspecialist** | Machineleesbare begrippenstelsels (RDF/SKOS), formele datamodellen (JSON Schema), meerdere exportformaten (Turtle, GEXF, GraphML) en een gedocumenteerde validatielaag met drie niveaus |
-| **Regelanalist** | Afleidingsregels in RegelSpraak-oriëntatie met invoer- en uitvoerbegrippen, positieve én negatieve testgevallen, en een directe koppeling aan de annotaties waaruit ze zijn afgeleid |
+| **Regelanalist** | Afleidingsregels in RegelSpraak-oriëntatie met invoer- en uitvoerbegrippen, formele testmatrices (voorbeeldreeksen A4b) met gestructureerde testgevallen, en een directe koppeling aan de annotaties waaruit ze zijn afgeleid |
 | **Wetsanalist / methodiekbureau** | Werkend voorbeeld van de BZK-Wetsanalyse-methodiek met volledige JAS-classificatie, inclusief AI-audit trail |
 
 ---
@@ -45,6 +45,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Art. 2 lid 2 IW — annotatie + begrippen | ✅ Gereed |
 | Begrippen (A3a) — 45 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 15 stuks | ✅ Gereed |
+| Voorbeeldreeksen (A4b) — skill `/valideer` beschikbaar | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
 | Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 3 L3-waarschuwingen | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
@@ -57,7 +58,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 
 ## Hoe werkt de analyse?
 
-De methodiek bestaat uit zes activiteiten (A1–A6). Claude Code ondersteunt **A2 en A3**; de overige stappen zijn een menselijke taak, uitgevoerd in multidisciplinair teamverband.
+De methodiek bestaat uit zes activiteiten (A1–A6). Claude Code ondersteunt **A2, A3 en A4b**; de overige stappen zijn een menselijke taak, uitgevoerd in multidisciplinair teamverband.
 
 ```
 A1  Werkgebied bepalen          (handmatig: scope, bronnen, juridische scenario's)
@@ -71,7 +72,11 @@ A3  Betekenis vastleggen        (/begrip-alles — Claude Code)
      │  annotaties → begrippen (YAML) + afleidingsregels (YAML)
      │  definities uitsluitend gebaseerd op markeringen uit A2
      ▼
-A4  Valideren                   (handmatig: multidisciplinair team, concrete scenario's)
+A4b Voorbeeldreeksen opstellen  (/valideer — Claude Code)
+     │  afleidingsregel → testmatrix (YAML) in validaties/
+     │  invoer/uitvoer ingevuld; is-voorspelling-juist=? blijft bij gebruiker
+     ▼
+A4  Valideren                   (handmatig: multidisciplinair team beoordeelt voorbeeldreeksen)
      ▼
 A5  Signaleren                  (handmatig: lacunes, open normen, uitvoeringsbeleid)
      ▼
@@ -93,11 +98,15 @@ Verwerkt de wetstekst naar een JAS-annotatie: elk zinsdeel wordt geclassificeerd
 
 Leidt uit de annotaties begrippen af: per gemarkeerd element ontstaat een YAML-bestand in `begrippen/` met definitie, soort (booleaans, datum, tijdsduur, monetair-bedrag, etc.), herkomst (direct uit wet of afgeleid), relaties naar andere begrippen en traceerbaarheid terug naar de markering. Complexere elementen leiden tot een afleidingsregel in `regels/`, uitgedrukt in RegelSpraak-oriëntatie.
 
-**Stap 4 — Valideren** (`make validate`)
+**Stap 4 — Voorbeeldreeksen opstellen** (`/valideer AR-[id]`)
+
+Genereert een gestructureerde testmatrix voor een afleidingsregel: per testgeval worden invoerwaarden en verwachte uitvoer ingevuld. Het veld `is-voorspelling-juist` wordt op `?` gezet — de juridische beoordeling blijft bij de gebruiker. Na invullen: zet `status: gereviseerd` en na teamvalidatie `status: gevalideerd`. Resultaat staat in `validaties/VR-[id].yaml`.
+
+**Stap 5 — Valideren** (`make validate`)
 
 Drie validatielagen controleren het project na elke schrijfactie. Zie §[Validatielaag](#validatielaag) voor een gedetailleerde beschrijving.
 
-**Stap 5 — Exporteren** (`make ci` of afzonderlijke targets)
+**Stap 6 — Exporteren** (`make ci` of afzonderlijke targets)
 
 Genereert alle eindproducten vanuit de YAML/JSON-bronbestanden. Zie §[Eindproducten](#eindproducten).
 
@@ -112,6 +121,7 @@ wetstekst (art. 9 lid 1 IW)
               └─► markering  markering-id: m-001
                     └─► begrip  begrippen/invorderbaarheid-belastingaanslag.yaml  (kern + contexten)
                           └─► regel  regels/AR-BWBR0004770-art9-lid1-a.yaml
+                                └─► voorbeeldreeks  validaties/VR-BWBR0004770-art9-lid1-a.yaml
 ```
 
 Elk YAML-bestand bevat het `bron-annotatie-id` en `markering-id` die de stap daarboven aanwijzen. Zo is elk eindproduct — definitie, uitkomst, regelformulering — in één klik te herleiden tot de exacte zin in de wetstekst.
@@ -266,7 +276,7 @@ Het project wordt op drie niveaus gevalideerd. Validatie draait automatisch bij 
 
 ### L1 — Schema-conformiteit
 
-**Wat:** elk JSON- en YAML-bestand in `annotaties/`, `begrippen/` en `regels/` wordt getoetst aan een JSON Schema (draft-07) in `schemas/`. Het schema legt verplichte velden, toegestane waarden en datatypes vast.
+**Wat:** elk JSON- en YAML-bestand in `annotaties/`, `begrippen/`, `regels/` en `validaties/` wordt getoetst aan een JSON Schema (draft-07) in `schemas/`. Het schema legt verplichte velden, toegestane waarden en datatypes vast.
 
 **Blokkerend:** ja — een L1-fout blokkeert de commit en laat CI mislukken.
 
@@ -285,6 +295,7 @@ annotaties/BWBR0004770/art9-1-lid1.json
 | `schemas/annotatie-lid.schema.json` | Lid-annotaties in `annotaties/` |
 | `schemas/begrip.schema.json` | Begrippen in `begrippen/` |
 | `schemas/regel.schema.json` | Regels in `regels/` |
+| `schemas/voorbeeldreeks.schema.json` | Voorbeeldreeksen in `validaties/` |
 
 ### L2 — Integriteitscontrole
 
@@ -294,6 +305,7 @@ annotaties/BWBR0004770/art9-1-lid1.json
 2. **Status-consistentie** — `status: gevalideerd` vereist een ingevulde `definitie.kern`; `status: vervallen` vereist een niet-null `vervangen-door`
 3. **Diagramintegriteit** — `kanten[].van` en `kanten[].naar` in annotatie-lid-diagrammen moeten verwijzen naar een bestaand `knopen[].id`
 4. **Definitie-gebaseerd-op bijdrage** — markering-id's in `definitie-gebaseerd-op` mogen alleen `bijdrage: primair` hebben
+5. **Voorbeeldreeks-integriteit** — `afleidingsregel-id` moet verwijzen naar een bestaand regelbestand; begrip-id's in `invoer` en `verwachte-uitvoer` moeten bestaan in `begrippen/`; bij `is-invoer-juist: nee` moet `is-voorspelling-juist: nvt` zijn
 
 **Blokkerend:** ja — L2-fouten blokkeren commit en CI.
 
@@ -319,6 +331,9 @@ annotaties/BWBR0004770/art9-lid1.json
 | `alle markeringen onbevestigd` | alle markeringen van een begrip hebben `bevestigd: false` — A4-domeinexpert-validatie nog niet uitgevoerd |
 | `prioriteit bij niet-Specialisatieregel` | `prioriteit` is ingevuld maar `soort` is geen `Specialisatieregel` — dit veld is alleen zinvol bij Specialisatieregels |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
+| `is-voorspelling-juist=?` | een of meer kolommen wachten nog op juridische beoordeling — vul in na review |
+| `minder dan 3 kolommen` | voorbeeldreeks heeft niet de minimumvereiste happy-path + grensgeval + negatief geval |
+| `status concept (VR)` | voorbeeldreeks is nog niet gereviseerd of gevalideerd |
 
 **Huidig rapport:** 67 bestanden ✅ · 0 blokkeerfouten · 3 L3-waarschuwingen (bewust geaccepteerd: `alsmede` en `rijksbelastingen` als operator/opsomming zonder zinvolle JAS-relaties; `art2-lid2` als definitie-lid zonder centrale JAS-klasse).
 
@@ -363,7 +378,54 @@ Het hart van het kennismodel. 45 begrippen, elk met definitie, datatype, JAS-kla
 | **Specialisatieregel** | Verfijnt of overschrijft een andere regel voor een deelgeval | *Lid 5: voor voorlopige aanslagen gelden andere termijnen* |
 | **Beperkingsregel** | Beperkt de toepassingsruimte van een andere regel | *Terugvalregel lid 1 bij ontbreken Leidraad-grondslag* |
 
-Elk bestand bevat invoer- en uitvoerbegrippen (als `begrip-id`), een formele-regel in RegelSpraak-oriëntatie, voorbeeldreeksen en een juridische toelichting herleidbaar naar de wettekst.
+Elk bestand bevat invoer- en uitvoerbegrippen (als `begrip-id`), een formele-regel in RegelSpraak-oriëntatie, een beknopte voorbeeldreeks (inline) en een juridische toelichting herleidbaar naar de wettekst. De formele A4b-testmatrix staat als apart bestand in `validaties/` (zie §[Voorbeeldreeksen (A4b)](#voorbeeldreeksen-a4b)).
+
+### Voorbeeldreeksen (`validaties/VR-*.yaml`) {#voorbeeldreeksen-a4b}
+
+Elke voorbeeldreeks is een gestructureerde testmatrix voor één afleidingsregel (A4b). De kolom-georiënteerde opzet maakt elke kolom één testgeval:
+
+```yaml
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid1-a
+afleidingsregel-id: AR-BWBR0004770-art9-lid1-a
+naam: bepalen invorderbaarheid belastingaanslag — voorbeeldreeks
+status: concept          # → gereviseerd → gevalideerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-15'
+
+kolommen:
+  - label: "Happy path — invorderbaar"
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: "aanslag IB 2025"
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: "2026-01-01"
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: "2026-02-12"
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: "ja"
+    is-voorspelling-juist: ?   # ← in te vullen na juridische beoordeling
+
+  - label: "Grensgeval — exact op dagtekening+6wk"
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: "aanslag IB 2025"
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: "2026-01-01"
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: "2026-02-12"
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: "ja"
+    is-voorspelling-juist: ?
+    toelichting: "Exact op de termijngrens — interpretatie kalenderstrikt of inclusief?"
+
+  - label: "Negatief — termijn nog niet verstreken"
+    invoer:
+      BWBR0004770/art9/lid1/belastingaanslag: "aanslag IB 2025"
+      BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: "2026-01-01"
+      BWBR0004770/art9/lid1/zes-weken-na-dagtekening-aanslagbiljet: "2026-02-11"
+    is-invoer-juist: ja
+    verwachte-uitvoer:
+      BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: "nee"
+    is-voorspelling-juist: ?
+```
+
+**Minimumvereisten:** ≥ 3 kolommen — altijd een happy-path, een grensgeval en een negatief geval. Het veld `is-voorspelling-juist` staat op `?` totdat een juridisch expert de uitkomst beoordeelt; bij ongeldige invoer (`is-invoer-juist: nee`) staat het op `nvt`. De webapp toont de matrix als HTML-tabel met kleurcodering per oordeel.
 
 ### RDF Turtle / SKOS (`kennisgraaf/begrippen.ttl`)
 
@@ -401,7 +463,7 @@ Interactieve website in Rijkshuisstijl, automatisch gepubliceerd naar GitHub Pag
 
 - **Begrippenlijst** — doorzoekbaar (MiniSearch) met JAS-klasse-badges, soort en status
 - **Annotatiepagina's** — wetstekst, annoteerderijen, Mermaid-structuurdiagram, kruisreferenties en delegatiestructuur per artikel/lid
-- **Regellijst** — formele RegelSpraak-regels met invoer/uitvoer-begrippen en testgevallen
+- **Regellijst** — formele RegelSpraak-regels met invoer/uitvoer-begrippen; als A4b-voorbeeldreeksen aanwezig zijn worden die als HTML-matrix getoond met kleurcodering per oordeel (`ja`/`nee`/`nvt`/`?`)
 - **Kennisgraaf** — interactieve D3.js-graaf met filter op JAS-klasse, drag, zoom en volledigscherm
 - **Zoeken** — globale volledige-tekst-zoekfunctie over alle typen (MiniSearch)
 - **SPARQL** — browsergebaseerde SPARQL-query-editor (Comunica) op de RDF/Turtle-export
@@ -439,13 +501,17 @@ Vervang `[A]` door het artikelnummer en `[W]` door de wetsaanduiding (bijv. `9` 
 # Stap 3 — Betekenis vastleggen (A3)
 /begrip-alles art. [A] [W]          # begrippen + regels voor dit artikel
 
-# Stap 4 — Valideren
+# Stap 4 — Voorbeeldreeksen opstellen (A4b) — herhaal per afleidingsregel
+/valideer AR-[bwb-id]-art[A]-lid[L]-[seq]
+# Vul daarna is-voorspelling-juist in (? → ja/nee) na juridische beoordeling
+
+# Stap 5 — Valideren
 make validate
 
-# Stap 5 — Exporteren
+# Stap 6 — Exporteren
 make export-graph                   # GEXF + GraphML
 
-# Stap 6 — Webapp genereren
+# Stap 7 — Webapp genereren
 make webapp
 open webapp/index.html
 
@@ -520,6 +586,9 @@ begrippen/             A3a — begrippenstelsel (YAML)
 regels/                A3b — afleidingsregels (YAML)
   AR-{bwb-id}-*.yaml   beslissings-, reken-, specialisatie- en beperkingsregels
 
+validaties/            A4b — voorbeeldreeksen (YAML)
+  VR-{bwb-id}-*.yaml   testmatrices per afleidingsregel; is-voorspelling-juist=? tot na beoordeling
+
 schemas/               JSON Schema draft-07 (L1-validatie)
 kennisgraaf/           exportartifacts
   begrippen.ttl        RDF Turtle / SKOS-begrippenstelsel
@@ -532,7 +601,7 @@ scripts/               pre-commit hook (L1/L2-validatie bij commit)
 sitegen/               statische webapp-generator (Python-package, `python -m sitegen`)
   cli.py               orchestratie: data laden → assets → pagina's
   html.py              HTML-primitieven (nav, breadcrumb, pagina-skelet)
-  data.py              YAML/JSON-loaders voor begrippen, annotaties en regels
+  data.py              YAML/JSON-loaders voor begrippen, annotaties, regels en voorbeeldreeksen
   mermaid.py           converter: diagram-JSON → Mermaid-flowsyntax
   assets.py            CSS/JS/icons kopiëren, data-JSON's genereren
   pages/               paginageneratoren (index, begrippen, annotaties, regels,
@@ -617,6 +686,6 @@ pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 
 Deze werkruimte implementeert de **Wetsanalyse-methodiek** (Ministerie van BZK, 2024), gebaseerd op het **Juridisch Analyseschema (JAS) v1.0.10**, geworteld in de rechtstheorie van Wesley Newcomb Hohfeld (1913).
 
-Alleen **A2 (markeren en classificeren)** en **A3 (betekenis vastleggen)** worden door AI ondersteund. A4 (valideren in multidisciplinair team), A5 (signaleren van lacunes) en A6 (kennismodel opstellen) zijn menselijke activiteiten buiten de scope van deze workflow.
+**A2 (markeren en classificeren)**, **A3 (betekenis vastleggen)** en **A4b (voorbeeldreeksen opstellen)** worden door AI ondersteund. Het juridisch oordeel in A4b (`is-voorspelling-juist`) blijft bij de gebruiker. A4-overig (valideren in multidisciplinair team), A5 (signaleren van lacunes) en A6 (kennismodel opstellen) zijn menselijke activiteiten buiten de scope van deze workflow.
 
-Kaders: [JAS-taxonomie](./.claude/skills/annoteer/kaders.md) · [Begrippen](./.claude/skills/begrip/kaders.md) · [Regels](./.claude/skills/begrip/kaders-regels.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+Kaders: [JAS-taxonomie](./.claude/skills/annoteer/kaders.md) · [Begrippen](./.claude/skills/begrip/kaders.md) · [Regels](./.claude/skills/begrip/kaders-regels.md) · [Voorbeeldreeksen](./.claude/skills/valideer/kaders.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)

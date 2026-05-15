@@ -41,20 +41,21 @@ Bij `herkomst: afgeleid` geldt: gebruik `afleidingsregel-id` alleen wanneer `jas
 
 ## Reikwijdte van deze workflow
 
-**Ondersteund door AI: uitsluitend A2 en A3.**
+**Ondersteund door AI: A2, A3 en A4b.**
 
 | Activiteit | Omschrijving | AI-ondersteuning |
 |------------|--------------|-----------------|
 | A1 — Werkgebied bepalen | Scope, juridische scenario's, bronnenselectie | ✗ niet ondersteund |
 | **A2 — Markeren en classificeren** | Annoteren, JAS-classificatie, diagrammen | **✓ ondersteund** |
 | **A3 — Betekenis vastleggen** | Begrippen, afleidingsregels, relaties | **✓ ondersteund** |
-| A4 — Valideren | Toetsing in multidisciplinair team | ✗ niet ondersteund |
+| **A4b — Voorbeeldreeksen opstellen** | Testmatrix voor afleidingsregels; juridisch oordeel blijft bij gebruiker | **✓ ondersteund** |
+| A4 (overig) — Valideren | Toetsing in multidisciplinair team | ✗ niet ondersteund |
 | A5 — Signaleren | Lacunes, open normen, uitvoeringsbeleid | ✗ niet ondersteund |
 | A6 — Kennismodel opstellen | Gegevensmodel, regelmodel, procesmodel | ✗ niet ondersteund |
 
-**Resultaten van de AI-workflow** zijn de graafmodellen in het project: annotatie-noten (A2), begrip-noten (A3a) en afleidingsregel-noten (A3b). Deze zijn input voor A4–A6, maar die activiteiten vallen buiten de scope van deze workflow.
+**Resultaten van de AI-workflow** zijn de graafmodellen in het project: annotatie-noten (A2), begrip-noten (A3a), afleidingsregel-noten (A3b) en voorbeeldreeksen (A4b). Handmatig in te vullen: `is-voorspelling-juist` per kolom na juridische beoordeling.
 
-**De scope van A2 en A3 wordt niet uitgebreid.** Voorstellen om andere activiteiten (A1, A4, A5, A6) alsnog met AI te ondersteunen worden niet doorgevoerd zonder expliciete beslissing van de gebruiker.
+**De scope van A2, A3 en A4b wordt niet uitgebreid.** Voorstellen om andere activiteiten (A1, A4-overig, A5, A6) alsnog met AI te ondersteunen worden niet doorgevoerd zonder expliciete beslissing van de gebruiker.
 
 ---
 
@@ -88,6 +89,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
 | `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
+| `/valideer` | `.claude/skills/valideer/SKILL.md` | A4b: voorbeeldreeks opstellen voor een afleidingsregel; output in `validaties/`; bij conflict: kaders.md is leidend |
 
 ### Kaders en ondersteunende bestanden
 
@@ -98,6 +100,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
+| `.claude/skills/valideer/kaders.md` | A4b: testgevallenpatronen per regeltype, typeafleiding, algoritmisch bepaalbare uitvoer, minimumvereisten (≥ 3 kolommen) |
 
 ### Makefile en Python-tools
 

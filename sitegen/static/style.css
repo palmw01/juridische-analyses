@@ -403,6 +403,22 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 .voorbeeld-label{font-weight:700;color:var(--success)}
 .voorbeeld.ongeldig .voorbeeld-label{color:var(--error)}
 
+/* ── VR-matrix (A4b voorbeeldreeksen) ── */
+.vr-header{display:flex;align-items:center;gap:0.5rem;margin:0.75rem 0 0.4rem}
+.vr-naam{font-weight:600;font-size:0.9rem}
+.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.vr-matrix{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:0.25rem}
+.vr-matrix th,.vr-matrix td{padding:0.35rem 0.6rem;border:1px solid var(--border);text-align:left;vertical-align:middle}
+.vr-matrix thead th,.vr-matrix th:first-child{background:var(--primary-light);color:var(--primary);font-weight:600}
+[data-theme="dark"] .vr-matrix thead th,[data-theme="dark"] .vr-matrix th:first-child{background:var(--primary-light);color:var(--text)}
+.vr-sectie td{background:var(--bg);color:var(--text-muted);font-weight:600;font-size:0.78rem;letter-spacing:0.03em;text-transform:uppercase;padding:0.2rem 0.6rem}
+.vr-meta-row td{background:var(--bg);border-top:2px solid var(--border);font-weight:500}
+.vr-ja{background:var(--success-bg);color:var(--success);font-weight:700;text-align:center}
+.vr-nee{background:var(--error-bg);color:var(--error);font-weight:700;text-align:center}
+.vr-nvt{color:var(--text-muted);font-style:italic;text-align:center}
+.vr-vraag{background:var(--warning-bg);color:var(--warning);font-weight:700;text-align:center}
+.vr-toelichting{font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0.75rem;padding-left:1.25rem}
+
 /* ── Detail pagina layout ── */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1rem}
 .detail-layout > *{min-width:0}

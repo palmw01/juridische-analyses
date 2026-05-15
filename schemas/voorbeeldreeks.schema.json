@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "voorbeeldreeks",
+  "title": "Voorbeeldreeks",
+  "description": "A4b: gestructureerde testmatrix voor een afleidingsregel",
+  "type": "object",
+  "required": [
+    "voorbeeldreeks-id",
+    "afleidingsregel-id",
+    "naam",
+    "status",
+    "peildatum",
+    "aangemaakt-op",
+    "kolommen"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "voorbeeldreeks-id": {
+      "type": "string",
+      "pattern": "^VR-",
+      "description": "Uniek ID, bijv. VR-BWBR0004770-art9-lid1-a"
+    },
+    "afleidingsregel-id": {
+      "type": "string",
+      "pattern": "^AR-",
+      "description": "Koppeling naar de te valideren afleidingsregel"
+    },
+    "naam": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["concept", "gereviseerd", "gevalideerd"]
+    },
+    "peildatum": {
+      "type": "string",
+      "format": "date"
+    },
+    "aangemaakt-op": {
+      "type": "string",
+      "format": "date"
+    },
+    "kolommen": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "invoer", "is-invoer-juist", "verwachte-uitvoer", "is-voorspelling-juist"],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Beschrijving van het testgeval"
+          },
+          "invoer": {
+            "type": "object",
+            "description": "Map van begrip-id naar concrete waarde",
+            "additionalProperties": { "type": ["string", "number", "boolean", "null"] }
+          },
+          "is-invoer-juist": {
+            "type": "string",
+            "enum": ["ja", "nee"],
+            "description": "Is deze invoercombinatie een geldig scenario?"
+          },
+          "verwachte-uitvoer": {
+            "type": "object",
+            "description": "Map van begrip-id naar verwachte uitvoerwaarde",
+            "additionalProperties": { "type": ["string", "number", "boolean", "null"] }
+          },
+          "is-voorspelling-juist": {
+            "type": "string",
+            "enum": ["ja", "nee", "nvt", "?"],
+            "description": "Juridisch oordeel: ja/nee/nvt (bij ongeldige invoer) of ? (nog te beoordelen)"
+          },
+          "toelichting": {
+            "type": ["string", "null"],
+            "description": "Voetnoot bij dit testgeval"
+          }
+        }
+      }
+    }
+  }
+}

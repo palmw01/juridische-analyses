@@ -140,6 +140,9 @@ def detect_schema(filepath: Path, project_root: Path) -> Optional[str]:
     if parts[0] == "regels":
         return "regel"
 
+    if parts[0] == "validaties":
+        return "voorbeeldreeks"
+
     if parts[0] == "annotaties":
         name = filepath.stem  # bijv. art9-1, art9
         # Lid-annotatie: bevat "lid" of heeft patroon art{N}-{L}
@@ -638,6 +641,61 @@ def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
     return warnings
 
 
+def validate_integrity_voorbeeldreeks(data: dict, filepath: Path, begrip_index: dict, project_root: Path) -> list[str]:
+    """Laag 2: Integriteitsvalidatie voor voorbeeldreeks-bestanden."""
+    errors = []
+
+    ar_id = data.get("afleidingsregel-id", "")
+    if ar_id:
+        regels_dir = project_root / "regels"
+        if not (regels_dir / f"{ar_id}.yaml").exists() and not (regels_dir / f"{ar_id}.md").exists():
+            errors.append(f"[L2] afleidingsregel-id: regel '{ar_id}' niet gevonden in regels/")
+
+    for i, kolom in enumerate(data.get("kolommen") or []):
+        for bid in (kolom.get("invoer") or {}).keys():
+            if not begrip_bestaat(bid, begrip_index):
+                slug = begrip_id_to_slug(bid)
+                errors.append(f"[L2] kolommen[{i}].invoer: begrip '{slug}' niet gevonden in begrippen/")
+        for bid in (kolom.get("verwachte-uitvoer") or {}).keys():
+            if not begrip_bestaat(bid, begrip_index):
+                slug = begrip_id_to_slug(bid)
+                errors.append(f"[L2] kolommen[{i}].verwachte-uitvoer: begrip '{slug}' niet gevonden in begrippen/")
+        if kolom.get("is-invoer-juist") == "nee" and kolom.get("is-voorspelling-juist") not in ("nvt", "?"):
+            errors.append(
+                f"[L2] kolommen[{i}]: is-invoer-juist=nee maar is-voorspelling-juist='{kolom.get('is-voorspelling-juist')}' — "
+                f"verwacht 'nvt' bij ongeldige invoer"
+            )
+
+    return errors
+
+
+def validate_quality_voorbeeldreeks(data: dict, filepath: Path) -> list[str]:
+    """Laag 3: Kwaliteitscontrole voor voorbeeldreeks-bestanden."""
+    warnings = []
+
+    kolommen = data.get("kolommen") or []
+    if len(kolommen) < 3:
+        warnings.append(
+            "[L3] voorbeeldreeks heeft minder dan 3 kolommen — "
+            "minimum: happy path, grensgeval, negatief geval"
+        )
+
+    open_beoordelingen = sum(
+        1 for k in kolommen
+        if k.get("is-voorspelling-juist") == "?" and k.get("is-invoer-juist") == "ja"
+    )
+    if open_beoordelingen > 0:
+        warnings.append(
+            f"[L3] {open_beoordelingen} kolom(men) met is-voorspelling-juist=? — "
+            f"juridische beoordeling vereist"
+        )
+
+    if data.get("status") == "concept":
+        warnings.append("[L3] status is 'concept' — nog niet gereviseerd of gevalideerd")
+
+    return warnings
+
+
 # ---------------------------------------------------------------------------
 # Hoofd-validatiefunctie per bestand
 # ---------------------------------------------------------------------------
@@ -682,6 +740,10 @@ def validate_file(
             result.errors.extend(
                 validate_integrity_annotatie_lid(data, filepath, begrip_index)
             )
+        elif schema_name == "voorbeeldreeks":
+            result.errors.extend(
+                validate_integrity_voorbeeldreeks(data, filepath, begrip_index, project_root)
+            )
 
     # Laag 3: Kwaliteitscontrole
     if schema_name == "begrip":
@@ -692,6 +754,8 @@ def validate_file(
         result.warnings.extend(validate_quality_annotatie_lid(data, filepath))
     elif schema_name == "annotatie-index":
         result.warnings.extend(validate_quality_annotatie_index(data, filepath))
+    elif schema_name == "voorbeeldreeks":
+        result.warnings.extend(validate_quality_voorbeeldreeks(data, filepath))
 
     return result
 
@@ -723,13 +787,17 @@ def collect_files_for_schema(project_root: Path, schema_name: str) -> list[Path]
             detected = detect_schema(fp, project_root)
             if detected == schema_name:
                 files.append(fp)
+    elif schema_name == "voorbeeldreeks":
+        d = project_root / "validaties"
+        if d.exists():
+            files.extend(d.glob("*.yaml"))
     return sorted(files)
 
 
 def collect_all_files(project_root: Path) -> list[tuple[Path, str]]:
     """Verzamel alle te valideren bestanden met hun schema-naam."""
     result = []
-    for schema_name in ("begrip", "regel"):
+    for schema_name in ("begrip", "regel", "voorbeeldreeks"):
         for fp in collect_files_for_schema(project_root, schema_name):
             result.append((fp, schema_name))
     # annotaties

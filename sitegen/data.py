@@ -234,6 +234,35 @@ def zoek_meta(boodschap: str, meta: list[dict]) -> dict | None:
     return None
 
 
+def laad_voorbeeldreeksen(project_root: Path) -> list[dict]:
+    voorbeeldreeksen = []
+    pad = project_root / "validaties"
+    if not pad.exists():
+        return voorbeeldreeksen
+    for f in sorted(pad.glob("*.yaml")):
+        data = yaml.safe_load(f.read_text()) or {}
+        kolommen = []
+        for k in data.get("kolommen") or []:
+            kolommen.append({
+                "label": k.get("label", ""),
+                "invoer": k.get("invoer") or {},
+                "is_invoer_juist": k.get("is-invoer-juist", ""),
+                "verwachte_uitvoer": k.get("verwachte-uitvoer") or {},
+                "is_voorspelling_juist": k.get("is-voorspelling-juist", "?"),
+                "toelichting": k.get("toelichting") or "",
+            })
+        voorbeeldreeksen.append({
+            "id": data.get("voorbeeldreeks-id", f.stem),
+            "naam": data.get("naam", ""),
+            "afleidingsregel_id": data.get("afleidingsregel-id", ""),
+            "status": data.get("status", "concept"),
+            "peildatum": str(data.get("peildatum") or ""),
+            "aangemaakt_op": str(data.get("aangemaakt-op") or ""),
+            "kolommen": kolommen,
+        })
+    return voorbeeldreeksen
+
+
 def laad_artikel_indices(project_root: Path) -> list[dict]:
     indices = []
     pad = project_root / "annotaties"
