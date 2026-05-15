@@ -2,7 +2,7 @@
 import json
 import yaml
 
-from sitegen.data import laad_begrippen, laad_regels, laad_annotaties, laad_artikel_indices
+from sitegen.data import laad_begrippen, laad_regels, laad_annotaties, laad_artikel_indices, laad_waarschuwingen, waarschuwingen_voor
 from tests.fixtures.annotaties import maak_annotatie
 from tests.fixtures.begrippen import maak_begrip
 from tests.fixtures.regels import maak_regel
@@ -218,3 +218,31 @@ def test_laad_artikel_indices_een_bestand(project_root):
     assert idx["id"] == "BWBR0004770/art9"
     assert idx["artikel"] == "9"
     assert idx["leden_annotaties"] == ["BWBR0004770/art9/lid1"]
+
+
+def test_laad_waarschuwingen_ontbreekt_geeft_leeg(tmp_path):
+    assert laad_waarschuwingen(tmp_path) == {}
+
+
+def test_laad_waarschuwingen_leest_json(tmp_path):
+    (tmp_path / "rapporten").mkdir()
+    data = {
+        "waarschuwingen": [
+            {"bestand": "begrippen/test.yaml", "boodschap": "[L3] Relaties leeg"},
+        ],
+        "fouten": [],
+        "geslaagd": 1,
+    }
+    (tmp_path / "rapporten" / "validatie-rapport.json").write_text(json.dumps(data))
+    result = laad_waarschuwingen(tmp_path)
+    assert result == {"begrippen/test.yaml": ["[L3] Relaties leeg"]}
+
+
+def test_waarschuwingen_voor_gevonden(tmp_path):
+    index = {"begrippen/belastingschuldige.yaml": ["[L3] test"]}
+    assert waarschuwingen_voor("belastingschuldige", index) == ["[L3] test"]
+
+
+def test_waarschuwingen_voor_niet_gevonden(tmp_path):
+    index = {"begrippen/belastingschuldige.yaml": ["[L3] test"]}
+    assert waarschuwingen_voor("onbekend", index) == []

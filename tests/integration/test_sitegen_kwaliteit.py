@@ -48,6 +48,14 @@ def test_gen_kwaliteit_regel_link_correct(tmp_path):
     assert 'href="regels/AR-001.html"' in content
 
 
+def test_gen_kwaliteit_onbekend_pad_geen_link(tmp_path):
+    ws = {"overig/onbekend.yaml": ["[L3] test"]}
+    gen_kwaliteit(tmp_path, ws)
+    content = (tmp_path / "kwaliteit.html").read_text()
+    assert "overig/onbekend.yaml" in content
+    assert 'href=""' not in content
+
+
 def test_gen_kwaliteit_filter_script_aanwezig(tmp_path):
     gen_kwaliteit(tmp_path, {})
     content = (tmp_path / "kwaliteit.html").read_text()
