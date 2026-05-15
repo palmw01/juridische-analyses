@@ -356,3 +356,75 @@ def test_regel_specialisatie_met_gespecialiseerd_id_geen_warning():
     data["gespecialiseerd-regel-id"] = "AR-BWBR0024096-par9-5-e"
     warnings = validate_quality_regel(data, DUMMY)
     assert not any("gespecialiseerd-regel-id" in w for w in warnings)
+
+
+# ===== validate_quality_voorbeeldreeks =====
+
+from validate_note import validate_quality_voorbeeldreeks
+
+
+def _maak_vr_data(n_kolommen=3, status="gereviseerd", open_beoordelingen=0) -> dict:
+    kolommen = []
+    for i in range(n_kolommen):
+        is_vpj = "?" if i < open_beoordelingen else "ja"
+        kolommen.append({
+            "label": f"Kolom {i}",
+            "invoer": {},
+            "is-invoer-juist": "ja",
+            "verwachte-uitvoer": {},
+            "is-voorspelling-juist": is_vpj,
+        })
+    return {
+        "voorbeeldreeks-id": "VR-0001",
+        "afleidingsregel-id": "AR-0001",
+        "naam": "Test",
+        "status": status,
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": kolommen,
+    }
+
+
+def test_vr_drie_kolommen_gereviseerd_geen_warnings():
+    data = _maak_vr_data(n_kolommen=3, status="gereviseerd")
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert warnings == []
+
+
+def test_vr_minder_dan_drie_kolommen_geeft_warning():
+    data = _maak_vr_data(n_kolommen=2)
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert any("minder dan 3 kolommen" in w for w in warnings)
+
+
+def test_vr_open_beoordelingen_geeft_warning():
+    data = _maak_vr_data(n_kolommen=3, open_beoordelingen=2)
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert any("is-voorspelling-juist=?" in w for w in warnings)
+    assert any("2 kolom" in w for w in warnings)
+
+
+def test_vr_geen_open_beoordelingen_geen_warning():
+    data = _maak_vr_data(n_kolommen=3, open_beoordelingen=0)
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert not any("is-voorspelling-juist=?" in w for w in warnings)
+
+
+def test_vr_status_concept_geeft_warning():
+    data = _maak_vr_data(status="concept")
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert any("concept" in w for w in warnings)
+
+
+def test_vr_status_gevalideerd_geen_concept_warning():
+    data = _maak_vr_data(status="gevalideerd")
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert not any("concept" in w for w in warnings)
+
+
+def test_vr_is_invoer_nee_telt_niet_mee_als_open_beoordeling():
+    data = _maak_vr_data(n_kolommen=3, status="gereviseerd")
+    data["kolommen"][0]["is-invoer-juist"] = "nee"
+    data["kolommen"][0]["is-voorspelling-juist"] = "?"
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert not any("is-voorspelling-juist=?" in w for w in warnings)

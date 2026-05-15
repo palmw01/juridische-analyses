@@ -132,3 +132,146 @@ def test_gen_regels_detail_waarschuwingen_toont_oplossing_als_meta(tmp_path):
     assert "oplossing-blok" in content
     assert "Prioriteit ontbreekt" in content
     assert "Stap R" in content
+
+
+# ===== VR-matrix rendering =====
+
+def _vr(ar_id="AR-0001", **overrides) -> dict:
+    base = {
+        "id": f"VR-{ar_id[3:]}",
+        "naam": "Test voorbeeldreeks",
+        "afleidingsregel_id": ar_id,
+        "status": "concept",
+        "peildatum": "2026-01-01",
+        "aangemaakt_op": "2026-01-01",
+        "kolommen": [
+            {
+                "label": "Happy path",
+                "invoer": {"b/invoer": "ja"},
+                "is_invoer_juist": "ja",
+                "verwachte_uitvoer": {"b/uitvoer": "ja"},
+                "is_voorspelling_juist": "?",
+                "toelichting": "",
+            },
+            {
+                "label": "Negatief geval",
+                "invoer": {"b/invoer": "nee"},
+                "is_invoer_juist": "ja",
+                "verwachte_uitvoer": {"b/uitvoer": "nee"},
+                "is_voorspelling_juist": "ja",
+                "toelichting": "Grensgeval toelichting",
+            },
+        ],
+    }
+    base.update(overrides)
+    return base
+
+
+def test_gen_regels_toont_vr_matrix(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-matrix" in content
+    assert "Happy path" in content
+
+
+def test_gen_regels_vr_matrix_toont_invoer_sectie(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Invoer" in content
+    assert "invoer" in content
+
+
+def test_gen_regels_vr_matrix_toont_uitvoer_sectie(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Uitvoer" in content
+
+
+def test_gen_regels_vr_matrix_toont_meta_rijen(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Invoer juist?" in content
+    assert "Voorspelling juist?" in content
+
+
+def test_gen_regels_vr_matrix_toont_vraag_klasse(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-vraag" in content
+
+
+def test_gen_regels_vr_matrix_toont_ja_klasse(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-ja" in content
+
+
+def test_gen_regels_vr_matrix_toont_toelichting(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "Grensgeval toelichting" in content
+
+
+def test_gen_regels_vr_matrix_toont_status_badge(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "concept" in content
+
+
+def test_gen_regels_vr_matrix_gevalideerd_badge(tmp_path):
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[_vr(status="gevalideerd")])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "badge-definitief" in content
+
+
+def test_gen_regels_vr_matrix_link_naar_begrip(tmp_path):
+    begrippen = [{"id": "b/invoer", "slug": "invoer-slug"}]
+    gen_regels(tmp_path, [_regel()], begrippen, [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "invoer-slug.html" in content
+
+
+def test_gen_regels_vr_matrix_null_waarde_toont_null_cel(tmp_path):
+    vr = _vr()
+    vr["kolommen"][0]["invoer"]["b/invoer"] = None
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[vr])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-nvt" in content
+
+
+def test_gen_regels_vr_matrix_lege_kolommen_geeft_leeg(tmp_path):
+    vr = _vr(kolommen=[])
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[vr])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-matrix" not in content
+
+
+def test_gen_regels_vr_andere_regel_niet_in_html(tmp_path):
+    vr = _vr(ar_id="AR-9999")
+    gen_regels(tmp_path, [_regel()], [], [], voorbeeldreeksen=[vr])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-matrix" not in content
+
+
+def test_gen_regels_inline_voorbeelden_als_fallback(tmp_path):
+    r = _regel(voorbeeldreeksen=[{
+        "invoerwaarden": "x=1",
+        "verwachte-uitkomst": "y=2",
+        "juridisch-juist": True,
+    }])
+    gen_regels(tmp_path, [r], [], [], voorbeeldreeksen=[])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "voorbeeld" in content
+    assert "x=1" in content
+
+
+def test_gen_regels_vr_vervangt_inline_als_aanwezig(tmp_path):
+    r = _regel(voorbeeldreeksen=[{
+        "invoerwaarden": "x=1",
+        "verwachte-uitkomst": "y=2",
+        "juridisch-juist": False,
+    }])
+    gen_regels(tmp_path, [r], [], [], voorbeeldreeksen=[_vr()])
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "vr-matrix" in content
+    assert "x=1" not in content

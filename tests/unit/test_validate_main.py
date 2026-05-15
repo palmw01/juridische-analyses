@@ -308,3 +308,92 @@ def test_build_begrip_index_md_parse_fout_overgeslagen(tmp_path):
     (tmp_path / "begrippen" / "kapot.md").write_bytes(b"\xc3\x28 ongeldig utf-8 bytes \xc3\x28")
     idx = build_begrip_index(tmp_path)
     assert "kapot" not in idx
+
+
+# ===== voorbeeldreeks: detect_schema, collect_files_for_schema, validate_file =====
+
+import shutil
+import yaml
+
+SCHEMAS_DIR = Path(__file__).resolve().parent.parent.parent / "schemas"
+
+
+def test_detect_schema_validaties_geeft_voorbeeldreeks(tmp_path):
+    project = tmp_path
+    bestand = project / "validaties" / "VR-0001.yaml"
+    (project / "validaties").mkdir()
+    bestand.touch()
+    assert detect_schema(bestand, project) == "voorbeeldreeks"
+
+
+def test_collect_files_for_schema_voorbeeldreeks(tmp_path):
+    (tmp_path / "validaties").mkdir()
+    (tmp_path / "validaties" / "VR-0001.yaml").write_text("x: 1\n")
+    (tmp_path / "validaties" / "VR-0002.yaml").write_text("x: 2\n")
+    from validate_note import collect_files_for_schema
+    files = collect_files_for_schema(tmp_path, "voorbeeldreeks")
+    assert len(files) == 2
+
+
+def test_collect_files_for_schema_voorbeeldreeks_ontbrekende_map(tmp_path):
+    from validate_note import collect_files_for_schema
+    files = collect_files_for_schema(tmp_path, "voorbeeldreeks")
+    assert files == []
+
+
+def test_collect_all_files_neemt_validaties_mee(tmp_path):
+    for d in ("begrippen", "regels", "annotaties", "validaties"):
+        (tmp_path / d).mkdir()
+    (tmp_path / "validaties" / "VR-0001.yaml").write_text("x: 1\n")
+    from validate_note import collect_all_files
+    paren = collect_all_files(tmp_path)
+    schema_namen = [s for _, s in paren]
+    assert "voorbeeldreeks" in schema_namen
+
+
+def test_validate_file_voorbeeldreeks_l3_dispatch(tmp_path):
+    schemas_dir = tmp_path / "schemas"
+    schemas_dir.mkdir()
+    shutil.copy(SCHEMAS_DIR / "voorbeeldreeks.schema.json", schemas_dir / "voorbeeldreeks.schema.json")
+    from validate_note import validate_file, load_json_schema
+    schema = load_json_schema(schemas_dir, "voorbeeldreeks")
+    vr_file = tmp_path / "VR-0001.yaml"
+    vr_data = {
+        "voorbeeldreeks-id": "VR-0001",
+        "afleidingsregel-id": "AR-0001",
+        "naam": "Test",
+        "status": "concept",
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": [
+            {"label": "A", "invoer": {}, "is-invoer-juist": "ja",
+             "verwachte-uitvoer": {}, "is-voorspelling-juist": "?"},
+            {"label": "B", "invoer": {}, "is-invoer-juist": "ja",
+             "verwachte-uitvoer": {}, "is-voorspelling-juist": "ja"},
+        ],
+    }
+    vr_file.write_text(yaml.dump(vr_data, allow_unicode=True))
+    result = validate_file(vr_file, "voorbeeldreeks", schema, {}, tmp_path)
+    assert not result.errors
+    assert any("concept" in w for w in result.warnings)
+
+
+def test_validate_file_voorbeeldreeks_l2_dispatch(tmp_path):
+    schemas_dir = tmp_path / "schemas"
+    schemas_dir.mkdir()
+    shutil.copy(SCHEMAS_DIR / "voorbeeldreeks.schema.json", schemas_dir / "voorbeeldreeks.schema.json")
+    from validate_note import validate_file, load_json_schema
+    schema = load_json_schema(schemas_dir, "voorbeeldreeks")
+    vr_file = tmp_path / "VR-0001.yaml"
+    vr_data = {
+        "voorbeeldreeks-id": "VR-0001",
+        "afleidingsregel-id": "AR-BESTAAT-NIET",
+        "naam": "Test",
+        "status": "gereviseerd",
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": [],
+    }
+    vr_file.write_text(yaml.dump(vr_data, allow_unicode=True))
+    result = validate_file(vr_file, "voorbeeldreeks", schema, {}, tmp_path, check_integrity=True)
+    assert any("AR-BESTAAT-NIET" in e for e in result.errors)

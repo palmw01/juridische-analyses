@@ -351,3 +351,75 @@ def test_waarschuwingen_voor_geen_substring_match(tmp_path):
     """Slug 'aanslag' mag geen warnings ophalen van 'belastingaanslag.yaml'."""
     index = {"begrippen/belastingaanslag.yaml": ["[L3] test"]}
     assert waarschuwingen_voor("aanslag", index) == []
+
+
+# ===== laad_voorbeeldreeksen =====
+
+from sitegen.data import laad_voorbeeldreeksen
+
+
+def test_laad_voorbeeldreeksen_geen_map(project_root):
+    assert laad_voorbeeldreeksen(project_root) == []
+
+
+def test_laad_voorbeeldreeksen_lege_map(project_root):
+    (project_root / "validaties").mkdir()
+    assert laad_voorbeeldreeksen(project_root) == []
+
+
+def test_laad_voorbeeldreeksen_een_bestand(project_root):
+    import yaml
+    (project_root / "validaties").mkdir()
+    vr = {
+        "voorbeeldreeks-id": "VR-0001",
+        "afleidingsregel-id": "AR-0001",
+        "naam": "Test VR",
+        "status": "concept",
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": [
+            {
+                "label": "Happy path",
+                "invoer": {"b/x": "ja"},
+                "is-invoer-juist": "ja",
+                "verwachte-uitvoer": {"b/y": "ja"},
+                "is-voorspelling-juist": "?",
+                "toelichting": "Grensgeval",
+            }
+        ],
+    }
+    (project_root / "validaties" / "VR-0001.yaml").write_text(yaml.dump(vr, allow_unicode=True))
+    result = laad_voorbeeldreeksen(project_root)
+    assert len(result) == 1
+    r = result[0]
+    assert r["id"] == "VR-0001"
+    assert r["naam"] == "Test VR"
+    assert r["afleidingsregel_id"] == "AR-0001"
+    assert r["status"] == "concept"
+    assert len(r["kolommen"]) == 1
+    k = r["kolommen"][0]
+    assert k["label"] == "Happy path"
+    assert k["invoer"] == {"b/x": "ja"}
+    assert k["verwachte_uitvoer"] == {"b/y": "ja"}
+    assert k["is_invoer_juist"] == "ja"
+    assert k["is_voorspelling_juist"] == "?"
+    assert k["toelichting"] == "Grensgeval"
+
+
+def test_laad_voorbeeldreeksen_gesorteerd(project_root):
+    import yaml
+    (project_root / "validaties").mkdir()
+    for naam in ("VR-ZZZ.yaml", "VR-AAA.yaml"):
+        vr = {
+            "voorbeeldreeks-id": naam.replace(".yaml", ""),
+            "afleidingsregel-id": "AR-0001",
+            "naam": naam,
+            "status": "concept",
+            "peildatum": "2026-01-01",
+            "aangemaakt-op": "2026-01-01",
+            "kolommen": [],
+        }
+        (project_root / "validaties" / naam).write_text(yaml.dump(vr, allow_unicode=True))
+    result = laad_voorbeeldreeksen(project_root)
+    ids = [r["id"] for r in result]
+    assert ids == sorted(ids)

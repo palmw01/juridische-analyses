@@ -7,6 +7,7 @@ import yaml
 from validate_note import (
     validate_integrity_begrip,
     validate_integrity_regel,
+    validate_integrity_voorbeeldreeks,
     build_begrip_index,
     build_annotatie_index,
 )
@@ -344,3 +345,117 @@ def test_begrip_uitvoer_van_regel_id_niet_gevonden_geeft_fout(tmp_path):
     idx = build_begrip_index(project)
     errors = validate_integrity_begrip(data, DUMMY, idx, project)
     assert any("uitvoer-van-regel-id" in e for e in errors)
+
+
+# ===== validate_integrity_voorbeeldreeks =====
+
+def _maak_vr(**overrides) -> dict:
+    base = {
+        "voorbeeldreeks-id": "VR-0001",
+        "afleidingsregel-id": "AR-0001",
+        "naam": "Test voorbeeldreeks",
+        "status": "concept",
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": [
+            {
+                "label": "Happy path",
+                "invoer": {},
+                "is-invoer-juist": "ja",
+                "verwachte-uitvoer": {},
+                "is-voorspelling-juist": "?",
+            }
+        ],
+    }
+    base.update(overrides)
+    return base
+
+
+def test_vr_geen_fouten_bij_valide_data(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    data = _maak_vr()
+    idx = build_begrip_index(project)
+    assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
+
+
+def test_vr_ontbrekende_regel_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    data = _maak_vr(**{"afleidingsregel-id": "AR-BESTAAT-NIET"})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_voorbeeldreeks(data, DUMMY, idx, project)
+    assert any("AR-BESTAAT-NIET" in e for e in errors)
+
+
+def test_vr_bestaande_regel_md_geen_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.md").write_text("---\nregel-id: AR-0001\n---\n")
+    data = _maak_vr()
+    idx = build_begrip_index(project)
+    assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
+
+
+def test_vr_onbekend_invoer_begrip_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    data = _maak_vr(kolommen=[{
+        "label": "test",
+        "invoer": {"bestaat/niet": "waarde"},
+        "is-invoer-juist": "ja",
+        "verwachte-uitvoer": {},
+        "is-voorspelling-juist": "?",
+    }])
+    idx = build_begrip_index(project)
+    errors = validate_integrity_voorbeeldreeks(data, DUMMY, idx, project)
+    assert any("invoer" in e and "niet" in e for e in errors)
+
+
+def test_vr_onbekend_uitvoer_begrip_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    data = _maak_vr(kolommen=[{
+        "label": "test",
+        "invoer": {},
+        "is-invoer-juist": "ja",
+        "verwachte-uitvoer": {"bestaat/niet": "waarde"},
+        "is-voorspelling-juist": "?",
+    }])
+    idx = build_begrip_index(project)
+    errors = validate_integrity_voorbeeldreeks(data, DUMMY, idx, project)
+    assert any("verwachte-uitvoer" in e for e in errors)
+
+
+def test_vr_invoer_onjuist_maar_nvt_geen_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    data = _maak_vr(kolommen=[{
+        "label": "Ongeldig geval",
+        "invoer": {},
+        "is-invoer-juist": "nee",
+        "verwachte-uitvoer": {},
+        "is-voorspelling-juist": "nvt",
+    }])
+    idx = build_begrip_index(project)
+    assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
+
+
+def test_vr_invoer_onjuist_maar_voorspelling_ja_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    data = _maak_vr(kolommen=[{
+        "label": "Onjuist geval",
+        "invoer": {},
+        "is-invoer-juist": "nee",
+        "verwachte-uitvoer": {},
+        "is-voorspelling-juist": "ja",
+    }])
+    idx = build_begrip_index(project)
+    errors = validate_integrity_voorbeeldreeks(data, DUMMY, idx, project)
+    assert any("is-invoer-juist=nee" in e for e in errors)
+
+
+def test_vr_leeg_afleidingsregel_id_geen_fout(tmp_path):
+    project = leeg_project(tmp_path, ("begrippen", "regels"))
+    data = _maak_vr(**{"afleidingsregel-id": ""})
+    idx = build_begrip_index(project)
+    assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
