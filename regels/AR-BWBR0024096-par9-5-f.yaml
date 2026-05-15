@@ -1,0 +1,53 @@
+regel-id: AR-BWBR0024096-par9-5-f
+naam: berekenen vervaldatum zes weken bij dagtekening 28 februari normaal jaar
+soort: Rekenregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-28-februari
+invoer:
+- BWBR0024096/par9-5/dagtekening-28-februari
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari
+operators:
+- plus
+formele-regel: |
+  vervaldag-normaal-jaar-28-februari moet berekend worden als
+  dagtekening-aanslagbiljet plus 42 dagen
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 28 februari
+  - het schrikkeljaar-voorbehoud is niet van toepassing (het jaar is geen schrikkeljaar)
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met zes weken
+  [uitkomst: 28 februari + 42 kalenderdagen in een 28-dagige februari = 11 april]
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, tweede rekenscenario (normaal-jaarvariant, zes weken).
+
+  De sectie bepaalt: "Als de dagtekening 28 februari is, dan vervalt … de betalingstermijn
+  van zes weken op 11 april, tenzij het jaartal aangeeft dat het een schrikkeljaar is."
+
+  In een niet-schrikkeljaar heeft februari 28 dagen. De berekening: zes weken = 42
+  kalenderdagen. 28 februari + 42 dagen:
+  - resterende dagen in februari na de 28e = 0
+  - maart: 31 dagen → lopend totaal: 31
+  - april: 42 - 31 = 11 → vervaldatum: 11 april
+
+  De 'tenzij'-constructie markeert de schrikkeljaar-specialisatieregel (AR-BWBR0024096-par9-5-c)
+  als uitzondering op déze hoofdregel. In een schrikkeljaar heeft februari 29 dagen, zodat
+  28 februari + 42 = 10 april (AR-BWBR0024096-par9-5-c is dan van toepassing).
+
+  Grammaticale interpretatie: de tekst stelt letterlijk 'de betalingstermijn van zes
+  weken vervalt op 11 april' bij dagtekening 28 februari (hoofdzin, normaal jaar).
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 28 februari 2025 (geen schrikkeljaar); betalingstermijn: zes weken"
+  verwachte-uitkomst: "vervaldatum: 11 april 2025"
+  juridisch-juist: true
+  toelichting: "2025 is geen schrikkeljaar; februari heeft 28 dagen; 28 februari + 42 dagen: 0 resterende in februari + 31 (maart) + 11 (april) = 42. Vervaldatum: 11 april."
+- invoerwaarden: "dagtekening: 28 februari 2024 (schrikkeljaar); betalingstermijn: zes weken"
+  verwachte-uitkomst: "vervaldatum: 11 april 2024"
+  juridisch-juist: false
+  toelichting: "Grensgeval: 2024 is een schrikkeljaar; de specialisatieregel AR-BWBR0024096-par9-5-c heeft prioriteit 1 en is van toepassing: 28 februari 2024 + 42 dagen (29-dagige februari) = 10 april (niet 11 april). Deze hoofdregel wordt terzijde gesteld."
+tussenresultaat: false

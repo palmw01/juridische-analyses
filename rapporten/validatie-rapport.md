@@ -102,6 +102,9 @@ WAARSCHUWINGEN
   begrippen/vervaldag-laatste-dag-maand.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
     [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
+  begrippen/vervaldag-normaal-jaar-28-februari.yaml
+    [L3] alle relaties leeg (is-een, heeft, leidt-tot)
+    [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
   begrippen/vervaldag-schrikkeljaar-28-februari.yaml
     [L3] alle relaties leeg (is-een, heeft, leidt-tot)
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
@@ -122,8 +125,12 @@ WAARSCHUWINGEN
   begrippen/zes-weken.yaml
     [L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd
     [L3] definitie.kern is ingevuld maar voorbeelden ontbreken — voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)
+  regels/AR-BWBR0004770-art9-lid5-a.yaml
+    [L3] soort is 'Specialisatieregel' maar gespecialiseert-regel-id is niet ingevuld — stel gespecialiseert-regel-id in op de regel-id van de hoofdregel
+  regels/AR-BWBR0024096-art9-par1-b.yaml
+    [L3] soort is 'Specialisatieregel' maar gespecialiseert-regel-id is niet ingevuld — stel gespecialiseert-regel-id in op de regel-id van de hoofdregel
 
-GESLAAGD: 56 bestanden
+GESLAAGD: 59 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 76
+WAARSCHUWINGEN: 80
 ```

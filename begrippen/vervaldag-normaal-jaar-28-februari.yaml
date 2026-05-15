@@ -1,0 +1,58 @@
+begrip-id: BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari
+begripsnaam: vervaldag-normaal-jaar-28-februari
+aliases: []
+soort: datum
+soort-id: false
+jas-klasse: tijdsaanduiding
+toelichting-klasse: >-
+  Standaard-uitkomst voor dagtekening 28 februari in een niet-schrikkeljaar: in een
+  niet-schrikkeljaar is 28 februari de laatste dag van de maand, zodat de beperkingsregel
+  van toepassing is voor de één-maandtermijn (31 maart) en de kalenderrekenregel voor de
+  zes-wekentermijn (11 april). Dit is de hoofdzin van de tenzij-constructie waarvan
+  AR-BWBR0024096-par9-5-c de specialisatieregel is.
+herkomst: afgeleid
+status: concept
+definitie:
+  kern: >-
+    De berekende vervaldag bij dagtekening 28 februari in een niet-schrikkeljaar: de
+    één-maandtermijn vervalt op 31 maart (beperkingsregel: 28 februari is de laatste dag
+    van de maand, volgmaand maart heeft 31 dagen) en de zes-wekentermijn vervalt op
+    11 april (28 februari + 42 kalenderdagen)
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "Als de dagtekening 28 februari is, dan vervalt de betalingstermijn van een maand op 31 maart en de betalingstermijn van zes weken op 11 april"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Dagtekening 28 februari 2025 (geen schrikkeljaar), betalingstermijn één maand — vervaldag is 31 maart 2025?"
+  waar: true
+  toelichting: "2025 is geen schrikkeljaar; 28 februari is de laatste dag van de maand; beperkingsregel: de dag die hetzelfde nummer draagt (28) bestaat in maart wel, maar de standaard voor de laatste dag van de maand is de laatste dag van de volgmaand = 31 maart."
+- stelling: "Dagtekening 28 februari 2025 (geen schrikkeljaar), betalingstermijn zes weken — vervaldag is 11 april 2025?"
+  waar: true
+  toelichting: "2025 is geen schrikkeljaar; 28 februari + 42 dagen: februari heeft 28 dagen, resterende in februari = 0, maart 31 dagen: 0 + 31 = 31, april: 42 - 31 = 11. Vervaldatum: 11 april."
+- stelling: "Dagtekening 28 februari 2024 (schrikkeljaar), betalingstermijn één maand — vervaldag is 31 maart 2024?"
+  waar: false
+  toelichting: "Grensgeval: 2024 is een schrikkeljaar; de specialisatieregel AR-BWBR0024096-par9-5-c is van toepassing: vervaldag is 28 maart (niet 31 maart). De hoofdregel AR-BWBR0024096-par9-5-e geldt niet in een schrikkeljaar."
+kenmerken:
+- "Hoofdregel voor het 28-februari-scenario: geldt uitsluitend in een niet-schrikkeljaar"
+- "28 februari is in een niet-schrikkeljaar de laatste dag van de maand (beperkingsregel-trigger)"
+- "Één maand: vervalt op 31 maart (laatste dag van de volgmaand)"
+- "Zes weken: 28 + 42 = 70 dagen totaal; 28 februari + 42 = 11 april in 28-dagige februari"
+- "Twee uitkomsten: 31 maart (één maand) of 11 april (zes weken)"
+identificatiebegrip: false
+uitvoer-van-regel-id: AR-BWBR0024096-par9-5-e
+tussenresultaat: false

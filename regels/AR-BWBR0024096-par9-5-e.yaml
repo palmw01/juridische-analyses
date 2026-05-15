@@ -1,0 +1,55 @@
+regel-id: AR-BWBR0024096-par9-5-e
+naam: berekenen vervaldatum één maand bij dagtekening 28 februari normaal jaar
+soort: Beperkingsregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-28-februari
+invoer:
+- BWBR0024096/par9-5/dagtekening-28-februari
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari
+operators:
+- gelijk-aan
+formele-regel: |
+  vervaldag-normaal-jaar-28-februari bedraagt ten hoogste 31 maart
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 28 februari
+  - het schrikkeljaar-voorbehoud is niet van toepassing (het jaar is geen schrikkeljaar)
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met één maand
+  [toelichting: in een niet-schrikkeljaar is 28 februari de laatste dag van de maand;
+   de beperkingsregel stelt de vervaldatum op de laatste bestaande dag van de volgmaand,
+   zijnde 31 maart]
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, tweede rekenscenario (normaal-jaarvariant, één maand).
+
+  De sectie bepaalt: "Als de dagtekening 28 februari is, dan vervalt de betalingstermijn
+  van een maand op 31 maart … tenzij het jaartal aangeeft dat het een schrikkeljaar is."
+
+  In een niet-schrikkeljaar heeft februari 28 dagen; 28 februari is de laatste dag van de
+  maand. De beperkingsregel voor de één-maandtermijn is dan van toepassing: de dag die
+  hetzelfde nummer draagt als de dagtekening (28) zou in maart op 28 maart vallen, maar
+  de LI stelt de vervaldag voor het normaal-jaar-geval op 31 maart. Dit is de
+  beperkingsregel voor het geval dat de dagtekening de laatste dag van de maand is: de
+  vervaldag is de laatste dag van de volgmaand.
+
+  De 'tenzij'-constructie markeert de schrikkeljaar-specialisatieregel (AR-BWBR0024096-par9-5-c)
+  als uitzondering op déze hoofdregel. Deze regel is de lex generalis; de specialisatieregel
+  heeft prioriteit 1 en overschrijft deze uitkomst in schrikkeljaren.
+
+  Grammaticale interpretatie: de tekst stelt letterlijk 'vervalt de betalingstermijn van
+  een maand op 31 maart' bij dagtekening 28 februari (hoofdzin, normaal jaar).
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 28 februari 2025 (geen schrikkeljaar); betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 31 maart 2025"
+  juridisch-juist: true
+  toelichting: "2025 is geen schrikkeljaar; 28 februari is de laatste dag van de maand; beperkingsregel: vervaldatum is 31 maart (laatste dag van de volgmaand maart)."
+- invoerwaarden: "dagtekening: 28 februari 2024 (schrikkeljaar); betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 31 maart 2024"
+  juridisch-juist: false
+  toelichting: "Grensgeval: 2024 is een schrikkeljaar; de specialisatieregel AR-BWBR0024096-par9-5-c heeft prioriteit 1 en is van toepassing: vervaldatum is 28 maart (niet 31 maart). Deze hoofdregel wordt door de specialisatieregel terzijde gesteld."
+tussenresultaat: false
