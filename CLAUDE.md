@@ -1,4 +1,6 @@
-# CLAUDE.md — Werkafspraken
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Rol
 
@@ -14,19 +16,120 @@ Je treedt op als **senior jurist bij de Belastingdienst, domein Inning**. Dat be
 
 ---
 
+## Architectuur
+
+Dit project is een AI-ondersteunde wetsanalyse-toolchain. De kern is een **traceerbare gegevenspijplijn** van wetstekst naar uitvoerbare regelspecificaties:
+
+```
+bronnen/{bwb-id}/art{N}.json             ← wetstekst (MCP, /wettenbank)
+        ↓
+annotaties/{bwb-id}/art{N}.json          ← structuurindex (Flow A, /annoteer)
+annotaties/{bwb-id}/art{N}-lid{L}.json   ← lid-annotatie + diagram (Flow B, /annoteer)
+        ↓
+begrippen/{slug}.yaml                    ← conceptdefinities (A3a, /begrip)
+regels/AR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← afleidingsregels (A3b, /begrip)
+        ↓
+validaties/VR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← testmatrix (A4b, /valideer)
+        ↓
+kennisgraaf/*.ttl / *.gexf               ← RDF + graafexport (make export-rdf/export-graph)
+webapp/                                  ← statische website (make webapp)
+```
+
+Elk bestand bevat `bron-annotatie-id`- en `markering-id`-velden die directe navigatie naar de exacte wetstekstpassage mogelijk maken.
+
+### Python-toolchain (`tools/`)
+
+| Script | Functie |
+|--------|---------|
+| `validate_note.py` | L1–L3 validatie: JSON Schema-conformiteit, referentiële integriteit, kwaliteitswaarschuwingen |
+| `export_rdf.py` | YAML-begrippen en -regels → RDF Turtle (SKOS) |
+| `export_graph.py` | Begrippen + relaties → GEXF + GraphML (Gephi/yEd) |
+| `check_enrichment.py` | Detecteert begrippen met meerdere bronartikelen |
+| `extract_kruisrefs.py` | JCI URI-extractie en forward/backward kruisreferenties |
+| `query_rdf.py` | SPARQL-query op het gegenereerde RDF-model |
+| `fetch_wettenbank.py` | MCP-wrapper voor wetsteksten ophalen |
+| `jas_index_lib.py` | Gedeeld hulpprogramma: kern- en contexten-laden |
+
+### Statische webapp (`sitegen/`)
+
+Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.js-kennisgraaf, SPARQL-editor (Comunica) en Mermaid-annotatiediagrammen. Outputmap: `webapp/` (gegenereerd, niet ingecheckt).
+
+### Validatielagen
+
+- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype. Blokkerend.
+- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (begrip-id → regel-id → voorbeeldreeks-id), statusconsistentie, diagramintegriteit. Blokkerend.
+- **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen. Adviserend.
+
+De **pre-commit hook** blokkeert commits met L1/L2-fouten in gestagede bestanden. Installeer met `make install-hooks`.
+
+---
+
+## Commando's
+
+### Opzet (eenmalig na clone)
+
+```bash
+make setup          # venv aanmaken + deps installeren + pre-commit hook installeren
+```
+
+### Tests
+
+```bash
+make test           # alle tests behalve e2e
+make test-fast      # alleen tests/unit/, stopt bij eerste fout (-x)
+make test-cov       # met coverage-rapport (fail_under=100%)
+make test-e2e       # end-to-end tests (traag, apart uitvoeren)
+
+# Eén specifieke test
+tools/.venv/bin/python -m pytest tests/unit/test_validate_note.py -k "naam_van_test" -q
+
+# Eén testbestand
+tools/.venv/bin/python -m pytest tests/unit/test_export_rdf.py -q
+```
+
+Coverage is verplicht op 100% — `make test-cov` mislukt bij lagere dekking.
+
+### Validatie en exports
+
+```bash
+make validate       # volledige L1+L2+L3 projectvalidatie
+make export-rdf     # begrippen + regels → RDF Turtle
+make export-graph   # begrippen + relaties → GEXF/GraphML
+make webapp         # statische webapp genereren in webapp/
+make check-enrichment  # begrippen met meerdere bronnen detecteren
+
+# Eén bestand valideren (na /annoteer of /begrip)
+tools/.venv/bin/python tools/validate_note.py --file annotaties/BWBR0004770/art9-lid1.json
+```
+
+### CI en deployment
+
+```bash
+make ci             # test + validate + export-rdf + export-graph + check-enrichment (= GitHub Actions)
+make clean          # gegenereerde bestanden verwijderen (webapp/, kennisgraaf/, .build/)
+make lock           # dependencies installeren en pinnen in requirements.lock
+```
+
+**GitHub Actions CI** draait `make ci` bij elke push naar `main` en elke PR.  
+**Deploy** bouwt de webapp en publiceert naar GitHub Pages bij elke push naar `main` via `.github/workflows/deploy-webapp.yml`.
+
+---
+
 ## Workflow
 
 De wetsanalyse werkt iteratief via drie micro-skills:
 
 ```
-/annoteer art. [A] [W]        →  Flow A: wetstekst-noot + index-noot (structuurankers)
-/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-noot + lege begrip-noten (A2)
-/begrip-alles art. [A] [W]    →  A3: definitie + voorbeelden + relaties + (evt.) afleidingsregels
+/annoteer art. [A] [W]         →  Flow A: index-JSON aanmaken (structuuranker)
+/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-JSON + begrip-YAML-stubs (A2)
+/begrip-alles art. [A] [W]     →  A3: definitie + relaties + afleidingsregels invullen
+/valideer AR-[id]              →  A4b: testmatrix opstellen voor een afleidingsregel
 ```
 
 Voor bronnen zonder leden (Leidraad, beleid):
+
 ```
-/annoteer sectie [ref] [W]    →  Flow C: wetstekst-noot + directe annotatie-noot
+/annoteer sectie [ref] [W]    →  Flow C: sectie-annotatie-JSON + begrip-stubs (A2)
 ```
 
 ### Annotatie → begrip: strikte volgorde
@@ -101,26 +204,3 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
 | `.claude/skills/valideer/kaders.md` | A4b: testgevallenpatronen per regeltype, typeafleiding, algoritmisch bepaalbare uitvoer, minimumvereisten (≥ 3 kolommen) |
-
-### Makefile en Python-tools
-
-| Commando | Gebruik | Wanneer uitvoeren |
-|----------|---------|-------------------|
-| `make setup` | .venv + deps + pre-commit in 1 commando | Eenmalig na clone |
-| `make validate` | Volledige projectvalidatie (L1+L2+L3) | Na elke wijziging |
-| `make export-rdf` | Exporteert begrippen + regels naar RDF Turtle | Na wijziging begrippen |
-| `make webapp` | Genereert statische webapp (Belastingdienst-stijl) | Na wijzigingen |
-| `make check-enrichment` | Detecteert begrippen met meerdere bronnen | Na nieuwe markeringen |
-| `make query-rdf` | SPARQL-query op RDF-model | Bij analyse |
-| `make export-graph` | Exporteert project naar GEXF/GraphML | Na wijzigingen begrippen/regels |
-| `make test` | Draait de Python-testsuite | Na codewijzigingen in tools/ |
-| `make fetch-wettenbank` | Haalt wetsteksten op via wettenbank-API | Bij nieuwe wetsartikelen |
-| `make ci` | Validatie + export-rdf + export-graph + check-enrichment (zelfde als GitHub Actions) | Voor push |
-| `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
-| `make lock` | Installeert + freeze't dependencies | Bij nieuwe deps |
-| `make clean` | Verwijdert gegenereerde bestanden (grafen, webapp) | Opruimen |
-| `tools/.venv/bin/python tools/validate_note.py --file <pad>` | L1 schema-validatie, L2 integriteitscontrole, L3 kwaliteitswaarschuwingen | Na elke `/annoteer` of `/begrip` write |
-
-**CI (GitHub Actions):** Bij elke push naar `main` en elke PR draait `make ci`.  
-**Deploy:** Bij elke push naar `main` wordt de webapp automatisch gebouwd en naar GitHub Pages gepubliceerd via `.github/workflows/deploy-webapp.yml`.  
-**Pre-commit hook:** Blokkeert commits met L1/L2-fouten in gestagede projectbestanden. Installeer met `make install-hooks`.
