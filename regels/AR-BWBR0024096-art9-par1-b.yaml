@@ -25,9 +25,12 @@ formele-regel: 'In afwijking van vaststellen betalingstermijn belastingaanslag:
   - voorlopige-aanslag is van toepassing
 
   - afwijkend-boekjaar is waar'
-toelichting: Voor belastingplichtigen met een afwijkend boekjaar wordt de laatste
+toelichting: "Voor belastingplichtigen met een afwijkend boekjaar wordt de laatste
   vervaldag van een voorlopige aanslag altijd gesteld op de laatste dag van de maand
-  waarin deze valt.
+  waarin deze valt.\n\n[OPEN PUNT] gespecialiseert-regel-id ontbreekt: de formele-regel
+  verwijst naar 'vaststellen betalingstermijn belastingaanslag', maar die hoofdregel
+  bestaat nog niet in regels/. Zodra die regel is aangemaakt, gespecialiseert-regel-id
+  hierop instellen."
 voorbeeldreeksen:
 - invoerwaarden: 'BV met boekjaar 1 april – 31 maart; afwijkend-boekjaar: ja; voorlopige
     aanslag; laatste termijn berekend op 15 november 2025'

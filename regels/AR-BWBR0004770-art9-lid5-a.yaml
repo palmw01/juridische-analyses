@@ -97,4 +97,5 @@ voorbeeldreeksen:
     Onjuiste toepassing. Wanneer de terugvalregel van de derde volzin van lid 5 wordt
     genegeerd, zou de specialisatieregel ten onrechte van toepassing worden geacht.
     Correct is nee: 12 − 12 = 0 resterende maanden, dus ≤ 1 termijn; lid 1 herneemt.
+gespecialiseert-regel-id: AR-BWBR0004770-art9-lid1-a
 tussenresultaat: false
