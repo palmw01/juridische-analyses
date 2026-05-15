@@ -27,7 +27,7 @@ def _render_regel_waarschuwingen(index: dict, regel_id: str, meta: list | None =
                 f'{commando_html}'
                 f'</div>'
             )
-        items += f'<li class="waarschuwing-item">{kort}{oplossing}</li>'
+        items += f'<li class="waarschuwing-item"><span class="waarschuwing-melding">{kort}</span>{oplossing}</li>'
     return f'<div class="card card-waarschuwing"><div class="card-title">Kwaliteitspunten ({len(ws)})</div><ul class="waarschuwing-list">{items}</ul></div>'
 
 

@@ -272,10 +272,9 @@ h2{font-size:clamp(1.05rem,3vw,1.25rem);color:var(--text);margin-bottom:0.625rem
 /* ── Lijsten ── */
 .item-list{list-style:none}
 .item-list li{
-  display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:0.5rem;
   padding:0.75rem 0.5rem;
   border-bottom:1px solid var(--border);
-  cursor:pointer;
   transition:background 0.12s;
 }
 .item-list li:hover{background:var(--primary-light)}
@@ -532,9 +531,27 @@ footer{
 .oplossing-commando code{font-size:0.78rem;background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:0.1rem 0.35rem}
 /* waarschuwing-list: op detailpagina's (begrippen, regels) */
 .card-waarschuwing{border-left:3px solid var(--warning)!important}
-.waarschuwing-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.5rem}
-.waarschuwing-item{font-size:0.82rem;color:var(--text-secondary);line-height:1.5}
-.waarschuwing-item .oplossing-blok{margin-top:0.4rem}
+.waarschuwing-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.waarschuwing-item{
+  font-size:0.82rem;color:var(--text-secondary);line-height:1.5;
+  padding:0.625rem 0;
+  border-bottom:1px solid var(--border);
+}
+.waarschuwing-list > .waarschuwing-item:last-child{border-bottom:none;padding-bottom:0}
+.waarschuwing-melding{
+  display:flex;align-items:flex-start;gap:0.4rem;
+  color:var(--warning);font-weight:600;
+}
+.waarschuwing-melding::before{
+  content:"!";
+  font-weight:700;font-size:0.75rem;
+  background:var(--warning);color:#fff;
+  border-radius:50%;
+  width:1.1rem;height:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:0.05rem;
+}
+.waarschuwing-item .oplossing-blok{margin-top:0.5rem}
 /* badge op kwaliteitspagina: volledige tekst zichtbaar, geen harde afkap */
 .badge-soort{max-width:none;white-space:normal;word-break:break-word}
 
