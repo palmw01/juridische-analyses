@@ -4,18 +4,34 @@ from pathlib import Path
 from sitegen.html import breadcrumb, format_ann_title, schrijf_html
 
 
-def _render_regel_waarschuwingen(index: dict, regel_id: str) -> str:
+def _render_regel_waarschuwingen(index: dict, regel_id: str, meta: list | None = None) -> str:
+    from sitegen.data import zoek_meta
     ws = [w for pad, ws in index.items() if regel_id in pad for w in ws]
     if not ws:
         return ""
-    items = "".join(
-        f'<li class="waarschuwing-item">{escape(w.removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))}</li>'
-        for w in ws
-    )
+    meta_lijst = meta or []
+    items = ""
+    for w in ws:
+        kort = escape(w.removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))
+        m = zoek_meta(w, meta_lijst)
+        oplossing = ""
+        if m:
+            stappen_html = "".join(f"<li>{escape(s)}</li>" for s in (m.get("stappen") or []))
+            commando = escape(m.get("commando", "") or "")
+            commando_html = f'<p class="oplossing-commando">Skill: <code>{commando}</code></p>' if commando else ""
+            oplossing = (
+                f'<div class="oplossing-blok">'
+                f'<div class="oplossing-titel">{escape(m.get("titel", ""))}</div>'
+                f'<p class="oplossing-uitleg">{escape(m.get("uitleg", "").strip())}</p>'
+                f'<ol class="oplossing-stappen">{stappen_html}</ol>'
+                f'{commando_html}'
+                f'</div>'
+            )
+        items += f'<li class="waarschuwing-item">{kort}{oplossing}</li>'
     return f'<div class="card card-waarschuwing"><div class="card-title">Kwaliteitspunten ({len(ws)})</div><ul class="waarschuwing-list">{items}</ul></div>'
 
 
-def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waarschuwingen: dict | None = None):
+def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waarschuwingen: dict | None = None, meta: list | None = None):
     slug_by_bid = {b["id"]: b["slug"] for b in begrippen}
 
     def _link(ref: str) -> str:
@@ -23,6 +39,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waars
         return f'<a href="../begrippen/{slug}.html">{escape(ref)}</a>' if slug else escape(ref)
 
     ws_index = waarschuwingen or {}
+    meta_lijst = meta or []
     ann_by_key: dict[tuple[str, str, str], dict] = {}
     for a in annotaties:
         ann_by_key[(a["bwb_id"], a["artikel"], a.get("lid", ""))] = a
@@ -114,5 +131,5 @@ _inp?.addEventListener('input',function(){{
 <div class="card-title">Voorbeeldreeksen</div>
 {vb or "<p class=item-meta>Geen voorbeelden</p>"}
 </div>
-{_render_regel_waarschuwingen(ws_index, r["id"])}"""
+{_render_regel_waarschuwingen(ws_index, r["id"], meta_lijst)}"""
         schrijf_html(out, f'regels/{r["id"]}.html', f'{r["naam"]} | Belastingdienst', body, active="regels", p="../")

@@ -61,3 +61,30 @@ def test_gen_kwaliteit_filter_script_aanwezig(tmp_path):
     content = (tmp_path / "kwaliteit.html").read_text()
     assert "filterInput" in content
     assert "MiniSearch" in content
+
+
+def test_gen_kwaliteit_toont_oplossing_als_meta_aanwezig(tmp_path):
+    ws = {"begrippen/test.yaml": ["[L3] definitie.kern is leeg — gebruik /begrip"]}
+    meta = [{"sleutel": "definitie.kern is leeg", "titel": "Kern ontbreekt", "uitleg": "Uitleg hier.", "stappen": ["Stap 1", "Stap 2"], "commando": "/begrip"}]
+    gen_kwaliteit(tmp_path, ws, meta)
+    content = (tmp_path / "kwaliteit.html").read_text()
+    assert "oplossing-blok" in content
+    assert "Kern ontbreekt" in content
+    assert "Stap 1" in content
+    assert "Skill" in content
+
+
+def test_gen_kwaliteit_geen_oplossing_zonder_meta(tmp_path):
+    ws = {"begrippen/test.yaml": ["[L3] definitie.kern is leeg"]}
+    gen_kwaliteit(tmp_path, ws)
+    content = (tmp_path / "kwaliteit.html").read_text()
+    assert "oplossing-blok" not in content
+
+
+def test_gen_kwaliteit_oplossing_zonder_commando(tmp_path):
+    ws = {"begrippen/test.yaml": ["[L3] alle relaties leeg (is-een, heeft, leidt-tot)"]}
+    meta = [{"sleutel": "alle relaties leeg", "titel": "Geen relaties", "uitleg": "U.", "stappen": ["Stap"]}]
+    gen_kwaliteit(tmp_path, ws, meta)
+    content = (tmp_path / "kwaliteit.html").read_text()
+    assert "oplossing-blok" in content
+    assert "oplossing-commando" not in content

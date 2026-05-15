@@ -11,14 +11,30 @@ from sitegen.html import (
 )
 
 
-def _render_waarschuwingen(index: dict, sleutel: str) -> str:
+def _render_waarschuwingen(index: dict, sleutel: str, meta: list | None = None) -> str:
+    from sitegen.data import zoek_meta
     ws = [w for pad, ws in index.items() if sleutel in pad for w in ws]
     if not ws:
         return ""
-    items = "".join(
-        f'<li class="waarschuwing-item">{escape(w.removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))}</li>'
-        for w in ws
-    )
+    meta_lijst = meta or []
+    items = ""
+    for w in ws:
+        kort = escape(w.removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))
+        m = zoek_meta(w, meta_lijst)
+        oplossing = ""
+        if m:
+            stappen_html = "".join(f"<li>{escape(s)}</li>" for s in (m.get("stappen") or []))
+            commando = escape(m.get("commando", "") or "")
+            commando_html = f'<p class="oplossing-commando">Skill: <code>{commando}</code></p>' if commando else ""
+            oplossing = (
+                f'<div class="oplossing-blok">'
+                f'<div class="oplossing-titel">{escape(m.get("titel", ""))}</div>'
+                f'<p class="oplossing-uitleg">{escape(m.get("uitleg", "").strip())}</p>'
+                f'<ol class="oplossing-stappen">{stappen_html}</ol>'
+                f'{commando_html}'
+                f'</div>'
+            )
+        items += f'<li class="waarschuwing-item">{kort}{oplossing}</li>'
     return f'<div class="card card-waarschuwing"><div class="card-title">Kwaliteitspunten ({len(ws)})</div><ul class="waarschuwing-list">{items}</ul></div>'
 
 
@@ -45,7 +61,7 @@ def _render_begrip_kenmerken(kenmerken: list) -> str:
     return f'<div class="card"><div class="card-title">Kenmerken</div><ul style="margin-left:1.25rem">{items}</ul></div>'
 
 
-def gen_begrippen(out: Path, begrippen: list, annotaties: list, waarschuwingen: dict | None = None):
+def gen_begrippen(out: Path, begrippen: list, annotaties: list, waarschuwingen: dict | None = None, meta: list | None = None):
     slug_by_bid: dict[str, str] = {b["id"]: b["slug"] for b in begrippen}
     ann_by_begrip: dict[str, list[dict]] = {}
     for a in annotaties:
@@ -235,5 +251,5 @@ _inp?.addEventListener('input',function(){{
 </div>
 {_render_begrip_voorbeelden(b["voorbeelden"])}
 {_render_begrip_kenmerken(b["kenmerken"])}
-{_render_waarschuwingen(ws_index, b["slug"])}"""
+{_render_waarschuwingen(ws_index, b["slug"], meta)}"""
         schrijf_html(out, f'begrippen/{b["slug"]}.html', f'{b["naam"]} | Belastingdienst', body, active="begrippen", p="../")

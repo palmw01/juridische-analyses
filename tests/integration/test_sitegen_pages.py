@@ -500,6 +500,17 @@ def test_gen_begrippen_geen_waarschuwingen_geen_kaart(tmp_path):
     assert "Kwaliteitspunten" not in content
 
 
+def test_gen_begrippen_waarschuwingen_toont_oplossing_als_meta(tmp_path):
+    b = begrip()
+    ws = {"begrippen/belastingschuldige.yaml": ["[L3] definitie.kern is leeg — gebruik /begrip"]}
+    meta = [{"sleutel": "definitie.kern is leeg", "titel": "Kern ontbreekt", "uitleg": "U.", "stappen": ["Stap A"]}]
+    gen_begrippen(tmp_path, [b], [], waarschuwingen=ws, meta=meta)
+    content = (tmp_path / "begrippen" / "belastingschuldige.html").read_text()
+    assert "oplossing-blok" in content
+    assert "Kern ontbreekt" in content
+    assert "Stap A" in content
+
+
 def test_gen_begrippen_definitie_context_met_bron_annotatie(tmp_path):
     b = begrip(
         markeringen=[{

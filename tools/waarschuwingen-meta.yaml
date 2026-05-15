@@ -1,0 +1,189 @@
+# Oplossings­instructies bij L3-waarschuwingen
+# Gesorteerd op sleutellengte aflopend (sitegen/data.py laadt ze in deze volgorde).
+# Matching verloopt via str.startswith(sleutel) na het strippen van [L3]/[L2]/[L1] prefix.
+
+# ── Begrip ────────────────────────────────────────────────────────────────────
+
+- sleutel: "definitie.kern is leeg maar definitie.contexten[] bevat items"
+  titel: "Contexten vóór kern"
+  uitleg: >
+    Contexten zijn aanvullingen op de kern; zonder ingevulde kern zijn ze zinloos
+    en staat de definitie structureel onjuist.
+  stappen:
+    - "Vul eerst `definitie.kern` in via `/begrip`"
+    - "Verifieer daarna dat de bestaande contexten nog kloppen met de nieuwe kern"
+  commando: "/begrip"
+
+- sleutel: "definitie.kern bevat de begripsnaam zelf"
+  titel: "Substitutieverbod geschonden"
+  uitleg: >
+    Een correcte definitie is substitueerbaar: de definiendum (het begrip) mag niet
+    in de definiens voorkomen (circulaire definitie).
+  stappen:
+    - "Herschrijf `definitie.kern` zonder de begripsnaam te noemen"
+    - "Beschrijf de essentie via naastliggende of hogere begrippen"
+
+- sleutel: "definitie.kern eindigt op een punt"
+  titel: "Punt aan einde kern"
+  uitleg: >
+    Kernomschrijvingen eindigen per conventie zonder punt, zodat ze
+    naadloos in samengestelde zinnen hergebruikt kunnen worden.
+  stappen:
+    - "Verwijder het afsluitende punt uit `definitie.kern`"
+
+- sleutel: "definitie.kern is ingevuld maar voorbeelden ontbreken"
+  titel: "Voorbeelden ontbreken"
+  uitleg: >
+    Voorbeelden toetsen de bruikbaarheid van de definitie en onthullen grenscasussen
+    die de definitie-tekst alleen niet dekt.
+  stappen:
+    - "Voeg via `/begrip` minimaal 2 voorbeelden toe"
+    - "Minimaal 1 duidelijk geldig geval (`waar: true`) en 1 grensgeval (`waar: false`)"
+  commando: "/begrip"
+
+- sleutel: "definitie.kern is leeg"
+  titel: "Kern definitie ontbreekt"
+  uitleg: >
+    Elk begrip heeft een kern-definitie nodig als fundament van de begripsomschrijving;
+    zonder kern kunnen geen contexten, relaties of voorbeelden worden gevalideerd.
+  stappen:
+    - "Voer `/begrip` uit voor dit begrip"
+    - "Vul `definitie.kern` in op basis van de primaire markering(en) in de annotatie"
+    - "Gebruik de markering-tekst als startpunt; schrijf naar één of twee zinnen"
+  commando: "/begrip"
+
+- sleutel: "markering(en) met bijdrage 'aanvullend' hebben geen context-entry"
+  titel: "Aanvullende markering zonder context"
+  uitleg: >
+    Markeringen met bijdrage 'aanvullend' signaleren een artikel-specifieke verfijning
+    of uitbreiding; die hoort vastgelegd te zijn als context-entry.
+  stappen:
+    - "Voeg voor elke aanvullende markering een entry toe aan `definitie.contexten`"
+    - "Zet het bijbehorende `markering-id` in het context-object"
+    - "Beschrijf de verfijning of uitbreiding in het `tekst`-veld"
+  commando: "/begrip"
+
+- sleutel: "alle relaties leeg (is-een, heeft, leidt-tot)"
+  titel: "Geen relaties vastgelegd"
+  uitleg: >
+    Relaties verankeren het begrip in de kennisgraaf; zonder relaties staat het
+    begrip geïsoleerd en kan de graaf niet worden doorzocht.
+  stappen:
+    - "Voeg minimaal één `is-een`-relatie toe naar het bovenliggende begrip"
+    - "Voeg `heeft`- of `leidt-tot`-relaties toe indien van toepassing"
+    - "Raadpleeg `kaders.md` §Relatierichting voor de forward-only regel"
+  commando: "/begrip"
+
+- sleutel: "alle markeringen onbevestigd"
+  titel: "A4-validatie ontbreekt"
+  uitleg: >
+    Onbevestigde markeringen zijn AI-output die nog niet door een jurist gecontroleerd
+    is; gebruik ze niet in definitieve analyses zonder A4-review.
+  stappen:
+    - "Controleer elke markering op juridische juistheid (A4-activiteit)"
+    - "Zet `bevestigd: true` en vul `bevestigd-op` in voor correct bevonden markeringen"
+    - "Verwijder of corrigeer onjuiste markeringen"
+
+- sleutel: "status: te-verrijken"
+  titel: "Begrip te verrijken"
+  uitleg: >
+    Dit begrip is bewust als 'te-verrijken' gemarkeerd omdat definitie, relaties of
+    voorbeelden nog onvolledig zijn.
+  stappen:
+    - "Vul de ontbrekende velden in (definitie, relaties, voorbeelden)"
+    - "Wijzig `status` naar `concept` zodra de basisinvulling compleet is"
+    - "Wijzig `status` naar `definitief` na A4-validatie"
+  commando: "/begrip"
+
+# ── Regel ─────────────────────────────────────────────────────────────────────
+
+- sleutel: "soort is 'Specialisatieregel' maar gespecialiseerd-regel-id is niet ingevuld"
+  titel: "Hoofdregel-koppeling ontbreekt"
+  uitleg: >
+    Elke Specialisatieregel moet expliciet verwijzen naar de hoofdregel waarvan zij
+    afwijkt; zonder die koppeling is de cascade onvolledig.
+  stappen:
+    - "Stel `gespecialiseerd-regel-id` in op de `regel-id` van de hoofdregel"
+    - "Als de hoofdregel nog niet bestaat: maak die eerst aan of documenteer het als open punt in `toelichting`"
+
+- sleutel: "soort is 'Specialisatieregel' maar prioriteit is niet ingevuld"
+  titel: "Prioriteit ontbreekt"
+  uitleg: >
+    Specialisatieregels moeten een prioriteit hebben zodat conflicten met de hoofdregel
+    deterministisch worden opgelost.
+  stappen:
+    - "Stel `prioriteit` in op een geheel getal"
+    - "Lager getal = hogere prioriteit (bijv. `1` voor de meest specifieke uitzondering)"
+    - "Raadpleeg `kaders-regels.md` §Specialisatieregel voor de prioriteit-beslisboom"
+
+- sleutel: "voorbeeldreeksen: geen grensgeval (juridisch-juist: false) aanwezig"
+  titel: "Geen grensgeval in voorbeelden"
+  uitleg: >
+    Grensgevallen tonen de buitengrens van de regel en voorkomen over- of onder-toepassing
+    bij randsituaties.
+  stappen:
+    - "Voeg een voorbeeldreeks toe met `juridisch-juist: false`"
+    - "Kies een invoer die nét buiten de toepassings­voorwaarden valt (bijv. een datum één dag te vroeg)"
+
+- sleutel: "prioriteit is ingevuld ("
+  titel: "Prioriteit op verkeerde regelsoort"
+  uitleg: >
+    Prioriteit is alleen zinvol bij Specialisatieregels; bij andere regelsoorten
+    heeft het veld geen effect en kan het verwarring wekken.
+  stappen:
+    - "Verwijder het `prioriteit`-veld"
+    - "Of wijzig `soort` naar `Specialisatieregel` als dat de bedoeling is"
+
+# ── Annotatie ─────────────────────────────────────────────────────────────────
+
+- sleutel: "annotatie-id is een paragraaf-bron maar sectie-veld is leeg"
+  titel: "Sectie-veld leeg"
+  uitleg: >
+    Paragraaf-annotaties (bijv. Leidraad Invordering) gebruiken het `sectie`-veld
+    als structuuranker in plaats van een lid-nummer.
+  stappen:
+    - "Vul `sectie` in met het paragraafnummer, bijv. `9.5`"
+    - "Controleer dat `structuurpositie` overeenkomt met de paragraafindeling"
+
+- sleutel: "diagram heeft knopen maar geen kanten"
+  titel: "Diagram mist verbindingen"
+  uitleg: >
+    Geïsoleerde knopen visualiseren geen relaties; kanten leggen de juridische
+    samenhang vast die centraal staat in het A2c-structuurdiagram.
+  stappen:
+    - "Voeg kanten toe die de relaties tussen de knopen weerspiegelen"
+    - "Gebruik de annotatierijen als bron voor de relatie-richting (kolom JAS-klasse)"
+    - "Voer `/annoteer` opnieuw uit als het diagram herzien moet worden"
+  commando: "/annoteer"
+
+- sleutel: "diagram ontbreekt of is leeg (geen knopen/kanten)"
+  titel: "Diagram ontbreekt"
+  uitleg: >
+    Het structuurdiagram (A2c) visualiseert de juridische samenhang en is vereist
+    voor een volledige annotatie.
+  stappen:
+    - "Voer `/annoteer` uit en vul het `diagram`-veld in"
+    - "Maak knopen voor elk geannoteerd begrip en kanten voor de relaties"
+    - "Raadpleeg `kaders.md` §Diagram voor het centrum-prioriteringsprotocol"
+  commando: "/annoteer"
+
+- sleutel: "annotatierijen leeg"
+  titel: "Geen annotatierijen"
+  uitleg: >
+    Zonder annotatierijen zijn er geen markeringen en begrippenkoppelingen vastgelegd;
+    de annotatie is in feite leeg.
+  stappen:
+    - "Voer `/annoteer` uit voor dit lid"
+    - "Maak voor elke relevante term in de wetstekst een annotatierij aan"
+    - "Vul minimaal `markering`, `jas-klasse`, `begrip-id` en `interpretatiemethode` in per rij"
+  commando: "/annoteer"
+
+- sleutel: "leden-annotaties leeg"
+  titel: "Artikel-index mist leden"
+  uitleg: >
+    Een artikel-index zonder leden-annotaties is een lege schil; de werkelijke
+    juridische inhoud zit in de lid-annotaties.
+  stappen:
+    - "Voeg de annotatie-id's van de lid-annotaties toe aan `leden-annotaties`"
+    - "Als de lid-annotaties nog niet bestaan: maak ze aan via `/annoteer`"
+  commando: "/annoteer"

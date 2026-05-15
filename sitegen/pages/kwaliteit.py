@@ -19,7 +19,28 @@ def _pad_naar_url(bestand: str) -> str:
     return ""
 
 
-def gen_kwaliteit(out: Path, waarschuwingen: dict[str, list[str]]):
+def _render_oplossing(meta_entry: dict | None) -> str:
+    if not meta_entry:
+        return ""
+    titel = escape(meta_entry.get("titel", ""))
+    uitleg = escape(meta_entry.get("uitleg", "").strip())
+    stappen = meta_entry.get("stappen") or []
+    commando = escape(meta_entry.get("commando", "") or "")
+    stappen_html = "".join(f"<li>{escape(s)}</li>" for s in stappen)
+    commando_html = f'<p class="oplossing-commando">Skill: <code>{commando}</code></p>' if commando else ""
+    return (
+        f'<div class="oplossing-blok">'
+        f'<div class="oplossing-titel">{titel}</div>'
+        f'<p class="oplossing-uitleg">{uitleg}</p>'
+        f'<ol class="oplossing-stappen">{stappen_html}</ol>'
+        f'{commando_html}'
+        f'</div>'
+    )
+
+
+def gen_kwaliteit(out: Path, waarschuwingen: dict[str, list[str]], meta: list | None = None):
+    from sitegen.data import zoek_meta
+    meta_lijst = meta or []
     items_data = []
     idx = 0
     for bestand, ws in sorted(waarschuwingen.items()):
@@ -43,11 +64,13 @@ def gen_kwaliteit(out: Path, waarschuwingen: dict[str, list[str]]):
             if url else escape(item["bestand"])
         )
         boodschap_kort = escape(item["boodschap"].removeprefix("[L3] ").removeprefix("[L2] ").removeprefix("[L1] "))
+        oplossing_html = _render_oplossing(zoek_meta(item["boodschap"], meta_lijst))
         items_html += (
             f'<li data-id="{item["id"]}">'
             f'<span class="badge badge-soort">{escape(item["type"])}</span> '
             f'{bestand_html}'
             f'<div class="item-meta">{boodschap_kort}</div>'
+            f'{oplossing_html}'
             f'</li>\n'
         )
 

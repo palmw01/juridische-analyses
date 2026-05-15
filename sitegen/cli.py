@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 from sitegen import assets
-from sitegen.data import laad_annotaties, laad_artikel_indices, laad_begrippen, laad_regels, laad_waarschuwingen
+from sitegen.data import laad_annotaties, laad_artikel_indices, laad_begrippen, laad_regels, laad_waarschuwingen, laad_waarschuwingen_meta
 from sitegen.pages.annotaties import gen_annotaties
 from sitegen.pages.artikel_indices import gen_artikel_indices
 from sitegen.pages.begrippen import gen_begrippen
@@ -33,6 +33,7 @@ def main():
     regels = laad_regels(project_dir)
     artikel_indices = laad_artikel_indices(project_dir)
     waarschuwingen = laad_waarschuwingen(project_dir)
+    meta = laad_waarschuwingen_meta(project_dir)
     print(f"  {len(begrippen)} begrippen, {len(annotaties)} annotaties, {len(regels)} regels, {len(artikel_indices)} artikel-indices", file=sys.stderr)
 
     print("CSS, JS en icons genereren...", file=sys.stderr)
@@ -42,11 +43,11 @@ def main():
     print("Pagina's genereren...", file=sys.stderr)
     gen_index(out, begrippen, annotaties, regels, waarschuwingen)
     gen_404(out)
-    gen_begrippen(out, begrippen, annotaties, waarschuwingen)
+    gen_begrippen(out, begrippen, annotaties, waarschuwingen, meta)
     gen_annotaties(out, annotaties, regels, begrippen, indices=artikel_indices)
     gen_artikel_indices(out, artikel_indices, annotaties)
-    gen_regels(out, regels, begrippen, annotaties, waarschuwingen)
-    gen_kwaliteit(out, waarschuwingen)
+    gen_regels(out, regels, begrippen, annotaties, waarschuwingen, meta)
+    gen_kwaliteit(out, waarschuwingen, meta)
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
     gen_sparql(out)

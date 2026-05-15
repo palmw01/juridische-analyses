@@ -122,3 +122,13 @@ def test_gen_regels_detail_geen_waarschuwingen_geen_kaart(tmp_path):
     gen_regels(tmp_path, [_regel()], [], [], waarschuwingen={})
     content = (tmp_path / "regels" / "AR-0001.html").read_text()
     assert "Kwaliteitspunten" not in content
+
+
+def test_gen_regels_detail_waarschuwingen_toont_oplossing_als_meta(tmp_path):
+    ws = {"regels/AR-0001.yaml": ["[L3] soort is 'Specialisatieregel' maar prioriteit is niet ingevuld — stel prioriteit in"]}
+    meta = [{"sleutel": "soort is 'Specialisatieregel' maar prioriteit is niet ingevuld", "titel": "Prioriteit ontbreekt", "uitleg": "U.", "stappen": ["Stap R"]}]
+    gen_regels(tmp_path, [_regel()], [], [], waarschuwingen=ws, meta=meta)
+    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    assert "oplossing-blok" in content
+    assert "Prioriteit ontbreekt" in content
+    assert "Stap R" in content

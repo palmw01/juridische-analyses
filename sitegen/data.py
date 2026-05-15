@@ -170,6 +170,28 @@ def waarschuwingen_voor(slug_of_id: str, index: dict[str, list[str]]) -> list[st
     return []
 
 
+def laad_waarschuwingen_meta(project_root: Path) -> list[dict]:
+    """Laad oplossings-meta uit tools/waarschuwingen-meta.yaml.
+    Retourneert entries gesorteerd op sleutellengte aflopend (langste eerst)
+    zodat startswith-matching altijd de meest specifieke entry vindt."""
+    pad = project_root / "tools" / "waarschuwingen-meta.yaml"
+    if not pad.exists():
+        return []
+    data = yaml.safe_load(pad.read_text()) or []
+    return sorted(data, key=lambda e: -len(e.get("sleutel", "")))
+
+
+def zoek_meta(boodschap: str, meta: list[dict]) -> dict | None:
+    """Vind de meta-entry voor een waarschuwingstekst via startswith-matching."""
+    tekst = boodschap
+    for prefix in ("[L3] ", "[L2] ", "[L1] "):
+        tekst = tekst.removeprefix(prefix)
+    for entry in meta:
+        if tekst.startswith(entry["sleutel"]):
+            return entry
+    return None
+
+
 def laad_artikel_indices(project_root: Path) -> list[dict]:
     indices = []
     pad = project_root / "annotaties"
