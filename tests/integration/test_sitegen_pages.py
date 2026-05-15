@@ -159,6 +159,13 @@ def test_gen_index_leeg_project(tmp_path):
     assert (tmp_path / "index.html").exists()
 
 
+def test_gen_index_kwaliteitspunten_tegel_niet_klikbaar(tmp_path):
+    gen_index(tmp_path, [], [], [], waarschuwingen={"begrippen/test.yaml": ["[L3] test"]})
+    content = (tmp_path / "index.html").read_text()
+    assert '<div class="stat-nr"><a href="kwaliteit.html"' not in content
+    assert "Kwaliteitspunten" in content
+
+
 def test_gen_404_maakt_bestand_aan(tmp_path):
     gen_404(tmp_path)
     assert (tmp_path / "404.html").exists()

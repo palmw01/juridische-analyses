@@ -24,7 +24,7 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list, waarsc
   <div class="card stat-card"><div class="stat-nr">{n_ann}</div><div class="stat-label">Annotaties</div></div>
   <div class="card stat-card"><div class="stat-nr">{n_reg}</div><div class="stat-label">Afleidingsregels</div></div>
   <div class="card stat-card"><div class="stat-nr">{n_klassen}</div><div class="stat-label">JAS-klassen</div></div>
-  <div class="card stat-card"><div class="stat-nr"><a href="kwaliteit.html" style="color:inherit;text-decoration:none">{n_ws}</a></div><div class="stat-label">Kwaliteitspunten</div></div>
+  <div class="card stat-card"><div class="stat-nr">{n_ws}</div><div class="stat-label">Kwaliteitspunten</div></div>
 </div>
 <div class="dash-grid">
   <div class="card">
