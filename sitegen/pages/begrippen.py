@@ -13,7 +13,7 @@ from sitegen.html import (
 
 def _render_waarschuwingen(index: dict, sleutel: str, meta: list | None = None) -> str:
     from sitegen.data import zoek_meta
-    ws = [w for pad, ws in index.items() if sleutel in pad for w in ws]
+    ws = [w for pad, ws in index.items() if Path(pad).stem == sleutel for w in ws]
     if not ws:
         return ""
     meta_lijst = meta or []

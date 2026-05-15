@@ -500,6 +500,16 @@ def test_gen_begrippen_geen_waarschuwingen_geen_kaart(tmp_path):
     assert "Kwaliteitspunten" not in content
 
 
+def test_gen_begrippen_waarschuwingen_geen_substring_match(tmp_path):
+    """Warnings van 'invorderen-van-belastingschuldige.yaml' mogen niet op
+    de pagina van 'belastingschuldige' verschijnen (regressie substring-bug)."""
+    b = begrip()
+    ws = {"begrippen/invorderen-van-belastingschuldige.yaml": ["[L3] Relaties leeg"]}
+    gen_begrippen(tmp_path, [b], [], waarschuwingen=ws)
+    content = (tmp_path / "begrippen" / "belastingschuldige.html").read_text()
+    assert "Kwaliteitspunten" not in content
+
+
 def test_gen_begrippen_waarschuwingen_toont_oplossing_als_meta(tmp_path):
     b = begrip()
     ws = {"begrippen/belastingschuldige.yaml": ["[L3] definitie.kern is leeg — gebruik /begrip"]}

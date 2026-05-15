@@ -345,3 +345,9 @@ def test_waarschuwingen_voor_gevonden(tmp_path):
 def test_waarschuwingen_voor_niet_gevonden(tmp_path):
     index = {"begrippen/belastingschuldige.yaml": ["[L3] test"]}
     assert waarschuwingen_voor("onbekend", index) == []
+
+
+def test_waarschuwingen_voor_geen_substring_match(tmp_path):
+    """Slug 'aanslag' mag geen warnings ophalen van 'belastingaanslag.yaml'."""
+    index = {"begrippen/belastingaanslag.yaml": ["[L3] test"]}
+    assert waarschuwingen_voor("aanslag", index) == []

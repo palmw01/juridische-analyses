@@ -207,7 +207,7 @@ def laad_waarschuwingen(project_root: Path) -> dict[str, list[str]]:
 def waarschuwingen_voor(slug_of_id: str, index: dict[str, list[str]]) -> list[str]:
     """Geef waarschuwingen voor een begrip-slug of regel-id."""
     for pad, ws in index.items():
-        if slug_of_id in pad:
+        if Path(pad).stem == slug_of_id:
             return ws
     return []
 
