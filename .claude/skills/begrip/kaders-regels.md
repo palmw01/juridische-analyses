@@ -121,12 +121,12 @@ prioriteit: 1   # gaat vóór andere Specialisatieregels met hogere waarde
 
 Voeg `prioriteit` alleen in als er daadwerkelijk meerdere Specialisatieregels zijn die hetzelfde deelgeval kunnen betreffen — geen speculatieve invulling vooraf.
 
-### Koppeling aan hoofdregel: `gespecialiseert-regel-id`
+### Koppeling aan hoofdregel: `gespecialiseerd-regel-id`
 
 Elke Specialisatieregel verwijst machine-leesbaar naar de hoofdregel waarvan zij afwijkt:
 
 ```yaml
-gespecialiseert-regel-id: AR-BWBR0024096-par9-5-e   # regel-id van de hoofdregel
+gespecialiseerd-regel-id: AR-BWBR0024096-par9-5-e   # regel-id van de hoofdregel
 ```
 
 - Vul dit veld in op het `regel-id` van de Rekenregel of Beperkingsregel die de Specialisatieregel overschrijft.
@@ -140,13 +140,13 @@ Wanneer de wetstekst een `tenzij`-constructie bevat die **twee expliciete uitkom
 | Constructiedeel | Regelsoort | Vereist veld |
 |----------------|-----------|--------------|
 | Hoofdzin ("Als … dan A") | Rekenregel, Beperkingsregel of Beslissingsregel | — |
-| Tenzij-variant ("tenzij … dan B") | Specialisatieregel | `gespecialiseert-regel-id` → regel-id van de hoofdzin-regel |
+| Tenzij-variant ("tenzij … dan B") | Specialisatieregel | `gespecialiseerd-regel-id` → regel-id van de hoofdzin-regel |
 
 **Besliscriterium**: Is de hoofdzin een zelfstandige normatieve uitkomst (geen lege verwijzing of opsomming)? Zo ja: maak beide regels aan. Dit onderscheidt een echte `tenzij`-pariteit van een uitzonderingsregel waarbij de hoofdregel impliciet of elders is vastgelegd.
 
 **Voorbeeld (§9.5 LI 2008)**: "vervalt op 31 maart … *tenzij* schrikkeljaar, in welk geval vervalt op 28 maart" — beide uitkomsten zijn expliciete normatieve bepalingen → twee regels vereist:
 1. Beperkingsregel: dagtekening 28 februari, normaal jaar → 31 maart
-2. Specialisatieregel: dagtekening 28 februari, schrikkeljaar → 28 maart (met `gespecialiseert-regel-id` → regel-id van 1)
+2. Specialisatieregel: dagtekening 28 februari, schrikkeljaar → 28 maart (met `gespecialiseerd-regel-id` → regel-id van 1)
 
 ---
 

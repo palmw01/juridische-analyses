@@ -187,14 +187,14 @@ def test_regel_specialisatie_zonder_prioriteit_geeft_warning():
     assert any("Specialisatieregel" in w and "prioriteit" in w for w in warnings)
 
 
-def test_regel_specialisatie_zonder_gespecialiseert_id_geeft_warning():
+def test_regel_specialisatie_zonder_gespecialiseerd_id_geeft_warning():
     data = maak_regel(soort="Specialisatieregel", prioriteit=1)
     warnings = validate_quality_regel(data, DUMMY)
-    assert any("gespecialiseert-regel-id" in w for w in warnings)
+    assert any("gespecialiseerd-regel-id" in w for w in warnings)
 
 
-def test_regel_specialisatie_met_gespecialiseert_id_geen_warning():
+def test_regel_specialisatie_met_gespecialiseerd_id_geen_warning():
     data = maak_regel(soort="Specialisatieregel", prioriteit=1)
-    data["gespecialiseert-regel-id"] = "AR-BWBR0024096-par9-5-e"
+    data["gespecialiseerd-regel-id"] = "AR-BWBR0024096-par9-5-e"
     warnings = validate_quality_regel(data, DUMMY)
-    assert not any("gespecialiseert-regel-id" in w for w in warnings)
+    assert not any("gespecialiseerd-regel-id" in w for w in warnings)

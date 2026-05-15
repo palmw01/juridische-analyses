@@ -49,7 +49,7 @@ toelichting: |
   Grammaticale interpretatie: de tekst stelt letterlijk 'in welk geval de termijn vervalt
   op 28 maart dan wel 10 april'.
 prioriteit: 1
-gespecialiseert-regel-id: AR-BWBR0024096-par9-5-e
+gespecialiseerd-regel-id: AR-BWBR0024096-par9-5-e
 voorbeeldreeksen:
 - invoerwaarden: "dagtekening: 28 februari 2024 (schrikkeljaar); betalingstermijn: één maand"
   verwachte-uitkomst: "vervaldatum: 28 maart 2024"

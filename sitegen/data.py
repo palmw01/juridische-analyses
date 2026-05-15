@@ -139,7 +139,7 @@ def laad_regels(project_root: Path) -> list[dict]:
             "annotatie_id": data.get("annotatie-id", ""),
             "rechtsfeit_id": data.get("rechtsfeit-id") or "",
             "vervangt_regel_id": data.get("vervangt-regel-id") or "",
-            "gespecialiseert_regel_id": data.get("gespecialiseert-regel-id") or "",
+            "gespecialiseerd_regel_id": data.get("gespecialiseerd-regel-id") or "",
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
             "geldigheid_tot": str(data.get("geldigheid-tot") or "") if data.get("geldigheid-tot") else "",
             "prioriteit": data.get("prioriteit"),
