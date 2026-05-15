@@ -24,6 +24,7 @@ def _regel(**overrides) -> dict:
         "annotatie_id": "BWBR0004770/art9/lid1",
         "rechtsfeit_id": "",
         "vervangt_regel_id": "",
+        "gespecialiseert_regel_id": "",
         "geldigheid_van": "2026-01-01",
         "geldigheid_tot": "",
         "prioriteit": None,

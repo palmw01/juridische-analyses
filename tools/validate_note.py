@@ -576,6 +576,13 @@ def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
             "stel prioriteit in (lager getal = hogere prioriteit)"
         )
 
+    # Specialisatieregel vereist gespecialiseert-regel-id
+    if soort == "Specialisatieregel" and not data.get("gespecialiseert-regel-id"):
+        warnings.append(
+            "[L3] soort is 'Specialisatieregel' maar gespecialiseert-regel-id is niet ingevuld — "
+            "stel gespecialiseert-regel-id in op de regel-id van de hoofdregel"
+        )
+
     return warnings
 
 

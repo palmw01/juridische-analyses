@@ -121,6 +121,33 @@ prioriteit: 1   # gaat vóór andere Specialisatieregels met hogere waarde
 
 Voeg `prioriteit` alleen in als er daadwerkelijk meerdere Specialisatieregels zijn die hetzelfde deelgeval kunnen betreffen — geen speculatieve invulling vooraf.
 
+### Koppeling aan hoofdregel: `gespecialiseert-regel-id`
+
+Elke Specialisatieregel verwijst machine-leesbaar naar de hoofdregel waarvan zij afwijkt:
+
+```yaml
+gespecialiseert-regel-id: AR-BWBR0024096-par9-5-e   # regel-id van de hoofdregel
+```
+
+- Vul dit veld in op het `regel-id` van de Rekenregel of Beperkingsregel die de Specialisatieregel overschrijft.
+- De validator geeft een L3-waarschuwing als het veld ontbreekt bij `soort: Specialisatieregel`.
+- Bij `soort != Specialisatieregel`: laat het veld weg (null of afwezig).
+
+### Pariteit bij tenzij-constructies
+
+Wanneer de wetstekst een `tenzij`-constructie bevat die **twee expliciete uitkomsten** benoemt (de hoofdzin én de tenzij-variant), moeten beide als zelfstandige regel worden aangemaakt:
+
+| Constructiedeel | Regelsoort | Vereist veld |
+|----------------|-----------|--------------|
+| Hoofdzin ("Als … dan A") | Rekenregel, Beperkingsregel of Beslissingsregel | — |
+| Tenzij-variant ("tenzij … dan B") | Specialisatieregel | `gespecialiseert-regel-id` → regel-id van de hoofdzin-regel |
+
+**Besliscriterium**: Is de hoofdzin een zelfstandige normatieve uitkomst (geen lege verwijzing of opsomming)? Zo ja: maak beide regels aan. Dit onderscheidt een echte `tenzij`-pariteit van een uitzonderingsregel waarbij de hoofdregel impliciet of elders is vastgelegd.
+
+**Voorbeeld (§9.5 LI 2008)**: "vervalt op 31 maart … *tenzij* schrikkeljaar, in welk geval vervalt op 28 maart" — beide uitkomsten zijn expliciete normatieve bepalingen → twee regels vereist:
+1. Beperkingsregel: dagtekening 28 februari, normaal jaar → 31 maart
+2. Specialisatieregel: dagtekening 28 februari, schrikkeljaar → 28 maart (met `gespecialiseert-regel-id` → regel-id van 1)
+
 ---
 
 ## Taalpatronen per type
@@ -352,6 +379,24 @@ Referentietabel voor de meest voorkomende afleidingsregels in de invorderingssfe
 | vaststellen betalingstermijn belastingaanslag | Specialisatieregel | vaststellen belastingaanslag | soort belastingaanslag | betalingstermijn belastingaanslag |
 | berekenen invorderingsrente | Rekenregel | verstrijken betalingstermijn | berekeningsgrondslag invorderingsrente, rentepercentage per dag, duur | invorderingsrente |
 | beoordelen recht op uitstel van betaling | Beslissingsregel | aanvraag uitstel van betaling | betalingsonmacht, zekerheid | recht op uitstel van betaling |
+
+---
+
+## Scope van bronspecifieke regels en signaleringen
+
+Wanneer een annotatierij een `signalering` bevat die aangeeft dat een concrete bepaling een algemenere norm impliceert, gelden twee scenario's:
+
+**Scenario A — Illustratief voorbeeld** (signalering bevat "voorbeeld" of "illustratief"):
+- De LI-tekst illustreert een principe dat normatief in de onderliggende wet (bijv. IW 1990) is verankerd.
+- Aanpak: maak een bronspecifieke regel voor het concrete LI-voorbeeld; noteer in `toelichting` dat de onderliggende norm in de wet zelf ligt en een aparte annotatie vereist.
+- Generaliseer **niet** binnen de LI-annotatie. De IW 1990-annotatie is de juiste bron voor de algemene regel.
+
+**Scenario B — Geïmpliceerde norm** (signalering bevat "impliceert algemene regel"):
+- De annotatie duidt op een normatieve bepaling die verder reikt dan het concrete geval.
+- Aanpak: maak een expliciete keuze en documenteer die in de `toelichting`:
+  - **Keuze 1 (aanbevolen)**: Maak de algemene regel aan als de norm grammaticaal of systematisch aantoonbaar is uit de bronbepaling — gebruik het concrete geval als voorbeeldreeks.
+  - **Keuze 2**: Beperk de regel tot het concrete voorbeeld en noteer in `toelichting` dat generalisatie wacht op annotatie van de bronwet.
+- Laat de keuze **nooit impliciet** — de signalering vereist altijd een expliciete afhandeling in de toelichting.
 
 ---
 

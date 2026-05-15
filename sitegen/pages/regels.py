@@ -93,6 +93,7 @@ _inp?.addEventListener('input',function(){{
       {f'<tr><td>Prioriteit</td><td>{r["prioriteit"]}</td></tr>' if r.get("prioriteit") is not None else ""}
       <tr><td>Rechtsfeit</td><td>{_link(r["rechtsfeit_id"]) if r.get("rechtsfeit_id") else "-"}</td></tr>
       {f'<tr><td>Vervangt</td><td><a href="{r["vervangt_regel_id"]}.html">{r["vervangt_regel_id"]}</a></td></tr>' if r.get("vervangt_regel_id") else ""}
+      {f'<tr><td>Gespecialiseert</td><td><a href="{r["gespecialiseert_regel_id"]}.html">{r["gespecialiseert_regel_id"]}</a></td></tr>' if r.get("gespecialiseert_regel_id") else ""}
       {f'<tr><td>Annotatie-id</td><td>{escape(r["annotatie_id"])}</td></tr>' if r.get("annotatie_id") else ""}
     </table>
   </div>
