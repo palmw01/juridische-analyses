@@ -17,7 +17,7 @@ Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek 
 
 **Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening — om de methodiek serieus te testen.
 
-**Output:** een traceerbaar kennismodel — 27 begrippen, 9 afleidingsregels, 40 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 38 begrippen, 13 afleidingsregels, 56 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -41,10 +41,11 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Art. 9 lid 1 IW — annotatie | ✅ Gereed |
 | Art. 9 lid 5 IW — annotatie | ✅ Gereed |
 | §9.1 Leidraad Invordering — annotatie | ✅ Gereed |
-| Begrippen (A3a) — 28 stuks | ✅ Gereed |
-| Afleidingsregels (A3b) — 9 stuks | ✅ Gereed |
+| §9.5 Leidraad Invordering — annotatie | ✅ Gereed |
+| Begrippen (A3a) — 38 stuks | ✅ Gereed |
+| Afleidingsregels (A3b) — 13 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
-| Validatie (L1–L3) — 40 bestanden, 0 blokkeerfouten | ✅ Gereed |
+| Validatie (L1–L3) — 56 bestanden, 0 blokkeerfouten | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
