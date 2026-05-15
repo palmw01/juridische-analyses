@@ -872,5 +872,27 @@
     ],
     "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
     "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari",
+    "begripsnaam": "vervaldag-normaal-jaar-28-februari",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "Als de dagtekening 28 februari is, dan vervalt de betalingstermijn van een maand op 31 maart en de betalingstermijn van zes weken op 11 april",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
   }
 ]
