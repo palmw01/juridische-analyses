@@ -1,0 +1,65 @@
+regel-id: AR-BWBR0024096-par9-5-c
+naam: berekenen vervaldatum bij dagtekening 28 februari in schrikkeljaar
+soort: Specialisatieregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-28-februari
+invoer:
+- BWBR0024096/par9-5/dagtekening-28-februari
+- BWBR0024096/par9-5/schrikkeljaar-voorbehoud
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari
+operators:
+- plus
+- gelijk-aan
+formele-regel: |
+  In afwijking van berekenen vervaldatum één maand bij dagtekening 28 februari (standaard):
+  vervaldag-schrikkeljaar-28-februari is 28 maart
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 28 februari
+  - het schrikkeljaar-voorbehoud is van toepassing (het jaar is een schrikkeljaar)
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met één maand
+
+  In afwijking van berekenen vervaldatum zes weken bij dagtekening 28 februari (standaard):
+  vervaldag-schrikkeljaar-28-februari is 10 april
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 28 februari
+  - het schrikkeljaar-voorbehoud is van toepassing (het jaar is een schrikkeljaar)
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met zes weken
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, tweede rekenscenario (schrikkeljaarvariant).
+
+  In een niet-schrikkeljaar is 28 februari de laatste dag van de maand. De beperkingsregel
+  zou dan de standaardregel zijn: vervaldatum bij één maand = 31 maart (laatste dag van maart
+  bestaat wel), bij zes weken = 11 april (28 + 42 = 11 april bij 28 febuari en een 28-dagige
+  februari).
+
+  In een schrikkeljaar heeft februari 29 dagen, dus is 28 februari niet de laatste dag. Dan
+  geldt de zelfde-dagnummer-regel: één maand later op de 28e = 28 maart. Voor zes weken:
+  28 februari + 42 dagen in een schrikkeljaar (29-dagige februari) = 10 april.
+
+  De 'tenzij'-constructie markeert dit als Specialisatieregel: de uitkomst wijkt af van de
+  standaardregel voor het 28-februari-scenario.
+
+  Grammaticale interpretatie: de tekst stelt letterlijk 'in welk geval de termijn vervalt
+  op 28 maart dan wel 10 april'.
+prioriteit: 1
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 28 februari 2024 (schrikkeljaar); betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 28 maart 2024"
+  juridisch-juist: true
+  toelichting: "2024 is schrikkeljaar; 28 februari + één maand = 28 maart (zelfde-dagnummer-regel, want 28 februari is niet de laatste dag van de maand)."
+- invoerwaarden: "dagtekening: 28 februari 2024 (schrikkeljaar); betalingstermijn: zes weken"
+  verwachte-uitkomst: "vervaldatum: 10 april 2024"
+  juridisch-juist: true
+  toelichting: "2024 is schrikkeljaar; 28 februari + 42 dagen: februari heeft 29 dagen, resterende = 1 dag, maart 31 dagen, april = 42 - 1 - 31 = 10. Vervaldatum: 10 april."
+- invoerwaarden: "dagtekening: 28 februari 2025 (geen schrikkeljaar); betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 28 maart 2025"
+  juridisch-juist: false
+  toelichting: "Grensgeval: 2025 is geen schrikkeljaar; 28 februari is de laatste dag van de maand; standaardregel geldt: vervaldatum is 31 maart (niet 28 maart). De specialisatieregel is niet van toepassing."
+tussenresultaat: false

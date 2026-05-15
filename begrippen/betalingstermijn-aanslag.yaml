@@ -1,0 +1,50 @@
+begrip-id: BWBR0024096/par9-5/betalingstermijn-aanslag
+begripsnaam: betalingstermijn-aanslag
+aliases: []
+soort: tijdsduur
+soort-id: false
+jas-klasse: variabele
+toelichting-klasse: >-
+  De betalingstermijn is een kenmerk van de aanslag (het rechtsobject) waarvan de lengte — één maand
+  of zes weken — bepalend is voor de vervaldagberekening. Variabele omdat de concrete waarde per aanslag
+  kan verschillen.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De wettelijk of bij beschikking vastgestelde tijdsduur waarbinnen de belastingschuldige een aanslag
+    moet betalen, uitgedrukt als één maand of als zes weken, en die bepalend is voor de keuze van de
+    toepasselijke vervaldagberekeningsregel
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "de betalingstermijn van een aanslag"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Betalingstermijn-aanslag: aanslag met dagtekening 15 maart en betalingstermijn van één maand — betalingstermijn-aanslag is één maand?"
+  waar: true
+  toelichting: "De betalingstermijn is vastgesteld op één maand; dit is de variabele die de rekenregel 'vervalt op zelfde dagnummer' triggert."
+- stelling: "Betalingstermijn-aanslag: aanslag met betalingstermijn van drie maanden — betalingstermijn-aanslag is zes weken?"
+  waar: false
+  toelichting: "Grensgeval: drie maanden is geen geldige waarde voor betalingstermijn-aanslag in de context van sectie 9.5; de sectie is uitsluitend van toepassing op één maand of zes weken."
+kenmerken:
+- "Twee mogelijke waarden: één maand of zes weken"
+- "Invoerbegrip voor de toepassingsvoorwaarde betalingstermijn-een-maand-of-zes-weken"
+- "Bepaalt welke variant van de vervaldagberekeningsregel wordt toegepast"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

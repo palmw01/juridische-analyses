@@ -1,0 +1,50 @@
+begrip-id: BWBR0024096/par9-5/dagtekening-31-oktober
+begripsnaam: dagtekening-31-oktober
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  Eerste concreet uitgewerkt rekenscenario: toepassingsvoorwaarde met kalenderdag 31 oktober als anker
+  voor de vervaldagberekening. De 'als'-constructie markeert het als illustratieve voorwaarde voor de
+  algemene rekenregel.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De toepassingsvoorwaarde die is vervuld wanneer de dagtekening van het aanslagbiljet valt op
+    31 oktober; dit scenario dient als illustratie van de beperkingsregel voor maanden met minder
+    dan 31 dagen (31 november bestaat niet, zodat de vervaldatum op 30 november valt)
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "als de dagtekening van een aanslagbiljet valt op 31 oktober"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Dagtekening-31-oktober: aanslagbiljet gedagtekend op 31 oktober 2025 — is de voorwaarde vervuld?"
+  waar: true
+  toelichting: "De dagtekening valt precies op 31 oktober; de voorwaarde is vervuld en de illustratieve rekenregels zijn van toepassing."
+- stelling: "Dagtekening-31-oktober: aanslagbiljet gedagtekend op 30 oktober 2025 — is de voorwaarde vervuld?"
+  waar: false
+  toelichting: "Grensgeval: 30 oktober is niet 31 oktober; de voorwaarde is niet vervuld en de algemene rekenregel (zelfde dagnummer) is van toepassing."
+kenmerken:
+- "Illustratieve voorwaarde: niet normatief, maar toepassingsscenario van de beperkingsregel"
+- "31 oktober is de laatste dag van oktober en het eerste voorbeeld van een maand met 31 dagen waarbij de volgmaand korter is"
+- "Impliceert de beperkingsregel: als de dag met hetzelfde nummer niet bestaat in de volgmaand, vervalt de termijn op de laatste dag van die maand"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

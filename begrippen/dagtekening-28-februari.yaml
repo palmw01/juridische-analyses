@@ -1,0 +1,51 @@
+begrip-id: BWBR0024096/par9-5/dagtekening-28-februari
+begripsnaam: dagtekening-28-februari
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  Tweede rekenscenario met specifieke kalenderdag (28 februari), gekozen vanwege de bijzondere positie
+  van februari in de kalender en het schrikkeljaareffect.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De toepassingsvoorwaarde die is vervuld wanneer de dagtekening van het aanslagbiljet valt op
+    28 februari; dit scenario introduceert het schrikkeljaar-voorbehoud omdat 28 februari in een
+    niet-schrikkeljaar de laatste dag van de maand is (wat de beperkingsregel triggert) maar in
+    een schrikkeljaar niet
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "Als de dagtekening 28 februari is"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Dagtekening-28-februari: aanslagbiljet gedagtekend op 28 februari 2026 — is de voorwaarde vervuld?"
+  waar: true
+  toelichting: "De dagtekening valt op 28 februari; 2026 is geen schrikkeljaar dus 28 februari is de laatste dag van de maand, vervaldatum wordt 31 maart (één maand) resp. 11 april (zes weken)."
+- stelling: "Dagtekening-28-februari: aanslagbiljet gedagtekend op 29 februari 2024 — is de voorwaarde dagtekening-28-februari vervuld?"
+  waar: false
+  toelichting: "Grensgeval: 29 februari is een andere dag dan 28 februari; de voorwaarde dagtekening-28-februari is niet vervuld. (29 februari bestaat alleen in schrikkeljaren.)"
+kenmerken:
+- "Bijzondere kalenderdag: februari is de kortste maand en heeft een variabele einddatum afhankelijk van het schrikkeljaar"
+- "Triggert het schrikkeljaar-voorbehoud als negatieve conditie"
+- "Niet-schrikkeljaar: 28 februari = laatste dag van de maand → beperkingsregel active (31 maart resp. 11 april)"
+- "Schrikkeljaar: 28 februari ≠ laatste dag van de maand → 'dan wel'-regel active (28 maart resp. 10 april)"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

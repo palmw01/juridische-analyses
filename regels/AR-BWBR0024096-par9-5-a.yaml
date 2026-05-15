@@ -1,0 +1,48 @@
+regel-id: AR-BWBR0024096-par9-5-a
+naam: berekenen vervaldatum één maand bij dagtekening 31 oktober
+soort: Beperkingsregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-31-oktober
+invoer:
+- BWBR0024096/par9-5/dagtekening-31-oktober
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-kortemaand-een-maand
+operators:
+- gelijk-aan
+formele-regel: |
+  vervaldag-kortemaand-een-maand bedraagt ten hoogste 30 november
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 31 oktober
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met één maand
+  [toelichting: 31 november bestaat niet; de beperkingsregel stelt de vervaldatum op
+   de laatste bestaande dag van de volgmaand, zijnde 30 november]
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, eerste rekenscenario.
+
+  De sectie illustreert de beperkingsregel voor maanden die korter zijn dan de
+  dagtekeningmaand: de dag die hetzelfde nummer draagt als de dagtekening (31) bestaat
+  niet in november (november heeft 30 dagen), zodat de vervaldatum wordt gesteld op de
+  laatste dag van november: 30 november.
+
+  Dit is een illustratief voorbeeld, geen zelfstandige normatieve bepaling. De
+  onderliggende norm is de algemene beperkingsregel dat de vervaldatum de laatste dag
+  van de volgmaand is wanneer de volgmaand de dag met het dagtekeningnummer niet bevat.
+
+  Grammaticale interpretatie: de tekst stelt letterlijk dat 'de betalingstermijn van één
+  maand vervalt op 30 november' bij dagtekening 31 oktober.
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 31 oktober 2025; betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 30 november 2025"
+  juridisch-juist: true
+  toelichting: "31 november bestaat niet; beperkingsregel stelt vervaldatum op 30 november."
+- invoerwaarden: "dagtekening: 30 oktober 2025; betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 30 november 2025"
+  juridisch-juist: false
+  toelichting: "Grensgeval: bij dagtekening 30 oktober bestaat 30 november wél; de zelfde-dagnummer-regel is van toepassing: vervaldatum is 30 november — toevallig dezelfde datum maar via een andere regel (AR-BWBR0024096-par9-5-d). De beperkingsregel AR-BWBR0024096-par9-5-a is hier niet van toepassing."
+tussenresultaat: false

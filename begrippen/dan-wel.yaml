@@ -1,0 +1,51 @@
+begrip-id: BWBR0024096/par9-5/dan-wel
+begripsnaam: dan-wel
+aliases: []
+soort: tekst
+soort-id: false
+jas-klasse: operator
+toelichting-klasse: >-
+  Disjunctieve operator (OF-equivalent) die de twee vervaldatums in het schrikkeljaarscenario onderscheidt
+  naar termijnlengte: 28 maart (één maand) dan wel 10 april (zes weken).
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    Disjunctieve operator die twee uitsluitende alternatieven onderscheidt waarbij de keuze bepaald
+    wordt door een reeds vaststaande conditie; in sectie 9.5 LI 2008 onderscheidt 'dan wel' de
+    vervaldatum bij een één-maandtermijn (28 maart) van de vervaldatum bij een zes-wekentermijn
+    (10 april) in het schrikkeljaarscenario
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "dan wel"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een:
+  - BWBR0004770/art9/lid5/logische-of
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Dan-wel: schrikkeljaar, dagtekening 28 februari, betalingstermijn één maand — vervaldatum is 28 maart dan wel 10 april?"
+  waar: true
+  toelichting: "De 'dan wel'-operator onderscheidt: bij één maand is het 28 maart; bij zes weken is het 10 april. In dit geval geldt 28 maart."
+- stelling: "Dan-wel: niet-schrikkeljaar, dagtekening 28 februari — 'dan wel' is van toepassing?"
+  waar: false
+  toelichting: "Grensgeval: bij een niet-schrikkeljaar is 28 februari de laatste dag van februari, zodat de standaardregel (31 maart resp. 11 april) geldt — de 'dan wel'-constructie is uitsluitend van toepassing in het schrikkeljaarscenario."
+kenmerken:
+- "Disjunctie van twee uitsluitende keuzes, bepaald door de reeds bekende termijnlengte"
+- "Functioneert als OF-operator maar benadrukt de alternativiteit van uitkomsten"
+- "Onderscheidt 'één maand later' (28 maart) van 'zes weken later' (10 april) in schrikkeljaarscenario"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

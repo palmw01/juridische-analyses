@@ -1,0 +1,50 @@
+begrip-id: BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand
+begripsnaam: dagtekening-niet-laatste-dag-maand
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  Derde en algemene scenario: de dagtekening valt niet op de laatste dag van de kalendermaand. Deze
+  voorwaarde sluit aan op de eerstgenoemde gevallen (31 oktober, 28 februari) en formuleert de
+  toepassingssfeer van de algemene rekenregel voor de resterende gevallen.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De toepassingsvoorwaarde die is vervuld wanneer de dagtekening van het aanslagbiljet valt op
+    een andere dag dan de laatste dag van de kalendermaand; in dat geval vervalt de één-maandtermijn
+    op de dag in de volgmaand met hetzelfde dagnummer als de dagtekening (de 'zelfde-dagnummer'-regel)
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "Als de dagtekening van het aanslagbiljet valt op een andere dag dan de laatste dag van de kalendermaand"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Dagtekening-niet-laatste-dag-maand: aanslagbiljet gedagtekend op 15 maart — is de voorwaarde vervuld?"
+  waar: true
+  toelichting: "15 maart is niet de laatste dag van maart (dat is 31 maart); de zelfde-dagnummer-regel is van toepassing: termijn vervalt op 15 april."
+- stelling: "Dagtekening-niet-laatste-dag-maand: aanslagbiljet gedagtekend op 31 oktober — is de voorwaarde vervuld?"
+  waar: false
+  toelichting: "Grensgeval: 31 oktober is de laatste dag van oktober; de voorwaarde is niet vervuld; de beperkingsregel is van toepassing (30 november)."
+kenmerken:
+- "Omgekeerde van 'dagtekening op laatste dag van de maand' — residueel geval"
+- "Toepassingsscenario van de zelfde-dagnummer-regel (vervaldag-zelfde-dagnummer)"
+- "Sluit de gevallen 31 oktober en 28 februari (niet-schrikkeljaar) uit, die de beperkingsregel triggeren"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

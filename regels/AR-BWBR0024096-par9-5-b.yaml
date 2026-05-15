@@ -1,0 +1,49 @@
+regel-id: AR-BWBR0024096-par9-5-b
+naam: berekenen vervaldatum zes weken bij dagtekening 31 oktober
+soort: Rekenregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-31-oktober
+invoer:
+- BWBR0024096/par9-5/dagtekening-31-oktober
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken
+operators:
+- plus
+formele-regel: |
+  vervaldag-kortemaand-zes-weken moet berekend worden als
+  dagtekening-aanslagbiljet plus 42 dagen
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening van het aanslagbiljet is gelijk aan 31 oktober
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met zes weken
+  [uitkomst: 31 oktober + 42 kalenderdagen = 12 december]
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, eerste rekenscenario (zes-wekenvariant).
+
+  De sectie verduidelijkt de kalenderrekenkundige methode voor de zes-wekentermijn: zes
+  weken is exact 42 kalenderdagen. Bij dagtekening 31 oktober levert dit op:
+  31 oktober + 42 dagen = 12 december.
+
+  Berekening: oktober heeft 31 dagen; resterende dagen in oktober na de 31e = 0.
+  November heeft 30 dagen: 0 + 30 = 30. December: 42 - 30 = 12. Vervaldatum: 12 december.
+
+  Dit is een illustratief voorbeeld, geen zelfstandige normatieve bepaling. De
+  onderliggende norm is dat zes weken als 42 kalenderdagen worden berekend.
+
+  Grammaticale interpretatie: de tekst stelt letterlijk dat 'de betalingstermijn van zes
+  weken vervalt op 12 december' bij dagtekening 31 oktober.
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 31 oktober 2025; betalingstermijn: zes weken"
+  verwachte-uitkomst: "vervaldatum: 12 december 2025"
+  juridisch-juist: true
+  toelichting: "31 oktober + 42 kalenderdagen = 12 december 2025."
+- invoerwaarden: "dagtekening: 15 oktober 2025; betalingstermijn: zes weken"
+  verwachte-uitkomst: "vervaldatum: 12 december 2025"
+  juridisch-juist: false
+  toelichting: "Grensgeval: 15 oktober + 42 dagen = 26 november 2025, niet 12 december. 12 december geldt uitsluitend bij dagtekening 31 oktober."
+tussenresultaat: false

@@ -1,0 +1,50 @@
+begrip-id: BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken
+begripsnaam: vervaldag-kortemaand-zes-weken
+aliases: []
+soort: datum
+soort-id: false
+jas-klasse: afleidingsregel
+toelichting-klasse: >-
+  Rekenregel die de vervaldag van een zes-wekentermijn bepaalt bij dagtekening 31 oktober: 42 dagen
+  na 31 oktober = 12 december. Het voorbeeld verduidelijkt de kalenderrekenkundige methode voor de
+  zes-wekenvariant.
+herkomst: afgeleid
+status: concept
+definitie:
+  kern: >-
+    De berekende vervaldag bij een betalingstermijn van zes weken en dagtekening 31 oktober,
+    vastgesteld op 12 december omdat zes weken (42 dagen) na 31 oktober de 12e dag van december
+    is; illustratie van de kalenderrekenkundige methode voor de zes-wekenvariant
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "de betalingstermijn van zes weken vervalt op 12 december"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Vervaldag-kortemaand-zes-weken: dagtekening 31 oktober, betalingstermijn zes weken — vervaldag is 12 december?"
+  waar: true
+  toelichting: "31 oktober + 42 dagen = 12 december. De zes-weekentermijn wordt kalenderrekenkundig berekend als exact 42 kalenderdagen."
+- stelling: "Vervaldag-kortemaand-zes-weken: dagtekening 15 oktober, betalingstermijn zes weken — vervaldag is 12 december?"
+  waar: false
+  toelichting: "Grensgeval: 15 oktober + 42 dagen = 26 november, niet 12 december. 12 december geldt uitsluitend bij dagtekening 31 oktober."
+kenmerken:
+- "Zes-wekenberekening: exact 42 kalenderdagen na de dagtekening"
+- "Specifiek voor dagtekening 31 oktober met zes-wekentermijn"
+- "Illustratief voorbeeld in sectie 9.5 LI 2008 — niet normatief zelfstandig"
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0024096-par9-5-b
+tussenresultaat: false

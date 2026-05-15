@@ -1,0 +1,53 @@
+begrip-id: BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+begripsnaam: betalingstermijn-een-maand-of-zes-weken
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  De 'Als'-constructie introduceert de toepassingsdrempel van de gehele sectie: de rekenregels zijn
+  uitsluitend van toepassing op betalingstermijnen van één maand of zes weken. De disjunctieve 'of'
+  markeert twee alternatieve toepassingsgevallen.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De toepassingsvoorwaarde die is vervuld wanneer de betalingstermijn van een aanslag is gesteld
+    op één maand of op zes weken; buiten deze twee gevallen zijn de rekenregels van sectie 9.5 LI
+    2008 niet van toepassing
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "Als de betalingstermijn van een aanslag is gesteld op één maand of is gesteld op zes weken"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Betalingstermijn-een-maand-of-zes-weken: aanslag met betalingstermijn van één maand — is voorwaarde vervuld?"
+  waar: true
+  toelichting: "De betalingstermijn is gesteld op één maand, dat is één van de twee toegestane termijnlengtes."
+- stelling: "Betalingstermijn-een-maand-of-zes-weken: aanslag met betalingstermijn van zes weken — is voorwaarde vervuld?"
+  waar: true
+  toelichting: "De betalingstermijn is gesteld op zes weken, dat is de tweede toegestane termijnlengte."
+- stelling: "Betalingstermijn-een-maand-of-zes-weken: aanslag met betalingstermijn van twee maanden — is voorwaarde vervuld?"
+  waar: false
+  toelichting: "Grensgeval: twee maanden is geen van de twee alternatieve termijnlengtes; de rekenregels van sectie 9.5 zijn niet van toepassing."
+kenmerken:
+- "Disjunctieve toepassingsdrempel: óf één maand óf zes weken"
+- "Exclusief: andere termijnlengtes vallen buiten het bereik van sectie 9.5 LI 2008"
+- "Sluit aan bij art. 9 lid 1 IW 1990 (zes weken) en betalingstermijnen die bij beschikking op één maand zijn gesteld"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

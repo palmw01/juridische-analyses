@@ -1,0 +1,264 @@
+{
+  "annotatie-id": "BWBR0024096/par9-5",
+  "bwb-id": "BWBR0024096",
+  "wet": "LI 2008",
+  "artikel": "9",
+  "lid": "",
+  "sectie": "9.5",
+  "peildatum": "2026-01-01",
+  "structuurpositie": "Artikel 1 Inleiding en toepassingsgebied > 9.5 Begrippen bij betalingstermijnen",
+  "wetstekst": "Als de betalingstermijn van een aanslag is gesteld op één maand of is gesteld op zes weken, dan houdt dat in dat als de dagtekening van een aanslagbiljet valt op 31 oktober, de betalingstermijn van één maand vervalt op 30 november en de betalingstermijn van zes weken vervalt op 12 december.Als de dagtekening 28 februari is, dan vervalt de betalingstermijn van een maand op 31 maart en de betalingstermijn van zes weken op 11 april, tenzij het jaartal aangeeft dat het een schrikkeljaar is, in welk geval de termijn vervalt op 28 maart dan wel 10 april.Als de dagtekening van het aanslagbiljet valt op een andere dag dan de laatste dag van de kalendermaand, vervalt de termijn een maand later (bij een betalingstermijn van een maand) op de dag die hetzelfde nummer heeft als dat van de dagtekening. Als de dagtekening bijvoorbeeld 15 maart is, vervalt de termijn dus op 15 april. Is de betalingstermijn zes weken en is de dagtekening 15 maart, vervalt de termijn op 26 april.",
+  "annotatierijen": [
+    {
+      "rij-id": "r-001",
+      "markering": "Als de betalingstermijn van een aanslag is gesteld op één maand of is gesteld op zes weken",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken",
+      "toelichting-klasse": "De 'Als'-constructie introduceert de toepassingsdrempel van de gehele sectie: de rekenregels zijn uitsluitend van toepassing op betalingstermijnen van één maand of zes weken. De disjunctieve 'of' markeert twee alternatieve toepassingsgevallen.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-002",
+      "markering": "of",
+      "jas-klasse": "operator",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid5/logische-of",
+      "toelichting-klasse": "Logische disjunctie (OF-operator) tussen de twee alternatieve betalingstermijnlengtes — één maand respectievelijk zes weken. De operator is relevant voor de uitbreiding van de toepassingssfeer van de rekenregel.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-003",
+      "markering": "de betalingstermijn van een aanslag",
+      "jas-klasse": "variabele",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/betalingstermijn-aanslag",
+      "toelichting-klasse": "De betalingstermijn is een kenmerk van de aanslag (het rechtsobject) waarvan de lengte — één maand of zes weken — bepalend is voor de vervaldagberekening. Variabele omdat de concrete waarde (één maand / zes weken) per aanslag kan verschillen.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-004",
+      "markering": "de dagtekening van een aanslagbiljet",
+      "jas-klasse": "tijdsaanduiding",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0024096/par9-5/dagtekening-aanslagbiljet",
+      "toelichting-klasse": "Hergebruikt begrip: de dagtekening van het aanslagbiljet is reeds geannoteerd in art. 9 lid 1 IW 1990 (m-001) en art. 9 lid 5 IW 1990 (m-002) als tijdsaanduiding. In sectie 9.5 LI 2008 fungeert de dagtekening als het vaste rekenkundige startpunt voor de vervaldagberekening; dit is consistent met de bestaande primaire definitie. Soort-consistentiecheck: bestaand soort is 'datum', gebruik hier is per aanslag — geen booleaans conflict.",
+      "signalering": "Hergebruikt begrip: begrippen/dagtekening-aanslagbiljet.yaml — bestaande kern geldig; sectie 9.5 LI 2008 voegt concrete rekenvoorbeelden toe als aanvullende context."
+    },
+    {
+      "rij-id": "r-005",
+      "markering": "als de dagtekening van een aanslagbiljet valt op 31 oktober",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/dagtekening-31-oktober",
+      "toelichting-klasse": "Eerste concreet uitgewerkt rekenscenario: toepassingsvoorwaarde met kalenderdag 31 oktober als anker voor de vervaldagberekening. De 'als'-constructie markeert het als illustratieve voorwaarde voor de algemene rekenregel.",
+      "signalering": "Dit betreft een voorbeeld/illustratie, geen zelfstandige normatieve bepaling."
+    },
+    {
+      "rij-id": "r-006",
+      "markering": "de betalingstermijn van één maand vervalt op 30 november",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-een-maand",
+      "toelichting-klasse": "Rekenregel die de vervaldatum bepaalt bij dagtekening 31 oktober en termijn van één maand: de dag die hetzelfde nummer heeft als de dagtekening bestaat niet in november (31 november bestaat niet), zodat de laatste dag van november (30 november) de vervaldatum is. Dit impliceert de beperkingsregel voor maanden met minder dan 31 dagen.",
+      "signalering": "Impliceert de algemene regel: bij maanden die korter zijn dan de dagtekeningmaand vervalt de termijn op de laatste dag van de termijnmaand."
+    },
+    {
+      "rij-id": "r-007",
+      "markering": "de betalingstermijn van zes weken vervalt op 12 december",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken",
+      "toelichting-klasse": "Rekenregel die de vervaldatum van een zes-wekentermijn bepaalt bij dagtekening 31 oktober: 42 dagen na 31 oktober = 12 december. Het voorbeeld verduidelijkt de kalenderrekenkundige methode voor de zes-wekenvariant.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-008",
+      "markering": "Als de dagtekening 28 februari is",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/dagtekening-28-februari",
+      "toelichting-klasse": "Tweede rekenscenario met specifieke kalenderdag (28 februari), gekozen vanwege de bijzondere positie van februari in de kalender en het schrikkeljaareffect.",
+      "signalering": "Dit scenario introduceert het schrikkeljaar-voorbehoud."
+    },
+    {
+      "rij-id": "r-009",
+      "markering": "tenzij het jaartal aangeeft dat het een schrikkeljaar is",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/schrikkeljaar-voorbehoud",
+      "toelichting-klasse": "'Tenzij' introduceert een uitzondering op de standaardregel voor het 28-februari-scenario. Het schrikkeljaarvoorbehoud is een negatieve voorwaarde (NIET-operator) die de standaardregel doorbreekt.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-010",
+      "markering": "in welk geval de termijn vervalt op 28 maart dan wel 10 april",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari",
+      "toelichting-klasse": "Rekenregel voor het schrikkeljaarscenario bij dagtekening 28 februari: in een schrikkeljaar is 28 februari niet de laatste dag van de maand, zodat de vervaldatum één maand later (28 maart) of zes weken later (10 april) valt. 'Dan wel' is een disjunctieve operator die de twee termijnvarianten (één maand / zes weken) onderscheidt.",
+      "signalering": "Onderscheid met niet-schrikkeljaar: in een niet-schrikkeljaar is 28 februari de laatste dag, wat tot 31 maart / 11 april leidt."
+    },
+    {
+      "rij-id": "r-011",
+      "markering": "dan wel",
+      "jas-klasse": "operator",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/dan-wel",
+      "toelichting-klasse": "Disjunctieve operator (OF-equivalent) die de twee vervaldatums in het schrikkeljaarscenario onderscheidt naar termijnlengte: 28 maart (één maand) dan wel 10 april (zes weken).",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-012",
+      "markering": "Als de dagtekening van het aanslagbiljet valt op een andere dag dan de laatste dag van de kalendermaand",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand",
+      "toelichting-klasse": "Derde en algemene scenario: de dagtekening valt niet op de laatste dag van de kalendermaand. Deze voorwaarde sluit aan op de eerstgenoemde gevallen (31 oktober, 28 februari) en formuleert de algemene rekenregel voor de resterende gevallen.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-013",
+      "markering": "vervalt de termijn een maand later (bij een betalingstermijn van een maand) op de dag die hetzelfde nummer heeft als dat van de dagtekening",
+      "jas-klasse": "afleidingsregel",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/vervaldag-zelfde-dagnummer",
+      "toelichting-klasse": "Algemene rekenregel voor de één-maandtermijn: de vervaldatum is de dag in de volgende kalendermaand met hetzelfde dagnummer als de dagtekening. Dit is de hoofdregel waarvan de 31-oktober- en 28-februari-voorbeelden specifieke toepassingen zijn.",
+      "signalering": null
+    }
+  ],
+  "diagram": {
+    "centrale-klasse": "afleidingsregel",
+    "knopen": [
+      {
+        "id": "AR1",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervalt op zelfde dagnummer…'",
+        "begrip-id": "BWBR0024096/par9-5/vervaldag-zelfde-dagnummer"
+      },
+      {
+        "id": "AR2",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervalt op 30 november'",
+        "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-een-maand"
+      },
+      {
+        "id": "AR3",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervalt op 12 december'",
+        "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken"
+      },
+      {
+        "id": "AR4",
+        "jas-klasse": "afleidingsregel",
+        "label": "afleidingsregel 'vervalt op 28 maart / 10 april'",
+        "begrip-id": "BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari"
+      },
+      {
+        "id": "VW1",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'termijn één maand of zes weken'",
+        "begrip-id": "BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken"
+      },
+      {
+        "id": "VW2",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'dagtekening 31 oktober'",
+        "begrip-id": "BWBR0024096/par9-5/dagtekening-31-oktober"
+      },
+      {
+        "id": "VW3",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'dagtekening 28 februari'",
+        "begrip-id": "BWBR0024096/par9-5/dagtekening-28-februari"
+      },
+      {
+        "id": "VW4",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'schrikkeljaar'",
+        "begrip-id": "BWBR0024096/par9-5/schrikkeljaar-voorbehoud"
+      },
+      {
+        "id": "VW5",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'dagtekening niet laatste dag maand'",
+        "begrip-id": "BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand"
+      },
+      {
+        "id": "VA",
+        "jas-klasse": "variabele",
+        "label": "variabele 'de betalingstermijn van een aanslag'",
+        "begrip-id": "BWBR0024096/par9-5/betalingstermijn-aanslag"
+      },
+      {
+        "id": "TA",
+        "jas-klasse": "tijdsaanduiding",
+        "label": "tijdsaanduiding 'dagtekening aanslagbiljet'",
+        "begrip-id": "BWBR0024096/par9-5/dagtekening-aanslagbiljet"
+      }
+    ],
+    "kanten": [
+      {
+        "van": "AR1",
+        "naar": "VW1",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR1",
+        "naar": "VW5",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR1",
+        "naar": "VA",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR1",
+        "naar": "TA",
+        "label": "gebruikt"
+      },
+      {
+        "van": "AR2",
+        "naar": "VW1",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR2",
+        "naar": "VW2",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR3",
+        "naar": "VW1",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR3",
+        "naar": "VW2",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR4",
+        "naar": "VW3",
+        "label": "geldig indien"
+      },
+      {
+        "van": "AR4",
+        "naar": "VW4",
+        "label": "geldig indien"
+      }
+    ]
+  },
+  "kruisreferenties": [
+    {
+      "doel-bwb-id": "BWBR0004770",
+      "doel-artikel": "9",
+      "doel-lid": null,
+      "richting": "forward",
+      "confidence": 0.9,
+      "ruwe-tekst": "Art. 9 IW 1990 (betalingstermijnen)"
+    }
+  ],
+  "delegatiestructuur": []
+}

@@ -1,0 +1,53 @@
+begrip-id: BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari
+begripsnaam: vervaldag-schrikkeljaar-28-februari
+aliases: []
+soort: datum
+soort-id: false
+jas-klasse: afleidingsregel
+toelichting-klasse: >-
+  Rekenregel voor het schrikkeljaarscenario bij dagtekening 28 februari: in een schrikkeljaar is 28
+  februari niet de laatste dag van de maand, zodat de vervaldag één maand later (28 maart) of zes
+  weken later (10 april) valt. 'Dan wel' is een disjunctieve operator die de twee termijnvarianten
+  (één maand / zes weken) onderscheidt.
+herkomst: afgeleid
+status: concept
+definitie:
+  kern: >-
+    De berekende vervaldag bij dagtekening 28 februari in een schrikkeljaar: de één-maandtermijn
+    vervalt op 28 maart en de zes-wekentermijn vervalt op 10 april; deze afwijkende uitkomst geldt
+    omdat 28 februari in een schrikkeljaar niet de laatste dag van de maand is, zodat de
+    zelfde-dagnummer-regel van toepassing is in plaats van de beperkingsregel
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "in welk geval de termijn vervalt op 28 maart dan wel 10 april"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Vervaldag-schrikkeljaar-28-februari: dagtekening 28 februari 2024 (schrikkeljaar), betalingstermijn één maand — vervaldag is 28 maart 2024?"
+  waar: true
+  toelichting: "2024 is een schrikkeljaar; 28 februari is niet de laatste dag (29 februari bestaat); zelfde-dagnummer-regel: één maand later = 28 maart."
+- stelling: "Vervaldag-schrikkeljaar-28-februari: dagtekening 28 februari 2025 (geen schrikkeljaar), betalingstermijn één maand — vervaldag is 28 maart 2025?"
+  waar: false
+  toelichting: "Grensgeval: 2025 is geen schrikkeljaar; 28 februari is de laatste dag van de maand; beperkingsregel: vervaldag = 31 maart, niet 28 maart."
+kenmerken:
+- "Uitzondering op de standaarduitkomst voor dagtekening 28 februari"
+- "Schrikkeljaareffect: 28 februari is niet de laatste dag van de maand in een schrikkeljaar"
+- "Twee uitkomsten: 28 maart (één maand) of 10 april (zes weken)"
+- "28 februari + 42 dagen = 10 april in een schrikkeljaar (februari heeft 29 dagen)"
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0024096-par9-5-c
+tussenresultaat: false

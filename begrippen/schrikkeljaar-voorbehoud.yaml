@@ -1,0 +1,51 @@
+begrip-id: BWBR0024096/par9-5/schrikkeljaar-voorbehoud
+begripsnaam: schrikkeljaar-voorbehoud
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  'Tenzij' introduceert een uitzondering op de standaardregel voor het 28-februari-scenario. Het
+  schrikkeljaarvoorbehoud is een negatieve voorwaarde (NIET-operator) die de standaardregel doorbreekt:
+  in een schrikkeljaar is 28 februari niet de laatste dag van de maand.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De uitzondering die is vervuld wanneer het jaar van de dagtekening een schrikkeljaar is, waardoor
+    in het 28-februari-scenario de standaardregel (beperkingsregel: vervaldatum op 31 maart resp.
+    11 april) wordt terzijde gesteld en de 'dan wel'-regel (28 maart resp. 10 april) van toepassing is
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "tenzij het jaartal aangeeft dat het een schrikkeljaar is"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Schrikkeljaar-voorbehoud: aanslagbiljet gedagtekend op 28 februari 2024 — is het schrikkeljaar-voorbehoud van toepassing?"
+  waar: true
+  toelichting: "2024 is een schrikkeljaar; 28 februari is niet de laatste dag van de maand; de standaardregel wordt terzijde gesteld en de schrikkeljaarregel (28 maart resp. 10 april) geldt."
+- stelling: "Schrikkeljaar-voorbehoud: aanslagbiljet gedagtekend op 28 februari 2025 — is het schrikkeljaar-voorbehoud van toepassing?"
+  waar: false
+  toelichting: "Grensgeval: 2025 is geen schrikkeljaar; 28 februari is de laatste dag van de maand; de standaardregel is van toepassing en de 'dan wel'-regel is niet van toepassing."
+kenmerken:
+- "Negatieve conditie (tenzij): de uitzondering is actief als het schrikkeljaar-criterium waar is"
+- "Uitsluitend relevant bij dagtekening 28 februari"
+- "Schrikkeljaar: jaar deelbaar door 4, met correctie voor eeuwjaren (deelbaar door 400)"
+- "Effect: bij schrikkeljaar valt 28 februari niet op de laatste dag van de maand, zodat de één-maand-termijn op 28 maart vervalt"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

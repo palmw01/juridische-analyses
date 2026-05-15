@@ -1,0 +1,58 @@
+regel-id: AR-BWBR0024096-par9-5-d
+naam: berekenen vervaldatum één maand op zelfde dagnummer
+soort: Rekenregel
+bwb-id: BWBR0024096
+artikel: "9"
+lid: par9-5
+peildatum: "2026-01-01"
+geldigheid-van: "2026-01-01"
+annotatie-id: BWBR0024096/par9-5
+rechtsfeit-id: BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand
+invoer:
+- BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand
+- BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken
+- BWBR0004770/art9/lid1/dagtekening-aanslagbiljet
+uitvoer:
+- BWBR0024096/par9-5/vervaldag-zelfde-dagnummer
+operators:
+- plus
+- gelijk-aan
+formele-regel: |
+  vervaldag-zelfde-dagnummer moet berekend worden als
+  de dag in de kalendermaand één maand na de dagtekeningmaand met hetzelfde dagnummer
+  als het dagnummer van de dagtekening
+  indien aan alle volgende voorwaarden is voldaan:
+  - de dagtekening-niet-laatste-dag-maand is vervuld (dagtekening valt niet op de
+    laatste dag van de kalendermaand)
+  - de betalingstermijn-een-maand-of-zes-weken is vervuld met één maand
+  [concreet voorbeeld: dagtekening 15 maart → vervaldatum 15 april]
+toelichting: |
+  Herleidbaar tot LI 2008 sectie 9.5, derde scenario (de algemene rekenregel).
+
+  De hoofdregel voor de één-maandtermijn bij dagtekeningen die niet op de laatste dag
+  van de kalendermaand vallen: de vervaldatum is de dag in de volgmaand die hetzelfde
+  dagnummer draagt als de dagtekening.
+
+  Het concrete voorbeeld in de sectie: dagtekening 15 maart → vervaldatum 15 april.
+
+  De regel is de lex generalis ten opzichte van de beperkingsregel (wanneer het betreffende
+  dagnummer niet bestaat in de volgmaand) en de schrikkeljaar-specialisatieregel.
+
+  Systematische interpretatie: de sectie beschrijft drie scenario's:
+  1. Dagtekening op laatste dag van een maand met 31 dagen waarna een kortere maand volgt
+     (31 oktober) → beperkingsregel
+  2. Dagtekening 28 februari in schrikkeljaar → specialisatieregel
+  3. Dagtekening niet op laatste dag van de maand → deze algemene rekenregel
+
+  Grammaticale interpretatie: 'vervalt de termijn een maand later (bij een betalingstermijn
+  van een maand) op de dag die hetzelfde nummer heeft als dat van de dagtekening'.
+voorbeeldreeksen:
+- invoerwaarden: "dagtekening: 15 maart 2026; betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 15 april 2026"
+  juridisch-juist: true
+  toelichting: "15 maart is niet de laatste dag van maart; de zelfde-dagnummer-regel: 15 april."
+- invoerwaarden: "dagtekening: 31 oktober 2026; betalingstermijn: één maand"
+  verwachte-uitkomst: "vervaldatum: 31 november 2026"
+  juridisch-juist: false
+  toelichting: "Grensgeval: 31 oktober is de laatste dag van oktober; de dagtekening-niet-laatste-dag-maand-voorwaarde is niet vervuld. Bovendien bestaat 31 november niet. De beperkingsregel (AR-BWBR0024096-par9-5-a) is van toepassing: vervaldatum is 30 november."
+tussenresultaat: false

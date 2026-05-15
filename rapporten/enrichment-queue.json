@@ -630,5 +630,247 @@
     ],
     "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0004770/art9/lid1. Juridische verificatie vereist vóór definitieve invulling.",
     "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/betalingstermijn-aanslag",
+    "begripsnaam": "betalingstermijn-aanslag",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "de betalingstermijn van een aanslag",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken",
+    "begripsnaam": "betalingstermijn-een-maand-of-zes-weken",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "Als de betalingstermijn van een aanslag is gesteld op één maand of is gesteld op zes weken",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/dagtekening-28-februari",
+    "begripsnaam": "dagtekening-28-februari",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "Als de dagtekening 28 februari is",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/dagtekening-31-oktober",
+    "begripsnaam": "dagtekening-31-oktober",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "als de dagtekening van een aanslagbiljet valt op 31 oktober",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand",
+    "begripsnaam": "dagtekening-niet-laatste-dag-maand",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "Als de dagtekening van het aanslagbiljet valt op een andere dag dan de laatste dag van de kalendermaand",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/dan-wel",
+    "begripsnaam": "dan-wel",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "dan wel",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/schrikkeljaar-voorbehoud",
+    "begripsnaam": "schrikkeljaar-voorbehoud",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "tenzij het jaartal aangeeft dat het een schrikkeljaar is",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-een-maand",
+    "begripsnaam": "vervaldag-kortemaand-een-maand",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "de betalingstermijn van één maand vervalt op 30 november",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken",
+    "begripsnaam": "vervaldag-kortemaand-zes-weken",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "de betalingstermijn van zes weken vervalt op 12 december",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari",
+    "begripsnaam": "vervaldag-schrikkeljaar-28-februari",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "in welk geval de termijn vervalt op 28 maart dan wel 10 april",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
+  },
+  {
+    "begrip-id": "BWBR0024096/par9-5/vervaldag-zelfde-dagnummer",
+    "begripsnaam": "vervaldag-zelfde-dagnummer",
+    "aangemeld-op": "2026-05-15",
+    "triggers": [
+      "onbevestigde-markering"
+    ],
+    "markeringen-count": 1,
+    "markeringen": [
+      {
+        "markering-id": "m-001",
+        "bron-annotatie-id": "BWBR0024096/par9-5",
+        "tekst": "vervalt de termijn een maand later (bij een betalingstermijn van een maand) op de dag die hetzelfde nummer heeft als dat van de dagtekening",
+        "interpretatiemethode": "grammaticaal",
+        "bijdrage": "primair",
+        "bevestigd": false,
+        "bevestigd-op": null
+      }
+    ],
+    "delta-analyse": "Niet-bevestigde markering(en) vanuit: BWBR0024096/par9-5. Juridische verificatie vereist vóór definitieve invulling.",
+    "advies": "bevestiging vereist — markering(en) nog niet geverifieerd door jurist"
   }
 ]

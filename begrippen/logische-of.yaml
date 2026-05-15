@@ -26,6 +26,13 @@ markeringen:
   bijdrage: primair
   bevestigd: false
   bevestigd-op: null
+- markering-id: m-002
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: of
+  interpretatiemethode: grammaticaal
+  bijdrage: context
+  bevestigd: false
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null

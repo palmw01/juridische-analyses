@@ -1,0 +1,52 @@
+begrip-id: BWBR0024096/par9-5/vervaldag-zelfde-dagnummer
+begripsnaam: vervaldag-zelfde-dagnummer
+aliases: []
+soort: datum
+soort-id: false
+jas-klasse: afleidingsregel
+toelichting-klasse: >-
+  Algemene rekenregel voor de één-maandtermijn: de vervaldag is de dag in de volgende kalendermaand
+  met hetzelfde dagnummer als de dagtekening. Dit is de hoofdregel waarvan de 31-oktober- en
+  28-februari-voorbeelden specifieke toepassingen zijn.
+herkomst: afgeleid
+status: concept
+definitie:
+  kern: >-
+    De berekende vervaldag van een betalingstermijn van één maand, vastgesteld op de dag in de
+    kalendermaand die één maand na de dagtekening valt en die hetzelfde dagnummer draagt als de
+    dagtekening van het aanslagbiljet; toepasselijk wanneer de dagtekening niet op de laatste
+    dag van de kalendermaand valt
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "vervalt de termijn een maand later (bij een betalingstermijn van een maand) op de dag die hetzelfde nummer heeft als dat van de dagtekening"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Vervaldag-zelfde-dagnummer: dagtekening 15 maart, betalingstermijn één maand — vervaldag is 15 april?"
+  waar: true
+  toelichting: "15 maart + één maand = 15 april (hetzelfde dagnummer in de volgmaand). 15 april bestaat; de zelfde-dagnummer-regel is van toepassing."
+- stelling: "Vervaldag-zelfde-dagnummer: dagtekening 31 oktober, betalingstermijn één maand — vervaldag is 31 november?"
+  waar: false
+  toelichting: "Grensgeval: 31 november bestaat niet; de zelfde-dagnummer-regel kan niet worden toegepast; de beperkingsregel vervangt de uitkomst door 30 november."
+kenmerken:
+- "Hoofdregel voor één-maandtermijnen bij dagtekeningen niet op de laatste dag van de maand"
+- "Berekening: dag D van maand M → dag D van maand M+1"
+- "Toepasselijk wanneer de volgmaand de dag met hetzelfde nummer wél bevat"
+- "Lex generalis ten opzichte van de beperkingsregel (31 oktober) en schrikkeljaar-uitzondering (28 februari)"
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0024096-par9-5-d
+tussenresultaat: false

@@ -1,0 +1,51 @@
+begrip-id: BWBR0024096/par9-5/vervaldag-kortemaand-een-maand
+begripsnaam: vervaldag-kortemaand-een-maand
+aliases: []
+soort: datum
+soort-id: false
+jas-klasse: afleidingsregel
+toelichting-klasse: >-
+  Rekenregel die de vervaldag bepaalt bij dagtekening 31 oktober en termijn van één maand: de dag die
+  hetzelfde nummer heeft als de dagtekening bestaat niet in november (31 november bestaat niet), zodat
+  de laatste dag van november (30 november) de vervaldag is. Dit impliceert de beperkingsregel voor
+  maanden met minder dan 31 dagen.
+herkomst: afgeleid
+status: concept
+definitie:
+  kern: >-
+    De berekende vervaldag bij een betalingstermijn van één maand en dagtekening op de laatste dag van
+    een maand met 31 dagen, vastgesteld op de laatste dag van de volgmaand omdat de volgmaand minder
+    dagen telt dan de dagtekeningmaand; geïllustreerd aan dagtekening 31 oktober — vervaldag 30 november
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: "de betalingstermijn van één maand vervalt op 30 november"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Vervaldag-kortemaand-een-maand: dagtekening 31 oktober, betalingstermijn één maand — vervaldag is 30 november?"
+  waar: true
+  toelichting: "31 november bestaat niet; de beperkingsregel stelt de vervaldag op de laatste dag van de volgmaand: 30 november."
+- stelling: "Vervaldag-kortemaand-een-maand: dagtekening 15 oktober, betalingstermijn één maand — vervaldag is 30 november?"
+  waar: false
+  toelichting: "Grensgeval: bij dagtekening 15 oktober bestaat 15 november wél; de zelfde-dagnummer-regel is van toepassing en de vervaldag is 15 november, niet 30 november."
+kenmerken:
+- "Toepassing van de beperkingsregel: als de dag met het dagtekeningnummer niet bestaat in de volgmaand, vervalt de termijn op de laatste dag van die maand"
+- "Specifiek voor dagtekening 31 oktober met één-maandtermijn"
+- "Illustratief voorbeeld in sectie 9.5 LI 2008 — niet normatief zelfstandig"
+identificatiebegrip: false
+afleidingsregel-id: AR-BWBR0024096-par9-5-a
+tussenresultaat: false

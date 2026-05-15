@@ -46,6 +46,13 @@ markeringen:
   bijdrage: context
   bevestigd: true
   bevestigd-op: '2026-01-01'
+- markering-id: m-003
+  bron-annotatie-id: BWBR0024096/par9-5
+  tekst: de dagtekening van een aanslagbiljet
+  interpretatiemethode: systematisch
+  bijdrage: context
+  bevestigd: false
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null
