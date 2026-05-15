@@ -27,6 +27,13 @@ markeringen:
   bijdrage: primair
   bevestigd: true
   bevestigd-op: '2026-05-15'
+- markering-id: m-002
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "dan wel"
+  interpretatiemethode: grammaticaal
+  bijdrage: context
+  bevestigd: false
+  bevestigd-op: null
 geldigheid-van: "2026-01-01"
 geldigheid-tot: null
 vervangen-door: null
