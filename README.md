@@ -46,7 +46,7 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Begrippen (A3a) — 45 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 15 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
-| Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 11 L3-waarschuwingen | ✅ Gereed |
+| Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 3 L3-waarschuwingen | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
@@ -320,7 +320,7 @@ annotaties/BWBR0004770/art9-lid1.json
 | `prioriteit bij niet-Specialisatieregel` | `prioriteit` is ingevuld maar `soort` is geen `Specialisatieregel` — dit veld is alleen zinvol bij Specialisatieregels |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 
-**Huidig rapport:** 67 bestanden ✅ · 0 blokkeerfouten · 11 L3-waarschuwingen (allen voor art. 2 lid 2 begrippen in A4-stadium: onbevestigde markeringen en lege relaties).
+**Huidig rapport:** 67 bestanden ✅ · 0 blokkeerfouten · 3 L3-waarschuwingen (bewust geaccepteerd: `alsmede` en `rijksbelastingen` als operator/opsomming zonder zinvolle JAS-relaties; `art2-lid2` als definitie-lid zonder centrale JAS-klasse).
 
 ### Validatiepipeline
 
