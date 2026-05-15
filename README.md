@@ -15,9 +15,9 @@ Dit project is een **proof-of-concept voor AI-ondersteunde wetsanalyse** binnen 
 
 Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek haalbaar zijn wanneer een AI de uitvoering overneemt, en dat het resultaat traceerbaar en valideerbaar genoeg is om als input voor digitale regelimplementatie te dienen.
 
-**Geanalyseerd artikel:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 en §9.5 Leidraad Invordering 2008. Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn. De bepaling is eenvoudig genoeg om volledig door te lopen, maar bevat voldoende lagen — hoofdregel, uitzonderingen, Leidraad-aanvulling, termijnberekening inclusief schrikkeljaarcorrecties — om de methodiek serieus te testen.
+**Geanalyseerde artikelen:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 en §9.5 Leidraad Invordering 2008, en art. 2 lid 2 IW 1990 (begripsbepalingen). Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn; art. 2 lid 2 IW definieert de kernbegrippen die in de gehele wet worden gebruikt, waaronder de uitgebreide definities van rijksbelastingen, belastingaanslag en invorderen.
 
-**Output:** een traceerbaar kennismodel — 39 begrippen, 15 afleidingsregels, 59 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 45 begrippen, 15 afleidingsregels, 67 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -38,18 +38,19 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 
 | Onderdeel | Status |
 |-----------|--------|
-| Art. 9 lid 1 IW — annotatie | ✅ Gereed |
-| Art. 9 lid 5 IW — annotatie | ✅ Gereed |
-| §9.1 Leidraad Invordering — annotatie | ✅ Gereed |
-| §9.5 Leidraad Invordering — annotatie | ✅ Gereed |
-| Begrippen (A3a) — 39 stuks | ✅ Gereed |
+| Art. 9 lid 1 IW — annotatie + begrippen | ✅ Gereed |
+| Art. 9 lid 5 IW — annotatie + begrippen | ✅ Gereed |
+| §9.1 Leidraad Invordering — annotatie + begrippen | ✅ Gereed |
+| §9.5 Leidraad Invordering — annotatie + begrippen | ✅ Gereed |
+| Art. 2 lid 2 IW — annotatie + begrippen | ✅ Gereed |
+| Begrippen (A3a) — 45 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 15 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
-| Validatie (L1–L3) — 59 bestanden, 0 blokkeerfouten, 0 L3-waarschuwingen | ✅ Gereed |
+| Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 11 L3-waarschuwingen | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
-| **Totaal: art. 9 IW volledig doorlopen** | **✅ Proof-of-concept compleet** |
+| **Totaal: art. 9 + art. 2 lid 2 IW volledig doorlopen** | **✅ Proof-of-concept actief** |
 | Doorontwikkeling van het PoC | 🔜 Volgende fase |
 
 ---
@@ -319,7 +320,7 @@ annotaties/BWBR0004770/art9-lid1.json
 | `prioriteit bij niet-Specialisatieregel` | `prioriteit` is ingevuld maar `soort` is geen `Specialisatieregel` — dit veld is alleen zinvol bij Specialisatieregels |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 
-**Huidig rapport:** 59 bestanden ✅ · 0 blokkeerfouten · 0 L3-waarschuwingen.
+**Huidig rapport:** 67 bestanden ✅ · 0 blokkeerfouten · 11 L3-waarschuwingen (allen voor art. 2 lid 2 begrippen in A4-stadium: onbevestigde markeringen en lege relaties).
 
 ### Validatiepipeline
 
@@ -349,7 +350,7 @@ git push → main (na ci.yml)
 
 ### Begrippenstelsel (`begrippen/*.yaml`)
 
-Het hart van het kennismodel. 39 begrippen, elk met definitie, datatype, JAS-klasse, herkomst, relaties en volledige traceerbaarheid naar de wetstekst. Zie §[De kennisgraaf van dichtbij](#de-kennisgraaf-van-dichtbij) voor een voorbeeldbestand.
+Het hart van het kennismodel. 45 begrippen, elk met definitie, datatype, JAS-klasse, herkomst, relaties en volledige traceerbaarheid naar de wetstekst. Zie §[De kennisgraaf van dichtbij](#de-kennisgraaf-van-dichtbij) voor een voorbeeldbestand.
 
 ### Afleidingsregels (`regels/AR-*.yaml`)
 
@@ -555,7 +556,7 @@ tools/                 Python-toolchain (9 scripts)
   extract_kruisrefs.py JCI URI-extractie uit annotaties
   queries/             SPARQL-querybestanden
 
-tests/                 Python-testsuite (623 tests, 100% coverage)
+tests/                 Python-testsuite (697 tests, 100% coverage)
   unit/                unit-tests per tool (validate_note, export_rdf, ...)
   integration/         integratie-tests (sitegen-pages, data-loading, pipeline)
   property/            property-based tests via Hypothesis (slugify, config)
@@ -592,7 +593,7 @@ pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 
 ### Testsuite
 
-673 tests — unit, integratie en property-based (Hypothesis) — met **100% line coverage** op alle toolchain-code (`tools/` en `sitegen/`). De suite is geschreven door Claude Code. `make test-cov` draait automatisch als eerste stap van CI; de build faalt bij minder dan 100%.
+697 tests — unit, integratie en property-based (Hypothesis) — met **100% line coverage** op alle toolchain-code (`tools/` en `sitegen/`). De suite is geschreven door Claude Code. `make test-cov` draait automatisch als eerste stap van CI; de build faalt bij minder dan 100%.
 
 ---
 
