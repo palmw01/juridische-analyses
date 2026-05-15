@@ -1,0 +1,54 @@
+begrip-id: BWBR0004770/art2/lid2/voor-zover-betrekking-heffing-rijksbelastingen
+begripsnaam: voor zover betrekking heffing rijksbelastingen
+aliases: []
+soort: booleaans
+soort-id: false
+jas-klasse: voorwaarde
+toelichting-klasse: >-
+  De zinsnede 'voor zover' introduceert een beperkende voorwaarde bij de definitie van 'wettelijke
+  regeling betreffende de heffing van rijksbelastingen'. Alleen die bepalingen van de Algemene
+  douanewet vallen eronder die betrekking hebben op heffing — niet op andere douanerechtelijke
+  onderwerpen. Grammaticaal herkenbaar aan het voegwoord 'voor zover'.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De beperkende voorwaarde dat uitsluitend die wettelijke bepalingen van de Algemene douanewet
+    in aanmerking komen die betrekking hebben op de heffing van rijksbelastingen — bepalingen
+    die geen betrekking hebben op heffing zijn uitgesloten
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "voor zover deze betrekking hebben op de heffing van rijksbelastingen"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot:
+  - begrip-id: BWBR0004770/art2/lid2/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen
+    relatie-soort: definitoir
+    kardinaliteit: null
+voorbeelden:
+- stelling: "Een bepaling uit de Algemene douanewet die de berekening van invoerrechten regelt, voldoet aan de voorwaarde 'betrekking hebben op de heffing van rijksbelastingen'?"
+  waar: true
+  toelichting: "Invoerrechten zijn rijksbelastingen; een berekeningsbepaling heeft direct betrekking op de heffing ervan en voldoet daarmee aan de 'voor zover'-voorwaarde."
+- stelling: "Een bepaling over de douaneaangifte-procedure (zonder heffingsaspect) voldoet aan de voorwaarde?"
+  waar: false
+  toelichting: "Grensgeval: de aangifte-procedure zelf heeft geen directe betrekking op de heffing maar op de procedurele verplichtingen; de 'voor zover'-voorwaarde is niet vervuld en de bepaling valt buiten de reikwijdte van art. 2 lid 2 sub b IW 1990."
+kenmerken:
+- "Beperkende 'voor zover'-constructie — beperkt tot een deelverzameling"
+- "Test: heeft de bepaling direct betrekking op de heffing? Zo nee → buiten scope"
+- "Filtert douanerechtelijke bepalingen naar hun relatie tot heffing"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

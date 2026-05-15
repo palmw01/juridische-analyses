@@ -1,0 +1,124 @@
+{
+  "annotatie-id": "BWBR0004770/art2/lid2",
+  "bwb-id": "BWBR0004770",
+  "wet": "IW 1990",
+  "artikel": "2",
+  "lid": "2",
+  "peildatum": "2026-01-01",
+  "structuurpositie": "Hoofdstuk I Algemene bepalingen > Artikel 2 > Lid 2",
+  "wetstekst": "Deze wet verstaat mede onder:\n\na. rijksbelastingen: de belastingrente, de revisierente, de rente op achterstallen, de kosten van ambtelijke werkzaamheden, alsmede de bestuurlijke boeten;\nb. wettelijke regeling betreffende de heffing van rijksbelastingen: de wettelijke bepalingen, bedoeld in artikel 1:1, eerste en tweede lid, van de Algemene douanewet, voor zover deze betrekking hebben op de heffing van rijksbelastingen;\nc. belastingaanslag: een ingevolge de Algemene wet inzake rijksbelastingen dan wel Algemene douanewet of enige andere wettelijke regeling betreffende de heffing van rijksbelastingen vastgestelde beschikking of uitspraak strekkende tot - al dan niet nadere - vaststelling van een ingevolge die regelingen verschuldigd of terug te geven bedrag;\nd. aanslagbiljet: de kennisgeving van de beschikking of de uitspraak, bedoeld in onderdeel c;\ne. invorderen van rijksbelastingen: het betalen van een terug te geven bedrag aan rijksbelastingen.",
+  "annotatierijen": [
+    {
+      "rij-id": "r-001",
+      "markering": "rijksbelastingen: de belastingrente, de revisierente, de rente op achterstallen, de kosten van ambtelijke werkzaamheden, alsmede de bestuurlijke boeten",
+      "jas-klasse": "brondefinitie",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art2/lid2/rijksbelastingen",
+      "toelichting-klasse": "Onderdeel a breidt de definitie van 'rijksbelastingen' uit artikel 2 lid 1 sub a uit via de constructie 'verstaat mede onder'. De term wordt expliciet omschreven in de wetstekst zelf — dat is het kenmerk van een brondefinitie. De uitbreiding omvat bijkomende publiekrechtelijke geldschulden (rente, kosten, boeten) die voor de toepassing van de IW 1990 gelijkgesteld worden met rijksbelastingen. Alternatieve classificatie als variabele is afgewezen: het gaat niet om een kenmerk van een rechtssubject maar om een begripsomschrijving.",
+      "signalering": "Lid 2 sub a breidt de reikwijdte van 'rijksbelastingen' uit ten opzichte van lid 1 sub a. De uitbreiding omvat geldschulden die strikt genomen geen belastingen zijn (bestuurlijke boeten, invorderingsrente). Dit kan betekenisvol zijn voor de afgrenzing van het invorderingsbegrip in grensgevallen."
+    },
+    {
+      "rij-id": "r-002",
+      "markering": "alsmede",
+      "jas-klasse": "operator",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art2/lid2/alsmede",
+      "toelichting-klasse": "De conjunctieve operator 'alsmede' verbindt de opsomming van de bij rijksbelastingen mede inbegrepen posten (belastingrente, revisierente, rente op achterstallen, kosten van ambtelijke werkzaamheden) met het laatste element (bestuurlijke boeten). Logisch type: EN-additief.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-003",
+      "markering": "wettelijke regeling betreffende de heffing van rijksbelastingen: de wettelijke bepalingen, bedoeld in artikel 1:1, eerste en tweede lid, van de Algemene douanewet, voor zover deze betrekking hebben op de heffing van rijksbelastingen",
+      "jas-klasse": "brondefinitie",
+      "interpretatiemethode": "systematisch",
+      "begrip-id": "BWBR0004770/art2/lid2/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen",
+      "toelichting-klasse": "Onderdeel b definieert wat onder 'wettelijke regeling betreffende de heffing van rijksbelastingen' wordt verstaan voor de toepassing van de IW 1990. De definitie verwijst naar art. 1:1 lid 1 en 2 Algemene douanewet en is beperkt tot douanerechtelijke bepalingen die betrekking hebben op heffing. Systematische interpretatiemethode: de definitie krijgt betekenis in samenhang met andere artikelen van de IW 1990 die deze term gebruiken.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-004",
+      "markering": "voor zover deze betrekking hebben op de heffing van rijksbelastingen",
+      "jas-klasse": "voorwaarde",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art2/lid2/voor-zover-betrekking-heffing-rijksbelastingen",
+      "toelichting-klasse": "De zinsnede 'voor zover' introduceert een beperkende voorwaarde bij de definitie van 'wettelijke regeling betreffende de heffing van rijksbelastingen'. Alleen die bepalingen van de Algemene douanewet vallen eronder die betrekking hebben op heffing — niet op andere douanerechtelijke onderwerpen. Grammaticaal herkenbaar aan het voegwoord 'voor zover'.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-005",
+      "markering": "belastingaanslag: een ingevolge de Algemene wet inzake rijksbelastingen dan wel Algemene douanewet of enige andere wettelijke regeling betreffende de heffing van rijksbelastingen vastgestelde beschikking of uitspraak strekkende tot - al dan niet nadere - vaststelling van een ingevolge die regelingen verschuldigd of terug te geven bedrag",
+      "jas-klasse": "brondefinitie",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag",
+      "toelichting-klasse": "Onderdeel c breidt de definitie van 'belastingaanslag' uit artikel 2 lid 1 sub m uit. De uitbreiding omvat beschikkingen en uitspraken vastgesteld op grond van de AWR, Algemene douanewet of enige andere wettelijke regeling betreffende de heffing van rijksbelastingen, strekkende tot vaststelling van een verschuldigd of terug te geven bedrag. De formulering 'al dan niet nadere vaststelling' omvat zowel primitive aanslagen als nader vastgestelde bedragen. Hergebruikt begrip: belastingaanslag bestaat al als begrip vanuit art9/lid1 (jas-klasse: rechtsobject); in dit lid verschijnt het als brondefinitie (de wettelijke omschrijving zelf). De definitiekern uit art9/lid1 is primair gebaseerd op de invorderingscontext; art2/lid2c geeft de formele wettelijke definitie die als aanvullende markering wordt toegevoegd.",
+      "signalering": "Onderdeel c omvat ook beschikkingen strekkende tot vaststelling van een 'terug te geven bedrag'. Dit is opmerkelijk: invordering richt zich doorgaans op het innen van belasting, niet op het uitbetalen. Zie ook art. 2 lid 2 sub e (invorderen van rijksbelastingen omvat mede het uitbetalen van teruggaven). Dit geeft een ruimer invorderingsbegrip dan in alledaags taalgebruik."
+    },
+    {
+      "rij-id": "r-006",
+      "markering": "dan wel",
+      "jas-klasse": "operator",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0024096/par9-5/dan-wel",
+      "toelichting-klasse": "De disjunctieve operator 'dan wel' verbindt de AWR en de Algemene douanewet als alternatieve grondslagen voor de vaststelling van een beschikking die als belastingaanslag kwalificeert. Logisch type: OF-alternatief.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-007",
+      "markering": "aanslagbiljet: de kennisgeving van de beschikking of de uitspraak, bedoeld in onderdeel c",
+      "jas-klasse": "brondefinitie",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art2/lid2/aanslagbiljet",
+      "toelichting-klasse": "Onderdeel d definieert 'aanslagbiljet' als de kennisgeving (het document) van de beschikking of uitspraak bedoeld in onderdeel c. Het aanslagbiljet is het formele document waarmee de belastingaanslag (in de uitgebreide zin van onderdeel c) aan de belastingschuldige bekend wordt gemaakt. Grammaticaal herkenbaar als begripsdefinitie via de dubbele punt-constructie.",
+      "signalering": null
+    },
+    {
+      "rij-id": "r-008",
+      "markering": "invorderen van rijksbelastingen: het betalen van een terug te geven bedrag aan rijksbelastingen",
+      "jas-klasse": "brondefinitie",
+      "interpretatiemethode": "grammaticaal",
+      "begrip-id": "BWBR0004770/art2/lid2/invorderen-van-rijksbelastingen",
+      "toelichting-klasse": "Onderdeel e breidt het begrip 'invorderen van rijksbelastingen' uit met de uitbetaling van teruggaven. Teleologisch: het doel van de uitbreiding is om de Belastingdienst (ontvanger) ook bevoegdheden en verplichtingen te geven bij het uitbetalen van teruggaven, zodat de IW 1990 ook op dat terrein van toepassing is. Dit is een opmerkelijke uitbreiding van het begrip 'invorderen', dat in alledaagse en juridische zin doorgaans alleen betrekking heeft op het innen van schulden.",
+      "signalering": "Onderdeel e geeft een contra-intuïtieve uitbreiding van 'invorderen': ook het uitbetalen van een teruggave valt hieronder. Dit heeft gevolgen voor de bevoegdheden van de ontvanger en de toepasselijkheid van de IW 1990 op teruggaafprocedures."
+    }
+  ],
+  "diagram": {
+    "centrale-klasse": null,
+    "knopen": [],
+    "kanten": []
+  },
+  "kruisreferenties": [
+    {
+      "doel-bwb-id": "BWBR0023746",
+      "doel-artikel": "1:1",
+      "doel-lid": "1",
+      "richting": "forward",
+      "confidence": 0.95,
+      "ruwe-tekst": "artikel 1:1, eerste en tweede lid, van de Algemene douanewet"
+    },
+    {
+      "doel-bwb-id": "BWBR0023746",
+      "doel-artikel": "1:1",
+      "doel-lid": "2",
+      "richting": "forward",
+      "confidence": 0.95,
+      "ruwe-tekst": "artikel 1:1, eerste en tweede lid, van de Algemene douanewet"
+    },
+    {
+      "doel-bwb-id": "BWBR0002320",
+      "doel-artikel": null,
+      "doel-lid": null,
+      "richting": "forward",
+      "confidence": 0.85,
+      "ruwe-tekst": "de Algemene wet inzake rijksbelastingen"
+    },
+    {
+      "doel-bwb-id": "BWBR0023746",
+      "doel-artikel": null,
+      "doel-lid": null,
+      "richting": "forward",
+      "confidence": 0.85,
+      "ruwe-tekst": "Algemene douanewet"
+    }
+  ],
+  "delegatiestructuur": []
+}

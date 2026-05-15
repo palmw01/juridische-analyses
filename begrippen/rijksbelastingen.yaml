@@ -1,0 +1,54 @@
+begrip-id: BWBR0004770/art2/lid2/rijksbelastingen
+begripsnaam: rijksbelastingen
+aliases:
+- rijksbelastingen (uitgebreid)
+soort: enumeratie
+soort-id: false
+jas-klasse: brondefinitie
+toelichting-klasse: >-
+  Onderdeel a breidt de definitie van 'rijksbelastingen' uit artikel 2 lid 1 sub a uit via de constructie
+  'verstaat mede onder'. De uitbreiding omvat bijkomende publiekrechtelijke geldschulden (belastingrente,
+  revisierente, rente op achterstallen, kosten van ambtelijke werkzaamheden, bestuurlijke boeten) die voor
+  de toepassing van de IW 1990 gelijkgesteld worden met rijksbelastingen. Classificatie als brondefinitie:
+  de term wordt expliciet omschreven in de wetstekst.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    Een gesloten opsomming van publiekrechtelijke geldschulden die voor de toepassing van de
+    Invorderingswet 1990 worden gelijkgesteld met belastingen geheven door het Rijk: de belastingrente,
+    de revisierente, de rente op achterstallen, de kosten van ambtelijke werkzaamheden en de bestuurlijke
+    boeten
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "rijksbelastingen: de belastingrente, de revisierente, de rente op achterstallen, de kosten van ambtelijke werkzaamheden, alsmede de bestuurlijke boeten"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "Belastingrente opgelegd wegens te late aangifte IB 2024 valt onder rijksbelastingen in de zin van art. 2 lid 2 IW 1990?"
+  waar: true
+  toelichting: "Belastingrente is expliciet opgenomen in de gesloten opsomming van onderdeel a; de IW 1990 is op de invordering ervan van toepassing."
+- stelling: "Een gemeentelijke parkeerboete valt onder rijksbelastingen in de zin van art. 2 lid 2 IW 1990?"
+  waar: false
+  toelichting: "Grensgeval: een gemeentelijke parkeerboete is geen rijksbelasting en is ook niet opgenomen in de gesloten opsomming van onderdeel a (die omvat uitsluitend belastingrente, revisierente, rente op achterstallen, kosten ambtelijke werkzaamheden en bestuurlijke boeten die onder de IW 1990 vallen)."
+kenmerken:
+- "Gesloten opsomming — uitsluitend de met name genoemde geldschulden vallen eronder"
+- "Uitbreiding van het begrip 'rijksbelastingen' via de fictie 'verstaat mede onder'"
+- "Omvat geldschulden die strikt genomen geen belastingen zijn (boeten, rente, kosten)"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

@@ -2,9 +2,49 @@
   "fouten": [],
   "waarschuwingen": [
     {
-      "bestand": "regels/AR-BWBR0024096-art9-par1-b.yaml",
-      "boodschap": "[L3] soort is 'Specialisatieregel' maar gespecialiseerd-regel-id is niet ingevuld — stel gespecialiseerd-regel-id in op de regel-id van de hoofdregel"
+      "bestand": "begrippen/aanslagbiljet.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "begrippen/alsmede.yaml",
+      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
+    },
+    {
+      "bestand": "begrippen/alsmede.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "begrippen/invorderen-van-rijksbelastingen.yaml",
+      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
+    },
+    {
+      "bestand": "begrippen/invorderen-van-rijksbelastingen.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "begrippen/rijksbelastingen.yaml",
+      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
+    },
+    {
+      "bestand": "begrippen/rijksbelastingen.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "begrippen/voor-zover-betrekking-heffing-rijksbelastingen.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "begrippen/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen.yaml",
+      "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
+    },
+    {
+      "bestand": "begrippen/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen.yaml",
+      "boodschap": "[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd"
+    },
+    {
+      "bestand": "annotaties/BWBR0004770/art2-lid2.json",
+      "boodschap": "[L3] diagram ontbreekt of is leeg (geen knopen/kanten)"
     }
   ],
-  "geslaagd": 59
+  "geslaagd": 67
 }

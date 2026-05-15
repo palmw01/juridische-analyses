@@ -3,29 +3,49 @@ begripsnaam: belastingaanslag
 aliases: []
 soort: enumeratie
 soort-id: false
-jas-klasse: rechtsobject
+jas-klasse: brondefinitie
 toelichting-klasse: >-
-  De belastingaanslag is het voorwerp van de invorderingsrechtsbetrekking; grammaticaal is 'een belastingaanslag'
-  het zelfstandig naamwoord waarop de invorderbaarheid betrekking heeft. Alternatieve classificatie als
-  rechtssubject is uitgesloten: de aanslag is geen drager van rechten of plichten.
+  Art. 2 lid 2 sub c IW 1990 geeft de formele wettelijke definitie van 'belastingaanslag' — deze
+  brondefinitie is leidend voor de definitiekern. Art. 9 lid 1 IW 1990 gebruikt de term als rechtsobject
+  (voorwerp van de invorderingsrechtsbetrekking) maar definieert hem niet; die invorderingsrechtelijke
+  rol is vastgelegd als verfijning-context.
 herkomst: direct
 status: concept
 definitie:
   kern: >-
-    Een door de Belastingdienst opgelegd en geformaliseerd besluit tot vaststelling van een belastingschuld,
-    dat als voorwerp van invordering dient en waarop de invorderingsrechtsbetrekking zich richt
-  contexten: []
-definitie-versie: 1
+    Een ingevolge de Algemene wet inzake rijksbelastingen, de Algemene douanewet of enige andere
+    wettelijke regeling betreffende de heffing van rijksbelastingen vastgestelde beschikking of
+    uitspraak, strekkende tot al dan niet nadere vaststelling van een ingevolge die regelingen
+    verschuldigd of terug te geven bedrag
+  contexten:
+  - markering-id: m-001
+    bijdrage: verfijning
+    tekst: >-
+      In de invorderingsrechtsbetrekking van art. 9 lid 1 IW 1990 functioneert de belastingaanslag
+      als rechtsobject: het is het voorwerp waarop de invorderingsbevoegdheid van de ontvanger
+      zich richt zodra de betalingstermijn is verstreken
+    toelichting: >-
+      Art. 9 lid 1 specificeert de toepassingscontext: de belastingaanslag als afdwingbare
+      titel voor de ontvanger. Deze invorderingsrechtelijke rol is een verfijning van de kern —
+      de formele definitie (art. 2 lid 2c) is breder en omvat ook teruggaafbeschikkingen.
+definitie-versie: 2
 definitie-gebaseerd-op:
-- m-001
+- m-002
 markeringen:
 - markering-id: m-001
   bron-annotatie-id: BWBR0004770/art9/lid1
   tekst: Een belastingaanslag
   interpretatiemethode: grammaticaal
-  bijdrage: primair
+  bijdrage: aanvullend
   bevestigd: true
   bevestigd-op: '2026-05-15'
+- markering-id: m-002
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "belastingaanslag: een ingevolge de Algemene wet inzake rijksbelastingen dan wel Algemene douanewet of enige andere wettelijke regeling betreffende de heffing van rijksbelastingen vastgestelde beschikking of uitspraak strekkende tot - al dan niet nadere - vaststelling van een ingevolge die regelingen verschuldigd of terug te geven bedrag"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
 geldigheid-van: '2026-01-01'
 geldigheid-tot: null
 vervangen-door: null

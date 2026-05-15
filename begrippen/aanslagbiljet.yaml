@@ -1,0 +1,52 @@
+begrip-id: BWBR0004770/art2/lid2/aanslagbiljet
+begripsnaam: aanslagbiljet
+aliases: []
+soort: entiteit
+soort-id: false
+jas-klasse: brondefinitie
+toelichting-klasse: >-
+  Onderdeel d definieert 'aanslagbiljet' als de kennisgeving (het document) van de beschikking of
+  uitspraak bedoeld in onderdeel c. Het aanslagbiljet is het formele document waarmee de belastingaanslag
+  (in de uitgebreide zin van onderdeel c) aan de belastingschuldige bekend wordt gemaakt.
+  Grammaticaal herkenbaar als begripsdefinitie via de dubbele punt-constructie.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De kennisgeving van de beschikking of uitspraak bedoeld in art. 2 lid 2 sub c IW 1990 — het
+    formele document waarmee de belastingaanslag aan de belastingschuldige bekend wordt gemaakt
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "aanslagbiljet: de kennisgeving van de beschikking of de uitspraak, bedoeld in onderdeel c"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft:
+  - begrip-id: BWBR0004770/art9/lid1/belastingaanslag
+    kardinaliteit: "1:1"
+  leidt-tot: []
+voorbeelden:
+- stelling: "Het schriftelijk bericht van de Belastingdienst waarop de aanslag IB 2024 staat vermeld met het te betalen bedrag, is een aanslagbiljet?"
+  waar: true
+  toelichting: "Het bericht is de kennisgeving van de beschikking (belastingaanslag) in de zin van onderdeel c; het maakt de aanslag formeel bekend aan de belastingschuldige."
+- stelling: "Een herinneringsbrief van de Belastingdienst voor een nog openstaande schuld is een aanslagbiljet?"
+  waar: false
+  toelichting: "Grensgeval: een herinneringsbrief is geen kennisgeving van een beschikking of uitspraak in de zin van onderdeel c — de beschikking is al eerder per aanslagbiljet bekendgemaakt; de herinneringsbrief is een aanmaning, geen aanslagbiljet."
+kenmerken:
+- "Formeel document — kennisgeving van de beschikking of uitspraak"
+- "Koppelt het aanslagbiljet aan de belastingaanslag in de zin van art. 2 lid 2 sub c"
+- "Instrument voor bekendmaking aan de belastingschuldige"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

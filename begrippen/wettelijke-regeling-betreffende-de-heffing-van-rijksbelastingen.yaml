@@ -1,0 +1,52 @@
+begrip-id: BWBR0004770/art2/lid2/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen
+begripsnaam: wettelijke regeling betreffende de heffing van rijksbelastingen
+aliases: []
+soort: entiteit
+soort-id: false
+jas-klasse: brondefinitie
+toelichting-klasse: >-
+  Onderdeel b definieert wat onder 'wettelijke regeling betreffende de heffing van rijksbelastingen'
+  wordt verstaan voor de toepassing van de IW 1990. De definitie verwijst naar art. 1:1 lid 1 en 2
+  Algemene douanewet en is beperkt tot douanerechtelijke bepalingen die betrekking hebben op heffing.
+  Systematische interpretatiemethode: de definitie krijgt betekenis in samenhang met andere artikelen
+  van de IW 1990 die deze term gebruiken.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    De wettelijke bepalingen bedoeld in artikel 1:1, eerste en tweede lid, van de Algemene douanewet,
+    voor zover deze betrekking hebben op de heffing van rijksbelastingen — met uitsluiting van
+    douanerechtelijke bepalingen die geen betrekking hebben op heffing
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "wettelijke regeling betreffende de heffing van rijksbelastingen: de wettelijke bepalingen, bedoeld in artikel 1:1, eerste en tweede lid, van de Algemene douanewet, voor zover deze betrekking hebben op de heffing van rijksbelastingen"
+  interpretatiemethode: systematisch
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "De bepalingen van de Algemene douanewet over de berekening van invoerrechten (heffing) vallen onder dit begrip?"
+  waar: true
+  toelichting: "Invoerrechten zijn rijksbelastingen; de heffingsbepalingen in de Algemene douanewet zijn wettelijke bepalingen bedoeld in art. 1:1 lid 1 en 2 ADW die betrekking hebben op de heffing van rijksbelastingen."
+- stelling: "De bepalingen van de Algemene douanewet over douaneformaliteiten (aangifteprocedures) vallen onder dit begrip?"
+  waar: false
+  toelichting: "Grensgeval: douaneformaliteiten hebben geen betrekking op de heffing van rijksbelastingen maar op procedurele verplichtingen; de 'voor zover'-beperking sluit dergelijke bepalingen uit."
+kenmerken:
+- "Beperkt tot bepalingen die betrekking hebben op de heffing — niet op andere douanerechtelijke onderwerpen"
+- "Verwijst via art. 1:1 lid 1 en 2 ADW naar specifieke wettelijke bepalingen"
+- "Functioneert als schakelbepaling tussen IW 1990 en douanewetgeving"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

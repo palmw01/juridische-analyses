@@ -1,0 +1,50 @@
+begrip-id: BWBR0004770/art2/lid2/alsmede
+begripsnaam: alsmede
+aliases: []
+soort: tekst
+soort-id: false
+jas-klasse: operator
+toelichting-klasse: >-
+  De conjunctieve operator 'alsmede' verbindt de opsomming van de bij rijksbelastingen mede inbegrepen
+  posten (belastingrente, revisierente, rente op achterstallen, kosten van ambtelijke werkzaamheden)
+  met het laatste element (bestuurlijke boeten). Logisch type: EN-additief.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    Conjunctieve operator die de laatste term in een opsomming additief verbindt met de voorgaande
+    termen, zodanig dat alle genoemde elementen tezamen gelden; logisch equivalent aan EN in een
+    gesloten opsomming
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "alsmede"
+  interpretatiemethode: grammaticaal
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "'Alsmede' in de opsomming belastingrente, revisierente, rente op achterstallen, kosten ambtelijke werkzaamheden, alsmede bestuurlijke boeten — zijn alle genoemde elementen inbegrepen?"
+  waar: true
+  toelichting: "De conjunctieve operator 'alsmede' voegt het laatste element (bestuurlijke boeten) additief toe aan de voorgaande opsomming; alle vijf elementen zijn inbegrepen onder rijksbelastingen."
+- stelling: "'Alsmede' werkt als een exclusieve keuze — het laatste element sluit de voorgaande elementen uit?"
+  waar: false
+  toelichting: "Grensgeval: 'alsmede' is additief (EN), niet disjunctief (OF of DAN WEL). Het voegt het laatste element toe zonder de voorgaande te vervangen of uit te sluiten."
+kenmerken:
+- "Additieve conjunctie — verbindt, sluit niet uit"
+- "Markeert het laatste element in een opsomming"
+- "Logisch type EN, niet OF"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

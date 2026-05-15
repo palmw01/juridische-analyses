@@ -1,0 +1,52 @@
+begrip-id: BWBR0004770/art2/lid2/invorderen-van-rijksbelastingen
+begripsnaam: invorderen van rijksbelastingen
+aliases: []
+soort: entiteit
+soort-id: false
+jas-klasse: brondefinitie
+toelichting-klasse: >-
+  Art. 2 lid 2 sub e geeft via de constructie 'verstaat mede onder' een grammaticale uitbreiding
+  van het begrip 'invorderen van rijksbelastingen': ook het betalen van een terug te geven bedrag
+  valt eronder. De kern omvat zowel de hoofdbetekenis (het innen van belastingschulden) als deze
+  wettelijke uitbreiding naar teruggaven. De contra-intuïtieve uitbreiding is opmerkelijk: in
+  alledaags en juridisch taalgebruik ziet 'invorderen' uitsluitend op het innen van schulden.
+herkomst: direct
+status: concept
+definitie:
+  kern: >-
+    Het door de ontvanger uitoefenen van bevoegdheden tot inning van verschuldigde rijksbelastingen,
+    alsmede — ingevolge art. 2 lid 2 sub e IW 1990 — het betalen van een terug te geven bedrag
+    aan rijksbelastingen, zodat de IW 1990 ook op teruggaafprocedures van toepassing is
+  contexten: []
+definitie-versie: 1
+definitie-gebaseerd-op:
+- m-001
+markeringen:
+- markering-id: m-001
+  bron-annotatie-id: BWBR0004770/art2/lid2
+  tekst: "invorderen van rijksbelastingen: het betalen van een terug te geven bedrag aan rijksbelastingen"
+  interpretatiemethode: teleologisch
+  bijdrage: primair
+  bevestigd: false
+  bevestigd-op: null
+geldigheid-van: "2026-01-01"
+geldigheid-tot: null
+vervangen-door: null
+relaties:
+  is-een: []
+  heeft: []
+  leidt-tot: []
+voorbeelden:
+- stelling: "De ontvanger betaalt een teruggaaf IB 2024 uit aan een belastingschuldige — valt dit onder invorderen van rijksbelastingen in de zin van art. 2 lid 2 sub e IW 1990?"
+  waar: true
+  toelichting: "De uitbetaling van een teruggaaf rijksbelasting door de ontvanger is expliciet opgenomen in de uitgebreide definitie van onderdeel e; de IW 1990 is van toepassing op deze handeling."
+- stelling: "De ontvanger vordert een openstaande belastingschuld in bij een belastingschuldige — valt dit onder invorderen van rijksbelastingen in de zin van art. 2 lid 2 sub e IW 1990?"
+  waar: false
+  toelichting: "Grensgeval: onderdeel e definieert uitsluitend de uitbreiding naar teruggaven; het innen van belastingschulden valt onder de hoofdbetekenis van 'invorderen' (buiten onderdeel e). Onderdeel e voegt aan die hoofdbetekenis de teruggaafuitbetaling toe — het vervangt de hoofdbetekenis niet."
+kenmerken:
+- "Contra-intuïtieve uitbreiding: 'invorderen' omvat ook uitbetalen"
+- "Doel: IW 1990-bevoegdheden van ontvanger ook bij teruggaafprocedures"
+- "Beperkt tot rijksbelastingen — geen gemeentelijke of provinciale teruggaven"
+identificatiebegrip: false
+afleidingsregel-id: null
+tussenresultaat: false

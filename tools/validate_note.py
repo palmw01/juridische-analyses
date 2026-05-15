@@ -449,7 +449,25 @@ def validate_integrity_annotatie_lid(data: dict, filepath: Path, begrip_index: d
     return errors
 
 
-def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
+def resolve_markering_jas_klasse(ann_id: str, begrip_id: str, project_root: Path) -> Optional[str]:
+    """Zoek de jas-klasse op van de annotatierij voor begrip_id in annotatie ann_id."""
+    annotaties_dir = project_root / "annotaties"
+    if not annotaties_dir.exists():
+        return None
+    for fp in annotaties_dir.rglob("*.json"):
+        try:
+            ann_data = load_json(fp)
+            if ann_data.get("annotatie-id") != ann_id:
+                continue
+            for rij in (ann_data.get("annotatierijen") or []):
+                if rij.get("begrip-id") == begrip_id:
+                    return rij.get("jas-klasse")
+        except Exception:
+            pass
+    return None
+
+
+def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[Path] = None) -> list[str]:
     """Laag 3: Kwaliteitscontrole voor begrip-bestanden."""
     warnings = []
 
@@ -511,6 +529,40 @@ def validate_quality_begrip(data: dict, filepath: Path) -> list[str]:
             "[L3] definitie.kern is ingevuld maar voorbeelden ontbreken — "
             "voeg minimaal 2 stellingen toe (waarvan 1 grensgeval)"
         )
+
+    # Prioriteitsconflict: brondefinitie als niet-primaire markering
+    # Een markering met jas-klasse 'brondefinitie' is de formele wettelijke definitie
+    # en hoort primair te zijn; een niet-definitoire klasse (rechtsobject, variabele, ...)
+    # als primaire markering is een aanwijzing dat de prioritering omgekeerd is.
+    if project_root is not None:
+        begrip_id = data.get("begrip-id", "")
+        markeringen_all: list[dict] = data.get("markeringen") or []
+        if begrip_id and len(markeringen_all) > 1:
+            primaire_jas: dict[str, str] = {}
+            niet_primaire_brondefs: list[tuple[str, str]] = []
+            for m in markeringen_all:
+                mid = m.get("markering-id") or ""
+                ann_id = str(m.get("bron-annotatie-id") or "")
+                bijdrage = m.get("bijdrage")
+                if not mid or not ann_id:
+                    continue
+                jas = resolve_markering_jas_klasse(ann_id, begrip_id, project_root)
+                if jas is None:
+                    continue
+                if bijdrage == "primair":
+                    primaire_jas[mid] = jas
+                elif jas == "brondefinitie":
+                    niet_primaire_brondefs.append((mid, ann_id))
+            if niet_primaire_brondefs:
+                niet_def_primair = {mid: jas for mid, jas in primaire_jas.items() if jas != "brondefinitie"}
+                if niet_def_primair:
+                    primair_info = ", ".join(f"{mid} ({jas})" for mid, jas in niet_def_primair.items())
+                    brondefs_info = ", ".join(f"{mid} ({ann})" for mid, ann in niet_primaire_brondefs)
+                    warnings.append(
+                        f"[L3] prioriteitsconflict markeringen: {brondefs_info} heeft jas-klasse "
+                        f"'brondefinitie' maar is niet primair — primaire markering(en) {primair_info} "
+                        f"hebben een niet-definitoire klasse; overweeg de brondefinitie als primaire markering"
+                    )
 
     return warnings
 
@@ -633,7 +685,7 @@ def validate_file(
 
     # Laag 3: Kwaliteitscontrole
     if schema_name == "begrip":
-        result.warnings.extend(validate_quality_begrip(data, filepath))
+        result.warnings.extend(validate_quality_begrip(data, filepath, project_root))
     elif schema_name == "regel":
         result.warnings.extend(validate_quality_regel(data, filepath))
     elif schema_name == "annotatie-lid":
