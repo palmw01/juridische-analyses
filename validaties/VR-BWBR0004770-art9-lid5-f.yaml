@@ -34,14 +34,16 @@ kolommen:
     BWBR0004770/art9/lid5/resterende-maanden-jaar: '11'
   is-invoer-juist: ja
   verwachte-uitvoer:
-    BWBR0004770/art9/lid5/termijnbedrag: '90.91'
-  is-voorspelling-juist: '?'
+    BWBR0004770/art9/lid5/termijnbedrag: '90.90'
+  is-voorspelling-juist: nee
   toelichting: 'Voorlopige aanslag IB 2026 gedagtekend januari 2026; bedrag € 1.000;
     resterende maanden = 11 (februari t/m december). Berekening: € 1.000 ÷ 11 = €
-    90,909... De wettekst zwijgt over afronding (A5-signaal in de regel). De hier
-    gehanteerde waarde (€ 90,91 met restant-verrekening) is één mogelijke uitkomst;
-    de verwachte uitvoer vereist juridische beoordeling omdat het afrondingsbeleid
-    niet wettelijk is vastgesteld.'
+    90,909... De eerder gehanteerde waarde (€ 90,91) was onjuist: € 90,91 × 11 = €
+    1.000,01, wat de aanslag overschrijdt. De wet eist "gelijke termijnen" (art. 9
+    lid 5 IW 1990 eerste volzin); gelijkheid wordt bereikt door naar beneden af te
+    ronden op centen (floor): € 90,90 per termijn, restant € 0,10 verrekend in de
+    slottermijn. AR-BWBR0004770-art9-lid5-f bevestigt € 90,90 als juiste uitkomst.
+    Verwachte uitvoer gecorrigeerd van € 90,91 naar € 90,90.'
 - label: Grenswaarde — minimaal geldige deler (€ 500 / 2 termijnen)
   invoer:
     BWBR0004770/art9/lid1/belastingaanslag: '500.00'

@@ -36,12 +36,14 @@ kolommen:
   is-invoer-juist: ja
   verwachte-uitvoer:
     BWBR0004770/art9/lid5/vervaldag-eerste-termijn: '2026-02-28'
-  is-voorspelling-juist: '?'
+  is-voorspelling-juist: ja
   toelichting: 'Aanslagbiljet gedagtekend 31 januari 2026. Formule: 31 januari + 1
     kalendermaand = 31 februari — maar 31 februari bestaat niet. Kalenderstrikt (art.
-    9 lid 10 IW 1990 sluit de ATw uit) wordt de vervaldag de laatste dag van februari:
-    28 februari 2026 (geen schrikkeljaar). In een schrikkeljaar zou de uitkomst 29
-    februari zijn. Dit is een juridisch grensgeval; juridische bevestiging is vereist.'
+    9 lid 10 IW 1990 sluit de ATw uit — die bepaalt de weekendregel, niet de maandberekeningsregel)
+    wordt de vervaldag de laatste dag van februari: 28 februari 2026 (geen schrikkeljaar).
+    De algemene rechtsleer (BW, bestuursrechtelijke termijnenleer) is eenduidig: als
+    de overeenkomstige dag in de doelmaand niet bestaat, valt de termijn op de laatste
+    dag van die maand. AR-BWBR0004770-art9-lid5-c bevestigt dit expliciet. Juist.'
 - label: Grenswaarde — dagtekening op de laatste dag van oktober (31 oktober 2026)
   invoer:
     BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-10-31'
