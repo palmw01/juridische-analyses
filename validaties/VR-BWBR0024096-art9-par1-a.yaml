@@ -1,0 +1,64 @@
+voorbeeldreeks-id: VR-BWBR0024096-art9-par1-a
+afleidingsregel-id: AR-BWBR0024096-art9-par1-a
+naam: bepalen of betalingstermijn eindigt voor 31 december — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Happy path — laatste termijn valt vóór 31 december
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: '2026-12-01'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '8'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/termijn-eindigt-voor-31-december: ja
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening april 2026 → 8 resterende maanden (≥ 2: lid 5 van toepassing).
+    Laatste vervaldag berekend op 1 december 2026, wat vóór 31 december valt. Beide
+    voorwaarden vervuld: termijn-eindigt-voor-31-december is waar.'
+- label: Grensgeval — laatste termijn exact op 31 december
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: '2026-12-31'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '9'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/termijn-eindigt-voor-31-december: nee
+  is-voorspelling-juist: ja
+  toelichting: 'Grensgeval: de laatste vervaldag valt op 31 december zelf. De voorwaarde
+    ''eindigt vóór 31 december'' is een strikte kleiner-dan-vergelijking; gelijkheid
+    is niet voldoende. De cap-regel (AR-9-5e) wordt daarom niet getriggerd.'
+- label: Negatief — lid 5 niet van toepassing (resterende maanden < 2)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: null
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '1'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/termijn-eindigt-voor-31-december: nee
+  is-voorspelling-juist: ja
+  toelichting: Dagtekening november 2026 → slechts 1 resterende maand. Aan de eerste
+    voorwaarde (resterende-maanden-jaar ≥ 2) is niet voldaan; lid 5 is niet van toepassing
+    en er zijn geen opvolgende termijnen om te beoordelen. De regel retourneert nee.
+    Vervaldag-volgende-termijnen is null omdat er geen opvolgende termijnen zijn.
+- label: Negatief — laatste termijn valt in volgend jaar (na 31 december)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: '2027-01-15'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '3'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/termijn-eindigt-voor-31-december: nee
+  is-voorspelling-juist: ja
+  toelichting: De berekende laatste vervaldag valt buiten het belastingjaar (15 januari
+    2027). De voorwaarde dat de termijn eindigt vóór 31 december van het belastingjaar
+    is niet vervuld; de cap-regel is niet van toepassing.
+- label: Ongeldige invoer — vervaldag ontbreekt terwijl lid 5 van toepassing is
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: null
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '5'
+  is-invoer-juist: nee
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/termijn-eindigt-voor-31-december: null
+  is-voorspelling-juist: nvt
+  toelichting: Lid 5 is van toepassing (5 resterende maanden ≥ 2), maar de vervaldag
+    van de laatste termijn is niet berekend of beschikbaar. Zonder die datum is de
+    kleiner-dan-vergelijking met 31 december niet uitvoerbaar; de regel kan niet worden
+    toegepast.

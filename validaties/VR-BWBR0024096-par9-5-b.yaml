@@ -1,0 +1,58 @@
+voorbeeldreeks-id: VR-BWBR0024096-par9-5-b
+afleidingsregel-id: AR-BWBR0024096-par9-5-b
+naam: berekenen vervaldatum zes weken bij dagtekening 31 oktober — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Happy path — dagtekening 31 oktober met zes-wekentermijn
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken: '2025-12-12'
+  is-voorspelling-juist: ja
+  toelichting: 'Beide toepassingsvoorwaarden zijn vervuld: dagtekening is 31 oktober
+    en de betalingstermijn is zes weken. 31 oktober + 42 kalenderdagen = 12 december.
+    Algoritmisch bepaald: 0 resterende dagen in oktober (na de 31e) + 30 dagen november
+    + 12 dagen december = 42 dagen.'
+- label: Grenswaarde — dagtekening 31 oktober maar termijn is één maand (niet zes
+    weken)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: een maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken: nvt
+  is-voorspelling-juist: ja
+  toelichting: 'Grensgeval: de dagtekening-voorwaarde is wel vervuld (31 oktober),
+    maar de betalingstermijn is één maand in plaats van zes weken. Deze regel (AR-BWBR0024096-par9-5-b)
+    geldt uitsluitend voor de zes-wekenvariant; de één-maandvariant valt onder een
+    afzonderlijke rekenregel. Verwachte uitvoer van deze specifieke regel: niet van
+    toepassing.'
+- label: Negatief — andere dagtekening dan 31 oktober
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken: nvt
+  is-voorspelling-juist: ja
+  toelichting: 'De dagtekening-voorwaarde (31 oktober) is niet vervuld; de betalingstermijn
+    is wel zes weken. Omdat de toepassingsvoorwaarde dagtekening-31-oktober niet geldt,
+    is deze specifieke rekenregel niet van toepassing. Voorbeeld: dagtekening 15 oktober
+    + 42 dagen = 26 november 2025, niet 12 december — berekening valt buiten het bereik
+    van deze regel.'
+- label: Ongeldige invoer — beide voorwaarden niet vervuld
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: twee maanden
+  is-invoer-juist: nee
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-zes-weken: ''
+  is-voorspelling-juist: nvt
+  toelichting: 'Ongeldige invoercombinatie: noch de dagtekening-31-oktober-voorwaarde,
+    noch een geldige termijnlengte (één maand of zes weken) is aanwezig. Een betalingstermijn
+    van twee maanden valt volledig buiten het bereik van sectie 9.5 LI 2008. Geen
+    uitvoer bepaalbaar.'

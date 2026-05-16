@@ -1,0 +1,58 @@
+voorbeeldreeks-id: VR-BWBR0024096-par9-5-f
+afleidingsregel-id: AR-BWBR0024096-par9-5-f
+naam: berekenen vervaldatum zes weken bij dagtekening 28 februari normaal jaar — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Standaard positief — dagtekening 28 februari, zes weken, normaal jaar
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: '2025-04-11'
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening 28 februari 2025 (geen schrikkeljaar); betalingstermijn
+    zes weken (42 dagen). Berekening: 28 februari + 42 kalenderdagen. Februari heeft
+    28 dagen, resterende in februari na de 28e = 0; maart: 31 dagen (lopend totaal:
+    31); april: 42 - 31 = 11. Verwachte vervaldatum: 11 april 2025.'
+- label: Nul-geval — betalingstermijn één maand (zes-weken-tak niet actief)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: een maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: '2025-03-31'
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening 28 februari 2025 (geen schrikkeljaar); betalingstermijn
+    één maand. De zes-weken-berekening (+ 42 dagen) is niet van toepassing: de één-maandvariant
+    levert via de beperkingsregel een vervaldatum van 31 maart (laatste dag volgmaand).
+    De rekenregel AR-BWBR0024096-par9-5-f is strikt genomen alleen actief voor de
+    zes-weken-tak; de uitkomst 31 maart behoort tot de breder gedefinieerde vervaldag-normaal-jaar-28-februari
+    (kern: twee uitkomsten).'
+- label: Negatief — dagtekening niet 28 februari (voorwaarde niet vervuld)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: nvt
+  is-voorspelling-juist: ja
+  toelichting: Dagtekening valt niet op 28 februari; de toepassingsvoorwaarde dagtekening-28-februari
+    is niet vervuld. De rekenregel AR-BWBR0024096-par9-5-f is niet van toepassing;
+    een andere rekenregel uit sectie 9.5 LI 2008 bepaalt de vervaldatum.
+- label: Grensgeval — dagtekening 28 februari schrikkeljaar (specialisatieregel actief)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: nee
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: null
+  is-voorspelling-juist: nvt
+  toelichting: 'Dagtekening 28 februari 2024 (schrikkeljaar); betalingstermijn zes
+    weken. De invoer is ongeldig voor déze rekenregel: in een schrikkeljaar is 28
+    februari niet de laatste dag van de maand (er volgt nog 29 februari), waardoor
+    de specialisatieregel AR-BWBR0024096-par9-5-c prioriteit heeft en de vervaldatum
+    10 april bedraagt (28 februari + 42 = 10 april in een 29-dagige februari). AR-BWBR0024096-par9-5-f
+    wordt terzijde gesteld.'

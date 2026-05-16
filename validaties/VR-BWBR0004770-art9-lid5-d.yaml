@@ -1,0 +1,78 @@
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid5-d
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-d
+naam: berekenen vervaldag volgende termijnen voorlopige aanslag — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Standaard positief — vervaldag eerste termijn midden in het jaar (15 april
+    2026, 9 volgende termijnen)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-eerste-termijn: '2026-04-15'
+    BWBR0004770/art9/lid5/telkens-een-maand-later: 1 kalendermaand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: 2026-05-15, 2026-06-15, 2026-07-15,
+      2026-08-15, 2026-09-15, 2026-10-15, 2026-11-15, 2026-12-15
+  is-voorspelling-juist: ja
+  toelichting: Eerste termijn vervalt op 15 april 2026 (dagtekening 15 maart 2026).
+    Iteratieve toepassing van de rekenregel levert vervaldagen op 15 mei, 15 juni,
+    15 juli, 15 augustus, 15 september, 15 oktober, 15 november en 15 december 2026.
+    Geen kortemaand-problematiek; alle maanden hebben een dag 15. Art. 9 lid 10 IW
+    1990 sluit de Algemene termijnenwet uit zodat de termijnen kalenderstrikt lopen.
+- label: Nul-geval — vervaldag eerste termijn op de eerste dag van de maand (1 oktober
+    2026, 3 volgende termijnen)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-eerste-termijn: '2026-10-01'
+    BWBR0004770/art9/lid5/telkens-een-maand-later: 1 kalendermaand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: 2026-11-01, 2026-12-01
+  is-voorspelling-juist: ja
+  toelichting: 'Eerste termijn vervalt op 1 oktober 2026 (dagtekening 1 september
+    2026); er zijn 2 volgende termijnen in het jaar: 1 november en 1 december 2026.
+    Dagtekening op de eerste dag van de maand levert geen kortemaand-problematiek
+    op. Het totaal van 3 termijnen (inclusief de eerste) is aanzienlijk minder dan
+    het gebruikelijke maximum van 10; iteratieve toepassing stopt bij het bereiken
+    van december.'
+- label: Grensgeval — vervaldag eerste termijn op een dag die in de volgende maand
+    niet bestaat (31 oktober 2026)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-eerste-termijn: '2026-10-31'
+    BWBR0004770/art9/lid5/telkens-een-maand-later: 1 kalendermaand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: 2026-11-30, 2026-12-31
+  is-voorspelling-juist: '?'
+  toelichting: 'Eerste termijn vervalt op 31 oktober 2026. Iteratie: 31 oktober +
+    1 maand = 31 november — maar november heeft slechts 30 dagen; de beperkingsregel
+    stelt de vervaldag op 30 november 2026. Volgende iteratie: 30 november + 1 maand
+    = 30 december 2026, maar omdat de vorige vervaldatum is teruggebracht van 31 naar
+    30, is het onduidelijk of de iteratie vertrekt van de gecorrigeerde (30 nov) of
+    de oorspronkelijke dagnummer (31). Bij toepassing van het oorspronkelijke dagnummer
+    31: 31 december 2026. Dit is een juridisch grensgeval; de correcte iteratielogica
+    bij kortemaand-correctie vereist juridische bevestiging.'
+- label: Grenswaarde — vervaldag eerste termijn in november (15 november 2026, slechts
+    1 volgende termijn)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-eerste-termijn: '2026-11-15'
+    BWBR0004770/art9/lid5/telkens-een-maand-later: 1 kalendermaand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: '2026-12-15'
+  is-voorspelling-juist: ja
+  toelichting: 'Eerste termijn vervalt op 15 november 2026 (dagtekening 15 oktober
+    2026); er is precies één volgende termijn in het jaar: 15 december 2026. Dit is
+    de minimale toepassing van de iteratieve rekenregel. Na 15 december zijn er geen
+    verdere termijnen in het belastingjaar (art. 9 lid 5 IW 1990 ziet op termijnen
+    "van het jaar").'
+- label: Ongeldige invoer — vervaldag eerste termijn ontbreekt (null)
+  invoer:
+    BWBR0004770/art9/lid5/vervaldag-eerste-termijn: null
+    BWBR0004770/art9/lid5/telkens-een-maand-later: 1 kalendermaand
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: De vervaldatum van de eerste termijn is de verplichte startwaarde voor
+    de iteratieve rekenregel; zonder deze invoer kan geen enkele volgende vervaldatum
+    worden berekend. De invoer is ongeldig; de rekenregel is niet van toepassing.

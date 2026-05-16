@@ -1,0 +1,66 @@
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid5-f
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-f
+naam: berekenen termijnbedrag voorlopige aanslag — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Standaard positief — exact deelbaar (€ 1.200 / 8 termijnen)
+  invoer:
+    BWBR0004770/art9/lid1/belastingaanslag: '1200.00'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '8'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/termijnbedrag: '150.00'
+  is-voorspelling-juist: ja
+  toelichting: 'Voorlopige aanslag IB 2026 gedagtekend april 2026; bedrag € 1.200;
+    resterende maanden = 8 (mei t/m december). Berekening: € 1.200 ÷ 8 = € 150,00
+    exact. Alle termijnen zijn gelijk van hoogte; geen afrondingsverschil.'
+- label: Nul-geval — resterende-maanden-jaar = 0 (deling door nul, ongeldige invoer)
+  invoer:
+    BWBR0004770/art9/lid1/belastingaanslag: '600.00'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '0'
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: Dagtekening in december levert 0 resterende maanden op. Deling door
+    nul is rekenkundig ongedefinieerd; de rekenregel kan niet worden toegepast. Bovendien
+    activeert resterende-maanden-jaar ≤ 1 de terugvalregel van art. 9 lid 5 derde
+    volzin (AR-BWBR0004770-art9-lid5-e), waardoor lid 1 herneemt en de huidige rekenregel
+    buiten toepassing blijft. Invoer is ongeldig voor deze regel.
+- label: Grensgeval — niet exact deelbaar, afrondingsverschil (€ 1.000 / 11 termijnen)
+  invoer:
+    BWBR0004770/art9/lid1/belastingaanslag: '1000.00'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '11'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/termijnbedrag: '90.91'
+  is-voorspelling-juist: '?'
+  toelichting: 'Voorlopige aanslag IB 2026 gedagtekend januari 2026; bedrag € 1.000;
+    resterende maanden = 11 (februari t/m december). Berekening: € 1.000 ÷ 11 = €
+    90,909... De wettekst zwijgt over afronding (A5-signaal in de regel). De hier
+    gehanteerde waarde (€ 90,91 met restant-verrekening) is één mogelijke uitkomst;
+    de verwachte uitvoer vereist juridische beoordeling omdat het afrondingsbeleid
+    niet wettelijk is vastgesteld.'
+- label: Grenswaarde — minimaal geldige deler (€ 500 / 2 termijnen)
+  invoer:
+    BWBR0004770/art9/lid1/belastingaanslag: '500.00'
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '2'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/termijnbedrag: '250.00'
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening oktober 2026; resterende maanden = 2 (november en december).
+    Dit is de minimale deler waarbij de rekenregel van lid 5 van toepassing is (>
+    1 termijn; terugvalregel niet actief). Berekening: € 500 ÷ 2 = € 250,00 exact.
+    Geen afrondingsverschil.'
+- label: Ongeldige invoer — belastingaanslag ontbreekt (null)
+  invoer:
+    BWBR0004770/art9/lid1/belastingaanslag: null
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '6'
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: Het bedrag van de belastingaanslag is de teller van de berekening.
+    Zonder dit bedrag kan het termijnbedrag niet worden berekend; de rekenregel is
+    niet toepasbaar. Invoer is ongeldig.

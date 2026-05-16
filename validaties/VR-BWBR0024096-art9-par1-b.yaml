@@ -1,0 +1,78 @@
+voorbeeldreeks-id: VR-BWBR0024096-art9-par1-b
+afleidingsregel-id: AR-BWBR0024096-art9-par1-b
+naam: vaststellen vervaldag voorlopige aanslag afwijkend boekjaar — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Valt onder specialisatie — BV met afwijkend boekjaar (april–maart), laatste
+    termijn op 15 november 2026
+  invoer:
+    BWBR0004770/art9/lid5/voorlopige-aanslag: ja
+    BWBR0024096/par9-1/afwijkend-boekjaar: ja
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: '2026-11-30'
+  is-voorspelling-juist: ja
+  toelichting: 'BV met boekjaar 1 april t/m 31 maart. Beide specialisatiecriteria
+    zijn vervuld: (1) voorlopige aanslag is van toepassing, (2) afwijkend-boekjaar
+    is waar. De specialisatieregel van LI 2008 §9.1 tweede volzin overschrijft de
+    uitkomst van AR-BWBR0004770-art9-lid5-d: de laatste vervaldag wordt gesteld op
+    30 november 2026 (laatste dag van de maand november). Algoritmisch bepaalbaar:
+    laatste dag van november = 30 november 2026.'
+- label: Valt niet onder specialisatie — natuurlijk persoon met regulier kalenderjaar
+  invoer:
+    BWBR0004770/art9/lid5/voorlopige-aanslag: ja
+    BWBR0024096/par9-1/afwijkend-boekjaar: nee
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: niet van toepassing — hoofdregel
+      AR-BWBR0004770-art9-lid5-d geldt
+  is-voorspelling-juist: ja
+  toelichting: Natuurlijk persoon met boekjaar gelijk aan het kalenderjaar (1 januari
+    t/m 31 december). Specialisatiecriterium afwijkend-boekjaar is niet vervuld; de
+    specialisatieregel van LI 2008 §9.1 tweede volzin is niet van toepassing. De hoofdregel
+    AR-BWBR0004770-art9-lid5-d bepaalt de vervaldagen conform de iteratieve berekening
+    vanuit de dagtekening.
+- label: Grensgeval criterium — boekjaar samenvallend met kalenderjaar (nét geen afwijkend
+    boekjaar)
+  invoer:
+    BWBR0004770/art9/lid5/voorlopige-aanslag: ja
+    BWBR0024096/par9-1/afwijkend-boekjaar: nee
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: niet van toepassing — hoofdregel
+      AR-BWBR0004770-art9-lid5-d geldt
+  is-voorspelling-juist: ja
+  toelichting: 'BV met boekjaar 1 januari t/m 31 december. Het boekjaar valt precies
+    samen met het kalenderjaar; afwijkend-boekjaar is nee. De grens van het specialisatiecriterium
+    ligt hier: zodra het boekjaar ook maar één dag afwijkt van het kalenderjaar is
+    de specialisatieregel wél van toepassing. In dit grensgeval is de specialisatieregel
+    niet van toepassing en geldt de hoofdregel.'
+- label: Grensgeval boekjaar — afwijkend boekjaar, laatste termijn valt buiten het
+    belastingjaar (15 maart 2027)
+  invoer:
+    BWBR0004770/art9/lid5/voorlopige-aanslag: ja
+    BWBR0024096/par9-1/afwijkend-boekjaar: ja
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: '2027-03-31'
+  is-voorspelling-juist: '?'
+  toelichting: BV met boekjaar 1 april t/m 31 maart. De laatste termijn van de voorlopige
+    aanslag valt (iteratief berekend) op 15 maart 2027 — in het volgende kalenderjaar.
+    Of LI 2008 §9.1 tweede volzin ook van toepassing is op termijnen die buiten het
+    belastingjaar vallen, is niet uitdrukkelijk geregeld (A5-signaal). Als de specialisatieregel
+    wél van toepassing is, wordt de vervaldag gesteld op 31 maart 2027 (laatste dag
+    van maart). De juridische beoordeling is vereist.
+- label: Ongeldige invoer — geen voorlopige aanslag (definitieve aanslag)
+  invoer:
+    BWBR0004770/art9/lid5/voorlopige-aanslag: nee
+    BWBR0024096/par9-1/afwijkend-boekjaar: ja
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: De specialisatieregel van LI 2008 §9.1 tweede volzin ziet uitsluitend
+    op voorlopige aanslagen in de zin van art. 9 lid 5 IW 1990. Bij een definitieve
+    aanslag is het eerste specialisatiecriterium (voorlopige-aanslag) niet vervuld;
+    de invoer is ongeldig voor deze regel. De invorderbaarheid van een definitieve
+    aanslag valt onder art. 9 lid 1 IW 1990.

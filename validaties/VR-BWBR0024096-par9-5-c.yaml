@@ -1,0 +1,77 @@
+voorbeeldreeks-id: VR-BWBR0024096-par9-5-c
+afleidingsregel-id: AR-BWBR0024096-par9-5-c
+naam: berekenen vervaldatum bij dagtekening 28 februari in schrikkeljaar — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Valt onder specialisatie — schrikkeljaar, betalingstermijn één maand
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/schrikkeljaar-voorbehoud: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari: '2024-03-28'
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening 28 februari 2024 (schrikkeljaar); betalingstermijn één
+    maand. De specialisatieregel is van toepassing: alle drie criteria zijn vervuld.
+    28 februari is niet de laatste dag van de maand in een schrikkeljaar (29 februari
+    bestaat), zodat de zelfde-dagnummer-regel geldt: één maand later op de 28e = 28
+    maart. Verwachte uitvoer: 28 maart 2024.'
+- label: Valt onder specialisatie — schrikkeljaar, betalingstermijn zes weken
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/schrikkeljaar-voorbehoud: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari: '2024-04-10'
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening 28 februari 2024 (schrikkeljaar); betalingstermijn zes
+    weken. De specialisatieregel is van toepassing: alle drie criteria zijn vervuld.
+    28 februari + 42 dagen in een schrikkeljaar (februari heeft 29 dagen): resterende
+    februaridagen: 1 dag (29 feb); maart: 31 dagen; 42 − 1 − 31 = 10 dagen april.
+    Verwachte uitvoer: 10 april 2024.'
+- label: Valt niet onder specialisatie — geen schrikkeljaar, hoofdregel van toepassing
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/schrikkeljaar-voorbehoud: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari: ''
+  is-voorspelling-juist: ja
+  toelichting: 'Dagtekening 28 februari 2025 (geen schrikkeljaar); betalingstermijn
+    één maand. Het schrikkeljaar-voorbehoud is niet vervuld: de specialisatieregel
+    is niet van toepassing. De hoofdregel (beperkingsregel voor einde-maand-scenario)
+    geldt: 28 februari is de laatste dag van de maand in 2025, zodat de vervaldatum
+    31 maart is (laatste dag van de volgende maand). De uitvoer van déze specialisatieregel
+    is niet van toepassing; er is geen vervaldag-schrikkeljaar-28-februari.'
+- label: Grensgeval criterium — dagtekening is 29 februari (grensgeval eerste criterium)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: nee
+    BWBR0024096/par9-5/schrikkeljaar-voorbehoud: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-schrikkeljaar-28-februari: ''
+  is-voorspelling-juist: ja
+  toelichting: 'Grensgeval: dagtekening is 29 februari 2024 (een dag later dan 28
+    februari, alleen mogelijk in een schrikkeljaar). Het eerste criterium — dagtekening-28-februari
+    — is niet vervuld. De specialisatieregel is dus niet van toepassing, ook al is
+    het een schrikkeljaar. De sectie 9.5 LI 2008 voorziet niet expliciet in een rekenregel
+    voor 29 februari; de standaard een-maandberekening leidt tot 29 maart (zelfde-dagnummer-regel).
+    De uitvoer van déze specialisatieregel is niet van toepassing.'
+- label: Ongeldige invoer — betalingstermijn buiten de twee toegestane waarden
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/schrikkeljaar-voorbehoud: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: twee maanden
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: Een betalingstermijn van twee maanden valt buiten het toepassingsbereik
+    van sectie 9.5 LI 2008, die uitsluitend voorziet in één maand of zes weken. De
+    toepassingsvoorwaarde betalingstermijn-een-maand-of-zes-weken is niet vervuld;
+    de rekenregels van sectie 9.5 zijn niet van toepassing. Invoer is ongeldig.

@@ -1,0 +1,62 @@
+voorbeeldreeks-id: VR-BWBR0004770-art9-lid5-e
+afleidingsregel-id: AR-BWBR0004770-art9-lid5-e
+naam: bepalen terugval naar lid 1 bij onvoldoende termijnen — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Happy path — december (0 resterende maanden), terugvalregel actief
+  invoer:
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '0'
+    BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '0'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/terugvalregel-lid-1: ja
+    BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: ja
+  is-voorspelling-juist: ja
+  toelichting: 'Voorlopige aanslag IB 2026, dagtekening december 2026. Na december
+    resteren 0 kalendermaanden in het belastingjaar; resterende-maanden-jaar = 0,
+    dus ≤ 1. De termijnenberekening levert 0 termijnen op: strikt minder dan meer
+    dan één termijn. De derde volzin van art. 9 lid 5 IW 1990 activeert de terugvalregel
+    en art. 9 lid 1 herneemt: de aanslag is invorderbaar zes weken na dagtekening.'
+- label: Grensgeval — november (1 resterende maand), terugvalregel actief op de drempel
+  invoer:
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '1'
+    BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '1'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/terugvalregel-lid-1: ja
+    BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: ja
+  is-voorspelling-juist: ja
+  toelichting: 'Voorlopige aanslag IB 2026, dagtekening november 2026. Na november
+    resteert precies 1 kalendermaand (december); resterende-maanden-jaar = 1. De eerste
+    volzin van art. 9 lid 5 zou leiden tot 1 termijn (≤ 1). De conditie "niet leidt
+    tot meer dan één termijn" is vervuld: ook 1 termijn valt eronder. Grensgeval:
+    de terugvalregel is actief (ja) en lid 1 herneemt. Dit vereist juridische bevestiging
+    omdat "niet meer dan één" zowel 0 als 1 omvat.'
+- label: Negatief — oktober (2 resterende maanden), terugvalregel niet actief
+  invoer:
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: '2'
+    BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: '2'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0004770/art9/lid5/terugvalregel-lid-1: nee
+    BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag: nee
+  is-voorspelling-juist: ja
+  toelichting: 'Voorlopige aanslag IB 2026, dagtekening oktober 2026. Na oktober resteren
+    2 kalendermaanden (november en december); resterende-maanden-jaar = 2, dus > 1.
+    De eerste volzin van art. 9 lid 5 leidt tot 2 termijnen: meer dan één. De terugvalregel
+    is niet actief (nee); lid 5 eerste volzin blijft gelden en de aanslag is invorderbaar
+    in gelijke termijnen. Art. 9 lid 1 is niet rechtstreeks van toepassing: invorderbaarheid-belastingaanslag
+    = nee (niet via lid 1, maar via lid 5).'
+- label: Ongeldige invoer — resterende-maanden-jaar ontbreekt (null)
+  invoer:
+    BWBR0004770/art9/lid5/resterende-maanden-jaar: null
+    BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden: null
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: Het aantal resterende maanden is de centrale invoerwaarde van de drempeltoets
+    (≤ 1). Zonder deze waarde kan niet worden vastgesteld of de termijnenberekening
+    "niet leidt tot meer dan één termijn"; de beslissingsregel is niet toepasbaar.
+    De invoer is ongeldig; de terugvalregel kan niet worden geactiveerd.

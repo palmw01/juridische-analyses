@@ -1,0 +1,72 @@
+voorbeeldreeks-id: VR-BWBR0024096-par9-5-d
+afleidingsregel-id: AR-BWBR0024096-par9-5-d
+naam: berekenen vervaldatum één maand op zelfde dagnummer — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Standaard positief — dagtekening 15 maart, termijn één maand
+  invoer:
+    BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+    BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-03-15'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-zelfde-dagnummer: '2026-04-15'
+  is-voorspelling-juist: ja
+  toelichting: 'Happy path: dagtekening 15 maart 2026 is niet de laatste dag van maart
+    (31 maart); de betalingstermijn is één maand; de zelfde-dagnummer-regel is van
+    toepassing. Berekening: dag 15 van maand 3 → dag 15 van maand 4 → 15 april 2026.
+    Conform het concrete voorbeeld in de formele regel.'
+- label: Standaard positief — dagtekening 1 januari, termijn één maand
+  invoer:
+    BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+    BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-01-01'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-zelfde-dagnummer: '2026-02-01'
+  is-voorspelling-juist: ja
+  toelichting: '1 januari is niet de laatste dag van januari (31 januari); de zelfde-dagnummer-regel
+    is van toepassing. Berekening: dag 1 van maand 1 → dag 1 van maand 2 → 1 februari
+    2026. Controle: dag 1 bestaat in februari; geen beperkingsregel nodig.'
+- label: Grenswaarde — dagtekening 28 februari in niet-schrikkeljaar, termijn één
+    maand
+  invoer:
+    BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+    BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-02-28'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-zelfde-dagnummer: nvt
+  is-voorspelling-juist: ja
+  toelichting: 'Grensgeval: 28 februari 2026 is de laatste dag van februari in een
+    niet-schrikkeljaar. De voorwaarde dagtekening-niet-laatste-dag-maand is niet vervuld
+    (nee); deze rekenregel is niet van toepassing. De beperkingsregel of de schrikkeljaar-specialisatieregel
+    is van toepassing. De verwachte uitvoer is ''nvt'' omdat deze regel geen uitvoer
+    produceert.'
+- label: Negatief — dagtekening 31 oktober, termijn één maand (beperkingsregel van
+    toepassing)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+    BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-10-31'
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-zelfde-dagnummer: nvt
+  is-voorspelling-juist: ja
+  toelichting: '31 oktober is de laatste dag van oktober; de voorwaarde dagtekening-niet-laatste-dag-maand
+    is niet vervuld. Deze rekenregel is niet van toepassing; de beperkingsregel (AR-BWBR0024096-par9-5-a)
+    neemt over: vervaldatum wordt 30 november (laatste dag van november, want 31 november
+    bestaat niet). Verwachte uitvoer is ''nvt''.'
+- label: Ongeldig — betalingstermijn is geen één maand of zes weken
+  invoer:
+    BWBR0024096/par9-5/dagtekening-niet-laatste-dag-maand: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: nee
+    BWBR0004770/art9/lid1/dagtekening-aanslagbiljet: '2026-03-15'
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: De betalingstermijn is niet één maand of zes weken (bijv. twee maanden).
+    De toepassingsdrempel van sectie 9.5 LI 2008 is niet vervuld; de rekenregels van
+    de sectie zijn buiten bereik. Invoer is ongeldig voor deze regel.

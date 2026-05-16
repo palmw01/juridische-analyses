@@ -10,9 +10,25 @@
       "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
     },
     {
+      "bestand": "validaties/VR-BWBR0004770-art9-lid5-c.yaml",
+      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0004770-art9-lid5-d.yaml",
+      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0004770-art9-lid5-f.yaml",
+      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0024096-art9-par1-b.yaml",
+      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
       "bestand": "annotaties/BWBR0004770/art2-lid2.json",
       "boodschap": "[L3] diagram ontbreekt of is leeg (geen knopen/kanten)"
     }
   ],
-  "geslaagd": 67
+  "geslaagd": 82
 }

@@ -1,0 +1,66 @@
+voorbeeldreeks-id: VR-BWBR0024096-par9-5-e
+afleidingsregel-id: AR-BWBR0024096-par9-5-e
+naam: berekenen vervaldatum één maand bij dagtekening 28 februari normaal jaar — voorbeeldreeks
+status: gereviseerd
+peildatum: '2026-01-01'
+aangemaakt-op: '2026-05-16'
+kolommen:
+- label: Beperkingsregel actief — dagtekening 28 februari 2025 (normaal jaar), termijn
+    één maand → vervaldag 31 maart 2025
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: '2025-03-31'
+  is-voorspelling-juist: ja
+  toelichting: 'Happy path: dagtekening is 28 februari 2025; 2025 is geen schrikkeljaar,
+    dus 28 februari is de laatste dag van de maand. De betalingstermijn bedraagt één
+    maand. Alle drie de voorwaarden van de beperkingsregel zijn vervuld. De grens
+    (31 maart) is actief: de vervaldag wordt gesteld op 31 maart 2025 — de laatste
+    dag van de volgmaand (in plaats van 28 maart, dat het reguliere maandresultaat
+    zou zijn). De beperkingsregel zorgt ervoor dat de vervaldag niet eerder valt dan
+    de laatste dag van de volgmaand.'
+- label: Beperkingsregel NIET actief — dagtekening 28 februari 2025 (normaal jaar),
+    termijn zes weken → vervaldag 11 april 2025 (geen cap)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: zes weken
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: '2025-04-11'
+  is-voorspelling-juist: ja
+  toelichting: 'De betalingstermijn is zes weken (42 dagen), niet één maand. De derde
+    voorwaarde van déze beperkingsregel ("betalingstermijn is vervuld met één maand")
+    is niet vervuld. De beperkingsregel met grens 31 maart is dan niet actief: de
+    kalenderregel is van toepassing en geeft 28 februari + 42 dagen = 11 april 2025.
+    Uitkomst: 11 april 2025. Hiermee wordt het patroon ''beperking niet actief → uitvoer
+    ≠ grens'' geïllustreerd.'
+- label: Ongeldige invoer voor déze regel — dagtekening 28 februari 2024 (schrikkeljaar);
+    specialisatieregel overschrijft
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: 'Grensgeval / ongeldige invoer voor déze regel: de dagtekening valt
+    op 28 februari 2024, maar 2024 is een schrikkeljaar. De formele-regel van AR-BWBR0024096-par9-5-e
+    vereist dat het schrikkeljaar-voorbehoud NIET van toepassing is. In een schrikkeljaar
+    geldt de specialisatieregel AR-BWBR0024096-par9-5-c (prioriteit 1), die de uitkomst
+    van déze hoofdregel overschrijft: de vervaldag wordt 28 maart 2024, niet 31 maart
+    2024. De invoer is ongeldig voor déze beperkingsregel; de specialisatieregel neemt
+    het geval over.'
+- label: Ongeldige invoer — dagtekening niet op 28 februari (eerste voorwaarde niet
+    vervuld)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-28-februari: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: één maand
+  is-invoer-juist: nee
+  verwachte-uitvoer: {}
+  is-voorspelling-juist: nvt
+  toelichting: De eerste voorwaarde ("de dagtekening van het aanslagbiljet is gelijk
+    aan 28 februari") is niet vervuld. Alle overige toepassingsvoorwaarden zijn irrelevant;
+    de beperkingsregel is niet van toepassing. Er is geen uitvoer voor vervaldag-normaal-jaar-28-februari
+    via déze regel. Andere rekenscenario's (bijv. sectie 9.5 eerste of derde scenario)
+    zijn van toepassing.
