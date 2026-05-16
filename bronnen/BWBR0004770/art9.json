@@ -1,10 +1,11 @@
 {
   "bwb-id": "BWBR0004770",
-  "wet": "Invorderingswet 1990",
   "artikel": "9",
-  "citeertitel": "Invorderingswet 1990",
+  "opgehaald-op": "2026-05-10",
   "versiedatum": "2026-01-01",
-  "structuurpositie": "Hoofdstuk II > Artikel 9",
+  "citeertitel": "Invorderingswet 1990",
+  "bronreferentie": "jci1.3:c:BWBR0004770&artikel=9",
+  "pad": "Hoofdstuk II > Artikel 9",
   "leden": [
     {
       "lid": "1",
@@ -36,7 +37,7 @@
     },
     {
       "lid": "8",
-      "tekst": "In afwijking van het tweede lid is terstond invorderbaar een naheffingsaanslag ter zake van:\n\na. de belasting van personenauto’s en motorrijwielen, die is opgelegd aan een ander dan een vergunninghouder als bedoeld in artikel 8 van de Wet op de belasting van personenauto’s en motorrijwielen 1992, of\nb. de belasting zware motorrijtuigen, die is opgelegd aan de houder van een ander motorrijtuig dan bedoeld in artikel 6, onderdeel a, van de Wet belasting zware motorrijtuigen."
+      "tekst": "In afwijking van het tweede lid is terstond invorderbaar een naheffingsaanslag ter zake van:\n\na. de belasting van personenauto's en motorrijwielen, die is opgelegd aan een ander dan een vergunninghouder als bedoeld in artikel 8 van de Wet op de belasting van personenauto's en motorrijwielen 1992, of\nb. de belasting zware motorrijtuigen, die is opgelegd aan de houder van een ander motorrijtuig dan bedoeld in artikel 6, onderdeel a, van de Wet belasting zware motorrijtuigen."
     },
     {
       "lid": "9",
@@ -54,7 +55,5 @@
       "lid": "12",
       "tekst": "De verplichting tot betaling wordt niet geschorst door de indiening van een bezwaar- of beroepschrift inzake een belastingaanslag."
     }
-  ],
-  "bronreferentie": "jci1.3:c:BWBR0004770&artikel=9",
-  "opgehaald-op": "2026-05-10"
+  ]
 }

@@ -76,6 +76,20 @@ def test_detect_schema_annotatie_lid_md_met_letter(tmp_path):
     assert detect_schema(f, tmp_path) == "annotatie-lid"
 
 
+def test_detect_schema_bron_json(tmp_path):
+    (tmp_path / "bronnen" / "BWBR0004770").mkdir(parents=True)
+    f = tmp_path / "bronnen" / "BWBR0004770" / "art9.json"
+    f.touch()
+    assert detect_schema(f, tmp_path) == "bron"
+
+
+def test_detect_schema_kruisrefs_overgeslagen(tmp_path):
+    (tmp_path / "bronnen" / "BWBR0004770").mkdir(parents=True)
+    f = tmp_path / "bronnen" / "BWBR0004770" / "art9.kruisrefs.json"
+    f.touch()
+    assert detect_schema(f, tmp_path) is None
+
+
 def test_collect_annotatie_lid_md_bestand(project_root):
     f = project_root / "annotaties" / "art9a-1.md"
     f.write_text("---\nannotatie-id: test\n---\n")

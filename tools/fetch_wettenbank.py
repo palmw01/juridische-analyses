@@ -78,17 +78,21 @@ def normalize_artikel(artikel: str) -> str:
 def normalize(data: dict) -> dict:
     """Bouw het genormaliseerde bronnen-record op."""
     artikel = normalize_artikel(str(data["artikel"]))
-    return {
+    record: dict = {
         "bwb-id": data["bwbId"],
-        "wet": data.get("citeertitel", ""),
         "artikel": artikel,
-        "citeertitel": data.get("citeertitel", ""),
-        "versiedatum": data.get("versiedatum", ""),
-        "structuurpositie": data.get("pad", ""),
-        "leden": data.get("leden", []),
-        "bronreferentie": data.get("bronreferentie", ""),
         "opgehaald-op": date.today().isoformat(),
+        "versiedatum": data.get("versiedatum", ""),
+        "citeertitel": data.get("citeertitel", ""),
+        "bronreferentie": data.get("bronreferentie", ""),
+        "pad": data.get("pad", ""),
+        "leden": data.get("leden", []),
     }
+    if "sectie" in data:
+        record["sectie"] = data["sectie"]
+    if "formaat" in data:
+        record["formaat"] = data["formaat"]
+    return record
 
 
 def write_output(record: dict, project_root: Path, force: bool) -> Path:

@@ -113,11 +113,12 @@ def test_normalize_artikel_geen_wijziging():
 def test_normalize_vult_velden():
     record = normalize(VALIDE_DATA)
     assert record["bwb-id"] == "BWBR0004770"
-    assert record["wet"] == "Invorderingswet 1990"
+    assert "wet" not in record
     assert record["artikel"] == "9"
     assert record["citeertitel"] == "Invorderingswet 1990"
     assert record["versiedatum"] == "2024-01-01"
-    assert record["structuurpositie"] == "Hoofdstuk II > Afdeling 1 > Artikel 9"
+    assert record["pad"] == "Hoofdstuk II > Afdeling 1 > Artikel 9"
+    assert "structuurpositie" not in record
     assert record["leden"] == VALIDE_DATA["leden"]
     assert record["bronreferentie"] == VALIDE_DATA["bronreferentie"]
     assert "opgehaald-op" in record
@@ -126,11 +127,23 @@ def test_normalize_vult_velden():
 def test_normalize_ontbrekende_optionele_velden():
     data = {"bwbId": "BWBR0004770", "artikel": "9", "leden": []}
     record = normalize(data)
-    assert record["wet"] == ""
     assert record["citeertitel"] == ""
     assert record["versiedatum"] == ""
-    assert record["structuurpositie"] == ""
+    assert record["pad"] == ""
     assert record["bronreferentie"] == ""
+
+
+def test_normalize_geeft_sectie_en_formaat_door():
+    data = {**VALIDE_DATA, "sectie": "Artikel 9", "formaat": "markdown"}
+    record = normalize(data)
+    assert record["sectie"] == "Artikel 9"
+    assert record["formaat"] == "markdown"
+
+
+def test_normalize_zonder_sectie_en_formaat():
+    record = normalize(VALIDE_DATA)
+    assert "sectie" not in record
+    assert "formaat" not in record
 
 
 # ===== write_output =====

@@ -58,25 +58,27 @@ Noteer uit `[BD]` alle begripsomschrijvingen voor termen in artikel `[A]` als `[
 
 ## Stap 3 — MCP-response opslaan
 
-Sla de ruwe MCP-response voor artikel `[A]` op als JSON in `bronnen/[B]/art[A].json`.
-
-Maak de map aan als die nog niet bestaat: `mkdir -p bronnen/[B]/`.
-
-Formaat:
-```json
-{
-  "bwb-id": "[B]",
-  "artikel": "[A]",
-  "opgehaald-op": "[datum van vandaag, YYYY-MM-DD]",
-  "versiedatum": "[PD]",
-  "citeertitel": "[citeertitel]",
-  "bronreferentie": "[JCI-uri]",
-  "pad": "[pad-string]",
-  "leden": [{ "lid": "1", "tekst": "..." }, ...]
-}
-```
+Schrijf de ruwe MCP-response **nooit** rechtstreeks naar `bronnen/` — gebruik altijd `fetch_wettenbank.py` voor normalisatie.
 
 Als `bronnen/[B]/art[A].json` al bestaat en de versiedatum gelijk is: meld "bronbestand actueel, geen update nodig" en ga door.
+
+Anders: schrijf de ruwe MCP-response naar een tijdelijk bestand en roep de normalisatietool aan:
+
+```bash
+# 1. Sla ruwe response op (vervang de JSON door de werkelijke MCP-response)
+echo '<ruwe-mcp-response-json>' > /tmp/mcp-art[A].json
+
+# 2. Normaliseer en sla op in bronnen/
+tools/.venv/bin/python tools/fetch_wettenbank.py \
+  --input /tmp/mcp-art[A].json \
+  --project-dir . \
+  [--force]   # alleen toevoegen als het bestand al bestaat en overschreven mag worden
+
+# 3. Opruimen
+rm /tmp/mcp-art[A].json
+```
+
+Het script zet `bwbId` om naar `bwb-id`, voegt `opgehaald-op` toe en geeft `sectie`/`formaat` door. Het uitvoerbestand wordt automatisch geplaatst op `bronnen/[B]/art[A].json`.
 
 ---
 

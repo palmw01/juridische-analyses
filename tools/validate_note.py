@@ -143,6 +143,9 @@ def detect_schema(filepath: Path, project_root: Path) -> Optional[str]:
     if parts[0] == "validaties":
         return "voorbeeldreeks"
 
+    if parts[0] == "bronnen" and filepath.suffix == ".json" and not filepath.name.endswith(".kruisrefs.json"):
+        return "bron"
+
     if parts[0] == "annotaties":
         name = filepath.stem  # bijv. art9-1, art9
         # Lid-annotatie: bevat "lid" of heeft patroon art{N}-{L}
