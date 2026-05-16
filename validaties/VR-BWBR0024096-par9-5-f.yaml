@@ -17,20 +17,21 @@ kolommen:
     zes weken (42 dagen). Berekening: 28 februari + 42 kalenderdagen. Februari heeft
     28 dagen, resterende in februari na de 28e = 0; maart: 31 dagen (lopend totaal:
     31); april: 42 - 31 = 11. Verwachte vervaldatum: 11 april 2025.'
-- label: Nul-geval — betalingstermijn één maand (zes-weken-tak niet actief)
+- label: Grens toepassingsbereik — betalingstermijn één maand (niet zes weken; uitkomst
+    via AR-BWBR0024096-par9-5-e)
   invoer:
     BWBR0024096/par9-5/dagtekening-28-februari: ja
     BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: een maand
   is-invoer-juist: ja
   verwachte-uitvoer:
-    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: '2025-03-31'
+    BWBR0024096/par9-5/vervaldag-normaal-jaar-28-februari: nvt
   is-voorspelling-juist: ja
   toelichting: 'Dagtekening 28 februari 2025 (geen schrikkeljaar); betalingstermijn
-    één maand. De zes-weken-berekening (+ 42 dagen) is niet van toepassing: de één-maandvariant
-    levert via de beperkingsregel een vervaldatum van 31 maart (laatste dag volgmaand).
-    De rekenregel AR-BWBR0024096-par9-5-f is strikt genomen alleen actief voor de
-    zes-weken-tak; de uitkomst 31 maart behoort tot de breder gedefinieerde vervaldag-normaal-jaar-28-februari
-    (kern: twee uitkomsten).'
+    één maand. AR-BWBR0024096-par9-5-f is uitsluitend actief voor de zes-weken-tak;
+    de één-maandvariant valt onder AR-BWBR0024096-par9-5-e (beperkingsregel 31 maart).
+    Dit grensgeval illustreert de grens van het toepassingsbereik: de dagtekening-voorwaarde
+    is vervuld maar de termijn-voorwaarde is niet de zes-wekentak. Uitvoer van déze
+    regel is niet van toepassing; de uitkomst 31 maart behoort toe aan AR-5e.'
 - label: Negatief — dagtekening niet 28 februari (voorwaarde niet vervuld)
   invoer:
     BWBR0024096/par9-5/dagtekening-28-februari: nee

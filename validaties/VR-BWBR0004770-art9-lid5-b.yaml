@@ -26,7 +26,7 @@ kolommen:
     = 0. Na de dagtekeningmaand december resteren 0 maanden in het jaar. Dit is het
     nul-geval: de terugvalregel van art. 9 lid 5 derde volzin IW 1990 is van toepassing;
     de specialisatieregel herneemt niet.'
-- label: Maximum resterende maanden — dagtekening in januari
+- label: Grenswaarde — maximale resterende maanden (dagtekening in januari)
   invoer:
     BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet: '1'
   is-invoer-juist: ja
@@ -35,7 +35,10 @@ kolommen:
   is-voorspelling-juist: ja
   toelichting: 'Aanslagbiljet gedagtekend in januari (maand 1). Formule: 12 − 1 =
     11. Na de dagtekeningmaand januari resteren 11 kalendermaanden (februari t/m december).
-    Dit is de maximale uitkomst van de rekenregel.'
+    Dit is de maximale uitkomst van de rekenregel. Noot: een "negatief geval" (geen
+    resterende maanden als gevolg van het invoerbereik) bestaat niet voor deze formule
+    — elke geldige maandinvoer (1–12) levert een uitkomst op tussen 0 en 11. Het
+    nul-geval (december) is opgenomen als kolom 2.'
 - label: Grensgeval — dagtekening in november, één resterende maand
   invoer:
     BWBR0004770/art9/lid5/maand-dagtekening-aanslagbiljet: '11'

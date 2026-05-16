@@ -10,20 +10,36 @@
       "boodschap": "[L3] alle relaties leeg (is-een, heeft, leidt-tot)"
     },
     {
-      "bestand": "validaties/VR-BWBR0004770-art9-lid5-c.yaml",
+      "bestand": "validaties/VR-BWBR0004770-art9-lid5-d.yaml",
       "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
     },
     {
       "bestand": "validaties/VR-BWBR0004770-art9-lid5-d.yaml",
-      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+      "boodschap": "[L3] status is 'concept' — nog niet gereviseerd of gevalideerd"
     },
     {
       "bestand": "validaties/VR-BWBR0004770-art9-lid5-f.yaml",
       "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
     },
     {
+      "bestand": "validaties/VR-BWBR0004770-art9-lid5-f.yaml",
+      "boodschap": "[L3] status is 'concept' — nog niet gereviseerd of gevalideerd"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0024096-art9-par1-a.yaml",
+      "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0024096-art9-par1-a.yaml",
+      "boodschap": "[L3] status is 'concept' — nog niet gereviseerd of gevalideerd"
+    },
+    {
       "bestand": "validaties/VR-BWBR0024096-art9-par1-b.yaml",
       "boodschap": "[L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist"
+    },
+    {
+      "bestand": "validaties/VR-BWBR0024096-art9-par1-b.yaml",
+      "boodschap": "[L3] status is 'concept' — nog niet gereviseerd of gevalideerd"
     },
     {
       "bestand": "annotaties/BWBR0004770/art2-lid2.json",

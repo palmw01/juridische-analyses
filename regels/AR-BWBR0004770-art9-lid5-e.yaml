@@ -13,7 +13,6 @@ invoer:
 - BWBR0004770/art9/lid5/termijnenberekening-resterende-maanden
 uitvoer:
 - BWBR0004770/art9/lid5/terugvalregel-lid-1
-- BWBR0004770/art9/lid1/invorderbaarheid-belastingaanslag
 operators:
 - ten-hoogste
 - NIET
@@ -40,7 +39,13 @@ toelichting: 'Herleidbaar tot art. 9 lid 5 IW 1990, derde volzin: *"Indien de to
 
   De terugvalregel veronderstelt dat aan de kwalificatievoorwaarden van de eerste
   en tweede conditie van AR-9-5a al is voldaan (juist aanslagtype én dagtekening in
-  belastingjaar); alleen dan is de vraag naar de drempelwaarde relevant.'
+  belastingjaar); alleen dan is de vraag naar de drempelwaarde relevant.
+
+
+  Uitvoer van deze regel is uitsluitend het activatie-signaal `terugvalregel-lid-1`
+  (ja/nee). Het eindresultaat (invorderbaarheid-belastingaanslag) is de uitvoer van
+  AR-BWBR0004770-art9-lid1-a, niet van deze regel. AR-5e stuurt de control-flow
+  naar AR-1-a zodra `terugvalregel-lid-1` = ja.'
 voorbeeldreeksen:
 - invoerwaarden: 'aanslagtype: voorlopige IB; dagtekening: 15 november 2026; resterende-maanden-jaar:
     1'

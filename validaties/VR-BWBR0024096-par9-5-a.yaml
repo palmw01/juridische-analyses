@@ -5,6 +5,35 @@ status: gereviseerd
 peildatum: '2026-01-01'
 aangemaakt-op: '2026-05-16'
 kolommen:
+- label: Onder de grens — beperking niet actief (dagtekening niet 31 oktober)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: nee
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-een-maand: nvt
+  is-voorspelling-juist: ja
+  toelichting: Dagtekening is niet 31 oktober (bijv. 15 oktober 2025). Voorwaarde
+    1 is niet vervuld; de beperkingsregel AR-BWBR0024096-par9-5-a is niet van toepassing.
+    De betalingstermijn van één maand vervalt via de algemene zelfde-dagnummer-regel
+    op 15 november 2025 (datum bestaat wél). Het uitvoerbegrip vervaldag-kortemaand-een-maand
+    is in dit scenario niet van toepassing.
+- label: Grens toepassingsbereik — dagtekening 31 oktober maar termijn is zes weken
+    (andere regel van toepassing)
+  invoer:
+    BWBR0024096/par9-5/dagtekening-31-oktober: ja
+    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
+  is-invoer-juist: ja
+  verwachte-uitvoer:
+    BWBR0024096/par9-5/vervaldag-kortemaand-een-maand: nvt
+  is-voorspelling-juist: ja
+  toelichting: 'Grens toepassingsbereik: dagtekening is 31 oktober (voorwaarde 1
+    vervuld) en betalingstermijn valt binnen bereik van sectie 9.5 (zes weken), maar
+    AR-BWBR0024096-par9-5-a betreft uitsluitend de termijn van één maand. Zes weken
+    na 31 oktober 2025 is 11 december 2025 — geen beperkingsprobleem. De vervaldag-kortemaand-een-maand
+    is hier niet van toepassing; AR-par9-5-b (zes weken) is de toepasselijke regel.
+    Dit grensgeval illustreert de grens van het toepassingsbereik van déze regel,
+    niet de grens van de beperking zelf.'
 - label: Boven de grens — beperking actief (31 november bestaat niet, vervaldatum
     wordt 30 november)
   invoer:
@@ -19,34 +48,6 @@ kolommen:
     die datum bestaat niet (november heeft 30 dagen). De beperkingsregel stelt de
     vervaldatum op de laatste bestaande dag van de volgmaand: 30 november 2025. Dit
     is het kernscenario dat sectie 9.5 LI 2008 illustreert.'
-- label: Op de grens — dagtekening 31 oktober, betalingstermijn zes weken (valt buiten
-    AR-par9-5-a)
-  invoer:
-    BWBR0024096/par9-5/dagtekening-31-oktober: ja
-    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
-  is-invoer-juist: ja
-  verwachte-uitvoer:
-    BWBR0024096/par9-5/vervaldag-kortemaand-een-maand: nvt
-  is-voorspelling-juist: ja
-  toelichting: 'Grensgeval: dagtekening is 31 oktober (voorwaarde 1 vervuld) en betalingstermijn
-    valt binnen bereik van sectie 9.5 (zes weken), maar AR-BWBR0024096-par9-5-a betreft
-    uitsluitend de termijn van één maand. Zes weken na 31 oktober 2025 is 11 december
-    2025 — geen beperkingsprobleem. De vervaldag-kortemaand-een-maand is hier niet
-    van toepassing; een andere regel (bijv. AR-par9-5-b voor zes weken) is van toepassing.
-    Het uitvoerbegrip van déze regel is ''nvt'' in dit scenario.'
-- label: Onder de grens — beperking niet actief (dagtekening niet 31 oktober)
-  invoer:
-    BWBR0024096/par9-5/dagtekening-31-oktober: nee
-    BWBR0024096/par9-5/betalingstermijn-een-maand-of-zes-weken: ja
-  is-invoer-juist: ja
-  verwachte-uitvoer:
-    BWBR0024096/par9-5/vervaldag-kortemaand-een-maand: nvt
-  is-voorspelling-juist: ja
-  toelichting: Dagtekening is niet 31 oktober (bijv. 15 oktober 2025). Voorwaarde
-    1 is niet vervuld; de beperkingsregel AR-BWBR0024096-par9-5-a is niet van toepassing.
-    De betalingstermijn van één maand vervalt via de algemene zelfde-dagnummer-regel
-    op 15 november 2025 (datum bestaat wél). Het uitvoerbegrip vervaldag-kortemaand-een-maand
-    is in dit scenario niet van toepassing.
 - label: Ongeldige invoer — betalingstermijn buiten bereik sectie 9.5
   invoer:
     BWBR0024096/par9-5/dagtekening-31-oktober: ja

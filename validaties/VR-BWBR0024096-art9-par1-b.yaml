@@ -1,7 +1,7 @@
 voorbeeldreeks-id: VR-BWBR0024096-art9-par1-b
 afleidingsregel-id: AR-BWBR0024096-art9-par1-b
 naam: vaststellen vervaldag voorlopige aanslag afwijkend boekjaar — voorbeeldreeks
-status: gereviseerd
+status: concept
 peildatum: '2026-01-01'
 aangemaakt-op: '2026-05-16'
 kolommen:
@@ -26,29 +26,29 @@ kolommen:
     BWBR0024096/par9-1/afwijkend-boekjaar: nee
   is-invoer-juist: ja
   verwachte-uitvoer:
-    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: niet van toepassing — hoofdregel
-      AR-BWBR0004770-art9-lid5-d geldt
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: nvt
   is-voorspelling-juist: ja
   toelichting: Natuurlijk persoon met boekjaar gelijk aan het kalenderjaar (1 januari
     t/m 31 december). Specialisatiecriterium afwijkend-boekjaar is niet vervuld; de
     specialisatieregel van LI 2008 §9.1 tweede volzin is niet van toepassing. De hoofdregel
     AR-BWBR0004770-art9-lid5-d bepaalt de vervaldagen conform de iteratieve berekening
     vanuit de dagtekening.
-- label: Grensgeval criterium — boekjaar samenvallend met kalenderjaar (nét geen afwijkend
-    boekjaar)
+- label: Grensgeval criterium — boekjaar één dag afwijkend van het kalenderjaar (nét
+    wel afwijkend boekjaar)
   invoer:
     BWBR0004770/art9/lid5/voorlopige-aanslag: ja
-    BWBR0024096/par9-1/afwijkend-boekjaar: nee
+    BWBR0024096/par9-1/afwijkend-boekjaar: ja
   is-invoer-juist: ja
   verwachte-uitvoer:
-    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: niet van toepassing — hoofdregel
-      AR-BWBR0004770-art9-lid5-d geldt
+    BWBR0024096/par9-1/vervaldag-laatste-dag-maand: '2026-11-30'
   is-voorspelling-juist: ja
-  toelichting: 'BV met boekjaar 1 januari t/m 31 december. Het boekjaar valt precies
-    samen met het kalenderjaar; afwijkend-boekjaar is nee. De grens van het specialisatiecriterium
-    ligt hier: zodra het boekjaar ook maar één dag afwijkt van het kalenderjaar is
-    de specialisatieregel wél van toepassing. In dit grensgeval is de specialisatieregel
-    niet van toepassing en geldt de hoofdregel.'
+  toelichting: 'BV met boekjaar dat één dag afwijkt van het kalenderjaar (bijv. 2
+    januari t/m 1 januari). Afwijkend-boekjaar is ja. De grens van het specialisatiecriterium
+    ligt hier: zelfs een afwijking van één dag volstaat om de specialisatieregel te
+    activeren. De specialisatieregel van LI 2008 §9.1 tweede volzin is van toepassing;
+    de laatste vervaldag wordt gesteld op de laatste dag van de maand (hier: 30 november
+    2026, uitgaande van een berekende laatste termijn in november). Dit grensgeval
+    illustreert de drempelgevoeligheid van het criterium afwijkend-boekjaar.'
 - label: Grensgeval boekjaar — afwijkend boekjaar, laatste termijn valt buiten het
     belastingjaar (15 maart 2027)
   invoer:
@@ -57,16 +57,15 @@ kolommen:
   is-invoer-juist: ja
   verwachte-uitvoer:
     BWBR0024096/par9-1/vervaldag-laatste-dag-maand: '2027-03-31'
-  is-voorspelling-juist: ja
+  is-voorspelling-juist: '?'
   toelichting: 'BV met boekjaar 1 april t/m 31 maart. De laatste termijn van de voorlopige
     aanslag valt (iteratief berekend) op 15 maart 2027 — in het volgende kalenderjaar.
     LI 2008 §9.1 tweede volzin luidt: "Bij afwijkende boekjaren wordt de laatste vervaldag
-    steeds op de laatste dag van de maand gesteld." Het woord "steeds" is imperatief
-    en bevat geen tijdelijke beperking tot termijnen binnen het belastingjaar; de enige
-    toepassingsvoorwaarde is het bestaan van een afwijkend boekjaar. De dagtekeningsvereiste
-    ("gedagtekend in november of eerder") is uitsluitend opgenomen in de eerste volzin.
-    De tweede volzin is grammaticaal een zelfstandige regel. Uitkomst: vervaldag gesteld
-    op 31 maart 2027 (laatste dag van maart). Voorspelling is juist.'
+    steeds op de laatste dag van de maand gesteld." De uitleg dat "steeds" geen tijdsbeperking
+    tot het belastingjaar bevat en ook op termijnen in het volgende jaar ziet, is een
+    grammaticale interpretatie van de tweede volzin als zelfstandige regel. A5-signaal:
+    de reikwijdte van "steeds" (uitsluitend binnen belastingjaar of ook daarna) vereist
+    vaststelling in uitvoeringsbeleid. Juridisch oordeel door de jurist in te vullen.'
 - label: Ongeldige invoer — geen voorlopige aanslag (definitieve aanslag)
   invoer:
     BWBR0004770/art9/lid5/voorlopige-aanslag: nee

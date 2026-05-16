@@ -1,7 +1,7 @@
 voorbeeldreeks-id: VR-BWBR0024096-art9-par1-a
 afleidingsregel-id: AR-BWBR0024096-art9-par1-a
 naam: bepalen of betalingstermijn eindigt voor 31 december — voorbeeldreeks
-status: gereviseerd
+status: concept
 peildatum: '2026-01-01'
 aangemaakt-op: '2026-05-16'
 kolommen:
@@ -23,10 +23,14 @@ kolommen:
   is-invoer-juist: ja
   verwachte-uitvoer:
     BWBR0024096/par9-1/termijn-eindigt-voor-31-december: nee
-  is-voorspelling-juist: ja
-  toelichting: 'Grensgeval: de laatste vervaldag valt op 31 december zelf. De voorwaarde
-    ''eindigt vóór 31 december'' is een strikte kleiner-dan-vergelijking; gelijkheid
-    is niet voldoende. De cap-regel (AR-9-5e) wordt daarom niet getriggerd.'
+  is-voorspelling-juist: '?'
+  toelichting: 'Grensgeval: de laatste vervaldag valt op 31 december zelf. De verwachte
+    uitvoer ''nee'' berust op de interpretatie dat "vóór 31 december" een strikte
+    kleiner-dan-vergelijking is; gelijkheid (31 december = 31 december) volstaat
+    niet. Dit is een grammaticale interpretatie van het woord "vóór" in LI 2008
+    §9.1, maar de Leidraad-tekst benoemt de grenswaarde niet expliciet. A5-signaal:
+    vaststelling vereist of "vóór 31 december" de exacte datum 31 december in- of
+    uitsluit. Juridisch oordeel door de jurist in te vullen.'
 - label: Negatief — lid 5 niet van toepassing (resterende maanden < 2)
   invoer:
     BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: null
