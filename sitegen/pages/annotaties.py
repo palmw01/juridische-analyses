@@ -23,7 +23,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
         for uitv in reg["uitvoer"]:
             regel_by_bid.setdefault(uitv, []).append(ref)
     items = "".join(
-        f'<li data-id="{idx["id"]}" onclick="window.location=\'annotaties/{idx["id"].replace("/","-")}.html\'">'
+        f'<li data-id="{idx["id"]}">'
         f'<a href="annotaties/{idx["id"].replace("/","-")}.html" class="item-title">{wet_label} — artikeloverzicht</a>'
         f'<div class="item-badges"><span class="badge badge-type">{idx.get("bwb_id","")}</span>'
         f'<span class="badge badge-soort">index</span></div>'
@@ -31,7 +31,7 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
         f'</li>\n'
         for idx, wet_label in [(idx, f'{idx["wet"]} art. {idx["artikel"]}' if idx.get("wet") else idx["id"]) for idx in (indices or [])]
     ) + "".join(
-        f'<li data-id="{a["id"]}" onclick="window.location=\'annotaties/{a["id"].replace("/","-")}.html\'">'
+        f'<li data-id="{a["id"]}">'
         f'<a href="annotaties/{a["id"].replace("/","-")}.html" class="item-title">{format_ann_title(a)}</a>'
         f'<div class="item-badges"><span class="badge badge-type">{a.get("bwb_id","")}</span></div>'
         f'<span class="item-meta">{format_structuurpositie(a)}</span>'
@@ -40,22 +40,17 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
     )
     body = f"""<h1>Annotaties ({len(annotaties)})</h1>
 <label for="filterInput" class="sr-only">Filter op wet of artikel</label>
-<input type="text" class="search-input" id="filterInput" placeholder="Filter op wet of artikel..." autofocus>
+<input type="search" class="search-input" id="filterInput" placeholder="Filter op wet of artikel..."
+       data-list="#itemList" data-source="data/annotaties.json"
+       data-fields="titel,wetstekst" data-status="#filterStatus" data-empty="#filterEmpty">
+<span id="filterStatus" class="result-status" role="status" aria-live="polite"></span>
 <div class="item-list" id="itemList">{items}</div>
+<div id="filterEmpty" class="empty-state" role="status">
+  <div class="empty-state-title">Geen resultaten</div>
+  <div>Pas je zoekterm aan of leeg het filter.</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
-<script>
-var _dr=false;
-var _inp=document.getElementById('filterInput');
-var _ms=new MiniSearch({{fields:['titel','wetstekst'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-if(_inp)_inp.placeholder='Zoekindex laden...';
-fetch('data/annotaties.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op wet of artikel...'}});
-_inp?.addEventListener('input',function(){{
-  var q=this.value.trim();
-  if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
-  var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
-  document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=s.has(l.getAttribute('data-id'))?'':'none'}});
-}});
-</script>"""
+<script src="js/filter-list.js"></script>"""
     schrijf_html(out, "annotaties.html", "Annotaties | Belastingdienst", body, active="annotaties")
 
     parent_by_ann_id: dict[str, dict] = {}
@@ -65,7 +60,7 @@ _inp?.addEventListener('input',function(){{
 
     for a in annotaties:
         rijen = ""
-        for r in a["rijen"]:
+        for idx_r, r in enumerate(a["rijen"]):
             bgp_link = ""
             if r.get("begrip_id"):
                 slug = slug_by_bid.get(r["begrip_id"]) or slugify(r["begrip_id"].rsplit("/", 1)[-1])
@@ -86,12 +81,22 @@ _inp?.addEventListener('input',function(){{
                 if sign:
                     detail_parts.append(f'<strong>[!]</strong> {sign}')
                 detail_html = " &mdash; ".join(detail_parts)
-                rijen += f'<tr class="has-sign" onclick="var d=this.nextElementSibling;d.style.display=d.style.display===\'none\'?\'table-row\':\'none\'">'
                 badge_cls = "sign-badge sign-badge-warn" if r.get("signalering") else "sign-badge sign-badge-info"
                 badge_sym = "!" if r.get("signalering") else "i"
-                rijen += f'<td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td class="ann-interpretatie">{interp}</td><td>{bgp_link}</td>'
-                rijen += f'<td class="ann-col-center"><span class="{badge_cls}">{badge_sym}</span></td></tr>\n'
-                rijen += f'<tr class="sign-detail" style="display:none"><td colspan="5"><div class="sign-content">{detail_html}</div></td></tr>\n'
+                detail_id = f'sign-detail-{a["id"].replace("/", "-")}-{idx_r}'
+                aria_lbl = "Signalering tonen" if r.get("signalering") else "Toelichting tonen"
+                rijen += f'<tr><td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td class="ann-interpretatie">{interp}</td><td>{bgp_link}</td>'
+                rijen += (
+                    f'<td class="ann-col-center">'
+                    f'<button type="button" class="disclosure-btn" '
+                    f'aria-expanded="false" aria-controls="{detail_id}" aria-label="{aria_lbl}">'
+                    f'<span class="{badge_cls}" aria-hidden="true">{badge_sym}</span>'
+                    f'</button></td></tr>\n'
+                )
+                rijen += (
+                    f'<tr class="sign-detail" id="{detail_id}" hidden>'
+                    f'<td colspan="5"><div class="sign-content">{detail_html}</div></td></tr>\n'
+                )
             else:
                 rijen += f'<tr><td class="mark-text">&#8220;{markering_txt}&#8221;</td><td>{jas_tag(r["jas_klasse"])}</td><td class="ann-interpretatie">{interp}</td><td>{bgp_link}</td><td class="ann-col-center"></td></tr>\n'
         mermaid_src = ""
@@ -125,7 +130,7 @@ _inp?.addEventListener('input',function(){{
                 if k.get("doel_lid"):
                     doel += f' lid {escape(str(k["doel_lid"]))}'
                 kr_rows += f'<tr><td>{escape(k.get("ruwe_tekst",""))}</td><td>{escape(k.get("richting",""))}</td><td>{escape(k.get("doel_bwb_id",""))}</td><td>{doel}</td><td style="text-align:right">{conf_str}</td></tr>\n'
-            kruisref_html = f'<div class="card"><div class="card-title">Kruisreferenties</div><div class="table-scroll"><table class="ann-table"><tr><th>Verwijzing</th><th>Richting</th><th>BWB-id</th><th>Doel</th><th>Conf.</th></tr>{kr_rows}</table></div></div>'
+            kruisref_html = f'<div class="card"><div class="card-title">Kruisreferenties</div><div class="table-scroll"><table class="ann-table"><thead><tr><th scope="col">Verwijzing</th><th scope="col">Richting</th><th scope="col">BWB-id</th><th scope="col">Doel</th><th scope="col">Conf.</th></tr></thead><tbody>{kr_rows}</tbody></table></div></div>'
         deleg_html = ""
         if a.get("delegatiestructuur"):
             del_rows = ""
@@ -134,7 +139,7 @@ _inp?.addEventListener('input',function(){{
                 vind_inv = d.get("vindplaats-invulling") or ""
                 inv_cell = f'<a href="{escape(vind_inv, quote=True)}">{inv}</a>' if vind_inv and vind_inv.startswith("http") else (f'{inv} <span style="font-size:0.75rem;color:var(--text-muted)">{escape(vind_inv)}</span>' if vind_inv else inv)
                 del_rows += f'<tr><td>{escape(d.get("omschrijving",""))}</td><td>{escape(d.get("vindplaats",""))}</td><td><span class="badge badge-soort">{escape(d.get("type",""))}</span></td><td>{inv_cell}</td></tr>\n'
-            deleg_html = f'<div class="card"><div class="card-title">Delegatiestructuur</div><div class="table-scroll"><table class="ann-table"><tr><th>Omschrijving</th><th>Vindplaats</th><th>Type</th><th>Invulling</th></tr>{del_rows}</table></div></div>'
+            deleg_html = f'<div class="card"><div class="card-title">Delegatiestructuur</div><div class="table-scroll"><table class="ann-table"><thead><tr><th scope="col">Omschrijving</th><th scope="col">Vindplaats</th><th scope="col">Type</th><th scope="col">Invulling</th></tr></thead><tbody>{del_rows}</tbody></table></div></div>'
         peildatum_str = f' &bull; Peildatum: {escape(str(a["peildatum"]))}' if a.get("peildatum") else ""
         parent_link = ""
         parent_idx = parent_by_ann_id.get(a["id"])
@@ -152,8 +157,12 @@ _inp?.addEventListener('input',function(){{
 <div class="card-title">Annotatierijen</div>
 <div class="table-scroll">
 <table class="ann-table">
-  <tr><th>Markering</th><th>JAS-klasse</th><th>Interpretatie</th><th>Begrip</th><th style="text-align:center">Detail</th></tr>
+  <thead>
+    <tr><th scope="col">Markering</th><th scope="col">JAS-klasse</th><th scope="col">Interpretatie</th><th scope="col">Begrip</th><th scope="col" class="ann-col-center">Detail</th></tr>
+  </thead>
+  <tbody>
   {rijen}
+  </tbody>
 </table></div>
 </div>
 {mermaid_src}

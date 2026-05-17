@@ -143,7 +143,7 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waars
         ann_by_key[(a["bwb_id"], a["artikel"], a.get("lid", ""))] = a
 
     items = "".join(
-        f'<li data-id="{r["id"]}" onclick="window.location=\'regels/{r["id"]}.html\'">'
+        f'<li data-id="{r["id"]}">'
         f'<a href="regels/{r["id"]}.html" class="item-title">{escape(r["naam"])}</a>'
         f'<div class="item-badges"><span class="badge badge-definitief">{escape(r["soort"])}</span></div>'
         f'<span class="item-meta">ID: {escape(r["id"])} &nbsp; Geldig vanaf: {escape(r.get("geldigheid_van") or "-")}</span>'
@@ -152,22 +152,17 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waars
     )
     body = f"""<h1>Afleidingsregels ({len(regels)})</h1>
 <label for="filterInput" class="sr-only">Filter op naam of ID</label>
-<input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of ID..." autofocus>
+<input type="search" class="search-input" id="filterInput" placeholder="Filter op naam of ID..."
+       data-list="#itemList" data-source="data/regels.json"
+       data-fields="titel,formele_regel,toelichting" data-status="#filterStatus" data-empty="#filterEmpty">
+<span id="filterStatus" class="result-status" role="status" aria-live="polite"></span>
 <div class="item-list" id="itemList">{items}</div>
+<div id="filterEmpty" class="empty-state" role="status">
+  <div class="empty-state-title">Geen resultaten</div>
+  <div>Pas je zoekterm aan of leeg het filter.</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
-<script>
-var _dr=false;
-var _inp=document.getElementById('filterInput');
-var _ms=new MiniSearch({{fields:['titel','formele_regel','toelichting'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-if(_inp)_inp.placeholder='Zoekindex laden...';
-fetch('data/regels.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op naam of ID...'}});
-_inp?.addEventListener('input',function(){{
-  var q=this.value.trim();
-  if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
-  var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
-  document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=s.has(l.getAttribute('data-id'))?'':'none'}});
-}});
-</script>"""
+<script src="js/filter-list.js"></script>"""
     schrijf_html(out, "regels.html", "Regels | Belastingdienst", body, active="regels")
 
     for r in regels:

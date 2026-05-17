@@ -71,12 +71,13 @@ def gen_sparql(out: Path):
 </div>
 
 <div class="card">
-  <div class="card-title">Query</div>
-  <textarea id="queryInput" class="search-input" style="min-height:160px;font-family:var(--font-mono);font-size:0.85rem;padding:0.75rem 1rem;resize:vertical;line-height:1.5" placeholder="SELECT ?s ?p ?o WHERE {{ ?s ?p ?o }} LIMIT 10"></textarea>
+  <div class="card-title"><label for="queryInput">Query</label></div>
+  <textarea id="queryInput" class="search-input" style="min-height:160px;font-family:var(--font-mono);font-size:0.85rem;padding:0.75rem 1rem;resize:vertical;line-height:1.5" placeholder="SELECT ?s ?p ?o WHERE {{ ?s ?p ?o }} LIMIT 10" aria-describedby="queryHint"></textarea>
+  <span id="queryHint" class="sr-only">Tip: Ctrl+Enter voert de query uit.</span>
   <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
-    <button id="runBtn" class="filter-chip active" type="button" style="border-radius:var(--radius-btn)">&#9654; Uitvoeren</button>
-    <button id="stopBtn" class="filter-chip" type="button" style="border-radius:var(--radius-btn);display:none">&#9632; Stop</button>
-    <span id="sparqlStatus" style="font-size:0.85rem;color:var(--text-muted)"></span>
+    <button id="runBtn" class="btn-primary" type="button">&#9654; Uitvoeren</button>
+    <button id="stopBtn" class="btn-secondary" type="button" style="display:none">&#9632; Stop</button>
+    <span id="sparqlStatus" role="status" aria-live="polite" style="font-size:0.85rem;color:var(--text-muted)"></span>
   </div>
 </div>
 
@@ -142,7 +143,7 @@ function formatTerm(term){{
 
 function hideStop() {{
   document.getElementById('stopBtn').style.display = 'none';
-  document.getElementById('runBtn').style.display = 'inline-block';
+  document.getElementById('runBtn').style.display = 'inline-flex';
 }}
 
 async function getEngine() {{
@@ -180,7 +181,7 @@ document.getElementById('runBtn').addEventListener('click', async function(){{
   errorDiv.style.display = 'none';
   noRdf.style.display = 'none';
   loading.style.display = 'block';
-  document.getElementById('stopBtn').style.display = 'inline-block';
+  document.getElementById('stopBtn').style.display = 'inline-flex';
   document.getElementById('runBtn').style.display = 'none';
   statusEl.textContent = 'Engine laden...';
 

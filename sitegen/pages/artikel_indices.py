@@ -26,7 +26,7 @@ def gen_artikel_indices(out: Path, indices: list, annotaties: list):
             kr_rows += f'<tr><td>{k}</td></tr>\n'
         kruisref_html = (
             f'<div class="card"><div class="card-title">Kruisreferenties</div>'
-            f'<div class="table-scroll"><table class="ann-table"><tr><th>Verwijzing</th></tr>{kr_rows}</table></div></div>'
+            f'<div class="table-scroll"><table class="ann-table"><thead><tr><th scope="col">Verwijzing</th></tr></thead><tbody>{kr_rows}</tbody></table></div></div>'
         ) if kr_rows else ""
         deleg_html = ""
         if idx["delegatiestructuur"]:
@@ -39,8 +39,8 @@ def gen_artikel_indices(out: Path, indices: list, annotaties: list):
             deleg_html = (
                 f'<div class="card"><div class="card-title">Delegatiestructuur</div>'
                 f'<div class="table-scroll"><table class="ann-table">'
-                f'<tr><th>Omschrijving</th><th>Vindplaats</th><th>Type</th><th>Invulling</th></tr>'
-                f'{del_rows}</table></div></div>'
+                f'<thead><tr><th scope="col">Omschrijving</th><th scope="col">Vindplaats</th><th scope="col">Type</th><th scope="col">Invulling</th></tr></thead>'
+                f'<tbody>{del_rows}</tbody></table></div></div>'
             )
         peildatum_str = f' &bull; Peildatum: {idx["peildatum"]}' if idx.get("peildatum") else ""
         br = breadcrumb(p, titel, [(f"{p}index.html", "Home"), (f"{p}annotaties.html", "Annotaties")])

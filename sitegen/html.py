@@ -36,19 +36,41 @@ def gen_nav(active: str = "", p: str = "") -> str:
 </nav>"""
 
 
-def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: str = "") -> str:
+DEFAULT_DESCRIPTION = (
+    "Gestructureerde wetsanalyse Artikel 9 Invorderingswet 1990 volgens "
+    "JAS v1.0.10 — begrippen, annotaties, afleidingsregels en kennisgraaf "
+    "voor de Belastingdienst (domein Inning)."
+)
+
+
+def pagina(
+    title: str,
+    body: str,
+    active: str = "",
+    p: str = "",
+    extra_scripts: str = "",
+    description: str = "",
+) -> str:
+    desc = escape(description or DEFAULT_DESCRIPTION)
     return f"""<!DOCTYPE html>
 <html lang="nl" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)}</title>
+<meta name="description" content="{desc}">
+<meta property="og:title" content="{escape(title)}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="{p}icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{p}icons/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="{p}icons/apple-touch-icon.png">
 <link rel="manifest" href="{p}manifest.json">
 <meta name="theme-color" content="#154273">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{p}css/style.css">
 </head>
 <body>
@@ -57,17 +79,17 @@ def pagina(title: str, body: str, active: str = "", p: str = "", extra_scripts: 
 <main id="main-content"><div class="container">
 {body}
 </div></main>
-<footer>Rechtsgraaf &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990 &bull; <a href="https://github.com/palmw01/juridische-analyses" target="_blank" rel="noopener noreferrer">GitHub</a></footer>
+<footer>Rechtsgraaf &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990 &bull; <a href="https://github.com/palmw01/juridische-analyses" target="_blank" rel="noopener noreferrer">GitHub<span class="ext-link-icon" aria-hidden="true">&#x2197;</span><span class="sr-only"> (opent in nieuw venster)</span></a></footer>
 <script src="{p}js/app.js"></script>
 {extra_scripts}
 </body>
 </html>"""
 
 
-def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = "", extra_scripts: str = ""):
+def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = "", extra_scripts: str = "", description: str = ""):
     pad = out / rel
     pad.parent.mkdir(parents=True, exist_ok=True)
-    pad.write_text(pagina(title, body, active, p, extra_scripts))
+    pad.write_text(pagina(title, body, active, p, extra_scripts, description), encoding="utf-8")
 
 
 def breadcrumb(p: str, active: str, crumbs: list[tuple[str, str]]) -> str:

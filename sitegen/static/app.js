@@ -1,4 +1,52 @@
 document.addEventListener('DOMContentLoaded',function(){
+  // Scroll-to-top knop (toont na 600px scroll, vooral nuttig op lange detailpagina's)
+  var scrollTopBtn=document.createElement('button');
+  scrollTopBtn.type='button';
+  scrollTopBtn.className='scroll-top';
+  scrollTopBtn.setAttribute('aria-label','Terug naar boven');
+  scrollTopBtn.setAttribute('title','Terug naar boven');
+  scrollTopBtn.innerHTML='&#x2191;';
+  scrollTopBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  document.body.appendChild(scrollTopBtn);
+  var sttick=false;
+  window.addEventListener('scroll',function(){
+    if(sttick) return;
+    sttick=true;
+    requestAnimationFrame(function(){
+      scrollTopBtn.classList.toggle('is-visible',window.scrollY>600);
+      sttick=false;
+    });
+  },{passive:true});
+
+  // Toetsenbord-toegankelijke disclosure-knoppen (annotatie-detailrij)
+  document.querySelectorAll('.disclosure-btn[aria-controls]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var id=btn.getAttribute('aria-controls');
+      var target=document.getElementById(id);
+      if(!target) return;
+      var open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded',String(!open));
+      if(open) target.setAttribute('hidden','');
+      else target.removeAttribute('hidden');
+    });
+  });
+
+  // Scroll-hint op tabellen die horizontaal overlopen
+  function updateScrollHints(){
+    document.querySelectorAll('.table-scroll,.table-responsive').forEach(function(el){
+      var overflow=el.scrollWidth>el.clientWidth+1 && (el.scrollLeft+el.clientWidth)<el.scrollWidth-1;
+      el.classList.toggle('has-overflow',overflow);
+    });
+  }
+  updateScrollHints();
+  window.addEventListener('resize',updateScrollHints);
+  document.querySelectorAll('.table-scroll,.table-responsive').forEach(function(el){
+    el.addEventListener('scroll',function(){
+      var overflow=el.scrollWidth>el.clientWidth+1 && (el.scrollLeft+el.clientWidth)<el.scrollWidth-1;
+      el.classList.toggle('has-overflow',overflow);
+    },{passive:true});
+  });
+
   var toggle=document.getElementById('darkToggle'),root=document.documentElement;
   var SVG_MOON='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   var SVG_SUN='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';

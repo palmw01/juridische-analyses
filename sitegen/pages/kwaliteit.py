@@ -81,22 +81,17 @@ def gen_kwaliteit(out: Path, waarschuwingen: dict[str, list[str]], meta: list | 
 
     body = f"""<h1>Kwaliteitsrapport ({totaal} openstaande punten)</h1>
 <label for="filterInput" class="sr-only">Filter op bestand, type of boodschap</label>
-<input type="text" class="search-input" id="filterInput" placeholder="Filter op bestand, type of boodschap..." autofocus>
+<input type="search" class="search-input" id="filterInput" placeholder="Filter op bestand, type of boodschap..."
+       data-list="#itemList" data-inline="kwaliteitData"
+       data-fields="bestand,boodschap,type" data-status="#filterStatus" data-empty="#filterEmpty">
+<span id="filterStatus" class="result-status" role="status" aria-live="polite"></span>
 <div class="item-list" id="itemList">{items_html}</div>
+<div id="filterEmpty" class="empty-state" role="status">
+  <div class="empty-state-title">Geen resultaten</div>
+  <div>Pas je zoekterm aan of leeg het filter.</div>
+</div>
+<script id="kwaliteitData" type="application/json">{ms_data}</script>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
-<script>
-var _dr=false;
-var _inp=document.getElementById('filterInput');
-var _ms=new MiniSearch({{fields:['bestand','boodschap','type'],storeFields:['bestand'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-var _data={ms_data};
-_ms.addAll(_data);_dr=true;
-if(_inp)_inp.placeholder='Filter op bestand, type of boodschap...';
-_inp?.addEventListener('input',function(){{
-  var q=this.value.trim();
-  if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
-  var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
-  document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=s.has(l.getAttribute('data-id'))?'':'none'}});
-}});
-</script>"""
+<script src="js/filter-list.js"></script>"""
 
     schrijf_html(out, "kwaliteit.html", "Kwaliteitsrapport | Belastingdienst", body, active="kwaliteit")

@@ -72,7 +72,7 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list, waarschuwingen: 
             if bid:
                 ann_by_begrip.setdefault(bid, []).append({"titel": ann_title, "url": ann_url})
     items = "".join(
-        f'<li data-id="{b["slug"]}" onclick="window.location=\'begrippen/{b["slug"]}.html\'">'
+        f'<li data-id="{b["slug"]}">'
         f'<a href="begrippen/{b["slug"]}.html" class="item-title">{escape(b["naam"])}</a>'
         f'<div class="item-badges">{jas_tag(b["jas_klasse"])}<span class="badge badge-soort">{escape(b["soort"])}</span>{status_badge(b["status"])}</div>'
         f'<span class="item-meta">ID: {escape(b["id"])}</span>'
@@ -80,23 +80,18 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list, waarschuwingen: 
         for b in begrippen
     )
     body = f"""<h1>Begrippen ({len(begrippen)})</h1>
-<label for="filterInput" class="sr-only">Filter op naam</label>
-<input type="text" class="search-input" id="filterInput" placeholder="Filter op naam of definitie..." autofocus>
+<label for="filterInput" class="sr-only">Filter op naam of definitie</label>
+<input type="search" class="search-input" id="filterInput" placeholder="Filter op naam of definitie..."
+       data-list="#itemList" data-source="data/begrippen.json"
+       data-fields="titel,definitie" data-status="#filterStatus" data-empty="#filterEmpty">
+<span id="filterStatus" class="result-status" role="status" aria-live="polite"></span>
 <div class="item-list" id="itemList">{items}</div>
+<div id="filterEmpty" class="empty-state" role="status">
+  <div class="empty-state-title">Geen resultaten</div>
+  <div>Pas je zoekterm aan of leeg het filter.</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
-<script>
-var _dr=false;
-var _inp=document.getElementById('filterInput');
-var _ms=new MiniSearch({{fields:['titel','definitie'],storeFields:['titel'],searchOptions:{{prefix:true,fuzzy:0.2}}}});
-if(_inp)_inp.placeholder='Zoekindex laden...';
-fetch('data/begrippen.json').then(function(r){{return r.json()}}).then(function(d){{_ms.addAll(d);_dr=true;if(_inp)_inp.placeholder='Filter op naam of definitie...'}});
-_inp?.addEventListener('input',function(){{
-  var q=this.value.trim();
-  if(!q||!_dr){{document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=''}});return}}
-  var s=new Set(_ms.search(q).map(function(r){{return r.id}}));
-  document.querySelectorAll('#itemList li').forEach(function(l){{l.style.display=s.has(l.getAttribute('data-id'))?'':'none'}});
-}});
-</script>"""
+<script src="js/filter-list.js"></script>"""
     schrijf_html(out, "begrippen.html", "Begrippen | Belastingdienst", body, active="begrippen")
 
     ws_index = waarschuwingen or {}
@@ -190,8 +185,12 @@ _inp?.addEventListener('input',function(){{
   <div class="card-title">Markeringen</div>
   <div class="table-scroll">
   <table class="ann-table">
-    <tr><th>ID</th><th>Tekst</th><th>JAS-klasse</th><th>Interpretatie</th><th>Bijdrage</th><th class="ann-col-center">Bevestigd</th></tr>
+    <thead>
+      <tr><th scope="col">ID</th><th scope="col">Tekst</th><th scope="col">JAS-klasse</th><th scope="col">Interpretatie</th><th scope="col">Bijdrage</th><th scope="col" class="ann-col-center">Bevestigd</th></tr>
+    </thead>
+    <tbody>
     {mark_tbl}
+    </tbody>
   </table></div>
 </div>"""
         reg_lnk = ""

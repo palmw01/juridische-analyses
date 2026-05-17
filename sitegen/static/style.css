@@ -51,8 +51,11 @@
   --border: #243547;
   --shadow: 0 1px 3px rgba(0,0,0,0.35);
   --shadow-hover: 0 4px 14px rgba(0,0,0,0.45);
+  --success: #6FCF8A;          /* helder genoeg voor donkere achtergrond */
   --success-bg: #0B2E14;
+  --error: #F08274;            /* heldere rood voor donkere bg, AA op #350A07 */
   --error-bg: #350A07;
+  --warning: #F5B968;          /* heldere geel/oranje voor donkere bg */
   --warning-bg: #332000;
   --focus-ring: 0 0 0 3px rgba(74,142,192,0.40);
 }
@@ -228,7 +231,7 @@ main{flex:1;padding:1.5rem 0}
 /* ── Grids ── */
 .stat-grid{display:grid;grid-template-columns:1fr;gap:0.75rem;margin-bottom:1.5rem}
 @media(min-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:768px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:768px){.stat-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}}
 .dash-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1.5rem}
 @media(min-width:768px){.dash-grid{grid-template-columns:repeat(3,1fr)}}
 .card-grid{display:grid;grid-template-columns:1fr;gap:0.75rem}
@@ -595,6 +598,85 @@ footer{
 
 /* ── Screenreader-only — WCAG 1.1.1 ── */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ── Volledig klikbare lijstrij — card-link patroon (WCAG 2.1.1) ── */
+/* De zichtbare item-title-link bedekt de hele <li> via een transparante ::after overlay.
+   Andere klikbare elementen binnen de rij krijgen een hogere z-index zodat ze bereikbaar blijven. */
+.item-list li{position:relative}
+.item-list a.item-title::after{content:"";position:absolute;inset:0;z-index:1}
+.item-list li:focus-within{outline:2px solid var(--primary);outline-offset:-2px;border-radius:var(--radius)}
+.item-list a.item-title:focus-visible{outline:none}
+.item-list .item-badges,
+.item-list .item-detail,
+.item-list .item-meta{position:relative;z-index:2}
+.item-list .item-meta a,
+.item-list .item-detail a,
+.item-list .badge a{position:relative;z-index:2}
+
+/* ── Empty state voor filterlijsten ── */
+.empty-state{display:none;padding:2rem 1rem;text-align:center;color:var(--text-muted);font-size:0.9rem;background:var(--card-bg);border:1px dashed var(--border);border-radius:var(--radius);margin-top:0.5rem}
+.empty-state.is-visible{display:block}
+.empty-state-title{font-weight:600;color:var(--text-secondary);margin-bottom:0.25rem}
+
+/* ── Resultaat-aankondiging voor screenreaders ── */
+.result-status{display:block;font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;min-height:1.2em}
+
+/* ── Externe link-icoon ── */
+.ext-link-icon{display:inline-block;font-size:0.75em;margin-left:0.15em;vertical-align:baseline;opacity:0.75}
+
+/* ── Scroll-hint op horizontaal scrollbare tabellen ── */
+.table-scroll,.table-responsive{position:relative}
+.table-scroll::after,.table-responsive::after{
+  content:"";position:absolute;top:0;right:0;bottom:0;width:24px;pointer-events:none;
+  background:linear-gradient(to right,transparent,rgba(0,0,0,0.06));
+  opacity:0;transition:opacity 0.2s;
+}
+.table-scroll.has-overflow::after,.table-responsive.has-overflow::after{opacity:1}
+[data-theme="dark"] .table-scroll::after,[data-theme="dark"] .table-responsive::after{background:linear-gradient(to right,transparent,rgba(0,0,0,0.45))}
+
+/* ── Primaire knop ── */
+.btn-primary{
+  height:40px;padding:0 1.125rem;
+  border:1px solid var(--primary);border-radius:var(--radius-btn);
+  background:var(--primary);color:#fff;
+  font-size:0.9rem;font-family:var(--font);font-weight:600;
+  cursor:pointer;transition:background 0.15s,border-color 0.15s;
+  display:inline-flex;align-items:center;gap:0.4rem;line-height:1;
+}
+.btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn-primary:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.btn-primary[disabled]{opacity:0.5;cursor:not-allowed}
+
+/* ── Toetsenbord-toegankelijke uitklap-knop in tabelrij ── */
+.disclosure-btn{
+  background:none;border:1px solid transparent;border-radius:var(--radius);
+  cursor:pointer;padding:0.15rem 0.45rem;
+  color:var(--text-muted);font-size:0.85rem;font-family:var(--font);line-height:1;
+  display:inline-flex;align-items:center;gap:0.3rem;
+}
+.disclosure-btn:hover{background:var(--primary-light);color:var(--primary);border-color:var(--border)}
+.disclosure-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.disclosure-btn[aria-expanded="true"] .sign-badge{transform:scale(1.05)}
+
+/* ── Terug-naar-boven knop ── */
+.scroll-top{
+  position:fixed;right:1rem;bottom:1rem;z-index:50;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--primary);color:#fff;border:none;
+  display:none;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 4px 12px rgba(21,66,115,0.25);
+  transition:background 0.15s,transform 0.15s,opacity 0.2s;
+  opacity:0;
+  font-size:1.1rem;line-height:1;
+}
+.scroll-top.is-visible{display:flex;opacity:1}
+.scroll-top:hover{background:var(--primary-hover);transform:translateY(-2px)}
+.scroll-top:focus-visible{outline:2px solid #fff;outline-offset:3px;box-shadow:0 0 0 5px rgba(21,66,115,0.4)}
+
+@media (prefers-reduced-motion: reduce){
+  .scroll-top{transition:none}
+  html{scroll-behavior:auto}
+}
 
 /* ── Responsive helpers ── */
 @media(min-width:480px){.hide-xs{display:inline!important}}

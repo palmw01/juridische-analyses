@@ -60,7 +60,8 @@ def test_gen_kwaliteit_filter_script_aanwezig(tmp_path):
     gen_kwaliteit(tmp_path, {})
     content = (tmp_path / "kwaliteit.html").read_text()
     assert "filterInput" in content
-    assert "MiniSearch" in content
+    assert "minisearch" in content.lower()
+    assert "filter-list.js" in content
 
 
 def test_gen_kwaliteit_toont_oplossing_als_meta_aanwezig(tmp_path):

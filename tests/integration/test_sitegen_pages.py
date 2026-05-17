@@ -570,7 +570,10 @@ def test_gen_annotaties_rij_met_signalering(tmp_path):
     }])
     gen_annotaties(tmp_path, [a], [], [])
     content = (tmp_path / "annotaties" / "BWBR0004770-art9-lid1.html").read_text()
-    assert "has-sign" in content
+    # Signalering wordt nu uitgeklapt via een toetsenbord-toegankelijke <button> met aria-expanded
+    assert 'aria-expanded="false"' in content
+    assert "disclosure-btn" in content
+    assert "Let op: bijzonder geval" in content
 
 
 def test_gen_annotaties_rij_met_toelichting_klasse(tmp_path):

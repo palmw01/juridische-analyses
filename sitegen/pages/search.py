@@ -6,15 +6,16 @@ from sitegen.html import schrijf_html
 def gen_search(out: Path, begrippen: list, annotaties: list, regels: list):
     body = f"""<h1>Zoeken</h1>
 <label for="searchInput" class="sr-only">Zoekterm</label>
-<input type="text" class="search-input" id="searchInput" placeholder="Zoek in begrippen, annotaties en regels..." autofocus>
-<div class="search-filters" id="searchFilters">
-  <span class="filter-chip active" data-type="all">Alle</span>
-  <span class="filter-chip" data-type="Begrip">Begrippen</span>
-  <span class="filter-chip" data-type="Annotatie">Annotaties</span>
-  <span class="filter-chip" data-type="Regel">Regels</span>
+<input type="search" class="search-input" id="searchInput" placeholder="Zoek in begrippen, annotaties en regels...">
+<div class="search-filters" id="searchFilters" role="group" aria-label="Filter op type">
+  <button type="button" class="filter-chip active" data-type="all" aria-pressed="true">Alle</button>
+  <button type="button" class="filter-chip" data-type="Begrip" aria-pressed="false">Begrippen</button>
+  <button type="button" class="filter-chip" data-type="Annotatie" aria-pressed="false">Annotaties</button>
+  <button type="button" class="filter-chip" data-type="Regel" aria-pressed="false">Regels</button>
 </div>
+<span id="searchStatus" class="result-status" role="status" aria-live="polite"></span>
 <div id="searchResults"></div>
-<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7/dist/umd/index.min.js" integrity="sha384-9Eacb80ywplqCp0P/bR61+zYn5Pg2LmQ7T8rppdoKHcQMmXbRh1wHwRC8avUJvnz" crossorigin="anonymous"></script>
 <script>
 var currentFilter = 'all';
 var dataReady = false;
@@ -31,12 +32,18 @@ Promise.all([
   var all = results[0].concat(results[1], results[2]);
   miniSearch.addAll(all);
   dataReady = true;
+  doSearch();
 }});
 function escHtml(s){{return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}
-document.querySelectorAll('.filter-chip').forEach(function(chip){{
+function setStatus(t){{document.getElementById('searchStatus').textContent = t || '';}}
+document.querySelectorAll('#searchFilters .filter-chip').forEach(function(chip){{
   chip.addEventListener('click',function(){{
-    document.querySelectorAll('.filter-chip').forEach(function(c){{c.classList.remove('active')}});
+    document.querySelectorAll('#searchFilters .filter-chip').forEach(function(c){{
+      c.classList.remove('active');
+      c.setAttribute('aria-pressed','false');
+    }});
     this.classList.add('active');
+    this.setAttribute('aria-pressed','true');
     currentFilter = this.getAttribute('data-type');
     doSearch();
   }});
@@ -45,14 +52,18 @@ function doSearch(){{
   var q = document.getElementById('searchInput').value.trim();
   var out = document.getElementById('searchResults');
   out.innerHTML = '';
-  if(q.length < 2){{out.innerHTML='<p class="item-meta" style="padding:1rem 0">Typ minimaal 2 tekens om te zoeken</p>';return}}
-  if(!dataReady){{out.innerHTML='<p class="item-meta" style="padding:1rem 0">Data wordt geladen... probeer opnieuw.</p>';return}}
+  if(q.length < 2){{out.innerHTML='<p class="item-meta" style="padding:1rem 0">Typ minimaal 2 tekens om te zoeken</p>';setStatus('');return}}
+  if(!dataReady){{out.innerHTML='<p class="item-meta" style="padding:1rem 0">Data wordt geladen... probeer opnieuw.</p>';setStatus('Index laden...');return}}
   var results = miniSearch.search(q);
   if(currentFilter !== 'all') results = results.filter(function(r){{return r.type === currentFilter}});
-  if(results.length === 0){{out.innerHTML='<div class="no-results">Geen resultaten voor "'+escHtml(q)+'"</div>';return}}
+  if(results.length === 0){{
+    out.innerHTML='<div class="no-results">Geen resultaten voor "'+escHtml(q)+'"</div>';
+    setStatus('Geen resultaten voor "'+q+'"');
+    return;
+  }}
   var shown=Math.min(results.length,50);
   var countTxt=results.length>50?shown+' van '+results.length+' resultaten':results.length+' resultaten';
-  out.innerHTML='<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem">'+countTxt+'</div>';
+  setStatus(countTxt);
   var html='';
   results.slice(0,50).forEach(function(d){{
     var rawExcerpt = (d.tekst||'').length > 150 ? (d.tekst||'').substring(0,150)+'...' : (d.tekst||'');
@@ -62,7 +73,7 @@ function doSearch(){{
       '<div class="search-result-meta"><span>Type: '+escHtml(d.type)+'</span>'+
       (d.jas_klasse?'<span>JAS: '+escHtml(d.jas_klasse)+'</span>':'')+'</div></a>';
   }});
-  out.innerHTML += html;
+  out.innerHTML = html;
 }}
 var _st;document.getElementById('searchInput').addEventListener('input',function(){{clearTimeout(_st);_st=setTimeout(doSearch,200)}});
 </script>"""

@@ -13,9 +13,12 @@ def gen_css_js(out: Path, project_root: Path | None = None):
     css_src = static_dir / "style.css"
     js_src = static_dir / "app.js"
     if css_src.exists():
-        (out / "css/style.css").write_text(css_src.read_text())
+        (out / "css/style.css").write_text(css_src.read_text(encoding="utf-8"), encoding="utf-8")
     if js_src.exists():
-        (out / "js/app.js").write_text(js_src.read_text())
+        (out / "js/app.js").write_text(js_src.read_text(encoding="utf-8"), encoding="utf-8")
+    filter_list_src = static_dir / "filter-list.js"
+    if filter_list_src.exists():
+        (out / "js/filter-list.js").write_text(filter_list_src.read_text(encoding="utf-8"), encoding="utf-8")
     build_dir = (project_root or Path(".")).resolve() / ".build"
     comunica_src = build_dir / "comunica.min.js"
     if comunica_src.exists() and comunica_src.stat().st_size > 100:
@@ -32,7 +35,7 @@ def gen_icons(project_dir: Path, out: Path):
                 shutil.copy2(f, dst / f.name)
     manifest = out / "manifest.json"
     if not manifest.exists():
-        manifest.write_text("""{"name":"Rechtsgraaf — Kennismodel Invordering","short_name":"Rechtsgraaf","start_url":".","display":"standalone","background_color":"#154273","theme_color":"#154273","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""")
+        manifest.write_text("""{"name":"Rechtsgraaf — Kennismodel Invordering","short_name":"Rechtsgraaf","start_url":".","display":"standalone","background_color":"#154273","theme_color":"#154273","icons":[{"src":"icons/favicon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/favicon-512.png","sizes":"512x512","type":"image/png"}]}""", encoding="utf-8")
 
 
 def gen_data_files(out: Path, begrippen: list, annotaties: list, regels: list, indices: list, project_root: Path | None = None):
@@ -90,9 +93,9 @@ def gen_data_files(out: Path, begrippen: list, annotaties: list, regels: list, i
             "soort": r["soort"],
         })
 
-    (data_dir / "begrippen.json").write_text(json.dumps(b_data, ensure_ascii=False))
-    (data_dir / "annotaties.json").write_text(json.dumps(a_data, ensure_ascii=False))
-    (data_dir / "regels.json").write_text(json.dumps(r_data, ensure_ascii=False))
+    (data_dir / "begrippen.json").write_text(json.dumps(b_data, ensure_ascii=False), encoding="utf-8")
+    (data_dir / "annotaties.json").write_text(json.dumps(a_data, ensure_ascii=False), encoding="utf-8")
+    (data_dir / "regels.json").write_text(json.dumps(r_data, ensure_ascii=False), encoding="utf-8")
 
     # RDF Turtle voor SPARQL (optioneel, na make export-rdf)
     ttl_src = (project_root or Path(".")) / "kennisgraaf" / "begrippen.ttl"

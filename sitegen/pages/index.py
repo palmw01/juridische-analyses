@@ -17,8 +17,10 @@ def gen_index(out: Path, begrippen: list, annotaties: list, regels: list, waarsc
         k = b["jas_klasse"]
         by_klasse[k] = by_klasse.get(k, 0) + 1
     klasse_rows = "".join(f'<tr><td>{jas_tag(k)}</td><td style="text-align:right">{c}</td></tr>' for k, c in sorted(by_klasse.items(), key=lambda x: -x[1]))
+    wetten = sorted({a.get("wet", "") for a in annotaties if a.get("wet")})
+    scope = wetten[0] if len(wetten) == 1 else (f"{len(wetten)} wetten" if wetten else "Invorderingswet 1990")
     body = f"""<h1>Rechtsgraaf</h1>
-<p class="subtitle">Artikel 9 Invorderingswet 1990 — Gestructureerde wetsanalyse volgens JAS v1.0.10</p>
+<p class="subtitle">Gestructureerde wetsanalyse — {scope} volgens JAS v1.0.10</p>
 <div class="stat-grid">
   <div class="card stat-card"><div class="stat-nr">{n_beg}</div><div class="stat-label">Begrippen</div></div>
   <div class="card stat-card"><div class="stat-nr">{n_ann}</div><div class="stat-label">Annotaties</div></div>
@@ -55,6 +57,12 @@ def gen_404(out: Path):
     body = """<div class="error-page">
 <h1>404</h1>
 <p>Deze pagina bestaat niet.</p>
-<a href="./" class="filter-chip active">Terug naar dashboard</a>
+<p><a href="index.html" class="btn-primary" style="text-decoration:none">Terug naar dashboard</a></p>
 </div>"""
-    schrijf_html(out, "404.html", "Pagina niet gevonden | Belastingdienst", body)
+    schrijf_html(
+        out,
+        "404.html",
+        "Pagina niet gevonden | Belastingdienst",
+        body,
+        description="De gevraagde pagina is niet gevonden. Ga terug naar het dashboard van de Rechtsgraaf.",
+    )
