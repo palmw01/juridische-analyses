@@ -1,7 +1,7 @@
 from html import escape
 from pathlib import Path
 
-from sitegen.html import breadcrumb, format_ann_title, schrijf_html
+from sitegen.html import breadcrumb, copy_button, format_ann_title, schrijf_html
 
 
 def _render_regel_waarschuwingen(index: dict, regel_id: str, meta: list | None = None) -> str:
@@ -187,13 +187,17 @@ def gen_regels(out: Path, regels: list, begrippen: list, annotaties: list, waars
                 ann_title = format_ann_title(match)
                 ann_link = f'<div class="card"><div class="card-title">Annotatie</div><p><a href="{ann_url}">{ann_title}</a></p></div>'
         r_br = breadcrumb("../", r["naam"], [("../index.html", "Home"), ("../regels.html", "Regels")])
+        rid_safe = escape(r["id"])
+        regel_dom_id = f'regel-id-{rid_safe}'
+        formele_dom_id = f'formele-regel-{rid_safe}'
         body = f"""{r_br}
 <h1>{escape(r["naam"])}</h1>
-<p class="subtitle"><span class="badge badge-definitief">{escape(r["soort"])}</span> {escape(r["id"])}</p>
+<p class="subtitle"><span class="badge badge-definitief">{escape(r["soort"])}</span> <code id="{regel_dom_id}">{rid_safe}</code>{copy_button("#" + regel_dom_id, "Regel-ID kopiëren")}</p>
 <div class="card">
-  <div class="card-title">Formele regel</div>
-  <div class="regel-box">{escape(r["formele_regel"])}</div>
-</div>
+  <div class="card-title">Formele regel{copy_button("#" + formele_dom_id, "Formele regel kopiëren")}</div>
+  <div class="regel-box" id="{formele_dom_id}">{escape(r["formele_regel"])}</div>
+</div>"""
+        body += f"""
 <div class="card">
   <div class="card-title">Toelichting</div>
   <p>{escape(r["toelichting"]) if r["toelichting"] else "<em>Geen toelichting</em>"}</p>

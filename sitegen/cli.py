@@ -53,5 +53,6 @@ def main():
     gen_search(out, begrippen, annotaties, regels)
     gen_sparql(out)
     assets.gen_data_files(out, begrippen, annotaties, regels, artikel_indices, project_root=project_dir)
+    assets.gen_seo_files(out)
 
     print(f"Webapp gegenereerd in {out}/ ({len(list(out.rglob('*')))} bestanden)", file=sys.stderr)

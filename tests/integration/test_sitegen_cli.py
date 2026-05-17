@@ -71,6 +71,35 @@ def test_main_print_statistieken(project_root, tmp_path, capsys):
     assert "annotaties" in err
 
 
+def test_main_genereert_sitemap_en_robots(project_root, tmp_path):
+    out = tmp_path / "webapp_test"
+    with patch.object(sys, "argv", ["sitegen", "--project-dir", str(project_root), "--out", str(out)]):
+        main()
+    sitemap = out / "sitemap.xml"
+    robots = out / "robots.txt"
+    assert sitemap.exists()
+    assert robots.exists()
+    sitemap_txt = sitemap.read_text(encoding="utf-8")
+    assert "<urlset" in sitemap_txt
+    assert "index.html" in sitemap_txt
+    assert "begrippen.html" in sitemap_txt
+    # 404 mag niet in sitemap zitten
+    assert "404.html" not in sitemap_txt
+    robots_txt = robots.read_text(encoding="utf-8")
+    assert "User-agent: *" in robots_txt
+    assert "Sitemap:" in robots_txt
+    assert "sitemap.xml" in robots_txt
+
+
+def test_main_canonical_link_in_pagina(project_root, tmp_path):
+    out = tmp_path / "webapp_test"
+    with patch.object(sys, "argv", ["sitegen", "--project-dir", str(project_root), "--out", str(out)]):
+        main()
+    content = (out / "index.html").read_text(encoding="utf-8")
+    assert '<link rel="canonical"' in content
+    assert "/index.html" in content
+
+
 def test_sitegen_main_als_module(project_root, tmp_path):
     """Dekt sitegen/__main__.py via runpy.run_module."""
     import runpy

@@ -1,7 +1,7 @@
 from html import escape
 from pathlib import Path
 
-from sitegen.config import JAS_KLEUREN, slugify
+from sitegen.config import JAS_KLEUREN
 
 
 def gen_nav(active: str = "", p: str = "") -> str:
@@ -42,6 +42,14 @@ DEFAULT_DESCRIPTION = (
     "voor de Belastingdienst (domein Inning)."
 )
 
+# Canonical base-URL; mag door cli overschreven worden via env SITEGEN_BASE_URL.
+SITE_BASE_URL = "https://palmw01.github.io/juridische-analyses"
+
+
+def _canonical(p: str, rel: str) -> str:
+    base = SITE_BASE_URL.rstrip("/")
+    return f"{base}/{rel.lstrip('/')}"
+
 
 def pagina(
     title: str,
@@ -50,8 +58,12 @@ def pagina(
     p: str = "",
     extra_scripts: str = "",
     description: str = "",
+    canonical_path: str = "",
 ) -> str:
     desc = escape(description or DEFAULT_DESCRIPTION)
+    canonical_tag = ""
+    if canonical_path:
+        canonical_tag = f'<link rel="canonical" href="{escape(_canonical(p, canonical_path), quote=True)}">'
     return f"""<!DOCTYPE html>
 <html lang="nl" data-theme="light">
 <head>
@@ -59,6 +71,7 @@ def pagina(
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)}</title>
 <meta name="description" content="{desc}">
+{canonical_tag}
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -81,6 +94,7 @@ def pagina(
 </div></main>
 <footer>Rechtsgraaf &bull; Belastingdienst &bull; Inning &bull; Art. 9 IW 1990 &bull; <a href="https://github.com/palmw01/juridische-analyses" target="_blank" rel="noopener noreferrer">GitHub<span class="ext-link-icon" aria-hidden="true">&#x2197;</span><span class="sr-only"> (opent in nieuw venster)</span></a></footer>
 <script src="{p}js/app.js"></script>
+<script src="{p}js/copy.js" defer></script>
 {extra_scripts}
 </body>
 </html>"""
@@ -89,7 +103,7 @@ def pagina(
 def schrijf_html(out: Path, rel: str, title: str, body: str, active: str = "", p: str = "", extra_scripts: str = "", description: str = ""):
     pad = out / rel
     pad.parent.mkdir(parents=True, exist_ok=True)
-    pad.write_text(pagina(title, body, active, p, extra_scripts, description), encoding="utf-8")
+    pad.write_text(pagina(title, body, active, p, extra_scripts, description, canonical_path=rel), encoding="utf-8")
 
 
 def breadcrumb(p: str, active: str, crumbs: list[tuple[str, str]]) -> str:
@@ -105,6 +119,24 @@ def jas_tag(klasse: str) -> str:
 def status_badge(status: str) -> str:
     s = status or "concept"
     return f'<span class="badge badge-{s}">{escape(status or "onbekend")}</span>'
+
+
+COPY_ICON_SVG = (
+    '<svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+    'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+    'stroke-linejoin="round" aria-hidden="true">'
+    '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>'
+    '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+)
+
+
+def copy_button(target_selector: str, label: str = "Kopieer naar klembord") -> str:
+    return (
+        f'<button type="button" class="copy-btn" '
+        f'data-copy-target="{escape(target_selector, quote=True)}" '
+        f'aria-label="{escape(label)}" title="{escape(label)}">'
+        f'{COPY_ICON_SVG}<span class="copy-status" aria-hidden="true"></span></button>'
+    )
 
 
 def format_ann_title(a: dict) -> str:

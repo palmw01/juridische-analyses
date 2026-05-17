@@ -23,14 +23,12 @@ Opties:
 import argparse
 import json
 import sys
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-import sys
-from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from jas_index_lib import haal_kern, haal_contexten
 
@@ -118,7 +116,7 @@ def genereer_delta_analyse(fm: dict, triggers: list[str]) -> str:
 
         if Trigger.CONFLICTERENDE_PRIMAIR in triggers:
             onderdelen.append(
-                f"Conflicterende primaire markeringen: "
+                "Conflicterende primaire markeringen: "
                 + " vs ".join(f"'{t[:60]}'" for t in primaire_teksten[:3])
                 + f" (bronnen: {', '.join(m.get('bron-annotatie-id','?') for m in primaire)})."
                 + " Definitie herschrijven of begrip afsplitsen."

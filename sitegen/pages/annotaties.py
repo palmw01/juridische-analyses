@@ -9,7 +9,7 @@ from sitegen.html import (
     jas_tag,
     schrijf_html,
 )
-from sitegen.mermaid import diagram_to_mermaid
+from sitegen.mermaid import diagram_tekst_fallback, diagram_to_mermaid
 
 
 def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, indices: list | None = None):
@@ -103,11 +103,14 @@ def gen_annotaties(out: Path, annotaties: list, regels: list, begrippen: list, i
         extra_scripts = ""
         mermaid_code = diagram_to_mermaid(a.get("diagram") or {})
         if mermaid_code:
+            fallback = diagram_tekst_fallback(a.get("diagram") or {})
             mermaid_src = f"""<div class="card"><div class="card-title">Structuurdiagram</div>
-<div class="mermaid">
+<div class="mermaid" role="img" aria-busy="true" aria-label="Structuurdiagram van de annotatie">
 {mermaid_code}
-</div></div>"""
-            extra_scripts = '<script type="module">import mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs\';(async function(){mermaid.initialize({startOnLoad:false,theme:\'neutral\',fontFamily:\'system-ui,sans-serif\'});await mermaid.run({querySelector:\'.mermaid\'});})();</script>'
+</div>
+{fallback}
+</div>"""
+            extra_scripts = '<script type="module">import mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs\';(async function(){mermaid.initialize({startOnLoad:false,theme:\'neutral\',fontFamily:\'system-ui,sans-serif\'});await mermaid.run({querySelector:\'.mermaid\'});document.querySelectorAll(\'.mermaid\').forEach(function(el){el.removeAttribute(\'aria-busy\');});})();</script>'
         regel_links = ""
         seen_regels: set[str] = set()
         regel_items = ""

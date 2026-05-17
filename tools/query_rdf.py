@@ -13,6 +13,10 @@ from __future__ import annotations
 
 import argparse
 import sys
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 from pathlib import Path
 
 BUILTIN_QUERIES: list[tuple[str, str]] = [

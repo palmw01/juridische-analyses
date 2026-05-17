@@ -212,8 +212,8 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
         ann_id = str(m.get("bron-annotatie-id") or "")
         if ann_id.startswith("[["):
             errors.append(
-                f"[L2] markeringen[].bron-annotatie-id: gebruik geen wikilink-formaat — "
-                f"verwacht pad-notatie bijv. 'BWBR0004770/art9/lid1'"
+                "[L2] markeringen[].bron-annotatie-id: gebruik geen wikilink-formaat — "
+                "verwacht pad-notatie bijv. 'BWBR0004770/art9/lid1'"
             )
 
     # Homoniem-detectie: onverenigbare JAS-klassen in dezelfde begrip-definitie
@@ -415,8 +415,8 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, pro
         ann_id_str = str(ann_id)
         if ann_id_str.startswith("[["):
             errors.append(
-                f"[L2] annotatie-id: gebruik geen Obsidian-link-format — "
-                f"verwacht bijv. 'BWBR0004770/art9/lid1', niet '[[annotaties/...]]'"
+                "[L2] annotatie-id: gebruik geen Obsidian-link-format — "
+                "verwacht bijv. 'BWBR0004770/art9/lid1', niet '[[annotaties/...]]'"
             )
         else:
             annotatie_index = build_annotatie_index(project_root)
@@ -998,12 +998,12 @@ def main():
         print(rapport_tekst)
         if args.full:
             schrijf_md_rapport(rapport_tekst, project_root)
-            print(f"\nRapport geschreven naar: rapporten/validatie-rapport.md")
+            print("\nRapport geschreven naar: rapporten/validatie-rapport.md")
             json_path = project_root / "rapporten" / "validatie-rapport.json"
             json_path.write_text(
                 json.dumps(format_rapport_json(results, project_root), ensure_ascii=False, indent=2)
             )
-            print(f"Rapport geschreven naar: rapporten/validatie-rapport.json")
+            print("Rapport geschreven naar: rapporten/validatie-rapport.json")
 
     # Exit code
     heeft_fouten = any(r.errors for r in results)

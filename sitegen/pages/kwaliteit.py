@@ -1,7 +1,7 @@
 from html import escape
 from pathlib import Path
 
-from sitegen.html import breadcrumb, schrijf_html
+from sitegen.html import schrijf_html
 
 
 def _waarschuwing_type(boodschap: str) -> str:

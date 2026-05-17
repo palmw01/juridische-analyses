@@ -71,7 +71,13 @@ def gen_sparql(out: Path):
 </div>
 
 <div class="card">
-  <div class="card-title"><label for="queryInput">Query</label></div>
+  <div class="card-title">
+    <label for="queryInput">Query</label>
+    <button type="button" class="copy-btn" data-copy-target="#queryInput" aria-label="Query kopiëren" title="Query kopiëren">
+      <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-status" aria-hidden="true"></span>
+    </button>
+  </div>
   <textarea id="queryInput" class="search-input" style="min-height:160px;font-family:var(--font-mono);font-size:0.85rem;padding:0.75rem 1rem;resize:vertical;line-height:1.5" placeholder="SELECT ?s ?p ?o WHERE {{ ?s ?p ?o }} LIMIT 10" aria-describedby="queryHint"></textarea>
   <span id="queryHint" class="sr-only">Tip: Ctrl+Enter voert de query uit.</span>
   <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">

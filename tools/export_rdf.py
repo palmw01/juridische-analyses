@@ -94,14 +94,14 @@ def begrip_naar_turtle(fm: dict, jas_index: dict[str, str]) -> str:
         bron = mid_to_bron.get(mid, "")
         if not ctx_tekst:
             continue
-        lines.append(f"    jas:definitieContext [")
+        lines.append("    jas:definitieContext [")
         lines.append(f'        jas:bijdrage "{bijdrage}" ;')
         if mid:
             lines.append(f'        jas:markering "{mid}" ;')
         if bron:
             lines.append(f'        jas:bron "{bron}" ;')
         lines.append(f"        skos:note {turtle_literal(ctx_tekst)}")
-        lines.append(f"    ] ;")
+        lines.append("    ] ;")
 
     if geldigheid_van:
         lines.append(f'    dct:valid "{geldigheid_van}"^^xsd:date ;')

@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from sitegen.config import slugify
 from sitegen.html import breadcrumb, format_ann_title, schrijf_html
 
 

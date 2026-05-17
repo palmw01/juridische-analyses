@@ -47,6 +47,10 @@ def _verrijk_markeringen(markeringen: list[dict], begrip_id: str, jas_index: dic
     return verrijkt
 
 
+def _extract_relatie_targets(relaties: dict, key: str) -> list[str]:
+    return [r if isinstance(r, str) else r.get("begrip-id", "") for r in (relaties.get(key) or [])]
+
+
 def laad_begrippen(project_root: Path) -> list[dict]:
     begrippen = []
     pad = project_root / "begrippen"
@@ -54,8 +58,6 @@ def laad_begrippen(project_root: Path) -> list[dict]:
     for f in sorted(pad.glob("*.yaml")):
         data = yaml.safe_load(f.read_text()) or {}
         relaties: dict = data.get("relaties") or {}
-        def extract_rel(key):
-            return [r if isinstance(r, str) else r.get("begrip-id", "") for r in (relaties.get(key) or [])]
         klasse = data.get("jas-klasse") or "onbekend"
         if klasse == "onbekend":
             for m in data.get("markeringen") or []:
@@ -87,9 +89,9 @@ def laad_begrippen(project_root: Path) -> list[dict]:
             "status": data.get("status", "concept") or "concept",
             "aliases": data.get("aliases") or [],
             "relaties": {
-                "is-een": extract_rel("is-een"),
-                "heeft": extract_rel("heeft"),
-                "leidt-tot": extract_rel("leidt-tot"),
+                "is-een": _extract_relatie_targets(relaties, "is-een"),
+                "heeft": _extract_relatie_targets(relaties, "heeft"),
+                "leidt-tot": _extract_relatie_targets(relaties, "leidt-tot"),
             },
             "afleidingsregel-id": data.get("afleidingsregel-id"),
             "uitvoer-van-regel-id": data.get("uitvoer-van-regel-id"),

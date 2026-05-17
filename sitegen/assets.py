@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 
 from sitegen.config import slugify
-from sitegen.html import format_ann_title
+from sitegen.html import SITE_BASE_URL, format_ann_title
 
 
 def gen_css_js(out: Path, project_root: Path | None = None):
@@ -16,9 +16,10 @@ def gen_css_js(out: Path, project_root: Path | None = None):
         (out / "css/style.css").write_text(css_src.read_text(encoding="utf-8"), encoding="utf-8")
     if js_src.exists():
         (out / "js/app.js").write_text(js_src.read_text(encoding="utf-8"), encoding="utf-8")
-    filter_list_src = static_dir / "filter-list.js"
-    if filter_list_src.exists():
-        (out / "js/filter-list.js").write_text(filter_list_src.read_text(encoding="utf-8"), encoding="utf-8")
+    for extra in ("filter-list.js", "copy.js"):
+        src_extra = static_dir / extra
+        if src_extra.exists():
+            (out / f"js/{extra}").write_text(src_extra.read_text(encoding="utf-8"), encoding="utf-8")
     build_dir = (project_root or Path(".")).resolve() / ".build"
     comunica_src = build_dir / "comunica.min.js"
     if comunica_src.exists() and comunica_src.stat().st_size > 100:
@@ -101,3 +102,27 @@ def gen_data_files(out: Path, begrippen: list, annotaties: list, regels: list, i
     ttl_src = (project_root or Path(".")) / "kennisgraaf" / "begrippen.ttl"
     if ttl_src.exists():
         shutil.copy2(ttl_src, data_dir / "begrippen.ttl")
+
+
+def gen_seo_files(out: Path) -> None:
+    """Genereer sitemap.xml en robots.txt op basis van alle .html bestanden in out."""
+    base = SITE_BASE_URL.rstrip("/")
+    urls: list[str] = []
+    for path in sorted(out.rglob("*.html")):
+        if path.name == "404.html":
+            continue
+        rel = path.relative_to(out).as_posix()
+        urls.append(f"{base}/{rel}")
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls)
+        + "</urlset>\n"
+    )
+    (out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    robots = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        f"Sitemap: {base}/sitemap.xml\n"
+    )
+    (out / "robots.txt").write_text(robots, encoding="utf-8")

@@ -4,6 +4,7 @@ from pathlib import Path
 from sitegen.config import slugify
 from sitegen.html import (
     breadcrumb,
+    copy_button,
     format_ann_title,
     jas_tag,
     schrijf_html,
@@ -229,7 +230,7 @@ def gen_begrippen(out: Path, begrippen: list, annotaties: list, waarschuwingen: 
   <div class="card">
     <div class="card-title">Kenmerken</div>
     <table class="prop-table">
-      <tr><td>ID</td><td style="word-break:break-all;font-size:0.8rem">{escape(b["id"])}</td></tr>
+      <tr><td>ID</td><td style="word-break:break-all;font-size:0.8rem"><code id="begrip-id-{escape(b["slug"])}">{escape(b["id"])}</code>{copy_button("#begrip-id-" + escape(b["slug"]), "Begrip-ID kopiëren")}</td></tr>
       <tr><td>Soort</td><td>{escape(b["soort"] or "-")}{"&nbsp;<span class='badge badge-soort'>sleutel-id</span>" if b.get("soort_id") else ""}</td></tr>
       <tr><td>Herkomst</td><td>{escape(b["herkomst"] or "-")}</td></tr>
       <tr><td>Aliases</td><td>{", ".join(escape(a) for a in b["aliases"]) or "-"}</td></tr>

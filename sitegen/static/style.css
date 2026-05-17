@@ -74,6 +74,19 @@
 [data-theme="dark"] .mermaid svg .cluster-label span{color:#b5c9db!important}
 .mermaid{min-height:120px;background:var(--card-bg);padding:0.5rem 0;overflow-x:auto}
 .mermaid svg{max-width:100%;height:auto}
+.mermaid[aria-busy="true"]{position:relative}
+.mermaid[aria-busy="true"]::before{
+  content:"Diagram wordt geladen…";
+  display:block;font-size:0.85rem;color:var(--text-muted);
+  padding:0.5rem 0;font-style:italic;
+}
+.diagram-fallback{margin-top:0.5rem;font-size:0.85rem;color:var(--text-secondary)}
+.diagram-fallback summary{cursor:pointer;color:var(--link);padding:0.3rem 0;list-style:disclosure-closed}
+.diagram-fallback[open] summary{list-style:disclosure-open}
+.diagram-fallback summary:hover{color:var(--link-hover)}
+.diagram-fallback summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:var(--radius)}
+.diagram-fallback ul{margin:0.4rem 0 0.6rem 1.25rem;line-height:1.7}
+.diagram-fallback-klasse{color:var(--text-muted);font-size:0.78rem;font-family:var(--font-mono)}
 
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -225,7 +238,10 @@ main{flex:1;padding:1.5rem 0}
   padding-bottom:0.5rem;
   border-bottom:1px solid var(--border);
   text-transform:uppercase;letter-spacing:0.06em;
+  display:flex;align-items:center;gap:0.5rem;
 }
+.card-title .copy-btn{margin-left:auto;text-transform:none;letter-spacing:0}
+.card-title label{cursor:pointer}
 .card h2{font-size:1.1rem;color:var(--primary);margin-bottom:0.75rem}
 
 /* ── Grids ── */
@@ -646,6 +662,23 @@ footer{
 .btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
 .btn-primary:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
 .btn-primary[disabled]{opacity:0.5;cursor:not-allowed}
+
+/* ── Copy-to-clipboard knop ── */
+.copy-btn{
+  background:none;border:1px solid transparent;border-radius:var(--radius);
+  cursor:pointer;padding:0.1rem 0.35rem;margin-left:0.4rem;
+  color:var(--text-muted);font-size:0.85rem;line-height:1;
+  display:inline-flex;align-items:center;gap:0.3rem;vertical-align:middle;
+  transition:background 0.15s,color 0.15s,border-color 0.15s;
+}
+.copy-btn:hover{background:var(--primary-light);color:var(--primary);border-color:var(--border)}
+.copy-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.copy-btn .copy-icon{width:14px;height:14px;display:inline-block}
+.copy-btn.copy-ok{color:var(--success);border-color:var(--success);background:var(--success-bg)}
+.copy-btn.copy-err{color:var(--error);border-color:var(--error);background:var(--error-bg)}
+.copy-btn .copy-status{display:none}
+.copy-btn[aria-label="Gekopieerd"] .copy-status,
+.copy-btn[aria-label="Kopiëren mislukt"] .copy-status{display:inline-block;font-size:0.75rem;font-weight:600}
 
 /* ── Toetsenbord-toegankelijke uitklap-knop in tabelrij ── */
 .disclosure-btn{

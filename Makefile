@@ -3,7 +3,7 @@ TOOLS     = tools
 SCRIPTS   = scripts
 
 .PHONY: setup install-hooks validate export-rdf export-graph
-.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp test test-fast test-cov test-e2e
+.PHONY: check-enrichment query-rdf fetch-wettenbank lock clean ci webapp test test-fast test-cov test-e2e lint lint-fix
 
 setup:
 	@echo "Maak virtual environment aan..."
@@ -79,6 +79,12 @@ test-cov:
 
 test-e2e:
 	@$(VENV) -m pytest tests/e2e/ -q; ret=$$?; [ $$ret -eq 0 ] || [ $$ret -eq 5 ]
+
+lint:
+	@tools/.venv/bin/ruff check sitegen/ tools/
+
+lint-fix:
+	@tools/.venv/bin/ruff check sitegen/ tools/ --fix
 
 ci: test validate export-rdf export-graph check-enrichment
 	@echo "CI-checks passed"

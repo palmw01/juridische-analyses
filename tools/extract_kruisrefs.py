@@ -453,7 +453,7 @@ def main() -> None:
 
     # Filter op gevraagd lid
     if args.bron_lid is not None:
-        leden = [l for l in leden if str(l.get("lid", "")) == args.bron_lid]
+        leden = [ld for ld in leden if str(ld.get("lid", "")) == args.bron_lid]
         if not leden:
             print(f"Fout: lid {args.bron_lid} niet gevonden in {input_path}", file=sys.stderr)
             sys.exit(1)

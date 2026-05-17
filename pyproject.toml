@@ -20,4 +20,25 @@ exclude_lines = [
     "pragma: no cover",
     "if __name__ == .__main__.:",
     "raise NotImplementedError",
+    "if TYPE_CHECKING:",
 ]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 140
+extend-exclude = [".venv", ".build", "webapp", "kennisgraaf", "node_modules"]
+
+[tool.ruff.lint]
+# Conservatieve set: pyflakes (F), pycodestyle errors (E), naamgevingsregels (N),
+# bugbear (B). Bewust geen import-sorting/formatting — bewaar bestaande stijl.
+select = ["E", "F", "B", "N"]
+ignore = [
+    "E501",   # regellengte (we hanteren al line-length 140)
+    "B008",   # function call in default arg (komt voor in argparse-stijl)
+    "N818",   # exception suffix (geen impact)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E741", "B011"]
+# G voor Graph is NetworkX-idioom
+"tools/export_graph.py" = ["N806"]

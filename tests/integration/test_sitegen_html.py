@@ -13,7 +13,7 @@ from sitegen.html import (
     format_ann_title,
     format_structuurpositie,
 )
-from sitegen.mermaid import diagram_to_mermaid
+from sitegen.mermaid import diagram_tekst_fallback, diagram_to_mermaid
 
 
 # ===== gen_nav =====
@@ -260,3 +260,63 @@ def test_diagram_to_mermaid_classdefs_aangemaakt():
     }
     result = diagram_to_mermaid(diagram)
     assert "classDef" in result
+
+
+# ===== diagram_tekst_fallback =====
+
+def test_diagram_tekst_fallback_leeg_geeft_leeg():
+    assert diagram_tekst_fallback({}) == ""
+    assert diagram_tekst_fallback(None) == ""
+    assert diagram_tekst_fallback({"knopen": []}) == ""
+
+
+def test_diagram_tekst_fallback_noemt_knopen():
+    diagram = {
+        "knopen": [
+            {"id": "k1", "jas-klasse": "rechtssubject", "label": "belastingschuldige"},
+            {"id": "k2", "jas-klasse": "rechtsobject", "label": "aanslag"},
+        ],
+        "kanten": [],
+    }
+    result = diagram_tekst_fallback(diagram)
+    assert "<details" in result
+    assert "belastingschuldige" in result
+    assert "aanslag" in result
+    assert "2 knopen" in result
+    assert "Geen relaties" in result
+
+
+def test_diagram_tekst_fallback_beschrijft_relaties_met_en_zonder_label():
+    diagram = {
+        "knopen": [
+            {"id": "k1", "jas-klasse": "rechtssubject", "label": "persoon"},
+            {"id": "k2", "jas-klasse": "variabele", "label": "bedrag"},
+            {"id": "k3", "jas-klasse": "rechtsobject", "label": "ding"},
+        ],
+        "kanten": [
+            {"van": "k1", "naar": "k2", "label": "heeft"},
+            {"van": "k2", "naar": "k3"},
+        ],
+    }
+    result = diagram_tekst_fallback(diagram)
+    assert "persoon → heeft → bedrag" in result
+    assert "bedrag — ding" in result
+
+
+def test_diagram_tekst_fallback_escapet_html():
+    diagram = {
+        "knopen": [{"id": "k1", "jas-klasse": "rechtssubject", "label": "<script>"}],
+        "kanten": [],
+    }
+    result = diagram_tekst_fallback(diagram)
+    assert "<script>" not in result
+    assert "&lt;script&gt;" in result
+
+
+def test_diagram_tekst_fallback_knoop_zonder_label_valt_terug_op_klasse():
+    diagram = {
+        "knopen": [{"id": "k1", "jas-klasse": "rechtsfeit"}],
+        "kanten": [],
+    }
+    result = diagram_tekst_fallback(diagram)
+    assert "rechtsfeit" in result
