@@ -33,6 +33,7 @@ validaties/VR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← testmatrix (A4b, /valideer)
         ↓
 kennisgraaf/*.ttl / *.gexf               ← RDF + graafexport (make export-rdf/export-graph)
 webapp/                                  ← statische website (make webapp)
+rapporten/validatie-rapport.{md,json}    ← gegenereerd door validate_note.py --full
 ```
 
 Elk bestand bevat `bron-annotatie-id`- en `markering-id`-velden die directe navigatie naar de exacte wetstekstpassage mogelijk maken.
@@ -56,11 +57,11 @@ Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.j
 
 ### Validatielagen
 
-- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype. Blokkerend.
+- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`). Blokkerend.
 - **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (begrip-id → regel-id → voorbeeldreeks-id), statusconsistentie, diagramintegriteit. Blokkerend.
 - **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen. Adviserend.
 
-De **pre-commit hook** blokkeert commits met L1/L2-fouten in gestagede bestanden. Installeer met `make install-hooks`.
+De **pre-commit hook** (`scripts/pre-commit`) blokkeert commits met L1/L2-fouten in gestagede bestanden en regenereert `rapporten/validatie-rapport.md`. De **pre-push hook** (`scripts/pre-push`) blokkeert pushes wanneer testdekking < 100% is. Installeer beide met `make install-hooks`.
 
 ---
 
@@ -75,19 +76,26 @@ make setup          # venv aanmaken + deps installeren + pre-commit hook install
 ### Tests
 
 ```bash
-make test           # alle tests behalve e2e
+make test           # alle tests behalve e2e (unit + integration + property)
 make test-fast      # alleen tests/unit/, stopt bij eerste fout (-x)
 make test-cov       # met coverage-rapport (fail_under=100%)
 make test-e2e       # end-to-end tests (traag, apart uitvoeren)
 
 # Eén specifieke test
-tools/.venv/bin/python -m pytest tests/unit/test_validate_note.py -k "naam_van_test" -q
+tools/.venv/bin/python -m pytest tests/unit/test_validate_schema.py -k "naam_van_test" -q
 
 # Eén testbestand
 tools/.venv/bin/python -m pytest tests/unit/test_export_rdf.py -q
 ```
 
-Coverage is verplicht op 100% — `make test-cov` mislukt bij lagere dekking.
+Testsuites: `tests/unit/`, `tests/integration/`, `tests/property/`, `tests/e2e/` (zie `tests/DESIGN.md` voor de scheiding). Coverage is verplicht op 100% over `tools/` + `sitegen/` — `make test-cov` en `scripts/pre-push` mislukken bij lagere dekking.
+
+### Lint
+
+```bash
+make lint           # ruff over sitegen/ en tools/
+make lint-fix       # ruff met --fix
+```
 
 ### Validatie en exports
 
@@ -201,6 +209,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 | `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 interpretatiemethoden, 4 typen afleidingsregels, diagram-centrum-prioritering, knooplabel-truncatieregels, delegatietype-beslisregel, kleurcodering |
 | `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
 | `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
+| `.claude/skills/begrip/valkuilen.md` | Geleerde lessen uit eerdere `/begrip`-runs (naamgeving, operator-hergebruik, e.d.). Raadpleeg aan het begin van elke run. |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
 | `.claude/skills/valideer/kaders.md` | A4b: testgevallenpatronen per regeltype, typeafleiding, algoritmisch bepaalbare uitvoer, minimumvereisten (≥ 3 kolommen) |
