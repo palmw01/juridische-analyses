@@ -38,12 +38,14 @@ kolommen:
   is-voorspelling-juist: '?'
   toelichting: 'Voorlopige aanslag IB 2026 gedagtekend januari 2026; bedrag € 1.000;
     resterende maanden = 11 (februari t/m december). Berekening: € 1.000 ÷ 11 = €
-    90,909... De verwachte uitvoer € 90,90 is gebaseerd op floor-afronding op centen
-    (€ 90,90 × 11 = € 999,90; restant € 0,10 verrekend in de slottermijn). A5-signaal:
-    de wet zwijgt over de afrondingsmethode bij niet-exact deelbare bedragen (art. 9
-    lid 5 IW 1990 spreekt alleen van "gelijke termijnen"). Floor-afronding is plausibel
-    maar vereist vaststelling in uitvoeringsbeleid. Juridisch oordeel door de jurist
-    in te vullen.'
+    90,909... Veronderstelde uitleg — floor-afronding op centen: termijnbedrag €
+    90,90 (× 11 = € 999,90; restant € 0,10 verrekend in de slottermijn). Alternatieven:
+    round-half-up levert € 90,91 × 11 = € 1.000,01 (overschrijding van de aanslag)
+    of een spread-evenly verdeling (10 × € 90,91 + 1 × € 90,90 = € 1.000,00). **A5-signaal**:
+    art. 9 lid 5 IW 1990 spreekt alleen van "gelijke termijnen" zonder afrondingsmethode
+    of restantverdeling te bepalen; LI 2008 geeft geen aanwijzing. Vaststelling in
+    uitvoeringsbeleid (beleidsbesluit of Leidraad-aanvulling) vereist; juridisch oordeel
+    door de jurist in te vullen.'
 - label: Grenswaarde — minimaal geldige deler (€ 500 / 2 termijnen)
   invoer:
     BWBR0004770/art9/lid1/belastingaanslag: '500.00'

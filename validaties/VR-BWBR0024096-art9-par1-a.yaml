@@ -24,13 +24,14 @@ kolommen:
   verwachte-uitvoer:
     BWBR0024096/par9-1/termijn-eindigt-voor-31-december: nee
   is-voorspelling-juist: '?'
-  toelichting: 'Grensgeval: de laatste vervaldag valt op 31 december zelf. De verwachte
-    uitvoer ''nee'' berust op de interpretatie dat "vóór 31 december" een strikte
-    kleiner-dan-vergelijking is; gelijkheid (31 december = 31 december) volstaat
-    niet. Dit is een grammaticale interpretatie van het woord "vóór" in LI 2008
-    §9.1, maar de Leidraad-tekst benoemt de grenswaarde niet expliciet. A5-signaal:
-    vaststelling vereist of "vóór 31 december" de exacte datum 31 december in- of
-    uitsluit. Juridisch oordeel door de jurist in te vullen.'
+  toelichting: 'Grensgeval: de laatste vervaldag valt exact op 31 december. Veronderstelde
+    uitleg — strikte kleiner-dan-vergelijking (<): "vóór 31 december" sluit de drempeldatum
+    uit, dus gelijkheid (31 december = 31 december) volstaat niet → uitkomst nee.
+    Alternatieve uitleg — kleiner-dan-of-gelijk (≤): de drempeldatum is inbegrepen
+    → uitkomst ja. **A5-signaal**: LI 2008 §9.1 benoemt de exacte grenswaarde 31
+    december niet en kiest niet expliciet voor < of ≤; de grammaticale interpretatie
+    van "vóór" laat beide ruimten open. Vaststelling in uitvoeringsbeleid (beleidsbesluit
+    of Leidraad-aanvulling) vereist; juridisch oordeel door de jurist in te vullen.'
 - label: Negatief — lid 5 niet van toepassing (resterende maanden < 2)
   invoer:
     BWBR0004770/art9/lid5/vervaldag-volgende-termijnen: null

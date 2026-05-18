@@ -58,14 +58,19 @@ kolommen:
   verwachte-uitvoer:
     BWBR0024096/par9-1/vervaldag-laatste-dag-maand: '2027-03-31'
   is-voorspelling-juist: '?'
-  toelichting: 'BV met boekjaar 1 april t/m 31 maart. De laatste termijn van de voorlopige
-    aanslag valt (iteratief berekend) op 15 maart 2027 — in het volgende kalenderjaar.
-    LI 2008 §9.1 tweede volzin luidt: "Bij afwijkende boekjaren wordt de laatste vervaldag
-    steeds op de laatste dag van de maand gesteld." De uitleg dat "steeds" geen tijdsbeperking
-    tot het belastingjaar bevat en ook op termijnen in het volgende jaar ziet, is een
-    grammaticale interpretatie van de tweede volzin als zelfstandige regel. A5-signaal:
-    de reikwijdte van "steeds" (uitsluitend binnen belastingjaar of ook daarna) vereist
-    vaststelling in uitvoeringsbeleid. Juridisch oordeel door de jurist in te vullen.'
+  toelichting: 'BV met boekjaar 1 april t/m 31 maart. De iteratief berekende laatste
+    termijn (AR-BWBR0004770-art9-lid5-d) valt op 15 maart 2027 — in het volgende
+    kalenderjaar. Veronderstelde uitleg — onbeperkte reikwijdte: LI 2008 §9.1 tweede
+    volzin ("Bij afwijkende boekjaren wordt de laatste vervaldag steeds op de laatste
+    dag van de maand gesteld.") werkt door over de kalenderjaargrens heen → 31 maart
+    2027. Alternatieve uitleg — beperkte reikwijdte: "steeds" geldt uitsluitend voor
+    termijnen binnen het belastingjaar, zodat de tweede volzin op 15 maart 2027 niet
+    van toepassing is en de hoofdregel uit AR-BWBR0004770-art9-lid5-d herneemt. **A5-signaal**:
+    art. 9 lid 5 IW 1990 ziet alleen op termijnen "van het jaar"; de tweede volzin
+    van LI 2008 §9.1 maakt de temporele reikwijdte van "steeds" (uitsluitend binnen
+    belastingjaar of ook daarna) niet expliciet. Vaststelling in uitvoeringsbeleid
+    (beleidsbesluit of Leidraad-aanvulling) vereist; juridisch oordeel door de jurist
+    in te vullen.'
 - label: Ongeldige invoer — geen voorlopige aanslag (definitieve aanslag)
   invoer:
     BWBR0004770/art9/lid5/voorlopige-aanslag: nee
