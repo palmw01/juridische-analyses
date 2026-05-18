@@ -40,10 +40,8 @@ WAARSCHUWINGEN
   validaties/VR-BWBR0024096-art9-par1-b.yaml
     [L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist
     [L3] status is 'concept' — nog niet gereviseerd of gevalideerd
-  annotaties/BWBR0004770/art2-lid2.json
-    [L3] diagram ontbreekt of is leeg (geen knopen/kanten)
 
 GESLAAGD: 82 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 19
+WAARSCHUWINGEN: 18
 ```

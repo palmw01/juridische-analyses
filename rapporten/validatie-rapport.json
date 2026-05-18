@@ -72,10 +72,6 @@
     {
       "bestand": "validaties/VR-BWBR0024096-art9-par1-b.yaml",
       "boodschap": "[L3] status is 'concept' — nog niet gereviseerd of gevalideerd"
-    },
-    {
-      "bestand": "annotaties/BWBR0004770/art2-lid2.json",
-      "boodschap": "[L3] diagram ontbreekt of is leeg (geen knopen/kanten)"
     }
   ],
   "geslaagd": 82
