@@ -241,9 +241,9 @@ def test_build_graph_met_regel(tmp_path):
     fm = maak_regel()
     (tmp_path / "regels" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
     g = build_graph(tmp_path)
-    assert "AR-0001" in g
-    assert g.nodes["AR-0001"]["node_type"] == "afleidingsregel"
-    assert g.nodes["AR-0001"]["jas_klasse"] == "afleidingsregel"
+    assert "AR-BWBR0004770-art9-lid1-a" in g
+    assert g.nodes["AR-BWBR0004770-art9-lid1-a"]["node_type"] == "afleidingsregel"
+    assert g.nodes["AR-BWBR0004770-art9-lid1-a"]["jas_klasse"] == "afleidingsregel"
 
 
 def test_build_graph_regel_met_peildatum(tmp_path):
@@ -251,7 +251,7 @@ def test_build_graph_regel_met_peildatum(tmp_path):
     fm = maak_regel(peildatum="2024-06-01")
     (tmp_path / "regels" / "test.yaml").write_text(yaml.dump(fm, allow_unicode=True))
     g = build_graph(tmp_path)
-    assert g.nodes["AR-0001"]["start"] == "2024-06-01"
+    assert g.nodes["AR-BWBR0004770-art9-lid1-a"]["start"] == "2024-06-01"
 
 
 def test_build_graph_regel_leeg_yaml(tmp_path):
@@ -432,7 +432,7 @@ def test_build_graph_edge_afleidingsregel_id(tmp_path):
     regel = maak_regel()
     (tmp_path / "regels" / "rule.yaml").write_text(yaml.dump(regel, allow_unicode=True))
 
-    fm = maak_begrip(**{"afleidingsregel-id": "AR-0001"})
+    fm = maak_begrip(**{"afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a"})
     (tmp_path / "begrippen" / "begrip.yaml").write_text(yaml.dump(fm, allow_unicode=True))
 
     g = build_graph(tmp_path)
@@ -449,7 +449,7 @@ def test_build_graph_edge_uitvoer_van_regel_id(tmp_path):
     regel = maak_regel()
     (tmp_path / "regels" / "rule.yaml").write_text(yaml.dump(regel, allow_unicode=True))
 
-    fm = maak_begrip(**{"uitvoer-van-regel-id": "AR-0001"})
+    fm = maak_begrip(**{"uitvoer-van-regel-id": "AR-BWBR0004770-art9-lid1-a"})
     (tmp_path / "begrippen" / "begrip.yaml").write_text(yaml.dump(fm, allow_unicode=True))
 
     g = build_graph(tmp_path)

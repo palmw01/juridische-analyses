@@ -119,6 +119,10 @@ Als `is-invoer-juist: nee`:
 
 Voorbeeld: voor `AR-BWBR0004770-art9-lid1-a` → bestand `validaties/VR-BWBR0004770-art9-lid1-a.yaml`, id `VR-BWBR0004770-art9-lid1-a`.
 
+**Schema-patroon (L1, afgedwongen):** `voorbeeldreeks-id` en `afleidingsregel-id` moeten matchen op `^(VR|AR)-BWBR[0-9]+-(art[0-9]+[a-z]?-lid[0-9]+|art[0-9]+[a-z]?-par[0-9]+|par[0-9]+-[0-9]+)-[a-z0-9]+$`. Drie geldige varianten: `…-art9-lid1-a`, `…-art9-par1-a`, `…-par9-5-a`. Een waarde als `VR-foo` of `AR-0001` faalt L1.
+
+**Minimum kolommen (L1, afgedwongen):** elke voorbeeldreeks moet ten minste 3 kolommen bevatten (happy path + grensgeval + negatief-geval).
+
 ---
 
 ## Drempelregel voor `is-voorspelling-juist: ?` (S1)

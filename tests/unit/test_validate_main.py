@@ -334,7 +334,7 @@ SCHEMAS_DIR = Path(__file__).resolve().parent.parent.parent / "schemas"
 
 def test_detect_schema_validaties_geeft_voorbeeldreeks(tmp_path):
     project = tmp_path
-    bestand = project / "validaties" / "VR-0001.yaml"
+    bestand = project / "validaties" / "VR-BWBR0004770-art9-lid1-a.yaml"
     (project / "validaties").mkdir()
     bestand.touch()
     assert detect_schema(bestand, project) == "voorbeeldreeks"
@@ -342,7 +342,7 @@ def test_detect_schema_validaties_geeft_voorbeeldreeks(tmp_path):
 
 def test_collect_files_for_schema_voorbeeldreeks(tmp_path):
     (tmp_path / "validaties").mkdir()
-    (tmp_path / "validaties" / "VR-0001.yaml").write_text("x: 1\n")
+    (tmp_path / "validaties" / "VR-BWBR0004770-art9-lid1-a.yaml").write_text("x: 1\n")
     (tmp_path / "validaties" / "VR-0002.yaml").write_text("x: 2\n")
     from validate_note import collect_files_for_schema
     files = collect_files_for_schema(tmp_path, "voorbeeldreeks")
@@ -358,7 +358,7 @@ def test_collect_files_for_schema_voorbeeldreeks_ontbrekende_map(tmp_path):
 def test_collect_all_files_neemt_validaties_mee(tmp_path):
     for d in ("begrippen", "regels", "annotaties", "validaties"):
         (tmp_path / d).mkdir()
-    (tmp_path / "validaties" / "VR-0001.yaml").write_text("x: 1\n")
+    (tmp_path / "validaties" / "VR-BWBR0004770-art9-lid1-a.yaml").write_text("x: 1\n")
     from validate_note import collect_all_files
     paren = collect_all_files(tmp_path)
     schema_namen = [s for _, s in paren]
@@ -371,10 +371,10 @@ def test_validate_file_voorbeeldreeks_l3_dispatch(tmp_path):
     shutil.copy(SCHEMAS_DIR / "voorbeeldreeks.schema.json", schemas_dir / "voorbeeldreeks.schema.json")
     from validate_note import validate_file, load_json_schema
     schema = load_json_schema(schemas_dir, "voorbeeldreeks")
-    vr_file = tmp_path / "VR-0001.yaml"
+    vr_file = tmp_path / "VR-BWBR0004770-art9-lid1-a.yaml"
     vr_data = {
-        "voorbeeldreeks-id": "VR-0001",
-        "afleidingsregel-id": "AR-0001",
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
+        "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Test",
         "status": "concept",
         "peildatum": "2026-01-01",
@@ -384,6 +384,8 @@ def test_validate_file_voorbeeldreeks_l3_dispatch(tmp_path):
              "verwachte-uitvoer": {}, "is-voorspelling-juist": "?"},
             {"label": "B", "invoer": {}, "is-invoer-juist": "ja",
              "verwachte-uitvoer": {}, "is-voorspelling-juist": "ja"},
+            {"label": "C", "invoer": {}, "is-invoer-juist": "nee",
+             "verwachte-uitvoer": {}, "is-voorspelling-juist": "nvt"},
         ],
     }
     vr_file.write_text(yaml.dump(vr_data, allow_unicode=True))
@@ -398,9 +400,9 @@ def test_validate_file_voorbeeldreeks_l2_dispatch(tmp_path):
     shutil.copy(SCHEMAS_DIR / "voorbeeldreeks.schema.json", schemas_dir / "voorbeeldreeks.schema.json")
     from validate_note import validate_file, load_json_schema
     schema = load_json_schema(schemas_dir, "voorbeeldreeks")
-    vr_file = tmp_path / "VR-0001.yaml"
+    vr_file = tmp_path / "VR-BWBR0004770-art9-lid1-a.yaml"
     vr_data = {
-        "voorbeeldreeks-id": "VR-0001",
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
         "afleidingsregel-id": "AR-BESTAAT-NIET",
         "naam": "Test",
         "status": "gereviseerd",

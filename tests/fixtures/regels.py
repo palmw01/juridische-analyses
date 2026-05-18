@@ -3,7 +3,7 @@
 
 def maak_regel(**overrides) -> dict:
     base = {
-        "regel-id": "AR-0001",
+        "regel-id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Berekening betalingstermijn",
         "soort": "Rekenregel",
         "formele-regel": "betalingstermijn = 30 dagen na dagtekening aanslag",

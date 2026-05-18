@@ -31,7 +31,7 @@ def load_json_schema(schema_dir: Path, schema_name: str) -> dict:
     path = schema_dir / f"{schema_name}.schema.json"
     if not path.exists():
         raise FileNotFoundError(f"Schema niet gevonden: {path}")
-    with path.open() as f:
+    with path.open(encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -43,13 +43,13 @@ def load_md_frontmatter(filepath: Path) -> dict:
 
 def load_yaml(filepath: Path) -> dict:
     """Laad puur YAML-bestand."""
-    with filepath.open() as f:
+    with filepath.open(encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
 def load_json(filepath: Path) -> dict:
     """Laad JSON-bestand."""
-    with filepath.open() as f:
+    with filepath.open(encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -85,23 +85,24 @@ def build_begrip_index(project_root: Path) -> dict[str, Path]:
         if fp.name == "index.md":
             continue
         try:
-            data = load_md_frontmatter(fp)
+            load_md_frontmatter(fp)
             index[fp.stem] = fp
-        except Exception as e:
+        except (OSError, ValueError, yaml.YAMLError) as e:
             print(f"[W] begrip overgeslagen (parse-fout): {fp.name}: {e}", file=sys.stderr)
 
     for fp in begrippen_dir.glob("*.yaml"):
         try:
             data = load_yaml(fp)
-            stem = fp.stem
-            index[stem] = fp
-            bid = data.get("begrip-id")
-            if bid:
-                slug = bid.rstrip("/").split("/")[-1]
-                index[slug] = fp
-                index[bid] = fp
-        except Exception as e:
+        except (OSError, yaml.YAMLError) as e:
             print(f"[W] begrip overgeslagen (parse-fout): {fp.name}: {e}", file=sys.stderr)
+            continue
+        stem = fp.stem
+        index[stem] = fp
+        bid = data.get("begrip-id") if isinstance(data, dict) else None
+        if bid:
+            slug = bid.rstrip("/").split("/")[-1]
+            index[slug] = fp
+            index[bid] = fp
 
     return index
 
@@ -367,11 +368,12 @@ def build_annotatie_index(project_root: Path) -> set[str]:
     for fp in annotaties_dir.rglob("*.json"):
         try:
             data = load_json(fp)
-            aid = data.get("annotatie-id")
-            if aid:
-                ids.add(str(aid))
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"[W] annotatie overgeslagen: {fp.name}: {e}", file=sys.stderr)
+            continue
+        aid = data.get("annotatie-id")
+        if aid:
+            ids.add(str(aid))
     return ids
 
 
@@ -408,6 +410,21 @@ def validate_integrity_regel(data: dict, filepath: Path, begrip_index: dict, pro
         regels_dir = project_root / "regels"
         if not (regels_dir / f"{vervangt}.yaml").exists():
             errors.append(f"[L2] vervangt-regel-id: regel '{vervangt}' niet gevonden in regels/")
+
+    # Specialisatieregel: gespecialiseerd-regel-id is verplicht en moet bestaan
+    if data.get("soort") == "Specialisatieregel":
+        gesp = data.get("gespecialiseerd-regel-id")
+        if not gesp:
+            errors.append(
+                "[L2] soort is 'Specialisatieregel' maar gespecialiseerd-regel-id ontbreekt — "
+                "stel deze in op de regel-id van de hoofdregel"
+            )
+        else:
+            regels_dir = project_root / "regels"
+            if not (regels_dir / f"{gesp}.yaml").exists():
+                errors.append(
+                    f"[L2] gespecialiseerd-regel-id: regel '{gesp}' niet gevonden in regels/"
+                )
 
     # annotatie-id: mag geen Obsidian-link zijn en moet verwijzen naar bestaande annotatie
     ann_id = data.get("annotatie-id")
@@ -463,13 +480,35 @@ def resolve_markering_jas_klasse(ann_id: str, begrip_id: str, project_root: Path
     for fp in annotaties_dir.rglob("*.json"):
         try:
             ann_data = load_json(fp)
-            if ann_data.get("annotatie-id") != ann_id:
-                continue
-            for rij in (ann_data.get("annotatierijen") or []):
-                if rij.get("begrip-id") == begrip_id:
-                    return rij.get("jas-klasse")
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"[W] annotatie overgeslagen: {fp.name}: {e}", file=sys.stderr)
+            continue
+        if ann_data.get("annotatie-id") != ann_id:
+            continue
+        for rij in (ann_data.get("annotatierijen") or []):
+            if rij.get("begrip-id") == begrip_id:
+                return rij.get("jas-klasse")
+    return None
+
+
+_SCENARIO_MAANDEN = re.compile(
+    r"\b(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\b",
+    re.IGNORECASE,
+)
+_SCENARIO_JAAR = re.compile(r"\b(?:19|20)\d{2}\b")
+_SCENARIO_VOORBEELD = re.compile(r"-voorbeeld(-|$)", re.IGNORECASE)
+
+
+def _scenario_signaal_in_begripsnaam(naam: str) -> Optional[str]:
+    """Detecteer scenario-specifieke patronen in een begripsnaam. Retourneert het type signaal of None."""
+    if not naam:
+        return None
+    if _SCENARIO_VOORBEELD.search(naam):
+        return "bevat '-voorbeeld-'"
+    if _SCENARIO_MAANDEN.search(naam):
+        return "bevat een maandnaam"
+    if _SCENARIO_JAAR.search(naam):
+        return "bevat een jaartal"
     return None
 
 
@@ -485,6 +524,14 @@ def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[P
     # Kern bevat de begripsnaam zelf (substitutietest)
     if begripsnaam and kern and begripsnaam.lower() in kern.lower():
         warnings.append("[L3] definitie.kern bevat de begripsnaam zelf — mogelijk schending substitutiebaarheidsregel")
+
+    # Scenario-specifieke begripsnaam (valkuil V1)
+    scenario_signaal = _scenario_signaal_in_begripsnaam(begripsnaam)
+    if scenario_signaal:
+        warnings.append(
+            f"[L3] begripsnaam '{begripsnaam}' bevat scenario-specifiek detail ({scenario_signaal}) — "
+            "kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+        )
 
     # Kern eindigt op een punt (conventies-check)
     if kern and kern.rstrip().endswith("."):
@@ -634,12 +681,7 @@ def validate_quality_regel(data: dict, filepath: Path) -> list[str]:
             "stel prioriteit in (lager getal = hogere prioriteit)"
         )
 
-    # Specialisatieregel vereist gespecialiseerd-regel-id
-    if soort == "Specialisatieregel" and not data.get("gespecialiseerd-regel-id"):
-        warnings.append(
-            "[L3] soort is 'Specialisatieregel' maar gespecialiseerd-regel-id is niet ingevuld — "
-            "stel gespecialiseerd-regel-id in op de regel-id van de hoofdregel"
-        )
+    # gespecialiseerd-regel-id wordt nu in L2 (validate_integrity_regel) gecontroleerd.
 
     return warnings
 
@@ -717,7 +759,7 @@ def validate_file(
     # Laad data
     try:
         data = load_file(filepath)
-    except Exception as e:
+    except (OSError, ValueError, yaml.YAMLError, json.JSONDecodeError) as e:
         result.errors.append(f"[L0] bestand kan niet geladen worden: {e}")
         return result
 

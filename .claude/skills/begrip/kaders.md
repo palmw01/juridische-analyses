@@ -228,6 +228,24 @@ Voorbeelden in invorderingscontext:
 
 Dit veld is input voor het gegevensmodel (A6d: "identificaties die nodig zijn om een gegeven uniek te maken").
 
+> **Noot — `soort-id` vs `identificatiebegrip`:** beide velden bestaan in het schema en markeren dezelfde semantiek (dit begrip is een identificerend attribuut). Vul beide met dezelfde booleanwaarde voor backward-compatibiliteit; het schema dwingt geen logische consistentie tussen deze twee af.
+
+---
+
+## Begrip-id-format (L1, afgedwongen)
+
+Het schema dwingt het volgende patroon af voor `begrip-id`:
+
+```
+^[A-Z0-9]+/(?:art[0-9]+[a-z]?/lid[0-9]+|par[0-9][0-9.-]*)/[a-z0-9-]+$
+```
+
+Twee geldige varianten:
+- `BWBR0004770/art9/lid1/belastingaanslag` (artikel + lid)
+- `BWBR0024096/par9-5/dagtekening-31-oktober` (paragraaf)
+
+Een losse slug zonder pad of een gemengde casing (`bwbr0004770/...`) faalt L1.
+
 ---
 
 ## Hergebruik en homonimie

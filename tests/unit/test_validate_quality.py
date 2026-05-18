@@ -33,6 +33,38 @@ def test_begrip_geen_markeringen_geen_onbevestigd_warning():
     assert not any("onbevestigd" in w for w in warnings)
 
 
+# ===== Scenario-specifieke begripsnaam (valkuil V1) =====
+
+def test_begripsnaam_met_maandnaam_geeft_l3():
+    data = maak_begrip(begripsnaam="vervaldag-oktober")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("scenario-specifiek" in w and "maandnaam" in w for w in warnings)
+
+
+def test_begripsnaam_met_jaartal_geeft_l3():
+    data = maak_begrip(begripsnaam="belastingbedrag-2024-ib")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("scenario-specifiek" in w and "jaartal" in w for w in warnings)
+
+
+def test_begripsnaam_met_voorbeeld_suffix_geeft_l3():
+    data = maak_begrip(begripsnaam="vervaldatum-een-maand-voorbeeld")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("scenario-specifiek" in w and "'-voorbeeld-'" in w for w in warnings)
+
+
+def test_begripsnaam_zonder_scenario_signaal_geen_l3():
+    data = maak_begrip(begripsnaam="vervaldag-kortemaand-een-maand")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("scenario-specifiek" in w for w in warnings)
+
+
+def test_begripsnaam_leeg_geen_l3_voor_scenario():
+    data = maak_begrip(begripsnaam="")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("scenario-specifiek" in w for w in warnings)
+
+
 def test_begrip_kern_gevuld_geen_kern_leeg_warning():
     data = maak_begrip()
     warnings = validate_quality_begrip(data, DUMMY)
@@ -345,15 +377,9 @@ def test_regel_specialisatie_zonder_prioriteit_geeft_warning():
     assert any("Specialisatieregel" in w and "prioriteit" in w for w in warnings)
 
 
-def test_regel_specialisatie_zonder_gespecialiseerd_id_geeft_warning():
+def test_regel_specialisatie_geen_l3_warning_voor_gespecialiseerd_id():
+    """gespecialiseerd-regel-id wordt vanaf nu in L2 gecontroleerd, niet in L3."""
     data = maak_regel(soort="Specialisatieregel", prioriteit=1)
-    warnings = validate_quality_regel(data, DUMMY)
-    assert any("gespecialiseerd-regel-id" in w for w in warnings)
-
-
-def test_regel_specialisatie_met_gespecialiseerd_id_geen_warning():
-    data = maak_regel(soort="Specialisatieregel", prioriteit=1)
-    data["gespecialiseerd-regel-id"] = "AR-BWBR0024096-par9-5-e"
     warnings = validate_quality_regel(data, DUMMY)
     assert not any("gespecialiseerd-regel-id" in w for w in warnings)
 
@@ -375,8 +401,8 @@ def _maak_vr_data(n_kolommen=3, status="gereviseerd", open_beoordelingen=0) -> d
             "is-voorspelling-juist": is_vpj,
         })
     return {
-        "voorbeeldreeks-id": "VR-0001",
-        "afleidingsregel-id": "AR-0001",
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
+        "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Test",
         "status": status,
         "peildatum": "2026-01-01",

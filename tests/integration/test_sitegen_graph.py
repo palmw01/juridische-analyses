@@ -24,7 +24,7 @@ def b(**overrides) -> dict:
 
 def r(**overrides) -> dict:
     base = {
-        "id": "AR-0001",
+        "id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Berekening betalingstermijn",
         "invoer": [],
         "uitvoer": ["BWBR0004770/art9/lid1/betalingstermijn"],
@@ -90,7 +90,7 @@ def test_gen_graph_regel_node(tmp_path):
     data = json.loads((tmp_path / "data" / "graph.json").read_text())
     regel_nodes = [n for n in data["nodes"] if n["type"] == "regel"]
     assert len(regel_nodes) == 1
-    assert regel_nodes[0]["id"] == "AR-0001"
+    assert regel_nodes[0]["id"] == "AR-BWBR0004770-art9-lid1-a"
 
 
 def test_gen_graph_regel_met_invoer_link(tmp_path):
@@ -222,7 +222,7 @@ def _annotatie():
 
 def _regel():
     return {
-        "id": "AR-0001",
+        "id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Berekening betalingstermijn",
         "formele_regel": "betalingstermijn = 30 dagen",
         "toelichting": "Standaard termijn.",

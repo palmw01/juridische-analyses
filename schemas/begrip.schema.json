@@ -7,7 +7,11 @@
   "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip", "jas-klasse", "toelichting-klasse"],
   "additionalProperties": false,
   "properties": {
-    "begrip-id": { "type": "string", "minLength": 1 },
+    "begrip-id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]+/(?:art[0-9]+[a-z]?/lid[0-9]+|par[0-9][0-9.-]*)/[a-z0-9-]+$",
+      "description": "Samengestelde ID: {bwb-id}/art{N}/lid{L}/{slug} of {bwb-id}/par{ref}/{slug}"
+    },
     "begripsnaam": { "type": "string", "minLength": 1 },
     "aliases": { "type": "array", "items": { "type": "string" }, "default": [] },
     "soort": {

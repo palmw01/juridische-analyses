@@ -7,7 +7,6 @@ Gebruik:
 """
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -16,7 +15,7 @@ import networkx as nx
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from sitegen.config import JAS_KLEUREN
-from jas_index_lib import bouw_jas_index
+from jas_index_lib import bouw_jas_index, load_json
 
 FALLBACK_KLEUR = "#CCCCCC"
 
@@ -124,11 +123,9 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
         for json_file in sorted(annotaties_dir.glob("**/*.json")):
             if is_verborgen_pad(json_file, annotaties_dir):
                 continue
-            with json_file.open(encoding="utf-8") as f:
-                try:
-                    data = json.load(f)
-                except json.JSONDecodeError:
-                    continue
+            data = load_json(json_file)
+            if data is None:
+                continue
 
             node_id = data.get("annotatie-id") or str(json_file.relative_to(project_root).with_suffix(""))
             artikel = data.get("artikel", "?")
@@ -195,11 +192,9 @@ def build_graph(project_root: Path) -> nx.MultiDiGraph:
         for json_file in sorted(annotaties_dir.glob("**/*.json")):
             if is_verborgen_pad(json_file, annotaties_dir):
                 continue
-            with json_file.open(encoding="utf-8") as f:
-                try:
-                    data = json.load(f)
-                except json.JSONDecodeError:
-                    continue
+            data = load_json(json_file)
+            if data is None:
+                continue
 
             annotatie_id = data.get("annotatie-id") or str(json_file.relative_to(project_root).with_suffix(""))
             if annotatie_id not in G:  # pragma: no cover

@@ -55,7 +55,7 @@ def test_slug_van_id_slashes_naar_underscores():
 
 
 def test_slug_van_id_geen_slashes():
-    assert slug_van_id("AR-0001") == "AR-0001"
+    assert slug_van_id("AR-BWBR0004770-art9-lid1-a") == "AR-BWBR0004770-art9-lid1-a"
 
 
 def test_slug_van_id_leeg():
@@ -141,9 +141,9 @@ def test_begrip_naar_turtle_met_markering_provenance():
 
 
 def test_begrip_naar_turtle_met_afleidingsregel_id():
-    fm = maak_begrip(**{"afleidingsregel-id": "AR-0001"})
+    fm = maak_begrip(**{"afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a"})
     result = begrip_naar_turtle(fm, {})
-    assert 'jas:afleidingsregel "AR-0001"' in result
+    assert 'jas:afleidingsregel "AR-BWBR0004770-art9-lid1-a"' in result
 
 
 def test_begrip_naar_turtle_met_uitvoer_van_regel():

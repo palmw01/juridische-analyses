@@ -7,7 +7,10 @@
   "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "geldigheid-van", "annotatie-id", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "toelichting", "voorbeeldreeksen", "tussenresultaat"],
   "additionalProperties": false,
   "properties": {
-    "regel-id": { "type": "string", "pattern": "^AR-" },
+    "regel-id": {
+      "type": "string",
+      "pattern": "^AR-BWBR[0-9]+-(?:art[0-9]+[a-z]?-lid[0-9]+|art[0-9]+[a-z]?-par[0-9]+|par[0-9]+-[0-9]+)-[a-z0-9]+$"
+    },
     "naam": { "type": "string", "minLength": 1 },
     "soort": {
       "type": "string",

@@ -18,6 +18,8 @@ Raadpleeg dit bestand aan het begin van elke `/begrip`-run. Het bevat geleerde l
 
 **Test:** Stel je voor dat de wet het voorbeeld vervangt door een ander getal of datum — blijft de naam dan nog kloppen? Zo niet: hernaam naar de abstracte rol.
 
+**L3-detectie:** `validate_note.py` waarschuwt bij begripsnamen die een **maandnaam** (`januari…december`), een **vier-cijferig jaartal** (`19xx`/`20xx`), of het suffix **`-voorbeeld-`** bevatten. De waarschuwing is adviserend; corrigeer of motiveer in de begrip-YAML.
+
 ---
 
 ## V2 — Operator hergebruik: check eerst bestaande begrippen

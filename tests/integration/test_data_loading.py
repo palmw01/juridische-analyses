@@ -172,7 +172,7 @@ def test_laad_regels_een_bestand(project_root):
     result = laad_regels(project_root)
     assert len(result) == 1
     r = result[0]
-    assert r["id"] == "AR-0001"
+    assert r["id"] == "AR-BWBR0004770-art9-lid1-a"
     assert r["soort"] == "Rekenregel"
     assert r["tussenresultaat"] is False
     assert r["annotatie_id"] == "BWBR0004770/art9/lid1"
@@ -371,8 +371,8 @@ def test_laad_voorbeeldreeksen_een_bestand(project_root):
     import yaml
     (project_root / "validaties").mkdir()
     vr = {
-        "voorbeeldreeks-id": "VR-0001",
-        "afleidingsregel-id": "AR-0001",
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
+        "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Test VR",
         "status": "concept",
         "peildatum": "2026-01-01",
@@ -388,13 +388,13 @@ def test_laad_voorbeeldreeksen_een_bestand(project_root):
             }
         ],
     }
-    (project_root / "validaties" / "VR-0001.yaml").write_text(yaml.dump(vr, allow_unicode=True))
+    (project_root / "validaties" / "VR-BWBR0004770-art9-lid1-a.yaml").write_text(yaml.dump(vr, allow_unicode=True))
     result = laad_voorbeeldreeksen(project_root)
     assert len(result) == 1
     r = result[0]
-    assert r["id"] == "VR-0001"
+    assert r["id"] == "VR-BWBR0004770-art9-lid1-a"
     assert r["naam"] == "Test VR"
-    assert r["afleidingsregel_id"] == "AR-0001"
+    assert r["afleidingsregel_id"] == "AR-BWBR0004770-art9-lid1-a"
     assert r["status"] == "concept"
     assert len(r["kolommen"]) == 1
     k = r["kolommen"][0]
@@ -412,7 +412,7 @@ def test_laad_voorbeeldreeksen_gesorteerd(project_root):
     for naam in ("VR-ZZZ.yaml", "VR-AAA.yaml"):
         vr = {
             "voorbeeldreeks-id": naam.replace(".yaml", ""),
-            "afleidingsregel-id": "AR-0001",
+            "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
             "naam": naam,
             "status": "concept",
             "peildatum": "2026-01-01",

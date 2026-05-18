@@ -138,3 +138,98 @@ def test_bron_schema_ontbrekend_verplicht_veld(bron_schema, tmp_path, veld, verw
     errors = validate_schema(data, bron_schema, tmp_path / "art9.json")
     assert errors, f"Verwacht L1-fout voor ontbrekend veld {veld}"
     assert any(verwacht_fragment in e for e in errors)
+
+
+# ---------- Strenge ID-patronen (regel, voorbeeldreeks, begrip) ----------
+
+def _vr_data(**overrides):
+    base = {
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
+        "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
+        "naam": "test",
+        "status": "concept",
+        "peildatum": "2026-01-01",
+        "aangemaakt-op": "2026-01-01",
+        "kolommen": [
+            {"label": str(i), "invoer": {}, "is-invoer-juist": "ja",
+             "verwachte-uitvoer": {}, "is-voorspelling-juist": "ja"}
+            for i in range(3)
+        ],
+    }
+    base.update(overrides)
+    return base
+
+
+@pytest.fixture(scope="module")
+def voorbeeldreeks_schema():
+    return load_json_schema(SCHEMAS_DIR, "voorbeeldreeks")
+
+
+@pytest.mark.parametrize("regel_id", [
+    "AR-BWBR0004770-art9-lid1-a",
+    "AR-BWBR0024096-art9-par1-b",
+    "AR-BWBR0024096-par9-5-f",
+])
+def test_regel_id_pattern_accepteert_alle_drie_varianten(regel_schema, tmp_path, regel_id):
+    data = maak_regel(**{"regel-id": regel_id})
+    errors = validate_schema(data, regel_schema, tmp_path / "r.yaml")
+    assert errors == [], f"Verwacht geldig: {regel_id}"
+
+
+@pytest.mark.parametrize("regel_id", [
+    "AR-foo",
+    "AR-0001",
+    "AR-BWBR0004770-art9-lid1",  # zonder seq
+    "ar-BWBR0004770-art9-lid1-a",  # kleine letters
+])
+def test_regel_id_pattern_wijst_ongeldige_af(regel_schema, tmp_path, regel_id):
+    data = maak_regel(**{"regel-id": regel_id})
+    errors = validate_schema(data, regel_schema, tmp_path / "r.yaml")
+    assert any("regel-id" in e for e in errors)
+
+
+@pytest.mark.parametrize("vr_id", [
+    "VR-BWBR0004770-art9-lid1-a",
+    "VR-BWBR0024096-art9-par1-b",
+    "VR-BWBR0024096-par9-5-f",
+])
+def test_voorbeeldreeks_id_pattern_accepteert_alle_drie_varianten(voorbeeldreeks_schema, tmp_path, vr_id):
+    data = _vr_data(**{"voorbeeldreeks-id": vr_id})
+    errors = validate_schema(data, voorbeeldreeks_schema, tmp_path / "vr.yaml")
+    assert errors == [], f"Verwacht geldig: {vr_id}"
+
+
+@pytest.mark.parametrize("vr_id", ["VR-foo", "VR-0001"])
+def test_voorbeeldreeks_id_pattern_wijst_ongeldige_af(voorbeeldreeks_schema, tmp_path, vr_id):
+    data = _vr_data(**{"voorbeeldreeks-id": vr_id})
+    errors = validate_schema(data, voorbeeldreeks_schema, tmp_path / "vr.yaml")
+    assert any("voorbeeldreeks-id" in e for e in errors)
+
+
+def test_voorbeeldreeks_minder_dan_3_kolommen_faalt(voorbeeldreeks_schema, tmp_path):
+    data = _vr_data()
+    data["kolommen"] = data["kolommen"][:2]
+    errors = validate_schema(data, voorbeeldreeks_schema, tmp_path / "vr.yaml")
+    assert any("kolommen" in e for e in errors)
+
+
+@pytest.mark.parametrize("begrip_id", [
+    "BWBR0004770/art9/lid1/belastingaanslag",
+    "BWBR0024096/par9-1/31-december",
+    "BWBR0024096/par9-5/dagtekening-31-oktober",
+])
+def test_begrip_id_pattern_accepteert_alle_varianten(begrip_schema, tmp_path, begrip_id):
+    data = maak_begrip(**{"begrip-id": begrip_id})
+    errors = validate_schema(data, begrip_schema, tmp_path / "b.yaml")
+    assert errors == [], f"Verwacht geldig: {begrip_id}"
+
+
+@pytest.mark.parametrize("begrip_id", [
+    "losse-slug-zonder-pad",
+    "bwbr0004770/art9/lid1/foo",  # kleine letters voor bwb
+    "BWBR0004770/art9/foo",  # mist lid
+])
+def test_begrip_id_pattern_wijst_ongeldige_af(begrip_schema, tmp_path, begrip_id):
+    data = maak_begrip(**{"begrip-id": begrip_id})
+    errors = validate_schema(data, begrip_schema, tmp_path / "b.yaml")
+    assert any("begrip-id" in e for e in errors)

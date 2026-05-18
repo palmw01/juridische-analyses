@@ -1,7 +1,16 @@
 import json
 from pathlib import Path
 
-from jas_index_lib import haal_kern, haal_contexten, bouw_jas_index
+import pytest
+
+from jas_index_lib import (
+    haal_kern,
+    haal_contexten,
+    bouw_jas_index,
+    load_yaml,
+    load_json,
+    slug_from_begrip_id,
+)
 
 
 # ---------- haal_kern ----------
@@ -120,3 +129,77 @@ def test_bouw_jas_index_eerste_jas_klasse_wint(tmp_path):
     (tmp_path / "annotaties" / "art2.json").write_text(json.dumps(data2))
     idx = bouw_jas_index(tmp_path)
     assert idx["test/begrip"] == "rechtssubject"
+
+
+# ---------- load_yaml ----------
+
+def test_load_yaml_geldig_bestand(tmp_path):
+    f = tmp_path / "x.yaml"
+    f.write_text("naam: Aanslag\nartikel: '9'\n", encoding="utf-8")
+    assert load_yaml(f) == {"naam": "Aanslag", "artikel": "9"}
+
+
+def test_load_yaml_ontbrekend_bestand_geeft_none(tmp_path):
+    assert load_yaml(tmp_path / "weg.yaml") is None
+
+
+def test_load_yaml_kapot_bestand_geeft_none(tmp_path, capsys):
+    f = tmp_path / "kapot.yaml"
+    f.write_text("a: [unterminated\n", encoding="utf-8")
+    assert load_yaml(f) is None
+    assert "load_yaml" in capsys.readouterr().err
+
+
+def test_load_yaml_silent_false_raised(tmp_path):
+    f = tmp_path / "kapot.yaml"
+    f.write_text("a: [unterminated\n", encoding="utf-8")
+    with pytest.raises(Exception):
+        load_yaml(f, silent=False)
+
+
+# ---------- load_json ----------
+
+def test_load_json_geldig_bestand(tmp_path):
+    f = tmp_path / "x.json"
+    f.write_text(json.dumps({"bwb-id": "BWBR0004770"}), encoding="utf-8")
+    assert load_json(f) == {"bwb-id": "BWBR0004770"}
+
+
+def test_load_json_ontbrekend_bestand_geeft_none(tmp_path):
+    assert load_json(tmp_path / "weg.json") is None
+
+
+def test_load_json_kapot_bestand_geeft_none(tmp_path, capsys):
+    f = tmp_path / "kapot.json"
+    f.write_text("{niet json", encoding="utf-8")
+    assert load_json(f) is None
+    assert "load_json" in capsys.readouterr().err
+
+
+def test_load_json_silent_false_raised(tmp_path):
+    f = tmp_path / "kapot.json"
+    f.write_text("{niet json", encoding="utf-8")
+    with pytest.raises(json.JSONDecodeError):
+        load_json(f, silent=False)
+
+
+# ---------- slug_from_begrip_id ----------
+
+def test_slug_from_begrip_id_pad():
+    assert slug_from_begrip_id("BWBR0004770/art9/lid1/foo") == "foo"
+
+
+def test_slug_from_begrip_id_par():
+    assert slug_from_begrip_id("BWBR0024096/par9-5/bar") == "bar"
+
+
+def test_slug_from_begrip_id_trailing_slash():
+    assert slug_from_begrip_id("BWBR0004770/art9/lid1/foo/") == "foo"
+
+
+def test_slug_from_begrip_id_zonder_pad():
+    assert slug_from_begrip_id("losse-slug") == "losse-slug"
+
+
+def test_slug_from_begrip_id_leeg():
+    assert slug_from_begrip_id("") == ""

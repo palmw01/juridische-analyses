@@ -49,7 +49,7 @@ Elk bestand bevat `bron-annotatie-id`- en `markering-id`-velden die directe navi
 | `extract_kruisrefs.py` | JCI URI-extractie en forward/backward kruisreferenties |
 | `query_rdf.py` | SPARQL-query op het gegenereerde RDF-model |
 | `fetch_wettenbank.py` | MCP-wrapper voor wetsteksten ophalen |
-| `jas_index_lib.py` | Gedeeld hulpprogramma: kern- en contexten-laden |
+| `jas_index_lib.py` | Gedeelde I/O-helpers (`load_yaml`/`load_json`), `slug_from_begrip_id`, JAS-index en kern-/contexten-laden |
 
 ### Statische webapp (`sitegen/`)
 
@@ -57,9 +57,9 @@ Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.j
 
 ### Validatielagen
 
-- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`). Blokkerend.
-- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (begrip-id → regel-id → voorbeeldreeks-id), statusconsistentie, diagramintegriteit. Blokkerend.
-- **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen. Adviserend.
+- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`). Patronen voor `begrip-id`, `regel-id` (AR-…) en `voorbeeldreeks-id` (VR-…) zijn structureel afgedwongen; voorbeeldreeksen moeten ten minste 3 kolommen bevatten. Blokkerend.
+- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (annotatie → begrip → regel → voorbeeldreeks), statusconsistentie, diagramintegriteit. `gespecialiseerd-regel-id` is voor `soort: Specialisatieregel` verplicht en moet naar een bestaand regel-bestand verwijzen. Blokkerend.
+- **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen, scenario-specifieke begripsnamen (maandnaam/jaartal/`-voorbeeld-`). Adviserend.
 
 De **pre-commit hook** (`scripts/pre-commit`) blokkeert commits met L1/L2-fouten in gestagede bestanden en regenereert `rapporten/validatie-rapport.md`. De **pre-push hook** (`scripts/pre-push`) blokkeert pushes wanneer testdekking < 100% is. Installeer beide met `make install-hooks`.
 

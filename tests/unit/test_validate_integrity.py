@@ -140,6 +140,33 @@ def test_regel_vervangt_gevonden_geen_fout(tmp_path):
     assert not any("vervangt-regel-id" in e for e in errors)
 
 
+def test_regel_specialisatie_zonder_gespecialiseerd_id_geeft_l2(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    data = maak_regel(soort="Specialisatieregel", prioriteit=1)
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("[L2]" in e and "gespecialiseerd-regel-id" in e for e in errors)
+
+
+def test_regel_specialisatie_met_onbekende_gespecialiseerd_id_geeft_l2(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    data = maak_regel(soort="Specialisatieregel", prioriteit=1)
+    data["gespecialiseerd-regel-id"] = "AR-BWBR0004770-art9-lid1-bestaat-niet"
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert any("[L2]" in e and "gespecialiseerd-regel-id" in e and "niet gevonden" in e for e in errors)
+
+
+def test_regel_specialisatie_met_bestaande_gespecialiseerd_id_geen_l2(tmp_path):
+    project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
+    (project / "regels" / "AR-BWBR0024096-par9-5-e.yaml").write_text("regel-id: AR-BWBR0024096-par9-5-e\n")
+    data = maak_regel(soort="Specialisatieregel", prioriteit=1)
+    data["gespecialiseerd-regel-id"] = "AR-BWBR0024096-par9-5-e"
+    idx = build_begrip_index(project)
+    errors = validate_integrity_regel(data, DUMMY, idx, project)
+    assert not any("gespecialiseerd-regel-id" in e for e in errors)
+
+
 def test_regel_wikilink_in_invoer_geeft_fout(tmp_path):
     project = leeg_project(tmp_path, mappen=("begrippen", "regels", "annotaties"))
     data = maak_regel(invoer=["[[begrippen/belastingschuldige]]"])
@@ -312,7 +339,7 @@ def test_begrip_herkomst_afgeleid_zonder_uitvoer_id_geeft_fout(tmp_path):
 def test_begrip_afleidingsregel_id_op_verkeerde_klasse_geeft_fout(tmp_path):
     project = leeg_project(tmp_path)
     data = maak_begrip(
-        **{"jas-klasse": "variabele", "afleidingsregel-id": "AR-0001", "definitie-gebaseerd-op": []},
+        **{"jas-klasse": "variabele", "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a", "definitie-gebaseerd-op": []},
         markeringen=[],
     )
     idx = build_begrip_index(project)
@@ -351,8 +378,8 @@ def test_begrip_uitvoer_van_regel_id_niet_gevonden_geeft_fout(tmp_path):
 
 def _maak_vr(**overrides) -> dict:
     base = {
-        "voorbeeldreeks-id": "VR-0001",
-        "afleidingsregel-id": "AR-0001",
+        "voorbeeldreeks-id": "VR-BWBR0004770-art9-lid1-a",
+        "afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a",
         "naam": "Test voorbeeldreeks",
         "status": "concept",
         "peildatum": "2026-01-01",
@@ -373,7 +400,7 @@ def _maak_vr(**overrides) -> dict:
 
 def test_vr_geen_fouten_bij_valide_data(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.yaml").write_text("regel-id: AR-BWBR0004770-art9-lid1-a\n")
     data = _maak_vr()
     idx = build_begrip_index(project)
     assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
@@ -389,7 +416,7 @@ def test_vr_ontbrekende_regel_geeft_fout(tmp_path):
 
 def test_vr_bestaande_regel_md_geen_fout(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.md").write_text("---\nregel-id: AR-0001\n---\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.md").write_text("---\nregel-id: AR-BWBR0004770-art9-lid1-a\n---\n")
     data = _maak_vr()
     idx = build_begrip_index(project)
     assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
@@ -397,7 +424,7 @@ def test_vr_bestaande_regel_md_geen_fout(tmp_path):
 
 def test_vr_onbekend_invoer_begrip_geeft_fout(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.yaml").write_text("regel-id: AR-BWBR0004770-art9-lid1-a\n")
     data = _maak_vr(kolommen=[{
         "label": "test",
         "invoer": {"bestaat/niet": "waarde"},
@@ -412,7 +439,7 @@ def test_vr_onbekend_invoer_begrip_geeft_fout(tmp_path):
 
 def test_vr_onbekend_uitvoer_begrip_geeft_fout(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.yaml").write_text("regel-id: AR-BWBR0004770-art9-lid1-a\n")
     data = _maak_vr(kolommen=[{
         "label": "test",
         "invoer": {},
@@ -427,7 +454,7 @@ def test_vr_onbekend_uitvoer_begrip_geeft_fout(tmp_path):
 
 def test_vr_invoer_onjuist_maar_nvt_geen_fout(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.yaml").write_text("regel-id: AR-BWBR0004770-art9-lid1-a\n")
     data = _maak_vr(kolommen=[{
         "label": "Ongeldig geval",
         "invoer": {},
@@ -441,7 +468,7 @@ def test_vr_invoer_onjuist_maar_nvt_geen_fout(tmp_path):
 
 def test_vr_invoer_onjuist_maar_voorspelling_ja_geeft_fout(tmp_path):
     project = leeg_project(tmp_path, ("begrippen", "regels"))
-    (project / "regels" / "AR-0001.yaml").write_text("regel-id: AR-0001\n")
+    (project / "regels" / "AR-BWBR0004770-art9-lid1-a.yaml").write_text("regel-id: AR-BWBR0004770-art9-lid1-a\n")
     data = _maak_vr(kolommen=[{
         "label": "Onjuist geval",
         "invoer": {},

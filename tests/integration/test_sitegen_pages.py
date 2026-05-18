@@ -90,7 +90,7 @@ def annotatie(
 
 
 def regel(
-    regel_id="AR-0001",
+    regel_id="AR-BWBR0004770-art9-lid1-a",
     naam="Berekening betalingstermijn",
     **overrides,
 ) -> dict:
@@ -218,7 +218,7 @@ def test_gen_regels_maakt_lijstpagina_aan(tmp_path):
 
 def test_gen_regels_maakt_detailpagina_aan(tmp_path):
     gen_regels(tmp_path, [regel()], [], [])
-    assert (tmp_path / "regels" / "AR-0001.html").exists()
+    assert (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").exists()
 
 
 def test_gen_regels_leeg_geen_fout(tmp_path):
@@ -228,37 +228,37 @@ def test_gen_regels_leeg_geen_fout(tmp_path):
 
 def test_gen_regels_detailpagina_bevat_naam(tmp_path):
     gen_regels(tmp_path, [regel()], [], [])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "Berekening betalingstermijn" in content
 
 
 def test_gen_regels_met_annotatie_link(tmp_path):
     gen_regels(tmp_path, [regel()], [begrip()], [annotatie()])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "Annotatie" in content or "annotatie" in content.lower()
 
 
 def test_gen_regels_met_prioriteit(tmp_path):
     gen_regels(tmp_path, [regel(prioriteit=1, soort="Specialisatieregel")], [], [])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "Prioriteit" in content or "prioriteit" in content.lower()
 
 
 def test_gen_regels_met_geldigheid_tot(tmp_path):
     gen_regels(tmp_path, [regel(**{"geldigheid_tot": "2025-12-31"})], [], [])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "2025-12-31" in content
 
 
 def test_gen_regels_met_vervangt(tmp_path):
     gen_regels(tmp_path, [regel(**{"vervangt_regel_id": "AR-0000"})], [], [])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "AR-0000" in content
 
 
 def test_gen_regels_voorbeeld_ongeldig_heeft_label(tmp_path):
     gen_regels(tmp_path, [regel()], [], [])
-    content = (tmp_path / "regels" / "AR-0001.html").read_text()
+    content = (tmp_path / "regels" / "AR-BWBR0004770-art9-lid1-a.html").read_text()
     assert "[-]" in content
 
 
@@ -471,10 +471,10 @@ def test_gen_begrippen_voorbeeld_met_toelichting(tmp_path):
 
 
 def test_gen_begrippen_met_afleidingsregel_id(tmp_path):
-    b = begrip(**{"afleidingsregel-id": "AR-0001"})
+    b = begrip(**{"afleidingsregel-id": "AR-BWBR0004770-art9-lid1-a"})
     gen_begrippen(tmp_path, [b], [])
     content = (tmp_path / "begrippen" / "belastingschuldige.html").read_text()
-    assert "AR-0001" in content
+    assert "AR-BWBR0004770-art9-lid1-a" in content
 
 
 def test_gen_begrippen_met_uitvoer_van_regel_id(tmp_path):
