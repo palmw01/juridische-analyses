@@ -524,6 +524,28 @@ make ci
 Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie). Bij elke push draait de **pre-push hook** (100% testdekking vereist).
 Bij elke push naar `main` draait **GitHub Actions** (volledige validatie + alle exports + deploy webapp).
 
+### Annotatie starten via de webapp (zonder Claude Code CLI)
+
+Collega's die geen Claude Code CLI willen installeren kunnen een annotatieverzoek indienen via [`start_annotatie.html`](https://palmw01.github.io/juridische-analyses/start_annotatie.html) op de webapp:
+
+1. Vul wet, type (artikel-index / lid / sectie) en de relevante velden in.
+2. Klik **Open op GitHub** — er opent een nieuwe issue met titel, body en label `annotatie-verzoek` al ingevuld; klik op *Submit new issue*.
+3. De workflow `.github/workflows/annoteer.yml` parsest het `/annoteer …`-commando uit de issue en plaatst een wachtbericht.
+4. De maker krijgt een Actions-notificatie en moet de run handmatig **Approve and deploy** in environment `claude-approval`. Pas dan wordt Claude gestart en worden API-tokens verbruikt.
+5. Na de run plaatst de bot een PR-link als comment op de issue.
+
+#### Eenmalige setup door de maker
+
+Vereist vóór de eerste run:
+
+1. **Environment** `claude-approval` aanmaken (Settings → Environments → New) met de maker als **Required reviewer**.
+2. **Secret** `ANTHROPIC_API_KEY` toevoegen aan dat environment.
+3. **Label** `annotatie-verzoek` aanmaken (Settings → Labels of via `gh label create`).
+4. **Workflow permissions** op *Read and write* zetten + *Allow GitHub Actions to create and approve pull requests* aanvinken (Settings → Actions → General).
+5. **Claude GitHub App** installeren op de repo (zie https://github.com/anthropics/claude-code-action).
+
+Approvers wijzigen: Settings → Environments → claude-approval → Required reviewers aanpassen (max 6 reviewers per environment).
+
 ---
 
 ## Technische begrippen

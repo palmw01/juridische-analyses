@@ -1,0 +1,109 @@
+name: Annoteer-verzoek uitvoeren
+
+# Triggert op nieuwe of (her)gelabelde issues. De feitelijke Claude-run
+# zit in een aparte job met `environment: claude-approval` — die wacht
+# op handmatige goedkeuring door de maker voordat er API-tokens worden
+# verbruikt.
+
+on:
+  issues:
+    types: [opened, labeled, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: annoteer-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  parse:
+    if: contains(github.event.issue.labels.*.name, 'annotatie-verzoek')
+    runs-on: ubuntu-latest
+    outputs:
+      command: ${{ steps.extract.outputs.command }}
+      branch: ${{ steps.extract.outputs.branch }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - id: extract
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python tools/parse_annoteer_issue.py
+
+      - name: Wachtbericht plaatsen op de issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: [
+                '⏳ Verzoek ontvangen.',
+                '',
+                'Commando: `' + ${{ toJSON(steps.extract.outputs.command) }} + '`',
+                'Doelbranch: `' + ${{ toJSON(steps.extract.outputs.branch) }} + '`',
+                '',
+                'Wacht op goedkeuring van de maker in de [Actions-tab](../../actions). ',
+                'Pas na **Approve and deploy** wordt Claude gestart — er worden tot dan ',
+                'geen API-tokens verbruikt.'
+              ].join('\n')
+            });
+
+  run:
+    needs: parse
+    runs-on: ubuntu-latest
+    environment: claude-approval     # required reviewers = slagboom
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Installeer projectdeps
+        run: |
+          python -m venv tools/.venv
+          tools/.venv/bin/pip install -r requirements.lock
+
+      - name: Voer /annoteer uit via Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: ${{ needs.parse.outputs.command }}
+          allowed_tools: "Read,Write,Edit,Bash"
+          branch: ${{ needs.parse.outputs.branch }}
+
+      - name: Bevestiging plaatsen op de issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Klaar. Bekijk de PR op branch `' + ${{ toJSON(needs.parse.outputs.branch) }} + '` en review de annotatie zoals gebruikelijk.'
+            });
+
+      - name: Foutmelding plaatsen op de issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ De annotatie-run is mislukt. Zie de [workflow-logs](../../actions/runs/${{ github.run_id }}) voor details.'
+            });
