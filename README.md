@@ -17,7 +17,7 @@ Dit PoC toont aan dat de kwaliteitsstandaarden van de BZK-Wetsanalyse-methodiek 
 
 **Geanalyseerde artikelen:** art. 9 Invorderingswet 1990 (betalingstermijnen), aangevuld met §9.1 en §9.5 Leidraad Invordering 2008, en art. 2 lid 2 IW 1990 (begripsbepalingen). Art. 9 IW regelt wanneer een belastingaanslag invorderbaar wordt en op welke tijdstippen de verschuldigde bedragen betaald moeten zijn; art. 2 lid 2 IW definieert de kernbegrippen die in de gehele wet worden gebruikt, waaronder de uitgebreide definities van rijksbelastingen, belastingaanslag en invorderen.
 
-**Output:** een traceerbaar kennismodel — 45 begrippen, 15 afleidingsregels, 67 gevalideerde projectbestanden, en voorbeeldreeksen (A4b) als testmatrices voor de afleidingsregels — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
+**Output:** een traceerbaar kennismodel — 45 begrippen, 15 afleidingsregels, 15 voorbeeldreeksen (A4b) en 82 gevalideerde projectbestanden — machineleesbaar als RDF/SKOS, GEXF en RegelSpraak, en direct bruikbaar voor digitale implementatie van de invorderingsregelgeving.
 
 Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](https://wetten.overheid.nl), gevalideerd met een Python-toolchain en gepubliceerd via GitHub Pages. De methodiek en validatiestructuur zijn model-onafhankelijk opgezet en gedocumenteerd voor hergebruik.
 
@@ -45,9 +45,9 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Art. 2 lid 2 IW — annotatie + begrippen | ✅ Gereed |
 | Begrippen (A3a) — 45 stuks | ✅ Gereed |
 | Afleidingsregels (A3b) — 15 stuks | ✅ Gereed |
-| Voorbeeldreeksen (A4b) — 2 stuks | ✅ Gereed |
+| Voorbeeldreeksen (A4b) — 15 stuks | ✅ Gereed |
 | RDF/SKOS-export | ✅ Gereed |
-| Validatie (L1–L3) — 67 bestanden, 0 blokkeerfouten, 3 L3-waarschuwingen | ✅ Gereed |
+| Validatie (L1–L3) — 82 bestanden, 0 blokkeerfouten, 19 L3-waarschuwingen | ✅ Gereed |
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
@@ -276,7 +276,7 @@ Het project wordt op drie niveaus gevalideerd. Validatie draait automatisch bij 
 
 ### L1 — Schema-conformiteit
 
-**Wat:** elk JSON- en YAML-bestand in `annotaties/`, `begrippen/`, `regels/` en `validaties/` wordt getoetst aan een JSON Schema (draft-07) in `schemas/`. Het schema legt verplichte velden, toegestane waarden en datatypes vast.
+**Wat:** elk JSON- en YAML-bestand in `bronnen/`, `annotaties/`, `begrippen/`, `regels/` en `validaties/` wordt getoetst aan een JSON Schema (draft-07) in `schemas/`. Het schema legt verplichte velden, toegestane waarden, datatypes en structurele patronen vast. Zo dwingen de schemas dat `begrip-id`, `regel-id` (`AR-…`) en `voorbeeldreeks-id` (`VR-…`) een volledige `{bwb-id}/{art|par}/{slug}`-grammatica volgen, en dat elke voorbeeldreeks ten minste 3 kolommen (happy path + grensgeval + negatief geval) bevat.
 
 **Blokkerend:** ja — een L1-fout blokkeert de commit en laat CI mislukken.
 
@@ -291,6 +291,7 @@ annotaties/BWBR0004770/art9-1-lid1.json
 
 | Bestand | Valideert |
 |---------|-----------|
+| `schemas/bron.schema.json` | Wetsteksten in `bronnen/` |
 | `schemas/annotatie-index.schema.json` | Structuurankers in `annotaties/` |
 | `schemas/annotatie-lid.schema.json` | Lid-annotaties in `annotaties/` |
 | `schemas/begrip.schema.json` | Begrippen in `begrippen/` |
@@ -301,11 +302,12 @@ annotaties/BWBR0004770/art9-1-lid1.json
 
 **Wat:** drie soorten controles, allemaal blokkerend:
 
-1. **Referentiële integriteit** — alle verwijzingen naar andere projectbestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten, `vervangt-regel-id`)
+1. **Referentiële integriteit** — alle verwijzingen naar andere projectbestanden worden gecontroleerd op bestaan (begrip-id's, annotatie-id's, afleidingsregel-id's, markering-id's in contexten, `vervangt-regel-id`, `gespecialiseerd-regel-id`)
 2. **Status-consistentie** — `status: gevalideerd` vereist een ingevulde `definitie.kern`; `status: vervallen` vereist een niet-null `vervangen-door`
 3. **Diagramintegriteit** — `kanten[].van` en `kanten[].naar` in annotatie-lid-diagrammen moeten verwijzen naar een bestaand `knopen[].id`
 4. **Definitie-gebaseerd-op bijdrage** — markering-id's in `definitie-gebaseerd-op` mogen alleen `bijdrage: primair` hebben
 5. **Voorbeeldreeks-integriteit** — `afleidingsregel-id` moet verwijzen naar een bestaand regelbestand; begrip-id's in `invoer` en `verwachte-uitvoer` moeten bestaan in `begrippen/`; bij `is-invoer-juist: nee` moet `is-voorspelling-juist: nvt` zijn
+6. **Specialisatieregel-koppeling** — bij `soort: Specialisatieregel` is `gespecialiseerd-regel-id` verplicht en moet verwijzen naar een bestaand regelbestand in `regels/`
 
 **Blokkerend:** ja — L2-fouten blokkeren commit en CI.
 
@@ -332,10 +334,10 @@ annotaties/BWBR0004770/art9-lid1.json
 | `prioriteit bij niet-Specialisatieregel` | `prioriteit` is ingevuld maar `soort` is geen `Specialisatieregel` — dit veld is alleen zinvol bij Specialisatieregels |
 | `aanvullende markering zonder context` | een markering met `bijdrage: aanvullend` heeft geen corresponderende entry in `definitie.contexten` — overweeg een verfijning-, uitbreiding- of uitzondering-context toe te voegen |
 | `is-voorspelling-juist=?` | een of meer kolommen wachten nog op juridische beoordeling — vul in na review |
-| `minder dan 3 kolommen` | voorbeeldreeks heeft niet de minimumvereiste happy-path + grensgeval + negatief geval |
 | `status concept (VR)` | voorbeeldreeks is nog niet gereviseerd of gevalideerd |
+| `scenario-specifieke begripsnaam` | begripsnaam bevat een maandnaam, vier-cijferig jaartal of het `-voorbeeld-`-suffix — overweeg een naam die de juridische rol beschrijft i.p.v. het voorbeeld (valkuil V1) |
 
-**Huidig rapport:** 67 bestanden ✅ · 0 blokkeerfouten · 3 L3-waarschuwingen (bewust geaccepteerd: `alsmede` en `rijksbelastingen` als operator/opsomming zonder zinvolle JAS-relaties; `art2-lid2` als definitie-lid zonder centrale JAS-klasse).
+**Huidig rapport:** 82 bestanden ✅ · 0 blokkeerfouten · 19 L3-waarschuwingen (overwegend bewust geaccepteerd: enkele scenario-specifieke begripsnamen ontleend aan concrete voorbeelden in de wettekst — `vervaldag-31-december`, `dagtekening-28-februari` e.d.; statusmeldingen op nog-niet-gereviseerde voorbeeldreeksen; `alsmede` en `rijksbelastingen` als operator/opsomming zonder zinvolle JAS-relaties; `art2-lid2` als definitie-lid zonder centrale JAS-klasse).
 
 ### Validatiepipeline
 
@@ -519,7 +521,7 @@ make webapp
 make ci
 ```
 
-Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie).
+Bij elke commit draait automatisch de **pre-commit hook** (L1/L2-validatie). Bij elke push draait de **pre-push hook** (100% testdekking vereist).
 Bij elke push naar `main` draait **GitHub Actions** (volledige validatie + alle exports + deploy webapp).
 
 ---
@@ -589,14 +591,15 @@ regels/                A3b — afleidingsregels (YAML)
 validaties/            A4b — voorbeeldreeksen (YAML)
   VR-{bwb-id}-*.yaml   testmatrices per afleidingsregel; is-voorspelling-juist=? tot na beoordeling
 
-schemas/               JSON Schema draft-07 (L1-validatie)
+schemas/               JSON Schema draft-07 (L1-validatie, 6 schemas: bron,
+                       annotatie-index, annotatie-lid, begrip, regel, voorbeeldreeks)
 kennisgraaf/           exportartifacts
   begrippen.ttl        RDF Turtle / SKOS-begrippenstelsel
   graph.gexf           graaf voor Gephi
   graph.graphml        graaf voor yEd / Cytoscape
 
 rapporten/             validatierapport (gegenereerd)
-scripts/               pre-commit hook (L1/L2-validatie bij commit)
+scripts/               pre-commit hook (L1/L2-validatie) + pre-push hook (100% coverage)
 
 sitegen/               statische webapp-generator (Python-package, `python -m sitegen`)
   cli.py               orchestratie: data laden → assets → pagina's
@@ -614,18 +617,19 @@ sitegen/               statische webapp-generator (Python-package, `python -m si
 
 webapp/                gegenereerde statische site (niet ingecheckt; deploy via CI)
 
-tools/                 Python-toolchain (9 scripts)
+tools/                 Python-toolchain (8 scripts)
   validate_note.py     L1–L3 validatie per projectbestand
   export_rdf.py        YAML/JSON → RDF Turtle (SKOS)
   export_graph.py      begrippen + relaties → GEXF + GraphML
   check_enrichment.py  detecteert begrippen met meerdere bronartikelen
-  jas_index_lib.py     gedeelde bibliotheek voor index-operaties
+  jas_index_lib.py     gedeelde I/O-helpers (load_yaml/load_json,
+                       slug_from_begrip_id), JAS-index, kern/contexten-laden
   query_rdf.py         SPARQL-query op gegenereerde TTL
   fetch_wettenbank.py  hulpscript: wetstekst ophalen via MCP
   extract_kruisrefs.py JCI URI-extractie uit annotaties
   queries/             SPARQL-querybestanden
 
-tests/                 Python-testsuite (697 tests, 100% coverage)
+tests/                 Python-testsuite (797 tests, 100% coverage)
   unit/                unit-tests per tool (validate_note, export_rdf, ...)
   integration/         integratie-tests (sitegen-pages, data-loading, pipeline)
   property/            property-based tests via Hypothesis (slugify, config)
@@ -657,14 +661,16 @@ pyproject.toml         pytest- en coverage-configuratie (fail_under = 100)
 | `make test-fast` | Alleen unit-tests, stopt bij eerste fout (-x) | Snelle check tijdens ontwikkeling |
 | `make test-e2e` | End-to-end tests via subprocess (traag) | Apart uitvoeren; niet in standaard CI |
 | `make test-cov` | Testsuite met coverage-rapport (100% vereist) | Na codewijzigingen |
+| `make lint` | ruff over `sitegen/` en `tools/` | Voor commit |
+| `make lint-fix` | ruff met `--fix` | Bij stijlfouten |
 | `make ci` | test + validate + export-rdf + export-graph + check-enrichment | Voor push |
-| `make install-hooks` | Installeert pre-commit hook | Eenmalig na clone |
+| `make install-hooks` | Installeert pre-commit en pre-push hooks | Eenmalig na clone |
 | `make lock` | Installeert + pinned dependencies | Bij nieuwe deps |
 | `make clean` | Verwijdert gegenereerde bestanden | Opruimen |
 
 ### Testsuite
 
-697 tests — unit, integratie en property-based (Hypothesis) — met **100% line coverage** op alle toolchain-code (`tools/` en `sitegen/`). De suite is geschreven door Claude Code. `make test-cov` draait automatisch als eerste stap van CI; de build faalt bij minder dan 100%.
+797 tests — unit, integratie en property-based (Hypothesis) — met **100% line coverage** op alle toolchain-code (`tools/` en `sitegen/`). De suite is geschreven door Claude Code. `make test-cov` draait automatisch als eerste stap van CI; de build faalt bij minder dan 100%. De **pre-push hook** voert dezelfde dekkingsmeting uit en blokkeert pushes lokaal bij ondergemiddelde dekking.
 
 ---
 
