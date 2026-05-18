@@ -82,9 +82,84 @@
     }
   ],
   "diagram": {
-    "centrale-klasse": null,
-    "knopen": [],
-    "kanten": []
+    "centrale-klasse": "brondefinitie",
+    "knopen": [
+      {
+        "id": "BD-RB",
+        "jas-klasse": "brondefinitie",
+        "label": "brondefinitie 'rijksbelastingen' (sub a)",
+        "begrip-id": "BWBR0004770/art2/lid2/rijksbelastingen"
+      },
+      {
+        "id": "OP-AL",
+        "jas-klasse": "operator",
+        "label": "operator 'alsmede' (EN-additief)",
+        "begrip-id": "BWBR0004770/art2/lid2/alsmede"
+      },
+      {
+        "id": "BD-WR",
+        "jas-klasse": "brondefinitie",
+        "label": "brondefinitie 'wettelijke regeling heffing' (sub b)",
+        "begrip-id": "BWBR0004770/art2/lid2/wettelijke-regeling-betreffende-de-heffing-van-rijksbelastingen"
+      },
+      {
+        "id": "VW-VZ",
+        "jas-klasse": "voorwaarde",
+        "label": "voorwaarde 'voor zover betrekking heffing'",
+        "begrip-id": "BWBR0004770/art2/lid2/voor-zover-betrekking-heffing-rijksbelastingen"
+      },
+      {
+        "id": "BD-BA",
+        "jas-klasse": "brondefinitie",
+        "label": "brondefinitie 'belastingaanslag' (sub c)",
+        "begrip-id": "BWBR0004770/art9/lid1/belastingaanslag"
+      },
+      {
+        "id": "OP-DW",
+        "jas-klasse": "operator",
+        "label": "operator 'dan wel' (OF-alternatief)",
+        "begrip-id": "BWBR0024096/par9-5/dan-wel"
+      },
+      {
+        "id": "BD-AB",
+        "jas-klasse": "brondefinitie",
+        "label": "brondefinitie 'aanslagbiljet' (sub d)",
+        "begrip-id": "BWBR0004770/art2/lid2/aanslagbiljet"
+      },
+      {
+        "id": "BD-IR",
+        "jas-klasse": "brondefinitie",
+        "label": "brondefinitie 'invorderen rijksbelastingen' (sub e)",
+        "begrip-id": "BWBR0004770/art2/lid2/invorderen-van-rijksbelastingen"
+      }
+    ],
+    "kanten": [
+      {
+        "van": "BD-RB",
+        "naar": "OP-AL",
+        "label": "verbindt opsomming"
+      },
+      {
+        "van": "BD-WR",
+        "naar": "VW-VZ",
+        "label": "beperkt door"
+      },
+      {
+        "van": "BD-BA",
+        "naar": "OP-DW",
+        "label": "verbindt alternatieven"
+      },
+      {
+        "van": "BD-AB",
+        "naar": "BD-BA",
+        "label": "kennisgeving van"
+      },
+      {
+        "van": "BD-IR",
+        "naar": "BD-RB",
+        "label": "object van"
+      }
+    ]
   },
   "kruisreferenties": [
     {
