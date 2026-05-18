@@ -20,8 +20,15 @@ from sitegen.mermaid import diagram_tekst_fallback, diagram_to_mermaid
 
 def test_gen_nav_bevat_alle_links():
     html = gen_nav()
-    for label in ("Dashboard", "Begrippen", "Annotaties", "Regels", "SPARQL", "Zoeken"):
+    for label in ("Dashboard", "Begrippen", "Annotaties", "Annotatie starten", "Regels", "SPARQL", "Zoeken"):
         assert label in html
+
+
+def test_gen_nav_active_class_voor_annotatie_starten():
+    html = gen_nav(active="annotatie starten")
+    assert 'aria-current="page"' in html
+    assert "Annotatie starten" in html
+    assert "start_annotatie.html" in html
 
 
 def test_gen_nav_active_class_gezet():

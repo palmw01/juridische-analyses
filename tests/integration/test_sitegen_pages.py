@@ -7,6 +7,7 @@ import pytest
 from sitegen.pages.index import gen_index, gen_404
 from sitegen.pages.search import gen_search
 from sitegen.pages.sparql import gen_sparql
+from sitegen.pages.start_annotatie import gen_start_annotatie
 from sitegen.pages.regels import gen_regels
 from sitegen.pages.artikel_indices import gen_artikel_indices
 from sitegen.pages.begrippen import gen_begrippen
@@ -628,3 +629,72 @@ def test_gen_annotaties_indices_op_lijstpagina(tmp_path):
     gen_annotaties(tmp_path, [], [], [], indices=[idx])
     content = (tmp_path / "annotaties.html").read_text()
     assert "artikeloverzicht" in content
+
+
+# ---------------------------------------------------------------------------
+# gen_start_annotatie
+# ---------------------------------------------------------------------------
+
+def test_gen_start_annotatie_maakt_bestand_aan(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    assert (tmp_path / "start_annotatie.html").exists()
+
+
+def test_gen_start_annotatie_bevat_form_en_alle_bwb_opties(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    assert 'id="annotatieForm"' in content
+    for bwb in ("BWBR0004770", "BWBR0002320", "BWBR0005537", "BWBR0004772", "BWBR0024096"):
+        assert bwb in content
+    assert "issues/new" in content
+    assert "annotatie-verzoek" in content
+
+
+def test_gen_start_annotatie_bevat_alle_flows(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    assert 'value="index"' in content
+    assert 'value="lid"' in content
+    assert 'value="sectie"' in content
+
+
+def test_gen_start_annotatie_datalist_uit_indices_en_annotaties(tmp_path):
+    idx = artikel_index(artikel="9")
+    ann = annotatie(ann_id="BWBR0004770/art9/lid1", artikel="9", lid="1")
+    extra_ann = annotatie(ann_id="BWBR0004770/art2/lid2", artikel="2", lid="2")
+    gen_start_annotatie(tmp_path, [idx], [ann, extra_ann])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    # Het JS-object met artikelen-per-wet zit als JSON in de pagina.
+    assert '"BWBR0004770"' in content
+    assert '"2"' in content and '"9"' in content
+
+
+def test_gen_start_annotatie_leeg_geen_fout(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    # Het JSON-object voor artikelen-per-wet is leeg ({}) maar de pagina staat er.
+    assert "ARTIKELEN_PER_WET = {}" in content
+
+
+def test_gen_start_annotatie_bevat_statuswidget(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    assert "api.github.com/repos/palmw01/juridische-analyses/issues" in content
+    assert 'id="recentRequests"' in content
+
+
+def test_gen_start_annotatie_bevat_uitleg_en_open_knop(tmp_path):
+    gen_start_annotatie(tmp_path, [], [])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    assert "Hoe werkt dit?" in content
+    assert 'id="openIssueBtn"' in content
+    assert 'rel="noopener noreferrer"' in content
+
+
+def test_gen_start_annotatie_negeert_bronnen_zonder_bwb_of_artikel(tmp_path):
+    # Zorg dat de filterbranches in _bestaande_artikelen geraakt worden.
+    idx = artikel_index(bwb_id="", artikel="9")
+    ann = annotatie(bwb_id="BWBR0004770", artikel="")
+    gen_start_annotatie(tmp_path, [idx], [ann])
+    content = (tmp_path / "start_annotatie.html").read_text()
+    assert "ARTIKELEN_PER_WET = {}" in content

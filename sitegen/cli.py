@@ -14,6 +14,7 @@ from sitegen.pages.kwaliteit import gen_kwaliteit
 from sitegen.pages.regels import gen_regels
 from sitegen.pages.search import gen_search
 from sitegen.pages.sparql import gen_sparql
+from sitegen.pages.start_annotatie import gen_start_annotatie
 
 
 def main():
@@ -52,6 +53,7 @@ def main():
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
     gen_sparql(out)
+    gen_start_annotatie(out, artikel_indices, annotaties)
     assets.gen_data_files(out, begrippen, annotaties, regels, artikel_indices, project_root=project_dir)
     assets.gen_seo_files(out)
 
