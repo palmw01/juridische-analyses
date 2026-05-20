@@ -9,6 +9,10 @@
 
 ---
 
+![Claude Code (Opus 4.7) met het /annoteer-commando in deze projectmap](docs/claude-cli.png)
+
+---
+
 ## Wat is dit?
 
 Dit project is een **proof-of-concept voor AI-ondersteunde wetsanalyse** binnen het domein van de invordering van rijksbelastingen. Het laat zien hoe een groot taalmodel (Claude Code) de meest arbeidsintensieve stappen van de Wetsanalyse-methodiek kan uitvoeren: het systematisch annoteren van wettekst en het afleiden van formele begrippen en regels.
