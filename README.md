@@ -124,6 +124,8 @@ make webapp
 
 Bij elke commit draait de pre-commit hook met validatie. Bij push naar `main` draaien GitHub Actions voor validatie, exports en publicatie van de webapp.
 
+Zie [docs/handleiding.md](./docs/handleiding.md) voor de volledige workflow met Claude Code-commando's.
+
 ## Belangrijkste mappen
 
 ```text
