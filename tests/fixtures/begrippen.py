@@ -34,7 +34,10 @@ def maak_begrip(**overrides) -> dict:
             "leidt-tot": [],
         },
         "aliases": [],
-        "voorbeelden": [],
+        "voorbeelden": [
+            {"stelling": "Jan is belastingschuldige", "waar": True, "toelichting": "happy"},
+            {"stelling": "De BV is belastingschuldige", "waar": True, "toelichting": "grensgeval"},
+        ],
         "kenmerken": [],
     }
     base.update(overrides)

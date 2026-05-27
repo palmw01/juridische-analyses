@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "voorbeeldreeks",
   "title": "Voorbeeldreeks",
-  "description": "A4b: gestructureerde testmatrix voor een afleidingsregel",
+  "description": "A4b: gestructureerde testmatrix voor een afleidingsregel. Veldenset gebaseerd op Handleiding Wetsanalyse §3.6.2b (testpatroon happy/grens/negatief). status-enum (concept/gereviseerd/gevalideerd) en `?`-sentinel in is-voorspelling-juist zijn projectconventies — zie kaders/projectconventies.md.",
   "type": "object",
   "required": [
     "voorbeeldreeks-id",
@@ -48,6 +48,17 @@
         "type": "object",
         "required": ["label", "invoer", "is-invoer-juist", "verwachte-uitvoer", "is-voorspelling-juist"],
         "additionalProperties": false,
+        "allOf": [
+          {
+            "$comment": "Projectconventie #19: ongeldige invoer (is-invoer-juist=nee) krijgt automatisch is-voorspelling-juist=nvt — er valt niets te toetsen.",
+            "if": { "properties": { "is-invoer-juist": { "const": "nee" } } },
+            "then": {
+              "properties": {
+                "is-voorspelling-juist": { "const": "nvt" }
+              }
+            }
+          }
+        ],
         "properties": {
           "label": {
             "type": "string",

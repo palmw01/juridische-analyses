@@ -2,10 +2,25 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "annotatie-lid",
   "title": "Annotatie-lid",
-  "description": "JAS-annotatie van één lid van een wetsartikel",
+  "description": "JAS-annotatie van één lid van een wetsartikel. jas-klasse-enum (16 waarden) en interpretatiemethode-enum (4 waarden) zijn canoniek (JAS v1.0.10 + Handleiding §3.4 + §3.5.3). diagram-structuur en delegatiestructuur-formaat zijn projectconventies — zie kaders/projectconventies.md.",
   "type": "object",
   "required": ["annotatie-id", "bwb-id", "wet", "artikel", "lid", "peildatum", "structuurpositie", "wetstekst", "annotatierijen", "kruisreferenties"],
   "additionalProperties": false,
+  "definitions": {
+    "delegatiestructuur-entry": {
+      "$comment": "Gedeelde definitie met annotatie-index.schema.json (zelfde structuur). Wijzigingen moeten in beide schema's worden doorgevoerd.",
+      "type": "object",
+      "required": ["omschrijving", "vindplaats", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "omschrijving": { "type": "string", "minLength": 1 },
+        "vindplaats": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
+        "invulling": { "type": ["string", "null"] },
+        "vindplaats-invulling": { "type": ["string", "null"] }
+      }
+    }
+  },
   "properties": {
     "annotatie-id": {
       "type": "string",
@@ -95,18 +110,7 @@
     },
     "delegatiestructuur": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["omschrijving", "vindplaats", "type"],
-        "additionalProperties": false,
-        "properties": {
-          "omschrijving": { "type": "string", "minLength": 1 },
-          "vindplaats": { "type": "string", "minLength": 1 },
-          "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
-          "invulling": { "type": ["string", "null"] },
-          "vindplaats-invulling": { "type": ["string", "null"] }
-        }
-      }
+      "items": { "$ref": "#/definitions/delegatiestructuur-entry" }
     }
   }
 }

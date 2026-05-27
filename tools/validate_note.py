@@ -298,6 +298,16 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
             "[L2] status is 'gevalideerd' maar definitie.kern is leeg — vul kern in vóór validatie"
         )
 
+    # Projectconventie #5: soort-id en identificatiebegrip moeten gelijk zijn (synoniem)
+    if "soort-id" in data:
+        soort_id = data.get("soort-id")
+        ident_b = data.get("identificatiebegrip")
+        if isinstance(soort_id, bool) and isinstance(ident_b, bool) and soort_id != ident_b:
+            errors.append(
+                f"[L2] soort-id ({soort_id}) en identificatiebegrip ({ident_b}) moeten dezelfde "
+                f"waarde hebben — zie kaders/projectconventies.md #5"
+            )
+
     # status == "vervallen" → vervangen-door niet null
     if status == "vervallen" and data.get("vervangen-door") is None:
         errors.append(

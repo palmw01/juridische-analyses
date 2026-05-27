@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "bron",
   "title": "Bronbestand (bronnen/)",
-  "description": "Wettekst van één artikel of paragraaf, opgehaald via wettenbank-MCP en genormaliseerd opgeslagen in bronnen/.",
+  "description": "Wettekst van één artikel of paragraaf, opgehaald via wettenbank-MCP en genormaliseerd opgeslagen in bronnen/. Veldenset is projectconventie: normalisatie van de wettenbank-MCP-respons (bwbId → bwb-id, toevoeging opgehaald-op). De wetstekst zelf is canonieke bron — zie verder kaders/projectconventies.md.",
   "type": "object",
   "required": [
     "bwb-id",

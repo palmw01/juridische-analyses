@@ -301,6 +301,26 @@ def test_begrip_status_gevalideerd_lege_kern_geeft_fout(tmp_path):
     assert any("gevalideerd" in e and "kern" in e for e in errors)
 
 
+def test_begrip_soort_id_en_identificatiebegrip_ongelijk_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        markeringen=[], **{"definitie-gebaseerd-op": [], "soort-id": True, "identificatiebegrip": False},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("soort-id" in e and "identificatiebegrip" in e for e in errors)
+
+
+def test_begrip_soort_id_en_identificatiebegrip_gelijk_geen_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(
+        markeringen=[], **{"definitie-gebaseerd-op": [], "soort-id": True, "identificatiebegrip": True},
+    )
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert not any("soort-id" in e and "identificatiebegrip" in e for e in errors)
+
+
 def test_begrip_status_vervallen_zonder_vervangen_door_geeft_fout(tmp_path):
     project = leeg_project(tmp_path)
     data = maak_begrip(

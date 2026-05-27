@@ -66,10 +66,10 @@ De gebruiker beoordeelt de `?`-velden. Daarna `status: gereviseerd` en na teamva
 
 > Een bestand met status `gereviseerd` of `gevalideerd` mag geen `?`-waarden bevatten. Bij correctie die `?` introduceert: status valt terug naar `concept`.
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
-- ≥ 3 kolommen (schema-afgedwongen).
-- Bij Beperkingsregel: kolom voor "Op de grens" én "Boven de grens" verplicht.
+Structurele vereisten staan in `schemas/voorbeeldreeks.schema.json` (≥ 3 kolommen; `is-invoer-juist=nee → is-voorspelling-juist=nvt`; enums; status-overgang). Procesregels die het schema niet kan afdwingen:
+
+- Bij Beperkingsregel: kolom voor "Op de grens" én "Boven de grens" verplicht (zie `kaders/voorbeeldreeks.md §Testpatronen`).
 - Bij Specialisatieregel: kolom met deelgeval van toepassing én een kolom met hoofdregel van toepassing.
-- Status start altijd op `concept`.
-- Geen herhaling van wat al in `kaders/voorbeeldreeks.md` staat — verwijs daarheen.
+- Status start altijd op `concept`; statusovergang loopt via reviewer/team.

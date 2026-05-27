@@ -83,7 +83,7 @@ Schema dwingt `minItems: 3` af.
 | `enumeratie` | Concrete enum-waarde |
 | Overig | Vrije tekstbeschrijving |
 
-## Algoritmisch bepaalbaar — drempelregel
+## Algoritmisch bepaalbaar — wanneer een concrete `verwachte-uitvoer` toelaatbaar is
 
 Vul `verwachte-uitvoer` met een concrete waarde (en zet `is-voorspelling-juist: ?` of `ja` indien wiskundig zeker) als:
 

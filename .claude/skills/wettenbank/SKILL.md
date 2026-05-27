@@ -92,18 +92,7 @@ Lees `$CLAUDE_SKILL_DIR/verwijzingen.md` volledig. Voer het protocol uit op alle
 2. `wettenbank_artikel(bwbId=<doel_bwbId>, artikel=<doel_artikel>)` voor elk uniek extern paar waarbij `doel_artikel` niet null is.
 3. `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` voor omgekeerde kruisreferenties. Voer daarna het verificatieprotocol uit (zie `verwijzingen.md` Omgekeerde kruisreferenties).
 
-Sla na deduplicatie alle unieke kruisreferentie-records op als `bronnen/[B]/art[A].kruisrefs.json`:
-```json
-[
-  {
-    "doel-bwb-id": "...",
-    "doel-artikel": "...",
-    "richting": "forward|backward|intern",
-    "confidence": 0.9,
-    "ruwe-tekst": "..."
-  }
-]
-```
+Sla na deduplicatie alle unieke kruisreferentie-records op als `bronnen/[B]/art[A].kruisrefs.json`. Het kruisreferentie-formaat (`doel-bwb-id`, `doel-artikel`, optioneel `doel-lid`, `richting`, `confidence`, `ruwe-tekst`) is gedefinieerd in `schemas/annotatie-lid.schema.json` onder `kruisreferenties[]` — die wordt door `annoteer-classificeer` gemigreerd naar de annotatie-lid-JSON. Bestaande `.kruisrefs.json`-bestanden in `bronnen/` volgen hetzelfde formaat.
 
 ---
 

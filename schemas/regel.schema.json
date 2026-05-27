@@ -2,10 +2,22 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "regel",
   "title": "Afleidingsregel",
-  "description": "Formele afleidingsregel in RegelSpraak-oriëntatie",
+  "description": "Formele afleidingsregel in RegelSpraak-oriëntatie. Veldenset gebaseerd op Handleiding Wetsanalyse §3.5.2b en §3.6 (vier regeltypen) + Leidraad §3.8 productentabel #15. soort-enum is canoniek (4 typen); tussenresultaat-vlag en prioriteit-veld zijn projectconventies — zie kaders/projectconventies.md.",
   "type": "object",
   "required": ["regel-id", "naam", "soort", "bwb-id", "artikel", "lid", "peildatum", "geldigheid-van", "annotatie-id", "rechtsfeit-id", "invoer", "uitvoer", "operators", "formele-regel", "toelichting", "voorbeeldreeksen", "tussenresultaat"],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Canon (HW §3.5.2b): een Specialisatieregel verwijst altijd naar de hoofdregel die zij overschrijft. gespecialiseerd-regel-id is daarom verplicht en niet-null bij soort=Specialisatieregel.",
+      "if": { "properties": { "soort": { "const": "Specialisatieregel" } } },
+      "then": {
+        "required": ["gespecialiseerd-regel-id"],
+        "properties": {
+          "gespecialiseerd-regel-id": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  ],
   "properties": {
     "regel-id": {
       "type": "string",

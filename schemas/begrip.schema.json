@@ -2,10 +2,48 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "begrip",
   "title": "Begrip",
-  "description": "SKOS-compatibel begrip, afgeleid van JAS-annotatie",
+  "description": "SKOS-compatibel begrip, afgeleid van JAS-annotatie. Veldenset gebaseerd op Handleiding Wetsanalyse §3.5.2a (begripsnaam + definitie kern/contexten) en JAS v1.0.10 (jas-klasse-enum). Status-, soort-, herkomst- en bijdrage-enums zijn projectconventies — zie kaders/projectconventies.md.",
   "type": "object",
   "required": ["begrip-id", "begripsnaam", "soort", "herkomst", "status", "definitie", "definitie-versie", "definitie-gebaseerd-op", "markeringen", "geldigheid-van", "relaties", "identificatiebegrip", "jas-klasse", "toelichting-klasse"],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Projectconventie #7: gevalideerde begrippen moeten een ingevulde kern hebben (lege kern is alleen toegestaan in stub-fase = status concept).",
+      "if": { "properties": { "status": { "const": "gevalideerd" } } },
+      "then": {
+        "properties": {
+          "definitie": {
+            "properties": { "kern": { "minLength": 1 } }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "Projectconventie: bij herkomst=afgeleid moet precies één van afleidingsregel-id of uitvoer-van-regel-id niet-null zijn. afleidingsregel-id wordt gebruikt als jas-klasse=afleidingsregel; anders uitvoer-van-regel-id.",
+      "if": { "properties": { "herkomst": { "const": "afgeleid" } } },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "afleidingsregel-id": { "type": "string", "minLength": 1 },
+              "uitvoer-van-regel-id": { "type": "null" }
+            },
+            "required": ["afleidingsregel-id"]
+          },
+          {
+            "properties": {
+              "afleidingsregel-id": { "type": "null" },
+              "uitvoer-van-regel-id": { "type": "string", "minLength": 1 }
+            },
+            "required": ["uitvoer-van-regel-id"]
+          }
+        ]
+      }
+    },
+    {
+      "$comment": "Projectconventie #5: soort-id en identificatiebegrip moeten dezelfde booleanwaarde hebben. Deze gelijkheid wordt door validate_note.py (L2) gecontroleerd; het schema dwingt het niet af om duplicaatcomplexiteit te vermijden."
+    }
+  ],
   "properties": {
     "begrip-id": {
       "type": "string",
@@ -166,7 +204,8 @@
     "tussenresultaat": { "type": "boolean", "default": false },
     "voorbeelden": {
       "type": "array",
-      "description": "Concrete stellingen die de grenzen van het begrip toetsen (minimaal 2, waarvan minstens 1 grensgeval)",
+      "description": "Concrete stellingen die de grenzen van het begrip toetsen (minimaal 2, waarvan minstens 1 grensgeval) — zie kaders/definitie.md §Concrete voorbeelden.",
+      "minItems": 2,
       "items": {
         "type": "object",
         "required": ["stelling", "waar"],

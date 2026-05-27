@@ -151,8 +151,8 @@ De projectbestanden worden op drie niveaus gecontroleerd:
 
 | Laag | Controle | Blokkerend |
 |---|---|---|
-| L1 | JSON Schema-conformiteit | Ja |
-| L2 | Referenties, statussen, diagrammen en regelkoppelingen | Ja |
+| L1 | JSON Schema-conformiteit (incl. conditionele `if/then`-regels op status, herkomst, regelsoort en testkolommen) | Ja |
+| L2 | Referenties, statussen, diagrammen, regelkoppelingen en synonieme veldkoppelingen | Ja |
 | L3 | Kwaliteitswaarschuwingen en review-signalen | Nee |
 
 Het volledige rapport staat in [rapporten/validatie-rapport.md](./rapporten/validatie-rapport.md). De uitgebreide uitleg van de validatielaag staat in [docs/validatie.md](./docs/validatie.md).
@@ -176,4 +176,4 @@ Een uitleg van JAS, SKOS, RDF en RegelSpraak staat in [docs/model.md](./docs/mod
 
 Deze werkruimte implementeert de Wetsanalyse-methodiek van het Ministerie van BZK, gebaseerd op het Juridisch Analyseschema (JAS) v1.0.10. A2, A3 en A4b worden door AI ondersteund. Het juridisch oordeel over voorbeeldreeksen en de formele validatie in teamverband blijven buiten de AI-scope.
 
-Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [Canon-ankers](./.claude/skills/kaders/canon-ankers.md) · [Projectconventies](./.claude/skills/kaders/projectconventies.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)

@@ -2,10 +2,25 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "annotatie-index",
   "title": "Annotatie-index",
-  "description": "Structuuranker voor een wetsartikel; verwijst naar lid-annotaties",
+  "description": "Structuuranker voor een wetsartikel; verwijst naar lid-annotaties. Gebaseerd op Handleiding §3.4 (artikelstructuur). delegatiestructuur-formaat is gedeeld met annotatie-lid (projectconventie) — zie kaders/projectconventies.md.",
   "type": "object",
   "required": ["artikel-id", "bwb-id", "wet", "artikel", "peildatum", "structuurpositie", "leden-annotaties", "kruisreferenties"],
   "additionalProperties": false,
+  "definitions": {
+    "delegatiestructuur-entry": {
+      "$comment": "Gedeelde definitie met annotatie-lid.schema.json (zelfde structuur). Wijzigingen moeten in beide schema's worden doorgevoerd.",
+      "type": "object",
+      "required": ["omschrijving", "vindplaats", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "omschrijving": { "type": "string", "minLength": 1 },
+        "vindplaats": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
+        "invulling": { "type": ["string", "null"] },
+        "vindplaats-invulling": { "type": ["string", "null"] }
+      }
+    }
+  },
   "properties": {
     "artikel-id": {
       "type": "string",
@@ -33,18 +48,7 @@
     "delegatiestructuur": {
       "type": "array",
       "description": "Delegatiebevoegdheden op artikelniveau (zelfde formaat als annotatie-lid)",
-      "items": {
-        "type": "object",
-        "required": ["omschrijving", "vindplaats", "type"],
-        "additionalProperties": false,
-        "properties": {
-          "omschrijving": { "type": "string", "minLength": 1 },
-          "vindplaats": { "type": "string", "minLength": 1 },
-          "type": { "type": "string", "enum": ["Verplicht", "Facultatief"] },
-          "invulling": { "type": ["string", "null"] },
-          "vindplaats-invulling": { "type": ["string", "null"] }
-        }
-      }
+      "items": { "$ref": "#/definitions/delegatiestructuur-entry" }
     }
   }
 }

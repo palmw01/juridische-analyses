@@ -61,8 +61,8 @@ Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.j
 
 ### Validatielagen
 
-- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`, `scenario`). Patronen voor `begrip-id`, `regel-id` (AR-…), `voorbeeldreeks-id` (VR-…) en `scenario-id` (scen-…) zijn structureel afgedwongen; voorbeeldreeksen moeten ten minste 3 kolommen bevatten. `scenario-refs` en `bronnen-secundair` zijn optionele velden voor A3c/A3d. Blokkerend.
-- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (annotatie → begrip → regel → voorbeeldreeks; `scenario-refs[].scenario-id` → `scenarios/`), statusconsistentie, diagramintegriteit, homoniem-conflicten. `gespecialiseerd-regel-id` is voor `soort: Specialisatieregel` verplicht en moet naar een bestaand regel-bestand verwijzen. Blokkerend.
+- **L1 — JSON Schema** (`schemas/`, Draft-07): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`, `scenario`). Patronen voor `begrip-id`, `regel-id` (AR-…), `voorbeeldreeks-id` (VR-…) en `scenario-id` (scen-…) zijn structureel afgedwongen. Conditionele regels via `if/then` en `oneOf`: `status=gevalideerd → definitie.kern niet leeg`; `herkomst=afgeleid → precies één van afleidingsregel-id/uitvoer-van-regel-id`; `soort=Specialisatieregel → gespecialiseerd-regel-id verplicht`; `is-invoer-juist=nee → is-voorspelling-juist=nvt`. `voorbeelden` heeft `minItems: 2`; voorbeeldreeksen hebben `minItems: 3` kolommen. Gedeelde `delegatiestructuur`-definitie via `$ref` in annotatie-index en annotatie-lid. `scenario-refs` en `bronnen-secundair` zijn optionele velden voor A3c/A3d. Blokkerend.
+- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (annotatie → begrip → regel → voorbeeldreeks; `scenario-refs[].scenario-id` → `scenarios/`), statusconsistentie, diagramintegriteit, homoniem-conflicten, `soort-id == identificatiebegrip`-koppeling. Cross-file checks die niet in JSON Schema afdwingbaar zijn. Blokkerend.
 - **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen, scenario-specifieke begripsnamen (maandnaam/jaartal/`-voorbeeld-`), ontbrekende `scenario-refs` bij rechtsbetrekking/rechtsfeit (A3c-volledigheid). Adviserend.
 
 De **pre-commit hook** (`scripts/pre-commit`) blokkeert commits met L1/L2-fouten in gestagede bestanden en regenereert `rapporten/validatie-rapport.md`. De **pre-push hook** (`scripts/pre-push`) blokkeert pushes wanneer testdekking < 100% is. Installeer beide met `make install-hooks`.
@@ -249,7 +249,9 @@ Conflictbeleid en gedeelde workflow: `.claude/skills/KADERS.md`.
 | `.claude/skills/kaders/definitie.md` | Kern + contexten, substitutietest, homoniem-splitsing (Handleiding §3.5.2a) |
 | `.claude/skills/kaders/relaties.md` | is-een / heeft / leidt-tot — forward-only, kardinaliteit |
 | `.claude/skills/kaders/regeltypen.md` | 4 regeltypen + beslisboom + taalpatronen + tussenresultaten + RegelSpraak (Handleiding §3.5.2b, §3.6) |
-| `.claude/skills/kaders/voorbeeldreeks.md` | Testpatronen per regeltype, drempelregel `?`, statusovergangen (Handleiding §3.6.2b) |
+| `.claude/skills/kaders/voorbeeldreeks.md` | Testpatronen per regeltype, `?`-sentinel voor open interpretatie, statusovergangen (Handleiding §3.6.2b) |
 | `.claude/skills/kaders/interpretatie.md` | 4 interpretatiemethoden (Handleiding §3.5.3); rol jurisprudentie |
+| `.claude/skills/kaders/canon-ankers.md` | Herleidbaarheidsmatrix: elke kader-/schema-uitspraak gekoppeld aan canon-paragraaf of projectconventie |
+| `.claude/skills/kaders/projectconventies.md` | Bundelt alle projectconventies (~23 items) met canon-anker en rationale; centrale ingang voor wijzigingen |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |

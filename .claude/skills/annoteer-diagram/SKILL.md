@@ -45,4 +45,4 @@ Zie `kaders/diagramregels.md` §Voorbeeld voor een complete Mermaid-uitvoer (geg
 
 - De knoop-id's zijn korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
 - Geen losse variabelen of parameters zonder verbinding met een Voorwaarde of Afleidingsregel.
-- Bij meerdere rechtsbetrekkingen: meerdere genummerde diagrammen toevoegen aan een `diagrammen[]`-veld (alternatief: schrijf het hoofd-diagram en noteer in `signalering` op de annotatierij dat er een extra diagram is).
+- Het schema laat één `diagram`-object per lid toe (`schemas/annotatie-lid.schema.json`). Bij meerdere rechtsbetrekkingen: kies de meest centrale en noteer in `signalering` op de overige rechtsbetrekking-annotatierijen dat er aanvullende structuur is. Verwijdert de noodzaak voor een `diagrammen[]`-array die het schema niet kent.

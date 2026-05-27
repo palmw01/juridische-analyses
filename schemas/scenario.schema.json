@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "scenario",
   "title": "Juridisch scenario",
-  "description": "Een juridisch scenario uit Activiteit 1 (Handleiding §3.3): één te doorlopen pad van één burger of bedrijf. Wordt niet door de AI gegenereerd; dit schema dient om handmatig opgestelde scenario's te valideren en vanuit begrippen/regels te referentieren.",
+  "description": "Een juridisch scenario uit Activiteit 1 (Handleiding §3.3 + Leidraad §2.4): één te doorlopen pad van één burger of bedrijf. Wordt niet door de AI gegenereerd; dit schema dient om handmatig opgestelde scenario's te valideren en vanuit begrippen/regels te referentieren. scenario-id-pattern (scen-…) is projectconventie — zie kaders/projectconventies.md.",
   "type": "object",
   "required": ["scenario-id", "naam", "soort", "rechtssubject", "stappen"],
   "additionalProperties": false,

@@ -41,40 +41,17 @@ Zie `kaders/definitie.md` voor de volledige normen. Kort:
 
 ## Velden bijwerken
 
-```yaml
-soort: [monetair-bedrag | percentage | tijdsduur | datum | booleaans | tekst | enumeratie | entiteit]
-soort-id: false           # true als identificatiebegrip (BSN, aanslagnummer)
-herkomst: [direct | afgeleid]
-definitie:
-  kern: "[substitueerbare tekst zonder eindpunt]"
-  contexten: []           # of array van {markering-id, bijdrage, tekst, toelichting?}
-definitie-versie: 1       # verhogen bij kernwijziging
-definitie-gebaseerd-op:
-- m-001                   # uitsluitend kern-markeringen
-aliases:
-- "[juridisch synoniem]"  # of leeg
-identificatiebegrip: false  # altijd gelijk aan soort-id
-afleidingsregel-id: null        # alleen bij jas-klasse: afleidingsregel (zie begrip-regel)
-uitvoer-van-regel-id: null      # bij herkomst: afgeleid + jas-klasse ≠ afleidingsregel
-tussenresultaat: false
-relaties:
-  is-een: [...]
-  heeft:
-  - begrip-id: ...
-    kardinaliteit: "1:1"
-  leidt-tot:
-  - begrip-id: ...
-    relatie-soort: causaal
-    kardinaliteit: null
-voorbeelden:
-  - stelling: "..."
-    waar: true
-    toelichting: "..."
-kenmerken:
-  - "..."
-```
+De canonieke veldenset, enums en conditionele regels staan in `schemas/begrip.schema.json` — zie ook `begrippen/belastingaanslag.yaml` als levend voorbeeld. De skill vult vanuit `markeringen[]`:
 
-Voorbeelden: minimaal 2 stellingen waarvan ≥ 1 grensgeval. Zie `kaders/definitie.md §Concrete voorbeelden`.
+- `definitie.kern` (vereist; geen punt aan einde)
+- `definitie.contexten[]` (optioneel — `bijdrage`-beslisboom in `kaders/definitie.md §Verrijkingsprotocol`)
+- `definitie-versie` (verhogen bij kernwijziging)
+- `definitie-gebaseerd-op` (uitsluitend kern-markeringen)
+- `soort` + `soort-id` (gelijk aan `identificatiebegrip`)
+- `herkomst` + (bij `afgeleid`) precies één van `afleidingsregel-id` of `uitvoer-van-regel-id`
+- `aliases`, `tussenresultaat`, `kenmerken[]`
+- `relaties.{is-een, heeft, leidt-tot}` — formaten in `schemas/begrip.schema.json` + `kaders/relaties.md`
+- `voorbeelden[]` — minItems: 2 (schema), waarvan ≥ 1 grensgeval
 
 Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
 
@@ -96,12 +73,13 @@ tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml
 
 L1/L2-fouten herstellen vóór doorgaan; L3 rapporteren.
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
-- Definitie uitsluitend gebaseerd op `markeringen[].tekst` — niet uit eigen kennis of wetstekst.
-- Substitueerbaar in een zin.
-- Geen punt aan het einde van de kern.
-- Minimaal één grensgeval bij `voorbeelden`.
-- Bij `herkomst: afgeleid` is minimaal één `leidt-tot`-relatie verplicht (of een `heeft`-relatie naar invoerbegrippen).
+Procesregels die niet in `schemas/begrip.schema.json` of `kaders/definitie.md` zijn vastgelegd:
+
+- Definitie uitsluitend gebaseerd op `markeringen[].tekst` — niet uit eigen kennis of wetstekst (projectconventie #1).
+- Substitueerbaar in een zin (zie `kaders/definitie.md §Kern`).
 - `status` blijft `concept` — statuswijziging is A4-taak.
 - `markeringen[].bevestigd` blijft `false` tenzij door een domeinexpert juridisch gevalideerd.
+
+Structurele vereisten (enums, minItems, if-then) worden door het schema afgedwongen — herhaal ze hier niet.
