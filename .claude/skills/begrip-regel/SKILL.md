@@ -30,7 +30,7 @@ Begrip-YAML `begrippen/[slug].yaml` met:
    - **`invoer`**: lijst van begrip-id-strings (JAS-klasse Variabele, Parameter, Tijdsaanduiding).
    - **`uitvoer`**: één begrip-id-string (zelden meerdere — bij meerdere uitvoerbegrippen: maak aparte regels).
    - **`operators`**: lijst uit `EN/OF/NIET/plus/min/maal/gedeeld-door/kleiner-dan/groter-dan/gelijk-aan/ten-hoogste/ten-minste`.
-   - **`formele-regel`**: volledige tekst conform taalpatroon (zie `kaders/regeltypen.md §Taalpatronen`).
+   - **`formele-regel`**: volledige tekst conform taalpatroon (zie `kaders/regeltypen.md §Taalpatronen`). Scan vóór het invullen alle overige leden van hetzelfde artikel op bepalingen die de werking van deze regel beperken, uitsluiten of modificeren (bijv. uitsluiting van een termijnenwet, afwijkende berekeningsgrondslag). Verwerk bevindingen in `formele-regel` en/of `toelichting`.
    - **`toelichting`**: tracering naar artikel + lid + zinsdeel + interpretatiemotivering.
    - **`voorbeeldreeksen`**: minimaal 2 illustratieve combinaties incl. ≥ 1 grensgeval. Dit zijn beknopte voorbeelden (kort beschreven); de volledige testmatrix komt in A4b (`valideer`).
    - **`tussenresultaat`**: `true` als het uitvoerbegrip uitsluitend als invoer voor een andere regel dient.

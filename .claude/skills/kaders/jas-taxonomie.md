@@ -2,6 +2,7 @@
 
 > **Bron:** JAS v1.0.10 (https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10) + Handleiding Wetsanalyse §3.4 (p. 31-35). Gebruikt door `annoteer-classificeer`, `annoteer-diagram`, `begrip-definitie`.
 > **Status enums:** identiek aan `schemas/annotatie-lid.schema.json` en `schemas/begrip.schema.json` (`jas-klasse`-enum). De schema's zijn canoniek; deze tekst geeft de betekenis en herkenningsvragen.
+> **⚠ Gesloten enum:** gebruik uitsluitend de 16 enumwaarden hieronder. Bedenk nooit een nieuwe klassennaam. Bij twijfel: raadpleeg de boomstructuur.
 
 ---
 

@@ -36,6 +36,7 @@ Markeert wetsformuleringen in één lid en initialiseert het annotatie-lid-besta
    - lidwoord meenemen, verwijzing meenemen
    - juiste markeer-omvang per klasse (variabele: smal; voorwaarde: zin/zinsdeel; afleidingsregel: hele als-dan)
    - markeringen mogen overlappen — één rij per klasse
+   - **Actieve check:** is het lid als geheel een als-dan-constructie (rechtsgevolg dat intreedt zodra een voorwaarde is vervuld)? Zo ja → voeg altijd een afleidingsregel-rij toe voor de volledige zin incl. punt (conform `kaders/markeerregels.md` tabel rij Afleidingsregel).
 6. Voor elke markering: roep `stub_annotatierij(rij_id, markering, jas_klasse=None, interpretatiemethode=None, begrip_id, toelichting_klasse="", signalering=None)` aan. `jas-klasse` en `interpretatiemethode` worden door `annoteer-classificeer` ingevuld; vul hier alleen een placeholder. `begrip-id` deterministisch: `[B]/art[A]/lid[L]/[slug]`.
 7. Voeg de rijen toe aan `annotatierijen[]` en schrijf met `schrijf_json`. **Niet valideren** — de annotatie-lid-JSON is na deze stap schema-invalid (jas-klasse = null); L1-validatie pas na `annoteer-diagram` (stap A2c).
 8. Voor elke unieke `begrip-id`: roep `stub_begrip(...)` aan en schrijf met `schrijf_yaml(Path("begrippen/[slug].yaml"), data)`. Als de YAML al bestaat: laat het bestaande bestand met rust en voeg een tweede markering toe (`m-002`, `bijdrage: context`) — meld dit in de hergebruiksrapportage.

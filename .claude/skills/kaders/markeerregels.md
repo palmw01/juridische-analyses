@@ -18,6 +18,7 @@
 7. **Begin bij de centrale klassen** rechtsbetrekking en rechtsfeit (Handleiding p. 34); zie `diagramregels.md`.
 8. **Markeringen mogen overlappen.** Dezelfde wetsformulering kan meerdere klassen krijgen (Handleiding §3.4.2b).
    - **Projectconventie:** één rij per klasse in de annotatietabel; dezelfde markering mag herhaald worden.
+   - **Heuristiek temporele dubbelclassificatie:** een tijdsaanduiding die het aanvangsmoment van een termijn of het intreden van een rechtsgevolg markeert, is tegelijk een rechtsfeit ("tijdsverloop met rechtsgevolg" — zie `jas-taxonomie.md §Rechtsfeit`). Voeg in dat geval een aparte rechtsfeit-rij toe voor dezelfde wetsformulering.
 
 ## Klasse-specifieke markeringsregels
 

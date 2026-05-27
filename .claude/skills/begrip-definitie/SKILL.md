@@ -22,6 +22,7 @@ Vult de inhoudelijke velden van een begrip-YAML in. Bronnen zijn uitsluitend `ma
 1. **Idempotentie:** als `definitie.kern`, `soort`, `herkomst` allemaal gevuld zijn én `relaties` minstens één niet-lege lijst heeft: meld "begrip [slug] is al afgerond" en stop. Overschrijf nooit zonder bevestiging.
 2. **Enrichment-queue:** lees `rapporten/enrichment-queue.json`. Als dit begrip een open beslissing heeft (`status: te-verrijken` zonder `beslissing`-veld): stop en meld; los eerst op.
 3. **Annotaties terugvinden:** `grep -rl "[begrip-id]" annotaties/`. Lees elke gevonden annotatie-JSON. Uit de rij met dit `begrip-id`: vul `jas-klasse` en `toelichting-klasse` op het top-level van de YAML bij (uit annotatie naar begrip — niet uit eigen kennis).
+   - **Brondefinitie-check (zie `kaders/jas-taxonomie.md §Brondefinitie`):** is de begripsnaam uitdrukkelijk omschreven in een ander artikel in de wetgeving? Zo ja: `jas-klasse: brondefinitie`; de markering uit het huidige artikel krijgt `bijdrage: aanvullend` en wordt als context/verfijning vastgelegd, niet als kern.
 4. **Verwante begrippen verkennen:** `ls begrippen/` en lees specifiek de mogelijke generalisaties (`is-een`), composities (`heeft`) en gevolgen (`leidt-tot`).
 
 Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-YAML's met een markering die begint met `[B]/art[A]`:
