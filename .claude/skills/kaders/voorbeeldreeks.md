@@ -58,7 +58,7 @@ Schema dwingt `minItems: 3` af.
 
 **Algoritmisch bepaalbaar:** als de grenswaarde een parameter in de regel is.
 
-**Kolom-semantiek (S3):** onderscheid twee typen grensgevallen:
+**Kolom-semantiek S3 (projectconventie):** onderscheid twee typen grensgevallen:
 - **Grens van de beperking:** invoerwaarde is exact de drempel die bepaalt of de cap actief is — kolom 2 "Op de grens".
 - **Grens van het toepassingsbereik:** andere voorwaarde niet vervuld waardoor de regel überhaupt niet van toepassing is — label "Grens toepassingsbereik — [omschrijving]".
 
@@ -70,7 +70,9 @@ Schema dwingt `minItems: 3` af.
 | 2 | Valt niet onder specialisatie | Eén criterium niet vervuld → hoofdregel |
 | 3 | Grensgeval criterium | Eén criterium op de grens |
 
-## Typeafleiding per begripsoort
+## Typeafleiding per begripsoort — projectconventie
+
+> **Projectconventie.** De koppeling van begrip-soort aan testwaarden is een projectspecifieke conventies die aansluit op de soort-enum in `schemas/begrip.schema.json`; de Handleiding schrijft geen testwaarden per datatype voor.
 
 | Begrip-soort | Testwaarden |
 |---|---|
@@ -113,7 +115,9 @@ Bij `is-invoer-juist: nee`:
 - `is-voorspelling-juist: nvt`.
 - `toelichting` motiveert waarom de invoer ongeldig is.
 
-## Chained regels en uitvoer-eigenaarschap
+## Chained regels en uitvoer-eigenaarschap — projectconventie
+
+> **Projectconventie.** De uitvoer-eigenaarschapsregel voor geketende regels is een projectspecifieke uitwerking; de Handleiding §3.6 beschrijft geen afzonderlijke VR per keten-stap.
 
 Bij een Beslissings- of terugvalregel die een andere regel activeert ("herneemt art. 9 lid 1 IW 1990"):
 
@@ -123,7 +127,9 @@ Bij een Beslissings- of terugvalregel die een andere regel activeert ("herneemt 
 
 > **Terugvalregel** is geen soort, maar een patroon: een Beslissingsregel die een andere regel activeert.
 
-## Statusovergangen
+## Statusovergangen — projectconventie
+
+> **Projectconventie.** De statusnamen (concept / gereviseerd / gevalideerd) en de overgangsregels zijn projectspecifiek; ze zijn afgedwongen door de `status`-enum in `schemas/voorbeeldreeks.schema.json`.
 
 | Status | Betekenis | `?`-waarden toegestaan? |
 |--------|-----------|------------------------|

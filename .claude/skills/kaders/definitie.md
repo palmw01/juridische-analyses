@@ -46,7 +46,9 @@ definitie:
 
 **Lege contexten (`contexten: []`)** zijn de norm bij begrippen die uit één artikel stammen of waarbij de kern voor alle bronnen volstaat.
 
-## Verrijkingsprotocol — nieuwe markering op bestaand begrip
+## Verrijkingsprotocol — nieuwe markering op bestaand begrip — projectconventie
+
+> **Projectconventie.** De beslisboom hieronder is een projectoperationalisatie van het gelaagde definitiemodel; de Handleiding schrijft dit stappenplan niet letterlijk voor.
 
 Wanneer `/annoteer` een markering toevoegt aan een begrip dat al een kern heeft:
 
@@ -69,7 +71,9 @@ Wanneer `/annoteer` een markering toevoegt aan een begrip dat al een kern heeft:
 - Toelichting per stelling: waarom geldt het (niet)?
 - Stellingen zijn concreet en toetsbaar — geen vage parafrasen.
 
-## Eigenschappen — soort en herkomst
+## Eigenschappen — soort en herkomst — projectconventie
+
+> **Projectconventie.** De soort- en herkomst-taxonomieën zijn projectoperationalisaties van het Handleiding §3.5.2a-begrippenkader; de canonieke enumwaarden staan in `schemas/begrip.schema.json`.
 
 **Soort** (datatype, verplicht):
 
@@ -91,7 +95,7 @@ Wanneer `/annoteer` een markering toevoegt aan een begrip dat al een kern heeft:
 | `direct` | Observeerbaar uit basisregistratie, aangifte of aanvraag |
 | `afgeleid` | Uitvoer van een afleidingsregel; verwijst via `afleidingsregel-id` (bij JAS-klasse afleidingsregel) of `uitvoer-van-regel-id` (overige klassen) |
 
-**Identificatie:** `soort-id: true` (én `identificatiebegrip: true`) als het begrip dient als unieke sleutel voor een entiteit (BSN, aanslagnummer). Beide velden hebben altijd dezelfde booleanwaarde.
+**Identificatie (projectconventie):** `soort-id: true` (én `identificatiebegrip: true`) als het begrip dient als unieke sleutel voor een entiteit (BSN, aanslagnummer). Beide velden hebben altijd dezelfde booleanwaarde.
 
 ## Kwaliteitseisen
 

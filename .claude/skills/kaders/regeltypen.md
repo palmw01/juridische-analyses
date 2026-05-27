@@ -78,7 +78,9 @@ Velden (schema-afgedwongen):
 - **`prioriteit`**: alleen voor Specialisatieregels mét concurrentie (meerdere op hetzelfde invoergeval). Lagere waarde = hogere prioriteit. Gaps toegestaan (1, 3, 5). Bij één Specialisatieregel of niet-Specialisatieregels: `null`. Vul niet speculatief in.
 - **`gespecialiseerd-regel-id`**: verplicht bij `soort: Specialisatieregel` — verwijst naar de hoofdregel die wordt overschreven.
 
-## Pariteit bij tenzij-constructies
+## Pariteit bij tenzij-constructies — projectconventie
+
+> **Projectconventie.** De twee-regelaanpak voor tenzij-constructies is een projectoperationalisatie; de Handleiding beschrijft Specialisatieregels maar schrijft geen verplichte pariteit voor.
 
 Wanneer de wetstekst een `tenzij`-constructie bevat met twee expliciete uitkomsten (hoofdzin én tenzij-variant), maak beide regels aan:
 
@@ -158,7 +160,9 @@ Bij impliciete algoritmen — één wetsformulering met meerdere berekeningen of
 3. Maak per tussenresultaat een aparte afleidingsregel.
 4. Verwijs in de hoofdregel naar de tussenresultaat-begrippen als `invoer`.
 
-## Reeks-producerende rekenregels
+## Reeks-producerende rekenregels — projectconventie
+
+> **Projectconventie.** De reeks-statustoets (peildatum-afhankelijkheid, partieel rechtsgevolg, binaire samenvattingsvraag) is een projectspecifieke uitwerking voor invorderingstijdlijnen; de Handleiding noemt dit patroon niet expliciet.
 
 Wanneer de uitvoer een **geordende reeks** is (vervaldatums, termijnbedragen), is vrijwel altijd ook een beslissingsregel nodig die de status van elk element op een peildatum bepaalt.
 
@@ -169,7 +173,9 @@ Reeks-statustoets:
 
 Maak alleen de begrippen aan die juridisch relevant zijn voor het scenario.
 
-## RegelSpraak-correspondentie
+## RegelSpraak-correspondentie — projectconventie
+
+> **Projectconventie.** De vertaaltabel naar RegelSpraak (ALEF) is een hulpmiddel voor de regelanalist; de Handleiding schrijft geen specifieke vertaling voor.
 
 De taalpatronen liggen dicht bij RegelSpraak (ALEF). De jurist legt het taalpatroon vast in de regel-noot; de regelanalist vertaalt naar RegelSpraak.
 
@@ -184,7 +190,9 @@ De taalpatronen liggen dicht bij RegelSpraak (ALEF). De jurist legt het taalpatr
 | `kleiner/groter dan of gelijk aan [waarde]` | identiek |
 | `niet gelijk aan [waarde]` | `ongelijk aan [waarde]` |
 
-## Signalering en LI-context
+## Signalering en LI-context — projectconventie
+
+> **Projectconventie.** De Leidraad-specifieke verwerkingsregels hieronder zijn projectspecifiek voor de IW 1990-annotaties; de Handleiding beschrijft geen LI-specifiek annotatiebeleid.
 
 Bij `signalering` met "voorbeeld"/"illustratief": bronspecifieke regel voor het LI-voorbeeld; noteer dat de onderliggende norm in de wet zelf ligt en aparte annotatie vereist. Generaliseer niet binnen de LI-annotatie.
 

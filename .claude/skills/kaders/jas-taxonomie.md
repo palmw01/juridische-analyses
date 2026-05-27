@@ -135,6 +135,6 @@ brondefinitie
 5. **Meerduidigheid signaleren.** Benoem als een element conflicteert of dubbelzinnig is.
 6. **Delegatieketens traceren.** Volledige keten (wet → amvb → ministeriële regeling).
 
-> **Noot (operator-soort):** begrippen met `jas-klasse: operator` krijgen altijd `soort: tekst` — de JAS-klasse beschrijft de functie, het soort het datatype.
+> **Projectconventie (operator-soort):** begrippen met `jas-klasse: operator` krijgen altijd `soort: tekst` — de JAS-klasse beschrijft de functie, het soort het datatype.
 
-> **Noot (rechtssubject-identificatie):** rechtssubjecten hebben `soort: entiteit`. Het identificatieveld (BSN, RSIN) wordt als separaat Variabele-begrip met `soort-id: true` vastgelegd; verwijs daarheen via `heeft`.
+> **Projectconventie (rechtssubject-identificatie):** rechtssubjecten hebben `soort: entiteit`. Het identificatieveld (BSN, RSIN) wordt als separaat Variabele-begrip met `soort-id: true` vastgelegd; verwijs daarheen via `heeft`.
