@@ -1,4 +1,5 @@
 ---
+name: annoteer-classificeer
 description: "A2b — wijst jas-klasse, interpretatiemethode en toelichting toe aan markeringen. Volgt op annoteer-markeer."
 context: fork
 agent: general-purpose
@@ -10,11 +11,15 @@ Vult `jas-klasse`, `interpretatiemethode`, `toelichting-klasse` en eventueel `si
 
 > Lees vóór elke run: `.claude/skills/kaders/jas-taxonomie.md` en `.claude/skills/kaders/interpretatie.md`.
 
+## Trigger
+
+Aangeroepen door de orchestrator na `annoteer-markeer` (geen eigen `/`-commando).
+
 ## Invoer
 
 Annotatie-lid-bestand `annotaties/[B]/art[A]-lid[L].json` (of sectie-variant) waarvan de markeringen zijn ingevuld door `annoteer-markeer` maar de klasse-velden nog leeg of placeholder zijn.
 
-## Stappen
+## Werkwijze
 
 1. Lees het annotatie-lid-bestand.
 2. Voor elke rij in `annotatierijen[]`:
@@ -35,17 +40,29 @@ Annotatie-lid-bestand `annotaties/[B]/art[A]-lid[L].json` (of sectie-variant) wa
 5. Schrijf het bestand terug met `schrijf_json`.
 6. Valideer.
 
-## Volledigheidscheck (intern)
+### Volledigheidscheck
 
 Vink af welke van de 13 hoofdklassen je hebt overwogen voor dit lid (zie `kaders/markeerregels.md §Volledigheidscheck`). Niet alle 13 hoeven aanwezig.
+
+## Output
+
+- `annotaties/[B]/art[A]-lid[L].json` — `annotatierijen[]` met ingevulde klasse-velden, optioneel `delegatiestructuur[]` en aanvullende `kruisreferenties[]`. Schema: `schemas/annotatie-lid.schema.json`.
 
 ## Vervolg
 
 Roep daarna `annoteer-diagram` aan om het structuurdiagram te bouwen.
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
-- `jas-klasse` moet één van de 16 enumwaarden zijn (schema-afgedwongen).
-- `toelichting-klasse` is geen lege string — minimaal de klassemotivering.
+- `toelichting-klasse` bevat minimaal de klassemotivering (niet leeg, geen stub-placeholder).
 - Meerduidigheid expliciet signaleren via `signalering`.
 - Delegatieketens volledig uitwerken (wet → amvb → ministeriële regeling).
+
+Structurele vereisten (enum 16 waarden, interpretatiemethode-enum, delegatie-type-enum) worden door het schema afgedwongen.
+
+## Bronnen
+
+- Schema: `schemas/annotatie-lid.schema.json`
+- Kaders: `kaders/jas-taxonomie.md`, `kaders/interpretatie.md`, `kaders/markeerregels.md` (volledigheidscheck)
+- Canon: handleiding §3.4 (JAS-elementen), §3.5.3 (interpretatiemethoden)
+- Projectconventies: `kaders/projectconventies.md` #9 (operator-hergebruik)

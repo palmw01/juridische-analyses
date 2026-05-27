@@ -34,6 +34,7 @@ Een **projectconventie** is een keuze die expliciet aanvullend is op canon-tekst
 | 21 | `scenario-refs[]`-array met (scenario-id, rol)-paren; rol-enum (rechtssubject/rechtsobject/voorwaarde/uitvoer/context). | HW §3.3 (scenario's) + LW §2.4 | Koppeling A1 ↔ A3; rol-enum is project-uitwerking. |
 | 22 | "Bestaansregel" (synoniem dat sporadisch in vooronderzoek opdook) is **niet** in canon — gebruik altijd **Beperkingsregel**. | HW §3.5.2b | Terminologie-stabilisatie. |
 | 23 | "Drempelregel" (projectjargon) is **niet** in canon — gebruik **Beperkingsregel** of beschrijf de grenscontrole expliciet. | HW §3.5.2b | Terminologie-stabilisatie; kop in `voorbeeldreeks.md §Algoritmisch bepaalbaar` is hernoemd. |
+| 24 | Skill-sjabloon: vaste sectie-structuur per `SKILL.md` (Doel/Trigger/Invoer/Werkwijze/Output/Vervolg/Kwaliteitseisen/Bronnen) met drie varianten (sub-skill, orchestrator, utility). Verplichte frontmatter: `name` + `description`. | [Agent Skills-spec](https://agentskills.io/specification) + [Claude Code skill-docs](https://code.claude.com/docs/en/skills.md) | Anthropic schrijft alleen `name` verplicht voor en geen body-secties. Het sjabloon is projectconventie voor onderlinge consistentie + orchestrator-leesbaarheid; volledige beschrijving in `KADERS.md §Skill-sjabloon`. |
 
 ---
 

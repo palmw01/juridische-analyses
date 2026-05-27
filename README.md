@@ -177,3 +177,5 @@ Een uitleg van JAS, SKOS, RDF en RegelSpraak staat in [docs/model.md](./docs/mod
 Deze werkruimte implementeert de Wetsanalyse-methodiek van het Ministerie van BZK, gebaseerd op het Juridisch Analyseschema (JAS) v1.0.10. A2, A3 en A4b worden door AI ondersteund. Het juridisch oordeel over voorbeeldreeksen en de formele validatie in teamverband blijven buiten de AI-scope.
 
 Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [Canon-ankers](./.claude/skills/kaders/canon-ankers.md) · [Projectconventies](./.claude/skills/kaders/projectconventies.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+
+De skills volgen de [Anthropic Agent Skills-spec](https://agentskills.io/specification) (`name` + `description` in frontmatter) met een projectconventie voor body-secties (Doel/Trigger/Invoer/Werkwijze/Output/Vervolg/Kwaliteitseisen/Bronnen) — zie [`.claude/skills/KADERS.md §Skill-sjabloon`](./.claude/skills/KADERS.md).

@@ -1,4 +1,5 @@
 ---
+name: valideer
 description: "A4b — voorbeeldreeks-YAML voor een bestaande afleidingsregel. Gebruik: /valideer AR-[bwb-id]-art[nr]-lid[l]-[seq]"
 context: fork
 agent: general-purpose
@@ -20,7 +21,12 @@ Genereert een gestructureerde testmatrix (≥ 3 kolommen) voor één afleidingsr
 
 Voorbeeld: `/valideer AR-BWBR0004770-art9-lid1-a`.
 
-## Stappen
+## Invoer
+
+- `regels/[arg].yaml` (bestaande afleidingsregel) — moet bestaan; anders stop.
+- Bijbehorende `begrippen/[slug].yaml`-bestanden voor invoer- en uitvoerbegrippen.
+
+## Werkwijze
 
 1. **Existentiecheck:**
    - `regels/[arg].yaml` moet bestaan; anders stop met foutmelding.
@@ -40,7 +46,7 @@ Voorbeeld: `/valideer AR-BWBR0004770-art9-lid1-a`.
      - `is-invoer-juist`: `"ja"` of `"nee"`.
      - `verwachte-uitvoer`: map `{ begrip-id: waarde }`. Algoritmisch bepaalbaar → concrete waarde; anders meest plausibele waarde.
      - `is-voorspelling-juist`:
-       - `"nvt"` bij `is-invoer-juist: "nee"`.
+       - `"nvt"` bij `is-invoer-juist: "nee"` (schema-afgedwongen).
        - `"?"` als juridisch oordeel nodig is.
        - `"ja"`/`"nee"` alleen bij exact wiskundige uitkomst of expliciete wettelijke regel.
      - `toelichting` waar nodig (grensgeval-motivering, open interpretatie).
@@ -60,7 +66,11 @@ Voorbeeld: `/valideer AR-BWBR0004770-art9-lid1-a`.
    - Welke `is-voorspelling-juist`-velden nog `?` zijn (vereisen gebruikersbeoordeling).
    - Eventuele L3-waarschuwingen.
 
-## Na de skill
+## Output
+
+- `validaties/VR-[id].yaml` — voorbeeldreeks met ≥ 3 kolommen. Schema: `schemas/voorbeeldreeks.schema.json`.
+
+## Vervolg
 
 De gebruiker beoordeelt de `?`-velden. Daarna `status: gereviseerd` en na teamvalidatie `status: gevalideerd`.
 
@@ -73,3 +83,10 @@ Structurele vereisten staan in `schemas/voorbeeldreeks.schema.json` (≥ 3 kolom
 - Bij Beperkingsregel: kolom voor "Op de grens" én "Boven de grens" verplicht (zie `kaders/voorbeeldreeks.md §Testpatronen`).
 - Bij Specialisatieregel: kolom met deelgeval van toepassing én een kolom met hoofdregel van toepassing.
 - Status start altijd op `concept`; statusovergang loopt via reviewer/team.
+
+## Bronnen
+
+- Schema: `schemas/voorbeeldreeks.schema.json`, `schemas/regel.schema.json` (regel inlezen)
+- Kaders: `kaders/voorbeeldreeks.md`, `kaders/regeltypen.md` (regel-soort-beslisboom)
+- Canon: handleiding §3.6.2b (voorbeeldreeks-testpatronen); leidraad §2.4 Ad 4 (happy/grens/negatief)
+- Projectconventies: `kaders/projectconventies.md` #19 (`?`-sentinel)

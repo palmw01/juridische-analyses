@@ -139,3 +139,62 @@ Voor elke skill geldt:
 4. **Geen MCP-aanroep als bron al lokaal bestaat.** Eerst `find bronnen/[B]/ …`.
 5. **Peildatum uit bronbestand**, niet uit lopende sessie.
 6. **Letterlijk citeren** van wetstekst — nooit parafraseren.
+
+## Skill-sjabloon (projectconventie)
+
+> **Spec-anker.** De [Agent Skills-spec](https://agentskills.io/specification) vereist alleen een `name`-veld in de frontmatter en een markdown-body — géén vaste sectie-structuur. De [Claude Code skill-docs](https://code.claude.com/docs/en/skills.md) voegen optionele velden toe (`context`, `agent`, `when_to_use`, `allowed-tools`, …) maar schrijven ook geen body-secties voor. Het sjabloon hieronder is **projectconventie** voor onderlinge consistentie en orchestrator-leesbaarheid; zie `kaders/projectconventies.md` #24.
+
+### Frontmatter
+
+**Verplicht** (Anthropic-spec):
+- `name` — kebab-case, identiek aan mapnaam.
+- `description` — 1-1024 karakters; bevat trigger-zin.
+
+**Optioneel** (Claude Code-extensies):
+- `context: fork` — geïsoleerde subagent (langlopende A2/A3/A4b-taken).
+- `agent: general-purpose` — subagent-type.
+- `when_to_use` — extra context als description te beknopt is.
+
+### Body — sub-skill (standaard)
+
+```markdown
+# /<naam> — <korte titel>
+
+<1-2 zinnen samenvatting; eindigt met "Lees vóór elke run: kaders/<x>.md.">
+
+## Trigger
+<commandvormen>
+
+## Invoer
+<verwachte bestanden + parameters>
+
+## Werkwijze
+1. ...
+
+## Output
+<bestand(en) + verwijzing naar schemas/<x>.schema.json + bestaand voorbeeld>
+
+## Vervolg
+<volgende skill in keten>
+
+## Kwaliteitseisen (proces)
+<alleen regels die niet in schema of kader staan>
+
+## Bronnen
+- Schema: `schemas/<x>.schema.json`
+- Kaders: `kaders/<a>.md`, `kaders/<b>.md`
+- Canon: handleiding §X.Y[, leidraad §A.B]
+- Projectconventies: `kaders/projectconventies.md` #N (indien van toepassing)
+```
+
+### Body — orchestrator (alleen `wetsanalyse`)
+
+Basis + extra secties **na Werkwijze**: `## TaskList`, `## Pauze-gedrag`, `## Foutafhandeling`. `## Werkwijze` heet hier `## Sequentie` (10 stappen). `## Bronnen` blijft verplicht.
+
+### Body — utility (alleen `wettenbank`)
+
+Basis met afwijking: `## Werkwijze` mag opgesplitst zijn in `### Stap 1`, `### Stap 2`, …; `## Vervolg` vervalt (geen vaste opvolger). `## Kwaliteitseisen (proces)` en `## Bronnen` blijven verplicht.
+
+### Lengte- en disclosure-richtlijn
+
+Elke SKILL.md blijft onder de Anthropic-richtlijn van 500 regels. Uitgebreide referenties (JAS-taxonomie, markeerregels, regeltypen, voorbeeldreeks-patronen) staan in `kaders/`; uitvoerbare helpers in `tools/jas_index_lib.py`. Skills bevatten *proces* — niet *inhoud*.

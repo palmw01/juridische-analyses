@@ -221,7 +221,7 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 ## Skill-documentatie
 
-Conflictbeleid en gedeelde workflow: `.claude/skills/KADERS.md`.
+Conflictbeleid, gedeelde workflow én **skill-sjabloon** (sectie-conventie voor elke `SKILL.md`): `.claude/skills/KADERS.md`. Het sjabloon volgt de [Agent Skills-spec](https://agentskills.io/specification) (`name` + `description` vereist) plus een projectconventie voor body-secties (Doel/Trigger/Invoer/Werkwijze/Output/Vervolg/Kwaliteitseisen/Bronnen) — zie `kaders/projectconventies.md` #24.
 
 ### Skills
 

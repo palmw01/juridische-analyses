@@ -1,4 +1,5 @@
 ---
+name: annoteer-diagram
 description: "A2c — bouwt het structuurdiagram met centrale klasse voor een geclassificeerd lid. Sluitstuk van de A2-keten."
 context: fork
 agent: general-purpose
@@ -10,11 +11,15 @@ Bouwt het `diagram`-object in een annotatie-lid-bestand: centrale klasse + knope
 
 > Lees vóór elke run: `.claude/skills/kaders/diagramregels.md`.
 
+## Trigger
+
+Aangeroepen door de orchestrator na `annoteer-classificeer` (geen eigen `/`-commando).
+
 ## Invoer
 
 Annotatie-lid-bestand `annotaties/[B]/art[A]-lid[L].json` met gevulde `annotatierijen[]` (incl. `jas-klasse`).
 
-## Stappen
+## Werkwijze
 
 1. Lees het annotatie-lid-bestand.
 2. **Bepaal de centrale klasse** volgens prioriteit (zie `kaders/diagramregels.md`):
@@ -35,14 +40,29 @@ Annotatie-lid-bestand `annotaties/[B]/art[A]-lid[L].json` met gevulde `annotatie
    [JAS-klasse]<br/>'[markering ingekort tot max. 40 tekens, eindig op zelfstandig naamwoord, "…" indien afgekort]'
    ```
 6. **Begrip-id per knoop**: vul `begrip-id` in als de knoop direct overeenkomt met een bestaand begrip; anders `null`.
-7. Schrijf het bestand terug. Valideer de volledige annotatie-lid-JSON (nu schema-compleet na `annoteer-markeer` + `annoteer-classificeer` + dit diagram): `tools/.venv/bin/python tools/validate_note.py --file annotaties/[B]/art[A]-lid[L].json`.
+7. Schrijf het bestand terug. Valideer de volledige annotatie-lid-JSON (nu schema-compleet na `annoteer-markeer` + `annoteer-classificeer` + dit diagram):
+   ```
+   tools/.venv/bin/python tools/validate_note.py --file annotaties/[B]/art[A]-lid[L].json
+   ```
 
-## Voorbeeld
+## Output
 
-Zie `kaders/diagramregels.md` §Voorbeeld voor een complete Mermaid-uitvoer (gegenereerd door `make webapp` op basis van het JSON-diagram).
+- `annotaties/[B]/art[A]-lid[L].json` — `diagram`-object ingevuld (`centrale-klasse`, `knopen[]`, `kanten[]`). Schema: `schemas/annotatie-lid.schema.json`.
+- Mermaid-rendering wordt later gegenereerd door `make webapp` op basis van het JSON-diagram (zie `kaders/diagramregels.md §Voorbeeld`).
 
-## Kwaliteitseisen
+## Vervolg
 
-- De knoop-id's zijn korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
+Annotatie-lid is nu schema-compleet. De orchestrator gaat verder met `begrip-definitie` voor elke begrip-stub die door `annoteer-markeer` is aangemaakt.
+
+## Kwaliteitseisen (proces)
+
+- Knoop-id's zijn korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
 - Geen losse variabelen of parameters zonder verbinding met een Voorwaarde of Afleidingsregel.
-- Het schema laat één `diagram`-object per lid toe (`schemas/annotatie-lid.schema.json`). Bij meerdere rechtsbetrekkingen: kies de meest centrale en noteer in `signalering` op de overige rechtsbetrekking-annotatierijen dat er aanvullende structuur is. Verwijdert de noodzaak voor een `diagrammen[]`-array die het schema niet kent.
+- Het schema laat één `diagram`-object per lid toe. Bij meerdere rechtsbetrekkingen: kies de meest centrale en noteer in `signalering` op de overige rechtsbetrekking-annotatierijen dat er aanvullende structuur is.
+
+## Bronnen
+
+- Schema: `schemas/annotatie-lid.schema.json`
+- Kaders: `kaders/diagramregels.md`, `kaders/jas-taxonomie.md`
+- Canon: handleiding §3.4.2c (diagramregels)
+- Projectconventies: `kaders/projectconventies.md` #16 (kleurcodering), #17 (knooplabel-formaat)
