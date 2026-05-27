@@ -81,3 +81,204 @@ def bouw_jas_index(project_root: Path) -> dict[str, str]:
             if bid and jas and bid not in index:
                 index[bid] = jas
     return index
+
+
+# ---------------------------------------------------------------------------
+# Stub-templates — deterministische skeletten voor /annoteer en /begrip
+# Eén bron van waarheid; SKILL.md's roepen deze functies aan i.p.v. templates
+# inline te onderhouden.
+# ---------------------------------------------------------------------------
+
+def stub_annotatie_index(
+    bwb_id: str,
+    wet: str,
+    artikel: str,
+    peildatum: str,
+    structuurpositie: str,
+    kruisreferenties: list[str] | None = None,
+) -> dict:
+    """Skelet voor annotaties/{bwb-id}/art{N}.json (Flow A)."""
+    return {
+        "artikel-id": f"{bwb_id}/art{artikel}",
+        "bwb-id": bwb_id,
+        "wet": wet,
+        "artikel": artikel,
+        "peildatum": peildatum,
+        "structuurpositie": structuurpositie,
+        "leden-annotaties": [],
+        "kruisreferenties": list(kruisreferenties or []),
+    }
+
+
+def stub_annotatie_lid(
+    bwb_id: str,
+    wet: str,
+    artikel: str,
+    lid: str,
+    peildatum: str,
+    structuurpositie: str,
+    wetstekst: str,
+) -> dict:
+    """Skelet voor annotaties/{bwb-id}/art{N}-lid{L}.json (Flow B)."""
+    return {
+        "annotatie-id": f"{bwb_id}/art{artikel}/lid{lid}",
+        "bwb-id": bwb_id,
+        "wet": wet,
+        "artikel": artikel,
+        "lid": lid,
+        "peildatum": peildatum,
+        "structuurpositie": structuurpositie,
+        "wetstekst": wetstekst,
+        "annotatierijen": [],
+        "kruisreferenties": [],
+    }
+
+
+def stub_annotatierij(
+    rij_id: str,
+    markering: str,
+    jas_klasse: str,
+    interpretatiemethode: str,
+    begrip_id: str,
+    toelichting_klasse: str,
+    signalering: str | None = None,
+) -> dict:
+    """Eén rij in annotatie-lid.annotatierijen."""
+    return {
+        "rij-id": rij_id,
+        "markering": markering,
+        "jas-klasse": jas_klasse,
+        "interpretatiemethode": interpretatiemethode,
+        "begrip-id": begrip_id,
+        "toelichting-klasse": toelichting_klasse,
+        "signalering": signalering,
+    }
+
+
+def stub_begrip(
+    bwb_id: str,
+    artikel: str,
+    lid: str,
+    slug: str,
+    jas_klasse: str,
+    markering_tekst: str,
+    interpretatiemethode: str,
+    peildatum: str,
+    toelichting_klasse: str = "",
+) -> dict:
+    """Skelet voor begrippen/{slug}.yaml — schema-valid na /annoteer.
+
+    `soort` krijgt een veilige default ("tekst") zodat het stub-bestand direct
+    L1-valid is; /begrip moet de juiste soort kiezen (zie kaders/definitie.md).
+    `toelichting-klasse` krijgt ook een placeholder omdat het schema minLength
+    forceert; /begrip overschrijft deze met de echte juridische motivering.
+    """
+    begrip_id = f"{bwb_id}/art{artikel}/lid{lid}/{slug}"
+    annotatie_id = f"{bwb_id}/art{artikel}/lid{lid}"
+    herkomst = "afgeleid" if jas_klasse == "afleidingsregel" else "direct"
+    return {
+        "begrip-id": begrip_id,
+        "begripsnaam": slug,
+        "aliases": [],
+        "soort": "tekst",
+        "soort-id": False,
+        "jas-klasse": jas_klasse,
+        "toelichting-klasse": toelichting_klasse or "stub — wordt ingevuld door /begrip",
+        "herkomst": herkomst,
+        "status": "concept",
+        "definitie": {"kern": "", "contexten": []},
+        "definitie-versie": 1,
+        "definitie-gebaseerd-op": ["m-001"],
+        "markeringen": [
+            {
+                "markering-id": "m-001",
+                "bron-annotatie-id": annotatie_id,
+                "tekst": markering_tekst,
+                "interpretatiemethode": interpretatiemethode,
+                "bijdrage": "primair",
+                "bevestigd": False,
+                "bevestigd-op": None,
+            }
+        ],
+        "geldigheid-van": peildatum,
+        "geldigheid-tot": None,
+        "vervangen-door": None,
+        "relaties": {"is-een": [], "heeft": [], "leidt-tot": []},
+        "identificatiebegrip": False,
+        "afleidingsregel-id": None,
+        "tussenresultaat": False,
+    }
+
+
+def stub_regel(
+    bwb_id: str,
+    artikel: str,
+    lid: str,
+    seq: str,
+    naam: str,
+    soort: str,
+    peildatum: str,
+    rechtsfeit_id: str | None = None,
+) -> dict:
+    """Skelet voor regels/AR-{bwb-id}-art{N}-lid{L}-{seq}.yaml."""
+    return {
+        "regel-id": f"AR-{bwb_id}-art{artikel}-lid{lid}-{seq}",
+        "naam": naam,
+        "soort": soort,
+        "bwb-id": bwb_id,
+        "artikel": artikel,
+        "lid": lid,
+        "peildatum": peildatum,
+        "geldigheid-van": peildatum,
+        "annotatie-id": f"{bwb_id}/art{artikel}/lid{lid}",
+        "rechtsfeit-id": rechtsfeit_id,
+        "invoer": [],
+        "uitvoer": [],
+        "operators": [],
+        "formele-regel": "",
+        "toelichting": "",
+        "voorbeeldreeksen": [],
+        "tussenresultaat": False,
+    }
+
+
+def stub_voorbeeldreeks(
+    regel_id: str,
+    naam: str,
+    peildatum: str,
+    aangemaakt_op: str,
+) -> dict:
+    """Skelet voor validaties/VR-{...}.yaml."""
+    if not regel_id.startswith("AR-"):
+        raise ValueError(f"regel_id moet beginnen met 'AR-': {regel_id}")
+    vr_id = "VR-" + regel_id[3:]
+    return {
+        "voorbeeldreeks-id": vr_id,
+        "afleidingsregel-id": regel_id,
+        "naam": naam,
+        "status": "concept",
+        "peildatum": peildatum,
+        "aangemaakt-op": aangemaakt_op,
+        "kolommen": [],
+    }
+
+
+def schrijf_yaml(path: Path, data: dict) -> None:
+    """Schrijf een dict naar YAML met de project-conventies (Unicode, blokstijl)."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        yaml.safe_dump(
+            data,
+            f,
+            allow_unicode=True,
+            sort_keys=False,
+            default_flow_style=False,
+        )
+
+
+def schrijf_json(path: Path, data: dict, *, indent: int = 2) -> None:
+    """Schrijf een dict naar JSON met UTF-8 en stabiele inspringing."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=indent)
+        f.write("\n")

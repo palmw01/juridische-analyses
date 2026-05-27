@@ -9,14 +9,59 @@
   },
   "skills": [
     {
+      "name": "wetsanalyse",
+      "description": "Orchestrator — volledige A2–A4b-keten voor één lid. Gebruik: /wetsanalyse art. [A] lid [L] [W]",
+      "path": ".claude/skills/wetsanalyse/SKILL.md"
+    },
+    {
       "name": "annoteer",
-      "description": "Markeer en classificeer een wetsartikel (Activiteit 2). Gebruik: /annoteer art. [A] [W]",
-      "path": ".claude/skills/annoteer/SKILL.md"
+      "description": "A2 — markeer wetsformuleringen in één lid (annoteer-markeer, eerste stap). Gebruik: /annoteer art. [A] lid [L] [W]",
+      "path": ".claude/skills/annoteer-markeer/SKILL.md"
+    },
+    {
+      "name": "annoteer-markeer",
+      "description": "A2a — markeert wetsformuleringen + begrip-stubs. Gebruik: /annoteer-markeer art. [A] lid [L] [W]",
+      "path": ".claude/skills/annoteer-markeer/SKILL.md"
+    },
+    {
+      "name": "annoteer-classificeer",
+      "description": "A2b — wijst jas-klasse + interpretatiemethode toe per rij. Gebruik: /annoteer-classificeer art. [A] lid [L] [W]",
+      "path": ".claude/skills/annoteer-classificeer/SKILL.md"
+    },
+    {
+      "name": "annoteer-diagram",
+      "description": "A2c — bouwt structuurdiagram met centrale klasse. Gebruik: /annoteer-diagram art. [A] lid [L] [W]",
+      "path": ".claude/skills/annoteer-diagram/SKILL.md"
     },
     {
       "name": "begrip",
-      "description": "Documenteer of actualiseer een juridisch begrip in begrippen/. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]",
-      "path": ".claude/skills/begrip/SKILL.md"
+      "description": "A3 — definitie, regel, scenario en bronnen voor een begrip. Gebruik: /begrip [slug] of /begrip-alles art. [A] [W]",
+      "path": ".claude/skills/begrip-definitie/SKILL.md"
+    },
+    {
+      "name": "begrip-definitie",
+      "description": "A3a — kern + contexten + relaties + voorbeelden. Gebruik: /begrip-definitie [slug]",
+      "path": ".claude/skills/begrip-definitie/SKILL.md"
+    },
+    {
+      "name": "begrip-regel",
+      "description": "A3b — afleidingsregel-YAML (alleen bij jas-klasse: afleidingsregel). Gebruik: /begrip-regel [slug]",
+      "path": ".claude/skills/begrip-regel/SKILL.md"
+    },
+    {
+      "name": "begrip-scenario",
+      "description": "A3c — scenario-koppeling (rechtsbetrekking/rechtsfeit). Gebruik: /begrip-scenario [slug]",
+      "path": ".claude/skills/begrip-scenario/SKILL.md"
+    },
+    {
+      "name": "begrip-bron",
+      "description": "A3d — secundaire bronnen (Leidraad, beleidsregel, jurisprudentie). Gebruik: /begrip-bron [slug]",
+      "path": ".claude/skills/begrip-bron/SKILL.md"
+    },
+    {
+      "name": "valideer",
+      "description": "A4b — voorbeeldreeks-YAML voor een bestaande afleidingsregel. Gebruik: /valideer AR-[id]",
+      "path": ".claude/skills/valideer/SKILL.md"
     },
     {
       "name": "wettenbank",

@@ -55,6 +55,9 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 | Enrichment-detectie | ✅ Gereed |
 | Graph-export (GEXF/GraphML) | ✅ Gereed |
 | Statische webapp (GitHub Pages) | ✅ Gereed |
+| Voortgangsdashboard (`webapp/voortgang.html`) | ✅ Gereed |
+| Orchestrator-skill `/wetsanalyse` (TaskList + run-rapport + dashboard) | ✅ Gereed |
+| Schema-uitbreidingen A3c (`scenario-refs`) en A3d (`bronnen-secundair`) | ✅ Gereed |
 | **Totaal: art. 9 + art. 2 lid 2 IW volledig doorlopen** | **✅ Proof-of-concept actief** |
 | Doorontwikkeling van het PoC | 🔜 Volgende fase |
 
@@ -65,15 +68,17 @@ Aangedreven door Claude Code met een MCP-koppeling naar [wetten.overheid.nl](htt
 De methodiek bestaat uit zes activiteiten (A1–A6). Claude Code ondersteunt **A2, A3 en A4b**; de overige stappen zijn een menselijke taak, uitgevoerd in multidisciplinair teamverband.
 
 ```
-A1  Werkgebied bepalen          (handmatig: scope, bronnen, juridische scenario's)
+A1  Werkgebied bepalen          (handmatig: scope, bronnen, juridische scenario's
+                                 in scenarios/{id}.yaml — buiten AI-scope)
      │
      ▼
-A2  Markeren & classificeren    (/annoteer — Claude Code)
+A2  Markeren & classificeren    (sub-skills annoteer-markeer → -classificeer → -diagram)
      │  wetstekst → JAS-annotaties in JSON
      │  elk zinsdeel krijgt een JAS-klasse + interpretatiemethode
      ▼
-A3  Betekenis vastleggen        (/begrip-alles — Claude Code)
+A3  Betekenis vastleggen        (sub-skills begrip-definitie + -regel + -scenario + -bron)
      │  annotaties → begrippen (YAML) + afleidingsregels (YAML)
+     │  + scenario-koppeling (A3c) + secundaire bronnen (A3d)
      │  definities uitsluitend gebaseerd op markeringen uit A2
      ▼
 A4b Voorbeeldreeksen opstellen  (/valideer — Claude Code)
@@ -88,6 +93,8 @@ A6  Kennismodel opstellen       (handmatig: modelleringsbeslissingen en governan
      de exports van A3 — RDF/SKOS, GEXF, RegelSpraak — zijn de invoer)
 ```
 
+Eén orchestrator-skill `/wetsanalyse art. [A] lid [L] [W]` voert A2 → A3 → A4b sequentieel uit voor één lid, met live voortgang in de Claude Code TaskList, een per-run-rapport in `rapporten/runs/` (Mermaid-diagram + statusoverzicht) en automatische update van het dashboard `webapp/voortgang.html`. De sub-skills blijven los aanroepbaar voor reparatie of partiële her-runs.
+
 ### Stap voor stap
 
 **Stap 1 — Wetstekst ophalen** (`/wettenbank art. [A] [W]`)
@@ -96,11 +103,11 @@ Haalt de wetstekst op via wetten.overheid.nl (MCP), normaliseert de JSON-respons
 
 **Stap 2 — Annoteren** (`/annoteer art. [A] [W]` + `/annoteer art. [A] lid [L] [W]`)
 
-Verwerkt de wetstekst naar een JAS-annotatie: elk zinsdeel wordt geclassificeerd in een van de 13 JAS-klassen (rechtssubject, rechtsobject, rechtsbetrekking, rechtsfeit, voorwaarde, etc.) en krijgt een interpretatiemethode (grammaticaal, systematisch, teleologisch, wetshistorisch). Het resultaat is een structuurdiagram (knopen + kanten) en een tabel met alle markeringen, opgeslagen in `annotaties/`.
+Drie sub-skills voeren A2 sequentieel uit: `annoteer-markeer` markeert wetsformuleringen (Handleiding §3.4.2a) en maakt begrip-stubs; `annoteer-classificeer` wijst elk een van de 16 JAS-klassen (13 hoofdklassen plus drie sub-elementen) en een interpretatiemethode toe (grammaticaal, systematisch, teleologisch, wetshistorisch); `annoteer-diagram` bouwt het structuurdiagram met centrale klasse (Handleiding §3.4.2c). Resultaat: een annotatie-lid-JSON in `annotaties/` met markeringen, JAS-classificaties, kruisreferenties, delegatiestructuur en diagram, plus begrip-YAML-stubs in `begrippen/`.
 
-**Stap 3 — Begrippen en regels vastleggen** (`/begrip-alles art. [A] [W]`)
+**Stap 3 — Begrippen en regels vastleggen** (`/begrip [slug]` of `/begrip-alles art. [A] [W]`)
 
-Leidt uit de annotaties begrippen af: per gemarkeerd element ontstaat een YAML-bestand in `begrippen/` met definitie, soort (booleaans, datum, tijdsduur, monetair-bedrag, etc.), herkomst (direct uit wet of afgeleid), relaties naar andere begrippen en traceerbaarheid terug naar de markering. Complexere elementen leiden tot een afleidingsregel in `regels/`, uitgedrukt in RegelSpraak-oriëntatie.
+Vier sub-skills vullen A3 in: `begrip-definitie` (A3a — kern + contexten + soort + herkomst + relaties + voorbeelden, gebaseerd op markeringen uit A2), `begrip-regel` (A3b — bij `jas-klasse: afleidingsregel` een regel-YAML in `regels/` met formele-regel in RegelSpraak-oriëntatie), `begrip-scenario` (A3c — koppelt rechtsbetrekking/rechtsfeit-begrippen aan scenario's in `scenarios/`) en `begrip-bron` (A3d — registreert secundaire bronnen: Leidraad, beleidsregels, MvT, jurisprudentie).
 
 **Stap 4 — Voorbeeldreeksen opstellen** (`/valideer AR-[id]`)
 
@@ -112,7 +119,7 @@ Drie validatielagen controleren het project na elke schrijfactie. Zie §[Validat
 
 **Stap 6 — Exporteren** (`make ci` of afzonderlijke targets)
 
-Genereert alle eindproducten vanuit de YAML/JSON-bronbestanden. Zie §[Eindproducten](#eindproducten).
+Genereert alle eindproducten vanuit de YAML/JSON-bronbestanden, inclusief het cross-cutting voortgangsdashboard. Zie §[Eindproducten](#eindproducten).
 
 ### Traceerbaarheid
 
@@ -298,9 +305,10 @@ annotaties/BWBR0004770/art9-1-lid1.json
 | `schemas/bron.schema.json` | Wetsteksten in `bronnen/` |
 | `schemas/annotatie-index.schema.json` | Structuurankers in `annotaties/` |
 | `schemas/annotatie-lid.schema.json` | Lid-annotaties in `annotaties/` |
-| `schemas/begrip.schema.json` | Begrippen in `begrippen/` |
-| `schemas/regel.schema.json` | Regels in `regels/` |
+| `schemas/begrip.schema.json` | Begrippen in `begrippen/` (incl. optionele `scenario-refs` voor A3c en `bronnen-secundair` voor A3d) |
+| `schemas/regel.schema.json` | Regels in `regels/` (incl. optionele `bronnen-secundair` voor A3d) |
 | `schemas/voorbeeldreeks.schema.json` | Voorbeeldreeksen in `validaties/` |
+| `schemas/scenario.schema.json` | Juridische scenario's in `scenarios/` (A1, handmatig — buiten AI-scope) |
 
 ### L2 — Integriteitscontrole
 
@@ -473,6 +481,7 @@ Interactieve website in Rijkshuisstijl, automatisch gepubliceerd naar GitHub Pag
 - **Kennisgraaf** — interactieve D3.js-graaf met filter op JAS-klasse, drag, zoom en volledigscherm
 - **Zoeken** — globale volledige-tekst-zoekfunctie over alle typen (MiniSearch)
 - **SPARQL** — browsergebaseerde SPARQL-query-editor (Comunica) op de RDF/Turtle-export
+- **Voortgangsdashboard** (`voortgang.html`) — statustabel per BWB/art/lid voor A2 / A3a / A3b / A3c / A3d / A4b, met KPI-samenvatting en klikbare cellen naar de onderliggende bestanden
 - **Dark-mode** en responsief ontwerp (mobiel + desktop)
 
 ---
@@ -595,14 +604,15 @@ regels/                A3b — afleidingsregels (YAML)
 validaties/            A4b — voorbeeldreeksen (YAML)
   VR-{bwb-id}-*.yaml   testmatrices per afleidingsregel; is-voorspelling-juist=? tot na beoordeling
 
-schemas/               JSON Schema draft-07 (L1-validatie, 6 schemas: bron,
-                       annotatie-index, annotatie-lid, begrip, regel, voorbeeldreeks)
+schemas/               JSON Schema draft-07 (L1-validatie, 7 schemas: bron,
+                       annotatie-index, annotatie-lid, begrip, regel, voorbeeldreeks, scenario)
 kennisgraaf/           exportartifacts
   begrippen.ttl        RDF Turtle / SKOS-begrippenstelsel
   graph.gexf           graaf voor Gephi
   graph.graphml        graaf voor yEd / Cytoscape
 
 rapporten/             validatierapport (gegenereerd)
+  runs/                per-run-rapporten van /wetsanalyse (Mermaid-diagram + statusoverzicht)
 scripts/               pre-commit hook (L1/L2-validatie) + pre-push hook (100% coverage)
 
 sitegen/               statische webapp-generator (Python-package, `python -m sitegen`)
@@ -626,8 +636,10 @@ tools/                 Python-toolchain (8 scripts)
   export_rdf.py        YAML/JSON → RDF Turtle (SKOS)
   export_graph.py      begrippen + relaties → GEXF + GraphML
   check_enrichment.py  detecteert begrippen met meerdere bronartikelen
-  jas_index_lib.py     gedeelde I/O-helpers (load_yaml/load_json,
-                       slug_from_begrip_id), JAS-index, kern/contexten-laden
+  jas_index_lib.py     gedeelde I/O-helpers (load_yaml/load_json, slug_from_begrip_id,
+                       stub-skeletten, JAS-index, kern/contexten-laden)
+  genereer_run_rapport.py  per-run Markdown-rapport met Mermaid-diagram, aangeroepen
+                       door /wetsanalyse-orchestrator; opgeslagen in rapporten/runs/
   query_rdf.py         SPARQL-query op gegenereerde TTL
   fetch_wettenbank.py  hulpscript: wetstekst ophalen via MCP
   extract_kruisrefs.py JCI URI-extractie uit annotaties
@@ -699,4 +711,4 @@ Deze werkruimte implementeert de **Wetsanalyse-methodiek** (Ministerie van BZK, 
 
 **A2 (markeren en classificeren)**, **A3 (betekenis vastleggen)** en **A4b (voorbeeldreeksen opstellen)** worden door AI ondersteund. Het juridisch oordeel in A4b (`is-voorspelling-juist`) blijft bij de gebruiker. A4-overig (valideren in multidisciplinair team), A5 (signaleren van lacunes) en A6 (kennismodel opstellen) zijn menselijke activiteiten buiten de scope van deze workflow.
 
-Kaders: [JAS-taxonomie](./.claude/skills/annoteer/kaders.md) · [Begrippen](./.claude/skills/begrip/kaders.md) · [Regels](./.claude/skills/begrip/kaders-regels.md) · [Voorbeeldreeksen](./.claude/skills/valideer/kaders.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)

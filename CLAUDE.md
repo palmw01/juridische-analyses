@@ -21,19 +21,22 @@ Je treedt op als **senior jurist bij de Belastingdienst, domein Inning**. Dat be
 Dit project is een AI-ondersteunde wetsanalyse-toolchain. De kern is een **traceerbare gegevenspijplijn** van wetstekst naar uitvoerbare regelspecificaties:
 
 ```
+scenarios/{scenario-id}.yaml             ← juridische scenario's (A1, handmatig — buiten AI-scope)
+        ↓ (input voor A3c)
 bronnen/{bwb-id}/art{N}.json             ← wetstekst (MCP, /wettenbank)
         ↓
-annotaties/{bwb-id}/art{N}.json          ← structuurindex (Flow A, /annoteer)
-annotaties/{bwb-id}/art{N}-lid{L}.json   ← lid-annotatie + diagram (Flow B, /annoteer)
+annotaties/{bwb-id}/art{N}.json          ← structuurindex (Flow A, /annoteer-markeer)
+annotaties/{bwb-id}/art{N}-lid{L}.json   ← lid-annotatie + diagram (A2: /annoteer-markeer → -classificeer → -diagram)
         ↓
-begrippen/{slug}.yaml                    ← conceptdefinities (A3a, /begrip)
-regels/AR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← afleidingsregels (A3b, /begrip)
+begrippen/{slug}.yaml                    ← conceptdefinities (A3a /begrip-definitie, A3c /begrip-scenario, A3d /begrip-bron)
+regels/AR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← afleidingsregels (A3b /begrip-regel)
         ↓
 validaties/VR-{bwb-id}-art{N}-lid{L}-{seq}.yaml  ← testmatrix (A4b, /valideer)
         ↓
 kennisgraaf/*.ttl / *.gexf               ← RDF + graafexport (make export-rdf/export-graph)
-webapp/                                  ← statische website (make webapp)
+webapp/                                  ← statische website incl. voortgang.html (make webapp)
 rapporten/validatie-rapport.{md,json}    ← gegenereerd door validate_note.py --full
+rapporten/runs/run-YYYY-MM-DD-HHMM-*.md  ← per-run-rapport van /wetsanalyse (Mermaid-diagram + statusoverzicht)
 ```
 
 Elk bestand bevat `bron-annotatie-id`- en `markering-id`-velden die directe navigatie naar de exacte wetstekstpassage mogelijk maken.
@@ -49,17 +52,18 @@ Elk bestand bevat `bron-annotatie-id`- en `markering-id`-velden die directe navi
 | `extract_kruisrefs.py` | JCI URI-extractie en forward/backward kruisreferenties |
 | `query_rdf.py` | SPARQL-query op het gegenereerde RDF-model |
 | `fetch_wettenbank.py` | MCP-wrapper voor wetsteksten ophalen |
-| `jas_index_lib.py` | Gedeelde I/O-helpers (`load_yaml`/`load_json`), `slug_from_begrip_id`, JAS-index en kern-/contexten-laden |
+| `genereer_run_rapport.py` | Per-run Markdown-rapport met Mermaid-diagram, aangeroepen door /wetsanalyse-orchestrator |
+| `jas_index_lib.py` | Gedeelde I/O-helpers, stub-skeletten voor annotatie/begrip/regel/voorbeeldreeks, slug-derivatie, JAS-index en kern-/contexten-helpers |
 
 ### Statische webapp (`sitegen/`)
 
-Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.js-kennisgraaf, SPARQL-editor (Comunica) en Mermaid-annotatiediagrammen. Outputmap: `webapp/` (gegenereerd, niet ingecheckt).
+Python-pakket dat HTML genereert met zoekfunctie (MiniSearch), interactieve D3.js-kennisgraaf, SPARQL-editor (Comunica), Mermaid-annotatiediagrammen en het **voortgangsdashboard** (`webapp/voortgang.html`) — statustabel per BWB/art/lid voor A2 / A3a / A3b / A3c / A3d / A4b. Outputmap: `webapp/` (gegenereerd, niet ingecheckt).
 
 ### Validatielagen
 
-- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`). Patronen voor `begrip-id`, `regel-id` (AR-…) en `voorbeeldreeks-id` (VR-…) zijn structureel afgedwongen; voorbeeldreeksen moeten ten minste 3 kolommen bevatten. Blokkerend.
-- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (annotatie → begrip → regel → voorbeeldreeks), statusconsistentie, diagramintegriteit. `gespecialiseerd-regel-id` is voor `soort: Specialisatieregel` verplicht en moet naar een bestaand regel-bestand verwijzen. Blokkerend.
-- **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen, scenario-specifieke begripsnamen (maandnaam/jaartal/`-voorbeeld-`). Adviserend.
+- **L1 — JSON Schema** (`schemas/`): verplichte velden, datatypes, enumeraties per bestandstype (`bron`, `annotatie-index`, `annotatie-lid`, `begrip`, `regel`, `voorbeeldreeks`, `scenario`). Patronen voor `begrip-id`, `regel-id` (AR-…), `voorbeeldreeks-id` (VR-…) en `scenario-id` (scen-…) zijn structureel afgedwongen; voorbeeldreeksen moeten ten minste 3 kolommen bevatten. `scenario-refs` en `bronnen-secundair` zijn optionele velden voor A3c/A3d. Blokkerend.
+- **L2 — Integriteitscontroles** (`validate_note.py`): referentiële integriteit (annotatie → begrip → regel → voorbeeldreeks; `scenario-refs[].scenario-id` → `scenarios/`), statusconsistentie, diagramintegriteit, homoniem-conflicten. `gespecialiseerd-regel-id` is voor `soort: Specialisatieregel` verplicht en moet naar een bestaand regel-bestand verwijzen. Blokkerend.
+- **L3 — Kwaliteitswaarschuwingen**: lege relaties, ontbrekende testkolommen, onbevestigde markeringen, scenario-specifieke begripsnamen (maandnaam/jaartal/`-voorbeeld-`), ontbrekende `scenario-refs` bij rechtsbetrekking/rechtsfeit (A3c-volledigheid). Adviserend.
 
 De **pre-commit hook** (`scripts/pre-commit`) blokkeert commits met L1/L2-fouten in gestagede bestanden en regenereert `rapporten/validatie-rapport.md`. De **pre-push hook** (`scripts/pre-push`) blokkeert pushes wanneer testdekking < 100% is. Installeer beide met `make install-hooks`.
 
@@ -125,28 +129,52 @@ make lock           # dependencies installeren en pinnen in requirements.lock
 
 ## Workflow
 
-De wetsanalyse werkt iteratief via drie micro-skills:
+De wetsanalyse is opgebouwd uit fijnmazige sub-skills (één per deelactiviteit) plus een orchestrator. Zie `.claude/skills/KADERS.md` voor het volledige overzicht.
+
+### Sub-skills (per deelactiviteit)
 
 ```
-/annoteer art. [A] [W]         →  Flow A: index-JSON aanmaken (structuuranker)
-/annoteer art. [A] lid [L] [W] →  Flow B: lid-annotatie-JSON + begrip-YAML-stubs (A2)
-/begrip-alles art. [A] [W]     →  A3: definitie + relaties + afleidingsregels invullen
-/valideer AR-[id]              →  A4b: testmatrix opstellen voor een afleidingsregel
+A2  /annoteer art. [A] [W]              → Flow A: index-JSON (annoteer-markeer)
+    /annoteer art. [A] lid [L] [W]      → annoteer-markeer → annoteer-classificeer → annoteer-diagram
+    /annoteer sectie [ref] [W]          → Flow C: sectie-annotatie
+
+A3  /begrip [slug]                      → begrip-definitie (A3a)
+                                          + begrip-regel (A3b — bij jas-klasse: afleidingsregel)
+                                          + begrip-scenario (A3c — koppeling aan scenarios/)
+                                          + begrip-bron (A3d — secundaire bronnen)
+    /begrip-alles art. [A] [W]          → idem voor alle stubs van een artikel
+
+A4b /valideer AR-[id]                   → voorbeeldreeks-YAML (≥ 3 kolommen)
 ```
 
-Voor bronnen zonder leden (Leidraad, beleid):
+### Orchestrator
 
 ```
-/annoteer sectie [ref] [W]    →  Flow C: sectie-annotatie-JSON + begrip-stubs (A2)
+/wetsanalyse art. [A] lid [L] [W]              → volledige A2–A4b-keten, interactief
+/wetsanalyse art. [A] lid [L] [W] --auto       → zonder pauzes
+/wetsanalyse art. [A] lid [L] [W] --vanaf begrip  → skip A2 (als al aanwezig)
 ```
+
+De orchestrator gebruikt TaskCreate/TaskUpdate voor live voortgang in de Claude Code UI, schrijft een per-run Markdown-rapport met Mermaid-diagram in `rapporten/runs/`, en updatet het dashboard `webapp/voortgang.html` via `make webapp`.
 
 ### Annotatie → begrip: strikte volgorde
 
-De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markering`(en) in het begrip-YAML zijn de enige bron voor de definitie.
+De annotatie (A2) is de **enige input** voor begrippen (A3). Begrippen worden nooit rechtstreeks uit de wetstekst afgeleid. `/begrip` raadpleegt nooit de wettenbank — de `markeringen[].tekst` in het begrip-YAML is de enige bron voor de definitie.
 
-Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. In dat geval bevat de `markeringen`-array meerdere entries met verschillende `bron-annotatie-id`-waarden; de bijdrage per markering is `primair`, `aanvullend` of `context`. De definitie bestaat uit een **kern** (gebaseerd op de primaire markeringen, geldig voor alle bronartikelen) en optionele **contexten** (artikel-specifieke verfijningen, uitbreidingen of uitzonderingen op de kern). Zie `kaders.md` §Gelaagd model voor de beslisboom.
+Een begrip kan meerdere bronnen hebben als het in meerdere artikelen voorkomt. De definitie bestaat uit een **kern** (gebaseerd op de primaire markeringen, geldig voor alle bronartikelen) en optionele **contexten** (artikel-specifieke verfijningen, uitbreidingen of uitzonderingen op de kern). Zie `.claude/skills/kaders/definitie.md` voor de beslisboom.
 
-Bij `herkomst: afgeleid` geldt: gebruik `afleidingsregel-id` alleen wanneer `jas-klasse: afleidingsregel`; gebruik anders `uitvoer-van-regel-id`. Zie `.claude/skills/begrip/SKILL.md` voor de volledige beslisboom.
+Bij `herkomst: afgeleid` geldt: gebruik `afleidingsregel-id` alleen wanneer `jas-klasse: afleidingsregel`; gebruik anders `uitvoer-van-regel-id`.
+
+### Code-laag (delegering uit skills)
+
+Skills schrijven geen output-templates inline; zij delegeren naar `tools/jas_index_lib.py`:
+
+- `stub_annotatie_index`, `stub_annotatie_lid`, `stub_annotatierij`, `stub_begrip`, `stub_regel`, `stub_voorbeeldreeks` — deterministische skeletten.
+- `schrijf_yaml`, `schrijf_json` — schrijfconventies (UTF-8, blokstijl, sort_keys=false).
+- `haal_kern`, `haal_contexten` — gelaagde definitie helpers.
+- `slug_from_begrip_id`, `bouw_jas_index` — id- en index-helpers.
+
+Het run-rapport wordt gegenereerd door `tools/genereer_run_rapport.py`; het voortgang-dashboard door `sitegen/pages/voortgang.py`.
 
 ---
 
@@ -193,23 +221,35 @@ Bij een `fout`-veld in de response: meld dit aan de gebruiker met de foutboodsch
 
 ## Skill-documentatie
 
+Conflictbeleid en gedeelde workflow: `.claude/skills/KADERS.md`.
+
 ### Skills
 
 | Skill | Bestand | Functie |
 |-------|---------|---------|
-| `/annoteer` | `.claude/skills/annoteer/SKILL.md` | A2: markeren (A2a), classificeren (A2b), structuurdiagram (A2c); bij conflict: kaders.md is leidend |
-| `/begrip` | `.claude/skills/begrip/SKILL.md` | A3: definitie, voorbeelden, kenmerken, afleidingsregels; bij conflict: kaders zijn leidend |
-| `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties extraheren |
-| `/valideer` | `.claude/skills/valideer/SKILL.md` | A4b: voorbeeldreeks opstellen voor een afleidingsregel; output in `validaties/`; bij conflict: kaders.md is leidend |
+| `/wetsanalyse` | `.claude/skills/wetsanalyse/SKILL.md` | Orchestrator — volledige A2–A4b-keten voor één lid |
+| `/annoteer-markeer` | `.claude/skills/annoteer-markeer/SKILL.md` | A2a — markeren + begrip-stubs |
+| `/annoteer-classificeer` | `.claude/skills/annoteer-classificeer/SKILL.md` | A2b — jas-klasse + interpretatiemethode |
+| `/annoteer-diagram` | `.claude/skills/annoteer-diagram/SKILL.md` | A2c — structuurdiagram |
+| `/begrip-definitie` | `.claude/skills/begrip-definitie/SKILL.md` | A3a — kern + contexten + relaties + voorbeelden |
+| `/begrip-regel` | `.claude/skills/begrip-regel/SKILL.md` | A3b — afleidingsregel-YAML |
+| `/begrip-scenario` | `.claude/skills/begrip-scenario/SKILL.md` | A3c — scenario-koppeling |
+| `/begrip-bron` | `.claude/skills/begrip-bron/SKILL.md` | A3d — secundaire bronnen |
+| `/valideer` | `.claude/skills/valideer/SKILL.md` | A4b — voorbeeldreeks |
+| `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties |
 
-### Kaders en ondersteunende bestanden
+### Gedeelde kaders (één bron per onderwerp)
 
 | Bestand | Inhoud |
 |---------|--------|
-| `.claude/skills/annoteer/kaders.md` | JAS v1.0.10 taxonomie — 13 elementen, 4 interpretatiemethoden, 4 typen afleidingsregels, diagram-centrum-prioritering, knooplabel-truncatieregels, delegatietype-beslisregel, kleurcodering |
-| `.claude/skills/begrip/kaders.md` | A3a + A6d: naamgeving, definitie, soort (incl. rechtssubject-noot), herkomst, kardinaliteit, identificatie, relatierichting (forward-only) |
-| `.claude/skills/begrip/kaders-regels.md` | A3b + A6e: beslisboom regeltype, 4 taalpatronen (incl. Beperkingsregel variant A/B), tussenresultaat-heuristiek, RegelSpraak-correspondentietabel (incl. vergelijkingsoperatoren), Specialisatieregel-voorbeeldformat |
-| `.claude/skills/begrip/valkuilen.md` | Geleerde lessen uit eerdere `/begrip`-runs (naamgeving, operator-hergebruik, e.d.). Raadpleeg aan het begin van elke run. |
+| `.claude/skills/kaders/jas-taxonomie.md` | 16 JAS-elementen, herkenningsvragen, taalkenmerken (Handleiding §3.4 + JAS v1.0.10) |
+| `.claude/skills/kaders/markeerregels.md` | 6 markeer-uitgangspunten + klasse-specifieke markeringsregels (Handleiding §3.4.2a) |
+| `.claude/skills/kaders/diagramregels.md` | Centrale-klasse-prioriteit, randlabels, knooplabels, Mermaid-classDef (Handleiding §3.4.2c) |
+| `.claude/skills/kaders/begripsnaam.md` | Vuistregels begripsnaam (Handleiding §3.5.2a) |
+| `.claude/skills/kaders/definitie.md` | Kern + contexten, substitutietest, homoniem-splitsing (Handleiding §3.5.2a) |
+| `.claude/skills/kaders/relaties.md` | is-een / heeft / leidt-tot — forward-only, kardinaliteit |
+| `.claude/skills/kaders/regeltypen.md` | 4 regeltypen + beslisboom + taalpatronen + tussenresultaten + RegelSpraak (Handleiding §3.5.2b, §3.6) |
+| `.claude/skills/kaders/voorbeeldreeks.md` | Testpatronen per regeltype, drempelregel `?`, statusovergangen (Handleiding §3.6.2b) |
+| `.claude/skills/kaders/interpretatie.md` | 4 interpretatiemethoden (Handleiding §3.5.3); rol jurisprudentie |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |
-| `.claude/skills/valideer/kaders.md` | A4b: testgevallenpatronen per regeltype, typeafleiding, algoritmisch bepaalbare uitvoer, minimumvereisten (≥ 3 kolommen) |

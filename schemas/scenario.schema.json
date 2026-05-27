@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scenario",
+  "title": "Juridisch scenario",
+  "description": "Een juridisch scenario uit Activiteit 1 (Handleiding §3.3): één te doorlopen pad van één burger of bedrijf. Wordt niet door de AI gegenereerd; dit schema dient om handmatig opgestelde scenario's te valideren en vanuit begrippen/regels te referentieren.",
+  "type": "object",
+  "required": ["scenario-id", "naam", "soort", "rechtssubject", "stappen"],
+  "additionalProperties": false,
+  "properties": {
+    "scenario-id": {
+      "type": "string",
+      "pattern": "^scen-[a-z0-9-]+$",
+      "description": "Unieke identificatie, bijv. scen-belastingschuldige-betaalt-tijdig"
+    },
+    "naam": { "type": "string", "minLength": 1 },
+    "soort": {
+      "type": "string",
+      "enum": ["happy", "variatie", "uitzondering", "grens"],
+      "description": "happy: het meest recht-toe-recht-aan praktijkvoorbeeld (Handleiding §3.3.3)"
+    },
+    "rechtssubject": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Fictieve naam met aanduiding van aard (natuurlijke of rechtspersoon), bijv. 'Jan de Groot (natuurlijke persoon)'"
+    },
+    "context": {
+      "type": "string",
+      "description": "Korte beschrijving van de context (locatie, tijdvak, situatie)"
+    },
+    "stappen": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stap-nr", "tijdstip", "gebeurtenis"],
+        "additionalProperties": false,
+        "properties": {
+          "stap-nr": { "type": "integer", "minimum": 1 },
+          "tijdstip": { "type": "string", "description": "ISO-datum of relatief moment" },
+          "gebeurtenis": { "type": "string", "minLength": 1 },
+          "rechtsfeit-id": { "type": ["string", "null"], "description": "begrip-id van het bijbehorende rechtsfeit, indien geclassificeerd" },
+          "rechtsbetrekking-id": { "type": ["string", "null"] },
+          "rechtsgevolg": { "type": ["string", "null"] },
+          "primaire-bronnen": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Lijst annotatie-ids of bronverwijzingen voor dit rechtsfeit"
+          }
+        }
+      }
+    },
+    "doel": {
+      "type": "string",
+      "description": "Vrije tekst — waarvoor dit scenario is opgesteld"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["concept", "gevalideerd"],
+      "default": "concept"
+    },
+    "geldigheid-van": { "type": "string", "format": "date" },
+    "geldigheid-tot": { "type": ["string", "null"], "format": "date" }
+  }
+}

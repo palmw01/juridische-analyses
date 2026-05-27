@@ -60,6 +60,23 @@
     "tussenresultaat": { "type": "boolean", "default": false },
     "prioriteit": { "type": ["integer", "null"], "description": "Uitvoeringsvolgorde bij meerdere toepasselijke Specialisatieregels; lager getal = hogere prioriteit; null bij overige regelsoorten" },
     "vervangt-regel-id": { "type": ["string", "null"] },
-    "gespecialiseerd-regel-id": { "type": ["string", "null"], "description": "Regel-id van de hoofdregel waarvan deze Specialisatieregel afwijkt; verplicht voor soort 'Specialisatieregel', null bij overige regelsoorten" }
+    "gespecialiseerd-regel-id": { "type": ["string", "null"], "description": "Regel-id van de hoofdregel waarvan deze Specialisatieregel afwijkt; verplicht voor soort 'Specialisatieregel', null bij overige regelsoorten" },
+    "bronnen-secundair": {
+      "type": "array",
+      "description": "A3d: secundaire bronnen (Leidraad, beleidsregels, jurisprudentie, MvT, kamerstukken) die de regel mede vormgeven. Primaire bron blijft annotatie-id.",
+      "items": {
+        "type": "object",
+        "required": ["soort", "vindplaats"],
+        "additionalProperties": false,
+        "properties": {
+          "soort": {
+            "type": "string",
+            "enum": ["leidraad", "beleidsregel", "memorie-van-toelichting", "jurisprudentie", "kamerstukken", "ander"]
+          },
+          "vindplaats": { "type": "string", "minLength": 1 },
+          "toelichting": { "type": ["string", "null"] }
+        }
+      }
+    }
   }
 }

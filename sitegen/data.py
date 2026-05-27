@@ -109,6 +109,8 @@ def laad_begrippen(project_root: Path) -> list[dict]:
             "vervangen_door": data.get("vervangen-door") or "",
             "voorbeelden": data.get("voorbeelden") or [],
             "kenmerken": data.get("kenmerken") or [],
+            "scenario_refs": data.get("scenario-refs") or [],
+            "bronnen_secundair": data.get("bronnen-secundair") or [],
         })
     return begrippen
 
@@ -187,6 +189,7 @@ def laad_regels(project_root: Path) -> list[dict]:
             "geldigheid_van": str(data.get("geldigheid-van") or ""),
             "geldigheid_tot": str(data.get("geldigheid-tot") or "") if data.get("geldigheid-tot") else "",
             "prioriteit": data.get("prioriteit"),
+            "bronnen_secundair": data.get("bronnen-secundair") or [],
         })
     return regels
 

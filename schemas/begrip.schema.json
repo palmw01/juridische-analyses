@@ -20,7 +20,7 @@
     },
     "soort-id": {
       "type": "boolean",
-      "description": "true als dit begrip dient als unieke sleutel (voorheen [id]-suffix)"
+      "description": "true als dit begrip dient als unieke sleutel (voorheen [id]-suffix). Moet altijd dezelfde waarde hebben als identificatiebegrip; het schema dwingt deze gelijkheid niet af."
     },
     "herkomst": { "type": "string", "enum": ["direct", "afgeleid"] },
     "status": { "type": "string", "enum": ["concept", "ter-review", "gevalideerd", "vervallen", "te-verrijken"] },
@@ -142,7 +142,7 @@
     },
     "identificatiebegrip": {
       "type": "boolean",
-      "description": "true als dit begrip een identificerend attribuut is van een entiteit (bijv. BSN voor belastingschuldige, aanslagnummer voor belastingaanslag). Zie ook soort-id, dat hetzelfde semantisch markeert; beide velden worden naast elkaar gebruikt voor backward-compatibiliteit."
+      "description": "true als dit begrip een identificerend attribuut is van een entiteit (bijv. BSN voor belastingschuldige, aanslagnummer voor belastingaanslag). Markeert dezelfde semantiek als soort-id en moet altijd dezelfde waarde hebben; het schema dwingt deze gelijkheid niet af."
     },
     "jas-klasse": {
       "type": "string",
@@ -182,6 +182,48 @@
       "type": "array",
       "description": "Juridische kenmerken of eigenschappen van het begrip",
       "items": { "type": "string", "minLength": 1 }
+    },
+    "scenario-refs": {
+      "type": "array",
+      "description": "A3c: juridische scenario's (uit A1) waarin dit begrip een rol speelt. Optioneel — leeg of weggelaten als A1 niet is uitgewerkt.",
+      "items": {
+        "type": "object",
+        "required": ["scenario-id", "rol"],
+        "additionalProperties": false,
+        "properties": {
+          "scenario-id": {
+            "type": "string",
+            "description": "Verwijst naar een bestand in scenarios/{scenario-id}.yaml"
+          },
+          "rol": {
+            "type": "string",
+            "enum": ["rechtssubject", "rechtsobject", "voorwaarde", "uitvoer", "context"],
+            "description": "Rol van dit begrip in het scenario"
+          },
+          "toelichting": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "bronnen-secundair": {
+      "type": "array",
+      "description": "A3d: secundaire bronnen (Leidraad, beleidsregels, jurisprudentie, MvT, kamerstukken) die de betekenis van dit begrip mede vormen. Primaire bron blijft markeringen[].bron-annotatie-id.",
+      "items": {
+        "type": "object",
+        "required": ["soort", "vindplaats"],
+        "additionalProperties": false,
+        "properties": {
+          "soort": {
+            "type": "string",
+            "enum": ["leidraad", "beleidsregel", "memorie-van-toelichting", "jurisprudentie", "kamerstukken", "ander"]
+          },
+          "vindplaats": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Concrete vindplaats, bijv. 'LI 2008 §9.5' of 'HR 2 oktober 2020, ECLI:NL:HR:2020:1559'"
+          },
+          "toelichting": { "type": ["string", "null"] }
+        }
+      }
     }
   }
 }

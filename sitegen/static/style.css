@@ -716,3 +716,29 @@ footer{
 @media(max-width:479px){.hide-xs{display:none!important}}
 @media(min-width:768px){.hide-md{display:none!important}}
 @media(max-width:767px){.show-md{display:none!important}}
+
+/* ── Voortgangsdashboard ── */
+.voortgang-totalen{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:0.75rem;margin:1rem 0 1.5rem;
+}
+.kpi{
+  background:var(--bg-soft,#f5f7fa);border:1px solid var(--border,#e1e4e8);
+  border-radius:6px;padding:0.75rem 1rem;display:flex;flex-direction:column;
+}
+.kpi-label{font-size:0.85rem;color:var(--muted,#586069);}
+.kpi-waarde{font-size:1.4rem;font-weight:600;color:var(--primary,#154273);}
+.voortgang-tabel{width:100%;border-collapse:collapse;margin:1rem 0;}
+.voortgang-tabel th,
+.voortgang-tabel td{padding:0.5rem 0.75rem;border-bottom:1px solid var(--border,#e1e4e8);text-align:left;}
+.voortgang-tabel th{background:var(--bg-soft,#f5f7fa);font-weight:600;}
+.voortgang-cel{
+  display:inline-block;min-width:2.2em;padding:0.15rem 0.5rem;border-radius:4px;
+  font-family:monospace;font-size:0.95rem;text-align:center;
+}
+.cel-leeg{background:#f0f0f0;color:#999;}
+.cel-stub{background:#fff3cd;color:#856404;}
+.cel-compleet{background:#d4edda;color:#155724;}
+.cel-waarschuwing{background:#ffe5b4;color:#9c5400;}
+.voortgang-legenda ul{list-style:none;padding:0;display:flex;gap:1.2rem;flex-wrap:wrap;}
+.voortgang-legenda li{display:flex;align-items:center;gap:0.4rem;}

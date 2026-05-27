@@ -356,6 +356,21 @@ def validate_integrity_begrip(data: dict, filepath: Path, begrip_index: dict, pr
                 f"[L2] uitvoer-van-regel-id: regel '{uitvoer_slug}' niet gevonden in regels/"
             )
 
+    # scenario-refs (A3c): scenario-id moet bestaan in scenarios/
+    scenario_refs: list[dict] = data.get("scenario-refs") or []
+    if scenario_refs:
+        scenarios_dir = project_root / "scenarios"
+        for i, ref in enumerate(scenario_refs):
+            sid = ref.get("scenario-id", "") if isinstance(ref, dict) else ""
+            if not sid:
+                continue
+            scen_pad = scenarios_dir / f"{sid}.yaml"
+            if not scen_pad.exists():
+                errors.append(
+                    f"[L2] scenario-refs[{i}].scenario-id: scenario '{sid}' niet gevonden "
+                    f"als scenarios/{sid}.yaml"
+                )
+
     return errors
 
 
@@ -530,7 +545,7 @@ def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[P
     if scenario_signaal:
         warnings.append(
             f"[L3] begripsnaam '{begripsnaam}' bevat scenario-specifiek detail ({scenario_signaal}) — "
-            "kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+            "kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
         )
 
     # Kern eindigt op een punt (conventies-check)
@@ -616,6 +631,15 @@ def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[P
                         f"'brondefinitie' maar is niet primair — primaire markering(en) {primair_info} "
                         f"hebben een niet-definitoire klasse; overweeg de brondefinitie als primaire markering"
                     )
+
+    # A3c — scenario-koppeling voor rechtsbetrekking/rechtsfeit-begrippen
+    jas_klasse_top = data.get("jas-klasse", "")
+    scenario_refs = data.get("scenario-refs") or []
+    if jas_klasse_top in ("rechtsbetrekking", "rechtsfeit") and not scenario_refs:
+        warnings.append(
+            f"[L3] begrip met jas-klasse '{jas_klasse_top}' mist scenario-refs[] — "
+            "voeg via /begrip-scenario een koppeling toe aan een juridisch scenario (A3c)"
+        )
 
     return warnings
 

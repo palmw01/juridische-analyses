@@ -14,6 +14,7 @@ from sitegen.pages.kwaliteit import gen_kwaliteit
 from sitegen.pages.regels import gen_regels
 from sitegen.pages.search import gen_search
 from sitegen.pages.sparql import gen_sparql
+from sitegen.pages.voortgang import gen_voortgang
 
 
 def main():
@@ -49,6 +50,7 @@ def main():
     gen_artikel_indices(out, artikel_indices, annotaties)
     gen_regels(out, regels, begrippen, annotaties, waarschuwingen, meta, voorbeeldreeksen)
     gen_kwaliteit(out, waarschuwingen, meta)
+    gen_voortgang(out, annotaties, begrippen, regels, voorbeeldreeksen)
     gen_graph(out, begrippen, regels, annotaties)
     gen_search(out, begrippen, annotaties, regels)
     gen_sparql(out)

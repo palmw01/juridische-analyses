@@ -3,7 +3,7 @@
   "waarschuwingen": [
     {
       "bestand": "begrippen/31-december.yaml",
-      "boodschap": "[L3] begripsnaam '31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam '31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/alsmede.yaml",
@@ -11,15 +11,19 @@
     },
     {
       "bestand": "begrippen/dagtekening-28-februari.yaml",
-      "boodschap": "[L3] begripsnaam 'dagtekening-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'dagtekening-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/dagtekening-31-oktober.yaml",
-      "boodschap": "[L3] begripsnaam 'dagtekening-31-oktober' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'dagtekening-31-oktober' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/dagtekening-in-november-of-eerder.yaml",
-      "boodschap": "[L3] begripsnaam 'dagtekening-in-november-of-eerder' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'dagtekening-in-november-of-eerder' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
+    },
+    {
+      "bestand": "begrippen/invorderbaarheid.yaml",
+      "boodschap": "[L3] begrip met jas-klasse 'rechtsbetrekking' mist scenario-refs[] — voeg via /begrip-scenario een koppeling toe aan een juridisch scenario (A3c)"
     },
     {
       "bestand": "begrippen/rijksbelastingen.yaml",
@@ -27,19 +31,19 @@
     },
     {
       "bestand": "begrippen/termijn-eindigt-voor-31-december.yaml",
-      "boodschap": "[L3] begripsnaam 'termijn-eindigt-voor-31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'termijn-eindigt-voor-31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/vervaldag-31-december.yaml",
-      "boodschap": "[L3] begripsnaam 'vervaldag-31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'vervaldag-31-december' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/vervaldag-normaal-jaar-28-februari.yaml",
-      "boodschap": "[L3] begripsnaam 'vervaldag-normaal-jaar-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'vervaldag-normaal-jaar-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "begrippen/vervaldag-schrikkeljaar-28-februari.yaml",
-      "boodschap": "[L3] begripsnaam 'vervaldag-schrikkeljaar-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/begrip/valkuilen.md V1)"
+      "boodschap": "[L3] begripsnaam 'vervaldag-schrikkeljaar-28-februari' bevat scenario-specifiek detail (bevat een maandnaam) — kies een naam die de juridische rol beschrijft i.p.v. het voorbeeld (zie .claude/skills/kaders/begripsnaam.md §Scenario-specifieke valkuil)"
     },
     {
       "bestand": "validaties/VR-BWBR0004770-art9-lid5-d.yaml",

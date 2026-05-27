@@ -7,6 +7,7 @@ from sitegen.config import JAS_KLEUREN
 def gen_nav(active: str = "", p: str = "") -> str:
     items = [
         (f"{p}index.html", "Dashboard"),
+        (f"{p}voortgang.html", "Voortgang"),
         (f"{p}begrippen.html", "Begrippen"),
         (f"{p}annotaties.html", "Annotaties"),
         (f"{p}regels.html", "Regels"),
