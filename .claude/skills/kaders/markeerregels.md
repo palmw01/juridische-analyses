@@ -15,12 +15,9 @@
 4. **Voorwaarde-markering: gehele zin of zinsdeel** waarin de voorwaarde omschreven wordt, inclusief voegwoord (indien, als, tenzij, mits).
 5. **Werk meteen met concrete voorbeelden.** Dat maakt scherp wat je wel/niet in de markering meeneemt.
 6. **Start bij de klasse die gecreëerd of afgeleid wordt** — niet bij de context. Identificeer dezelfde betekenis daarna in andere tekststukjes.
-
-## Projectconventie
-
-- **Begin diagrammatisch bij de centrale klassen** rechtsbetrekking en rechtsfeit (Handleiding p. 34); zie `diagramregels.md`.
-- **Markeringen mogen overlappen.** Dezelfde wetsformulering kan meerdere klassen krijgen (Handleiding §3.4.2b). Eén rij per klasse in de annotatietabel; zelfde markering mag herhaald worden.
-- **Diagram-gedreven, niet uitputtend.** Markeer niet de volledige wet, maar de wetsformuleringen die deel uitmaken van het diagram van een centrale klasse of daarmee samenhangen — elk gemarkeerd fragment wordt wél volledig geclassificeerd.
+7. **Begin bij de centrale klassen** rechtsbetrekking en rechtsfeit (Handleiding p. 34); zie `diagramregels.md`.
+8. **Markeringen mogen overlappen.** Dezelfde wetsformulering kan meerdere klassen krijgen (Handleiding §3.4.2b).
+   - **Projectconventie:** één rij per klasse in de annotatietabel; dezelfde markering mag herhaald worden.
 
 ## Klasse-specifieke markeringsregels
 
@@ -52,4 +49,4 @@
 ☐ tijdsaanduiding  ☐ plaatsaanduiding
 ```
 
-Niet alle 13 hoeven aanwezig te zijn in elk lid — afvinken markeert alleen dat je elke klasse hebt overwogen.
+Niet alle 13 hoeven aanwezig te zijn in elk lid — afvinken markeert alleen dat je elke klasse hebt overwogen. Elk gemarkeerd fragment wordt volledig geclassificeerd; geen half-ingevulde rijen.
