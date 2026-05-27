@@ -486,3 +486,41 @@ def test_vr_leeg_afleidingsregel_id_geen_fout(tmp_path):
     data = _maak_vr(**{"afleidingsregel-id": ""})
     idx = build_begrip_index(project)
     assert validate_integrity_voorbeeldreeks(data, DUMMY, idx, project) == []
+
+
+# ===== scenario-refs integriteit (A3c) =====
+
+def test_begrip_scenario_refs_bestaand_scenario_geen_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    scenarios_dir = tmp_path / "scenarios"
+    scenarios_dir.mkdir()
+    (scenarios_dir / "scen-001.yaml").write_text("scenario-id: scen-001\n")
+    data = maak_begrip(**{"scenario-refs": [{"scenario-id": "scen-001", "rol": "rechtssubject"}]})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert not any("scenario" in e for e in errors)
+
+
+def test_begrip_scenario_refs_ontbrekend_scenario_geeft_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    (tmp_path / "scenarios").mkdir()
+    data = maak_begrip(**{"scenario-refs": [{"scenario-id": "scen-ontbreekt", "rol": "rechtssubject"}]})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert any("scen-ontbreekt" in e for e in errors)
+
+
+def test_begrip_scenario_refs_leeg_scenario_id_overgeslagen(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip(**{"scenario-refs": [{"scenario-id": "", "rol": "rechtssubject"}]})
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert not any("scenario" in e for e in errors)
+
+
+def test_begrip_geen_scenario_refs_geen_fout(tmp_path):
+    project = leeg_project(tmp_path)
+    data = maak_begrip()
+    idx = build_begrip_index(project)
+    errors = validate_integrity_begrip(data, DUMMY, idx, project)
+    assert not any("scenario" in e for e in errors)

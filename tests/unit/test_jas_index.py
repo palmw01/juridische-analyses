@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
 from jas_index_lib import (
     haal_kern,
@@ -10,6 +11,14 @@ from jas_index_lib import (
     load_yaml,
     load_json,
     slug_from_begrip_id,
+    stub_annotatie_index,
+    stub_annotatie_lid,
+    stub_annotatierij,
+    stub_begrip,
+    stub_regel,
+    stub_voorbeeldreeks,
+    schrijf_yaml,
+    schrijf_json,
 )
 
 
@@ -203,3 +212,180 @@ def test_slug_from_begrip_id_zonder_pad():
 
 def test_slug_from_begrip_id_leeg():
     assert slug_from_begrip_id("") == ""
+
+
+# ---------- stub_annotatie_index ----------
+
+def test_stub_annotatie_index_basisvelden():
+    result = stub_annotatie_index("BWBR0004770", "IW 1990", "9", "2026-01-01", "H1 > Art 9")
+    assert result["artikel-id"] == "BWBR0004770/art9"
+    assert result["bwb-id"] == "BWBR0004770"
+    assert result["leden-annotaties"] == []
+    assert result["kruisreferenties"] == []
+
+
+def test_stub_annotatie_index_met_kruisreferenties():
+    refs = ["BWBR0002657/art1"]
+    result = stub_annotatie_index("BWBR0004770", "IW 1990", "9", "2026-01-01", "H1", refs)
+    assert result["kruisreferenties"] == refs
+
+
+def test_stub_annotatie_index_kruisreferenties_none():
+    result = stub_annotatie_index("BWBR0004770", "IW 1990", "9", "2026-01-01", "H1", None)
+    assert result["kruisreferenties"] == []
+
+
+# ---------- stub_annotatie_lid ----------
+
+def test_stub_annotatie_lid_basisvelden():
+    result = stub_annotatie_lid("BWBR0004770", "IW 1990", "9", "1", "2026-01-01", "H1 > Art 9", "De tekst.")
+    assert result["annotatie-id"] == "BWBR0004770/art9/lid1"
+    assert result["wetstekst"] == "De tekst."
+    assert result["annotatierijen"] == []
+    assert result["kruisreferenties"] == []
+
+
+def test_stub_annotatie_lid_artikel_en_lid():
+    result = stub_annotatie_lid("BWBR0004770", "IW", "2", "2", "2026-01-01", "H1", "tekst")
+    assert result["artikel"] == "2"
+    assert result["lid"] == "2"
+
+
+# ---------- stub_annotatierij ----------
+
+def test_stub_annotatierij_basisvelden():
+    result = stub_annotatierij("r-001", "de belastingplichtige", "rechtssubject",
+                                "grammaticaal", "BWBR/art9/lid1/bp", "rechtssubject-toelichting")
+    assert result["rij-id"] == "r-001"
+    assert result["jas-klasse"] == "rechtssubject"
+    assert result["signalering"] is None
+
+
+def test_stub_annotatierij_met_signalering():
+    result = stub_annotatierij("r-001", "tekst", "variabele", "grammaticaal",
+                                "BWBR/art9/lid1/x", "variabele-toelichting", "A5")
+    assert result["signalering"] == "A5"
+
+
+def test_stub_annotatierij_none_waarden_doorgestuurd():
+    result = stub_annotatierij("r-001", "tekst", None, None, "BWBR/art9/lid1/x", "")
+    assert result["jas-klasse"] is None
+    assert result["interpretatiemethode"] is None
+
+
+# ---------- stub_begrip ----------
+
+def test_stub_begrip_basisstructuur():
+    result = stub_begrip("BWBR0004770", "9", "1", "belastingschuldige",
+                          "rechtssubject", "de belastingschuldige", "grammaticaal", "2026-01-01")
+    assert result["begrip-id"] == "BWBR0004770/art9/lid1/belastingschuldige"
+    assert result["herkomst"] == "direct"
+    assert result["status"] == "concept"
+    assert result["definitie"] == {"kern": "", "contexten": []}
+    assert len(result["markeringen"]) == 1
+
+
+def test_stub_begrip_afleidingsregel_herkomst_afgeleid():
+    result = stub_begrip("BWBR0004770", "9", "1", "invorderbaarheid",
+                          "afleidingsregel", "is invorderbaar", "grammaticaal", "2026-01-01")
+    assert result["herkomst"] == "afgeleid"
+
+
+def test_stub_begrip_toelichting_klasse_placeholder():
+    result = stub_begrip("BWBR0004770", "9", "1", "slug", "variabele", "tekst", "grammaticaal", "2026-01-01")
+    assert "stub" in result["toelichting-klasse"]
+
+
+def test_stub_begrip_toelichting_klasse_opgegeven():
+    result = stub_begrip("BWBR0004770", "9", "1", "slug", "variabele", "tekst",
+                          "grammaticaal", "2026-01-01", toelichting_klasse="mijn toelichting")
+    assert result["toelichting-klasse"] == "mijn toelichting"
+
+
+# ---------- stub_regel ----------
+
+def test_stub_regel_basisvelden():
+    result = stub_regel("BWBR0004770", "9", "1", "a", "bepalen invorderbaarheid", "Beslissingsregel", "2026-01-01")
+    assert result["regel-id"] == "AR-BWBR0004770-art9-lid1-a"
+    assert result["soort"] == "Beslissingsregel"
+    assert result["invoer"] == []
+    assert result["uitvoer"] == []
+    assert result["tussenresultaat"] is False
+
+
+def test_stub_regel_met_rechtsfeit_id():
+    result = stub_regel("BWBR0004770", "9", "1", "a", "naam", "Beslissingsregel", "2026-01-01", "rf-001")
+    assert result["rechtsfeit-id"] == "rf-001"
+
+
+def test_stub_regel_annotatie_id():
+    result = stub_regel("BWBR0004770", "9", "1", "a", "naam", "Beslissingsregel", "2026-01-01")
+    assert result["annotatie-id"] == "BWBR0004770/art9/lid1"
+
+
+# ---------- stub_voorbeeldreeks ----------
+
+def test_stub_voorbeeldreeks_basisvelden():
+    result = stub_voorbeeldreeks("AR-BWBR0004770-art9-lid1-a", "naam", "2026-01-01", "2026-05-01")
+    assert result["voorbeeldreeks-id"] == "VR-BWBR0004770-art9-lid1-a"
+    assert result["afleidingsregel-id"] == "AR-BWBR0004770-art9-lid1-a"
+    assert result["status"] == "concept"
+    assert result["kolommen"] == []
+
+
+def test_stub_voorbeeldreeks_geen_ar_prefix_geeft_valueerror():
+    with pytest.raises(ValueError, match="AR-"):
+        stub_voorbeeldreeks("VR-fout", "naam", "2026-01-01", "2026-05-01")
+
+
+def test_stub_voorbeeldreeks_naam_en_datums():
+    result = stub_voorbeeldreeks("AR-BWBR-art1-lid1-a", "mijn naam", "2026-01-01", "2026-03-15")
+    assert result["naam"] == "mijn naam"
+    assert result["peildatum"] == "2026-01-01"
+    assert result["aangemaakt-op"] == "2026-03-15"
+
+
+# ---------- schrijf_yaml ----------
+
+def test_schrijf_yaml_maakt_bestand(tmp_path):
+    pad = tmp_path / "test.yaml"
+    schrijf_yaml(pad, {"naam": "belastingplichtige", "soort": "entiteit"})
+    assert pad.exists()
+    geladen = yaml.safe_load(pad.read_text())
+    assert geladen["naam"] == "belastingplichtige"
+
+
+def test_schrijf_yaml_maakt_parent_aan(tmp_path):
+    pad = tmp_path / "sub" / "test.yaml"
+    schrijf_yaml(pad, {"x": 1})
+    assert pad.exists()
+
+
+def test_schrijf_yaml_unicode_bewaard(tmp_path):
+    pad = tmp_path / "test.yaml"
+    schrijf_yaml(pad, {"naam": "naïviteit"})
+    tekst = pad.read_text(encoding="utf-8")
+    assert "naïviteit" in tekst
+
+
+# ---------- schrijf_json ----------
+
+def test_schrijf_json_maakt_bestand(tmp_path):
+    pad = tmp_path / "test.json"
+    schrijf_json(pad, {"bwb-id": "BWBR0004770"})
+    assert pad.exists()
+    import json as _json
+    geladen = _json.loads(pad.read_text())
+    assert geladen["bwb-id"] == "BWBR0004770"
+
+
+def test_schrijf_json_maakt_parent_aan(tmp_path):
+    pad = tmp_path / "sub" / "test.json"
+    schrijf_json(pad, {"x": 1})
+    assert pad.exists()
+
+
+def test_schrijf_json_eindigt_met_newline(tmp_path):
+    pad = tmp_path / "test.json"
+    schrijf_json(pad, {"x": 1})
+    assert pad.read_text().endswith("\n")

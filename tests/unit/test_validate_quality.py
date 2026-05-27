@@ -454,3 +454,32 @@ def test_vr_is_invoer_nee_telt_niet_mee_als_open_beoordeling():
     data["kolommen"][0]["is-voorspelling-juist"] = "?"
     warnings = validate_quality_voorbeeldreeks(data, DUMMY)
     assert not any("is-voorspelling-juist=?" in w for w in warnings)
+
+
+# ===== A3c — scenario-refs L3-waarschuwing =====
+
+def test_begrip_rechtsbetrekking_zonder_scenario_refs_geeft_l3_warning():
+    data = maak_begrip(**{"jas-klasse": "rechtsbetrekking", "scenario-refs": []})
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("scenario-refs" in w for w in warnings)
+
+
+def test_begrip_rechtsfeit_zonder_scenario_refs_geeft_l3_warning():
+    data = maak_begrip(**{"jas-klasse": "rechtsfeit", "scenario-refs": []})
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("scenario-refs" in w for w in warnings)
+
+
+def test_begrip_rechtsbetrekking_met_scenario_refs_geen_warning():
+    data = maak_begrip(**{
+        "jas-klasse": "rechtsbetrekking",
+        "scenario-refs": [{"scenario-id": "scen-001", "rol": "rechtssubject"}],
+    })
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("scenario-refs" in w for w in warnings)
+
+
+def test_begrip_andere_klasse_zonder_scenario_refs_geen_warning():
+    data = maak_begrip(**{"jas-klasse": "variabele", "scenario-refs": []})
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("scenario-refs" in w for w in warnings)
