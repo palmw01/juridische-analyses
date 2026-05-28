@@ -38,6 +38,7 @@ Beginnende TaskList:
 [ ] wettenbank — art. [A] [W] ophalen          (skip als bronnen/[B]/art[A].json bestaat)
 [ ] annoteer-markeer — Flow A index            (skip als annotaties/[B]/art[A].json bestaat)
 [ ] annoteer-markeer — Flow B lid [L]          (skip als annotaties/[B]/art[A]-lid[L].json bestaat)
+[ ] tekstdekkings-controle — lid [L]
 [ ] annoteer-classificeer — lid [L]
 [ ] annoteer-diagram — lid [L]
 [ ] begrip-XXX  (één per stub; toegevoegd ná annoteer-markeer)
@@ -67,6 +68,16 @@ Als `annotaties/[B]/art[A].json` ontbreekt: roep de sub-skill aan om de index-JS
 ### 3. annoteer-markeer (Flow B)
 
 Als `annotaties/[B]/art[A]-lid[L].json` ontbreekt: roep de sub-skill aan om markeringen + begrip-stubs te maken. Verzamel de lijst van nieuwe begrip-stubs voor stappen 6.
+
+### 3.5. tekstdekkings-controle (vóór classificeren)
+
+Voer de tekstdekkings-volledigheidscheck uit op `annotaties/[B]/art[A]-lid[L].json`:
+
+```
+tools/.venv/bin/python tools/validate_note.py --file annotaties/[B]/art[A]-lid[L].json
+```
+
+Inspecteer de L3-meldingen **"niet-gemarkeerde wetstekst"** en **"markering niet teruggevonden in wetstekst"** (Handleiding §3.4.2a). Bij ongedekte betekenisvolle fragmenten: vul de ontbrekende markeringen aan (her-run de `annoteer-markeer`-logica voor het lid) vóór je classificeert. Niet-blokkerend (L3), maar log het resultaat — opgelost of bewust geaccepteerd — in het run-rapport.
 
 ### 4. annoteer-classificeer
 

@@ -42,8 +42,23 @@ WAARSCHUWINGEN
   validaties/VR-BWBR0024096-art9-par1-b.yaml
     [L3] 1 kolom(men) met is-voorspelling-juist=? — juridische beoordeling vereist
     [L3] status is 'concept' — nog niet gereviseerd of gevalideerd
+  annotaties/BWBR0004770/art2-lid2.json
+    [L3] niet-gemarkeerde wetstekst: 5 fragment(en) niet gedekt door een markering — controleer of elk stukje tekst geclassificeerd is (Handleiding §3.4.2a; .claude/skills/kaders/markeerregels.md): "Deze wet verstaat mede onder:
+
+a.", ";
+b.", ";
+c.", ";
+d.", ";
+e."
+  annotaties/BWBR0004770/art9-lid5.json
+    [L3] markering niet teruggevonden in wetstekst (mogelijke typo/drift): "is ... invorderbaar", "een belastingaanslag" — markering moet een letterlijk fragment van de wetstekst zijn (.claude/skills/kaders/markeerregels.md)
+  annotaties/BWBR0024096/par9-1.json
+    [L3] niet-gemarkeerde wetstekst: 2 fragment(en) niet gedekt door een markering — controleer of elk stukje tekst geclassificeerd is (Handleiding §3.4.2a; .claude/skills/kaders/markeerregels.md): "**[9.1]** In de gevallen waarin voor voorlopige aanslagen (b", ", toepassing van de [wet](jci1.3:c:BWBR0004770) er toe zou l"
+    [L3] markering niet teruggevonden in wetstekst (mogelijke typo/drift): "voor voorlopige aanslagen (bedoeld in artikel 9, vijfde lid,", "toepassing van de wet er toe zou leiden dat de enige of laat" — markering moet een letterlijk fragment van de wetstekst zijn (.claude/skills/kaders/markeerregels.md)
+  annotaties/BWBR0024096/par9-5.json
+    [L3] niet-gemarkeerde wetstekst: 3 fragment(en) niet gedekt door een markering — controleer of elk stukje tekst geclassificeerd is (Handleiding §3.4.2a; .claude/skills/kaders/markeerregels.md): ", dan houdt dat in dat", ", dan vervalt de betalingstermijn van een maand op 31 maart ", ". Als de dagtekening bijvoorbeeld 15 maart is, vervalt de te"
 
 GESLAAGD: 82 bestanden
 BLOKKEERFOUTEN: 0
-WAARSCHUWINGEN: 19
+WAARSCHUWINGEN: 24
 ```

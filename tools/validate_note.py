@@ -654,6 +654,79 @@ def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[P
     return warnings
 
 
+# Tekstdekkings-check: triviale gaten die geen betekenisvolle ongemarkeerde
+# wetstekst vormen (louter whitespace/leestekens of verbindende woorden).
+_DEKKING_LEESTEKENS = re.compile(r"^[\s\W]+$")
+_DEKKING_STOPWOORDEN = frozenset(
+    {
+        "en", "of", "te", "de", "het", "een", "is", "in", "op", "met",
+        "dan", "ook", "bij", "aan", "voor", "door", "als", "dat", "die",
+    }
+)
+
+
+def _dekking_gat_is_triviaal(gat: str) -> bool:
+    """Een gat is triviaal als het leeg is, alleen leestekens/whitespace bevat,
+    of uitsluitend uit verbindende stopwoorden bestaat."""
+    kern = gat.strip()
+    if not kern:
+        return True
+    if _DEKKING_LEESTEKENS.match(kern):
+        return True
+    return all(token.lower() in _DEKKING_STOPWOORDEN for token in kern.split())
+
+
+def compute_uncovered_fragments(
+    wetstekst: str, markeringen: list[str]
+) -> tuple[list[str], list[str]]:
+    """Retourneer (ongedekte_fragmenten, drift_markeringen).
+
+    ongedekte_fragmenten: betekenisvolle stukken wetstekst die door geen enkele
+    markering gedekt worden (tekstdekkings-volledigheidscheck, Handleiding §3.4.2a).
+    drift_markeringen: markeringen die niet als letterlijk fragment in de
+    wetstekst voorkomen (mogelijke typo/drift).
+    """
+    if not wetstekst.strip():
+        return [], []
+
+    spans: list[tuple[int, int]] = []
+    drift: list[str] = []
+    for markering in markeringen:
+        if not markering:
+            continue
+        pos = wetstekst.find(markering)
+        if pos == -1:
+            drift.append(markering)
+            continue
+        while pos != -1:
+            spans.append((pos, pos + len(markering)))
+            pos = wetstekst.find(markering, pos + 1)
+
+    spans.sort()
+    samengevoegd: list[tuple[int, int]] = []
+    for start, eind in spans:
+        if samengevoegd and start <= samengevoegd[-1][1]:
+            vorige_start, vorige_eind = samengevoegd[-1]
+            samengevoegd[-1] = (vorige_start, max(vorige_eind, eind))
+        else:
+            samengevoegd.append((start, eind))
+
+    uncovered: list[str] = []
+    cursor = 0
+    for start, eind in samengevoegd:
+        if start > cursor:
+            gat = wetstekst[cursor:start]
+            if not _dekking_gat_is_triviaal(gat):
+                uncovered.append(gat.strip())
+        cursor = max(cursor, eind)
+    if cursor < len(wetstekst):
+        gat = wetstekst[cursor:]
+        if not _dekking_gat_is_triviaal(gat):
+            uncovered.append(gat.strip())
+
+    return uncovered, drift
+
+
 def validate_quality_annotatie_lid(data: dict, filepath: Path) -> list[str]:
     """Laag 3: Kwaliteitscontrole voor annotatie-lid bestanden."""
     warnings = []
@@ -675,6 +748,26 @@ def validate_quality_annotatie_lid(data: dict, filepath: Path) -> list[str]:
             "[L3] annotatie-id is een paragraaf-bron maar sectie-veld is leeg — "
             "vul sectie in (bijv. '9.1')"
         )
+
+    # Tekstdekkings-volledigheidscheck (Handleiding §3.4.2a)
+    wetstekst = data.get("wetstekst") or ""
+    markeringen = [rij.get("markering", "") for rij in rijen if rij.get("markering")]
+    if wetstekst.strip() and markeringen:
+        uncovered, drift = compute_uncovered_fragments(wetstekst, markeringen)
+        if uncovered:
+            frags = ", ".join(f'"{f[:60]}"' for f in uncovered)
+            warnings.append(
+                f"[L3] niet-gemarkeerde wetstekst: {len(uncovered)} fragment(en) niet gedekt "
+                f"door een markering — controleer of elk stukje tekst geclassificeerd is "
+                f"(Handleiding §3.4.2a; .claude/skills/kaders/markeerregels.md): {frags}"
+            )
+        if drift:
+            ds = ", ".join(f'"{m[:60]}"' for m in drift)
+            warnings.append(
+                f"[L3] markering niet teruggevonden in wetstekst (mogelijke typo/drift): {ds} — "
+                f"markering moet een letterlijk fragment van de wetstekst zijn "
+                f"(.claude/skills/kaders/markeerregels.md)"
+            )
 
     return warnings
 

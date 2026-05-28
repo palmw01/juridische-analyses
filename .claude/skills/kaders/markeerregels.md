@@ -40,7 +40,21 @@
 
 ## Volledigheidscheck (intern)
 
-13 hoofdklassen afvinken voor elk geannoteerd lid:
+### Primair: tekstdekking
+
+> **Bron:** Handleiding §3.4.2a (p. 33): "een lidwoord neem je mee in de markering … Dit maakt een volledigheidscheck mogelijk (is elk stukje tekst geclassificeerd)."
+
+De volledigheidscheck is een **tekstdekkings-check**, niet een klasse-afvinklijst. Loop de `wetstekst` van het lid van begin tot eind door en controleer:
+
+- Is **elk betekenisvol stukje tekst** gedekt door minstens één markering?
+- Lidwoorden, verwijzingen en voorwaardezinnen horen **volledig binnen** een markering te vallen (niet half).
+- Wat bewust níét gemarkeerd is, mag alleen louter verbindend zijn (leestekens, voegwoorden zonder eigen betekenisdrager).
+
+De tooling toetst dit mee: `validate_note.py` geeft een L3-waarschuwing **"niet-gemarkeerde wetstekst"** voor ongedekte betekenisvolle fragmenten en **"markering niet teruggevonden in wetstekst"** wanneer een markering geen letterlijk fragment van de wetstekst is. Skill en validator hanteren dezelfde norm.
+
+### Secundair hulpmiddel: klasse-overweging
+
+Naast de tekstdekking helpt het om per JAS-hoofdklasse te controleren of je een aanwezig fragment hebt overwogen. Dit is een hulpmiddel, niet de volledigheidsmaat zelf:
 
 ```
 ☐ rechtssubject    ☐ rechtsobject    ☐ rechtsbetrekking

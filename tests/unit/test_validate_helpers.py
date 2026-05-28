@@ -17,6 +17,7 @@ from validate_note import (
     validate_integrity_annotatie_lid,
     validate_quality_annotatie_lid,
     validate_quality_annotatie_index,
+    compute_uncovered_fragments,
     validate_file,
     format_rapport_text,
     format_rapport_json,
@@ -338,6 +339,116 @@ def test_quality_annotatie_lid_par_met_sectie_geen_warning():
     }
     warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
     assert not any("paragraaf-bron" in w for w in warnings)
+
+
+# ===== tekstdekkings-check (compute_uncovered_fragments + quality-lid) =====
+
+def _lid_met_dekking(wetstekst, markeringen):
+    return {
+        "annotatie-id": "BWBR0004770/art9/lid1",
+        "wetstekst": wetstekst,
+        "annotatierijen": [
+            {"rij-id": f"r{i}", "markering": m} for i, m in enumerate(markeringen, 1)
+        ],
+        "diagram": {
+            "knopen": [{"id": "k1"}, {"id": "k2"}],
+            "kanten": [{"van": "k1", "naar": "k2"}],
+        },
+    }
+
+
+def test_quality_lid_volledige_dekking_geen_warning():
+    data = _lid_met_dekking(
+        "Een belastingaanslag is invorderbaar.",
+        ["Een belastingaanslag", "is invorderbaar"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert not any("niet-gemarkeerde wetstekst" in w for w in warnings)
+
+
+def test_quality_lid_gemist_fragment_geeft_warning():
+    data = _lid_met_dekking(
+        "Een belastingaanslag is invorderbaar zes weken na de dagtekening.",
+        ["Een belastingaanslag", "is invorderbaar"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert any("niet-gemarkeerde wetstekst" in w for w in warnings)
+    assert any("zes weken na de dagtekening" in w for w in warnings)
+
+
+def test_quality_lid_markering_niet_substring_geeft_drift_warning():
+    data = _lid_met_dekking(
+        "Een belastingaanslag is invorderbaar.",
+        ["Een belastingaanslag", "is invorderbaar", "een aanslagbiljet"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert any("mogelijke typo/drift" in w for w in warnings)
+
+
+def test_quality_lid_alleen_leestekens_gap_geen_warning():
+    data = _lid_met_dekking(
+        "Een belastingaanslag, is invorderbaar.",
+        ["Een belastingaanslag", "is invorderbaar"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert not any("niet-gemarkeerde wetstekst" in w for w in warnings)
+
+
+def test_quality_lid_alleen_connectieven_gap_geen_warning():
+    data = _lid_met_dekking(
+        "de ontvanger en de belastingschuldige",
+        ["de ontvanger", "de belastingschuldige"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert not any("niet-gemarkeerde wetstekst" in w for w in warnings)
+
+
+def test_quality_lid_overlappende_markeringen_correct():
+    data = _lid_met_dekking(
+        "zes weken na de dagtekening",
+        ["zes weken na de dagtekening", "zes weken", "de dagtekening"],
+    )
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert not any("niet-gemarkeerde wetstekst" in w for w in warnings)
+
+
+def test_quality_lid_lege_annotatierijen_geen_coverage_warning():
+    data = {
+        "annotatie-id": "BWBR0004770/art9/lid1",
+        "wetstekst": "Een belastingaanslag is invorderbaar.",
+        "annotatierijen": [],
+        "diagram": {"knopen": [], "kanten": []},
+    }
+    warnings = validate_quality_annotatie_lid(data, Path("/tmp/test.json"))
+    assert any("annotatierijen leeg" in w for w in warnings)
+    assert not any("niet-gemarkeerde wetstekst" in w for w in warnings)
+
+
+def test_compute_uncovered_fragments_duplicaat_alle_occurrences():
+    uncovered, drift = compute_uncovered_fragments(
+        "de aanslag en de aanslag", ["de aanslag", "en"]
+    )
+    assert uncovered == []
+    assert drift == []
+
+
+def test_compute_uncovered_fragments_lege_wetstekst():
+    assert compute_uncovered_fragments("", ["x"]) == ([], [])
+
+
+def test_compute_uncovered_fragments_lege_markering_overgeslagen():
+    uncovered, drift = compute_uncovered_fragments("de aanslag", ["de aanslag", ""])
+    assert uncovered == []
+    assert drift == []
+
+
+def test_compute_uncovered_fragments_gat_in_het_midden():
+    uncovered, drift = compute_uncovered_fragments(
+        "de belastingaanslag is invorderbaar geworden",
+        ["de belastingaanslag", "geworden"],
+    )
+    assert uncovered == ["is invorderbaar"]
+    assert drift == []
 
 
 # ===== validate_quality_annotatie_index =====

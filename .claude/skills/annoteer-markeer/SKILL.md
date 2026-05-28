@@ -49,10 +49,11 @@ De skill kent drie flows; kies de juiste op basis van de trigger. Slug-conventie
    - markeringen mogen overlappen — één rij per klasse
    - **Actieve check:** is het lid als geheel een als-dan-constructie (rechtsgevolg dat intreedt zodra een voorwaarde is vervuld)? Zo ja → voeg altijd een afleidingsregel-rij toe voor de volledige zin incl. punt (conform `kaders/markeerregels.md` tabel rij Afleidingsregel).
 6. Voor elke markering: roep `stub_annotatierij(rij_id, markering, jas_klasse=None, interpretatiemethode=None, begrip_id, toelichting_klasse="", signalering=None)` aan. `jas-klasse` en `interpretatiemethode` worden door `annoteer-classificeer` ingevuld; vul hier alleen een placeholder. `begrip-id` deterministisch: `[B]/art[A]/lid[L]/[slug]`.
-7. Voeg de rijen toe aan `annotatierijen[]` en schrijf met `schrijf_json`. **Niet valideren** — de annotatie-lid-JSON is na deze stap schema-invalid (jas-klasse = null); L1-validatie pas na `annoteer-diagram` (stap A2c).
-8. Voor elke unieke `begrip-id`: roep `stub_begrip(...)` aan en schrijf met `schrijf_yaml(Path("begrippen/[slug].yaml"), data)`. Als de YAML al bestaat: laat het bestaande bestand met rust en voeg een tweede markering toe (`m-002`, `bijdrage: context`) — meld dit in de hergebruiksrapportage.
-9. Werk `leden-annotaties[]` bij in de index-JSON: voeg `"[B]/art[A]/lid[L]"` toe, gesorteerd.
-10. Valideer de begrip-stubs: `tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml` (één aanroep per nieuw aangemaakt stub).
+7. **Tekstdekkings-zelfcontrole (vóór wegschrijven).** Loop de volledige `wetstekst` van het lid van begin tot eind na en controleer dat elk betekenisvol fragment binnen minstens één markering valt (tekstdekkings-check, Handleiding §3.4.2a; `kaders/markeerregels.md §Volledigheidscheck`). Noem expliciet welke stukken bewust níét gemarkeerd zijn (louter verbindende woorden/leestekens). Vul ontbrekende markeringen aan vóór je verder gaat.
+8. Voeg de rijen toe aan `annotatierijen[]` en schrijf met `schrijf_json`. **Niet valideren** — de annotatie-lid-JSON is na deze stap schema-invalid (jas-klasse = null); L1-validatie pas na `annoteer-diagram` (stap A2c).
+9. Voor elke unieke `begrip-id`: roep `stub_begrip(...)` aan en schrijf met `schrijf_yaml(Path("begrippen/[slug].yaml"), data)`. Als de YAML al bestaat: laat het bestaande bestand met rust en voeg een tweede markering toe (`m-002`, `bijdrage: context`) — meld dit in de hergebruiksrapportage.
+10. Werk `leden-annotaties[]` bij in de index-JSON: voeg `"[B]/art[A]/lid[L]"` toe, gesorteerd.
+11. Valideer de begrip-stubs: `tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml` (één aanroep per nieuw aangemaakt stub).
 
 ### Flow C — sectie-annotatie
 
@@ -87,8 +88,9 @@ Roep daarna `annoteer-classificeer` aan om `jas-klasse`, `interpretatiemethode` 
 
 ## Kwaliteitseisen (proces)
 
-- Wetstekst altijd letterlijk geciteerd (geen parafrase).
+- Wetstekst altijd letterlijk geciteerd (geen parafrase); elke `markering` is een letterlijk fragment van de `wetstekst`.
 - `markering.tekst` bevat lidwoord en verwijzingen.
+- **Tekstdekking:** elk betekenisvol stukje van de `wetstekst` valt binnen minstens één markering (Handleiding §3.4.2a). De L3-check "niet-gemarkeerde wetstekst" in `validate_note.py` toetst dit.
 - Peildatum uit `versiedatum` in bronbestand.
 - Stub-begrippen worden door `annoteer-markeer` aangemaakt maar pas door `/begrip` ingevuld.
 
