@@ -1,4 +1,5 @@
 ---
+name: annoteer-markeer
 description: "A2a — markeert wetsformuleringen in één lid. Eerste van drie A2-sub-skills (markeer → classificeer → diagram). Gebruik: /annoteer art. [A] lid [L] [W]"
 context: fork
 agent: general-purpose
@@ -10,7 +11,7 @@ Markeert wetsformuleringen in één lid en initialiseert het annotatie-lid-besta
 
 > Lees vóór elke run: `.claude/skills/KADERS.md` en `.claude/skills/kaders/markeerregels.md`.
 
-## Triggers
+## Trigger
 
 | Trigger | Flow |
 |---------|------|

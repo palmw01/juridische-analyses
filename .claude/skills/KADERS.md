@@ -71,7 +71,7 @@ Orchestrator
 
 | Skill | Doel | Triggert door |
 |-------|------|---------------|
-| `annoteer-markeer` | A2a — markeringen + annotatierij-skelet | `/annoteer art. [A] [W]` of `/annoteer art. [A] lid [L] [W]` |
+| `annoteer-markeer` | A2a — markeringen + annotatierij-skelet | `/annoteer art. [A] [W]` (Flow A), `/annoteer art. [A] lid [L] [W]` (Flow B) of `/annoteer sectie [ref] [W]` (Flow C) |
 | `annoteer-classificeer` | A2b — jas-klasse + interpretatiemethode + toelichting | volgt op `annoteer-markeer` |
 | `annoteer-diagram` | A2c — Mermaid-diagram met centrale klasse | volgt op `annoteer-classificeer` |
 

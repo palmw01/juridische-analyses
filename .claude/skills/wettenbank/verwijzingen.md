@@ -2,6 +2,8 @@
 
 Gebruik dit protocol in de Voorbereiding (dataverwerving). Voer de fasen strikt in volgorde uit. Lever het resultaat op als intern JSON-model; gebruik dit model als enige bron voor de annotatietabel (kolom Begrip) en de frontmatter-array `kruisreferenties`.
 
+> **Veldnaming.** Alle veldnamen in het JSON-model volgen `schemas/annotatie-lid.schema.json` `kruisreferenties[]` (kebab-case: `doel-bwb-id`, `doel-artikel`, `doel-lid`, `ruwe-tekst`).
+
 ---
 
 ## JCI URI-parser
@@ -34,7 +36,7 @@ Zoekpatronen (in volgorde):
 1. `leden\s+(\d+)\s+(?:en|tot en met)\s+(\d+)` → maak één record per lid in het bereik
 2. `(\w+)\s+lid` waarbij het eerste woord een rangnaam is → zie rangnamentabel
 3. `lid\s+(\d+)` → dat cijfer
-4. Geen lidpatroon gevonden → `doel_lid: null`
+4. Geen lidpatroon gevonden → `doel-lid: null`
 
 **Rangnamentabel:**
 
@@ -83,7 +85,7 @@ Verwijder eerst alle al gematche JCI-Markdown-passages uit de tekst. Zoek daarna
 
 ## Deduplicatie
 
-Gebruik `(bron_bwbId, bron_artikel, bron_lid, doel_bwbId, doel_artikel, doel_lid)` als unieke sleutel. Duplicaten — bijv. hetzelfde artikel dat in twee opeenvolgende leden wordt aangehaald — bewaar als één record. Noteer in `ruwe_tekst` het eerste voorkomen.
+Gebruik `(bron-bwb-id, bron-artikel, bron-lid, doel-bwb-id, doel-artikel, doel-lid)` als unieke sleutel. Duplicaten — bijv. hetzelfde artikel dat in twee opeenvolgende leden wordt aangehaald — bewaar als één record. Noteer in `ruwe-tekst` het eerste voorkomen.
 
 ---
 
@@ -91,7 +93,7 @@ Gebruik `(bron_bwbId, bron_artikel, bron_lid, doel_bwbId, doel_artikel, doel_lid
 
 | Situatie | Aanpak |
 |----------|--------|
-| `&artikel=` ontbreekt in URI | `doel_artikel: null`, `doel_lid: null`, confidence 0.8 |
+| `&artikel=` ontbreekt in URI | `doel-artikel: null`, `doel-lid: null`, confidence 0.8 |
 | Meerdere lids in display-tekst, één URI | Eén record per lid (zelfde bwbId + artikel) |
 | Meerdere artikelen in display-tekst | Eén record per artikel |
 | Dezelfde combinatie al gezien | Één record bewaren (deduplicatie) |
@@ -103,31 +105,31 @@ Gebruik `(bron_bwbId, bron_artikel, bron_lid, doel_bwbId, doel_artikel, doel_lid
 
 ```json
 {
-  "bron_bwbId": "BWBR0004770",
-  "bron_artikel": "28",
-  "bron_lid": "3",
-  "doel_bwbId": "BWBR0004770",
-  "doel_wet": "Invorderingswet 1990",
-  "doel_artikel": "25",
-  "doel_lid": "3",
-  "ruwe_tekst": "artikel 25, derde lid",
+  "bron-bwb-id": "BWBR0004770",
+  "bron-artikel": "28",
+  "bron-lid": "3",
+  "doel-bwb-id": "BWBR0004770",
+  "doel-wet": "Invorderingswet 1990",
+  "doel-artikel": "25",
+  "doel-lid": "3",
+  "ruwe-tekst": "artikel 25, derde lid",
   "confidence": 1.0
 }
 ```
 
-`doel_lid` is een string (ordinaal als getal: "3", "5") of `null`.
+`doel-lid` is een string (ordinaal als getal: "3", "5") of `null`.
 
 ---
 
 ## Van JSON-model naar kruisreferenties-kolom en frontmatter
 
-Groepeer records op `doel_bwbId`:
-- `doel_bwbId` = `bron_bwbId` → **interne verwijzing**
-- `doel_bwbId` ≠ `bron_bwbId` → **externe verwijzing**
+Groepeer records op `doel-bwb-id`:
+- `doel-bwb-id` = `bron-bwb-id` → **interne verwijzing**
+- `doel-bwb-id` ≠ `bron-bwb-id` → **externe verwijzing**
 
 Bij `confidence < 0.8`: markeer met *(verificatie aanbevolen)*.
 
-De `kruisreferenties`-array in de frontmatter bevat de unieke waarden van `"Art. <doel_artikel> <wet-afkorting>"` — zonder wiki-brackets, zonder lid.
+De `kruisreferenties`-array in de frontmatter bevat de unieke waarden van `"Art. <doel-artikel> <wet-afkorting>"` — zonder wiki-brackets, zonder lid.
 
 ---
 

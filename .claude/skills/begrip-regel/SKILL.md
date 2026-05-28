@@ -1,4 +1,5 @@
 ---
+name: begrip-regel
 description: "A3b — maakt een afleidingsregel-YAML voor een begrip met jas-klasse: afleidingsregel. Volgt op begrip-definitie."
 context: fork
 agent: general-purpose
@@ -10,6 +11,10 @@ Maakt `regels/AR-[bwb-id]-art[N]-lid[L]-[seq].yaml` voor een begrip met `jas-kla
 
 > Lees vóór elke run: `.claude/skills/kaders/regeltypen.md`.
 
+## Trigger
+
+Volgt op `begrip-definitie` wanneer het bijbehorende begrip `jas-klasse: afleidingsregel` heeft. Wordt automatisch aangeroepen door de orchestrator `/wetsanalyse`.
+
 ## Invoer
 
 Begrip-YAML `begrippen/[slug].yaml` met:
@@ -17,7 +22,7 @@ Begrip-YAML `begrippen/[slug].yaml` met:
 - `herkomst: afgeleid`
 - definitie en relaties ingevuld door `begrip-definitie`
 
-## Stappen
+## Werkwijze
 
 1. **Bepaal het regeltype** via de beslisboom in `kaders/regeltypen.md`:
    - Ja/nee uitkomst → Beslissingsregel
@@ -48,6 +53,13 @@ Begrip-YAML `begrippen/[slug].yaml` met:
    tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml
    ```
 
+## Output
+
+- `regels/AR-[bwb-id]-art[N]-lid[L]-[seq].yaml` — conform `schemas/regel.schema.json`.
+- Update van `begrippen/[slug].yaml`: veld `afleidingsregel-id` of `uitvoer-van-regel-id`.
+
+Levend voorbeeld: zie bestaande `regels/AR-BWBR0004770-*.yaml`.
+
 ## Tussenresultaten
 
 Als de formule meer dan twee invoerregels nodig heeft of meerdere operators bevat: split in tussenresultaten (zie `kaders/regeltypen.md §Tussenresultaten`). Maak voor elk tussenresultaat een eigen begrip (`tussenresultaat: true`) **en** een eigen afleidingsregel.
@@ -56,6 +68,11 @@ Als de formule meer dan twee invoerregels nodig heeft of meerdere operators beva
 
 Wanneer de uitvoer een geordende reeks is (vervaldatums, termijnbedragen): voer de Reeks-statustoets uit (zie `kaders/regeltypen.md`). Maak waar relevant een aanvullende beslissingsregel `bepalen status [element] op peildatum`.
 
+## Vervolg
+
+- `/valideer AR-[id]` (A4b) voor de volledige voorbeeldreeks-testmatrix.
+- `/begrip-scenario` en `/begrip-bron` blijven op begrip-niveau (worden niet hier opgeroepen).
+
 ## Kwaliteitseisen
 
 - Elke regel herleidbaar tot één artikel + lid + zinsdeel.
@@ -63,3 +80,10 @@ Wanneer de uitvoer een geordende reeks is (vervaldatums, termijnbedragen): voer 
 - `rechtsfeit-id` gevuld (of `null` bij tussenresultaat).
 - Voorbeeldreeksen bevatten minimaal één grensgeval (`juridisch-juist: false`).
 - Taalpatroon consistent met de tabel in `kaders/regeltypen.md`.
+
+## Bronnen
+
+- Schema: `schemas/regel.schema.json`
+- Kader: `kaders/regeltypen.md`
+- Canon: Handleiding §3.5.2b, §3.6
+- Projectconventies: `kaders/projectconventies.md` #15, #21

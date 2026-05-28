@@ -1,4 +1,5 @@
 ---
+name: wetsanalyse
 description: "Orchestrator — voert de volledige A2–A4b-keten voor één lid uit. Gebruik: /wetsanalyse art. [A] lid [L] [W] | --auto | --vanaf [stap]"
 context: fork
 agent: general-purpose
@@ -10,7 +11,7 @@ Voert de gehele wetsanalyse-keten sequentieel uit voor één lid. Roept sub-skil
 
 > Lees vóór elke run: `.claude/skills/KADERS.md` (conflicthiërarchie en bronanker-eis gelden ook hier).
 
-## Triggervormen
+## Trigger
 
 ```
 /wetsanalyse art. [A] lid [L] [W]               ← interactief (pauzes tussen activiteiten)

@@ -65,7 +65,7 @@ Artikel al geannoteerd, alleen begrippen en regels updaten:
 /valideer AR-BWBR0004770-art9-lid1-a   A4b: voorbeeldreeks voor één regel
 ```
 
-## Alle commando's
+## Belangrijkste commando's
 
 | Commando | Functie |
 |---|---|
@@ -75,6 +75,8 @@ Artikel al geannoteerd, alleen begrippen en regels updaten:
 | `/begrip [slug]` | Stap A3: één begrip uitwerken |
 | `/begrip-alles art. [A] [W]` | Stap A3: alle begrippen van een artikel |
 | `/valideer AR-[id]` | Stap A4b: voorbeeldreeks opstellen |
+
+De sub-skills `/annoteer-markeer`, `/annoteer-classificeer`, `/annoteer-diagram` (binnen `/annoteer`) en `/begrip-scenario`, `/begrip-bron` (binnen `/begrip`) worden automatisch aangeroepen — je hoeft ze niet apart te starten.
 
 De wetsnaam schrijf je als `IW 1990`, `AWR` of `Awb`. De BWB-mapping vertaalt dit automatisch naar het juiste BWB-id.
 

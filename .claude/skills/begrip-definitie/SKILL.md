@@ -1,4 +1,5 @@
 ---
+name: begrip-definitie
 description: "A3a — vult begripsdefinitie (kern + contexten), soort, herkomst, relaties en voorbeelden in vanuit gevulde markeringen. Gebruik: /begrip [slug]"
 context: fork
 agent: general-purpose
@@ -10,7 +11,7 @@ Vult de inhoudelijke velden van een begrip-YAML in. Bronnen zijn uitsluitend `ma
 
 > Lees vóór elke run: `.claude/skills/kaders/definitie.md`, `.claude/skills/kaders/begripsnaam.md`, `.claude/skills/kaders/relaties.md`.
 
-## Triggers
+## Trigger
 
 | Trigger | Wanneer |
 |---------|---------|
@@ -55,7 +56,7 @@ De canonieke veldenset, enums en conditionele regels staan in `schemas/begrip.sc
 
 Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
 
-## Vervolgen
+## Vervolg
 
 Na afronden van `begrip-definitie`:
 

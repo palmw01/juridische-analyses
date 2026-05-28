@@ -7,11 +7,13 @@ Deze pagina beschrijft wat er in het kennismodel zit, hoe de bestanden samenhang
 Elk begrip en elke regel is herleidbaar via een vaste ID-keten:
 
 ```text
+scenarios/{scenario-id}.yaml      (A1, handmatig — buiten AI-scope)
+        ↓ (input voor A3c)
 wetstekst
   -> bronnen/{bwb-id}/art{N}.json
     -> annotaties/{bwb-id}/art{N}-lid{L}.json
       -> markering-id
-        -> begrippen/{slug}.yaml
+        -> begrippen/{slug}.yaml          (scenario-refs uit A3c)
           -> regels/AR-{bwb-id}-*.yaml
             -> validaties/VR-{bwb-id}-*.yaml
 ```
@@ -26,7 +28,7 @@ Een begrip beschrijft een juridisch concept met definitie, datatype, JAS-klasse,
 |---|---|
 | `begrip-id` | Stabiele identificatie binnen de kennisgraaf |
 | `begripsnaam` | Leesbare naam / slug |
-| `soort` | Datatype: `booleaans`, `datum`, `tekst` of `entiteit` |
+| `soort` | Datatype: `monetair-bedrag`, `percentage`, `tijdsduur`, `datum`, `booleaans`, `tekst`, `enumeratie` of `entiteit` (zie `schemas/begrip.schema.json`) |
 | `jas-klasse` | JAS-classificatie van het begrip |
 | `herkomst` | `direct` uit wetstekst of `afgeleid` via analyse |
 | `definitie.kern` | Algemene betekenis van het begrip |
@@ -118,9 +120,14 @@ JAS staat voor Juridisch Analyseschema — de classificatiebasis binnen de Wetsa
 | voorwaarde | Voorwaarde voor toepasselijkheid of gevolg |
 | afleidingsregel | Regel die een uitkomst afleidt |
 | tijdsaanduiding | Datum, termijn of tijdstip |
-| operator | Logische of grammaticale operator |
+| plaatsaanduiding | Geografische aanduiding of jurisdictie |
+| delegatiebevoegdheid | Bevoegdheid tot lagere regelgeving (amvb, ministeriële regeling) |
+| brondefinitie | Begripsomschrijving in begripsbepalingen-artikel |
+| variabele | Kenmerk waarvan de waarde varieert per geval |
+| parameter | Tariefwaarde, drempel, maximum of minimum |
+| operator | Logische of rekenkundige operator |
 
-Canonieke bron: [regels.overheid.nl/standaarden/wetsanalyse/v1.0.10](https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10)
+Canonieke bron: [regels.overheid.nl/standaarden/wetsanalyse/v1.0.10](https://regels.overheid.nl/standaarden/wetsanalyse/v1.0.10). Voor uitwerking van subklassen (rechtsfeit-tijdsverloop, brondefinitie-uitbreiding) zie [`.claude/skills/kaders/jas-taxonomie.md`](../.claude/skills/kaders/jas-taxonomie.md).
 
 ### RegelSpraak
 

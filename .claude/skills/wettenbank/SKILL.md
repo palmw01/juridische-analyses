@@ -1,4 +1,5 @@
 ---
+name: wettenbank
 description: "Haal wetstekst op via de wettenbank MCP en sla genormaliseerd op in bronnen/. Gebruik: /wettenbank art. 25 IW 1990"
 context: fork
 agent: general-purpose
@@ -6,7 +7,7 @@ agent: general-purpose
 
 # /wettenbank — Dataverwerving
 
-## Triggervormen
+## Trigger
 
 | Trigger | Wanneer gebruiken |
 |---------|-------------------|
@@ -88,8 +89,8 @@ Lees `$CLAUDE_SKILL_DIR/verwijzingen.md` volledig. Voer het protocol uit op alle
 
 **Parallel aanroepen (op basis van het JSON-model):**
 
-1. `wettenbank_artikel(bwbId=[B], artikel=<nr>)` voor elk uniek intern `(doel_bwbId, doel_artikel)`-paar waarbij `doel_artikel` niet null is.
-2. `wettenbank_artikel(bwbId=<doel_bwbId>, artikel=<doel_artikel>)` voor elk uniek extern paar waarbij `doel_artikel` niet null is.
+1. `wettenbank_artikel(bwbId=[B], artikel=<nr>)` voor elk uniek intern `(doel-bwb-id, doel-artikel)`-paar waarbij `doel-artikel` niet null is.
+2. `wettenbank_artikel(bwbId=<doel-bwb-id>, artikel=<doel-artikel>)` voor elk uniek extern paar waarbij `doel-artikel` niet null is.
 3. `wettenbank_zoekterm(bwbId=[B], zoekterm="artikel [A]")` voor omgekeerde kruisreferenties. Voer daarna het verificatieprotocol uit (zie `verwijzingen.md` Omgekeerde kruisreferenties).
 
 Sla na deduplicatie alle unieke kruisreferentie-records op als `bronnen/[B]/art[A].kruisrefs.json`. Het kruisreferentie-formaat (`doel-bwb-id`, `doel-artikel`, optioneel `doel-lid`, `richting`, `confidence`, `ruwe-tekst`) is gedefinieerd in `schemas/annotatie-lid.schema.json` onder `kruisreferenties[]` — die wordt door `annoteer-classificeer` gemigreerd naar de annotatie-lid-JSON. Bestaande `.kruisrefs.json`-bestanden in `bronnen/` volgen hetzelfde formaat.
