@@ -22,7 +22,13 @@ Voert de gehele wetsanalyse-keten sequentieel uit voor één lid. Roept sub-skil
 
 Aliasen: `[W]` kan een vrije wetsafkorting zijn (`IW 1990`, `Awb`, …); de orchestrator vertaalt naar BWB-id via `.claude/skills/wettenbank/bwb-mapping.md`.
 
-## Voorbereiding — TaskList aanmaken
+## Invoer
+
+- Artikel + lid + wetsafkorting (slash-argument).
+- Optioneel: `--auto` (geen pauzes) of `--vanaf [stap]` (skip A2 of A2+A3 als output al bestaat).
+- Bestaande artefacten in `bronnen/`, `annotaties/`, `begrippen/`, `regels/`, `validaties/` — gebruikt voor existing-checks (idempotentie).
+
+## TaskList
 
 Bouw bij start een TaskList met alle voorziene stappen op basis van de input. De daadwerkelijke stappen 3-6 worden pas zichtbaar nadat `annoteer-markeer` is afgerond (omdat het aantal begrippen pas dan bekend is).
 
@@ -128,9 +134,15 @@ Bij `--auto`: doorlopen zonder pauzes, run-rapport markeert pauzepunten als "aut
 - Dashboard in `webapp/voortgang.html` na `make webapp`.
 - Eindbericht in de chat: "Wetsanalyse art. [A] lid [L] [W] voltooid — zie rapporten/runs/run-…md en webapp/voortgang.html. Openstaande punten: N grensgevallen op `?`."
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
 - Geen sub-skill twee keer aanroepen voor hetzelfde bestand (idempotentie).
 - Bij elke stap: TaskList bijwerken vóór en na uitvoering.
 - Run-rapport bevat altijd een Mermaid-diagram van de keten.
 - Alle uitvoer is traceerbaar — geen losse bestanden buiten de standaardmappen.
+
+## Bronnen
+
+- Sub-skills + kaders: zie `.claude/skills/KADERS.md` (workflow + skills-index).
+- Tools: `tools/genereer_run_rapport.py`, `tools/validate_note.py --full`, `make webapp`.
+- Canon: Handleiding §3.4–3.6 (A2–A4b-keten).

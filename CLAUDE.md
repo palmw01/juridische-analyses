@@ -129,33 +129,9 @@ make lock           # dependencies installeren en pinnen in requirements.lock
 
 ## Workflow
 
-De wetsanalyse is opgebouwd uit fijnmazige sub-skills (één per deelactiviteit) plus een orchestrator. Zie `.claude/skills/KADERS.md` voor het volledige overzicht.
+De wetsanalyse is opgebouwd uit fijnmazige sub-skills (één per deelactiviteit) plus een orchestrator: A2 (annoteer-markeer → -classificeer → -diagram), A3 (begrip-definitie → -regel → -scenario → -bron), A4b (valideer). De orchestrator `/wetsanalyse art. [A] lid [L] [W]` voert de hele keten voor één lid uit, gebruikt TaskCreate/TaskUpdate voor live voortgang, schrijft een per-run Markdown-rapport met Mermaid-diagram in `rapporten/runs/`, en updatet `webapp/voortgang.html` via `make webapp`.
 
-### Sub-skills (per deelactiviteit)
-
-```
-A2  /annoteer art. [A] [W]              → Flow A: index-JSON (annoteer-markeer)
-    /annoteer art. [A] lid [L] [W]      → annoteer-markeer → annoteer-classificeer → annoteer-diagram
-    /annoteer sectie [ref] [W]          → Flow C: sectie-annotatie
-
-A3  /begrip [slug]                      → begrip-definitie (A3a)
-                                          + begrip-regel (A3b — bij jas-klasse: afleidingsregel)
-                                          + begrip-scenario (A3c — koppeling aan scenarios/)
-                                          + begrip-bron (A3d — secundaire bronnen)
-    /begrip-alles art. [A] [W]          → idem voor alle stubs van een artikel
-
-A4b /valideer AR-[id]                   → voorbeeldreeks-YAML (≥ 3 kolommen)
-```
-
-### Orchestrator
-
-```
-/wetsanalyse art. [A] lid [L] [W]              → volledige A2–A4b-keten, interactief
-/wetsanalyse art. [A] lid [L] [W] --auto       → zonder pauzes
-/wetsanalyse art. [A] lid [L] [W] --vanaf begrip  → skip A2 (als al aanwezig)
-```
-
-De orchestrator gebruikt TaskCreate/TaskUpdate voor live voortgang in de Claude Code UI, schrijft een per-run Markdown-rapport met Mermaid-diagram in `rapporten/runs/`, en updatet het dashboard `webapp/voortgang.html` via `make webapp`.
+**Bron van waarheid voor skill-triggers, workflow-diagram en kader → skill-koppelingen: `.claude/skills/KADERS.md`.** Skill-bestandspaden staan in §"Skill-documentatie" hieronder.
 
 ### Annotatie → begrip: strikte volgorde
 

@@ -16,11 +16,17 @@ agent: general-purpose
 
 **Argument:** `$ARGUMENTS`
 
+## Invoer
+
+- Slash-argument met artikelnummer + wetsafkorting (eventueel lidnummer).
+- BWB-mapping in `$CLAUDE_SKILL_DIR/bwb-mapping.md`.
+- Extractieprotocol voor kruisreferenties in `$CLAUDE_SKILL_DIR/verwijzingen.md`.
+
+## Werkwijze
+
 Voer onderstaande stappen uit. Het doel is alle wetstekst, structuurdata en kruisreferenties beschikbaar stellen als genormaliseerde JSON-bestanden in `bronnen/`.
 
----
-
-## Stap 1 — Argument parsen
+### Stap 1 — Argument parsen
 
 Parseer `$ARGUMENTS`:
 
@@ -32,7 +38,7 @@ Noteer: `[A]`, `[W]`, `[B]`, `[L]`, `[BD]`.
 
 ---
 
-## Stap 2 — Wetstekst ophalen (parallel)
+### Stap 2 — Wetstekst ophalen (parallel)
 
 Roep tegelijk aan:
 - `wettenbank_artikel(bwbId=[B], artikel=[A])` — te analyseren artikel
@@ -57,7 +63,7 @@ Noteer uit `[BD]` alle begripsomschrijvingen voor termen in artikel `[A]` als `[
 
 ---
 
-## Stap 3 — MCP-response opslaan
+### Stap 3 — MCP-response opslaan
 
 Schrijf de ruwe MCP-response **nooit** rechtstreeks naar `bronnen/` — gebruik altijd `fetch_wettenbank.py` voor normalisatie.
 
@@ -83,7 +89,7 @@ Het script zet `bwbId` om naar `bwb-id`, voegt `opgehaald-op` toe en geeft `sect
 
 ---
 
-## Stap 4 — Kruisreferenties extraheren
+### Stap 4 — Kruisreferenties extraheren
 
 Lees `$CLAUDE_SKILL_DIR/verwijzingen.md` volledig. Voer het protocol uit op alle `leden[].tekst`-velden van artikel `[A]`.
 
@@ -97,9 +103,13 @@ Sla na deduplicatie alle unieke kruisreferentie-records op als `bronnen/[B]/art[
 
 ---
 
-## Resultaat
+## Output
 
-Retourneer als intern datamodel voor gebruik door de aanroepende skill:
+- `bronnen/[B]/art[A].json` — genormaliseerde wetstekst conform `schemas/bron.schema.json`.
+- `bronnen/[B]/art[A].kruisrefs.json` — kruisreferenties (formaat: zie `schemas/annotatie-lid.schema.json` `kruisreferenties[]`).
+- Optioneel: `bronnen/[B]/art[BD].json` (begripsbepalingen).
+
+Intern datamodel voor de aanroepende skill:
 
 ```
 [A], [W], [B], [L], [BD], [PD]
@@ -109,3 +119,17 @@ brondefinities: [brondefinities]
 kruisrefs JSON-model: (uit bronnen/[B]/art[A].kruisrefs.json)
 bronreferentie: [JCI-uri]
 ```
+
+## Kwaliteitseisen (proces)
+
+- Sla MCP-response nooit direct op — gebruik altijd `tools/fetch_wettenbank.py` voor normalisatie.
+- Versie-check via `versiedatum`: skip overschrijven als bestand actueel is.
+- Veldnaming in `.kruisrefs.json` volgt `schemas/annotatie-lid.schema.json` `kruisreferenties[]` (kebab-case).
+- Lijden van >3 leden zonder `[L]`-argument blokkeren (forceer specificatie).
+
+## Bronnen
+
+- Schemas: `schemas/bron.schema.json`, `schemas/annotatie-lid.schema.json` (`kruisreferenties[]`)
+- Documenten: `bwb-mapping.md`, `verwijzingen.md` (in deze skill-directory)
+- Tools: `tools/fetch_wettenbank.py`, `tools/extract_kruisrefs.py`
+- Canon: MCP wettenbank-API (zie `CLAUDE.md` §MCP wettenbank)

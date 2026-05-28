@@ -19,7 +19,17 @@ Markeert wetsformuleringen in één lid en initialiseert het annotatie-lid-besta
 | `/annoteer art. [A] lid [L] [W]` | **Flow B** — lid-annotatie aanmaken + begrip-stubs |
 | `/annoteer sectie [ref] [W]` | **Flow C** — sectie-annotatie (bronnen zonder leden) |
 
-## Flow A — artikel-index
+## Invoer
+
+- Wetbestand `bronnen/[B]/art[A].json` (anders eerst `/wettenbank art. [A] [W]`).
+- Optioneel: `bronnen/[B]/art[A].kruisrefs.json` voor Flow A.
+- Voor Flow B: lidnummer `[L]`.
+
+## Werkwijze
+
+De skill kent drie flows; kies de juiste op basis van de trigger. Slug-conventies staan onderaan.
+
+### Flow A — artikel-index
 
 1. Controleer bronbestand: `find bronnen/[B]/ -name "art[A].json"`. Ontbreekt → `/wettenbank art. [A] [W]`.
 2. Controleer of `annotaties/[B]/art[A].json` al bestaat. Zo ja → meld "index-annotatie bestaat al" en stop.
@@ -27,7 +37,7 @@ Markeert wetsformuleringen in één lid en initialiseert het annotatie-lid-besta
 4. Schrijf met `schrijf_json(Path("annotaties/[B]/art[A].json"), data)`.
 5. Valideer: `tools/.venv/bin/python tools/validate_note.py --file annotaties/[B]/art[A].json`.
 
-## Flow B — lid-annotatie (markeerfase)
+### Flow B — lid-annotatie (markeerfase)
 
 1. Controleer of `annotaties/[B]/art[A].json` bestaat. Nee → voer Flow A eerst uit.
 2. Controleer of `annotaties/[B]/art[A]-lid[L].json` al bestaat. Zo ja → meld en stop.
@@ -44,14 +54,14 @@ Markeert wetsformuleringen in één lid en initialiseert het annotatie-lid-besta
 9. Werk `leden-annotaties[]` bij in de index-JSON: voeg `"[B]/art[A]/lid[L]"` toe, gesorteerd.
 10. Valideer de begrip-stubs: `tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml` (één aanroep per nieuw aangemaakt stub).
 
-## Flow C — sectie-annotatie
+### Flow C — sectie-annotatie
 
 Identiek aan Flow B met:
 - `annotatie-id`: `[B]/[slug]` (slug uit `pad`-veld; geen lid)
 - `lid: ""` (leeg)
 - Geen index-JSON; bestand opslaan als `annotaties/[B]/[slug].json`
 
-## Slug-conventies
+### Slug-conventies
 
 Stub-bestanden voor begrippen krijgen een slug afgeleid van de begripsnaam:
 - lowercase, spaties → koppelteken, bijzondere tekens weglaten
@@ -65,13 +75,26 @@ Eenheid-slug uit het `pad`-veld:
 | `§ 1.1 De ontvanger` | `par1-1` |
 | `Paragraaf 3` | `par3` |
 
+## Output
+
+- **Flow A**: `annotaties/[B]/art[A].json` — conform `schemas/annotatie-index.schema.json`.
+- **Flow B**: `annotaties/[B]/art[A]-lid[L].json` (schema-invalid totdat A2c klaar is) + begrip-stubs in `begrippen/[slug].yaml` per uniek `begrip-id`. Update van `leden-annotaties[]` in de index-JSON.
+- **Flow C**: `annotaties/[B]/[slug].json` + begrip-stubs.
+
 ## Vervolg
 
 Roep daarna `annoteer-classificeer` aan om `jas-klasse`, `interpretatiemethode` en `toelichting-klasse` per rij in te vullen.
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
 - Wetstekst altijd letterlijk geciteerd (geen parafrase).
 - `markering.tekst` bevat lidwoord en verwijzingen.
 - Peildatum uit `versiedatum` in bronbestand.
 - Stub-begrippen worden door `annoteer-markeer` aangemaakt maar pas door `/begrip` ingevuld.
+
+## Bronnen
+
+- Schemas: `schemas/annotatie-index.schema.json`, `schemas/annotatie-lid.schema.json`, `schemas/begrip.schema.json`
+- Kaders: `kaders/markeerregels.md`, `kaders/begripsnaam.md`
+- Canon: Handleiding §3.4.2a
+- Projectconventies: `kaders/projectconventies.md` #1, #9

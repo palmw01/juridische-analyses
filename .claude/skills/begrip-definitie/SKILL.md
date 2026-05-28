@@ -18,7 +18,15 @@ Vult de inhoudelijke velden van een begrip-YAML in. Bronnen zijn uitsluitend `ma
 | `/begrip [slug]` | Eén begrip invullen |
 | `/begrip-alles art. [A] [W]` | Alle begrip-YAML's van een artikel achtereenvolgens verwerken |
 
-## Voorbereiding
+## Invoer
+
+- Begrip-YAML `begrippen/[slug].yaml` met (door `annoteer-markeer`) gevulde `markeringen[]`.
+- Annotatie-bestanden in `annotaties/` waarin dit `begrip-id` voorkomt (voor `jas-klasse` en `toelichting-klasse`).
+- Bij `/begrip-alles art. [A] [W]`: alle begrip-YAML's met `bron-annotatie-id.*[B]/art[A]`.
+
+## Werkwijze
+
+### Voorbereiding
 
 1. **Idempotentie:** als `definitie.kern`, `soort`, `herkomst` allemaal gevuld zijn én `relaties` minstens één niet-lege lijst heeft: meld "begrip [slug] is al afgerond" en stop. Overschrijf nooit zonder bevestiging.
 2. **Enrichment-queue:** lees `rapporten/enrichment-queue.json`. Als dit begrip een open beslissing heeft (`status: te-verrijken` zonder `beslissing`-veld): stop en meld; los eerst op.
@@ -31,7 +39,7 @@ Bij `/begrip-alles art. [A] [W]`: zoek alle begrip-YAML's met een markering die 
 grep -rl "bron-annotatie-id.*[B]/art[A]" begrippen/
 ```
 
-## Definitie opstellen
+### Definitie opstellen
 
 Zie `kaders/definitie.md` voor de volledige normen. Kort:
 
@@ -40,7 +48,7 @@ Zie `kaders/definitie.md` voor de volledige normen. Kort:
 - **`definitie-gebaseerd-op`** bevat uitsluitend de markering-id's die de **kern** staven.
 - **`definitie-versie`** verhogen bij elke kernwijziging.
 
-## Velden bijwerken
+### Velden bijwerken
 
 De canonieke veldenset, enums en conditionele regels staan in `schemas/begrip.schema.json` — zie ook `begrippen/belastingaanslag.yaml` als levend voorbeeld. De skill vult vanuit `markeringen[]`:
 
@@ -56,6 +64,21 @@ De canonieke veldenset, enums en conditionele regels staan in `schemas/begrip.sc
 
 Wijzig **niet**: `begrip-id`, `begripsnaam`, `markeringen`, `geldigheid-van`, `geldigheid-tot`, `status`, `vervangen-door`.
 
+### Valideren
+
+```
+tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml
+```
+
+L1/L2-fouten herstellen vóór doorgaan; L3 rapporteren.
+
+## Output
+
+- Bijgewerkte `begrippen/[slug].yaml` — conform `schemas/begrip.schema.json`.
+- `status` blijft `concept`; statuswijziging is een A4-taak.
+
+Levend voorbeeld: zie `begrippen/belastingaanslag.yaml`.
+
 ## Vervolg
 
 Na afronden van `begrip-definitie`:
@@ -65,14 +88,6 @@ Na afronden van `begrip-definitie`:
 - Roep `begrip-bron` aan voor secundaire bronnen (A3d).
 
 In een orchestrator-context worden deze vervolg-skills automatisch sequentieel uitgevoerd.
-
-## Valideren
-
-```
-tools/.venv/bin/python tools/validate_note.py --file begrippen/[slug].yaml
-```
-
-L1/L2-fouten herstellen vóór doorgaan; L3 rapporteren.
 
 ## Kwaliteitseisen (proces)
 
@@ -84,3 +99,10 @@ Procesregels die niet in `schemas/begrip.schema.json` of `kaders/definitie.md` z
 - `markeringen[].bevestigd` blijft `false` tenzij door een domeinexpert juridisch gevalideerd.
 
 Structurele vereisten (enums, minItems, if-then) worden door het schema afgedwongen — herhaal ze hier niet.
+
+## Bronnen
+
+- Schema: `schemas/begrip.schema.json`
+- Kaders: `kaders/definitie.md`, `kaders/begripsnaam.md`, `kaders/relaties.md`, `kaders/interpretatie.md`, `kaders/jas-taxonomie.md`
+- Canon: Handleiding §3.5.2a, §3.5.3
+- Projectconventies: `kaders/projectconventies.md` #1, #7, #8

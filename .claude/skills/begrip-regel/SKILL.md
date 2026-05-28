@@ -73,7 +73,7 @@ Wanneer de uitvoer een geordende reeks is (vervaldatums, termijnbedragen): voer 
 - `/valideer AR-[id]` (A4b) voor de volledige voorbeeldreeks-testmatrix.
 - `/begrip-scenario` en `/begrip-bron` blijven op begrip-niveau (worden niet hier opgeroepen).
 
-## Kwaliteitseisen
+## Kwaliteitseisen (proces)
 
 - Elke regel herleidbaar tot één artikel + lid + zinsdeel.
 - Altijd invoer- én uitvoerbegrip(pen) als begrip-id-strings.
