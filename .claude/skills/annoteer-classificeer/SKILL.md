@@ -54,15 +54,16 @@ Roep daarna `annoteer-diagram` aan om het structuurdiagram te bouwen.
 
 ## Kwaliteitseisen (proces)
 
-- `toelichting-klasse` bevat minimaal de klassemotivering (niet leeg, geen stub-placeholder).
-- Meerduidigheid expliciet signaleren via `signalering`.
+- `toelichting-klasse` bevat minimaal de klassemotivering (niet leeg, geen stub-placeholder), mét bronanker.
+- **Signaleren, niet beslechten.** Meerduidigheid, open normen en interpretatie-divergentie tussen methoden → vastleggen in `signalering`; de AI kiest niet zelf een winnaar (zie `KADERS.md §Signaleringsdiscipline` en `kaders/interpretatie.md §Divergentie`).
 - Delegatieketens volledig uitwerken (wet → amvb → ministeriële regeling).
+- **Menselijke validatie:** classificatie + interpretatie zijn een concept; bij meerduidigheid beslist het multidisciplinaire team, niet de AI (`kaders/menselijke-validatie.md`).
 
 Structurele vereisten (enum 16 waarden, interpretatiemethode-enum, delegatie-type-enum) worden door het schema afgedwongen.
 
 ## Bronnen
 
 - Schema: `schemas/annotatie-lid.schema.json`
-- Kaders: `kaders/jas-taxonomie.md`, `kaders/interpretatie.md`, `kaders/markeerregels.md` (volledigheidscheck)
-- Canon: handleiding §3.4 (JAS-elementen), §3.5.3 (interpretatiemethoden)
+- Kaders: `kaders/jas-taxonomie.md`, `kaders/interpretatie.md`, `kaders/markeerregels.md` (volledigheidscheck), `kaders/menselijke-validatie.md`
+- Canon: handleiding §3.4 (JAS-elementen), §3.5.3 (interpretatiemethoden; `handleiding.pages.md` r. 2320, 2340-2417)
 - Projectconventies: `kaders/projectconventies.md` #9 (operator-hergebruik)

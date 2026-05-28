@@ -93,10 +93,11 @@ Roep daarna `annoteer-classificeer` aan om `jas-klasse`, `interpretatiemethode` 
 - **Tekstdekking:** elk betekenisvol stukje van de `wetstekst` valt binnen minstens één markering (Handleiding §3.4.2a). De L3-check "niet-gemarkeerde wetstekst" in `validate_note.py` toetst dit.
 - Peildatum uit `versiedatum` in bronbestand.
 - Stub-begrippen worden door `annoteer-markeer` aangemaakt maar pas door `/begrip` ingevuld.
+- **Menselijke validatie:** markeringen zijn een concept; de afbakening wordt door een vaktechnisch jurist getoetst (`kaders/menselijke-validatie.md`). `markeringen[].bevestigd` blijft `false`.
 
 ## Bronnen
 
 - Schemas: `schemas/annotatie-index.schema.json`, `schemas/annotatie-lid.schema.json`, `schemas/begrip.schema.json`
-- Kaders: `kaders/markeerregels.md`, `kaders/begripsnaam.md`
-- Canon: Handleiding §3.4.2a
+- Kaders: `kaders/markeerregels.md`, `kaders/begripsnaam.md`, `kaders/menselijke-validatie.md`
+- Canon: Handleiding §3.4.2a (`handleiding.pages.md` r. 1547-1572)
 - Projectconventies: `kaders/projectconventies.md` #1, #9

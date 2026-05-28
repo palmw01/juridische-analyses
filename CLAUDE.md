@@ -227,7 +227,9 @@ Conflictbeleid, gedeelde workflow én **skill-sjabloon** (sectie-conventie voor 
 | `.claude/skills/kaders/regeltypen.md` | 4 regeltypen + beslisboom + taalpatronen + tussenresultaten + RegelSpraak (Handleiding §3.5.2b, §3.6) |
 | `.claude/skills/kaders/voorbeeldreeks.md` | Testpatronen per regeltype, `?`-sentinel voor open interpretatie, statusovergangen (Handleiding §3.6.2b) |
 | `.claude/skills/kaders/interpretatie.md` | 4 interpretatiemethoden (Handleiding §3.5.3); rol jurisprudentie |
-| `.claude/skills/kaders/canon-ankers.md` | Herleidbaarheidsmatrix: elke kader-/schema-uitspraak gekoppeld aan canon-paragraaf of projectconventie |
+| `.claude/skills/kaders/canon-ankers.md` | Herleidbaarheidsmatrix: elke kader-/schema-uitspraak gekoppeld aan canon-paragraaf (incl. exacte extract-regelankers) of projectconventie |
 | `.claude/skills/kaders/projectconventies.md` | Bundelt alle projectconventies (~23 items) met canon-anker en rationale; centrale ingang voor wijzigingen |
+| `.claude/skills/kaders/menselijke-validatie.md` | AI als hulpmiddel; welke menselijke discipline elke output valideert (Handleiding §1; Leidraad §2) |
+| `.claude/skills/kaders/glossarium.md` | Definities van veelgebruikte termen/velden + activiteitscodes + status-enum-verschillen |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |

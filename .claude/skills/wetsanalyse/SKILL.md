@@ -51,11 +51,13 @@ Gebruik `TaskCreate` aan het begin en `TaskUpdate` bij elke status-overgang. Sta
 
 ## Sequentie
 
-### 0. Argument-parsing
+### 0. Argument-parsing en doel-/maatwerkcheck
 
 - `bwb-id` afleiden uit `[W]`. Onbekend → meld en stop.
 - Pad: `bronnen/[B]/`, `annotaties/[B]/`, etc.
 - `--vanaf` bepaalt vanaf welke fase wordt gestart.
+- **Doel-bewustzijn (maatwerk).** A2/A3/A4b is een gekozen subset; de gewenste diepgang volgt uit het doel van de analyse (IT, handmatig proces, uitvoeringstoets, casuïstiek — Leidraad r. 79-96). Ga niet uit van software als enig doel.
+- **Start-informatie (A1) controleren, niet invullen.** Ontbreken `scenarios/` of een vastgelegd doel/projecttypologie, dan signaleer je dat in het run-rapport (welke startinformatie ontbreekt) en ga je door waar mogelijk — je verzint geen A1-keuzes (zie `KADERS.md §Scope`).
 
 ### 1. wettenbank (als `bronnen/[B]/art[A].json` ontbreekt)
 
@@ -151,9 +153,10 @@ Bij `--auto`: doorlopen zonder pauzes, run-rapport markeert pauzepunten als "aut
 - Bij elke stap: TaskList bijwerken vóór en na uitvoering.
 - Run-rapport bevat altijd een Mermaid-diagram van de keten.
 - Alle uitvoer is traceerbaar — geen losse bestanden buiten de standaardmappen.
+- **Concept ter validatie.** De keten levert concepten op; het run-rapport benoemt per product welke menselijke discipline nog moet valideren (`kaders/menselijke-validatie.md`) en welke `signalering`/`?`-velden openstaan voor het multidisciplinaire team.
 
 ## Bronnen
 
-- Sub-skills + kaders: zie `.claude/skills/KADERS.md` (workflow + skills-index).
+- Sub-skills + kaders: zie `.claude/skills/KADERS.md` (workflow + skills-index, incl. `menselijke-validatie.md` en `glossarium.md`).
 - Tools: `tools/genereer_run_rapport.py`, `tools/validate_note.py --full`, `make webapp`.
-- Canon: Handleiding §3.4–3.6 (A2–A4b-keten).
+- Canon: Handleiding §3.4–3.6 (A2–A4b-keten); Leidraad §2 (maatwerk; `leidraad.pages.md` r. 79-96).

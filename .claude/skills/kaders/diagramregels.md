@@ -10,6 +10,8 @@ Eén diagram per Rechtsbetrekking in het lid. Meerdere Rechtsbetrekkingen → me
 
 ## Centrale klasse — prioriteitsvolgorde
 
+> Een centrale klasse "heeft relaties met andere klassen"; rechtsbetrekking en rechtsfeit zijn "doorgaans te vinden in de bij activiteit 1 opgestelde juridische scenario's" (Handleiding `handleiding.pages.md` r. 1605-1614). Neem waar mogelijk de rechtsbetrekking/het rechtsfeit uit het **happy scenario** als vertrekpunt — dat verankert de brugfunctie A1↔A2↔A3.
+
 Gebruik de eerste die aanwezig is:
 
 1. **Rechtsbetrekking** — altijd eerste keuze
@@ -18,6 +20,8 @@ Gebruik de eerste die aanwezig is:
 4. **Voorwaarde** — als het lid primair een conditie/begrenzing beschrijft
 
 > De markeringsregel "begin bij rechtsbetrekking en rechtsfeit" gaat over de **annotatievolgorde**, niet over diagram-centrum-selectie. Het diagram-centrum volgt deze prioriteitsvolgorde.
+
+**Valkuil (Handleiding r. 1722-1726):** neem alleen wetsformuleringen op die een relatie met de centrale klasse hebben of die klasse zelf vormen. Het diagram "voorkomt dat losse woorden gemarkeerd worden terwijl deze niet een relatie hebben met een centrale klasse". Losse knopen zonder rand zijn een signaal dat de markering of klasse heroverwogen moet worden.
 
 Als alle vier ontbreken: noteer letterlijk `Geen centrale klasse gevonden; diagram niet van toepassing.`
 

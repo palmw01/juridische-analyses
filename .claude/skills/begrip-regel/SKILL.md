@@ -80,10 +80,12 @@ Wanneer de uitvoer een geordende reeks is (vervaldatums, termijnbedragen): voer 
 - `rechtsfeit-id` gevuld (of `null` bij tussenresultaat).
 - Voorbeeldreeksen bevatten minimaal één grensgeval (`juridisch-juist: false`).
 - Taalpatroon consistent met de tabel in `kaders/regeltypen.md`.
+- **Tussenresultaten expliciet:** impliciete algoritmen (tussenstappen/voorwaarden in de wetstekst) als aparte tussenresultaat-regels uitschrijven (`handleiding.pages.md` r. 301-303; `kaders/regeltypen.md`).
+- **Menselijke validatie:** de afleidingsregel is een concept dat door vaktechnisch jurist + regelanalist wordt getoetst op juridische volledigheid (`kaders/menselijke-validatie.md`).
 
 ## Bronnen
 
 - Schema: `schemas/regel.schema.json`
-- Kader: `kaders/regeltypen.md`
-- Canon: Handleiding §3.5.2b, §3.6
+- Kaders: `kaders/regeltypen.md`, `kaders/menselijke-validatie.md`
+- Canon: Handleiding §3.5.2b, §3.6 (`handleiding.pages.md` r. 2273-2299, 301-303)
 - Projectconventies: `kaders/projectconventies.md` #15, #21
