@@ -97,12 +97,14 @@ Procesregels die niet in `schemas/begrip.schema.json` of `kaders/definitie.md` z
 - Substitueerbaar in een zin (zie `kaders/definitie.md §Kern`).
 - `status` blijft `concept` — statuswijziging is A4-taak.
 - `markeringen[].bevestigd` blijft `false` tenzij door een domeinexpert juridisch gevalideerd.
+- **Homoniem/synoniem:** zelfde woord–andere betekenis → splitsen; andere woorden–zelfde betekenis → één begrip hergebruiken (`kaders/begripsnaam.md §Homoniem`/`§Synoniem`). Twijfel of open norm → `toelichting` + `signalering`, niet zelf beslechten.
+- **Menselijke validatie:** begripsnaam + definitie zijn een concept dat door een vaktechnisch jurist (bij open normen ook de wetgevingsjurist) wordt getoetst (`kaders/menselijke-validatie.md`).
 
 Structurele vereisten (enums, minItems, if-then) worden door het schema afgedwongen — herhaal ze hier niet.
 
 ## Bronnen
 
 - Schema: `schemas/begrip.schema.json`
-- Kaders: `kaders/definitie.md`, `kaders/begripsnaam.md`, `kaders/relaties.md`, `kaders/interpretatie.md`, `kaders/jas-taxonomie.md`
-- Canon: Handleiding §3.5.2a, §3.5.3
+- Kaders: `kaders/definitie.md`, `kaders/begripsnaam.md`, `kaders/relaties.md`, `kaders/interpretatie.md`, `kaders/jas-taxonomie.md`, `kaders/menselijke-validatie.md`
+- Canon: Handleiding §3.5.2a, §3.5.3 (`handleiding.pages.md` r. 1935 e.v., 2070-2086, 2177-2219)
 - Projectconventies: `kaders/projectconventies.md` #1, #7, #8

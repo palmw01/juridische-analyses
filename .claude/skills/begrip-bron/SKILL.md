@@ -54,13 +54,14 @@ Begrip is nu A3-compleet. De orchestrator gaat verder met de volgende begrip-stu
 - Vindplaats moet uniek en herleidbaar zijn (ECLI-nummer voor jurisprudentie; paragraafnummer voor Leidraad; Kamerstuknummer voor kamerstukken).
 - Toelichting beschrijft welke interpretatieve werking de bron heeft.
 - Geen herhaling van wat al in `markeringen[]` of `annotatie-id` staat.
-- Jurisprudentie nooit als primaire bron behandelen — zie `kaders/interpretatie.md §Jurisprudentie`.
+- Jurisprudentie nooit als primaire bron behandelen — zie `kaders/interpretatie.md §Jurisprudentie` en `kaders/glossarium.md` (primaire bron vs. interpretatiebron, Leidraad r. 572-580).
+- **Menselijke validatie:** de relevantie en interpretatieve werking van een secundaire bron worden door een vaktechnisch jurist beoordeeld (`kaders/menselijke-validatie.md`).
 
 Structurele vereisten (soort-enum) worden door schema afgedwongen.
 
 ## Bronnen
 
 - Schema: `schemas/begrip.schema.json`, `schemas/regel.schema.json` (veld `bronnen-secundair[]`)
-- Kaders: `kaders/interpretatie.md` (rol jurisprudentie + secundaire bronnen)
-- Canon: handleiding §3.5.4 (interpretatiebronnen); leidraad §2.4 (primaire vs secundaire bron)
+- Kaders: `kaders/interpretatie.md` (rol jurisprudentie + secundaire bronnen), `kaders/glossarium.md`, `kaders/menselijke-validatie.md`
+- Canon: handleiding §3.5.4 (interpretatiebronnen); leidraad §2.4 (primaire vs secundaire bron; `leidraad.pages.md` r. 572-580)
 - Projectconventies: `kaders/projectconventies.md` #20 (bronnen-secundair structuur + soort-enum)

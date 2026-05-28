@@ -57,12 +57,14 @@ Annotatie-lid is nu schema-compleet. De orchestrator gaat verder met `begrip-def
 ## Kwaliteitseisen (proces)
 
 - Knoop-id's zijn korte uppercase codes (RB, RF, RO, VW, AR, TA, …).
-- Geen losse variabelen of parameters zonder verbinding met een Voorwaarde of Afleidingsregel.
+- Geen losse variabelen of parameters zonder verbinding met een Voorwaarde of Afleidingsregel. Een losse knoop zonder rand is een signaal dat markering/klasse heroverwogen moet worden (`kaders/diagramregels.md §Centrale klasse`).
+- Verbind het diagram-centrum waar mogelijk met de rechtsbetrekking/het rechtsfeit uit het happy scenario (brugfunctie A1↔A2↔A3, `handleiding.pages.md` r. 1605-1614).
 - Het schema laat één `diagram`-object per lid toe. Bij meerdere rechtsbetrekkingen: kies de meest centrale en noteer in `signalering` op de overige rechtsbetrekking-annotatierijen dat er aanvullende structuur is.
+- **Menselijke validatie:** het diagram is een tussenresultaat en controlemiddel dat door vaktechnisch jurist + uitvoeringspraktijkjurist wordt beoordeeld (`kaders/menselijke-validatie.md`).
 
 ## Bronnen
 
 - Schema: `schemas/annotatie-lid.schema.json`
-- Kaders: `kaders/diagramregels.md`, `kaders/jas-taxonomie.md`
-- Canon: handleiding §3.4.2c (diagramregels)
+- Kaders: `kaders/diagramregels.md`, `kaders/jas-taxonomie.md`, `kaders/menselijke-validatie.md`
+- Canon: handleiding §3.4.2c (diagramregels; `handleiding.pages.md` r. 1592-1635, 1722-1726)
 - Projectconventies: `kaders/projectconventies.md` #16 (kleurcodering), #17 (knooplabel-formaat)

@@ -83,10 +83,11 @@ Structurele vereisten staan in `schemas/voorbeeldreeks.schema.json` (≥ 3 kolom
 - Bij Beperkingsregel: kolom voor "Op de grens" én "Boven de grens" verplicht (zie `kaders/voorbeeldreeks.md §Testpatronen`).
 - Bij Specialisatieregel: kolom met deelgeval van toepassing én een kolom met hoofdregel van toepassing.
 - Status start altijd op `concept`; statusovergang loopt via reviewer/team.
+- **Menselijke validatie:** de voorbeeldreeks toetst juridische correctheid, niet enkel algoritmische uitkomst (`handleiding.pages.md` r. 2851 e.v.). Het juridische oordeel `is-voorspelling-juist` wordt door een **vaktechnisch jurist** ingevuld — nooit door de AI (`kaders/menselijke-validatie.md`). De AI laat dit veld op `?`.
 
 ## Bronnen
 
 - Schema: `schemas/voorbeeldreeks.schema.json`, `schemas/regel.schema.json` (regel inlezen)
-- Kaders: `kaders/voorbeeldreeks.md`, `kaders/regeltypen.md` (regel-soort-beslisboom)
-- Canon: handleiding §3.6.2b (voorbeeldreeks-testpatronen); leidraad §2.4 Ad 4 (happy/grens/negatief)
+- Kaders: `kaders/voorbeeldreeks.md`, `kaders/regeltypen.md` (regel-soort-beslisboom), `kaders/menselijke-validatie.md`
+- Canon: handleiding §3.6.2b (voorbeeldreeks-testpatronen; `handleiding.pages.md` r. 2851 e.v.); leidraad §2.4 Ad 4 (happy/grens/negatief)
 - Projectconventies: `kaders/projectconventies.md` #19 (`?`-sentinel)

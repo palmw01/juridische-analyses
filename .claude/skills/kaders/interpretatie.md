@@ -19,7 +19,13 @@ Het schema dwingt vier enumwaarden af: `grammaticaal`, `systematisch`, `teleolog
 
 - Begin altijd grammaticaal.
 - Schakel pas naar `systematisch`/`teleologisch`/`wetshistorisch` als de grammaticale betekenis ontoereikend of meerduidig is.
-- **Documenteer de keuze** in `toelichting-klasse` (annotatie) of `toelichting` (begrip-context). Schrijf welke interpretatieve afweging is gemaakt.
+- **Documenteer de keuze** in `toelichting-klasse` (annotatie) of `toelichting` (begrip-context). Schrijf welke interpretatieve afweging is gemaakt, mét bronanker.
+
+## Divergentie → signaleren, niet beslechten
+
+> "Interpretatie vindt eigenlijk plaats in alle activiteiten" (Handleiding r. 2320). Verschillende methoden kunnen tot verschillende uitkomsten leiden; daarom worden "verschillende invalshoeken bij de interpretatie … tegen elkaar afgewogen" door het team (Handleiding r. 2433).
+
+Leiden twee methoden tot **verschillende lezingen**, of is de norm **bewust open** gelaten, dan kiest de AI niet zelf een winnaar. Leg de alternatieve lezingen en hun methode/bronanker vast in `signalering` (annotatie) of `toelichting` (begrip) en laat de afweging aan het multidisciplinaire team (zie `KADERS.md §Signaleringsdiscipline`). Dit is tevens input voor A5 (vastleggen van interpretaties/nadere invullingen, Leidraad r. 734-747).
 
 ## Jurisprudentie
 

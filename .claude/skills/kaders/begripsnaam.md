@@ -61,4 +61,13 @@ Twee markeringen voor dezelfde term zijn **homoniemen** (→ twee aparte begripp
 
 Ze zijn **polyseem** (→ één verrijkt begrip met contexten) als de kern identiek is en het verschil uitsluitend de toepassingscontext betreft. Bij twijfel: substitutiebaarheidstest — formuleer een testzin met de veronderstelde kern; klopt die juridisch in beide bronartikelen, dan polyseem.
 
-> Voorbeeld uit Handleiding: `bijdrage-inkomen` in art. 43 Zvw heeft drie verschillende betekenissen — drie homoniemen (`berekend bijdrage-inkomen`, `bijdrage-inkomen na nihilstelling`, `bijdrage-inkomen na maximumstelling`).
+> Voorbeeld uit Handleiding (`handleiding.pages.md` r. 2177-2189): `bijdrage-inkomen` in art. 43 Zvw heeft drie verschillende betekenissen — drie homoniemen (`berekend bijdrage-inkomen`, `bijdrage-inkomen na nihilstelling`, `bijdrage-inkomen na maximumstelling`).
+
+## Synoniem — andersom: één begrip voor meerdere formuleringen
+
+> **Bron:** Handleiding `handleiding.pages.md` r. 2190-2219. "Het komt ook voor dat formuleringen … verschillend zijn, maar dezelfde betekenis hebben; dan is sprake van synoniemen … [we] maken een uniek begrip dat we voor alle formuleringen met diezelfde betekenis kunnen hergebruiken."
+
+Verschillende woorden met **identieke** juridische betekenis krijgen **één** begrip dat voor alle formuleringen wordt hergebruikt (de afwijkende formuleringen komen als `aliases` of als context-markering). Maak géén duplicaat.
+
+- Test: passeren beide formuleringen de substitutietest met dezelfde kerndefinitie in hun bronartikelen? Zo ja: synoniem → één begrip.
+- **Signaleer** de uiteenlopende wetsterminologie als aandachtspunt voor harmonisatie (zie `KADERS.md §Signaleringsdiscipline`); de keuze om te harmoniseren ligt bij de wetgever/beleidsmaker.

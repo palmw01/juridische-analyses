@@ -53,11 +53,13 @@ Aangeroepen door de orchestrator of `/begrip [slug]` na `begrip-definitie` (geen
 - Gebruik niet meer dan één entry per (`scenario-id`, `rol`)-combinatie.
 - `validate_note.py` waarschuwt (L3) als een begrip met JAS-klasse `rechtsbetrekking` of `rechtsfeit` géén `scenario-refs[]` heeft (Handleiding §3.5.2c: scenario's voeden A3). Bij ontbrekend scenario: signaleer en stop met advies aan de domeinexpert.
 
+- **Menselijke validatie:** de scenario-rol is een concept dat door een uitvoeringspraktijkjurist wordt getoetst (`kaders/menselijke-validatie.md`). Scenario's zelf opstellen of aanvullen blijft A1/A3c-mensenwerk.
+
 Structurele vereisten (rol-enum, bestaande scenario-id via L2-check) worden door schema + `validate_note.py` afgedwongen.
 
 ## Bronnen
 
 - Schema: `schemas/begrip.schema.json` (veld `scenario-refs[]`), `schemas/scenario.schema.json`
-- Kaders: —
-- Canon: handleiding §3.3 (scenario's), §3.5.2c; leidraad §2.4 (A1 → A3-keten)
+- Kaders: `kaders/menselijke-validatie.md`
+- Canon: handleiding §3.3 (scenario's; `handleiding.pages.md` r. 937), §3.5.2c; leidraad §2.4 (A1 → A3-keten)
 - Projectconventies: `kaders/projectconventies.md` #21 (scenario-refs structuur)

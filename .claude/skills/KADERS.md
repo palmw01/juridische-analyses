@@ -12,6 +12,23 @@ De skills ondersteunen drie deelactiviteiten uit de Wetsanalyse-methodiek:
 
 Activiteiten A1, A4a, A5 en A6 zijn nadrukkelijk **buiten AI-scope**. De skills mogen daarvoor input opmerken (bijv. ontbrekende scenario's, signaleringen, gegevensmodel-vragen) maar nooit zelf invullen.
 
+**A2/A3/A4b is een gekozen subset, geen vaste keten.** De Wetsanalyse is maatwerk: "Niet altijd hoeven alle activiteiten van de Wetsanalyse plaats te vinden" en de activiteiten "kunnen volgordelijk plaatsvinden, in iteraties of in een afwijkende volgorde" (Leidraad `leidraad.pages.md` r. 79-96). De gewenste omvang/diepgang volgt uit het **doel** van de analyse (IT, handmatig proces, uitvoeringstoets, wetgevingsondersteuning, casuïstiek). Daaruit volgt voor de skills:
+
+- Ga niet uit van software-implementatie als enig doel; de output dient evengoed handmatige processen, uitvoeringstoetsen of casuïstiek.
+- Vul **ontbrekende A1/start-informatie** (doel, scenario's, projecttypologie) niet zelf in — signaleer welke startinformatie ontbreekt en ga door waar mogelijk.
+
+## Rol van AI en menselijke verantwoordelijkheid
+
+> **Bron:** Handleiding r. 500-516 (multidisciplinair samenwerken), r. 2771 ("mensenwerk"); Leidraad r. 117-140 (maatwerk team). Zie `kaders/menselijke-validatie.md`.
+
+AI is een **hulpmiddel**: het ondersteunt het maken, controleren en verbeteren van analyseproducten, maar vervangt **niet** de menselijke juridische verantwoordelijkheid en **niet** de multidisciplinaire validatie. Elke skill-output is een **concept ter validatie**, geen vastgesteld juridisch oordeel: `status` blijft `concept` en `markeringen[].bevestigd` blijft `false` tot een mens valideert. Welke discipline welke output toetst, staat in `kaders/menselijke-validatie.md`.
+
+## Signaleringsdiscipline (A5-haak)
+
+> **Bron:** Handleiding r. 2320-2435 (interpretatie in alle activiteiten; invalshoeken afwegen); Leidraad r. 734-747 (interpretaties/nadere invullingen → beleidsverantwoordelijken).
+
+Komt de AI een **open norm**, **meerduidige formulering**, **interpretatie-divergentie** tussen methoden, of een vermoeden van **onbekend/verborgen uitvoeringsbeleid** tegen, dan legt zij dit vast in het `signalering`-veld (annotatie) of de `toelichting` (begrip) — als input voor A5 en het team. **De AI beslecht zo'n kwestie nooit zelf** door één lezing als vaststaand te presenteren. Dit borgt de rechtsbeginselen rechtmatigheid, uitlegbaarheid, rechtvaardigheid en controleerbaarheid (Handleiding r. 138-164).
+
 ## Conflicthiërarchie
 
 Bij tegenspraak tussen documenten geldt de volgende volgorde:
@@ -112,6 +129,8 @@ Welke kader-bestanden welke skills voeden:
 | `kaders/regeltypen.md` | begrip-regel, valideer |
 | `kaders/voorbeeldreeks.md` | valideer |
 | `kaders/interpretatie.md` | annoteer-classificeer, begrip-definitie |
+| `kaders/menselijke-validatie.md` | **alle skills** (welke discipline valideert) |
+| `kaders/glossarium.md` | **alle skills** (termen, velden, status-enums) |
 
 ## Code-laag
 
@@ -139,6 +158,8 @@ Voor elke skill geldt:
 4. **Geen MCP-aanroep als bron al lokaal bestaat.** Eerst `find bronnen/[B]/ …`.
 5. **Peildatum uit bronbestand**, niet uit lopende sessie.
 6. **Letterlijk citeren** van wetstekst — nooit parafraseren.
+7. **Concept ter validatie.** Output is nooit een vastgesteld juridisch oordeel; benoem de menselijke reviewer (`kaders/menselijke-validatie.md`).
+8. **Signaleren, niet beslechten.** Open normen, meerduidigheid en interpretatie-divergentie → `signalering`/`toelichting`, niet zelf oplossen (zie §Signaleringsdiscipline).
 
 ## Skill-sjabloon (projectconventie)
 
