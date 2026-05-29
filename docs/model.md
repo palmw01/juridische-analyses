@@ -36,6 +36,8 @@ Een begrip beschrijft een juridisch concept met definitie, datatype, JAS-klasse,
 | `markeringen` | Annotaties waarop de definitie is gebaseerd |
 | `relaties` | `is-een`, `heeft` en `leidt-tot`-relaties |
 | `afleidingsregel-id` | Koppeling naar een regel, indien van toepassing |
+| `markeringen[].bevestigd` / `bevestigd-op` / `bevestigd-door` | Of en door wie/wanneer de markering juridisch is bevestigd |
+| `validatie` | Optioneel menselijk validatie-blok: `gevalideerd-door`, `gevalideerd-op`, `oordeel`, `discipline` (`jurist`/`regelanalist`), `notitie` — ingevuld door `/beoordeel` |
 
 Verkort voorbeeld:
 
@@ -97,7 +99,7 @@ formele-regel: |
 
 Voorbeeldreeksen in `validaties/` zijn A4b-testmatrices voor afleidingsregels. Ze bevatten per kolom een testgeval met invoerwaarden, verwachte uitvoer en het oordeelveld `is-voorspelling-juist`.
 
-Het oordeelveld blijft `?` totdat een juridisch expert de voorspelling beoordeelt. Bij ongeldige invoer staat het op `nvt`.
+Het oordeelveld blijft `?` totdat een juridisch expert de voorspelling beoordeelt. Bij ongeldige invoer staat het op `nvt`. Het beoordelen gebeurt via de `/beoordeel`-skill, die het oordeel per kolom invult en de beoordelaar vastlegt in het `validatie`-blok (zie [`.claude/skills/kaders/samenwerking.md`](../.claude/skills/kaders/samenwerking.md)).
 
 | Testsoort | Doel |
 |---|---|

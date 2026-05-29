@@ -48,7 +48,7 @@ webapp/                gegenereerde statische site
 | `tools/export_rdf.py` | YAML/JSON naar RDF Turtle |
 | `tools/export_graph.py` | Begrippen en relaties naar GEXF/GraphML |
 | `tools/check_enrichment.py` | Detectie van begrippen met meerdere bronnen |
-| `tools/jas_index_lib.py` | Gedeelde I/O-helpers en JAS-indexfuncties |
+| `tools/jas_index_lib.py` | Gedeelde I/O-helpers, JAS-indexfuncties en stub-skeletten (o.a. `stub_begrip`, `stub_regel`, `stub_voorbeeldreeks`, `stub_validatie`) |
 | `tools/genereer_run_rapport.py` | Per-run Markdownrapporten |
 | `tools/query_rdf.py` | SPARQL-query op gegenereerde TTL |
 | `tools/fetch_wettenbank.py` | Wetstekst ophalen via MCP |

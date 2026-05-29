@@ -32,7 +32,7 @@ De analyse volgt zes activiteiten (A1–A6), waarvan AI drie ondersteunt:
 | A4 — Valideren | Juridische beoordeling in teamverband | Handmatig |
 | A5–A6 | Signaleren en kennismodel opstellen | Handmatig |
 
-Het juridisch oordeel over voorbeeldreeksen (`is-voorspelling-juist`) vul je zelf in na de AI-stap.
+Het juridisch oordeel over voorbeeldreeksen (`is-voorspelling-juist`) vul je zelf in na de AI-stap. De skill `/beoordeel` ondersteunt deze menselijke validatie: ze leidt je per artefact langs de te beoordelen punten, legt je oordeel traceerbaar vast (wie/wanneer/onderbouwing) en herziet concepten op jouw aanwijzing — zonder het oordeel zelf te automatiseren.
 
 ## Typische workflow
 
@@ -75,6 +75,7 @@ Artikel al geannoteerd, alleen begrippen en regels updaten:
 | `/begrip [slug]` | Stap A3: één begrip uitwerken |
 | `/begrip-alles art. [A] [W]` | Stap A3: alle begrippen van een artikel |
 | `/valideer AR-[id]` | Stap A4b: voorbeeldreeks opstellen |
+| `/beoordeel [pad] \| art. [A] lid [L] [W] \| --openstaand` | Menselijke validatie: oordeel vastleggen + dialogische herzielus |
 
 De sub-skills `/annoteer-markeer`, `/annoteer-classificeer`, `/annoteer-diagram` (binnen `/annoteer`) en `/begrip-scenario`, `/begrip-bron` (binnen `/begrip`) worden automatisch aangeroepen — je hoeft ze niet apart te starten.
 
@@ -108,7 +109,7 @@ Controleer of `bronnen/{bwb-id}/art{N}.json` bestaat. Als dat zo is, sla `/wette
 Gebruik `/annoteer art. [A] lid [L] [W]` direct; dit overschrijft niet de andere leden.
 
 **Voorbeeldreeks invullen na juridische beoordeling**
-Open het betreffende `validaties/VR-*.yaml` en zet `is-voorspelling-juist` op `ja`, `nee` of `nvt` per kolom.
+Draai `/beoordeel validaties/VR-*.yaml`: de skill loopt de `?`-kolommen met je door, vult `is-voorspelling-juist` (`ja`/`nee`/`nvt`) in en legt je oordeel vast in het `validatie`-blok. Handmatig kan ook: open het bestand en zet de waarden zelf.
 
 **Commit mislukt**
 De pre-commit hook blokkeert bij L1- of L2-fouten. Draai `make validate` om te zien welke bestanden fouten bevatten, herstel ze en commit opnieuw.

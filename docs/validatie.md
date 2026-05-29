@@ -58,8 +58,19 @@ Typische waarschuwingen:
 | `aanvullende markering zonder context` | Contextuele bijdrage mist toelichting in `definitie.contexten` |
 | `is-voorspelling-juist=?` | Voorbeeldreeks wacht op juridisch oordeel |
 | `scenario-specifieke begripsnaam` | Naam lijkt gebaseerd op concreet voorbeeld in plaats van juridische rol |
+| `gevalideerd zonder validatie-blok` | `status: gevalideerd` zonder geregistreerd menselijk oordeel (zie hieronder) |
+| `bevestigd zonder bevestigd-door` | Markering is bevestigd maar de beoordelaar is niet vastgelegd |
 
 De huidige PoC heeft geen L1- of L2-fouten. De resterende L3-waarschuwingen zijn review-signalen en deels bewust geaccepteerde modellering.
+
+### Menselijke validatie
+
+Het menselijke oordeel wordt traceerbaar vastgelegd via de `/beoordeel`-skill (zie [`.claude/skills/kaders/samenwerking.md`](../.claude/skills/kaders/samenwerking.md)):
+
+- Begrip-, regel- en voorbeeldreeks-bestanden krijgen een optioneel `validatie`-blok (`gevalideerd-door`, `gevalideerd-op`, `oordeel`, `discipline` = `jurist`/`regelanalist`, `notitie`).
+- Markeringen krijgen naast `bevestigd`/`bevestigd-op` ook `bevestigd-door`.
+
+Deze velden zijn **optioneel** (backward-compatible). De bijbehorende controles zijn bewust **L3 (adviserend, niet-blokkerend)**: de jurist stuurt het werkproces en niets blokkeert de commit. De AI zet `status: gevalideerd` of `bevestigd: true` nooit autonoom — alleen op expliciete goedkeuring binnen `/beoordeel`.
 
 ## Pipeline
 

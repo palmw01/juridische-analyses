@@ -131,6 +131,8 @@ make lock           # dependencies installeren en pinnen in requirements.lock
 
 De wetsanalyse is opgebouwd uit fijnmazige sub-skills (één per deelactiviteit) plus een orchestrator: A2 (annoteer-markeer → -classificeer → -diagram), A3 (begrip-definitie → -regel → -scenario → -bron), A4b (valideer). De orchestrator `/wetsanalyse art. [A] lid [L] [W]` voert de hele keten voor één lid uit, gebruikt TaskCreate/TaskUpdate voor live voortgang, schrijft een per-run Markdown-rapport met Mermaid-diagram in `rapporten/runs/`, en updatet `webapp/voortgang.html` via `make webapp`.
 
+De keten levert **concepten**; de menselijke validatie loopt via `/beoordeel` (jurist beoordeelt, legt oordeel vast in het `validatie`-blok, voert een dialogische herzielus uit). De AI zet nooit autonoom `status: gevalideerd` of `markeringen[].bevestigd: true`. Zie `.claude/skills/kaders/samenwerking.md` (validatiecyclus) en `menselijke-validatie.md` (discipline per output).
+
 **Bron van waarheid voor skill-triggers, workflow-diagram en kader → skill-koppelingen: `.claude/skills/KADERS.md`.** Skill-bestandspaden staan in §"Skill-documentatie" hieronder.
 
 ### Annotatie → begrip: strikte volgorde

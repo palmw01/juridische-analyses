@@ -44,11 +44,11 @@ Dit is een werkende PoC voor de huidige scope. De analyse is breed genoeg om de 
 |---|---|
 | Scope | Art. 9 IW, art. 2 lid 2 IW, §9.1 en §9.5 Leidraad Invordering |
 | Model | 45 begrippen, 15 afleidingsregels, 15 voorbeeldreeksen |
-| Validatie | 82 projectbestanden, 0 blokkerende fouten, 19 L3-waarschuwingen |
+| Validatie | 82 projectbestanden, 0 blokkerende fouten, 74 L3-waarschuwingen |
 | Publicatie | GitHub Pages-webapp beschikbaar |
 | Fase | PoC afgerond voor huidige scope; doorontwikkeling volgt |
 
-De L3-waarschuwingen zijn niet blokkerend. Ze markeren aandachtspunten zoals nog te beoordelen voorbeeldreeksen, bewust losse operatorbegrippen of scenario-specifieke begripsnamen uit concrete wetstekstvoorbeelden.
+De L3-waarschuwingen zijn niet blokkerend. Ze markeren aandachtspunten zoals nog te beoordelen voorbeeldreeksen, onbevestigde markeringen, nog niet menselijk gevalideerde artefacten, bewust losse operatorbegrippen of scenario-specifieke begripsnamen uit concrete wetstekstvoorbeelden.
 
 ## Hoe de analyse werkt
 
@@ -83,7 +83,10 @@ De Claude Code-workflow gebruikt onder meer deze commando's:
 /annoteer art. [A] lid [L] [W]    lid annoteren
 /begrip-alles art. [A] [W]        begrippen en regels vastleggen
 /valideer AR-[id]                 voorbeeldreeks opstellen
+/beoordeel art. [A] lid [L] [W]   menselijke validatie: jurist beoordeelt en legt oordeel vast
 ```
+
+`/beoordeel` ondersteunt de menselijke validatie: het leidt de jurist door de te beoordelen producten, legt het oordeel vast (wie/wanneer/onderbouwing) en voert een dialogische herzielus uit. Het juridische oordeel blijft mensenwerk — de AI legt het alleen traceerbaar vast en zet nooit autonoom een status op `gevalideerd`.
 
 Meer detail staat in [docs/model.md](./docs/model.md) en [docs/validatie.md](./docs/validatie.md).
 
@@ -176,6 +179,6 @@ Een uitleg van JAS, SKOS, RDF en RegelSpraak staat in [docs/model.md](./docs/mod
 
 Deze werkruimte implementeert de Wetsanalyse-methodiek van het Ministerie van BZK, gebaseerd op het Juridisch Analyseschema (JAS) v1.0.10. A2, A3 en A4b worden door AI ondersteund. Het juridisch oordeel over voorbeeldreeksen en de formele validatie in teamverband blijven buiten de AI-scope.
 
-Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [Canon-ankers](./.claude/skills/kaders/canon-ankers.md) · [Projectconventies](./.claude/skills/kaders/projectconventies.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
+Kaders: [JAS-taxonomie](./.claude/skills/kaders/jas-taxonomie.md) · [Definitie](./.claude/skills/kaders/definitie.md) · [Regeltypen](./.claude/skills/kaders/regeltypen.md) · [Voorbeeldreeks](./.claude/skills/kaders/voorbeeldreeks.md) · [Menselijke validatie](./.claude/skills/kaders/menselijke-validatie.md) · [Samenwerking](./.claude/skills/kaders/samenwerking.md) · [Canon-ankers](./.claude/skills/kaders/canon-ankers.md) · [Projectconventies](./.claude/skills/kaders/projectconventies.md) · [BWB-mapping](./.claude/skills/wettenbank/bwb-mapping.md)
 
 De skills volgen de [Anthropic Agent Skills-spec](https://agentskills.io/specification) (`name` + `description` in frontmatter) met een projectconventie voor body-secties (Doel/Trigger/Invoer/Werkwijze/Output/Vervolg/Kwaliteitseisen/Bronnen) — zie [`.claude/skills/KADERS.md §Skill-sjabloon`](./.claude/skills/KADERS.md).
