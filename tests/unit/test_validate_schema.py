@@ -233,3 +233,51 @@ def test_begrip_id_pattern_wijst_ongeldige_af(begrip_schema, tmp_path, begrip_id
     data = maak_begrip(**{"begrip-id": begrip_id})
     errors = validate_schema(data, begrip_schema, tmp_path / "b.yaml")
     assert any("begrip-id" in e for e in errors)
+
+
+# ---------- validatie-blok (menselijke validatie, optioneel) ----------
+
+_VALIDATIE = {"gevalideerd-door": "JdG", "gevalideerd-op": "2026-05-29",
+              "oordeel": "goedgekeurd", "discipline": "jurist", "notitie": "akkoord"}
+
+
+def test_begrip_zonder_validatie_blijft_geldig(begrip_schema, tmp_path):
+    """Backward-compat: bestaande data zonder validatie-blok blijft valide."""
+    data = maak_begrip()
+    assert "validatie" not in data
+    assert validate_schema(data, begrip_schema, tmp_path / "b.yaml") == []
+
+
+def test_begrip_met_validatie_blok_geldig(begrip_schema, tmp_path):
+    data = maak_begrip(status="gevalideerd", validatie=_VALIDATIE)
+    assert validate_schema(data, begrip_schema, tmp_path / "b.yaml") == []
+
+
+def test_begrip_validatie_zonder_oordeel_faalt(begrip_schema, tmp_path):
+    data = maak_begrip(validatie={"gevalideerd-door": "JdG", "gevalideerd-op": "2026-05-29"})
+    assert any("oordeel" in e for e in validate_schema(data, begrip_schema, tmp_path / "b.yaml"))
+
+
+def test_begrip_validatie_onbekend_oordeel_faalt(begrip_schema, tmp_path):
+    data = maak_begrip(validatie={**_VALIDATIE, "oordeel": "misschien"})
+    assert any("oordeel" in e for e in validate_schema(data, begrip_schema, tmp_path / "b.yaml"))
+
+
+def test_begrip_markering_met_bevestigd_door_geldig(begrip_schema, tmp_path):
+    data = maak_begrip(markeringen=[{
+        "markering-id": "m-001", "bijdrage": "primair",
+        "bron-annotatie-id": "BWBR0004770/art9/lid1", "tekst": "t",
+        "interpretatiemethode": "grammaticaal", "bevestigd": True,
+        "bevestigd-op": "2026-05-29", "bevestigd-door": "jurist",
+    }])
+    assert validate_schema(data, begrip_schema, tmp_path / "b.yaml") == []
+
+
+def test_voorbeeldreeks_met_validatie_blok_geldig(voorbeeldreeks_schema, tmp_path):
+    data = _vr_data(status="gevalideerd", validatie=_VALIDATIE)
+    assert validate_schema(data, voorbeeldreeks_schema, tmp_path / "vr.yaml") == []
+
+
+def test_regel_met_validatie_blok_geldig(regel_schema, tmp_path):
+    data = maak_regel(validatie=_VALIDATIE)
+    assert validate_schema(data, regel_schema, tmp_path / "r.yaml") == []

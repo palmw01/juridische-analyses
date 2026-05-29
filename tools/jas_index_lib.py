@@ -263,6 +263,31 @@ def stub_voorbeeldreeks(
     }
 
 
+def stub_validatie(
+    gevalideerd_door: str,
+    oordeel: str,
+    gevalideerd_op: str,
+    discipline: str | None = None,
+    notitie: str | None = None,
+) -> dict:
+    """Skelet voor het validatie-blok (menselijke beoordeling, A4) op begrip/regel/voorbeeldreeks.
+
+    Wordt door /beoordeel ingevuld; de AI roept dit nooit autonoom aan. `oordeel` is
+    een van 'goedgekeurd' | 'afgekeurd' | 'voorbehoud'; `discipline` (optioneel) is
+    'jurist' | 'regelanalist'. Zie kaders/samenwerking.md.
+    """
+    blok = {
+        "gevalideerd-door": gevalideerd_door,
+        "gevalideerd-op": gevalideerd_op,
+        "oordeel": oordeel,
+    }
+    if discipline is not None:
+        blok["discipline"] = discipline
+    if notitie is not None:
+        blok["notitie"] = notitie
+    return blok
+
+
 def schrijf_yaml(path: Path, data: dict) -> None:
     """Schrijf een dict naar YAML met de project-conventies (Unicode, blokstijl)."""
     path.parent.mkdir(parents=True, exist_ok=True)

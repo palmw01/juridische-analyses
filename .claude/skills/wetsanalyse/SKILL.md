@@ -145,7 +145,9 @@ Bij `--auto`: doorlopen zonder pauzes, run-rapport markeert pauzepunten als "aut
 - TaskList volledig afgerond (status per stap) in de Claude Code UI.
 - Run-rapport in `rapporten/runs/`.
 - Dashboard in `webapp/voortgang.html` na `make webapp`.
-- Eindbericht in de chat: "Wetsanalyse art. [A] lid [L] [W] voltooid — zie rapporten/runs/run-…md en webapp/voortgang.html. Openstaande punten: N grensgevallen op `?`."
+- Eindbericht in de chat: "Wetsanalyse art. [A] lid [L] [W] voltooid — zie rapporten/runs/run-…md en webapp/voortgang.html. Openstaande punten: N grensgevallen op `?`. Volgende stap: `/beoordeel art. [A] lid [L] [W]` voor de menselijke validatie."
+
+> **Menselijke validatie is een aparte, jurist-gestuurde stap.** De orchestrator produceert concepten; hij zet **nooit** `status: gevalideerd` of `markeringen[].bevestigd: true`. Dat gebeurt via `/beoordeel` (zie `kaders/samenwerking.md`).
 
 ## Kwaliteitseisen (proces)
 

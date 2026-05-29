@@ -394,6 +394,14 @@ def test_gen_voortgang_bevat_kpi_sectie(tmp_path):
     assert "kpi" in html
 
 
+def test_gen_voortgang_te_valideren_kpi(tmp_path):
+    annotaties = [_annotatie()]
+    begrippen = [_begrip("BWBR0004770/art9/lid1/belastingschuldige")]
+    gen_voortgang(tmp_path, annotaties, begrippen, [], [])
+    html = (tmp_path / "voortgang.html").read_text()
+    assert "Te valideren" in html
+
+
 def test_gen_voortgang_par_sectie_link(tmp_path):
     """Paragraaf-begrip geeft link naar sectie-annotatie."""
     b = _begrip("BWBR0024096/par9-1/belasting")

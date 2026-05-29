@@ -17,6 +17,7 @@ from jas_index_lib import (
     stub_begrip,
     stub_regel,
     stub_voorbeeldreeks,
+    stub_validatie,
     schrijf_yaml,
     schrijf_json,
 )
@@ -343,6 +344,28 @@ def test_stub_voorbeeldreeks_naam_en_datums():
     assert result["naam"] == "mijn naam"
     assert result["peildatum"] == "2026-01-01"
     assert result["aangemaakt-op"] == "2026-03-15"
+
+
+# ---------- stub_validatie ----------
+
+def test_stub_validatie_basis():
+    result = stub_validatie("JdG", "goedgekeurd", "2026-05-29")
+    assert result == {
+        "gevalideerd-door": "JdG",
+        "gevalideerd-op": "2026-05-29",
+        "oordeel": "goedgekeurd",
+    }
+    assert "discipline" not in result
+    assert "notitie" not in result
+
+
+def test_stub_validatie_met_discipline_en_notitie():
+    result = stub_validatie(
+        "RA", "afgekeurd", "2026-05-29", discipline="regelanalist", notitie="herzie de kern"
+    )
+    assert result["discipline"] == "regelanalist"
+    assert result["notitie"] == "herzie de kern"
+    assert result["oordeel"] == "afgekeurd"
 
 
 # ---------- schrijf_yaml ----------

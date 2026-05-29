@@ -31,6 +31,7 @@
 | `voorbeeldreeks.md` | HW §3.6.2b (p. 52-53) | HW r. 2851 e.v. | kolom-semantiek S3; typeafleiding; chained regels; statusovergangen |
 | `interpretatie.md` | HW §3.5.3 (p. 44-46) | HW r. 2320 (in alle activiteiten); r. 2340-2417 (vier methoden); r. 2433 (invalshoeken afwegen) | divergentie→signaleren |
 | `menselijke-validatie.md` | HW §1 + LW §2 | HW r. 500-516, r. 2771; LW r. 117-140 | disciplinetoewijzing per output |
+| `samenwerking.md` | HW §1 + LW §2.4 | HW r. 500-516, r. 2771; LW r. 711-747 | validatiecyclus; dialogische herzielus; validatie-blok + bevestigd-door |
 | `glossarium.md` | div. (zie per term) | LW r. 572-580 (primaire bron); HW r. 301-303 (tussenresultaat) | activiteitscodes; status-enum-verschil |
 
 ---
@@ -41,9 +42,9 @@
 |--------|-----------|--------------------------|
 | `annotatie-index` | HW §3.4 (artikelstructuur) | `delegatiestructuur[]`-formaat |
 | `annotatie-lid` | HW §3.4 + JAS v1.0.10 (jas-klasse-enum) | `diagram`-structuur; `signalering`-veld |
-| `begrip` | HW §3.5.2a + JAS v1.0.10 | status-enum (5 waarden); soort-enum (8 waarden); `soort-id`+`identificatiebegrip`; `tussenresultaat`-vlag; `kenmerken[]`; `scenario-refs[]`; `bronnen-secundair[]` |
-| `regel` | HW §3.5.2b + LW §3.8 #15 | regel-id-pattern (AR-…); status-veld (impliciet via geldigheid); `tussenresultaat`-vlag; `prioriteit`-veld |
-| `voorbeeldreeks` | HW §3.6.2b | voorbeeldreeks-id (VR-…); kolom-status-enum; `is-voorspelling-juist`-`?`-sentinel |
+| `begrip` | HW §3.5.2a + JAS v1.0.10 | status-enum (5 waarden); soort-enum (8 waarden); `soort-id`+`identificatiebegrip`; `tussenresultaat`-vlag; `kenmerken[]`; `scenario-refs[]`; `bronnen-secundair[]`; `validatie`-blok + `markeringen[].bevestigd-door` (menselijke validatie) |
+| `regel` | HW §3.5.2b + LW §3.8 #15 | regel-id-pattern (AR-…); status-veld (impliciet via geldigheid); `tussenresultaat`-vlag; `prioriteit`-veld; `validatie`-blok |
+| `voorbeeldreeks` | HW §3.6.2b | voorbeeldreeks-id (VR-…); kolom-status-enum; `is-voorspelling-juist`-`?`-sentinel; `validatie`-blok |
 | `scenario` | LW §2.4 (scenario's voeden A2-A4) + HW §3.3.3 | scenario-id-pattern (scen-…) |
 | `bron` | wettenbank-MCP-respons | normalisatie van `bwbId` → `bwb-id`; `opgehaald-op`-veld |
 

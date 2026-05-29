@@ -91,6 +91,19 @@
           }
         }
       }
+    },
+    "validatie": {
+      "type": "object",
+      "description": "Menselijke validatie van deze voorbeeldreeks (A4b, ingevuld door /beoordeel). Optioneel; aanwezig zodra een jurist de reeks beoordeeld heeft. AI vult dit nooit autonoom — zie kaders/samenwerking.md.",
+      "required": ["gevalideerd-door", "gevalideerd-op", "oordeel"],
+      "additionalProperties": false,
+      "properties": {
+        "gevalideerd-door": { "type": "string", "minLength": 1, "description": "Persoon/initialen van de beoordelaar" },
+        "gevalideerd-op": { "type": "string", "format": "date" },
+        "discipline": { "type": "string", "enum": ["jurist", "regelanalist"] },
+        "oordeel": { "type": "string", "enum": ["goedgekeurd", "afgekeurd", "voorbehoud"] },
+        "notitie": { "type": ["string", "null"], "description": "Onderbouwing van het oordeel; bij afgekeurd/voorbehoud de gevraagde herziening" }
+      }
     }
   }
 }
