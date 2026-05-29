@@ -72,7 +72,7 @@ Voorbeeld: `/valideer AR-BWBR0004770-art9-lid1-a`.
 
 ## Vervolg
 
-De gebruiker beoordeelt de `?`-velden. Daarna `status: gereviseerd` en na teamvalidatie `status: gevalideerd`.
+Roep `/beoordeel validaties/[VR-id].yaml` aan: daarin beoordeelt de jurist de `?`-velden, legt het oordeel vast in het `validatie`-blok en zet de status. Een bestand met status `gereviseerd`/`gevalideerd` bevat geen `?`-waarden meer.
 
 > Een bestand met status `gereviseerd` of `gevalideerd` mag geen `?`-waarden bevatten. Bij correctie die `?` introduceert: status valt terug naar `concept`.
 

@@ -9,7 +9,6 @@ Mermaid-diagram, gewijzigde-bestanden-lijst en openstaande punten.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -83,9 +82,10 @@ def lees_validatie_rapport(project_root: Path) -> dict:
 
 
 def tel_open_velden(project_root: Path) -> dict:
-    """Tel ?-velden in validaties/ en niet-bevestigde markeringen in begrippen/."""
+    """Tel ?-velden, onbevestigde markeringen en nog niet-gevalideerde artefacten."""
     open_voorspellingen = 0
     onbevestigde_markeringen = 0
+    te_valideren = 0
     validaties_dir = project_root / "validaties"
     if validaties_dir.exists():
         for yaml_file in validaties_dir.glob("*.yaml"):
@@ -93,6 +93,8 @@ def tel_open_velden(project_root: Path) -> dict:
             for kolom in data.get("kolommen") or []:
                 if kolom.get("is-voorspelling-juist") == "?":
                     open_voorspellingen += 1
+            if not data.get("validatie"):
+                te_valideren += 1
     begrippen_dir = project_root / "begrippen"
     if begrippen_dir.exists():
         for yaml_file in begrippen_dir.glob("*.yaml"):
@@ -100,9 +102,12 @@ def tel_open_velden(project_root: Path) -> dict:
             for m in data.get("markeringen") or []:
                 if not m.get("bevestigd"):
                     onbevestigde_markeringen += 1
+            if not data.get("validatie"):
+                te_valideren += 1
     return {
         "open_voorspellingen": open_voorspellingen,
         "onbevestigde_markeringen": onbevestigde_markeringen,
+        "te_valideren": te_valideren,
     }
 
 
@@ -173,9 +178,11 @@ def schrijf_rapport(
 
 - `?`-velden in voorbeeldreeksen (juridisch oordeel nodig): **{open_velden['open_voorspellingen']}**
 - Onbevestigde markeringen (A4-validatie nodig): **{open_velden['onbevestigde_markeringen']}**
+- Artefacten zonder menselijk validatie-blok (nog te beoordelen): **{open_velden['te_valideren']}**
 
 ## Volgende stappen
 
+- Menselijke validatie: draai `/beoordeel art. {artikel} lid {lid} {wet}` om de producten te beoordelen en het oordeel (jurist/regelanalist) vast te leggen.
 - Reviewer-actie: beoordeel `?`-velden in `validaties/`.
 - Domeinexpert: bevestig markeringen in `begrippen/` waar `bevestigd: false`.
 - Bij L1/L2-fouten: zie `rapporten/validatie-rapport.md` voor details en herstel.

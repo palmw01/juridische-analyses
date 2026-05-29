@@ -537,6 +537,28 @@ def _scenario_signaal_in_begripsnaam(naam: str) -> Optional[str]:
     return None
 
 
+def _validatie_status_waarschuwing(data: dict) -> list[str]:
+    """L3: status 'gevalideerd' zonder geregistreerd menselijk oordeel.
+
+    Adviserend (niet-blokkerend): de jurist stuurt het werkproces via /beoordeel.
+    Zie .claude/skills/kaders/samenwerking.md en menselijke-validatie.md.
+    """
+    if data.get("status") != "gevalideerd":
+        return []
+    validatie = data.get("validatie") or {}
+    compleet = (
+        validatie.get("oordeel") == "goedgekeurd"
+        and validatie.get("gevalideerd-door")
+        and validatie.get("gevalideerd-op")
+    )
+    if compleet:
+        return []
+    return [
+        "[L3] status: gevalideerd zonder geregistreerd menselijk oordeel — "
+        "vul het validatie-blok (gevalideerd-door, gevalideerd-op, oordeel: goedgekeurd) via /beoordeel"
+    ]
+
+
 def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[Path] = None) -> list[str]:
     """Laag 3: Kwaliteitscontrole voor begrip-bestanden."""
     warnings = []
@@ -600,6 +622,17 @@ def validate_quality_begrip(data: dict, filepath: Path, project_root: Optional[P
     markeringen = data.get("markeringen") or []
     if markeringen and all(not m.get("bevestigd", False) for m in markeringen):
         warnings.append("[L3] alle markeringen onbevestigd — A4-validatie nog niet uitgevoerd")
+
+    # Bevestigde markering zonder geregistreerde beoordelaar
+    for m in markeringen:
+        if m.get("bevestigd") and not m.get("bevestigd-door"):
+            warnings.append(
+                f"[L3] markering '{m.get('markering-id')}' is bevestigd maar mist bevestigd-door — "
+                "registreer wie bevestigde (via /beoordeel)"
+            )
+
+    # Status gevalideerd zonder menselijk oordeel
+    warnings.extend(_validatie_status_waarschuwing(data))
 
     # Kern ingevuld maar voorbeelden ontbreken
     if kern and not (data.get("voorbeelden") or []):
@@ -861,6 +894,9 @@ def validate_quality_voorbeeldreeks(data: dict, filepath: Path) -> list[str]:
             f"[L3] {open_beoordelingen} kolom(men) met is-voorspelling-juist=? — "
             f"juridische beoordeling vereist"
         )
+
+    # Status gevalideerd zonder menselijk oordeel
+    warnings.extend(_validatie_status_waarschuwing(data))
 
     if data.get("status") == "concept":
         warnings.append("[L3] status is 'concept' — nog niet gereviseerd of gevalideerd")

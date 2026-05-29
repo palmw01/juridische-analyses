@@ -132,7 +132,11 @@
             "description": "primair: staving van de kern; aanvullend: verrijkt de kern vanuit meerdere bronartikelen; context: markeert aanwezigheid zonder betekenisbijdrage"
           },
           "bevestigd": { "type": "boolean" },
-          "bevestigd-op": { "type": ["string", "null"], "format": "date" }
+          "bevestigd-op": { "type": ["string", "null"], "format": "date" },
+          "bevestigd-door": {
+            "type": ["string", "null"],
+            "description": "Discipline/persoon die de markering juridisch bevestigde (ingevuld door /beoordeel). null zolang onbevestigd."
+          }
         }
       }
     },
@@ -262,6 +266,19 @@
           },
           "toelichting": { "type": ["string", "null"] }
         }
+      }
+    },
+    "validatie": {
+      "type": "object",
+      "description": "Menselijke validatie van dit begrip (A4, ingevuld door /beoordeel). Optioneel; aanwezig zodra een jurist het beoordeeld heeft. AI vult dit nooit autonoom — zie kaders/samenwerking.md.",
+      "required": ["gevalideerd-door", "gevalideerd-op", "oordeel"],
+      "additionalProperties": false,
+      "properties": {
+        "gevalideerd-door": { "type": "string", "minLength": 1, "description": "Persoon/initialen van de beoordelaar" },
+        "gevalideerd-op": { "type": "string", "format": "date" },
+        "discipline": { "type": "string", "enum": ["jurist", "regelanalist"] },
+        "oordeel": { "type": "string", "enum": ["goedgekeurd", "afgekeurd", "voorbehoud"] },
+        "notitie": { "type": ["string", "null"], "description": "Onderbouwing van het oordeel; bij afgekeurd/voorbehoud de gevraagde herziening" }
       }
     }
   }

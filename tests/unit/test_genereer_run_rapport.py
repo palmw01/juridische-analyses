@@ -139,7 +139,7 @@ def test_tel_open_velden_lege_mappen(tmp_path):
     (tmp_path / "validaties").mkdir()
     (tmp_path / "begrippen").mkdir()
     result = tel_open_velden(tmp_path)
-    assert result == {"open_voorspellingen": 0, "onbevestigde_markeringen": 0}
+    assert result == {"open_voorspellingen": 0, "onbevestigde_markeringen": 0, "te_valideren": 0}
 
 
 def test_tel_open_velden_geen_mappen_geeft_nullen(tmp_path):
@@ -179,6 +179,24 @@ def test_tel_open_velden_telt_onbevestigde_markeringen(tmp_path):
     )
     result = tel_open_velden(tmp_path)
     assert result["onbevestigde_markeringen"] == 1
+    # begrip zonder validatie-blok telt als nog te valideren
+    assert result["te_valideren"] == 1
+
+
+def test_tel_open_velden_validatie_blok_telt_niet_als_te_valideren(tmp_path):
+    begrippen_dir = tmp_path / "begrippen"
+    begrippen_dir.mkdir()
+    (begrippen_dir / "gevalideerd.yaml").write_text(
+        "markeringen:\n"
+        "  - markering-id: m-001\n"
+        "    bevestigd: true\n"
+        "validatie:\n"
+        "  gevalideerd-door: JdG\n"
+        "  gevalideerd-op: 2026-05-29\n"
+        "  oordeel: goedgekeurd\n"
+    )
+    result = tel_open_velden(tmp_path)
+    assert result["te_valideren"] == 0
 
 
 # ---------------------------------------------------------------------------
@@ -200,7 +218,7 @@ def test_schrijf_rapport_maakt_bestand(tmp_path):
         gewijzigde_bestanden=["annotaties/BWBR0004770/art9-lid1.json"],
         validatie={"l1": 0, "l2": 0, "l3": 1, "bestanden": 3,
                    "details": [{"bestand": "x.yaml", "boodschap": "w1"}]},
-        open_velden={"open_voorspellingen": 2, "onbevestigde_markeringen": 1},
+        open_velden={"open_voorspellingen": 2, "onbevestigde_markeringen": 1, "te_valideren": 1},
     )
     assert output.exists()
     tekst = output.read_text()
@@ -219,7 +237,7 @@ def test_schrijf_rapport_meer_dan_20_l3_meldingen(tmp_path):
         stappen=[],
         gewijzigde_bestanden=[],
         validatie={"l1": 0, "l2": 0, "l3": 25, "bestanden": 0, "details": details},
-        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0},
+        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0, "te_valideren": 0},
     )
     tekst = output.read_text()
     assert "+5 verdere L3-meldingen" in tekst
@@ -234,7 +252,7 @@ def test_schrijf_rapport_geen_bestanden(tmp_path):
         stappen=[],
         gewijzigde_bestanden=[],
         validatie={"l1": 0, "l2": 0, "l3": 0, "bestanden": 0, "details": []},
-        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0},
+        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0, "te_valideren": 0},
     )
     tekst = output.read_text()
     assert "_(geen)_" in tekst
@@ -249,7 +267,7 @@ def test_schrijf_rapport_maakt_parent_aan(tmp_path):
         peildatum="2026-01-01", gestart_op="2026-01-01 10:00", klaar_op="2026-01-01 10:30",
         stappen=[], gewijzigde_bestanden=[],
         validatie={"l1": 0, "l2": 0, "l3": 0, "bestanden": 0, "details": []},
-        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0},
+        open_velden={"open_voorspellingen": 0, "onbevestigde_markeringen": 0, "te_valideren": 0},
     )
     assert output.exists()
 

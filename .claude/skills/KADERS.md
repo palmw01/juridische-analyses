@@ -74,6 +74,10 @@ A3  /begrip [slug]
 A4b /valideer AR-[id]
     └─ valideer                  → validaties/VR-*.yaml met ≥ 3 kolommen
 
+A4  /beoordeel [pad] | art. [A] lid [L] [W] | --openstaand   (menselijke validatie)
+    └─ beoordeel                 → jurist beoordeelt, legt oordeel vast in validatie-blok,
+                                   bevestigt markeringen, zet status; dialogische herzielus
+
 Orchestrator
     /wetsanalyse art. [A] lid [L] [W]
     ├─ Voert bovenstaande keten sequentieel uit voor één lid
@@ -107,6 +111,12 @@ Orchestrator
 |-------|------|---------------|
 | `valideer` | A4b — voorbeeldreeks-YAML | `/valideer AR-[id]` |
 
+### Menselijke validatie (A4)
+
+| Skill | Doel | Triggert door |
+|-------|------|---------------|
+| `beoordeel` | Jurist beoordeelt analyseproducten, legt oordeel vast (`validatie`-blok), bevestigt markeringen, zet status; dialogische herzielus | `/beoordeel [pad]`, `/beoordeel art. [A] lid [L] [W]` of `/beoordeel --openstaand` |
+
 ### Orchestratie
 
 | Skill | Doel | Triggert door |
@@ -130,6 +140,7 @@ Welke kader-bestanden welke skills voeden:
 | `kaders/voorbeeldreeks.md` | valideer |
 | `kaders/interpretatie.md` | annoteer-classificeer, begrip-definitie |
 | `kaders/menselijke-validatie.md` | **alle skills** (welke discipline valideert) |
+| `kaders/samenwerking.md` | beoordeel, wetsanalyse (jurist-AI-validatiecyclus + dialogische herzielus) |
 | `kaders/glossarium.md` | **alle skills** (termen, velden, status-enums) |
 
 ## Code-laag

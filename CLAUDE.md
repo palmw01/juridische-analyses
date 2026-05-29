@@ -212,6 +212,7 @@ Conflictbeleid, gedeelde workflow én **skill-sjabloon** (sectie-conventie voor 
 | `/begrip-scenario` | `.claude/skills/begrip-scenario/SKILL.md` | A3c — scenario-koppeling |
 | `/begrip-bron` | `.claude/skills/begrip-bron/SKILL.md` | A3d — secundaire bronnen |
 | `/valideer` | `.claude/skills/valideer/SKILL.md` | A4b — voorbeeldreeks |
+| `/beoordeel` | `.claude/skills/beoordeel/SKILL.md` | Menselijke validatie — jurist beoordeelt, legt oordeel vast, dialogische herzielus |
 | `/wettenbank` | `.claude/skills/wettenbank/SKILL.md` | Wetstekst ophalen + kruisreferenties |
 
 ### Gedeelde kaders (één bron per onderwerp)
@@ -230,6 +231,7 @@ Conflictbeleid, gedeelde workflow én **skill-sjabloon** (sectie-conventie voor 
 | `.claude/skills/kaders/canon-ankers.md` | Herleidbaarheidsmatrix: elke kader-/schema-uitspraak gekoppeld aan canon-paragraaf (incl. exacte extract-regelankers) of projectconventie |
 | `.claude/skills/kaders/projectconventies.md` | Bundelt alle projectconventies (~23 items) met canon-anker en rationale; centrale ingang voor wijzigingen |
 | `.claude/skills/kaders/menselijke-validatie.md` | AI als hulpmiddel; welke menselijke discipline elke output valideert (Handleiding §1; Leidraad §2) |
+| `.claude/skills/kaders/samenwerking.md` | Jurist-AI-validatiecyclus, beslisvragen per artefact, dialogische herzielus, vastlegging in `validatie`-blok |
 | `.claude/skills/kaders/glossarium.md` | Definities van veelgebruikte termen/velden + activiteitscodes + status-enum-verschillen |
 | `.claude/skills/wettenbank/bwb-mapping.md` | Wetten → BWB-id's |
 | `.claude/skills/wettenbank/verwijzingen.md` | JCI URI-extractie, forward/backward kruisreferenties |

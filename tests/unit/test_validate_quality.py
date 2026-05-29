@@ -33,6 +33,49 @@ def test_begrip_geen_markeringen_geen_onbevestigd_warning():
     assert not any("onbevestigd" in w for w in warnings)
 
 
+# ===== Menselijke validatie — validatie-blok + bevestigd-door (L3) =====
+
+def test_begrip_gevalideerd_zonder_validatie_geeft_l3():
+    data = maak_begrip(status="gevalideerd")
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("geregistreerd menselijk oordeel" in w for w in warnings)
+
+
+def test_begrip_gevalideerd_met_volledig_validatieblok_geen_l3():
+    data = maak_begrip(status="gevalideerd", validatie={
+        "gevalideerd-door": "JdG", "gevalideerd-op": "2026-05-29", "oordeel": "goedgekeurd",
+    })
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("geregistreerd menselijk oordeel" in w for w in warnings)
+
+
+def test_begrip_gevalideerd_met_afgekeurd_oordeel_geeft_l3():
+    data = maak_begrip(status="gevalideerd", validatie={
+        "gevalideerd-door": "JdG", "gevalideerd-op": "2026-05-29", "oordeel": "afgekeurd",
+    })
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("geregistreerd menselijk oordeel" in w for w in warnings)
+
+
+def test_begrip_bevestigd_zonder_bevestigd_door_geeft_l3():
+    data = maak_begrip(markeringen=[{
+        "markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+        "tekst": "t", "interpretatiemethode": "grammaticaal", "bevestigd": True,
+    }])
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert any("mist bevestigd-door" in w for w in warnings)
+
+
+def test_begrip_bevestigd_met_bevestigd_door_geen_l3():
+    data = maak_begrip(markeringen=[{
+        "markering-id": "m-001", "bijdrage": "primair", "bron-annotatie-id": "x",
+        "tekst": "t", "interpretatiemethode": "grammaticaal", "bevestigd": True,
+        "bevestigd-door": "jurist",
+    }])
+    warnings = validate_quality_begrip(data, DUMMY)
+    assert not any("mist bevestigd-door" in w for w in warnings)
+
+
 # ===== Scenario-specifieke begripsnaam (valkuil V1) =====
 
 def test_begripsnaam_met_maandnaam_geeft_l3():
@@ -454,6 +497,21 @@ def test_vr_is_invoer_nee_telt_niet_mee_als_open_beoordeling():
     data["kolommen"][0]["is-voorspelling-juist"] = "?"
     warnings = validate_quality_voorbeeldreeks(data, DUMMY)
     assert not any("is-voorspelling-juist=?" in w for w in warnings)
+
+
+def test_vr_gevalideerd_zonder_validatie_geeft_l3():
+    data = _maak_vr_data(status="gevalideerd")
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert any("geregistreerd menselijk oordeel" in w for w in warnings)
+
+
+def test_vr_gevalideerd_met_validatieblok_geen_l3():
+    data = _maak_vr_data(status="gevalideerd")
+    data["validatie"] = {
+        "gevalideerd-door": "JdG", "gevalideerd-op": "2026-05-29", "oordeel": "goedgekeurd",
+    }
+    warnings = validate_quality_voorbeeldreeks(data, DUMMY)
+    assert not any("geregistreerd menselijk oordeel" in w for w in warnings)
 
 
 # ===== A3c — scenario-refs L3-waarschuwing =====

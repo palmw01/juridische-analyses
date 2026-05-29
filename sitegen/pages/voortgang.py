@@ -182,7 +182,7 @@ def gen_voortgang(
     rijen = []
     totalen = {
         "leden": 0, "a2_compleet": 0, "a3a_compleet": 0, "a3b_compleet": 0,
-        "a4b_compleet": 0, "open_q": 0, "onbevestigd": 0,
+        "a4b_compleet": 0, "open_q": 0, "onbevestigd": 0, "te_valideren": 0,
     }
     for (bwb, artikel, lid), groep in sorted(per_lid.items()):
         bs = groep["begrippen"]
@@ -211,6 +211,8 @@ def gen_voortgang(
             1 for b in bs for m in (b.get("markeringen") or [])
             if not m.get("bevestigd")
         )
+        totalen["te_valideren"] += sum(1 for b in bs if not b.get("validatie"))
+        totalen["te_valideren"] += sum(1 for vr in vrs if not vr.get("validatie"))
         wet = groep.get("wet") or next(
             (a.get("wet", "") for a in annotaties if a.get("bwb_id") == bwb),
             bwb,
@@ -259,6 +261,7 @@ def gen_voortgang(
   <div class="kpi"><span class="kpi-label">A4b compleet</span><span class="kpi-waarde">{totalen['a4b_compleet']}/{totalen['leden']}</span></div>
   <div class="kpi"><span class="kpi-label">Openstaande ?</span><span class="kpi-waarde">{totalen['open_q']}</span></div>
   <div class="kpi"><span class="kpi-label">Onbevestigde markeringen</span><span class="kpi-waarde">{totalen['onbevestigd']}</span></div>
+  <div class="kpi"><span class="kpi-label">Te valideren (jurist)</span><span class="kpi-waarde">{totalen['te_valideren']}</span></div>
 </section>
 
 <table class="voortgang-tabel">
